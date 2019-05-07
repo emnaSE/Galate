@@ -6,20 +6,12 @@ const mongoose=require('mongoose');
 const TestMemberSchema=mongoose.Schema({
     
 
-    name: {
+    idTest: {
         type: String
     },
-    stepsNumber: {
+    idMember: {
         type: Number
     },
-    password: {
-        type: String
-    },
-    activationDate: {
-        type: Date
-    },
-    expirationDate :{
-        type : Date
-    }
+    
 })
 var TestMember=module.exports=mongoose.model('TestMember', TestMemberSchema);
