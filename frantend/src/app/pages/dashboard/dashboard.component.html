@@ -2,10 +2,34 @@
 
 <nb-card>
   <nb-card-header>
-    Smart Table
+    Listes des test
   </nb-card-header>
 
+
   <nb-card-body>
+    <i class="ion ion-android-add" (click)="create()"></i>
+    <table id="example2" class="my-3 table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
+      <thead>
+      <tr role="row">
+        <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="id: activate to sort column descending">ID</th>
+        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="name: activate to sort column ascending">name</th>
+        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="action: activate to sort column ascending">action</th>
+
+      </thead>
+      <tbody>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>
+          <i class="ion ion-trash-b" (click)="create()"></i>
+          <i class="ion ion-alert-circled" (click)="create()"></i>
+        </td>
+
+
+      </tr>
+      </tbody>
+    </table>
 
 
   </nb-card-body>

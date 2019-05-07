@@ -6,6 +6,8 @@ import { PagesRoutingModule } from './pages-routing.module';
 import { ThemeModule } from '../@theme/theme.module';
 import { MiscellaneousModule } from './miscellaneous/miscellaneous.module';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
+import {TestModule} from "./test/test.module";
+import {SubcategorieModule} from "./subcategorie/subcategorie.module";
 
 const PAGES_COMPONENTS = [
   PagesComponent,
@@ -16,7 +18,10 @@ const PAGES_COMPONENTS = [
     PagesRoutingModule,
     ThemeModule,
     DashboardModule,
-    MiscellaneousModule
+    MiscellaneousModule,
+    TestModule,
+    SubcategorieModule
+
   ],
   declarations: [
     ...PAGES_COMPONENTS,

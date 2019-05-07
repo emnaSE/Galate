@@ -10,13 +10,13 @@ export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'Sous Categorie',
     icon: 'nb-star',
-    link: '/pages/dashboard',
+    link: '/pages/sous',
     home: true,
   },
   {
     title: 'Test',
     icon: 'nb-e-commerce',
-    link: '/pages/dashboard',
+    link: '/pages/test',
     home: true,
   },
   {
