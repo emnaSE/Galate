@@ -3,7 +3,7 @@
 
 const mongoose=require('mongoose');
 
-const StepSchema=mongoose.Schema({
+const TestSubcategorySchema=mongoose.Schema({
     
 
   
@@ -23,4 +23,4 @@ const StepSchema=mongoose.Schema({
         type: String
     }
 })
-var Step=module.exports=mongoose.model('Step', StepSchema);
+var TestSubcategory=module.exports=mongoose.model('TestSubcategory', TestSubcategorySchema);

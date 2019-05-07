@@ -9,7 +9,7 @@ const TestMemberSchema=mongoose.Schema({
     name: {
         type: String
     },
-    stepsNumber: {
+    testSubcategoriesNumber: {
         type: Number
     },
     password: {
