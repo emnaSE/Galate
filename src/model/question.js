@@ -16,7 +16,7 @@ const QuestionSchema=mongoose.Schema({
     wording: {
         type: String
     },
-    idStep: {
+    idTestSubcategory: {
         type: String
     }
 })
