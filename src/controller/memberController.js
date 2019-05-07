@@ -19,7 +19,7 @@ _publics.createMember = (member) => {
     
     return new Promise((resolve, reject) => {  
              var msg="";
-             var sql = "INSERT INTO user SET ? ";
+             var sql = "INSERT INTO member SET ? ";
              const newMember = { firstname: firstname,lastname:lastname,email:email,age:age,pseudo:pseudo, password: password, civility: civility, idSchool:idSchool,idClass:idClass};
              con.query(sql,newMember, function (err, result) {
                 if (err){
@@ -69,7 +69,7 @@ _publics.deleteMember = (req) => {
    return new Promise((resolve, reject) => {  
             var sql = "DELETE FROM member WHERE id = ?"; 
             var msg="";
-            con.query(sql,[ref], function (err, result) {
+            con.query(sql,[id], function (err, result) {
               if (err){
                 msg="failure";
                 reject(err);
@@ -135,5 +135,82 @@ _publics.getMemberById = (req) => {
      });    
   };
 
+  _publics.createChoiceMember = (choiceMember) => { 
+    var choiceMember=JSON.parse(choiceMember);
+    var idQuestion=choiceMember.idQuestion;
+    var idAnswer=choiceMember.idAnswer;
+    var idTestMember=choiceMember.idTestMember;
+    
+    
+    return new Promise((resolve, reject) => {  
+             var msg="";
+             var sql = "INSERT INTO choice_member SET ? ";
+             const newChoiceMember = { idQuestion: idQuestion,idAnswer:idAnswer,idTestMember:idTestMember};
+             con.query(sql,newChoiceMember, function (err, result) {
+                if (err){
+                    msg="failure";
+                    reject(err);
+                  }else{
+                    msg="success";
+                  }
+              return resolve(msg);
+             });
+    });   
+  
+        
+  }; 
+
+_publics.updateChoiceMember=(req,choiceMember) => { 
+    var choiceMember=JSON.parse(choiceMember);
+    var idQuestion=choiceMember.idQuestion;
+    var idAnswer=choiceMember.idAnswer;
+    var idTestMember=choiceMember.idTestMember;
+    
+  
+  
+    var id=req.query.id;
+    return new Promise((resolve, reject) => { 
+             var msg="";
+             var sql = "UPDATE choice_member SET idQuestion=?, idAnswer=?, idTestMember=?  WHERE id = ?"; 
+             con.query(sql,[idQuestion,idAnswer,idTestMember,id], function (err, result) {
+                if (err){
+                    msg="failure";
+                    reject(err);
+                  }else{
+                    msg="success";
+                  }
+              return resolve(msg);
+             });
+           });    
+  };
+
+_publics.deleteChoiceMember = (req) => { 
+    var id=req.query.id;
+   return new Promise((resolve, reject) => {  
+            var sql = "DELETE FROM choice_member WHERE id = ?"; 
+            var msg="";
+            con.query(sql,[id], function (err, result) {
+              if (err){
+                msg="failure";
+                reject(err);
+              }else{
+                msg="success";
+              }
+             return resolve(msg);
+            });
+          });    
+};
+
+_publics.getAllChoiceMembers = (req) => { 
+  
+    return new Promise((resolve, reject) => {  
+             var sql = "select * FROM choice_member"; 
+           
+                 con.query(sql, function (err, result) {
+                 if (err) reject(err);
+                 return resolve(JSON.stringify(result));
+                 });
+     });    
+ };
 
 module.exports = _publics;
