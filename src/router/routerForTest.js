@@ -16,6 +16,12 @@ router.use((req, res, next) => {
 var testController=require('../controller/controllerForTest');
 
 
+router.get('/test', (req, res, next) => testController
+.test(req)
+.then(response => {
+  res.send(response);
+})
+.catch(next));
 
 router.get('/getAllTests', (req, res, next) => testController
 .getAllTests()
