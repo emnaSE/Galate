@@ -2,13 +2,19 @@
 
 const router = require('express').Router();
 const adminController=require('../controller/adminController');
+
+const bodyParser = require('body-parser');
+
 var options = {
     inflate: true,
     limit: '100kb',
     type: 'application/octet-stream'
   };
-const bodyParser = require('body-parser');
-var urlencodedParser = bodyParser.urlencoded({ extended: false })
+var urlencodedParser=bodyParser.urlencoded({extended : false});
+
+var getRawBody = require('raw-body');
+
+
 
 router.use(bodyParser.raw(options));
 router.use((req, res, next) => {
@@ -20,18 +26,18 @@ router.use((req, res, next) => {
   });
 
 
-
-var getRawBody = require('raw-body')
 router.use(bodyParser.urlencoded({extended : true}));
 
 router.post('/createCategory',(req, res, next)=>
 adminController.getRawBody(req)
 .then(category=>{ 
+    console.log('ggggg');
     res.payload.category=category;
-    return adminController.createCategory(category)
+    return adminController.createCategory(category);
 })
-.then(response=>{ 
+/*.then(response=>{ 
     var name=response.name;
+    var subCategoriesNumber=response.subCategoriesNumber;
     if(response.msg==="success"){
         console.log(name);
         return name;
@@ -39,7 +45,7 @@ adminController.getRawBody(req)
         console.log("failure");
         return ("failure");
     } 
-})
+})*/
 .then(msg=>{
     res.send(msg);
 })
