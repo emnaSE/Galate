@@ -11,6 +11,7 @@ import {SubcategorieModule} from "./subcategorie/subcategorie.module";
 import {NgMultiSelectDropDownModule} from "ng-multiselect-dropdown";
 import {EcoleModule} from "./ecole/ecole.module";
 import {ClassModule} from "./class/class.module";
+import {EtalonnageModule} from "./etalonnage/etalonnage.module";
 
 const PAGES_COMPONENTS = [
   PagesComponent,
@@ -26,6 +27,7 @@ const PAGES_COMPONENTS = [
     SubcategorieModule,
     EcoleModule,
     ClassModule,
+    EtalonnageModule,
     NgMultiSelectDropDownModule.forRoot()
 
   ],

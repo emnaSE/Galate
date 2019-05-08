@@ -11,6 +11,8 @@ import {CreateTestComponent} from "./test/create-test/create-test.component";
 import {EcoleComponent} from "./ecole/ecole.component";
 import {ClassComponent} from "./class/class.component";
 import {CreateEcoleComponent} from "./ecole/create-ecole/create-ecole.component";
+import {EtalonnageComponent} from "./etalonnage/etalonnage.component";
+import {CreateEtalonnageComponent} from "./etalonnage/etalonnage-ecole/create-etalonnage.component";
 
 const routes: Routes = [{
   path: '',
@@ -47,6 +49,14 @@ const routes: Routes = [{
     {
       path:"ecole/create",
       component: CreateEcoleComponent,
+    },
+    {
+      path:"etalonnage",
+      component: EtalonnageComponent,
+    },
+    {
+      path: 'etalonnage/create',
+      component:CreateEtalonnageComponent ,
     },
     {
       path:"class",
