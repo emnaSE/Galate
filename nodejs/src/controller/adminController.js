@@ -1,16 +1,36 @@
 'use strict';
 
 const _publics = {};
+var config = require('../config');
+var con=config.con;
+var getRawBody = require('raw-body')
+var contentType = require('content-type')
+
 //Category Controller
-_publics.createCategory = (req) => { 
-    var name=req.name;
-    var subCategoriesNumber=req.subCategoriesNumber;
+_publics.createCategory = (category) => { 
+    var categoryParsed=JSON.parse(category);
+   var name=categoryParsed.name;
+
+  //  var name=re
+    var subCategoriesNumber=categoryParsed.subcategoriesNumber;
     return new Promise((resolve, reject) => {  
-             var sql = "insert into category (name,subCategoriesNumber) values(?,?)";
-             con.query(sql,[name,subCategoriesNumber], function (err, result) {
-                if (err) reject(err);               
-              return resolve(result);
-             });
+      var msg="";
+      var sql = "INSERT INTO category SET ? ";
+      const newCategory = { name: name,subcategories_number:subCategoriesNumber};
+      con.query(sql,newCategory, function (err, result) {
+         if (err){
+             msg="failure";
+             reject(err);
+           }else{
+             msg="success";
+           }
+       return resolve(msg);
+      });
+
+
+
+
+
            });    
  }; 
 
@@ -50,8 +70,10 @@ _publics.createCategory = (req) => {
            });    
  }; 
  
-_publics.getRawBody = (req) => { 
-  return new Promise((resolve, reject) => { 
+
+
+ _publics.getRawBody = (req) => {
+  return new Promise((resolve, reject) => {
           getRawBody(req, {
             length: req.headers['content-length'],
             limit: '1mb',
@@ -60,9 +82,8 @@ _publics.getRawBody = (req) => {
             req.text = string;
             return resolve(req.text);
           })
-  });    
+  });
 };
-
 
 //Class Controller
  _publics.updateClazz = (req) => { 
