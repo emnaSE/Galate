@@ -25,20 +25,10 @@ var getRawBody = require('raw-body')
 router.use(bodyParser.urlencoded({extended : true}));
 
 router.post('/createChoiceMember',(req, res, next)=>
-memberController.createChoiceMember(req)
-.then(choiceMember=>{ 
-    res.payload.choiceMember=choiceMember;
-    return memberController.createChoiceMember(choiceMember)
-})
-.then(response=>{ 
-    var idTestMember=response.idTestMember;
-    if(response.msg==="success"){
-        console.log(idTestMember);
-        return idTestMember;
-    }else{
-        console.log("failure");
-        return ("failure");
-    } 
+memberController.getRawBody(req)
+.then(ChoiceMember=>{
+    res.payload.choice_member=ChoiceMember;
+    return memberController.createChoiceMember(ChoiceMember)
 })
 .then(msg=>{
     res.send(msg);
