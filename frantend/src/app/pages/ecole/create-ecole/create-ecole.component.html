@@ -1,0 +1,26 @@
+
+
+<nb-card>
+  <nb-card-header>
+    create ecole
+  </nb-card-header>
+
+  <nb-card-body>
+    <form [formGroup]="addForm" (ngSubmit)="onSubmit()">
+
+
+      <div class="form-group">
+        <input type="text" class="form-control" formControlName="name" placeholder="nom d 'ecole">
+        <ng-container *ngIf="submitted && formvalidate.name.errors">
+          <p class="text-danger" >
+            prenom est obligatoire !
+          </p>
+        </ng-container>
+      </div>
+
+
+      <button type="submit" class="btn btn-success">ajouter</button>
+    </form>
+
+  </nb-card-body>
+</nb-card>

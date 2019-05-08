@@ -26,6 +26,7 @@ export class CreateCategorieComponent implements OnInit {
 
     this.addForm=this.formBuilder.group({
       nom: new FormControl('', [Validators.required]),
+      subCategoriesNumber: ['',Validators.required],
      });
 
 

@@ -1,7 +1,9 @@
 export interface Test {
     id?:number;
     name?: string;
-    categorie?: string;
-    subCategorie?: string;
+    testSubcategoriesNumber?: string;
+    password?: string;
+    activationDate?:any;
+    expirationDate?:any;
 
   }

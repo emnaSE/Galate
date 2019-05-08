@@ -6,9 +6,9 @@ import { Subject } from 'rxjs';
 
 @Component({
   selector: 'ngx-dashboard',
-  templateUrl: './subcategorie.component.html',
+  templateUrl: './class.component.html',
 })
-export class SubcategorieComponent  implements OnInit{
+export class ClassComponent  implements OnInit{
   pageActuel: number =1;
 
 

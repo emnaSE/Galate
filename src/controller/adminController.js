@@ -15,15 +15,16 @@ _publics.createCategory = (req) => {
  }; 
 
  _publics.updateCategory = (req) => { 
-    var name=req.name;
+  var name=req.name;
     var subCategoriesNumber=req.subCategoriesNumber;
     var id=req.id;
     return new Promise((resolve, reject) => {  
              var sql = "update  category set name=?,subCategoriesNumber=? where id=?";
              con.query(sql,[name,subCategoriesNumber,id], function (err, result) {
-                if (err) reject(err);               
+               if (err) reject(err);               
               return resolve(result);
              });
+             
            });    
  }; 
  _publics.deleteCategory = (req) => { 
@@ -48,6 +49,21 @@ _publics.createCategory = (req) => {
              });
            });    
  }; 
+ 
+_publics.getRawBody = (req) => { 
+  return new Promise((resolve, reject) => { 
+          getRawBody(req, {
+            length: req.headers['content-length'],
+            limit: '1mb',
+          }, function (err, string) {
+            if (err) return next(err)
+            req.text = string;
+            return resolve(req.text);
+          })
+  });    
+};
+
+
 //Class Controller
  _publics.updateClazz = (req) => { 
     var name=req.name;

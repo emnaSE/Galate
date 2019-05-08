@@ -15,8 +15,7 @@ router.use((req, res, next) => {
 
 
 router.use('/admin', require('./adminRouter'));
-//router.use('/order', require('./order'));
-//router.use('/client', require('./client'));
+router.use('/member', require('./memberRouter'));
 
 
 
