@@ -1,9 +1,48 @@
+
+'use strict';
+
 const _publics = {};
-
-
-const School=require('../model/school');
 var config = require('../config');
 var con=config.con;
+var url=`http://localhost:3001`;
+var URL = require('url').URL;
+const path = require('path');
+var getRawBody = require('raw-body')
+
+
+_publics.getRawBody = (req) => { 
+    return new Promise((resolve, reject) => { 
+            getRawBody(req, {
+              length: req.headers['content-length'],
+              limit: '1mb',
+            }, function (err, string) {
+              if (err) return next(err)
+              req.text = string;
+              return resolve(req.text);
+            })
+    });    
+  };
+
+
+_publics.createTest = (test) => {
+  var test0=JSON.parse(test);
+  var name=test0.name;
+    return new Promise((resolve, reject) => { 
+     var msg="";
+           var sql = "INSERT INTO school SET ? ";
+           const test0 = { name: name};
+           con.query(sql,test0, function (err, response) {
+              if (err){
+                  console.log("error");
+                }else{
+                  console.log("success");
+                }
+            
+            return resolve("ok");
+        });
+   });  
+}
+
 
 _publics.test = () => {
     return new Promise((resolve, reject) => {  
@@ -74,18 +113,6 @@ _publics.getQuestionsByTest = (req) => {
 
 
 
-
-_publics.createTest = (req) => {
-    var name=req.body.name;
-    var password=req.body.password;
-    var activationDate=req.body.activationDate;
-    var expirationDate=req.body.expirationDate;
-    return new Promise((resolve, reject) => { 
-     resolve("ok");  
-   });  
-  
-}
-
 _publics.createCategory = (req) => {
     var name=req.body.name;
     var subCategoriesNumber=req.body.subCategoriesNumber;
@@ -109,7 +136,8 @@ _publics.createQuestion = (req) => {
     var name=req.body.name;
     var value=req.body.value;
     var wording=req.body.wording;
-    var idTestSubcategory=req.body.idTestSubcategory;
+    var subcategoryId=req.body.subcategoryId;
+    var testId=req.body.testId;
     return new Promise((resolve, reject) => {
      resolve("ok");  
    });  

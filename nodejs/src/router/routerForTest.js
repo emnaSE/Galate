@@ -1,19 +1,53 @@
 'use strict';
 
-const router = require('express').Router();
-router.use((req, res, next) => {
-  res.payload = {};
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-  next();
-});
-router.use((req, res, next) => {
-  res.payload = {};
-  next();
-});
-
 var testController=require('../controller/controllerForTest');
+const router = require('express').Router();
+
+
+const bodyParser = require('body-parser');
+var urlencodedParser = bodyParser.urlencoded({ extended: false })
+
+var options = {
+    inflate: true,
+    limit: '100kb',
+    type: 'application/octet-stream'
+  };
+router.use(bodyParser.raw(options));
+router.use((req, res, next) => {
+    res.payload = {};
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+    res.setHeader('Access-Control-Allow-Credentials', true)
+    next();
+  });
+var getRawBody = require('raw-body')
+router.use(bodyParser.urlencoded({extended : true}));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+router.post('/createTest', (req, res, next) => testController.
+getRawBody(req)
+.then(test=>{
+    console.log(test);
+    return testController.createTest(test)
+})
+.catch(next));
+
 
 
 router.get('/test', (req, res, next) => testController
@@ -97,12 +131,7 @@ router.get('/getQuestionsByTest', (req, res, next) => testController
 
 
 
-router.post('/createTest', (req, res, next) => testController
-.createTest(req)
-.then(response => {
-  res.send(response);
-})
-.catch(next));
+
 
 router.post('/createCategory', (req, res, next) => testController
 .createCategory(req)
