@@ -150,17 +150,17 @@ _publics.getMemberById = (req) => {
      });    
   };
 
-_publics.createChoiceMember = (choiceMember) => { 
-    var choiceMember=JSON.parse(choiceMember);
-    var id_question=choiceMember.id_question;
-    var idAnswer=choiceMember.idAnswer;
-    var idTestMember=choiceMember.idTestMember;
+_publics.createChoiceMember = (choice_member) => { 
+    var choice_member=JSON.parse(choice_member);
+    var id_question=choice_member.id_question;
+    var id_answer=choice_member.id_answer;
+    var id_test_member=choice_member.id_test_member;
     
     
     return new Promise((resolve, reject) => {  
              var msg="";
              var sql = "INSERT INTO choice_member SET ? ";
-             const newChoiceMember = { id_question: id_question,id_answer:id_answer,idTestMember:idTestMember};
+             const newChoiceMember = { id_question: id_question,id_answer:id_answer,id_test_member:id_test_member};
              con.query(sql,newChoiceMember, function (err, result) {
                 if (err){
                     msg="failure";
