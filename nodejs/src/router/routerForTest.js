@@ -21,8 +21,9 @@ router.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Credentials', true)
     next();
   });
-var getRawBody = require('raw-body')
+
 router.use(bodyParser.urlencoded({extended : true}));
+
 
 
 
