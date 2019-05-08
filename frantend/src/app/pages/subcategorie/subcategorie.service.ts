@@ -19,6 +19,9 @@ export class SubcategorieService {
   constructor(private http:HttpClient){
 
   }
+  addSousCategorie(souscategorie: Object): Observable<Object> {
+    return this.http.post(this.url+ 'createCategory',JSON.stringify(souscategorie), {responseType: 'text'});
+  }
 
 }
 
