@@ -11,6 +11,12 @@ const SubCategorySchema=mongoose.Schema({
     },
     idCategory:{
         type: String
+    },
+    downDescription:{
+        type: String
+    },
+    upDescription:{
+        type: String
     }
 })
 var SubCategory=module.exports=mongoose.model('SubCategory', SubCategorySchema);
