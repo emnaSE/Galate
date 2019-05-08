@@ -8,13 +8,16 @@ import {SubcategorieComponent} from "./subcategorie/subcategorie.component";
 import {CreateCategorieComponent} from "./dashboard/create-categorie/create-categorie.component";
 import {CreateSousComponent} from "./subcategorie/create-sous/create-sous.component";
 import {CreateTestComponent} from "./test/create-test/create-test.component";
+import {EcoleComponent} from "./ecole/ecole.component";
+import {ClassComponent} from "./class/class.component";
+import {CreateEcoleComponent} from "./ecole/create-ecole/create-ecole.component";
 
 const routes: Routes = [{
   path: '',
   component: PagesComponent,
   children: [
     {
-      path: 'dashboard',
+      path: 'categorie',
       component: DashboardComponent,
     },
     {
@@ -30,16 +33,28 @@ const routes: Routes = [{
       component: SubcategorieComponent,
     },
     {
+      path: 'ecole',
+      component: EcoleComponent,
+    },
+    {
       path: 'sous/create',
       component: CreateSousComponent,
     },
     {
-      path:"dashboard/create",
+      path:"categorie/create",
       component: CreateCategorieComponent,
     },
     {
+      path:"ecole/create",
+      component: CreateEcoleComponent,
+    },
+    {
+      path:"class",
+      component: ClassComponent,
+    },
+    {
       path: '',
-      redirectTo: 'dashboard',
+      redirectTo: 'categorie',
       pathMatch: 'full',
     },
 

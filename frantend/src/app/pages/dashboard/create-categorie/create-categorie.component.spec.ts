@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CreateCategorieComponent } from './create-categorie.component';
 
-describe('CreateSousComponent', () => {
+describe('CreateClassComponent', () => {
   let component: CreateCategorieComponent;
   let fixture: ComponentFixture<CreateCategorieComponent>;
 

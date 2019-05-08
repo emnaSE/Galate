@@ -10,11 +10,13 @@ import {Test} from "./test.model";
   templateUrl: './test.component.html',
 })
 export class TestComponent  implements OnInit{
-private tests:Test[];
+       private tests:Test[];
+       pageActuel: number =1;
 
 
 
-    constructor(private testServices:TestService){
+    constructor(private testServices:TestService,
+                private router:Router){
 
       }
   ngOnInit() {
@@ -31,6 +33,6 @@ private tests:Test[];
   }
 
   create(){
-      console.log("test");
+      this.router.navigate(['pages/test/create'])
   }
 }

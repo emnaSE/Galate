@@ -11,6 +11,8 @@ import {Categorie} from "./categorie.model";
 export class DashboardComponent implements OnInit{
 
   private categories:Categorie[]
+  pageActuel: number =1;
+
 
   constructor(private router: Router,
               private categorieServcie:CategorieService) {
@@ -25,6 +27,9 @@ export class DashboardComponent implements OnInit{
           console.log(err);
         }
       )
+  }
+  create(){
+    this.router.navigate(['pages/categorie/create']);
   }
 
 }
