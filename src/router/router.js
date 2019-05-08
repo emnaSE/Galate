@@ -1,17 +1,19 @@
 'use strict';
 
 const router = require('express').Router();
-
-
-
-
-
-const DISCOUNT=5/100;
 router.use((req, res, next) => {
   res.payload = {};
-  res.payload.discount=DISCOUNT;
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
   next();
 });
+router.use((req, res, next) => {
+  res.payload = {};
+  next();
+});
+
+
 
 
 
