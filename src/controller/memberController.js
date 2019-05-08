@@ -1,10 +1,11 @@
 'use strict';
 
 const _publics = {};
-var config = require('../../config');
-const dateFormat = require('dateformat');
+var config = require('../config');
+var getRawBody = require('raw-body');
 var con=config.con;
 var url=`http://localhost:3000`;
+
 _publics.createMember = (member) => { 
     var member=JSON.parse(member);
     var firstname=member.firstname;
@@ -14,13 +15,13 @@ _publics.createMember = (member) => {
     var pseudo=member.pseudo;
     var password=member.password;
     var civility=member.civility;
-    var idSchool=member.idSchool;
-    var idClass=member.idClass;
+    var id_school=member.id_school;
+    var id_clazz=member.id_clazz;
     
     return new Promise((resolve, reject) => {  
              var msg="";
              var sql = "INSERT INTO member SET ? ";
-             const newMember = { firstname: firstname,lastname:lastname,email:email,age:age,pseudo:pseudo, password: password, civility: civility, idSchool:idSchool,idClass:idClass};
+             const newMember = { firstname: firstname,lastname:lastname,email:email,age:age,pseudo:pseudo, password: password, civility: civility,id_school:id_school,id_clazz:id_clazz};
              con.query(sql,newMember, function (err, result) {
                 if (err){
                     msg="failure";
@@ -34,7 +35,18 @@ _publics.createMember = (member) => {
   
         
   }; 
-
+_publics.getRawBody = (req) => { 
+    return new Promise((resolve, reject) => { 
+            getRawBody(req, {
+              length: req.headers['content-length'],
+              limit: '1mb',
+            }, function (err, string) {
+              if (err) return next(err)
+              req.text = string;
+              return resolve(req.text);
+            })
+    });    
+  };
 _publics.updateMember=(req,member) => { 
     var member=JSON.parse(member);
     var firstname=member.firstname;
@@ -44,15 +56,15 @@ _publics.updateMember=(req,member) => {
     var pseudo=member.pseudo;
     var password=member.password;
     var civility=member.civility;
-    var idSchool=member.idSchool;
-    var idClass=member.idClass;
+    var id_school=member.id_school;
+    var id_clazz=member.id_clazz;
   
   
     var id=req.query.id;
     return new Promise((resolve, reject) => { 
              var msg="";
-             var sql = "UPDATE member SET firstname=?, lastname=?, email=?, age=?, pseudo=?, password=?,civility=?,idSchool=?,idClass=?  WHERE id = ?"; 
-             con.query(sql,[firstname,lastname,email,age,pseudo,password,civility,idSchool,idClass,id], function (err, result) {
+             var sql = "UPDATE member SET firstname=?, lastname=?, email=?, age=?, pseudo=?, password=?,civility=?,id_school=?,id_clazz=?  WHERE id = ?"; 
+             con.query(sql,[firstname,lastname,email,age,pseudo,password,civility,id_school,id_clazz,id], function (err, result) {
                 if (err){
                     msg="failure";
                     reject(err);
@@ -140,7 +152,7 @@ _publics.getMemberById = (req) => {
 
 _publics.createChoiceMember = (choiceMember) => { 
     var choiceMember=JSON.parse(choiceMember);
-    var idQuestion=choiceMember.idQuestion;
+    var id_question=choiceMember.id_question;
     var idAnswer=choiceMember.idAnswer;
     var idTestMember=choiceMember.idTestMember;
     
@@ -148,7 +160,7 @@ _publics.createChoiceMember = (choiceMember) => {
     return new Promise((resolve, reject) => {  
              var msg="";
              var sql = "INSERT INTO choice_member SET ? ";
-             const newChoiceMember = { idQuestion: idQuestion,idAnswer:idAnswer,idTestMember:idTestMember};
+             const newChoiceMember = { id_question: id_question,id_answer:id_answer,idTestMember:idTestMember};
              con.query(sql,newChoiceMember, function (err, result) {
                 if (err){
                     msg="failure";
@@ -165,17 +177,17 @@ _publics.createChoiceMember = (choiceMember) => {
 
 _publics.updateChoiceMember=(req,choiceMember) => { 
     var choiceMember=JSON.parse(choiceMember);
-    var idQuestion=choiceMember.idQuestion;
-    var idAnswer=choiceMember.idAnswer;
-    var idTestMember=choiceMember.idTestMember;
+    var id_question=choiceMember.id_question;
+    var id_answer=choiceMember.id_answer;
+    var id_test_member=choiceMember.id_test_member;
     
   
   
     var id=req.query.id;
     return new Promise((resolve, reject) => { 
              var msg="";
-             var sql = "UPDATE choice_member SET idQuestion=?, idAnswer=?, idTestMember=?  WHERE id = ?"; 
-             con.query(sql,[idQuestion,idAnswer,idTestMember,id], function (err, result) {
+             var sql = "UPDATE choice_member SET id_question=?, id_answer=?, id_test_member=?  WHERE id = ?"; 
+             con.query(sql,[id_question,id_answer,id_test_member,id], function (err, result) {
                 if (err){
                     msg="failure";
                     reject(err);
@@ -219,7 +231,7 @@ _publics.getAllChoiceMembers = (req) => {
 _publics.getMemberByClazz = (req) => { 
     var idClazz=req.query.id;
     return new Promise((resolve, reject) => {  
-             var sql = "select * FROM member where clazz_id=? "; 
+             var sql = "select * FROM member where id_clazz=? "; 
                  con.query(sql,[idClazz], function (err, result) {
                  if (err) reject(err);
                  return resolve(JSON.stringify(result));
@@ -242,14 +254,14 @@ _publics.getTestMembers = (req) => {
  };
 _publics.createTestMembers = (testMembers ) => { 
     var testMembers=JSON.parse(testMembers);
-    var idTest=testMembers.idTest;
-    var idMember=testMembers.idMember;
+    var id_test=testMembers.id_test;
+    var id_member=testMembers.id_member;
     
     
     return new Promise((resolve, reject) => {  
              var msg="";
              var sql = "INSERT INTO test_members SET ? ";
-             const newtestMembers = { idTest: idTest,idMember:idMember};
+             const newtestMembers = { id_test: id_test,id_member:id_member};
              con.query(sql,newtestMembers, function (err, result) {
                 if (err){
                     msg="failure";
@@ -277,18 +289,18 @@ _publics.getTestSubCategoryMembers = (req) => {
        });    
    };
 
-   _publics.updateTestMember=(req,testMembers) => { 
+_publics.updateTestMember=(req,testMembers) => { 
     var testMembers=JSON.parse(testMembers);
-    var idTest=choiceMember.idTest;
-    var idMember=choiceMember.idMember;
+    var id_test=choiceMember.id_test;
+    var id_member=choiceMember.id_member;
     
   
   
-    var idTestMember=req.query.idTestMember;
+    var idTestMember=req.query.id;
     return new Promise((resolve, reject) => { 
              var msg="";
-             var sql = "UPDATE test_member SET test_id=?, member_id=?  WHERE id = ?"; 
-             con.query(sql,[idTest,idMember,,idTestMember], function (err, result) {
+             var sql = "UPDATE test_member SET id_test=?, id_member=?  WHERE id = ?"; 
+             con.query(sql,[id_test,id_member,,id], function (err, result) {
                 if (err){
                     msg="failure";
                     reject(err);
@@ -301,7 +313,7 @@ _publics.getTestSubCategoryMembers = (req) => {
   };
 
 _publics.deleteTestMember = (req) => { 
-    var idTestMember=req.query.idTestMember;
+    var idTestMember=req.query.id;
    return new Promise((resolve, reject) => {  
             var sql = "DELETE FROM test_member WHERE id = ?"; 
             var msg="";
@@ -318,9 +330,9 @@ _publics.deleteTestMember = (req) => {
 };
 
 _publics.getAllTestMembersByMember = (req) => { 
-    var idMember=req.query.idMember;
+    var idMember=req.query.id;
     return new Promise((resolve, reject) => {  
-             var sql = "select * FROM test_member where member_id=?"; 
+             var sql = "select * FROM test_member where id=?"; 
            
                  con.query(sql,[idMember], function (err, result) {
                  if (err) reject(err);

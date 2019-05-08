@@ -27,7 +27,7 @@ const MemberSchema=mongoose.Schema({
     civility: {
         type: String
     },
-    idSchool: {
+    id_school: {
         type: String
     },
     idClass:{

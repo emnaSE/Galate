@@ -45,9 +45,51 @@ memberController.createChoiceMember(req)
 })
 .catch(next));
 
+router.post('/createMember',(req, res, next)=>
+memberController.getRawBody(req)
+.then(member=>{
+    res.payload.member=member;
+    return memberController.createMember(member)
+})
+.then(msg=>{
+    res.send(msg);
+})
+.catch(next));
 
 
+router.post('/updateMember',(req, res, next)=>
+memberController.getRawBody(req)
+.then(member=>{
+    return memberController.updateMember(req,member)
+})
+.then(msg=>{
+    res.send(msg);
+})
+.catch(next));
 
+router.get('/deleteMember',urlencodedParser, (req, res, next) => 
+memberController.deleteMember(req)
+.then(msg=>{
+    res.send(msg);
+})
+.catch(next));
+
+router.get('/getAllMembers',urlencodedParser, (req, res, next) => 
+memberController.getAllChoiceMembers(req)
+.then(members=>{
+  res.send(members);
+})
+.catch(next));
+
+router.post('/login',urlencodedParser, (req, res, next) => 
+memberController.getRawBody(req)
+.then(member=>{
+    return memberController.login(member);
+})
+.then(response=>{
+  res.send(response);
+})
+.catch(next));
 
 
 
