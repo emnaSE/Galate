@@ -105,34 +105,33 @@ _publics.getAllMembers = (req) => {
      });    
  };
 
-_publics.login = (member) => { 
+_publics.login = (member) => {
+  
     var memberDetails={};
-    var member=JSON.parse(member);
-    var pseudo=member.pseudo;
-    var password=member.password;
+    var member0=JSON.parse(member);
+    var pseudo=member0.pseudo;
+    var password=member0.password;
   
         return new Promise((resolve, reject) => {
      
         var sql = "select * FROM member where pseudo=? and password=? "; 
         con.query(sql,[pseudo, password], function (err, members) {
-          var membersList=JSON.stringify(members);
-          membersList=JSON.parse(membersList);
+          var members=JSON.stringify(members);
+          members=JSON.parse(members);
+         
           if (err) {
             memberDetails = {
                 status: 500
             };
-            reject(err);
-        } else if (membersList[0]===undefined || (membersList[0].password!==password)) {
+        } else if (members[0]===undefined || (members[0].password!==password)) {
             memberDetails = {
                 status: 403
             };
-            reject(err);
         } else{
             memberDetails = {
-                member:membersList[0],
+                member:members[0],
                 status: 200,
             }; 
-            reject(err);
         }
         return resolve(JSON.stringify(memberDetails));
         });          
