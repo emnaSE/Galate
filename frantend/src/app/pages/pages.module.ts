@@ -9,6 +9,8 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
 import {TestModule} from "./test/test.module";
 import {SubcategorieModule} from "./subcategorie/subcategorie.module";
 import {NgMultiSelectDropDownModule} from "ng-multiselect-dropdown";
+import {EcoleModule} from "./ecole/ecole.module";
+import {ClassModule} from "./class/class.module";
 
 const PAGES_COMPONENTS = [
   PagesComponent,
@@ -22,6 +24,8 @@ const PAGES_COMPONENTS = [
     MiscellaneousModule,
     TestModule,
     SubcategorieModule,
+    EcoleModule,
+    ClassModule,
     NgMultiSelectDropDownModule.forRoot()
 
   ],

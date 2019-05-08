@@ -2,34 +2,63 @@ import { NbMenuItem } from '@nebular/theme';
 
 export const MENU_ITEMS: NbMenuItem[] = [
   {
-    title: 'Categorie',
+    title: 'categorie',
     icon: 'nb-home',
-    link: '/pages/dashboard',
     home: true,
+    children:[
+      {
+        title:"liste",
+        link: '/pages/categorie',
+
+      },
+        {
+        title: "Sous categorie",
+        link: '/pages/sous',
+      },
+    ],
   },
-  {
-    title: 'Sous Categorie',
-    icon: 'nb-star',
-    link: '/pages/sous',
-    home: true,
-  },
+
   {
     title: 'Test',
     icon: 'nb-e-commerce',
     link: '/pages/test',
     home: true,
+    children: [
+      {
+        title: 'liste',
+        link: '/pages/test',
+      },
+
+    ],
   },
+
+
   {
-    title: 'Ecole',
-    icon: 'ion-bookmark',
-    link: '/pages/dashboard',
+    title: 'Configuration',
+    icon: 'nb-cloudy',
     home: true,
-  },
-  {
-    title: 'User',
-    icon: 'nb-compose',
-    link: '/pages/dashboard',
-    home: true,
+    children:[
+      {
+
+        title: 'Ecole',
+        icon: 'ion-bookmark',
+        link: '/pages/ecole',
+        home: true,
+
+      },
+      {
+        title: 'Class',
+        icon: 'nb-compose',
+        link: '/pages/class',
+        home: true,
+      },
+      {
+        title: 'Etalonnage',
+        icon: 'nb-help',
+        link: '/pages/class',
+        home: true,
+      },
+    ],
   },
   {
     title: 'FEATURES',
