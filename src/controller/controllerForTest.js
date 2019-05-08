@@ -2,8 +2,19 @@ const _publics = {};
 
 
 const School=require('../model/school');
+var config = require('../config');
+var con=config.con;
 
-
+_publics.test = () => {
+    return new Promise((resolve, reject) => {  
+        var sql = "select * FROM category"; 
+              con.query(sql, function (err, result) {
+              if (err) reject(err);
+              return resolve(JSON.stringify(result));
+              }); 
+   });  
+  
+}
 
 _publics.getAllTests = () => {
     return new Promise((resolve, reject) => {   

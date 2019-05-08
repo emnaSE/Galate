@@ -4,7 +4,7 @@
 const mongoose=require('mongoose');
 
 
-const EtallonageSchema=mongoose.Schema({
+const EtalonnageSchema=mongoose.Schema({
     
 
     lowerBound: {
@@ -20,4 +20,4 @@ const EtallonageSchema=mongoose.Schema({
         type: String
     }
 })
-var Etallonage=module.exports=mongoose.model('Etallonage', EtallonageSchema);
+var Etalonnage=module.exports=mongoose.model('Etalonnage', EtalonnageSchema);
