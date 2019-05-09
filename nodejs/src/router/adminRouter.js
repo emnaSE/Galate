@@ -2,19 +2,14 @@
 
 const router = require('express').Router();
 const adminController=require('../controller/adminController');
-
-const bodyParser = require('body-parser');
-
+const memberController=require('../controller/memberController');
 var options = {
     inflate: true,
     limit: '100kb',
     type: 'application/octet-stream'
   };
-var urlencodedParser=bodyParser.urlencoded({extended : false});
-
-var getRawBody = require('raw-body');
-
-
+const bodyParser = require('body-parser');
+var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 router.use(bodyParser.raw(options));
 router.use((req, res, next) => {
@@ -26,43 +21,62 @@ router.use((req, res, next) => {
   });
 
 
+
+var getRawBody = require('raw-body')
 router.use(bodyParser.urlencoded({extended : true}));
 
-router.post('/createCategory',(req, res, next)=>
-adminController.getRawBody(req)
-.then(category=>{ 
-    console.log('ggggg');
-    res.payload.category=category;
-    return adminController.createCategory(category);
+  router.post('/createCategory',(req, res, next)=>
+  memberController.getRawBody(req)
+  .then(category=>{
+      res.payload.category=category;
+      return adminController.createCategory(category)
+  })
+  .then(msg=>{
+      res.send(msg);
+  })
+  .catch(next));
+  
+router.post('/updateCategory', (req, res, next) =>
+memberController.getRawBody(req)
+.then(category=>{
+    return adminController.updateCategory(req,category)
 })
-/*.then(response=>{ 
-    var name=response.name;
-    var subCategoriesNumber=response.subCategoriesNumber;
-    if(response.msg==="success"){
-        console.log(name);
-        return name;
-    }else{
-        console.log("failure");
-        return ("failure");
-    } 
-})*/
 .then(msg=>{
     res.send(msg);
 })
 .catch(next));
 
-router.get('/category/update', (req, res, next) =>
-    adminController.updateCategory()
-        .then(response => {
-            
-            res.send(response);
-        })
-        .catch(next));
+router.post('/deleteCategory', (req, res, next) =>
+adminController.deleteCategory(req)
+
+.then(msg=>{
+    res.send(msg);
+})
+.catch(next));
+
+
+router.post('/createClass',(req, res, next)=>
+memberController.getRawBody(req)
+.then(clazz=>{
+    res.payload.clazz=clazz;
+    return adminController.createClazz(clazz)
+})
+.then(msg=>{
+    res.send(msg);
+})
+.catch(next));
 
 
 
-
-
+router.post('/updateClass', (req, res, next) =>
+memberController.getRawBody(req)
+.then(clazz=>{
+    return adminController.updateClazz(req,clazz)
+})
+.then(msg=>{
+    res.send(msg);
+})
+.catch(next));
 
 
 

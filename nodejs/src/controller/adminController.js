@@ -2,45 +2,39 @@
 
 const _publics = {};
 var config = require('../config');
+var getRawBody = require('raw-body');
 var con=config.con;
-var getRawBody = require('raw-body')
-var contentType = require('content-type')
 
-//Category Controller
 _publics.createCategory = (category) => { 
-    var categoryParsed=JSON.parse(category);
-   var name=categoryParsed.name;
-
-  //  var name=re
-    var subCategoriesNumber=categoryParsed.subcategoriesNumber;
+    var category=JSON.parse(category);
+    var name=category.name;
+    var subcategories_number=category.subcategories_number;
     return new Promise((resolve, reject) => {  
-      var msg="";
-      var sql = "INSERT INTO category SET ? ";
-      const newCategory = { name: name,subcategories_number:subCategoriesNumber};
-      con.query(sql,newCategory, function (err, result) {
-         if (err){
-             msg="failure";
-             reject(err);
-           }else{
-             msg="success";
-           }
-       return resolve(msg);
-      });
+             var msg="";
+             var sql = "INSERT INTO category SET ? ";
+             const newCategory = { name: name,subcategories_number:subcategories_number};
+             con.query(sql,newCategory, function (err, result) {
+                if (err){
+                    msg="failure";
+                    reject(err);
+                  }else{
+                    msg="success";
+                  }
+              return resolve(msg);
+             });
+    });   
+  
+        
+  }; 
+ _publics.updateCategory = (req,category) => { 
+  var category1=JSON.parse(category);
 
-
-
-
-
-           });    
- }; 
-
- _publics.updateCategory = (req) => { 
-  var name=req.name;
-    var subCategoriesNumber=req.subCategoriesNumber;
-    var id=req.id;
+  var name=category1.name;
+    var subcategories_number=category1.subcategories_number;
+    var id=req.query.id;
     return new Promise((resolve, reject) => {  
-             var sql = "update  category set name=?,subCategoriesNumber=? where id=?";
-             con.query(sql,[name,subCategoriesNumber,id], function (err, result) {
+             var sql = "update  category set name=?,subcategories_number=? where id=?";
+             con.query(sql,[name,subcategories_number,id], function (err, result) {
                if (err) reject(err);               
               return resolve(result);
              });
@@ -48,7 +42,7 @@ _publics.createCategory = (category) => {
            });    
  }; 
  _publics.deleteCategory = (req) => { 
-    var id=req.id;
+    var id=req.query.id;
     return new Promise((resolve, reject) => {  
              var sql = "delete from   category where id=?";
              con.query(sql,[id], function (err, result) {
@@ -58,12 +52,14 @@ _publics.createCategory = (category) => {
            });    
  }; 
 
- _publics.createClazz = (req) => { 
-    var name=req.name;
-    var idSchool=req.idSchool;
+ _publics.createClazz = (clazz) => { 
+
+  var clazz=JSON.parse(clazz);
+  var name=clazz.name;
+  var id_school=clazz.id_school;
     return new Promise((resolve, reject) => {  
-             var sql = "insert into Clazz (name,idSchool) values(?,?)";
-             con.query(sql,[name,idSchool], function (err, result) {
+             var sql = "insert into Clazz (name,id_school) values(?,?)";
+             con.query(sql,[name,id_school], function (err, result) {
                 if (err) reject(err);               
               return resolve(result);
              });
@@ -86,13 +82,13 @@ _publics.createCategory = (category) => {
 };
 
 //Class Controller
- _publics.updateClazz = (req) => { 
+ _publics.updateClazz = (req,clazz) => { 
     var name=req.name;
-    var idSchool=req.idSchool;
+    var id_school=req.id_school;
     var id=req.id;
     return new Promise((resolve, reject) => {  
-             var sql = "update  Clazz set name=?,idSchool=? where id=?";
-             con.query(sql,[name,idSchool,id], function (err, result) {
+             var sql = "update  Clazz set name=?,id_school=? where id=?";
+             con.query(sql,[name,id_school,id], function (err, result) {
                 if (err) reject(err);               
               return resolve(result);
              });
