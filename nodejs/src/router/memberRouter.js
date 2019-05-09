@@ -64,14 +64,14 @@ memberController.deleteMember(req)
 })
 .catch(next));
 
-router.get('/getAllMembers',urlencodedParser, (req, res, next) => 
+router.get('/getAllChoiceMembers',urlencodedParser, (req, res, next) => 
 memberController.getAllChoiceMembers(req)
 .then(members=>{
   res.send(members);
 })
 .catch(next));
 
-router.post('/login',urlencodedParser, (req, res, next) => 
+router.post('/login', (req, res, next) => 
 memberController.getRawBody(req)
 .then(member=>{
     return memberController.login(member);
@@ -81,7 +81,12 @@ memberController.getRawBody(req)
 })
 .catch(next));
 
-
+router.get('/getAllMembers',urlencodedParser, (req, res, next) => 
+memberController.getAllMembers(req)
+.then(members=>{
+  res.send(members);
+})
+.catch(next));
 
 
 
