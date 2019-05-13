@@ -6,6 +6,7 @@ import {Categorie} from "./categorie.model";
 
 @Component({
   selector: 'ngx-dashboard',
+  styleUrls: ['./dashboard.component.scss'],
   templateUrl: './dashboard.component.html',
 })
 export class DashboardComponent implements OnInit{
