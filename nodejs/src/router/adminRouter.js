@@ -306,4 +306,69 @@ adminController.getAllAnswerByQuestion(req)
 })
 .catch(next));
 
+
+//Test 
+
+
+
+router.get('/getAllTests',urlencodedParser, (req, res, next) => 
+adminController.getAllTests(req)
+.then(tests=>{
+  res.send(tests);
+})
+.catch(next));
+
+router.get('/getTest',urlencodedParser, (req, res, next) => 
+adminController.getTest(req)
+.then(tests=>{
+  res.send(tests);
+})
+.catch(next));
+
+
+router.get('/getAllActivatedTests',urlencodedParser, (req, res, next) => 
+adminController.getAllActiveTests(req)
+.then(tests=>{
+  res.send(tests);
+})
+.catch(next));
+
+
+router.get('/getAllDisabledTests',urlencodedParser, (req, res, next) => 
+adminController.getAllDisabledTests(req)
+.then(tests=>{
+  res.send(tests);
+})
+.catch(next));
+
+router.post('/createTest',(req, res, next)=>
+memberController.getRawBody(req)
+.then(test=>{
+    res.payload.test=test;
+    return adminController.createTest(test)
+})
+.then(msg=>{
+    res.send(msg);
+})
+.catch(next));
+
+router.post('/updateTest',(req, res, next)=>
+memberController.getRawBody(req)
+.then(test=>{
+    console.log(test);
+
+    return adminController.updateTest(req,test)
+})
+.then(msg=>{
+    res.send(msg);
+})
+.catch(next));
+
+router.post('/deleteTest', (req, res, next) =>
+adminController.deleteTest(req)
+
+.then(msg=>{
+    res.send(msg);
+})
+.catch(next));
 module.exports = router;

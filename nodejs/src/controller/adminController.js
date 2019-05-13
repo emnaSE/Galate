@@ -521,4 +521,116 @@ _publics.getAllAnswerByQuestion = (req) => {
    });    
 };
 
+
+
+//Test Controller
+
+
+
+_publics.getTest = (req) => { 
+  var id=req.query.id;
+  return new Promise((resolve, reject) => {  
+           var sql = "select * FROM test where id=?"; 
+         
+               con.query(sql,[id], function (err, result) {
+               if (err) reject(err);
+               return resolve(JSON.stringify(result));
+               });
+   });    
+};
+
+_publics.getAllTests = (req) => { 
+  
+  return new Promise((resolve, reject) => {  
+           var sql = "select * FROM test"; 
+         
+               con.query(sql, function (err, result) {
+               if (err) reject(err);
+               return resolve(JSON.stringify(result));
+               });
+   });    
+};
+_publics.getAllActiveTests = (req) => { 
+    var date=new Date;
+  return new Promise((resolve, reject) => {  
+           var sql = "select * FROM test where expiration_date>=?"; 
+         
+               con.query(sql,[date], function (err, result) {
+               if (err) reject(err);
+               return resolve(JSON.stringify(result));
+               });
+   });    
+};
+_publics.getAllDisabledTests = (req) => { 
+  var date=new Date;
+return new Promise((resolve, reject) => {  
+         var sql = "select * FROM test where expiration_date<?"; 
+       
+             con.query(sql,[date], function (err, result) {
+             if (err) reject(err);
+             return resolve(JSON.stringify(result));
+             });
+ });    
+};
+_publics.createTest = (test) => { 
+    var test=JSON.parse(test)
+    var name=test.name;
+    var test_subcategories_number=test.test_subcategories_number;
+  var password =test.password;
+  var activation_date=test.activation_date;
+  var expiration_date=test.expiration_date;
+
+
+    return new Promise((resolve, reject) => { 
+      var msg="";
+      var sql = "insert into test set ? ";
+
+      const newTest = { name: name,test_subcategories_number:test_subcategories_number,password:password,activation_date:activation_date,expiration_date:expiration_date}; 
+          
+      con.query(sql,newTest, function (err, result) {
+              if (err){
+                msg="failure";
+                reject(err);
+              }else{
+                msg="success";
+              }
+          return resolve(msg);
+         });
+});   
+
+    
+}; 
+
+_publics.updateTest= (req,test) => { 
+  var test=JSON.parse(test);
+  var name=test.name;
+  var test_subcategories_number=test.test_subcategories_number;
+     var password =test.password;
+     var activation_date=test.activation_date;
+ var expiration_date=test.expiration_date;
+
+var id=req.query.id;
+    return new Promise((resolve, reject) => {  
+             var sql = "update  test set name=?,test_subcategories_number=?,password=?,activation_date=?,expiration_date=? where id=?";
+             con.query(sql,[name,test_subcategories_number,password,activation_date,expiration_date,id], function (err, result) {
+               if (err) reject(err);               
+              return resolve(result);
+             });
+             
+           });    
+ };
+
+
+ _publics.deleteTest = (req) => { 
+    var id=req.query.id;
+    return new Promise((resolve, reject) => {  
+             var sql = "delete from   test where id=?";
+             con.query(sql,[id], function (err, result) {
+                if (err) reject(err);               
+              return resolve(result);
+             });
+           });    
+ }; 
+
+
 module.exports = _publics;
