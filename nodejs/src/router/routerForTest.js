@@ -2,11 +2,8 @@
 
 var testController=require('../controller/controllerForTest');
 const router = require('express').Router();
-
-
 const bodyParser = require('body-parser');
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
-
 var options = {
     inflate: true,
     limit: '100kb',
@@ -21,7 +18,6 @@ router.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Credentials', true)
     next();
   });
-
 router.use(bodyParser.urlencoded({extended : true}));
 
 
@@ -44,19 +40,13 @@ router.use(bodyParser.urlencoded({extended : true}));
 router.post('/createTest', (req, res, next) => testController.
 getRawBody(req)
 .then(test=>{
-    console.log(test);
     return testController.createTest(test)
 })
 .catch(next));
 
 
 
-router.get('/test', (req, res, next) => testController
-.test(req)
-.then(response => {
-  res.send(response);
-})
-.catch(next));
+
 
 router.get('/getAllTests', (req, res, next) => testController
 .getAllTests()
