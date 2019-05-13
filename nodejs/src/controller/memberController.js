@@ -273,19 +273,6 @@ _publics.createTestMembers = (testMembers ) => {
   
         
   }; 
-_publics.getTestSubCategoryMembers = (req) => { 
-    var id_test=req.query.id_test;
-    var id_category=req.query.id_category;
-      return new Promise((resolve, reject) => {  
-               var sql = "select * FROM sub_category where id_test = ? order by (category_id) ?"; 
-               con.query(sql,[id_test,id_category], function (err, result) {
-                   con.query(sql, function (err, result) {
-                   if (err) reject(err);
-                   return resolve(JSON.stringify(result));
-                   });
-                  });
-       });    
-   };
 
 _publics.updateTestMember=(req,testMember) => { 
     var testMember=JSON.parse(testMember);
