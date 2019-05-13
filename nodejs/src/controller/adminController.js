@@ -349,5 +349,176 @@ _publics.createSubCategory = (subcategory) => {
            });
          });    
 }; 
+//Get raw
+_publics.getRawBody = (req) => { 
+  return new Promise((resolve, reject) => { 
+          getRawBody(req, {
+            length: req.headers['content-length'],
+            limit: '1mb',
+          }, function (err, string) {
+            if (err) return next(err)
+            req.text = string;
+            return resolve(req.text);
+          })
+  });    
+};
+
+//Question 
+_publics.createQuestion = (question ) => { 
+  var question=JSON.parse(question);
+  var name=question.name;
+  var wording=question.wording;
+  var value=question.value;
+  
+  
+  return new Promise((resolve, reject) => {  
+           var msg="";
+           var sql = "INSERT INTO question SET ? ";
+           const newQuestion = { name: name,wording:wording,value:value};
+           con.query(sql,newQuestion, function (err, result) {
+              if (err){
+                  msg="failure";
+                  reject(err);
+                }else{
+                  msg="success";
+                }
+            return resolve(msg);
+           });
+  });   
+
+      
+}; 
+
+_publics.updateQuestion=(req,question) => { 
+  var question=JSON.parse(question);
+  var name=question.name;
+  var wording=question.wording;
+  var value=question.value;
+  
+
+
+  var question_id=req.query.id;
+  return new Promise((resolve, reject) => { 
+           var msg="";
+           var sql = "UPDATE question SET name=?, wording=?,value=?  WHERE id = ?"; 
+           con.query(sql,[name,wording,value,question_id], function (err, result) {
+              if (err){
+                  msg="failure";
+                  reject(err);
+                }else{
+                  msg="success";
+                }
+            return resolve(msg);
+           });
+         });    
+};
+
+_publics.deleteQuestion = (req) => { 
+  var question_id=req.query.id;
+ return new Promise((resolve, reject) => {  
+          var sql = "DELETE FROM question WHERE id = ?"; 
+          var msg="";
+          con.query(sql,[question_id], function (err, result) {
+            if (err){
+              msg="failure";
+              reject(err);
+            }else{
+              msg="success";
+            }
+           return resolve(msg);
+          });
+        });    
+};
+
+_publics.getAllQuestion = (req) => { 
+  
+  return new Promise((resolve, reject) => {  
+           var sql = "select * FROM question "; 
+         
+               con.query(sql, function (err, result) {
+               if (err) reject(err);
+               return resolve(JSON.stringify(result));
+               });
+   });    
+};
+
+//Answer 
+_publics.createAnswer = (answer ) => { 
+  var answer=JSON.parse(answer);
+  var id_question=answer.id_question;
+  var name=answer.name;
+  var value=answer.value;
+  
+  
+  return new Promise((resolve, reject) => {  
+           var msg="";
+           var sql = "INSERT INTO answer SET ? ";
+           const newAnswer = { id_question: id_question,name:name,value:value};
+           con.query(sql,newAnswer, function (err, result) {
+              if (err){
+                  msg="failure";
+                  reject(err);
+                }else{
+                  msg="success";
+                }
+            return resolve(msg);
+           });
+  });   
+
+      
+}; 
+
+_publics.updateAnswer=(req,answer) => { 
+  var answer=JSON.parse(answer);
+  var id_question=answer.id_question;
+  var name=answer.name;
+  var value=answer.value;
+  
+
+
+  var answer_id=req.query.id;
+  return new Promise((resolve, reject) => { 
+           var msg="";
+           var sql = "UPDATE answer SET id_question=?, name=?,value=?  WHERE id = ?"; 
+           con.query(sql,[id_question,name,value,answer_id], function (err, result) {
+              if (err){
+                  msg="failure";
+                  reject(err);
+                }else{
+                  msg="success";
+                }
+            return resolve(msg);
+           });
+         });    
+};
+
+_publics.deleteAnswer = (req) => { 
+  var answer_id=req.query.id;
+ return new Promise((resolve, reject) => {  
+          var sql = "DELETE FROM answer WHERE id = ?"; 
+          var msg="";
+          con.query(sql,[answer_id], function (err, result) {
+            if (err){
+              msg="failure";
+              reject(err);
+            }else{
+              msg="success";
+            }
+           return resolve(msg);
+          });
+        });    
+};
+
+_publics.getAllAnswerByQuestion = (req) => { 
+  var id_question=req.query.id_question;
+  return new Promise((resolve, reject) => {  
+           var sql = "select * FROM answer where id_question=?  "; 
+         
+               con.query(sql,[id_question], function (err, result) {
+               if (err) reject(err);
+               return resolve(JSON.stringify(result));
+               });
+   });    
+};
 
 module.exports = _publics;

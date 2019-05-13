@@ -230,6 +230,80 @@ adminController.deleteSubCategorysByIdCategory(req)
 })
 .catch(next));
 
+//question
 
+router.post('/createQuestion',(req, res, next)=>
+adminController.getRawBody(req)
+.then(question=>{
+    res.payload.question=question;
+    return adminController.createQuestion(question)
+})
+.then(msg=>{
+    res.send(msg);
+})
+.catch(next));
+
+
+router.post('/updateQuestion',(req, res, next)=>
+adminController.getRawBody(req)
+.then(question=>{
+    return adminController.updateQuestion(req,question)
+})
+.then(msg=>{
+    res.send(msg);
+})
+.catch(next));
+
+router.get('/deleteQuestion',urlencodedParser, (req, res, next) => 
+adminController.deleteQuestion(req)
+.then(msg=>{
+    res.send(msg);
+})
+.catch(next));
+
+router.get('/getAllQuestion',urlencodedParser, (req, res, next) => 
+adminController.getAllQuestion(req)
+.then(questions=>{
+  res.send(questions);
+})
+.catch(next));
+
+//Answer
+
+router.post('/createAnswer',(req, res, next)=>
+adminController.getRawBody(req)
+.then(answer=>{
+    res.payload.answer=answer;
+    return adminController.createAnswer(answer)
+})
+.then(msg=>{
+    res.send(msg);
+})
+.catch(next));
+
+
+router.post('/updateAnswer',(req, res, next)=>
+adminController.getRawBody(req)
+.then(answer=>{
+    return adminController.updateAnswer(req,answer)
+})
+.then(msg=>{
+    res.send(msg);
+})
+.catch(next));
+
+router.get('/deleteAnswer',urlencodedParser, (req, res, next) => 
+adminController.deleteAnswer(req)
+.then(msg=>{
+    res.send(msg);
+})
+.catch(next));
+
+router.get('/getAllAnswerByQuestion',urlencodedParser, (req, res, next) => 
+adminController.getAllAnswerByQuestion(req)
+.then(answers=>{
+  res.send(answers);
+})
+.catch(next));
 
 module.exports = router;
