@@ -5,7 +5,7 @@ var config = require('../config');
 var getRawBody = require('raw-body');
 var con=config.con;
 var url=`http://localhost:3000`;
-
+//member 
 _publics.createMember = (member) => { 
     var member=JSON.parse(member);
     var firstname=member.firstname;
@@ -104,7 +104,7 @@ _publics.getAllMembers = (req) => {
                  });
      });    
  };
-
+//login
 _publics.login = (member) => {
   
     var memberDetails={};
@@ -148,7 +148,7 @@ _publics.getMemberById = (req) => {
                 });
      });    
   };
-
+//choice member
 _publics.createChoiceMember = (choice_member) => { 
     var choice_member=JSON.parse(choice_member);
     var id_question=choice_member.id_question;
@@ -250,6 +250,7 @@ _publics.getTestMembersByClassSchool = (req) => {
                 });
     
  };
+ //test member 
 _publics.createTestMembers = (testMembers ) => { 
     var testMembers=JSON.parse(testMembers);
     var id_test=testMembers.id_test;
