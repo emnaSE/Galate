@@ -35,4 +35,12 @@ export class TestComponent  implements OnInit{
   create(){
       this.router.navigate(['pages/test/create'])
   }
+  affCatergorie(test:Test){
+      this.router.navigate(['pages/test',test.id,'affectation']);
+
+  }
+  affSubCateg(test:Test){
+      this.router.navigate(['pages/test',test.id,'affectationsub']);
+  }
+
 }

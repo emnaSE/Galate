@@ -41,27 +41,27 @@ export const MENU_ITEMS: NbMenuItem[] = [
       {
 
         title: 'Ecole',
-        icon: 'ion-bookmark',
+        //icon: 'ion-bookmark',
         link: '/pages/ecole',
-        home: true,
+        //home: true,
 
       },
       {
         title: 'Class',
-        icon: 'nb-compose',
+        //icon: 'nb-compose',
         link: '/pages/class',
-        home: true,
+        //home: true,
       },
       {
         title: 'Etalonnage',
-        icon: 'nb-help',
+        //icon: 'nb-help',
         link: '/pages/etalonnage',
-        home: true,
+        //home: true,
       },
     ],
   },
   {
-    title: 'FEATURES',
+    title: '',
     group: true,
   },
 
