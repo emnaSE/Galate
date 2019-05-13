@@ -25,20 +25,10 @@ var getRawBody = require('raw-body')
 router.use(bodyParser.urlencoded({extended : true}));
 
 router.post('/createChoiceMember',(req, res, next)=>
-memberController.createChoiceMember(req)
-.then(choiceMember=>{ 
-    res.payload.choiceMember=choiceMember;
-    return memberController.createChoiceMember(choiceMember)
-})
-.then(response=>{ 
-    var idTestMember=response.idTestMember;
-    if(response.msg==="success"){
-        console.log(idTestMember);
-        return idTestMember;
-    }else{
-        console.log("failure");
-        return ("failure");
-    } 
+memberController.getRawBody(req)
+.then(ChoiceMember=>{
+    res.payload.choice_member=ChoiceMember;
+    return memberController.createChoiceMember(ChoiceMember)
 })
 .then(msg=>{
     res.send(msg);
@@ -74,14 +64,14 @@ memberController.deleteMember(req)
 })
 .catch(next));
 
-router.get('/getAllMembers',urlencodedParser, (req, res, next) => 
+router.get('/getAllChoiceMembers',urlencodedParser, (req, res, next) => 
 memberController.getAllChoiceMembers(req)
 .then(members=>{
   res.send(members);
 })
 .catch(next));
 
-router.post('/login',urlencodedParser, (req, res, next) => 
+router.post('/login', (req, res, next) => 
 memberController.getRawBody(req)
 .then(member=>{
     return memberController.login(member);
@@ -91,7 +81,12 @@ memberController.getRawBody(req)
 })
 .catch(next));
 
-
+router.get('/getAllMembers',urlencodedParser, (req, res, next) => 
+memberController.getAllMembers(req)
+.then(members=>{
+  res.send(members);
+})
+.catch(next));
 
 
 

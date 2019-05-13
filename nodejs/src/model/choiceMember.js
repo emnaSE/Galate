@@ -7,13 +7,13 @@ const mongoose=require('mongoose');
 const ChoiceMemberSchema=mongoose.Schema({
     
 
-    idQuestion: {
+    id_question: {
         type: String
     },
-    idAnswer: {
+    id_answer: {
         type: String
     },
-    idTestMember: {
+    id_test_member: {
         type: String
     }
 
