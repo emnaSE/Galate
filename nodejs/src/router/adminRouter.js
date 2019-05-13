@@ -79,6 +79,89 @@ memberController.getRawBody(req)
 .catch(next));
 
 
+router.post('/deleteClassById', (req, res, next) =>
+adminController.deleteClazzById(req)
+
+.then(msg=>{
+    res.send(msg);
+})
+.catch(next));
+router.post('/deleteClassByIdSchool', (req, res, next) =>
+adminController.deleteClazzByIdSchool(req)
+
+.then(msg=>{
+    res.send(msg);
+})
+.catch(next));
+
+  router.post('/createSchool',(req, res, next)=>
+  memberController.getRawBody(req)
+  .then(school=>{
+      res.payload.school=school;
+      return adminController.createSchool(school)
+  })
+  .then(msg=>{
+      res.send(msg);
+  })
+  .catch(next));
+  
+router.post('/updateSchool', (req, res, next) =>
+memberController.getRawBody(req)
+.then(school=>{
+    return adminController.updateSchool(req,school)
+})
+.then(msg=>{
+    res.send(msg);
+})
+.catch(next));
+
+router.post('/deleteSchool', (req, res, next) =>
+adminController.deleteSchool(req)
+
+.then(msg=>{
+    res.send(msg);
+})
+.catch(next));
+
+
+
+router.post('/createSubcategory',(req, res, next)=>
+memberController.getRawBody(req)
+.then(Subcategory=>{
+    res.payload.Subcategory=Subcategory;
+    return adminController.createSubCategory(Subcategory)
+})
+.then(msg=>{
+    res.send(msg);
+})
+.catch(next));
+
+router.post('/updateSubcategory', (req, res, next) =>
+memberController.getRawBody(req)
+.then(Subcategory=>{
+  return adminController.updateSubCategory(req,Subcategory)
+})
+.then(msg=>{
+  res.send(msg);
+})
+.catch(next));
+
+router.post('/deleteSubcategory', (req, res, next) =>
+adminController.deleteSubCategoryById(req)
+
+.then(msg=>{
+  res.send(msg);
+})
+.catch(next));
+
+router.post('/deleteSubcategroies', (req, res, next) =>
+adminController.deleteSubCategorysByIdCategory(req)
+
+.then(msg=>{
+  res.send(msg);
+})
+.catch(next));
+
 
 
 module.exports = router;

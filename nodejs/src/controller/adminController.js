@@ -51,6 +51,10 @@ _publics.createCategory = (category) => {
              });
            });    
  }; 
+//Class Controller
+
+
+
 
  _publics.createClazz = (clazz) => { 
 
@@ -58,46 +62,47 @@ _publics.createCategory = (category) => {
   var name=clazz.name;
   var id_school=clazz.id_school;
     return new Promise((resolve, reject) => {  
-             var sql = "insert into Clazz (name,id_school) values(?,?)";
-             con.query(sql,[name,id_school], function (err, result) {
-                if (err) reject(err);               
-              return resolve(result);
-             });
-           });    
- }; 
- 
+      var msg="";
+             var sql = "insert into clazz set ?";
+             const newClazz={name:name,id_school:id_school};
+             con.query(sql,newClazz, function (err, result) {
+              if (err){
+                msg="failure";
+                reject(err);
+              }else{
+                msg="success";
+              }
+          return resolve(msg);
+        });
+      });   
+    
+          
+    }; 
 
 
- _publics.getRawBody = (req) => {
-  return new Promise((resolve, reject) => {
-          getRawBody(req, {
-            length: req.headers['content-length'],
-            limit: '1mb',
-          }, function (err, string) {
-            if (err) return next(err)
-            req.text = string;
-            return resolve(req.text);
-          })
-  });
-};
 
-//Class Controller
+
  _publics.updateClazz = (req,clazz) => { 
-    var name=req.name;
-    var id_school=req.id_school;
-    var id=req.id;
+   var clazz=JSON.parse(clazz);
+    var name=clazz.name;
+    var id_school=clazz.id_school;
+    var id=req.query.id;
     return new Promise((resolve, reject) => {  
-             var sql = "update  Clazz set name=?,id_school=? where id=?";
+             var sql = "update  clazz set name=?,id_school=? where id=?";
              con.query(sql,[name,id_school,id], function (err, result) {
                 if (err) reject(err);               
               return resolve(result);
              });
            });    
  }; 
+
+
+ 
+
  _publics.deleteClazzById = (req) => { 
-    var id=req.id;
+    var id=req.query.id;
     return new Promise((resolve, reject) => {  
-             var sql = "delete from   Clazz where id=?";
+             var sql = "delete from   clazz where id=?";
              con.query(sql,[id], function (err, result) {
                 if (err) reject(err);               
               return resolve(result);
@@ -106,33 +111,48 @@ _publics.createCategory = (category) => {
  }; 
  _publics.deleteClazzByIdSchool= (req) => { 
   
-    var idSchool=req.idSchool;
+    var id_school=req.query.id_school;
 
     return new Promise((resolve, reject) => {  
-             var sql = "delete from   Clazz where idSchool=?";
-             con.query(sql,[idSchool], function (err, result) {
+             var sql = "delete from   clazz where id_school=?";
+             con.query(sql,[id_school], function (err, result) {
                 if (err) reject(err);               
               return resolve(result);
              });
            });    
  }; 
  // school controller
-_publics.createSchool = (req) => { 
-    var name=req.name;
- 
-    return new Promise((resolve, reject) => {  
-             var sql = "insert into school (name) values(?)";
-             con.query(sql,[name], function (err, result) {
-                if (err) reject(err);               
-              return resolve(result);
-             });
-           });    
- }; 
 
- _publics.updateSchool = (req) => { 
-  var name=req.name;
+
+_publics.createSchool = (school) => { 
+  var school =JSON.parse(school)  
+  var name=req.query.name;
  
-  var id=req.id;
+    return new Promise((resolve, reject) => {
+      var msg="";  
+             var sql = "insert into school set ?";
+             const newSchool = { name: name};
+
+              con.query(sql,newSchool, function (err, result) {
+                if (err){
+                    msg="failure";
+                    reject(err);
+                  }else{
+                    msg="success";
+                  }
+              return resolve(msg);
+            });
+          });   
+        
+              
+        }; 
+
+      
+ _publics.updateSchool = (req,school) => { 
+  var school=JSON.parse(school);
+  var name=school.name;
+ 
+  var id=req.query.id;
     return new Promise((resolve, reject) => {  
              var sql = "update  school set name=? where id=?";
              con.query(sql,[name,id], function (err, result) {
@@ -142,8 +162,9 @@ _publics.createSchool = (req) => {
            });    
  }; 
  
+ 
  _publics.deleteSchool = (req) => { 
-    var id=req.id;
+    var id=req.query.id;
     
     return new Promise((resolve, reject) => {  
            var sql = "delete from   school where id=?";
@@ -154,34 +175,54 @@ _publics.createSchool = (req) => {
          });    
 }; 
 // subCategory Controller
-_publics.createSubCategory = (req) => { 
-    var name=req.name;
-    var idCategory=req.idCategory;
+
+
+
+_publics.createSubCategory = (subcategory) => { 
+    var subcategory=JSON.parse(subcategory)
+    var name=subcategory.name;
+    var id_category=subcategory.id_category;
+  
+
+    return new Promise((resolve, reject) => { 
+      var msg="";
+      var sql = "insert into subcategory set ? ";
+
+      const newsubcategory = { name: name,id_category:id_category}; 
+          
+      con.query(sql,newsubcategory, function (err, result) {
+              if (err){
+                msg="failure";
+                reject(err);
+              }else{
+                msg="success";
+              }
+          return resolve(msg);
+         });
+});   
+
+    
+}; 
+
+ _publics.updateSubCategory = (req,subcategory) => { 
+   var subcategory=JSON.parse(subcategory);
+  var name=subcategory.name;
+  var id_category=subcategory.id_category;
+  var id=req.query.id;
     return new Promise((resolve, reject) => {  
-             var sql = "insert into subCategory (name,idCategory) values(?,?)";
-             con.query(sql,[name,idCategory], function (err, result) {
+             var sql = "update  subcategory set name=?,id_category=? where id=?";
+             con.query(sql,[name,id_category,id], function (err, result) {
                 if (err) reject(err);               
               return resolve(result);
              });
            });    
  }; 
 
- _publics.updateSubCategory = (req) => { 
-  var name=req.name;
-  var idCategory=req.idCategory;
-  var id=req.id;
-    return new Promise((resolve, reject) => {  
-             var sql = "update  subCategory set name=?,idCategory=? where id=?";
-             con.query(sql,[name,idCategory,id], function (err, result) {
-                if (err) reject(err);               
-              return resolve(result);
-             });
-           });    
- }; 
+
  _publics.deleteSubCategoryById = (req) => { 
-    var id=req.id;
+    var id=req.query.id;
     return new Promise((resolve, reject) => {  
-             var sql = "delete from   subCategory where id=?";
+             var sql = "delete from   subcategory where id=?";
              con.query(sql,[id], function (err, result) {
                 if (err) reject(err);               
               return resolve(result);
@@ -189,10 +230,10 @@ _publics.createSubCategory = (req) => {
            });    
  }; 
  _publics.deleteSubCategorysByIdCategory = (req) => { 
-  var idCategory=req.idCategory;
+  var id_category=req.query.id_category;
   return new Promise((resolve, reject) => {  
-           var sql = "delete from   subCategory where idCategory=?";
-           con.query(sql,[idCategory], function (err, result) {
+           var sql = "delete from   subCategory where id_category=?";
+           con.query(sql,[id_category], function (err, result) {
               if (err) reject(err);               
             return resolve(result);
            });
