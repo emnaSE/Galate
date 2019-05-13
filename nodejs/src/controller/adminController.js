@@ -5,6 +5,28 @@ var config = require('../config');
 var getRawBody = require('raw-body');
 var con=config.con;
 
+_publics.getAllCategories = (req) => { 
+  
+  return new Promise((resolve, reject) => {  
+           var sql = "select * FROM category"; 
+         
+               con.query(sql, function (err, result) {
+               if (err) reject(err);
+               return resolve(JSON.stringify(result));
+               });
+   });    
+};
+_publics.getCategory = (req) => { 
+  var id=req.query.id;
+  return new Promise((resolve, reject) => {  
+           var sql = "select * FROM category where id=?"; 
+         
+               con.query(sql, [id],function (err, result) {
+               if (err) reject(err);
+               return resolve(JSON.stringify(result));
+               });
+   });    
+};
 _publics.createCategory = (category) => { 
     var category=JSON.parse(category);
     var name=category.name;
@@ -55,7 +77,40 @@ _publics.createCategory = (category) => {
 
 
 
+_publics.getAllClasses = (req) => { 
+  
+  return new Promise((resolve, reject) => {  
+           var sql = "select * FROM clazz"; 
+         
+               con.query(sql, function (err, result) {
+               if (err) reject(err);
+               return resolve(JSON.stringify(result));
+               });
+   });    
+};
+_publics.getClass = (req) => { 
+  var id =req.query.id;
+  return new Promise((resolve, reject) => {  
+           var sql = "select * FROM clazz where id=?"; 
+         
+               con.query(sql, [id],function (err, result) {
+               if (err) reject(err);
+               return resolve(JSON.stringify(result));
+               });
+   });    
+};
 
+_publics.getAllClassesByIdSchool = (req) => { 
+  var id_school=req.query.idSchool;
+  return new Promise((resolve, reject) => {  
+           var sql = "select * FROM clazz where id_school=?"; 
+         
+               con.query(sql, [id_school],function (err, result) {
+               if (err) reject(err);
+               return resolve(JSON.stringify(result));
+               });
+   });    
+};
  _publics.createClazz = (clazz) => { 
 
   var clazz=JSON.parse(clazz);
@@ -123,7 +178,28 @@ _publics.createCategory = (category) => {
  }; 
  // school controller
 
-
+ _publics.getAllSchools = (req) => { 
+  
+  return new Promise((resolve, reject) => {  
+           var sql = "select * FROM school"; 
+         
+               con.query(sql, function (err, result) {
+               if (err) reject(err);
+               return resolve(JSON.stringify(result));
+               });
+   });    
+};
+_publics.getSchool = (req) => { 
+  var id=req.query.id;
+  return new Promise((resolve, reject) => {  
+           var sql = "select * FROM school where id=?"; 
+         
+               con.query(sql,[id] ,function (err, result) {
+               if (err) reject(err);
+               return resolve(JSON.stringify(result));
+               });
+   });    
+};
 _publics.createSchool = (school) => { 
   var school =JSON.parse(school)  
   var name=req.query.name;
@@ -178,6 +254,40 @@ _publics.createSchool = (school) => {
 
 
 
+_publics.getSubcategory = (req) => { 
+  var id=req.query.id;
+  return new Promise((resolve, reject) => {  
+           var sql = "select * FROM subcategory where id=?"; 
+         
+               con.query(sql,[id], function (err, result) {
+               if (err) reject(err);
+               return resolve(JSON.stringify(result));
+               });
+   });    
+};
+
+_publics.getAllSubcategories = (req) => { 
+  
+  return new Promise((resolve, reject) => {  
+           var sql = "select * FROM subcategory"; 
+         
+               con.query(sql, function (err, result) {
+               if (err) reject(err);
+               return resolve(JSON.stringify(result));
+               });
+   });    
+};
+_publics.getAllSubcategoriesByCategory = (req) => { 
+  var idCategory=req.query.idCategory;
+  return new Promise((resolve, reject) => {  
+           var sql = "select * FROM subcategory where id_category=?"; 
+         
+               con.query(sql,[idCategory], function (err, result) {
+               if (err) reject(err);
+               return resolve(JSON.stringify(result));
+               });
+   });    
+};
 _publics.createSubCategory = (subcategory) => { 
     var subcategory=JSON.parse(subcategory)
     var name=subcategory.name;
@@ -232,7 +342,7 @@ _publics.createSubCategory = (subcategory) => {
  _publics.deleteSubCategorysByIdCategory = (req) => { 
   var id_category=req.query.id_category;
   return new Promise((resolve, reject) => {  
-           var sql = "delete from   subCategory where id_category=?";
+           var sql = "delete from   subcategory where id_category=?";
            con.query(sql,[id_category], function (err, result) {
               if (err) reject(err);               
             return resolve(result);

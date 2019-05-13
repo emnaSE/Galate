@@ -24,6 +24,20 @@ router.use((req, res, next) => {
 
 var getRawBody = require('raw-body')
 router.use(bodyParser.urlencoded({extended : true}));
+router.get('/getAllCategories',urlencodedParser, (req, res, next) => 
+ adminController.getAllCategories(req)
+.then(categories=>{
+  res.send(categories);
+})
+.catch(next));
+
+router.get('/getCategory',urlencodedParser, (req, res, next) => 
+ adminController.getCategory(req)
+.then(categories=>{
+  res.send(categories);
+})
+.catch(next));
+
 
   router.post('/createCategory',(req, res, next)=>
   memberController.getRawBody(req)
@@ -54,6 +68,27 @@ adminController.deleteCategory(req)
 })
 .catch(next));
 
+//class 
+
+router.get('/getAllClasses',urlencodedParser, (req, res, next) => 
+ adminController.getAllClasses(req)
+.then(classes=>{
+  res.send(classes);
+})
+.catch(next));
+
+router.get('/getAllClassesBySchool',urlencodedParser, (req, res, next) => 
+ adminController.getAllClassesByIdSchool(req)
+.then(classes=>{
+  res.send(classes);
+})
+.catch(next));
+router.get('/getClass',urlencodedParser, (req, res, next) => 
+ adminController.getClass(req)
+.then(classes=>{
+  res.send(classes);
+})
+.catch(next));
 
 router.post('/createClass',(req, res, next)=>
 memberController.getRawBody(req)
@@ -93,6 +128,20 @@ adminController.deleteClazzByIdSchool(req)
     res.send(msg);
 })
 .catch(next));
+//school
+
+router.get('/getSchool',urlencodedParser, (req, res, next) => 
+ adminController.getSchool(req)
+.then(schools=>{
+  res.send(schools);
+})
+.catch(next));
+router.get('/getAllSchools',urlencodedParser, (req, res, next) => 
+ adminController.getAllSchools(req)
+.then(schools=>{
+  res.send(schools);
+})
+.catch(next));
 
   router.post('/createSchool',(req, res, next)=>
   memberController.getRawBody(req)
@@ -123,7 +172,26 @@ adminController.deleteSchool(req)
 })
 .catch(next));
 
+//subcategory
+router.get('/getAllSubcategories',urlencodedParser, (req, res, next) => 
+ adminController.getAllSubcategories(req)
+.then(subcategories=>{
+  res.send(subcategories);
+})
+.catch(next));
+router.get('/getSubcategory',urlencodedParser, (req, res, next) => 
+ adminController.getSubcategory(req)
+.then(subcategories=>{
+  res.send(subcategories);
+})
+.catch(next));
 
+router.get('/getAllSubcategoriesByCategory',urlencodedParser, (req, res, next) => 
+ adminController.getAllSubcategoriesByCategory(req)
+.then(subcategories=>{
+  res.send(subcategories);
+})
+.catch(next));
 
 router.post('/createSubcategory',(req, res, next)=>
 memberController.getRawBody(req)
