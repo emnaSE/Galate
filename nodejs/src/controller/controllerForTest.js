@@ -27,11 +27,15 @@ _publics.getRawBody = (req) => {
 
 _publics.createTest = (test) => {
   var test0=JSON.parse(test);
+  var test_subcategories_number=test0.test_subcategories_number;
   var name=test0.name;
+  var password=test0.password;
+  var activation_date=test0.activation_date;
+  var expiration_date=test0.expiration_date;
     return new Promise((resolve, reject) => { 
      var msg="";
-           var sql = "INSERT INTO school SET ? ";
-           const test0 = { name: name};
+           var sql = "INSERT INTO test SET ? ";
+           const test0 = { name: name,test_subcategories_number:test_subcategories_number,password:password,activation_date:activation_date,expiration_date:expiration_date};
            con.query(sql,test0, function (err, response) {
               if (err){
                   console.log("error");
@@ -45,16 +49,7 @@ _publics.createTest = (test) => {
 }
 
 
-_publics.test = () => {
-    return new Promise((resolve, reject) => {  
-        var sql = "select * FROM category"; 
-              con.query(sql, function (err, result) {
-              if (err) reject(err);
-              return resolve(JSON.stringify(result));
-              }); 
-   });  
-  
-}
+
 
 _publics.getAllTests = () => {
     return new Promise((resolve, reject) => {   
