@@ -101,7 +101,7 @@ _publics.getClass = (req) => {
 };
 
 _publics.getAllClassesByIdSchool = (req) => { 
-  var id_school=req.query.idSchool;
+  var id_school=req.query.id_school;
   return new Promise((resolve, reject) => {  
            var sql = "select * FROM clazz where id_school=?"; 
          
