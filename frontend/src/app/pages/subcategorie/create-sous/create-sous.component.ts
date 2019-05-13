@@ -42,7 +42,8 @@ export class CreateSousComponent implements OnInit {
       unSelectAllText: 'UnSelect All',
       itemsShowLimit: 1,
       allowSearchFilter: true,
-      enableSearchFilter:true
+      enableSearchFilter:true,
+      classes: "myclass custom-class-example",
     };
 
 
