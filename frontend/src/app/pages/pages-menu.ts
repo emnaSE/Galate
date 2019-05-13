@@ -55,7 +55,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
       {
         title: 'Etalonnage',
         icon: 'nb-help',
-        link: '/pages/class',
+        link: '/pages/etalonnage',
         home: true,
       },
     ],
