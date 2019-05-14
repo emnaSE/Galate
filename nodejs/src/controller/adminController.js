@@ -55,28 +55,40 @@ _publics.createCategory = (category) => {
     var subcategories_number=category1.subcategories_number;
     var id=req.query.id;
     return new Promise((resolve, reject) => {  
+             var msg="";
              var sql = "update  category set name=?,subcategories_number=? where id=?";
              con.query(sql,[name,subcategories_number,id], function (err, result) {
-               if (err) reject(err);               
-              return resolve(result);
+              if (err){
+                msg="failure";
+                reject(err);
+              }else{
+                msg="success";
+              }
+             return resolve(msg);
              });
              
            });    
  }; 
  _publics.deleteCategory = (req) => { 
     var id=req.query.id;
-    return new Promise((resolve, reject) => {  
+    return new Promise((resolve, reject) => { 
+             var msg=""; 
              var sql = "delete from   category where id=?";
              con.query(sql,[id], function (err, result) {
-                if (err) reject(err);               
-              return resolve(result);
+              if (err){
+                msg="failure";
+                reject(err);
+              }else{
+                msg="success";
+              }
+             return resolve(msg);
              });
            });    
  }; 
-//Class Controller
 
 
 
+ // clazz controller
 _publics.getAllClasses = (req) => { 
   
   return new Promise((resolve, reject) => {  
@@ -127,7 +139,7 @@ _publics.getAllClassesByIdSchool = (req) => {
               }else{
                 msg="success";
               }
-          return resolve(msg);
+            return resolve(msg);
         });
       });   
     
@@ -143,10 +155,16 @@ _publics.getAllClassesByIdSchool = (req) => {
     var id_school=clazz.id_school;
     var id=req.query.id;
     return new Promise((resolve, reject) => {  
+             var msg="";
              var sql = "update  clazz set name=?,id_school=? where id=?";
              con.query(sql,[name,id_school,id], function (err, result) {
-                if (err) reject(err);               
-              return resolve(result);
+              if (err){
+                msg="failure";
+                reject(err);
+              }else{
+                msg="success";
+              }
+            return resolve(msg);
              });
            });    
  }; 
@@ -156,11 +174,17 @@ _publics.getAllClassesByIdSchool = (req) => {
 
  _publics.deleteClazzById = (req) => { 
     var id=req.query.id;
-    return new Promise((resolve, reject) => {  
+    return new Promise((resolve, reject) => { 
+             var msg=""; 
              var sql = "delete from   clazz where id=?";
              con.query(sql,[id], function (err, result) {
-                if (err) reject(err);               
-              return resolve(result);
+              if (err){
+                msg="failure";
+                reject(err);
+              }else{
+                msg="success";
+              }
+            return resolve(msg);
              });
            });    
  }; 
@@ -168,11 +192,17 @@ _publics.getAllClassesByIdSchool = (req) => {
   
     var id_school=req.query.id_school;
 
-    return new Promise((resolve, reject) => {  
+    return new Promise((resolve, reject) => { 
+             var msg="";  
              var sql = "delete from   clazz where id_school=?";
              con.query(sql,[id_school], function (err, result) {
-                if (err) reject(err);               
-              return resolve(result);
+              if (err){
+                msg="failure";
+                reject(err);
+              }else{
+                msg="success";
+              }
+            return resolve(msg);
              });
            });    
  }; 
@@ -205,7 +235,7 @@ _publics.createSchool = (school) => {
   var name=req.query.name;
  
     return new Promise((resolve, reject) => {
-      var msg="";  
+             var msg="";  
              var sql = "insert into school set ?";
              const newSchool = { name: name};
 
@@ -230,10 +260,16 @@ _publics.createSchool = (school) => {
  
   var id=req.query.id;
     return new Promise((resolve, reject) => {  
+             var msg="";  
              var sql = "update  school set name=? where id=?";
              con.query(sql,[name,id], function (err, result) {
-                if (err) reject(err);               
-              return resolve(result);
+              if (err){
+                msg="failure";
+                reject(err);
+              }else{
+                msg="success";
+              }
+             return resolve(msg);
              });
            });    
  }; 
@@ -242,11 +278,17 @@ _publics.createSchool = (school) => {
  _publics.deleteSchool = (req) => { 
     var id=req.query.id;
     
-    return new Promise((resolve, reject) => {  
+    return new Promise((resolve, reject) => { 
+           var msg="";   
            var sql = "delete from   school where id=?";
            con.query(sql,[id], function (err, result) {
-              if (err) reject(err);               
-            return resolve(result);
+            if (err){
+              msg="failure";
+              reject(err);
+            }else{
+              msg="success";
+            }
+           return resolve(msg);
            });
          });    
 }; 
@@ -297,9 +339,7 @@ _publics.createSubCategory = (subcategory) => {
     return new Promise((resolve, reject) => { 
       var msg="";
       var sql = "insert into subcategory set ? ";
-
-      const newsubcategory = { name: name,id_category:id_category}; 
-          
+      const newsubcategory = { name: name,id_category:id_category};         
       con.query(sql,newsubcategory, function (err, result) {
               if (err){
                 msg="failure";
@@ -307,7 +347,7 @@ _publics.createSubCategory = (subcategory) => {
               }else{
                 msg="success";
               }
-          return resolve(msg);
+             return resolve(msg);
          });
 });   
 
@@ -320,10 +360,16 @@ _publics.createSubCategory = (subcategory) => {
   var id_category=subcategory.id_category;
   var id=req.query.id;
     return new Promise((resolve, reject) => {  
+             var msg="";
              var sql = "update  subcategory set name=?,id_category=? where id=?";
              con.query(sql,[name,id_category,id], function (err, result) {
-                if (err) reject(err);               
-              return resolve(result);
+              if (err){
+                msg="failure";
+                reject(err);
+              }else{
+                msg="success";
+              }
+             return resolve(msg);
              });
            });    
  }; 
@@ -332,24 +378,36 @@ _publics.createSubCategory = (subcategory) => {
  _publics.deleteSubCategoryById = (req) => { 
     var id=req.query.id;
     return new Promise((resolve, reject) => {  
+             var msg="";
              var sql = "delete from   subcategory where id=?";
              con.query(sql,[id], function (err, result) {
-                if (err) reject(err);               
-              return resolve(result);
+              if (err){
+                msg="failure";
+                reject(err);
+              }else{
+                msg="success";
+              }
+             return resolve(msg);
              });
            });    
  }; 
  _publics.deleteSubCategorysByIdCategory = (req) => { 
   var id_category=req.query.id_category;
-  return new Promise((resolve, reject) => {  
+  return new Promise((resolve, reject) => { 
+           var msg=""; 
            var sql = "delete from   subcategory where id_category=?";
            con.query(sql,[id_category], function (err, result) {
-              if (err) reject(err);               
-            return resolve(result);
+            if (err){
+              msg="failure";
+              reject(err);
+            }else{
+              msg="success";
+            }
+           return resolve(msg);
            });
          });    
 }; 
-//Get raw
+
 _publics.getRawBody = (req) => { 
   return new Promise((resolve, reject) => { 
           getRawBody(req, {
@@ -363,14 +421,12 @@ _publics.getRawBody = (req) => {
   });    
 };
 
-//Question 
+//Question controller
 _publics.createQuestion = (question ) => { 
   var question=JSON.parse(question);
   var name=question.name;
   var wording=question.wording;
-  var value=question.value;
-  
-  
+  var value=question.value;  
   return new Promise((resolve, reject) => {  
            var msg="";
            var sql = "INSERT INTO question SET ? ";
@@ -394,9 +450,6 @@ _publics.updateQuestion=(req,question) => {
   var name=question.name;
   var wording=question.wording;
   var value=question.value;
-  
-
-
   var question_id=req.query.id;
   return new Promise((resolve, reject) => { 
            var msg="";
@@ -446,7 +499,6 @@ _publics.getQuestionById = (req) => {
   var id=req.query.id;
   return new Promise((resolve, reject) => {  
            var sql = "select * FROM question where id=?"; 
-         
                con.query(sql,[id], function (err, result) {
                if (err) reject(err);
                return resolve(JSON.stringify(result));
@@ -454,14 +506,12 @@ _publics.getQuestionById = (req) => {
    });    
 };
 
-//Answer 
+//Answer controller
 _publics.createAnswer = (answer ) => { 
   var answer=JSON.parse(answer);
   var id_question=answer.id_question;
   var name=answer.name;
   var value=answer.value;
-  
-  
   return new Promise((resolve, reject) => {  
            var msg="";
            var sql = "INSERT INTO answer SET ? ";
@@ -485,9 +535,6 @@ _publics.updateAnswer=(req,answer) => {
   var id_question=answer.id_question;
   var name=answer.name;
   var value=answer.value;
-  
-
-
   var answer_id=req.query.id;
   return new Promise((resolve, reject) => { 
            var msg="";
@@ -524,11 +571,10 @@ _publics.deleteAnswer = (req) => {
 _publics.getAllAnswerByQuestion = (req) => { 
   var id_question=req.query.id_question;
   return new Promise((resolve, reject) => {  
-           var sql = "select * FROM answer where id_question=?  "; 
-         
+           var sql = "select * FROM answer where id_question=?  ";     
                con.query(sql,[id_question], function (err, result) {
-               if (err) reject(err);
-               return resolve(JSON.stringify(result));
+                  if (err) reject(err);
+                  return resolve(JSON.stringify(result));
                });
    });    
 };
@@ -536,8 +582,7 @@ _publics.getAllAnswerByQuestion = (req) => {
 _publics.getAnswerById = (req) => { 
   var id=req.query.id;
   return new Promise((resolve, reject) => {  
-           var sql = "select * FROM answer where id=?"; 
-         
+           var sql = "select * FROM answer where id=?";          
                con.query(sql,[id], function (err, result) {
                if (err) reject(err);
                return resolve(JSON.stringify(result));
@@ -548,13 +593,10 @@ _publics.getAnswerById = (req) => {
 
 //Test Controller
 
-
-
 _publics.getTestById = (req) => { 
   var id=req.query.id;
   return new Promise((resolve, reject) => {  
-           var sql = "select * FROM test where id=?"; 
-         
+           var sql = "select * FROM test where id=?";         
                con.query(sql,[id], function (err, result) {
                if (err) reject(err);
                return resolve(JSON.stringify(result));
@@ -562,11 +604,9 @@ _publics.getTestById = (req) => {
    });    
 };
 
-_publics.getAllTests = (req) => { 
-  
+_publics.getAllTests = (req) => {  
   return new Promise((resolve, reject) => {  
-           var sql = "select * FROM test"; 
-         
+           var sql = "select * FROM test";          
                con.query(sql, function (err, result) {
                if (err) reject(err);
                return resolve(JSON.stringify(result));
@@ -576,8 +616,7 @@ _publics.getAllTests = (req) => {
 _publics.getAllActiveTests = (req) => { 
     var date=new Date;
   return new Promise((resolve, reject) => {  
-           var sql = "select * FROM test where expiration_date>=?"; 
-         
+           var sql = "select * FROM test where expiration_date>=?";        
                con.query(sql,[date], function (err, result) {
                if (err) reject(err);
                return resolve(JSON.stringify(result));
@@ -587,8 +626,7 @@ _publics.getAllActiveTests = (req) => {
 _publics.getAllDisabledTests = (req) => { 
   var date=new Date;
 return new Promise((resolve, reject) => {  
-         var sql = "select * FROM test where expiration_date<?"; 
-       
+         var sql = "select * FROM test where expiration_date<?";        
              con.query(sql,[date], function (err, result) {
              if (err) reject(err);
              return resolve(JSON.stringify(result));
@@ -596,20 +634,16 @@ return new Promise((resolve, reject) => {
  });    
 };
 _publics.createTest = (test) => { 
-    var test=JSON.parse(test)
-    var name=test.name;
-    var test_subcategories_number=test.test_subcategories_number;
-  var password =test.password;
-  var activation_date=test.activation_date;
-  var expiration_date=test.expiration_date;
-
-
-    return new Promise((resolve, reject) => { 
+      var test=JSON.parse(test)
+      var name=test.name;
+      var test_subcategories_number=test.test_subcategories_number;
+      var password =test.password;
+      var activation_date=test.activation_date;
+      var expiration_date=test.expiration_date;
+      return new Promise((resolve, reject) => { 
       var msg="";
       var sql = "insert into test set ? ";
-
-      const newTest = { name: name,test_subcategories_number:test_subcategories_number,password:password,activation_date:activation_date,expiration_date:expiration_date}; 
-          
+      const newTest = { name: name,test_subcategories_number:test_subcategories_number,password:password,activation_date:activation_date,expiration_date:expiration_date};         
       con.query(sql,newTest, function (err, result) {
               if (err){
                 msg="failure";
@@ -617,27 +651,30 @@ _publics.createTest = (test) => {
               }else{
                 msg="success";
               }
-          return resolve(msg);
+              return resolve(msg);
          });
-});   
-
-    
+});      
 }; 
 
 _publics.updateTest= (req,test) => { 
-  var test=JSON.parse(test);
-  var name=test.name;
-  var test_subcategories_number=test.test_subcategories_number;
-     var password =test.password;
-     var activation_date=test.activation_date;
- var expiration_date=test.expiration_date;
-
-var id=req.query.id;
+      var test=JSON.parse(test);
+      var name=test.name;
+      var test_subcategories_number=test.test_subcategories_number;
+      var password =test.password;
+      var activation_date=test.activation_date;
+      var expiration_date=test.expiration_date;
+      var id=req.query.id;
     return new Promise((resolve, reject) => {  
+             var msg="";
              var sql = "update  test set name=?,test_subcategories_number=?,password=?,activation_date=?,expiration_date=? where id=?";
              con.query(sql,[name,test_subcategories_number,password,activation_date,expiration_date,id], function (err, result) {
-               if (err) reject(err);               
-              return resolve(result);
+                if (err){
+                  msg="failure";
+                  reject(err);
+                }else{
+                  msg="success";
+                }
+                return resolve(msg);
              });
              
            });    
@@ -646,11 +683,17 @@ var id=req.query.id;
 
  _publics.deleteTest = (req) => { 
     var id=req.query.id;
-    return new Promise((resolve, reject) => {  
+    return new Promise((resolve, reject) => { 
+             var msg=""; 
              var sql = "delete from   test where id=?";
              con.query(sql,[id], function (err, result) {
-                if (err) reject(err);               
-              return resolve(result);
+              if (err){
+                msg="failure";
+                reject(err);
+              }else{
+                msg="success";
+              }
+              return resolve(msg);
              });
            });    
  }; 
