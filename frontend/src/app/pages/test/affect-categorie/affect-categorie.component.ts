@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {CategorieService} from "../../dashboard/categorie.service";
 import {Categorie} from "../../dashboard/categorie.model";
+import {TestService} from "../test.service";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'affect-categorie',
@@ -9,7 +11,7 @@ import {Categorie} from "../../dashboard/categorie.model";
   styleUrls: ['./affect-categorie.component.scss']
 })
 export class AffectCategorieComponent implements OnInit {
-
+  id:number;
   dropdownList = [];
   selectedItems = [];
   settings = {};
@@ -17,7 +19,9 @@ export class AffectCategorieComponent implements OnInit {
   submitted = false;
 
   constructor(private categorieService:CategorieService,
-              private formBuilder:FormBuilder) { }
+              private formBuilder:FormBuilder,
+              private testService:TestService,
+              private activateRoute:ActivatedRoute) { }
 
   ngOnInit() {
     this.addForm=this.formBuilder.group({
@@ -26,6 +30,15 @@ export class AffectCategorieComponent implements OnInit {
       dateExpiration: new FormControl('', [Validators.required]),
       cat: [[], Validators.required]
     })
+
+    this.id=this.activateRoute.snapshot.params['id'];
+    if (this.id){
+      this.testService.getById(this.id).subscribe(
+        data=>{
+          this.addForm.patchValue(data);
+        }
+      )
+    }
 
 
 
@@ -49,7 +62,22 @@ export class AffectCategorieComponent implements OnInit {
       }
     )
  }
+    affecter(){
 
+      if(this.addForm.valid){
+        this.testService.affectCategorie(this.addForm.value).subscribe(
+          data=>{
+            alert("ajout")
+
+
+          },err=>{
+            console.log(err);
+          }
+        )
+
+      }
+
+    }
 
   get Formvalidate(){
    return this.addForm.controls;
