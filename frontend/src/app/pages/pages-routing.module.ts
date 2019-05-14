@@ -53,6 +53,10 @@ const routes: Routes = [{
       component: CreateEcoleComponent,
     },
     {
+      path:"categorie/:id/modifier",
+      component: CreateCategorieComponent,
+    },
+    {
       path:"etalonnage",
       component: EtalonnageComponent,
     },

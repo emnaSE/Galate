@@ -19,16 +19,13 @@
 
       </thead>
       <tbody>
-      <tr *ngFor="let categorie of categories | paginate: { id: 'foo',
-                                                      itemsPerPage: pageSize,
-                                                      currentPage: p,
-                                                      totalItems: total }">
+      <tr *ngFor="let categorie of categories | paginate: { itemsPerPage: 7, currentPage: pageActuel }">
         <td>{{categorie.id}}</td>
         <td>{{categorie.name}}</td>
         <td>{{categorie.subCategoriesNumber}}</td>
         <td>
-          <i style="cursor: pointer; display: inline-block;margin-right: 20px !important;" class="fas fa-trash fa-2x" (click)="create()"></i>
-          <i class="fas fa-info fa-2x" style="cursor: pointer;" (click)="create()"></i>
+          <i style="cursor: pointer; display: inline-block;margin-right: 20px !important;" class="fas fa-trash fa-2x" (click)="deleteByid(categorie)"></i>
+          <i class="fas fa-info fa-2x" style="cursor: pointer;" (click)="updateCommercial(categorie)"></i>
         </td>
        </tr>
       </tbody>
