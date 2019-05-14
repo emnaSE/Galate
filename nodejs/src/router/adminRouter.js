@@ -31,8 +31,8 @@ router.get('/getAllCategories',urlencodedParser, (req, res, next) =>
 })
 .catch(next));
 
-router.get('/getCategory',urlencodedParser, (req, res, next) => 
- adminController.getCategory(req)
+router.get('/getCategoryById',urlencodedParser, (req, res, next) => 
+ adminController.getCategoryById(req)
 .then(categories=>{
   res.send(categories);
 })
@@ -83,8 +83,8 @@ router.get('/getAllClassesBySchool',urlencodedParser, (req, res, next) =>
   res.send(classes);
 })
 .catch(next));
-router.get('/getClass',urlencodedParser, (req, res, next) => 
- adminController.getClass(req)
+router.get('/getClassById',urlencodedParser, (req, res, next) => 
+ adminController.getClassById(req)
 .then(classes=>{
   res.send(classes);
 })
@@ -130,8 +130,8 @@ adminController.deleteClazzByIdSchool(req)
 .catch(next));
 //school
 
-router.get('/getSchool',urlencodedParser, (req, res, next) => 
- adminController.getSchool(req)
+router.get('/getSchoolById',urlencodedParser, (req, res, next) => 
+ adminController.getSchoolById(req)
 .then(schools=>{
   res.send(schools);
 })
@@ -179,8 +179,8 @@ router.get('/getAllSubcategories',urlencodedParser, (req, res, next) =>
   res.send(subcategories);
 })
 .catch(next));
-router.get('/getSubcategory',urlencodedParser, (req, res, next) => 
- adminController.getSubcategory(req)
+router.get('/getSubcategoryById',urlencodedParser, (req, res, next) => 
+ adminController.getSubcategoryById(req)
 .then(subcategories=>{
   res.send(subcategories);
 })
@@ -268,6 +268,13 @@ adminController.getAllQuestion(req)
 })
 .catch(next));
 
+router.get('/getQuestionById',urlencodedParser, (req, res, next) => 
+ adminController.getQuestionById(req)
+.then(question=>{
+  res.send(question);
+})
+.catch(next));
+
 //Answer
 
 router.post('/createAnswer',(req, res, next)=>
@@ -306,6 +313,12 @@ adminController.getAllAnswerByQuestion(req)
 })
 .catch(next));
 
+router.get('/getAnswerById',urlencodedParser, (req, res, next) => 
+ adminController.getAnswerById(req)
+.then(answer=>{
+  res.send(answer);
+})
+.catch(next));
 
 //Test 
 

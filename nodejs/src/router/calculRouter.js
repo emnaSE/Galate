@@ -25,7 +25,7 @@ router.use((req, res, next) => {
 
 var getRawBody = require('raw-body')
 router.use(bodyParser.urlencoded({extended : true}));
-
+//etalonnage 
 router.post('/createEtalonnage',(req, res, next)=>
 memberController.getRawBody(req)
 .then(etalonnage=>{

@@ -16,7 +16,7 @@ _publics.getAllCategories = (req) => {
                });
    });    
 };
-_publics.getCategory = (req) => { 
+_publics.getCategoryById = (req) => { 
   var id=req.query.id;
   return new Promise((resolve, reject) => {  
            var sql = "select * FROM category where id=?"; 
@@ -88,7 +88,7 @@ _publics.getAllClasses = (req) => {
                });
    });    
 };
-_publics.getClass = (req) => { 
+_publics.getClassById = (req) => { 
   var id =req.query.id;
   return new Promise((resolve, reject) => {  
            var sql = "select * FROM clazz where id=?"; 
@@ -189,7 +189,7 @@ _publics.getAllClassesByIdSchool = (req) => {
                });
    });    
 };
-_publics.getSchool = (req) => { 
+_publics.getSchoolById = (req) => { 
   var id=req.query.id;
   return new Promise((resolve, reject) => {  
            var sql = "select * FROM school where id=?"; 
@@ -254,7 +254,7 @@ _publics.createSchool = (school) => {
 
 
 
-_publics.getSubcategory = (req) => { 
+_publics.getSubcategoryById = (req) => { 
   var id=req.query.id;
   return new Promise((resolve, reject) => {  
            var sql = "select * FROM subcategory where id=?"; 
@@ -442,6 +442,18 @@ _publics.getAllQuestion = (req) => {
    });    
 };
 
+_publics.getQuestionById = (req) => { 
+  var id=req.query.id;
+  return new Promise((resolve, reject) => {  
+           var sql = "select * FROM question where id=?"; 
+         
+               con.query(sql,[id], function (err, result) {
+               if (err) reject(err);
+               return resolve(JSON.stringify(result));
+               });
+   });    
+};
+
 //Answer 
 _publics.createAnswer = (answer ) => { 
   var answer=JSON.parse(answer);
@@ -521,13 +533,24 @@ _publics.getAllAnswerByQuestion = (req) => {
    });    
 };
 
+_publics.getAnswerById = (req) => { 
+  var id=req.query.id;
+  return new Promise((resolve, reject) => {  
+           var sql = "select * FROM answer where id=?"; 
+         
+               con.query(sql,[id], function (err, result) {
+               if (err) reject(err);
+               return resolve(JSON.stringify(result));
+               });
+   });    
+};
 
 
 //Test Controller
 
 
 
-_publics.getTest = (req) => { 
+_publics.getTestById = (req) => { 
   var id=req.query.id;
   return new Promise((resolve, reject) => {  
            var sql = "select * FROM test where id=?"; 
