@@ -22,5 +22,15 @@ export class TestService {
   getAllTest():Observable<Test[]>{
     return this.http.get<Test[]>(this.url+"getAllTests");
   }
+
+  affectCategorie(test:Test):Observable<Test[]>{
+    return this.http.post<Test[]>(this.url+"AffectCategoriesToTest",test);
+  }
+  addTest(test:Test):Observable<Test[]>{
+    return this.http.post<Test[]>(this.url+"createTest",test);
+  }
+  getById(id:number):Observable<any>{
+    return this.http.get<any>(this.url+"getTest"+id);
+  }
 }
 

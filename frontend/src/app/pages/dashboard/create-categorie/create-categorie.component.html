@@ -2,25 +2,25 @@
 
 <nb-card>
   <nb-card-header>
-    create catergire
+    {{ editMode ? 'Update':'Ajouter'}} catergire
   </nb-card-header>
 
   <nb-card-body>
     <form [formGroup]="addForm" (ngSubmit)="onSubmit()">
       <div class="form-group">
-        <input type="text" class="form-control" formControlName="nom" placeholder="Nom du categorie">
-        <ng-container *ngIf="submitted && formvalidate.nom.errors">
+        <input type="text" class="form-control" formControlName="name" placeholder="Nom du categorie">
+        <ng-container *ngIf="submitted && formvalidate.name.errors">
           <p class="text-danger" >
-            prenom est obligatoire !
+            name est obligatoire !
           </p>
         </ng-container>
       </div>
       <div  class="input-group input-group-sm">
-        <input formControlName="subCategoriesNumber" type="number" ngModel="0" disabled  nbInput fullWidth placeholder="nombre de sous categotire">
+        <input formControlName="subcategories_number" type="number"    nbInput fullWidth placeholder="nombre de sous categotire">
       </div>
 
 
-      <button type="submit" class="btn btn-success">ajouter</button>
+      <button type="submit" class="btn btn-success">{{ editMode ? 'Update':'Ajouter'}}</button>
     </form>
 
   </nb-card-body>
