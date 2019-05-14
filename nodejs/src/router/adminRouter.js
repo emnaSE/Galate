@@ -24,6 +24,20 @@ router.use((req, res, next) => {
 
 var getRawBody = require('raw-body')
 router.use(bodyParser.urlencoded({extended : true}));
+router.get('/getAllCategories',urlencodedParser, (req, res, next) => 
+ adminController.getAllCategories(req)
+.then(categories=>{
+  res.send(categories);
+})
+.catch(next));
+
+router.get('/getCategory',urlencodedParser, (req, res, next) => 
+ adminController.getCategory(req)
+.then(categories=>{
+  res.send(categories);
+})
+.catch(next));
+
 
   router.post('/createCategory',(req, res, next)=>
   memberController.getRawBody(req)
@@ -54,6 +68,27 @@ adminController.deleteCategory(req)
 })
 .catch(next));
 
+//class 
+
+router.get('/getAllClasses',urlencodedParser, (req, res, next) => 
+ adminController.getAllClasses(req)
+.then(classes=>{
+  res.send(classes);
+})
+.catch(next));
+
+router.get('/getAllClassesBySchool',urlencodedParser, (req, res, next) => 
+ adminController.getAllClassesByIdSchool(req)
+.then(classes=>{
+  res.send(classes);
+})
+.catch(next));
+router.get('/getClass',urlencodedParser, (req, res, next) => 
+ adminController.getClass(req)
+.then(classes=>{
+  res.send(classes);
+})
+.catch(next));
 
 router.post('/createClass',(req, res, next)=>
 memberController.getRawBody(req)
@@ -79,6 +114,261 @@ memberController.getRawBody(req)
 .catch(next));
 
 
+router.post('/deleteClassById', (req, res, next) =>
+adminController.deleteClazzById(req)
+
+.then(msg=>{
+    res.send(msg);
+})
+.catch(next));
+router.post('/deleteClassByIdSchool', (req, res, next) =>
+adminController.deleteClazzByIdSchool(req)
+
+.then(msg=>{
+    res.send(msg);
+})
+.catch(next));
+//school
+
+router.get('/getSchool',urlencodedParser, (req, res, next) => 
+ adminController.getSchool(req)
+.then(schools=>{
+  res.send(schools);
+})
+.catch(next));
+router.get('/getAllSchools',urlencodedParser, (req, res, next) => 
+ adminController.getAllSchools(req)
+.then(schools=>{
+  res.send(schools);
+})
+.catch(next));
+
+  router.post('/createSchool',(req, res, next)=>
+  memberController.getRawBody(req)
+  .then(school=>{
+      res.payload.school=school;
+      return adminController.createSchool(school)
+  })
+  .then(msg=>{
+      res.send(msg);
+  })
+  .catch(next));
+  
+router.post('/updateSchool', (req, res, next) =>
+memberController.getRawBody(req)
+.then(school=>{
+    return adminController.updateSchool(req,school)
+})
+.then(msg=>{
+    res.send(msg);
+})
+.catch(next));
+
+router.post('/deleteSchool', (req, res, next) =>
+adminController.deleteSchool(req)
+
+.then(msg=>{
+    res.send(msg);
+})
+.catch(next));
+
+//subcategory
+router.get('/getAllSubcategories',urlencodedParser, (req, res, next) => 
+ adminController.getAllSubcategories(req)
+.then(subcategories=>{
+  res.send(subcategories);
+})
+.catch(next));
+router.get('/getSubcategory',urlencodedParser, (req, res, next) => 
+ adminController.getSubcategory(req)
+.then(subcategories=>{
+  res.send(subcategories);
+})
+.catch(next));
+
+router.get('/getAllSubcategoriesByCategory',urlencodedParser, (req, res, next) => 
+ adminController.getAllSubcategoriesByCategory(req)
+.then(subcategories=>{
+  res.send(subcategories);
+})
+.catch(next));
+
+router.post('/createSubcategory',(req, res, next)=>
+memberController.getRawBody(req)
+.then(Subcategory=>{
+    res.payload.Subcategory=Subcategory;
+    return adminController.createSubCategory(Subcategory)
+})
+.then(msg=>{
+    res.send(msg);
+})
+.catch(next));
+
+router.post('/updateSubcategory', (req, res, next) =>
+memberController.getRawBody(req)
+.then(Subcategory=>{
+  return adminController.updateSubCategory(req,Subcategory)
+})
+.then(msg=>{
+  res.send(msg);
+})
+.catch(next));
+
+router.post('/deleteSubcategory', (req, res, next) =>
+adminController.deleteSubCategoryById(req)
+
+.then(msg=>{
+  res.send(msg);
+})
+.catch(next));
+
+router.post('/deleteSubcategroies', (req, res, next) =>
+adminController.deleteSubCategorysByIdCategory(req)
+
+.then(msg=>{
+  res.send(msg);
+})
+.catch(next));
+
+//question
+
+router.post('/createQuestion',(req, res, next)=>
+adminController.getRawBody(req)
+.then(question=>{
+    res.payload.question=question;
+    return adminController.createQuestion(question)
+})
+.then(msg=>{
+    res.send(msg);
+})
+.catch(next));
 
 
+router.post('/updateQuestion',(req, res, next)=>
+adminController.getRawBody(req)
+.then(question=>{
+    return adminController.updateQuestion(req,question)
+})
+.then(msg=>{
+    res.send(msg);
+})
+.catch(next));
+
+router.get('/deleteQuestion',urlencodedParser, (req, res, next) => 
+adminController.deleteQuestion(req)
+.then(msg=>{
+    res.send(msg);
+})
+.catch(next));
+
+router.get('/getAllQuestion',urlencodedParser, (req, res, next) => 
+adminController.getAllQuestion(req)
+.then(questions=>{
+  res.send(questions);
+})
+.catch(next));
+
+//Answer
+
+router.post('/createAnswer',(req, res, next)=>
+adminController.getRawBody(req)
+.then(answer=>{
+    res.payload.answer=answer;
+    return adminController.createAnswer(answer)
+})
+.then(msg=>{
+    res.send(msg);
+})
+.catch(next));
+
+
+router.post('/updateAnswer',(req, res, next)=>
+adminController.getRawBody(req)
+.then(answer=>{
+    return adminController.updateAnswer(req,answer)
+})
+.then(msg=>{
+    res.send(msg);
+})
+.catch(next));
+
+router.get('/deleteAnswer',urlencodedParser, (req, res, next) => 
+adminController.deleteAnswer(req)
+.then(msg=>{
+    res.send(msg);
+})
+.catch(next));
+
+router.get('/getAllAnswerByQuestion',urlencodedParser, (req, res, next) => 
+adminController.getAllAnswerByQuestion(req)
+.then(answers=>{
+  res.send(answers);
+})
+.catch(next));
+
+
+//Test 
+
+
+
+router.get('/getAllTests',urlencodedParser, (req, res, next) => 
+adminController.getAllTests(req)
+.then(tests=>{
+  res.send(tests);
+})
+.catch(next));
+
+router.get('/getTest',urlencodedParser, (req, res, next) => 
+adminController.getTest(req)
+.then(tests=>{
+  res.send(tests);
+})
+.catch(next));
+
+
+router.get('/getAllActivatedTests',urlencodedParser, (req, res, next) => 
+adminController.getAllActiveTests(req)
+.then(tests=>{
+  res.send(tests);
+})
+.catch(next));
+
+
+router.get('/getAllDisabledTests',urlencodedParser, (req, res, next) => 
+adminController.getAllDisabledTests(req)
+.then(tests=>{
+  res.send(tests);
+})
+.catch(next));
+
+router.post('/createTest',(req, res, next)=>
+memberController.getRawBody(req)
+.then(test=>{
+    res.payload.test=test;
+    return adminController.createTest(test)
+})
+.then(msg=>{
+    res.send(msg);
+})
+.catch(next));
+
+router.post('/updateTest',(req, res, next)=>
+memberController.getRawBody(req)
+.then(test=>{
+    console.log(test);
+
+    return adminController.updateTest(req,test)
+})
+.then(msg=>{
+    res.send(msg);
+})
+.catch(next));
+
+router.post('/deleteTest', (req, res, next) =>
+adminController.deleteTest(req)
+
+.then(msg=>{
+    res.send(msg);
+})
+.catch(next));
 module.exports = router;

@@ -5,7 +5,7 @@ var config = require('../config');
 var getRawBody = require('raw-body');
 var con=config.con;
 var url=`http://localhost:3000`;
-
+//member 
 _publics.createMember = (member) => { 
     var member=JSON.parse(member);
     var firstname=member.firstname;
@@ -104,7 +104,7 @@ _publics.getAllMembers = (req) => {
                  });
      });    
  };
-
+//login
 _publics.login = (member) => {
   
     var memberDetails={};
@@ -148,7 +148,7 @@ _publics.getMemberById = (req) => {
                 });
      });    
   };
-
+//choice member
 _publics.createChoiceMember = (choice_member) => { 
     var choice_member=JSON.parse(choice_member);
     var id_question=choice_member.id_question;
@@ -227,8 +227,8 @@ _publics.getAllChoiceMembers = (req) => {
      });    
  };
 
-_publics.getMemberByClazz = (req) => { 
-    var idClazz=req.query.id;
+_publics.getMemberByClass = (req) => { 
+    var idClazz=req.query.idClazz;
     return new Promise((resolve, reject) => {  
              var sql = "select * FROM member where id_clazz=? "; 
                  con.query(sql,[idClazz], function (err, result) {
@@ -238,19 +238,19 @@ _publics.getMemberByClazz = (req) => {
      });    
   };
 
-_publics.getTestMembers = (req) => { 
+_publics.getTestMembersByClassSchool = (req) => { 
   var id_clazz=req.query.id_clazz;
   var id_school=req.query.id_school;
     return new Promise((resolve, reject) => {  
-             var sql = "select * FROM test where id_school = ? and id_clazz = ?"; 
-             con.query(sql,[id_clazz,id_school], function (err, result) {
-                 con.query(sql, function (err, result) {
+             var sql = "select * FROM member where id_school=? and  id_clazz=? "; 
+             con.query(sql,[id_school,id_clazz], function (err, result) {
                  if (err) reject(err);
                  return resolve(JSON.stringify(result));
                  });
                 });
-     });    
+    
  };
+ //test member 
 _publics.createTestMembers = (testMembers ) => { 
     var testMembers=JSON.parse(testMembers);
     var id_test=testMembers.id_test;
@@ -259,7 +259,7 @@ _publics.createTestMembers = (testMembers ) => {
     
     return new Promise((resolve, reject) => {  
              var msg="";
-             var sql = "INSERT INTO test_members SET ? ";
+             var sql = "INSERT INTO test_member SET ? ";
              const newtestMembers = { id_test: id_test,id_member:id_member};
              con.query(sql,newtestMembers, function (err, result) {
                 if (err){
@@ -274,24 +274,11 @@ _publics.createTestMembers = (testMembers ) => {
   
         
   }; 
-_publics.getTestSubCategoryMembers = (req) => { 
-    var id_test=req.query.id_test;
-    var id_category=req.query.id_category;
-      return new Promise((resolve, reject) => {  
-               var sql = "select * FROM sub_category where id_test = ? order by (category_id) ?"; 
-               con.query(sql,[id_test,id_category], function (err, result) {
-                   con.query(sql, function (err, result) {
-                   if (err) reject(err);
-                   return resolve(JSON.stringify(result));
-                   });
-                  });
-       });    
-   };
 
-_publics.updateTestMember=(req,testMembers) => { 
-    var testMembers=JSON.parse(testMembers);
-    var id_test=choiceMember.id_test;
-    var id_member=choiceMember.id_member;
+_publics.updateTestMember=(req,testMember) => { 
+    var testMember=JSON.parse(testMember);
+    var id_test=testMember.id_test;
+    var id_member=testMember.id_member;
     
   
   
@@ -299,7 +286,7 @@ _publics.updateTestMember=(req,testMembers) => {
     return new Promise((resolve, reject) => { 
              var msg="";
              var sql = "UPDATE test_member SET id_test=?, id_member=?  WHERE id = ?"; 
-             con.query(sql,[id_test,id_member,,id], function (err, result) {
+             con.query(sql,[id_test,id_member,idTestMember], function (err, result) {
                 if (err){
                     msg="failure";
                     reject(err);
@@ -328,10 +315,10 @@ _publics.deleteTestMember = (req) => {
           });    
 };
 
-_publics.getAllTestMembersByMember = (req) => { 
-    var idMember=req.query.id;
+_publics.getAllMemberTest = (req) => { 
+    var idMember=req.query.idMember;
     return new Promise((resolve, reject) => {  
-             var sql = "select * FROM test_member where id=?"; 
+             var sql = "select * FROM test_member where id_member=?"; 
            
                  con.query(sql,[idMember], function (err, result) {
                  if (err) reject(err);
@@ -351,4 +338,6 @@ _publics.getAllTestMembers = (req) => {
                  });
      });    
  };
+
+
 module.exports = _publics;
