@@ -86,7 +86,17 @@ _publics.getAllEtalonnages = (req) => {
      });    
  };
 
-
+_publics.getEtalonnageById = (req) => { 
+  var id=req.query.id;
+  return new Promise((resolve, reject) => {  
+           var sql = "select * FROM etalonnage where id=?"; 
+         
+               con.query(sql,[id], function (err, result) {
+               if (err) reject(err);
+               return resolve(JSON.stringify(result));
+               });
+   });    
+};
 
 
 

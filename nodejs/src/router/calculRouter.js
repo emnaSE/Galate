@@ -40,8 +40,8 @@ memberController.getRawBody(req)
 
 router.post('/updateEtalonnage',(req, res, next)=>
 memberController.getRawBody(req)
-.then(member=>{
-    return calculController.updateEtalonnage(req,member)
+.then(etalonnage=>{
+    return calculController.updateEtalonnage(req,etalonnage)
 })
 .then(msg=>{
     res.send(msg);
@@ -61,5 +61,10 @@ calculController.getAllEtalonnages(req)
   res.send(etalonnages);
 })
 .catch(next));
-
+router.get('/getEtalonnageById',urlencodedParser, (req, res, next) => 
+calculController.getEtalonnageById(req)
+.then(etalonnage=>{
+  res.send(etalonnage);
+})
+.catch(next));
 module.exports = router;
