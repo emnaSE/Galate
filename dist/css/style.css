@@ -232,7 +232,7 @@ footer { padding: 40px 0 45px 0; background: #f8f8f8; }
 		-webkit-box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.1);
 		box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.1);
 	}
-	.navbar-no-bg .navbar-brand { background-image: url(../img/logo-dark.png); }
+	.navbar-no-bg .navbar-brand { background-image: url(../img/galate.png); }
 	
 	.navbar-no-bg ul.navbar-nav { color: #888; }
 	.navbar-no-bg ul.navbar-nav li a { color: #888; }
