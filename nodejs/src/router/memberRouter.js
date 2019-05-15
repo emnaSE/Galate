@@ -174,7 +174,12 @@ memberController.getRawBody(req)
 .catch(next));
 
 
-
+router.get('/getTestDetails',urlencodedParser, (req, res, next) => 
+memberController.getTestDetails(req)
+.then(tests=>{
+  res.send(tests);
+})
+.catch(next));
 
 
 

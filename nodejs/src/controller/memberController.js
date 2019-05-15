@@ -365,5 +365,16 @@ _publics.getAllTestMembers = (req) => {
          });    
 };
 
+_publics.getTestDetails = (req) => { 
+  var id_test=req.query.id_test;
+  return new Promise((resolve, reject) => {  
+           var sql = "select a.id, a.name, a.ordre,s.name,s.id_category from answer a left join question q on (a.id_question=q.id) left join test_subcategory ts on (ts.id=q.id_test_subcategory) left join subcategory s on(ts.id_subcategory=s.id) where id_test=?"; 
+         
+               con.query(sql,[id_test], function (err, result) {
+               if (err) reject(err);
+               return resolve(JSON.stringify(result));
+               });
+   });    
+};
 
 module.exports = _publics;
