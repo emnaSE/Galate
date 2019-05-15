@@ -178,6 +178,7 @@ ul.navbar-nav li a.btn-link-3:active:focus { outline: 0; background: #63a736; co
 /***** Top content *****/
 
 .top-content { padding: 120px 0 150px 0; 
+	background-image: url("assets/img/backgrounds/1.jpg");
 }
 
 .top-content .text { padding-top: 60px; color: #fff; }
