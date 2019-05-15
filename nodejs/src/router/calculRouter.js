@@ -83,7 +83,7 @@ router.get('/getLineSum', urlencodedParser, (req, res, next) =>
 router.get('/getEtalonnageValue', urlencodedParser, (req, res, next) =>
         calculController.getEtalonnageValue(req)
             .then(value => {
-                //calculController.setEtalonnageValue(req, value);
+                calculController.setEtalonnageValue(req, value);
             }).then(response => {
                 res.send(response);
             })
