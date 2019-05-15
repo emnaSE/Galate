@@ -147,11 +147,10 @@ _publics.setEtalonnageValue= (req,value) => {
 
    
   var value=JSON.parse(value);
-  console.log(value);
    // var id=req.query.id;
     return new Promise((resolve, reject) => { 
              var msg="";
-             var sql = "UPDATE manuel_answer set result_etallonage=?  WHERE id = ?"; 
+             var sql = "UPDATE manuel_answer set etallonage_result=?  WHERE id = ?"; 
              con.query(sql,[value[0].value,value[1].id], function (err, result) {
                 if (err){
                     msg="failure";
@@ -169,7 +168,7 @@ _publics.setEtalonnageValue= (req,value) => {
 _publics.getEtalonnageValue = (req) => { 
   var id_subcategory=req.query.id_subcategory;
   return new Promise((resolve, reject) => {  
-           var sql = "select e.value as value from etalonnage e left join manuel_answer ma on(ma.id_subcategory=e.id_subcategory) where ma.id_subcategory=? and ma.result between e.upper_bound and e.lower_bound"; 
+           var sql = "select e.value as value, ma.id as id from etalonnage e left join manuel_answer ma on(ma.id_subcategory=e.id_subcategory) where ma.id_subcategory=? and ma.result between e.upper_bound and e.lower_bound"; 
          
                con.query(sql,[id_subcategory], function (err, result) {
                if (err) reject(err);
