@@ -5,10 +5,10 @@ import {Router} from "@angular/router";
 
 
 @Component({
-  selector: 'home',
-  templateUrl: './home.component.html',
+  selector: 'startTest',
+  templateUrl: './startTest.component.html',
 })
-export class HomeComponent  implements OnInit{
+export class StartTestComponent  implements OnInit{
   pageActuel: number =1;
 
 

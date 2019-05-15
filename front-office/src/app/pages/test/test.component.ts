@@ -5,10 +5,10 @@ import {Router} from "@angular/router";
 
 
 @Component({
-  selector: 'login',
-  templateUrl: './login.component.html',
+  selector: 'test',
+  templateUrl: './test.component.html',
 })
-export class LoginComponent  implements OnInit{
+export class TestComponent  implements OnInit{
   pageActuel: number =1;
 
 

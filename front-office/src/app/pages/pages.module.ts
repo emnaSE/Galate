@@ -1,7 +1,11 @@
 import { NgModule } from '@angular/core';
 import { PagesComponent } from './pages.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import { HomeModule } from './home/home.module';
+import { TestModule } from './test/test.module';
+import { ResultTableModule } from './resultTable/resultTable.module';
+import { LoginModule } from './login/login.module';
+import { RegisterModule } from './register/register.module';
+import { StartTestModule } from './startTest/startTest.module';
 
 const PAGES_COMPONENTS = [
   PagesComponent,
@@ -9,7 +13,12 @@ const PAGES_COMPONENTS = [
 
 @NgModule({
   imports: [
-    HomeModule,
+    ResultTableModule,
+    TestModule,
+    LoginModule,
+    RegisterModule,
+    StartTestModule,
+   
   ],
   declarations: [
     ...PAGES_COMPONENTS,
