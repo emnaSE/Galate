@@ -13,11 +13,14 @@ import {Categorie} from "../categorie.model";
 })
 export class CreateCategorieComponent implements OnInit {
   private categorie:Categorie[]
+  id:number;
+  editMode=false;
   addForm:FormGroup;
   submitted = false;
 
   constructor(private categorieService:CategorieService,
               private formBuilder:FormBuilder,
+              private activateRoute:ActivatedRoute,
               private router:Router){
 
   }
@@ -25,31 +28,51 @@ export class CreateCategorieComponent implements OnInit {
   ngOnInit() {
 
     this.addForm=this.formBuilder.group({
-      nom: new FormControl('', [Validators.required]),
-      subCategoriesNumber: ['',Validators.required],
+      name: new FormControl('', [Validators.required]),
+      subcategories_number: ['',Validators.required],
      });
 
+    this.id=this.activateRoute.snapshot.params['id'];
+    if(this.id){
+      this.editMode=true;
+      this.categorieService.getCategorieParId(this.id).subscribe(
+        (value:any)=>{
+          this.addForm.patchValue(value);
 
 
-
+        },err=>{
+          console.log(err);
+        }
+      )
+    }
   }
+
+
+
+
+
   get formvalidate() {
     return this.addForm.controls;
   }
   onSubmit(){
-    this.submitted = true;
-    this.categorieService.addCategorie(this.addForm.value).subscribe(
-      data=>{
-        alert("ajouter vec succes");
-        this.router.navigate(['pages/dashboard'])
-
-      },err=>{
-        console.log(err);
+    //this.editMode=true;
+    if(this.id){
+      if(this.addForm.valid){
+        this.categorieService.updateCategorie(this.id, this.addForm.value).subscribe(
+          data=>{
+            this.router.navigate(['pages/categorie'])
+          }
+        )
       }
-    )
-
+    }else{
+      if(this.addForm.valid){
+        this.categorieService.addCategorie(this.addForm.value).subscribe(
+          data=>{
+            this.router.navigate(['pages/categorie'])
+          }
+        )
+      }
+    }
 
   }
-
-
 }

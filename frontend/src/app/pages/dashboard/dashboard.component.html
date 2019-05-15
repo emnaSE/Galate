@@ -3,7 +3,7 @@
 <nb-card>
   <nb-card-header>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
-    Listes des test
+    Liste des Catégories
   </nb-card-header>
 
 
@@ -19,16 +19,13 @@
 
       </thead>
       <tbody>
-      <tr *ngFor="let categorie of categories | paginate: { id: 'foo',
-                                                      itemsPerPage: pageSize,
-                                                      currentPage: p,
-                                                      totalItems: total }">
+      <tr *ngFor="let categorie of categories | paginate: { itemsPerPage: 7, currentPage: pageActuel }">
         <td>{{categorie.id}}</td>
         <td>{{categorie.name}}</td>
         <td>{{categorie.subCategoriesNumber}}</td>
         <td>
-          <i style="cursor: pointer; display: inline-block;margin-right: 20px !important;" class="fas fa-trash fa-2x" (click)="create()"></i>
-          <i class="fas fa-info fa-2x" style="cursor: pointer;" (click)="create()"></i>
+          <i style="cursor: pointer; display: inline-block;margin-right: 20px !important;" class="fas fa-trash fa-2x" (click)="deleteByid(categorie)"></i>
+          <i class="fas fa-info fa-2x" style="cursor: pointer;" (click)="updateCommercial(categorie)"></i>
         </td>
        </tr>
       </tbody>
