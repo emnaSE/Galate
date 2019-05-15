@@ -366,6 +366,7 @@ _publics.getAllTestMembers = (req) => {
          });    
 };
 
+//test details
 _publics.getTestDetails = (req) => { 
   var id_test=req.query.id_test;
   return new Promise((resolve, reject) => {  
@@ -376,6 +377,41 @@ _publics.getTestDetails = (req) => {
                return resolve(JSON.stringify(result));
                });
    });    
+};
+
+// vérifier password 
+_publics.verifPasswordTest = (test) => {
+  
+  var testDetails={};
+  var test=JSON.parse(test);
+  var password=test.password;
+  // password=JSON.parse(password);
+console.log(password);
+      return new Promise((resolve, reject) => {
+   
+      var sql = "select * FROM test where password=? "; 
+      con.query(sql,[password], function (err, tests) {
+        var tests=JSON.stringify(tests);
+        tests=JSON.parse(tests);
+       
+        if (err) {
+          testDetails = {
+              status: 500
+          };
+      } else if (tests[0]===undefined || (tests[0].password!==password)) {
+        testDetails = {
+              status: 403
+          };
+        
+      } else{
+        testDetails = {
+            tests:tests[0],
+              status: 200,
+          }; 
+      }
+      return resolve(JSON.stringify(testDetails));
+      });          
+     }); 
 };
 
 module.exports = _publics;

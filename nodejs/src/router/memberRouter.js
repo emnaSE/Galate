@@ -181,6 +181,14 @@ memberController.getTestDetails(req)
 })
 .catch(next));
 
-
+router.post('/verifPasswordTest', (req, res, next) => 
+memberController.getRawBody(req)
+.then(test=>{
+    return memberController.verifPasswordTest(test);
+})
+.then(response=>{
+  res.send(response);
+})
+.catch(next));
 
 module.exports = router;
