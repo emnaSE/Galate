@@ -7,7 +7,7 @@ const mongoose=require('mongoose');
 const AnswerSchema=mongoose.Schema({
     
 
-    idQuestion: {
+    id_question: {
         type: String
     },
     value: {
@@ -15,6 +15,9 @@ const AnswerSchema=mongoose.Schema({
     },
     name: {
         type: String
+    },
+    ordre: {
+        type: Number
     }
 })
 var Answer=module.exports=mongoose.model('Answer', AnswerSchema);

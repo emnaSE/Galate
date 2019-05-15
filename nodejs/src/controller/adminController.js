@@ -359,11 +359,13 @@ _publics.createSubCategory = (subcategory) => {
    var subcategory=JSON.parse(subcategory);
   var name=subcategory.name;
   var id_category=subcategory.id_category;
+  var down_description=subcategory.down_description;
+    var up_description=subcategory.up_description;
   var id=req.query.id;
     return new Promise((resolve, reject) => {  
              var msg="";
-             var sql = "update  subcategory set name=?,id_category=? where id=?";
-             con.query(sql,[name,id_category,id], function (err, result) {
+             var sql = "update  subcategory set name=?,id_category=?,down_description=?,up_description where id=?";
+             con.query(sql,[name,id_category,down_description,up_description,id], function (err, result) {
               if (err){
                 msg="failure";
                 reject(err);
@@ -513,10 +515,11 @@ _publics.createAnswer = (answer ) => {
   var id_question=answer.id_question;
   var name=answer.name;
   var value=answer.value;
+  var ordre =answer.ordre;
   return new Promise((resolve, reject) => {  
            var msg="";
            var sql = "INSERT INTO answer SET ? ";
-           const newAnswer = { id_question: id_question,name:name,value:value};
+           const newAnswer = { id_question: id_question,name:name,value:value,ordre:ordre};
            con.query(sql,newAnswer, function (err, result) {
               if (err){
                   msg="failure";
@@ -536,11 +539,12 @@ _publics.updateAnswer=(req,answer) => {
   var id_question=answer.id_question;
   var name=answer.name;
   var value=answer.value;
+  var ordre =answer.ordre;
   var answer_id=req.query.id;
   return new Promise((resolve, reject) => { 
            var msg="";
-           var sql = "UPDATE answer SET id_question=?, name=?,value=?  WHERE id = ?"; 
-           con.query(sql,[id_question,name,value,answer_id], function (err, result) {
+           var sql = "UPDATE answer SET id_question=?, name=?,value=?,ordre=?  WHERE id = ?"; 
+           con.query(sql,[id_question,name,value,ordre,answer_id], function (err, result) {
               if (err){
                   msg="failure";
                   reject(err);
