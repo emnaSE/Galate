@@ -46,6 +46,10 @@ const routes: Routes = [{
       component: CreateSousComponent,
     },
     {
+      path: 'sous/:id/modifier',
+      component: CreateSousComponent,
+    },
+    {
       path:"categorie/create",
       component: CreateCategorieComponent,
     },

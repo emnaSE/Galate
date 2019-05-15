@@ -17,11 +17,11 @@ export class CreateSousComponent implements OnInit {
   dropdownList = [];
   selectedItems = [];
   dropdownSettings = {};
-  id_category:any;
+
   addForm:FormGroup;
   submitted = false;
   constructor(private categorieService:CategorieService,
-              private subCategorie:SubcategorieService,
+              private subCategorieService:SubcategorieService,
               private router:Router,
               private formBuilder:FormBuilder){
 
@@ -55,8 +55,7 @@ export class CreateSousComponent implements OnInit {
       data=>{
         this.dropdownList =data.map((cat:Categorie)=>{
           return{id:cat.id, itemName:cat.name};
-          this.id_category=cat.id;
-          console.log(this.id_category)
+
         })
       }
     )
@@ -70,14 +69,16 @@ export class CreateSousComponent implements OnInit {
   onSubmit(){
 
     this.submitted = true;
-    /*this.selectedItems.map(cat=>{
-      let sub = new Categorie()
-      sub.id=cat.id;
-    })*/
+    let data = {...this.addForm.value}
+    console.log(data);
+    data.id_category=data.id_category.map(c=>{
 
-    console.log(this.selectedItems);
+      return c.id;
+      console.log(c.id);
+    })
 
-    this.subCategorie.addSousCategorie(this.addForm.value).subscribe(
+
+    this.subCategorieService.addSousCategorie(data).subscribe(
       data=>{
         alert("ajouter vec succes");
         this.router.navigate(['pages/sous'])
