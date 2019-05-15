@@ -63,8 +63,7 @@
                         <ul class="nav navbar-nav ml-auto">
                             <li class="nav-item"><a href="home.html" class="nav-link">Accueil</a>
                             </li>
-                            <li class="nav-item"><a href="listTest.html" class="nav-link">Nos Tests</a>
-                            </li>
+                            
                             <li class="nav-item"><a href="#" class="nav-link">Contactez Nous</a>
                             </li>
                             <li class="nav-item"><a id="login" class="btn btn-link-3 nav-link" href="login.html">Login</a>
@@ -87,7 +86,7 @@
                         </ol>
                         <!-- Wrapper for slides -->
                         <div class="carousel-inner">
-                            <div class="item active carousel-item">
+                            <div class="item active carousel-item" id="1">
                                 
                                 <!-- Static Header -->
                                 <div class="header-text hidden-xsd-none d-sm-blockd-none d-sm-block">
@@ -103,7 +102,7 @@
                                 </div>
                                 <!-- /header-text -->
                             </div>
-                            <div class="item carousel-item">
+                            <div class="item carousel-item" id="2">
                                 <!-- Static Header -->
                                 <div class="header-text hidden-xsd-none d-sm-blockd-none d-sm-block">
                                     <div class="col-xl-12 text-center">
@@ -118,7 +117,7 @@
                                 </div>
                                 <!-- /header-text -->
                             </div>
-                            <div class="item carousel-item">
+                            <div class="item carousel-item" id="3">
                                 <!-- Static Header -->
                                 <div class="header-text hidden-xsd-none d-sm-blockd-none d-sm-block">
                                     <div class="col-xl-12 text-center">
@@ -130,7 +129,7 @@
                                             <a class="btn btn-theme btn-sm btn-min-block choices" href="#carousel-example-generic" role="button" data-slide="next" onclick="save(this)">choice2</a>
                                         </div>
                                         <div class="" style="padding-top:20px"> <a style="background-color:green" class="btn btn-theme btn-sm btn-min-block"
-                                            href="resultTable.html" role="button">Get Resuult</a>
+                                            href="resultTable.html" onclick="showRes()" role="button">Get Resuult</a>
                                         </div>
                                     </div>
                                 </div>
@@ -155,11 +154,32 @@
                 }); 
             </script>
             <script>
-                $answers=[];
+                $answers= new Array(3);
             </script>
             <script>
             function save(elem){
+                $elemParent=elem.parentNode.parentNode.parentNode.parentNode;
+                var i = 0;
+                while(($Sib=$elemParent.previousElementSibling)!=null){
+                    $elemParent=$elemParent.previousElementSibling;
+                    i++;
+                }
+                alert(i);
+                /*$answers[$elemParent.id-1]=elem.innerText;
+                elem.style.borderColor="green";
+                if(elem.previousElementSibling){
+                    elem.previousElementSibling.style.borderColor="";
+                }
+                if(elem.nextElementSibling){
+                    elem.nextElementSibling.style.borderColor="";
+                }
+                */
                 
+            }
+            function showRes(){
+                for($i=0;$i<$answers.length;$i++){
+                    alert("answer"+$i+":"+$answers[$i]);
+                }
             }
             </script>
             
