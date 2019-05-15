@@ -275,9 +275,9 @@ only screen and (                min-resolution: 2dppx) {
 	
 	/* logo */
     .navbar-brand {
-    	background-image: url(../img/logo-dark@2x.png) !important; background-repeat: no-repeat !important; background-size: 102px 32px !important;
+    	background-image: url(../img/galate.png) !important; background-repeat: no-repeat !important; background-size: 102px 32px !important;
     }
     
-    .navbar-no-bg .navbar-brand { background-image: url(../img/logo-dark@2x.png); }
+    .navbar-no-bg .navbar-brand { background-image: url(../img/galate.png); }
 	
 }
