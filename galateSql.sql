@@ -191,3 +191,5 @@ create table manuel_answer(
 	 
 	 
 );
+alter table manuel_answer add column etallonage_result bigint;
+alter table answer add column ordre bigint;
