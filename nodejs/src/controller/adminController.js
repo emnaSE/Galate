@@ -231,8 +231,8 @@ _publics.getSchoolById = (req) => {
    });    
 };
 _publics.createSchool = (school) => { 
-  var school =JSON.parse(school)  
-  var name=req.query.name;
+  var school =JSON.parse(school) ; 
+  var name=school.name;
  
     return new Promise((resolve, reject) => {
              var msg="";  

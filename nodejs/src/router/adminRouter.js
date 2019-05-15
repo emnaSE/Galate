@@ -146,7 +146,6 @@ router.get('/getAllSchools',urlencodedParser, (req, res, next) =>
   router.post('/createSchool',(req, res, next)=>
   memberController.getRawBody(req)
   .then(school=>{
-      res.payload.school=school;
       return adminController.createSchool(school)
   })
   .then(msg=>{
