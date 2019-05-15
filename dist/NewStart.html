@@ -6,7 +6,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Bootstrap Navbar Menu Template</title>
+        <title>Start Test</title>
 
         <!-- CSS -->        
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Josefin+Sans:300,400|Roboto:300,400,500">
@@ -40,6 +40,10 @@
         }
         .choices{
             color: #41823b;
+        }
+        
+        .carousel-control-prev{
+            position:fixed;
         }
     </style>
     </head>
@@ -92,8 +96,8 @@
                                         <br>
                                          <h3><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span></h3>
                                         <br>
-                                        <div class=""> <a class="btn btn-theme btn-sm btn-min-block choices" href="#carousel-example-generic" role="button" data-slide="next">choice1</a>
-                                        <a class="btn btn-theme btn-sm btn-min-block choices" href="#carousel-example-generic" role="button" data-slide="next">choice2</a>
+                                        <div class=""> <a class="btn btn-theme btn-sm btn-min-block choices" href="#carousel-example-generic" role="button" data-slide="next" onclick="save(this)">choice1</a>
+                                        <a class="btn btn-theme btn-sm btn-min-block choices" href="#carousel-example-generic" role="button" data-slide="next" onclick="save(this)">choice2</a>
                                         </div>
                                     </div>
                                 </div>
@@ -107,8 +111,8 @@
                                         <br>
                                          <h3><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span></h3>
                                         <br>
-                                        <div class=""> <a class="btn btn-theme btn-sm btn-min-block choices" href="#carousel-example-generic" role="button" data-slide="next">choice1</a>
-                                            <a class="btn btn-theme btn-sm btn-min-block choices" href="#carousel-example-generic" role="button" data-slide="next">choice2</a>
+                                        <div class=""> <a class="btn btn-theme btn-sm btn-min-block choices" href="#carousel-example-generic" role="button" data-slide="next" onclick="save(this)">choice1</a>
+                                            <a class="btn btn-theme btn-sm btn-min-block choices" href="#carousel-example-generic" role="button" data-slide="next" onclick="save(this)">choice2</a>
                                         </div>
                                     </div>
                                 </div>
@@ -122,8 +126,8 @@
                                         <br>
                                          <h3><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span></h3>
                                         <br>
-                                        <div class=""> <a class="btn btn-theme btn-sm btn-min-block choices" href="#carousel-example-generic" role="button" data-slide="next">choice1</a>
-                                            <a class="btn btn-theme btn-sm btn-min-block choices" href="#carousel-example-generic" role="button" data-slide="next">choice2</a>
+                                        <div class=""> <a class="btn btn-theme btn-sm btn-min-block choices" href="#carousel-example-generic" role="button" data-slide="next" onclick="save(this)">choice1</a>
+                                            <a class="btn btn-theme btn-sm btn-min-block choices" href="#carousel-example-generic" role="button" data-slide="next" onclick="save(this)">choice2</a>
                                         </div>
                                         <div class="" style="padding-top:20px"> <a style="background-color:green" class="btn btn-theme btn-sm btn-min-block"
                                             href="resultTable.html" role="button">Get Resuult</a>
@@ -133,15 +137,14 @@
                                 <!-- /header-text -->
                             </div>
                         </div>
-                        <!-- Controls --> <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
-                            <span class="glyphicon glyphicon-chevron-left"></span>
-                         </a>
+                        <!-- Controls --> <a class="carousel-control-prev" href="#carousel-example-generic" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
                     </div>
                     <!-- /carousel -->
                 </div>
             </div>
-        
- 
 
             <script src="js/jquery-3.2.1.min.js"></script>
             <script src="js/bootstrap.min.js"></script>
@@ -151,6 +154,15 @@
                     wrap: false
                 }); 
             </script>
+            <script>
+                $answers=[];
+            </script>
+            <script>
+            function save(elem){
+                
+            }
+            </script>
+            
     </body>
 
 </html>
