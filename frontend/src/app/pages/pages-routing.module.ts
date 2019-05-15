@@ -15,6 +15,7 @@ import {EtalonnageComponent} from "./etalonnage/etalonnage.component";
 import {CreateEtalonnageComponent} from "./etalonnage/etalonnage-ecole/create-etalonnage.component";
 import {AffectCategorieComponent} from "./test/affect-categorie/affect-categorie.component";
 import {AffectSubcategorieComponent} from "./test/affect-subcategorie/affect-subcategorie.component";
+import {CreateClassComponent} from "./class/create-class/create-class.component";
 
 const routes: Routes = [{
   path: '',
@@ -67,6 +68,14 @@ const routes: Routes = [{
     {
       path:"class",
       component: ClassComponent,
+    },
+    {
+      path:"class/:id/modifier",
+      component: CreateClassComponent,
+    },
+    {
+      path:"ecole/:id/modifier",
+      component: CreateEcoleComponent,
     },
     {
       path: 'test/:id/affectation',

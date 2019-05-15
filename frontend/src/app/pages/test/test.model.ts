@@ -3,7 +3,8 @@ export interface Test {
     name?: string;
     testSubcategoriesNumber?: string;
     password?: string;
-    activationDate?:any;
-    expirationDate?:any;
+    activation_date?:any;
+    expiration_date?:any;
+    test_subcategories_number?:number;
 
   }

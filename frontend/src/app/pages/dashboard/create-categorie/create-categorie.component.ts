@@ -23,15 +23,17 @@ export class CreateCategorieComponent implements OnInit {
               private activateRoute:ActivatedRoute,
               private router:Router){
 
+
+       this.addForm=this.formBuilder.group({
+         name:['', Validators.required],
+         subcategories_number: ['', Validators.required],
+    });
+
+
+
   }
 
   ngOnInit() {
-
-    this.addForm=this.formBuilder.group({
-      name: new FormControl('', [Validators.required]),
-      subcategories_number: ['',Validators.required],
-     });
-
     this.id=this.activateRoute.snapshot.params['id'];
     if(this.id){
       this.editMode=true;
@@ -45,6 +47,8 @@ export class CreateCategorieComponent implements OnInit {
         }
       )
     }
+
+
   }
 
 
@@ -55,6 +59,7 @@ export class CreateCategorieComponent implements OnInit {
     return this.addForm.controls;
   }
   onSubmit(){
+    this.submitted=true;
     //this.editMode=true;
     if(this.id){
       if(this.addForm.valid){
