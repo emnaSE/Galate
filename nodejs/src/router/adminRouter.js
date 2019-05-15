@@ -383,4 +383,48 @@ adminController.deleteTest(req)
     res.send(msg);
 })
 .catch(next));
+
+
+
+router.post('/affectCategoriesToTest', (req, res, next) => adminController.
+getRawBody(req)
+.then(affectation=>{
+  var affectation=JSON.parse(affectation);
+  var testId=req.query.testId;
+  res.payload.testId=testId;
+  res.payload.categoriesList=affectation.categories;
+  return adminController.RemoveAffectationCategoriesToTest(testId, affectation.categories);
+})
+.then(response=>{
+  return adminController.AffectCategoriesToTest(res.payload.testId,  res.payload.categoriesList);
+})
+.then(response=>{
+  res.send(response);
+})
+.catch(next));
+
+
+router.post('/affectSubcategoriesToTest', (req, res, next) => adminController.
+getRawBody(req)
+.then(affectation=>{
+  var affectation=JSON.parse(affectation);
+  var testId=req.query.testId;
+  res.payload.testId=testId;
+  res.payload.subcategoriesList=affectation.subcategories;
+  res.payload.questionsNumber=affectation.questionsNumber;
+  res.payload.wording=affectation.wording;
+  return adminController.RemoveAffectationSubcategoriesToTest(testId, affectation.subcategories);
+})
+.then(response=>{
+  return adminController.AffectSubcategoriesToTest(res.payload.testId,  res.payload.subcategoriesList,res.payload.questionsNumber,res.payload.wording);
+})
+.then(response=>{
+  res.send(response);
+})
+.catch(next));
+
+
+
+
+
 module.exports = router;
