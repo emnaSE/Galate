@@ -33,7 +33,7 @@ export class DashboardComponent implements OnInit{
     this.router.navigate(['pages/categorie/create']);
   }
 
-  updateCommercial(categorie:Categorie):void{
+  updateCategorie(categorie:Categorie):void{
     this.router.navigate(['pages/categorie/',categorie.id,'modifier']);
 
   }

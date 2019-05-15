@@ -3,6 +3,7 @@
 <nb-card>
   <nb-card-header>
     Liste des Ecoles
+
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
 
   </nb-card-header>
@@ -10,7 +11,7 @@
 
   <nb-card-body>
     <i style="cursor: pointer;" class="fas fa-plus fa-2x" (click)="create()"> ajouter </i>
-    <table id="example2" class="my-3 table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
+    <table id="example2" class="my-3 table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info" style="text-align: center">
       <thead>
       <tr role="row">
         <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="id: activate to sort column descending">ID</th>
@@ -19,16 +20,13 @@
 
           </thead>
       <tbody>
-      <tr *ngFor="let test of tests | paginate: { id: 'foo',
-                                                      itemsPerPage: pageSize,
-                                                      currentPage: p,
-                                                      totalItems: total }">
-        <td></td>
-        <td></td>
-        <td></td>
+      <tr *ngFor="let ecole of ecoles | paginate: { itemsPerPage: 7, currentPage: pageActuel }">
+        <td>{{ecole.id}}</td>
+        <td>{{ecole.name}}</td>
+
         <td>
-          <i class="ion ion-trash-b" (click)="create()"></i>
-          <i class="ion ion-alert-circled" (click)="create()"></i>
+          <i style="cursor: pointer; display: inline-block;margin-right: 20px !important;" class="fas fa-trash fa-2x" (click)="deleteByid(ecole)"></i>
+          <i class="fas fa-info fa-2x" style="cursor: pointer;" (click)="updateEcole(ecole)"></i>
         </td>
 
 
