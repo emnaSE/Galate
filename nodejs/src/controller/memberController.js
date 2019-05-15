@@ -127,6 +127,7 @@ _publics.login = (member) => {
             memberDetails = {
                 status: 403
             };
+          
         } else{
             memberDetails = {
                 member:members[0],
