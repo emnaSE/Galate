@@ -69,7 +69,7 @@ export class AffectCategorieComponent implements OnInit {
         }
       )
       if(this.addForm.valid){
-        this.testService.affectCategorie(data).subscribe(
+        this.testService.affectCategorie(this.id,data).subscribe(
           data=>{
             alert("affectation categorie avec succes");
             this.router.navigate(['pages/test'])

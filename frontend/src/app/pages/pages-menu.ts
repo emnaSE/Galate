@@ -13,6 +13,10 @@ export const MENU_ITEMS: NbMenuItem[] = [
         title: 'Liste des tests ',
         link: '/pages/test',
       },
+      {
+        title: 'Liste des questions ',
+        link: '/pages/question',
+      },
 
     ],
   },

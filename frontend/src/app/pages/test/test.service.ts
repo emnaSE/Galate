@@ -24,8 +24,8 @@ export class TestService {
     return this.http.get<Test[]>(this.url+"getAllTests");
   }
 
-  affectCategorie(test:Test):Observable<Test[]>{
-    return this.http.post<Test[]>(this.url+"AffectCategoriesToTest",test);
+  affectCategorie(id:number,test:Test):Observable<any>{
+    return this.http.post<any>(this.url+"affectCategoriesToTest?testId="+id,test);
   }
   addTest(test:Test):Observable<Test[]>{
     return this.http.post<Test[]>(this.url+"createTest",test);
