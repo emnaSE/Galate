@@ -385,8 +385,7 @@ _publics.verifPasswordTest = (test) => {
   var testDetails={};
   var test=JSON.parse(test);
   var password=test.password;
-  // password=JSON.parse(password);
-console.log(password);
+  
       return new Promise((resolve, reject) => {
    
       var sql = "select * FROM test where password=? "; 
