@@ -2,7 +2,7 @@
 
 <nb-card>
   <nb-card-header>
-    create ecole
+    {{ editMode ? 'Update':'Ajouter' }} ecole
   </nb-card-header>
 
   <nb-card-body>
@@ -11,7 +11,7 @@
 
       <div class="form-group">
         <input type="text" class="form-control" formControlName="name" placeholder="nom d 'ecole">
-        <ng-container *ngIf="submitted && formvalidate.name.errors">
+        <ng-container *ngIf="submitted && formValidate.name.errors">
           <p class="text-danger" >
             prenom est obligatoire !
           </p>
@@ -19,7 +19,7 @@
       </div>
 
 
-      <button type="submit" class="btn btn-success">ajouter</button>
+      <button type="submit" class="btn btn-success">{{ editMode ? 'Update' : 'Ajouter' }}</button>
     </form>
 
   </nb-card-body>

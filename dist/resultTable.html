@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Estimation</title>
+
+        <!-- CSS -->        
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Josefin+Sans:300,400|Roboto:300,400,500">
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/font-awesome.min.css">
+        <link rel="stylesheet" href="css/animate.css">
+        <link rel="stylesheet" href="css/style.css">
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+    <style>
+      nav{
+        background-color:rgb(126,126,126);
+      }
+      nav *{
+        font-family: 'Roboto', sans-serif;
+            font-size: 16px;
+            font-weight: 300;
+            color:rgba(37, 41, 39, 0.747) !important;
+            line-height: 30px;
+            text-align: center;
+      }
+      table {
+                border-collapse: collapse;
+                empty-cells: show;
+                width:100%
+            }
+            th, td {
+            padding: 7px;
+            }
+
+            table, th, td {
+            border: 1px solid black;
+            text-align: center;
+            }
+            .full{
+                background-color:rgb(218, 210, 210);
+            }
+/*------------------------------------------------------------------
+[ Button ]*/
+.container-contact100-form-btn {
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding-top: 10px;
+}
+
+.contact100-form-btn {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 20px;
+  min-width: 200px;
+  height: 50px;
+  border-radius: 2px;
+  background: #00ad5f;
+
+  font-family: Montserrat-Bold;
+  font-size: 12px;
+  color: #fff;
+  line-height: 1.2;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+
+  -webkit-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+  transition: all 0.4s;
+}
+
+.contact100-form-btn:hover {
+  background: #333333;
+}
+        
+        #carous{
+            margin-top: 10%;
+        }
+        .carousel-indicators{
+            display:none;
+        }
+        .choices{
+            color: #41823b;
+        }
+    </style>
+    </head>
+
+    <body>
+    
+    	<!-- Top menu -->
+		<nav class="navbar  navbar-no-bg navbar-expand-md" role="navigation">
+			<div class="container">
+				<button type="button" class="navbar-toggler collapsed" data-toggle="collapse"
+				data-target="#top-navbar-1">	<span class="sr-only">Toggle navigation</span>
+		&#x2630;</button>	<a class="navbar-brand"
+				href="home.html"></a>
+				<!-- Collect the nav
+				links, forms, and other content for toggling -->
+				<div class="collapse navbar-collapse" id="top-navbar-1">
+					<ul class="nav navbar-nav ml-auto">
+						<li class="nav-item"><a href="home.html" class="nav-link">Accueil</a>
+						</li>
+						<li class="nav-item"><a href="listTest.html" class="nav-link">Nos Tests</a>
+						</li>
+						<li class="nav-item"><a href="#" class="nav-link">Contactez Nous</a>
+						</li>
+						<li class="nav-item"><a id="login" class="btn btn-link-3 nav-link" href="login.html">Login</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+    <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col"></th>
+              <th scope="col"></th>
+              <th scope="col"></th>
+              <th scope="col">1</th>
+              <th scope="col">2</th>
+              <th scope="col">3</th>
+              <th scope="col">4</th>
+              <th scope="col">5</th>
+              <th scope="col">6</th>
+              <th scope="col">7</th>
+              <th scope="col">8</th>
+              <th scope="col">9</th>
+              <th scope="col">10</th>
+              <th scope="col">11</th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="full">
+              <th scope="row" rowspan="2">Direction</th>
+              <td>Athenticité</td>
+              <td>Stratège,calculateur</td>
+              <td class="Au" id="td1" onclick="content(this)"></td>
+              <td id="td2" class="Au" onclick="content(this)"></td>
+              <td id="td3" class="Au" onclick="content(this)"></td>
+              <td id="td4" class="Au" onclick="content(this)"></td>
+              <td id="td5" class="Au" onclick="content(this)"></td>
+              <td id="td6" class="Au" onclick="content(this)"></td>
+              <td id="td7" class="Au" onclick="content(this)"></td>
+              <td id="td8" class="Au" onclick="content(this)"></td>
+              <td id="td9" class="Au" onclick="content(this)"></td>
+              <td id="td10" class="Au" onclick="content(this)"></td>
+              <td id="td11" class="Au" onclick="content(this)"></td>
+              <td>Naturel, spontané</td>
+            </tr>
+            <tr class="full">
+              <td>Diplomatie</td>
+              <td>Sans détour, direct</td>
+              <td class="Di" id="td12" onclick="content(this)"></td>
+              <td class="Di" id="td13" onclick="content(this)"></td>
+              <td class="Di" id="td14" onclick="content(this)"></td>
+              <td class="Di" id="td15" onclick="content(this)"></td>
+              <td class="Di" id="td16" onclick="content(this)"></td>
+              <td class="Di" id="td17" onclick="content(this)"></td>
+              <td class="Di" id="td18" onclick="content(this)"></td>
+              <td class="Di" id="td19" onclick="content(this)"></td>
+              <td class="Di" id="td20" onclick="content(this)"></td>
+              <td class="Di" id="td21" onclick="content(this)"></td>
+              <td class="Di" id="td22" onclick="content(this)"></td>
+              <td>Souple, intelligent social</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+
+            <tr class="full">
+              <th scope="row" rowspan="2">Relation</th>
+              <td>Sociabilité</td>
+              <td>Réservé,Observateur,en retrait</td>
+              <td class="So" id="td23" onclick="content(this)"></td>
+              <td class="So" id="td24" onclick="content(this)"></td>
+              <td class="So" id="td25" onclick="content(this)"></td>
+              <td class="So" id="td26" onclick="content(this)"></td>
+              <td class="So" id="td27" onclick="content(this)"></td>
+              <td class="So" id="td28" onclick="content(this)"></td>
+              <td class="So" id="td29" onclick="content(this)"></td>
+              <td class="So" id="td30" onclick="content(this)"></td>
+              <td class="So" id="td31" onclick="content(this)"></td>
+              <td class="So" id="td32" onclick="content(this)"></td>
+              <td class="So" id="td33" onclick="content(this)"></td>
+              <td>Lian, aimable, relationnel</td>
+            </tr>
+            <tr class="full">
+              <td>Tolérance</td>
+              <td>Valorisation de soi,compétiteur</td>
+              <td class="To" id="td34" onclick="content(this)"></td>
+              <td class="To" id="td35" onclick="content(this)"></td>
+              <td class="To" id="td36" onclick="content(this)"></td>
+              <td class="To" id="td37" onclick="content(this)"></td>
+              <td class="To" id="td38" onclick="content(this)"></td>
+              <td class="To" id="td39" onclick="content(this)"></td>
+              <td class="To" id="td40" onclick="content(this)"></td>
+              <td class="To" id="td41" onclick="content(this)"></td>
+              <td class="To" id="td42" onclick="content(this)"></td>
+              <td class="To" id="td43" onclick="content(this)"></td>
+              <td class="To" id="td44" onclick="content(this)"></td>
+              <td>Bienveillant, acceptation de l'autre</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr class="full">
+              <th scope="row" rowspan="3">Action</th>
+              <td>Activité</td>
+              <td>Posé,maitrisé,prenant du temps</td>
+              <td class="Ac" id="td45" onclick="content(this)"></td>
+              <td class="Ac" id="td46" onclick="content(this)"></td>
+              <td class="Ac" id="td47" onclick="content(this)"></td>
+              <td class="Ac" id="td48" onclick="content(this)"></td>
+              <td class="Ac" id="td49" onclick="content(this)"></td>
+              <td class="Ac" id="td50" onclick="content(this)"></td>
+              <td class="Ac" id="td51" onclick="content(this)"></td>
+              <td class="Ac" id="td52" onclick="content(this)"></td>
+              <td class="Ac" id="td53" onclick="content(this)"></td>
+              <td class="Ac" id="td54" onclick="content(this)"></td>
+              <td class="Ac" id="td55" onclick="content(this)"></td>
+              <td>Energique, vital, voire hyperactif</td>
+            </tr>
+            <tr class="full">
+              <td>Esprit d'entreprise</td>
+              <td>Progressif,structuré,mesuré</td>
+              <td class="Ee" id="td56" onclick="content(this)"></td>
+              <td class="Ee" id="td57" onclick="content(this)"></td>
+              <td class="Ee" id="td58" onclick="content(this)"></td>
+              <td class="Ee" id="td59" onclick="content(this)"></td>
+              <td class="Ee" id="td60" onclick="content(this)"></td>
+              <td class="Ee" id="td61" onclick="content(this)"></td>
+              <td class="Ee" id="td62" onclick="content(this)"></td>
+              <td class="Ee" id="td63" onclick="content(this)"></td>
+              <td class="Ee" id="td64" onclick="content(this)"></td>
+              <td class="Ee" id="td65" onclick="content(this)"></td>
+              <td class="Ee" id="td66" onclick="content(this)"></td>
+              <td>Décidé, audacieux,fonceur</td>
+            </tr>
+            <tr class="full">
+              <td>Créativité</td>
+              <td>Pensée rationnelle et méthodique</td>
+              <td class="Cr" id="td67" onclick="content(this)"></td>
+              <td class="Cr" id="td68" onclick="content(this)"></td>
+              <td class="Cr" id="td69" onclick="content(this)"></td>
+              <td class="Cr" id="td70" onclick="content(this)"></td>
+              <td class="Cr" id="td71" onclick="content(this)"></td>
+              <td class="Cr" id="td72" onclick="content(this)"></td>
+              <td class="Cr" id="td73" onclick="content(this)"></td>
+              <td class="Cr" id="td74" onclick="content(this)"></td>
+              <td class="Cr" id="td75" onclick="content(this)"></td>
+              <td class="Cr" id="td76" onclick="content(this)"></td>
+              <td class="Cr" id="td77" onclick="content(this)"></td>
+              <td>Pensée inventive et latérale</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr class="full">
+              <th scope="row" rowspan="2">Distanciation</th>
+              <td>Réflexion</td>
+              <td>Immédiat dan l'action,réactif</td>
+              <td class="Re" id="td78" onclick="content(this)"></td>
+              <td class="Re" id="td79" onclick="content(this)"></td>
+              <td class="Re" id="td80" onclick="content(this)"></td>
+              <td class="Re" id="td81" onclick="content(this)"></td>
+              <td class="Re" id="td82" onclick="content(this)"></td>
+              <td class="Re" id="td83" onclick="content(this)"></td>
+              <td class="Re" id="td84" onclick="content(this)"></td>
+              <td class="Re" id="td85" onclick="content(this)"></td>
+              <td class="Re" id="td86" onclick="content(this)"></td>
+              <td class="Re" id="td87" onclick="content(this)"></td>
+              <td class="Re" id="td88" onclick="content(this)"></td>
+              <td>Réfléchi, analytique</td>
+            </tr>
+            <tr class="full">
+              <td>Objectivité</td>
+              <td>Perméable et souple, peut être partial</td>
+              <td class="Ob" id="td89" onclick="content(this)"></td>
+              <td class="Ob" id="td90" onclick="content(this)"></td>
+              <td class="Ob" id="td91" onclick="content(this)"></td>
+              <td class="Ob" id="td92" onclick="content(this)"></td>
+              <td class="Ob" id="td93" onclick="content(this)"></td>
+              <td class="Ob" id="td94" onclick="content(this)"></td>
+              <td class="Ob" id="td95" onclick="content(this)"></td>
+              <td class="Ob" id="td96" onclick="content(this)"></td>
+              <td class="Ob" id="td97" onclick="content(this)"></td>
+              <td class="Ob" id="td98" onclick="content(this)"></td>
+              <td class="Ob" id="td99" onclick="content(this)"></td>
+              <td>Factuel et juste en raisonnement</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr class="full">
+              <th scope="row" rowspan="3">Intériorisation</th>
+              <td>Confiance</td>
+              <td>Humilité, modestie</td>
+              <td class="Co" id="td100" onclick="content(this)"></td>
+              <td class="Co" id="td101" onclick="content(this)"></td>
+              <td class="Co" id="td102" onclick="content(this)"></td>
+              <td class="Co" id="td103" onclick="content(this)"></td>
+              <td class="Co" id="td104" onclick="content(this)"></td>
+              <td class="Co" id="td105" onclick="content(this)"></td>
+              <td class="Co" id="td106" onclick="content(this)"></td>
+              <td class="Co" id="td107" onclick="content(this)"></td>
+              <td class="Co" id="td108" onclick="content(this)"></td>
+              <td class="Co" id="td109" onclick="content(this)"></td>
+              <td class="Co" id="td110" onclick="content(this)"></td>
+              <td>Assurance, aisance</td>
+            </tr>
+            <tr class="full">
+              <td>Optimisme</td>
+              <td>Lucide et nuancé, parfois pessimiste</td>
+              <td class="Op" id="td111" onclick="content(this)"></td>
+              <td class="Op" id="td112" onclick="content(this)"></td>
+              <td class="Op" id="td113" onclick="content(this)"></td>
+              <td class="Op" id="td114" onclick="content(this)"></td>
+              <td class="Op" id="td115" onclick="content(this)"></td>
+              <td class="Op" id="td116" onclick="content(this)"></td>
+              <td class="Op" id="td117" onclick="content(this)"></td>
+              <td class="Op" id="td118" onclick="content(this)"></td>
+              <td class="Op" id="td119" onclick="content(this)"></td>
+              <td class="Op" id="td120" onclick="content(this)"></td>
+              <td class="Op" id="td121" onclick="content(this)"></td>
+              <td>Positif,joyeux,insouciant</td>
+            </tr>
+            <tr class="full">
+              <td>Sensibilité</td>
+              <td>Approche Raison et jugement</td>
+              <td class="Se" id="td122" onclick="content(this)"></td>
+              <td class="Se" id="td123" onclick="content(this)"></td>
+              <td class="Se" id="td124" onclick="content(this)"></td>
+              <td class="Se" id="td125" onclick="content(this)"></td>
+              <td class="Se" id="td126" onclick="content(this)"></td>
+              <td class="Se" id="td127" onclick="content(this)"></td>
+              <td class="Se" id="td128" onclick="content(this)"></td>
+              <td class="Se" id="td129" onclick="content(this)"></td>
+              <td class="Se" id="td130" onclick="content(this)"></td>
+              <td class="Se" id="td131" onclick="content(this)"></td>
+              <td class="Se" id="td132" onclick="content(this)"></td>
+              <td>Approche Intuition et affect</td>
+            </tr>
+            
+          </tbody>
+        </table>
+      </div>
+      
+      <div class="container-contact100-form-btn">
+      <button class="contact100-form-btn" onclick="affiche()">
+        Show Result
+      </button>
+    </div>
+    <script>
+      $Answers = {Au: 0, Di: 0, So: 0, To:0, Ac:0, Ee:0, Cr:0, Re:0, Ob:0, Co:0, Op:0, Se:0};
+    </script>
+    <script>
+      function content(elem){
+        $count=elem.parentElement.childElementCount;
+        $col = elem.cellIndex;
+        if($count==14){
+          $col=$col-1;
+        }
+        else{
+          $col=$col-2;
+        }
+        $class=elem.className;
+        for($i=0;$i<11;$i++){
+          document.getElementsByClassName($class)[$i].style.backgroundColor="rgb(218,210,210)";
+          document.getElementsByClassName($class)[$i].style.backgroundImage="url('')";
+        }
+        elem.style.backgroundImage="url('img/done.png')";
+        elem.style.backgroundRepeat="no-repeat";
+        elem.style.backgroundPositionY="center";
+        elem.style.backgroundPositionX="center";
+        $Answers[$class]=$col;
+        /* if(elem.style.backgroundColor=="blue")
+        elem.style.backgroundColor="rgb(218,210,210)";
+        else
+        elem.style.backgroundColor="blue";
+        
+        
+
+        //$row = elem.parentElement.rowIndex;
+        
+        alert($class); */
+      }
+      function affiche(){
+        $text="";
+        $vide=false;
+        for($key in $Answers){
+          $text=$text+$key +':'+$Answers[$key]+".....";
+          if($Answers[$key]==0){
+            $vide=true;
+          }
+        }
+        if($vide){
+          alert("Please fill the table")
+        }
+        else{
+          alert($text);
+        }
+        
+      }
+    </script>
+        
+        
+        
+ 
+
+    </body>
+
+</html>

@@ -22,10 +22,10 @@
       <tr *ngFor="let categorie of categories | paginate: { itemsPerPage: 7, currentPage: pageActuel }">
         <td>{{categorie.id}}</td>
         <td>{{categorie.name}}</td>
-        <td>{{categorie.subCategoriesNumber}}</td>
+        <td>{{categorie.subcategories_number}}</td>
         <td>
           <i style="cursor: pointer; display: inline-block;margin-right: 20px !important;" class="fas fa-trash fa-2x" (click)="deleteByid(categorie)"></i>
-          <i class="fas fa-info fa-2x" style="cursor: pointer;" (click)="updateCommercial(categorie)"></i>
+          <i class="fas fa-info fa-2x" style="cursor: pointer;" (click)="updateCategorie(categorie)"></i>
         </td>
        </tr>
       </tbody>

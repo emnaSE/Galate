@@ -17,6 +17,7 @@ export class CreateSousComponent implements OnInit {
   dropdownList = [];
   selectedItems = [];
   dropdownSettings = {};
+  id_category:any;
   addForm:FormGroup;
   submitted = false;
   constructor(private categorieService:CategorieService,
@@ -29,7 +30,10 @@ export class CreateSousComponent implements OnInit {
   ngOnInit() {
     this.addForm=this.formBuilder.group({
       name: new FormControl('', [Validators.required]),
-      cat: [[], Validators.required]
+      down_description: [[], Validators.required],
+      up_description: [[], Validators.required],
+
+      id_category: [[], Validators.required],
 
     });
 
@@ -51,6 +55,8 @@ export class CreateSousComponent implements OnInit {
       data=>{
         this.dropdownList =data.map((cat:Categorie)=>{
           return{id:cat.id, itemName:cat.name};
+          this.id_category=cat.id;
+          console.log(this.id_category)
         })
       }
     )
@@ -64,7 +70,12 @@ export class CreateSousComponent implements OnInit {
   onSubmit(){
 
     this.submitted = true;
+    /*this.selectedItems.map(cat=>{
+      let sub = new Categorie()
+      sub.id=cat.id;
+    })*/
 
+    console.log(this.selectedItems);
 
     this.subCategorie.addSousCategorie(this.addForm.value).subscribe(
       data=>{
@@ -79,7 +90,9 @@ export class CreateSousComponent implements OnInit {
 
   }
   onItemSelect(item: any) {
+
     console.log(item);
+    console.log(this.selectedItems);
   }
   onSelectAll(items: any) {
     console.log(items);
