@@ -169,7 +169,7 @@ _publics.setEtalonnageValue= (req,value) => {
 _publics.getEtalonnageValue = (req) => { 
   var id_subcategory=req.query.id_subcategory;
   return new Promise((resolve, reject) => {  
-           var sql = "select e.value as value,ma.id as id from etalonnage e left join manuel_answer ma on(ma.id_subcategory=e.id_subcategory) where ma.id_subcategory=? and ma.result<e.upper_bound and ma.result>=e.lower_bound"; 
+           var sql = "select e.value as value from etalonnage e left join manuel_answer ma on(ma.id_subcategory=e.id_subcategory) where ma.id_subcategory=? and ma.result between e.upper_bound and e.lower_bound"; 
          
                con.query(sql,[id_subcategory], function (err, result) {
                if (err) reject(err);
