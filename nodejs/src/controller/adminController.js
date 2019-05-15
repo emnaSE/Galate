@@ -334,12 +334,13 @@ _publics.createSubCategory = (subcategory) => {
     var subcategory=JSON.parse(subcategory)
     var name=subcategory.name;
     var id_category=subcategory.id_category;
-  
+    var down_description=subcategory.down_description;
+    var up_description=subcategory.up_description;
 
     return new Promise((resolve, reject) => { 
       var msg="";
       var sql = "insert into subcategory set ? ";
-      const newsubcategory = { name: name,id_category:id_category};         
+      const newsubcategory = { name: name,id_category:id_category,up_description:up_description,down_description:down_description};         
       con.query(sql,newsubcategory, function (err, result) {
               if (err){
                 msg="failure";
