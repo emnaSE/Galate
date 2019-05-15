@@ -339,5 +339,31 @@ _publics.getAllTestMembers = (req) => {
      });    
  };
 
+ _publics.updateManuelAnswer=(req,manuelAnswer) => { 
+  var manuelAnswer=JSON.parse(manuelAnswer);
+  var id_test=manuelAnswer.id_test;
+  var id_member=manuelAnswer.id_member;
+  var id_subcategory=manuelAnswer.id_subcategory;
+  var id=manuelAnswer.id;
+  var response=req.query.response;
+ 
+
+
+  var id=req.query.id;
+  return new Promise((resolve, reject) => { 
+           var msg="";
+           var sql = "UPDATE manuel_answer set response=?  WHERE id = ?"; 
+           con.query(sql,[response,id], function (err, result) {
+              if (err){
+                  msg="failure";
+                  reject(err);
+                }else{
+                  msg="success";
+                }
+            return resolve(msg);
+           });
+         });    
+};
+
 
 module.exports = _publics;
