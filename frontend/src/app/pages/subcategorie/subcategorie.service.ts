@@ -28,12 +28,12 @@ export class SubcategorieService {
     return this.http.get<SousCategorie[]>(this.url+"getAllSubcategories");
   }
   getSousCategorieById(id:number):Observable<SousCategorie>{
-    return this.http.get<SousCategorie>(this.url+"getSubcategory?id="+id);
+    return this.http.get<SousCategorie>(this.url+"getSubcategoryById?id="+id);
   }
   getAllSubcategoriesByCategory(id:number):Observable<SousCategorie[]>{
     return this.http.get<SousCategorie[]>(this.url+"getAllSubcategoriesByCategory?id_category="+id);
   }
-  updateSousCategorie(id:number,sousCategorie:Object):Observable<Object>{
+  updateSousCategorie(id:number,sousCategorie:any):Observable<any>{
     return this.http.post(this.url+"updateSubcategoryById?id"+id,sousCategorie,{responseType:'text'});
   }
 

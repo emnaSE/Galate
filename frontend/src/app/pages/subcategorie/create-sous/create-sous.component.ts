@@ -17,13 +17,15 @@ export class CreateSousComponent implements OnInit {
   dropdownList = [];
   selectedItems = [];
   dropdownSettings = {};
-
+  id:number;
+  editMode=false;
   addForm:FormGroup;
   submitted = false;
   constructor(private categorieService:CategorieService,
               private subCategorieService:SubcategorieService,
               private router:Router,
-              private formBuilder:FormBuilder){
+              private formBuilder:FormBuilder,
+              private activatedRoute:ActivatedRoute){
 
   }
 
@@ -32,11 +34,22 @@ export class CreateSousComponent implements OnInit {
       name: new FormControl('', [Validators.required]),
       down_description: [[], Validators.required],
       up_description: [[], Validators.required],
-
       id_category: [[], Validators.required],
 
     });
 
+    this.id=this.activatedRoute.snapshot.params['id'];
+    console.log(this.id);
+    if(this.id){
+      this.editMode=true;
+      this.subCategorieService.getSousCategorieById(this.id).subscribe(
+        (value:any)=>{
+          this.addForm.patchValue(value);
+        },err=>{
+          console.log(err)
+        }
+      )
+    }
 
     this.dropdownSettings = {
       singleSelection: true,
@@ -76,17 +89,35 @@ export class CreateSousComponent implements OnInit {
       return c.id;
       console.log(c.id);
     })
-
-
-    this.subCategorieService.addSousCategorie(data).subscribe(
-      data=>{
-        alert("ajouter vec succes");
-        this.router.navigate(['pages/sous'])
-
-      },err=>{
-        console.log(err);
+    if (this.id) {
+      if (this.addForm.valid) {
+        this.subCategorieService.updateSousCategorie(this.id, data).subscribe(
+          data => {
+            alert("update with succes");
+            this.router.navigate(['pages/sous'])
+          }, err => {
+            console.log(err)
+          }
+        )
       }
-    )
+    }else{
+        if(this.addForm.valid){
+          console.log("message");
+          this.subCategorieService.addSousCategorie(data).subscribe(
+            data=>{
+              alert("ajouter vec succes");
+              this.router.navigate(['pages/sous'])
+
+            },err=>{
+              console.log(err);
+            }
+          )
+
+        }
+      }
+
+
+
 
 
   }

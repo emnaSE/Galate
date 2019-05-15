@@ -17,7 +17,6 @@
       <tr role="row">
         <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="id: activate to sort column descending">ID</th>
         <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="name: activate to sort column ascending">name</th>
-        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="id_category: activate to sort column ascending">id_category</th>
         <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="description: activate to sort column ascending">description</th>
         <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="up_description: activate to sort column ascending">up_description</th>
         <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="action: activate to sort column ascending">action</th>
@@ -27,12 +26,11 @@
       <tr *ngFor="let sousCategorie of sousCategories | paginate: { itemsPerPage: 7, currentPage: pageActuel }">
         <td>{{sousCategorie.id}}</td>
         <td>{{sousCategorie.name}}</td>
-        <td>{{sousCategorie.id_category}}</td>
         <td>{{sousCategorie.down_description}}</td>
         <td>{{sousCategorie.up_description}}</td>
         <td>
-          <i style="cursor: pointer; display: inline-block;margin-right: 20px !important;" class="fas fa-trash fa-2x" (click)="create()"></i>
-          <i class="fas fa-info fa-2x" style="cursor: pointer;" (click)="create()"></i>
+          <i style="cursor: pointer; display: inline-block;margin-right: 20px !important;" class="fas fa-trash fa-2x" (click)="deleteByid(sousCategorie)"></i>
+          <i class="fas fa-info fa-2x" style="cursor: pointer;" (click)="updateSousCategorie(sousCategorie)"></i>
         </td>
 
 

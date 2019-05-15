@@ -44,8 +44,8 @@ export class TestService {
   deleteTest(id:number):Observable<string>{
     return this.http.get<string>(this.url+"deleteTestById?id="+id);
   }
-  updateCategorie(id:number,categorie:Categorie):Observable<Categorie>{
-    return this.http.put<Categorie>(this.url+"updateTestById?id="+id,categorie);
+  updateTest(id:number,test:any):Observable<any>{
+    return this.http.post<any>(this.url+"updateTestById?id="+id,test);
   }
 }
 

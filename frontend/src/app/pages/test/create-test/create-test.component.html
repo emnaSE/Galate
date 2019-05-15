@@ -2,7 +2,7 @@
 
 <nb-card>
   <nb-card-header>
-    create Sous test
+    {{ editMode ? 'Update' : 'Ajouter' }} Sous test
   </nb-card-header>
 
   <nb-card-body>
@@ -33,7 +33,7 @@
 
 
 
-      <button type="submit" class="btn btn-success">ajouter</button>
+      <button type="submit" class="btn btn-success">{{ editMode ? 'Update' : 'Ajouter' }}</button>
     </form>
 
   </nb-card-body>

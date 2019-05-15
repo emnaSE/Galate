@@ -38,7 +38,7 @@ export class ClassComponent  implements OnInit{
   }
 
   create(){
-      this.router.navigate(['pages/sous/create']);
+      this.router.navigate(['pages/class/create']);
   }
   updateClass(clas:Class):void{
     this.router.navigate(['pages/class/',clas.id,'modifier']);

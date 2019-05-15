@@ -78,6 +78,10 @@ const routes: Routes = [{
       component: CreateClassComponent,
     },
     {
+      path:"class/create",
+      component: CreateClassComponent,
+    },
+    {
       path:"ecole/:id/modifier",
       component: CreateEcoleComponent,
     },
