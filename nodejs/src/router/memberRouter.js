@@ -35,11 +35,11 @@ memberController.getRawBody(req)
 })
 .catch(next));
 
-router.post('/createMember',(req, res, next)=>
+router.post('/register',(req, res, next)=>
 memberController.getRawBody(req)
 .then(member=>{
     res.payload.member=member;
-    return memberController.createMember(member)
+    return memberController.register(member)
 })
 .then(msg=>{
     res.send(msg);

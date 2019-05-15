@@ -6,7 +6,7 @@ var getRawBody = require('raw-body');
 var con=config.con;
 var url=`http://localhost:3000`;
 //member 
-_publics.createMember = (member) => { 
+_publics.register= (member) => { 
     var member=JSON.parse(member);
     var firstname=member.firstname;
     var lastname=member.lastname;
