@@ -161,4 +161,21 @@ memberController.getAllMemberTest(req)
   res.send(tests);
 })
 .catch(next));
+
+
+router.post('/updateManuelAnswer',(req, res, next)=>
+memberController.getRawBody(req)
+.then(manuelAnswer=>{
+    return memberController.updateManuelAnswer(req,manuelAnswer)
+})
+.then(msg=>{
+    res.send(msg);
+})
+.catch(next));
+
+
+
+
+
+
 module.exports = router;
