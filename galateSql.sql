@@ -194,3 +194,5 @@ create table manuel_answer(
 alter table manuel_answer add column etallonage_result bigint;
 alter table answer add column ordre bigint;
 alter table manuel_answer add column result bigint;
+alter table question add id_test_subcategory int(11);
+alter table question add constraint question_test_subcategory_fkey foreign key (id_test_subcategory) references test_subcategory(id);

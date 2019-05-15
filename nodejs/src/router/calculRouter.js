@@ -81,14 +81,22 @@ router.get('/getLineSum', urlencodedParser, (req, res, next) =>
         .catch(next));
 
 router.get('/getEtalonnageValue', urlencodedParser, (req, res, next) =>
-        calculController.getEtalonnageValue(req)
-            .then(value => {
-                calculController.setEtalonnageValue(req, value);
-            }).then(response => {
-                res.send(response);
-            })
-            .catch(next));
-    
+    calculController.getEtalonnageValue(req)
+        .then(value => {
+            calculController.setEtalonnageValue(req, value);
+        }).then(response => {
+            res.send(response);
+        })
+        .catch(next));
+
+
+router.get('/getEtalonnageResults', urlencodedParser, (req, res, next) =>
+    calculController.getEtalonnageResults(req)
+        .then(response => {
+            res.send(response);
+        })
+        .catch(next));
+
 
 
 module.exports = router;
