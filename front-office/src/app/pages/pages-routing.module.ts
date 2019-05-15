@@ -1,21 +1,17 @@
-import { NgModule } from '@angular/core';
 import { ExtraOptions, RouterModule, Routes } from '@angular/router';
-import { StarterComponent } from './starter/starter.component';
-import { HomeComponent } from './pages/home/home.component';
+import { NgModule } from '@angular/core';
+import { HomeComponent } from './home/home.component';
 
 
 const routes: Routes = [
-  { path: 'pages', loadChildren: './app.module#AppModule' },
+  { path: 'pages', loadChildren: 'app/pages/pages.module#PagesModule' },
 
-  {
-    path: 'starter',
-    component:StarterComponent,
-  },
   {
     path: 'home',
     component:HomeComponent,
   },
-  { path: '', redirectTo: 'pages', pathMatch: 'full' },
+
+  { path: '', redirectTo: 'pages/home', pathMatch: 'full' },
   { path: '**', redirectTo: 'pages' },
 ];
 
