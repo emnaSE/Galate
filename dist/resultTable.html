@@ -6,7 +6,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Bootstrap Navbar Menu Template</title>
+        <title>Estimation</title>
 
         <!-- CSS -->        
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Josefin+Sans:300,400|Roboto:300,400,500">
@@ -446,8 +446,12 @@
         $class=elem.className;
         for($i=0;$i<11;$i++){
           document.getElementsByClassName($class)[$i].style.backgroundColor="rgb(218,210,210)";
+          document.getElementsByClassName($class)[$i].style.backgroundImage="url('')";
         }
-        elem.style.backgroundColor="blue";
+        elem.style.backgroundImage="url('img/done.png')";
+        elem.style.backgroundRepeat="no-repeat";
+        elem.style.backgroundPositionY="center";
+        elem.style.backgroundPositionX="center";
         $Answers[$class]=$col;
         /* if(elem.style.backgroundColor=="blue")
         elem.style.backgroundColor="rgb(218,210,210)";
