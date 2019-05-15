@@ -8,11 +8,13 @@ import { StarterComponent } from './starter/starter.component';
 import { StarterHeaderComponent } from './starter/starter-header/starter-header.component';
 import { StarterFooterComponent } from './starter/starter-footer/starter-footer.component';
 import { HomeComponent } from './pages/home/home.component';
+import { TestComponent } from './pages/test/test.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
+    TestComponent,
     StarterComponent,
     StarterHeaderComponent,
     StarterFooterComponent
