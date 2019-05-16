@@ -364,7 +364,7 @@ _publics.createSubCategory = (subcategory) => {
   var id=req.query.id;
     return new Promise((resolve, reject) => {  
              var msg="";
-             var sql = "update  subcategory set name=?,id_category=?,down_description=?,up_description where id=?";
+             var sql = "update  subcategory set name=?,id_category=?,down_description=?,up_description=? where id=?";
              con.query(sql,[name,id_category,down_description,up_description,id], function (err, result) {
               if (err){
                 msg="failure";
@@ -430,10 +430,11 @@ _publics.createQuestion = (question ) => {
   var name=question.name;
   var wording=question.wording;
   var value=question.value;  
+  var id_test_subcategory=question.id_test_subcategory;
   return new Promise((resolve, reject) => {  
            var msg="";
            var sql = "INSERT INTO question SET ? ";
-           const newQuestion = { name: name,wording:wording,value:value};
+           const newQuestion = { name: name,wording:wording,value:value,id_test_subcategory:id_test_subcategory};
            con.query(sql,newQuestion, function (err, result) {
               if (err){
                   msg="failure";
@@ -454,10 +455,11 @@ _publics.updateQuestion=(req,question) => {
   var wording=question.wording;
   var value=question.value;
   var question_id=req.query.id;
+  var id_test_subcategory=question.id_test_subcategory;
   return new Promise((resolve, reject) => { 
            var msg="";
-           var sql = "UPDATE question SET name=?, wording=?,value=?  WHERE id = ?"; 
-           con.query(sql,[name,wording,value,question_id], function (err, result) {
+           var sql = "UPDATE question SET name=?, wording=?,value=?,id_test_subcategory=?  WHERE id = ?"; 
+           con.query(sql,[name,wording,value,id_test_subcategory,question_id], function (err, result) {
               if (err){
                   msg="failure";
                   reject(err);
@@ -824,7 +826,6 @@ _publics.duplicateTest = (test) => {
   return new Promise((resolve, reject) => { 
   var msg="";
   var sql = "INSERT INTO test ( test_subcategories_number, name,password,activation_date,expiration_date) SELECT test_subcategories_number, name, password, activation_date,expiration_date FROM test WHERE  id=? ";
-  //const newTest = { name: name,test_subcategories_number:test_subcategories_number,password:password,activation_date:activation_date,expiration_date:expiration_date};         
   con.query(sql,[id], function (err, result) {
           if (err){
             msg="failure";

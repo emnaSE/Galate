@@ -330,7 +330,7 @@ adminController.getAllTests(req)
 })
 .catch(next));
 
-router.get('/getTestById',urlencodedParser, (req, res, next) => 
+router.get('/getAllTestsById',urlencodedParser, (req, res, next) => 
 adminController.getTestById(req)
 .then(tests=>{
   res.send(tests);
