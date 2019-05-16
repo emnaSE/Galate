@@ -94,11 +94,12 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-6 col-md-6 col-lg-4" *ngFor="let item of testsList">
+            <div class="col-sm-6 col-md-6 col-lg-4" *ngFor="let item of tests">
                     <div class="card-body">
-                        <h5 class="card-title">{{ item.text }}</h5>
-                        <p class="card-text"> Lorem ipsum dolor sit amet consectetur, adipisicing elit. Minima nulla voluptatibus, reiciendis laboriosam deserunt quia repudiandae, odit sunt . </p>
-                        <a routerLink="/login" class="btn btn-primary">Start</a>
+                        <h5 class="card-title">{{ item.name }}</h5>
+                        <p class="card-text"> {{ item.activation_date }}</p>
+                        <p class="card-text"> {{ item.expiration_date }}</p>
+                        <a routerLink="/startTest" class="btn btn-primary">Start</a>
                     </div>
             </div>
     

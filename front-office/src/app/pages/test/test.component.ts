@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import { TestService } from './test.service';
 import { Test } from './test';
+import { Subject } from 'rxjs';
 
 
 
@@ -14,6 +15,7 @@ import { Test } from './test';
 export class TestComponent  implements OnInit{
 
   private tests:Test[]=[];
+  dtTrigger: Subject<any> = new Subject();
 
 
 
@@ -22,14 +24,30 @@ export class TestComponent  implements OnInit{
     }
 
   ngOnInit() { 
-
+    this.testService.getAllTests().subscribe(
+      data=>{
+        this.tests=data;
+        this.dtTrigger.next();
+      },err=>{
+        console.log(err);
+      }
+    )
   }
-
+  public getAllTests() {
+    this.testService.getAllTests().subscribe(
+      data=>{
+        this.tests=data;
+        this.dtTrigger.next();
+      },err=>{
+        console.log(err);
+      }
+    )
+  }
   
 
   public testsList:Array<any>;
 
-  public  getTodoList() {
+  public getTodoList() {
       return this.testService.getTodoList();
   }
 

@@ -13,6 +13,5 @@ import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown';
   declarations: [
     TestComponent,
   ],
-  providers: [TestService]
 })
 export class TestModule { }
