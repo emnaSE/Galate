@@ -23,7 +23,8 @@ _publics.getCategoryById = (req) => {
          
                con.query(sql, [id],function (err, result) {
                if (err) reject(err);
-               return resolve(JSON.stringify(result));
+              
+               return resolve(JSON.stringify(result[0]));
                });
    });    
 };
@@ -107,7 +108,7 @@ _publics.getClassById = (req) => {
          
                con.query(sql, [id],function (err, result) {
                if (err) reject(err);
-               return resolve(JSON.stringify(result));
+               return resolve(JSON.stringify(result[0]));
                });
    });    
 };
@@ -226,7 +227,7 @@ _publics.getSchoolById = (req) => {
          
                con.query(sql,[id] ,function (err, result) {
                if (err) reject(err);
-               return resolve(JSON.stringify(result));
+               return resolve(JSON.stringify(result[0]));
                });
    });    
 };
@@ -303,7 +304,7 @@ _publics.getSubcategoryById = (req) => {
          
                con.query(sql,[id], function (err, result) {
                if (err) reject(err);
-               return resolve(JSON.stringify(result));
+               return resolve(JSON.stringify(result[0]));
                });
    });    
 };
@@ -504,7 +505,7 @@ _publics.getQuestionById = (req) => {
            var sql = "select * FROM question where id=?"; 
                con.query(sql,[id], function (err, result) {
                if (err) reject(err);
-               return resolve(JSON.stringify(result));
+               return resolve(JSON.stringify(result[0]));
                });
    });    
 };
@@ -590,7 +591,7 @@ _publics.getAnswerById = (req) => {
            var sql = "select * FROM answer where id=?";          
                con.query(sql,[id], function (err, result) {
                if (err) reject(err);
-               return resolve(JSON.stringify(result));
+               return resolve(JSON.stringify(result[0]));
                });
    });    
 };
@@ -604,7 +605,7 @@ _publics.getTestById = (req) => {
            var sql = "select * FROM test where id=?";         
                con.query(sql,[id], function (err, result) {
                if (err) reject(err);
-               return resolve(JSON.stringify(result));
+               return resolve(JSON.stringify(result[0]));
                });
    });    
 };
