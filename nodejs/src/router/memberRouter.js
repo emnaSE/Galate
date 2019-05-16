@@ -35,6 +35,20 @@ memberController.getRawBody(req)
 })
 .catch(next));
 
+router.post('/createMemberChoices',(req, res, next)=>
+memberController.getRawBody(req)
+
+
+.then(response=>{
+    return memberController.createMemberChoices(response)
+})
+
+.then(msg=>{
+    res.send(msg);
+})
+.catch(next));
+
+
 router.post('/register',(req, res, next)=>
 memberController.getRawBody(req)
 .then(member=>{
