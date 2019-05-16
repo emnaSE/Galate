@@ -12,6 +12,10 @@ import { ResultTableComponent } from './pages/resultTable/resultTable.component'
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { StartTestComponent } from './pages/startTest/startTest.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RegisterService } from './pages/register/register.service';
+import { HttpClient } from 'selenium-webdriver/http';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -28,9 +32,12 @@ import { StartTestComponent } from './pages/startTest/startTest.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
     TooltipModule.forRoot()
   ],
-  providers: [],
+  providers: [RegisterService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

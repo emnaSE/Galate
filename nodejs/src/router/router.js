@@ -7,10 +7,7 @@ router.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Credentials', true)
   next();
 });
-router.use((req, res, next) => {
-  res.payload = {};
-  next();
-});
+
 
 
 
