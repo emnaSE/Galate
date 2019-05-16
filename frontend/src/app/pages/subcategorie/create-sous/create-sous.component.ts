@@ -17,6 +17,7 @@ export class CreateSousComponent implements OnInit {
   dropdownList = [];
   selectedItems = [];
   dropdownSettings = {};
+  erreur:number;
   id:number;
   editMode=false;
   addForm:FormGroup;
@@ -39,7 +40,7 @@ export class CreateSousComponent implements OnInit {
     });
 
     this.id=this.activatedRoute.snapshot.params['id'];
-    console.log(this.id);
+    //console.log(this.id);
     if(this.id){
       this.editMode=true;
       this.subCategorieService.getSousCategorieById(this.id).subscribe(

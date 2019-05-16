@@ -95,7 +95,7 @@ this.id = this.activatedRouter.snapshot.params['id'];
       }
     }else{
       if(this.addForm.valid){
-        console.log("message");
+
         this.classService.addClass(data).subscribe(
           data=>{
             alert("ajouter vec succes");

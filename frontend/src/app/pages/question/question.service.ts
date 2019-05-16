@@ -23,10 +23,10 @@ export class QuestionService {
 
 
   addQuestion(question:Object):Observable<Object>{
-    this.http.post(this.url+'createQuestion',JSON.stringify(question),{responseType: 'text'});
+    return this.http.post(this.url+'createQuestion',JSON.stringify(question),{responseType: 'text'});
   }
   getAllQuestion():Observable<Question[]>{
-    this.http.get<Question[]>(this.url+'getAllQuestion');
+    return this.http.get<Question[]>(this.url+'getAllQuestion');
   }
   deleteById(id:number):Observable<boolean>{
     return this.http.get<boolean>(this.url+"deleteQuestion?id_question="+id);

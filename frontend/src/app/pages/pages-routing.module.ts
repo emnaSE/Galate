@@ -110,6 +110,10 @@ const routes: Routes = [{
       component:AffectSubcategorieComponent,
     },
     {
+      path: 'test/:id/modifier',
+      component:CreateTestComponent,
+    },
+    {
       path: '',
       redirectTo: 'categorie',
       pathMatch: 'full',

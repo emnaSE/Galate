@@ -13,6 +13,7 @@ export class CreateTestComponent implements OnInit {
   id:number;
   submitted = false;
   editMode=false;
+  erreur:number;
   addForm:FormGroup;
   constructor(private testService:TestService,
               private activateRouter:ActivatedRoute,
@@ -20,6 +21,7 @@ export class CreateTestComponent implements OnInit {
               private router:Router){
 
     this.id = this.activateRouter.snapshot.params['id'];
+
   }
   ngOnInit() {
 
@@ -28,6 +30,9 @@ export class CreateTestComponent implements OnInit {
       down_description: [[], Validators.required],
       up_description: [[], Validators.required],
       id_category: [[], Validators.required],
+      activation_date: [[], Validators.required],
+      expiration_date: [[], Validators.required],
+      password: [[], Validators.required],
     });
 
     if(this.id){
