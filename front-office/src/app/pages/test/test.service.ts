@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpRequest } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import {API_URL} from "../../app.constant";
+import { Test } from './test';
 
 @Injectable()
 export class TestService {
@@ -9,10 +10,13 @@ export class TestService {
 
 
 
+  constructor(private http: HttpClient) { }
+  
+  getAllTests():Observable<Test[]>{
+    return this.http.get<Test[]>(this.url+'getAllTests');
+  }
 
- /* getAllTests(): Observable<Object> {
-    return this.http.get(`${this.url}` + `/getAllTests`);
-  }*/
+
 
   private _todoList = [
     { text: 'Check me out' },

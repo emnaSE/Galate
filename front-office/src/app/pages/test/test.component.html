@@ -94,13 +94,11 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-6 col-md-6 col-lg-4" *ngFor="let item of getTodoList()">
+            <div class="col-sm-6 col-md-6 col-lg-4" *ngFor="let item of testsList">
                     <div class="card-body">
                         <h5 class="card-title">{{ item.text }}</h5>
                         <p class="card-text"> Lorem ipsum dolor sit amet consectetur, adipisicing elit. Minima nulla voluptatibus, reiciendis laboriosam deserunt quia repudiandae, odit sunt . </p>
-                        <form [formGroup]="form" (ngSubmit)="onSubmit()" id="form_id"  role="form" class="nobottommargin">
-                            <a href="javascript:$('#form_id').submit();" class="btn btn-primary">Start</a>
-                        </form>
+                        <a routerLink="/login" class="btn btn-primary">Start</a>
                     </div>
             </div>
     

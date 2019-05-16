@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import { TestService } from './test.service';
+import { Test } from './test';
 
 
 
@@ -11,37 +12,25 @@ import { TestService } from './test.service';
   styleUrls: ['./test.component.scss']
 })
 export class TestComponent  implements OnInit{
-  pageActuel: number =1;
 
+  private tests:Test[]=[];
 
 
 
     constructor(private router:Router, private testService: TestService){ 
-     
+      this.testsList= this.testService.getTodoList();
     }
-  ngOnInit() { }
+
+  ngOnInit() { 
+
+  }
 
   
 
-  public todoList:Array<any>;
-  public newTodoText:string = '';
-
+  public testsList:Array<any>;
 
   public  getTodoList() {
       return this.testService.getTodoList();
   }
 
-
-  public addToDoItem($event) {
-      if (($event.which === 1 || $event.which === 13) && this.newTodoText.trim() != '') {
-          this.todoList.unshift({
-              text: this.newTodoText
-          });
-          this.newTodoText = '';
-      }
-  }
-
-  onSubmit() {
-      this.router.navigate(['/login']);
-  }
 }
