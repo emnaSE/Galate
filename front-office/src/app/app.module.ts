@@ -21,6 +21,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { TestService } from './pages/test/test.service';
 
 import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown';
+import { StartTestService } from './pages/startTest/startTest.service';
 
 
 @NgModule({
@@ -45,7 +46,7 @@ import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown';
     TooltipModule.forRoot()
   ],
 
-  providers: [RegisterService, LoginService, TestService],
+  providers: [RegisterService, LoginService, TestService , StartTestService],
 
 
   bootstrap: [AppComponent]
