@@ -22,24 +22,6 @@ router.use(bodyParser.urlencoded({extended : true}));
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 router.get('/getAllTests', (req, res, next) => testController
 .getAllTests()
 .then(response => {

@@ -177,19 +177,51 @@ _publics.createMemberChoices = (response) => {
 
   var response = JSON.parse(response);
   var choices = response.choices;
+
   return new Promise((resolve, reject) => {
     var msg = "";
-    for (var i in choices) {
-      
-      var sql = "INSERT INTO choice_member SET id_question=?,id_answer=? ,id_test_member=? ";
-      con.query(sql, [choices[i].id_question, choices[i].id_answer, choices[i].id_test_member], function (err, result) {
+    var i=0;
+    for (i in choices) {
+     
+      var sql = "select count(*) as size from choice_member where id_question=? and id_test_member=?  ";
+      con.query(sql, [choices[i].id_question, choices[i].id_test_member], function (err, result) {
         if (err) {
           msg = "failure";
           reject(err);
         } else {
-          msg = "success";
+        
+         
+          if (JSON.parse(JSON.stringify(result[0].size)) === 0) {
+            var sql = "INSERT INTO choice_member SET id_question=?,id_answer=? ,id_test_member=?   ";
+ 
+
+            con.query(sql, [choices[i].id_question, choices[i].id_answer, choices[i].id_test_member], function (err, result) {
+              if (err) {
+                msg = "failure";
+                reject(err);
+              } else {
+                msg = "record added";
+              }
+              return resolve(msg);
+            });
+          }
+          else {
+            var sql = "update choice_member SET id_answer=? where id_question=? and id_test_member=?   ";
+    
+            con.query(sql, [choices[i].id_answer, choices[i].id_question, choices[i].id_test_member], function (err, result) {
+              if (err) {
+                msg = "failure";
+                reject(err);
+              } else {
+                msg = "record updated";
+              }
+              return resolve(msg);
+            });
+          }
+
+          //    msg = "success";
         }
-        return resolve(msg);
+        //   return resolve(msg);
       });
     }
 
