@@ -331,7 +331,7 @@ adminController.getAllTests(req)
 })
 .catch(next));
 
-router.get('/getTestById',urlencodedParser, (req, res, next) => 
+router.get('/getAllTestsById',urlencodedParser, (req, res, next) => 
 adminController.getTestById(req)
 .then(tests=>{
   res.send(tests);
@@ -436,5 +436,19 @@ memberController.getRawBody(req)
 })
 .catch(next));
 
+//test by class member date
+router.get('/getTestClassDateMember',urlencodedParser, (req, res, next) => 
+adminController.getTestClassDateMember(req)
+.then(tests=>{
+  res.send(tests);
+})
+.catch(next));
 
+//test fait 
+router.get('/getTestFait',urlencodedParser, (req, res, next) => 
+adminController.getTestFait(req)
+.then(tests=>{
+  res.send(tests);
+})
+.catch(next));
 module.exports = router;

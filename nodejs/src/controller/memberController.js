@@ -446,6 +446,7 @@ _publics.verifPasswordTest = (test) => {
   });
 };
 
+
 module.exports = _publics;
 
 function createnewMemberChoices(choices, i, msg, reject, resolve) {
@@ -491,3 +492,21 @@ function createnewMemberChoices(choices, i, msg, reject, resolve) {
   });
   return msg;
 }
+
+//get test En Cours 
+_publics.getTestEnCours = (req) => { 
+  var date=new Date;
+  var id_member=req.query.id_member;
+  
+return new Promise((resolve, reject) => {  
+         var sql = " select * from test t left join test_clazz tc on (t.id=tc.id_test) left join member m on (tc.id_clazz=m.id_clazz) where m.id=? and activation_date < ? and expiration_date >?";        
+             con.query(sql,[id_member,date,date], function (err, result) {
+             if (err) reject(err);
+             return resolve(JSON.stringify(result));
+             });
+ });    
+};
+
+
+module.exports = _publics;
+
