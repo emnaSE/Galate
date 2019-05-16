@@ -17,7 +17,11 @@ import { LoginService } from './pages/login/login.service';
 import { RegisterService } from './pages/register/register.service';
 import { HttpClient } from 'selenium-webdriver/http';
 import { HttpClientModule } from '@angular/common/http';
+
 import { TestService } from './pages/test/test.service';
+
+import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown';
+
 
 @NgModule({
   declarations: [
@@ -36,10 +40,14 @@ import { TestService } from './pages/test/test.service';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    AngularMultiSelectModule,
     HttpClientModule,
     TooltipModule.forRoot()
   ],
+
   providers: [RegisterService, LoginService, TestService],
+
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -18,6 +18,7 @@ const PAGES_COMPONENTS = [
     LoginModule,
     RegisterModule,
     StartTestModule,
+    
    
   ],
   declarations: [
