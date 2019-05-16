@@ -17,6 +17,7 @@ import { LoginService } from './pages/login/login.service';
 import { RegisterService } from './pages/register/register.service';
 import { HttpClient } from 'selenium-webdriver/http';
 import { HttpClientModule } from '@angular/common/http';
+import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown';
 
 @NgModule({
   declarations: [
@@ -35,14 +36,13 @@ import { HttpClientModule } from '@angular/common/http';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    AngularMultiSelectModule,
     HttpClientModule,
     TooltipModule.forRoot()
   ],
-<<<<<<< HEAD
-  providers: [LoginService],
-=======
-  providers: [RegisterService],
->>>>>>> origin/ameni_raddaoui
+
+  providers: [LoginService ,RegisterService],
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }
