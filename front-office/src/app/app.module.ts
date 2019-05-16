@@ -12,6 +12,9 @@ import { ResultTableComponent } from './pages/resultTable/resultTable.component'
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { StartTestComponent } from './pages/startTest/startTest.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { LoginService } from './pages/login/login.service';
 
 @NgModule({
   declarations: [
@@ -28,9 +31,12 @@ import { StartTestComponent } from './pages/startTest/startTest.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
     TooltipModule.forRoot()
   ],
-  providers: [],
+  providers: [LoginService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
