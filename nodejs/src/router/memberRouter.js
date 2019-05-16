@@ -35,6 +35,20 @@ memberController.getRawBody(req)
 })
 .catch(next));
 
+router.post('/createMemberChoices',(req, res, next)=>
+memberController.getRawBody(req)
+
+
+.then(response=>{
+    return memberController.createMemberChoices(response)
+})
+
+.then(msg=>{
+    res.send(msg);
+})
+.catch(next));
+
+
 router.post('/register',(req, res, next)=>
 memberController.getRawBody(req)
 .then(member=>{
@@ -174,8 +188,21 @@ memberController.getRawBody(req)
 .catch(next));
 
 
+router.get('/getTestDetails',urlencodedParser, (req, res, next) => 
+memberController.getTestDetails(req)
+.then(tests=>{
+  res.send(tests);
+})
+.catch(next));
 
-
-
+router.post('/verifPasswordTest', (req, res, next) => 
+memberController.getRawBody(req)
+.then(test=>{
+    return memberController.verifPasswordTest(test);
+})
+.then(response=>{
+  res.send(response);
+})
+.catch(next));
 
 module.exports = router;

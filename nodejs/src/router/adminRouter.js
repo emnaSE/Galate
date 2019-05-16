@@ -425,7 +425,16 @@ getRawBody(req)
 .catch(next));
 
 
-
+router.post('/duplicateTest',(req, res, next)=>
+memberController.getRawBody(req)
+.then(test=>{
+    res.payload.test=test;
+    return adminController.duplicateTest(test)
+})
+.then(msg=>{
+    res.send(msg);
+})
+.catch(next));
 
 
 module.exports = router;

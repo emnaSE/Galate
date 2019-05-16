@@ -21,9 +21,10 @@ export class RegisterService {
 
   }
 
-      addMember(clas: Object): Observable<Object> {
-        return this.http.post(this.url+ 'register',JSON.stringify(clas), {responseType: 'text'});
+      addMember(register: Object): Observable<Object> {
+        console.log("--------------------hnaa")
+        return this.http.post(this.url+ 'register',JSON.stringify(register), {responseType: 'text'});
       }
 
-     
-      }
+  
+ }

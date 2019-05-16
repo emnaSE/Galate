@@ -1,6 +1,6 @@
 
 
-export interface Class {
+export interface Register {
     id?:number;
     firstname?: string;
     lastname?: string;

@@ -815,7 +815,27 @@ _publics.RemoveAffectationSubcategoriesToTest = (testId, subcategoriesList) => {
   }
   return Promise.all(promises)
 }
+// duplicate test
 
+_publics.duplicateTest = (test) => { 
+  var test=JSON.parse(test)
+  var id=test.id;
+  
+  return new Promise((resolve, reject) => { 
+  var msg="";
+  var sql = "INSERT INTO test ( test_subcategories_number, name,password,activation_date,expiration_date) SELECT test_subcategories_number, name, password, activation_date,expiration_date FROM test WHERE  id=? ";
+  //const newTest = { name: name,test_subcategories_number:test_subcategories_number,password:password,activation_date:activation_date,expiration_date:expiration_date};         
+  con.query(sql,[id], function (err, result) {
+          if (err){
+            msg="failure";
+            reject(err);
+          }else{
+            msg="success";
+          }
+          return resolve(msg);
+     });
+});      
+}; 
 
 
 module.exports = _publics;

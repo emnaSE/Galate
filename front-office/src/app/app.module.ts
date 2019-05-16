@@ -13,8 +13,10 @@ import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { StartTestComponent } from './pages/startTest/startTest.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
 import { LoginService } from './pages/login/login.service';
+import { RegisterService } from './pages/register/register.service';
+import { HttpClient } from 'selenium-webdriver/http';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,11 @@ import { LoginService } from './pages/login/login.service';
     HttpClientModule,
     TooltipModule.forRoot()
   ],
+<<<<<<< HEAD
   providers: [LoginService],
+=======
+  providers: [RegisterService],
+>>>>>>> origin/ameni_raddaoui
   bootstrap: [AppComponent]
 })
 export class AppModule { }
