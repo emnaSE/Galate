@@ -214,7 +214,7 @@ memberController.getRawBody(req)
 })
 .catch(next));
 
-router.post('/deleteSubcategory', (req, res, next) =>
+router.post('/deleteSubcategoryById', (req, res, next) =>
 adminController.deleteSubCategoryById(req)
 
 .then(msg=>{
