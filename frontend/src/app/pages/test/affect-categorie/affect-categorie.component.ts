@@ -22,7 +22,11 @@ export class AffectCategorieComponent implements OnInit {
               private formBuilder:FormBuilder,
               private testService:TestService,
               private activateRoute:ActivatedRoute,
-              private router :Router) { }
+              private router :Router) {
+
+
+
+  }
 
   ngOnInit() {
     this.addForm=this.formBuilder.group({

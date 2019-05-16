@@ -1,6 +1,9 @@
 
 
 <nb-card>
+
+  <nb-alert outline="info" *ngIf="err==1" >update avec success</nb-alert>
+  <nb-alert outline="info" *ngIf="err==2" >ajout avec success</nb-alert>
   <nb-card-header>
     {{ editMode ? 'Update':'Ajouter'}} categorie
   </nb-card-header>

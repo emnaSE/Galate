@@ -17,6 +17,7 @@ export class CreateCategorieComponent implements OnInit {
   editMode=false;
   addForm:FormGroup;
   submitted = false;
+  err:number;
 
   constructor(private categorieService:CategorieService,
               private formBuilder:FormBuilder,
@@ -49,7 +50,7 @@ export class CreateCategorieComponent implements OnInit {
       this.categorieService.getCategorieParId(this.id).subscribe(
         (value:any)=>{
           this.addForm.patchValue(value);
-          console.log(value);
+
 
         },err=>{
           console.log(err);
@@ -79,6 +80,7 @@ export class CreateCategorieComponent implements OnInit {
       if(this.addForm.valid){
         this.categorieService.updateCategorie(this.id, this.addForm.value).subscribe(
           data=>{
+            this.err= 1;
             this.router.navigate(['pages/categorie'])
           }
         )
@@ -87,6 +89,7 @@ export class CreateCategorieComponent implements OnInit {
       if(this.addForm.valid){
         this.categorieService.addCategorie(this.addForm.value).subscribe(
           data=>{
+            this.err=2;
             this.router.navigate(['pages/categorie'])
           }
         )

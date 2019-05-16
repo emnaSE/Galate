@@ -36,8 +36,8 @@ export class ClassService {
       deleteClass(id:number):Observable<string>{
         return this.http.get<string>(this.url+"deleteClassById?id="+id);
       }
-      updateClass(id:number,clas:Class):Observable<Class>{
-        return this.http.put<Class>(this.url+"updateClassById?id="+id,clas);
+      updateClass(id:number,clas:Object):Observable<Object>{
+        return this.http.post(this.url+"updateClassById?id="+id,JSON.stringify(clas), {responseType: 'text'});
       }
 
   getAllClassByScoohId(): Observable<Class[]> {

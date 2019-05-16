@@ -6,21 +6,21 @@
 
       <div class="wrap-login100">
 
-        <form class="login100-form validate-form">
+        <form  [formGroup]="loginForm" (ngSubmit)="onSubmit()" )class="login100-form validate-form">
 
           <span class="login100-form-title p-b-43">
 						Login to continue
 					</span>
 
           <div class="wrap-input100 validate-input" data-validate = "username est obligatoire">
-            <input class="input100" type="text" name="username" >
+            <input class="input100" type="text" formControlName="username" name="username" >
             <span class="focus-input100"></span>
             <span class="label-input100">username</span>
           </div>
 
 
           <div class="wrap-input100 validate-input" data-validate="Mot de Passe est obligatoire">
-            <input class="input100"  type="password" name="mot_de_passe">
+            <input class="input100"  type="password" formControlName="password" name="mot_de_passe">
             <span class="focus-input100"></span>
             <span class="label-input100">Mot de Passe</span>
           </div>

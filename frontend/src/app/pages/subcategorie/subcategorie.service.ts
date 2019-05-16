@@ -38,7 +38,7 @@ export class SubcategorieService {
   }
 
   deleteSousCategorie(id:number):Observable<Object>{
-    return this.http.get(this.url+"deleteSubcategoryById?id="+id, {responseType: 'text'});
+    return this.http.post(this.url+"deleteSubcategoryById?id="+id, {responseType: 'text'});
   }
 
 }

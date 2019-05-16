@@ -17,7 +17,7 @@ export class CreateSousComponent implements OnInit {
   dropdownList = [];
   selectedItems = [];
   dropdownSettings = {};
-  erreur:number;
+
   id:number;
   editMode=false;
   addForm:FormGroup;
@@ -46,6 +46,9 @@ export class CreateSousComponent implements OnInit {
       this.subCategorieService.getSousCategorieById(this.id).subscribe(
         (value:any)=>{
           this.addForm.patchValue(value);
+          this.selectedItems=this.subcategories.map(cat=>{
+            return {id:cat.id_category,itemName: cat.name}
+          })
         },err=>{
           console.log(err)
         }
