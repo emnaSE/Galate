@@ -838,5 +838,34 @@ _publics.duplicateTest = (test) => {
 });      
 }; 
 
+//get test by date and class
+_publics.getTestClassDateMember = (req) => { 
+  var date=new Date;
+  var id_clazz=req.query.id_clazz;
+  var id_school=req.query.id_school;
+  var id_member=req.query.id_member;
+return new Promise((resolve, reject) => {  
+         var sql = "select * from test_member tm left join test_clazz tc on (tm.id_test=tc.id_test) left join test t on (tm.id_test=t.id) left join test_school ts on (ts.id_test=tm.id_test) where tc.id_clazz=? and ts.id_school=? and activation_date < ? and expiration_date > ? and tm.id_member=?";        
+             con.query(sql,[id_clazz,id_school,date,date,id_member], function (err, result) {
+             if (err) reject(err);
+             return resolve(JSON.stringify(result));
+             });
+ });    
+};
+
+//get test déjà fait 
+_publics.getTestFait = (req) => { 
+  var date=new Date;
+  var id_clazz=req.query.id_clazz;
+  var id_school=req.query.id_school;
+  var id_member=req.query.id_member;
+return new Promise((resolve, reject) => {  
+         var sql = "select * from test_member tm left join test_clazz tc on (tm.id_test=tc.id_test) left join test t on (tm.id_test=t.id) left join test_school ts on (ts.id_test=tm.id_test) where tc.id_clazz=? and ts.id_school=? and tm.id_member=? and tm.date_test <?";        
+             con.query(sql,[id_clazz,id_school,id_member,date], function (err, result) {
+             if (err) reject(err);
+             return resolve(JSON.stringify(result));
+             });
+ });    
+};
 
 module.exports = _publics;
