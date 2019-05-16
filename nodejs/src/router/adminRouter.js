@@ -288,6 +288,26 @@ adminController.getRawBody(req)
 })
 .catch(next));
 
+router.post('/createQuestionAndAnswers',(req, res, next)=>
+adminController.getRawBody(req)
+.then(response=>{
+    var question=JSON.parse(response).question;
+    res.payload.answers=JSON.parse(response).answers;
+    return adminController.createNewQuestion(question)
+})
+.then(message=>{
+    if(message.msg==="success"){
+        return adminController.createAnswers(message.questionId, res.payload.answers);
+    }else{
+        return "failure";
+    }
+})
+.then(msg=>{
+    res.send(msg);
+})
+.catch(next));
+
+
 
 router.post('/updateAnswer',(req, res, next)=>
 adminController.getRawBody(req)
@@ -368,7 +388,7 @@ memberController.getRawBody(req)
 router.post('/updateTest',(req, res, next)=>
 memberController.getRawBody(req)
 .then(test=>{
-    console.log(test);
+    //console.log(test);
 
     return adminController.updateTest(req,test)
 })

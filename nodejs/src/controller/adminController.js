@@ -427,6 +427,7 @@ _publics.getRawBody = (req) => {
 
 //Question controller
 _publics.createQuestion = (question ) => { 
+  
   var question=JSON.parse(question);
   var name=question.name;
   var wording=question.wording;
@@ -444,6 +445,38 @@ _publics.createQuestion = (question ) => {
                   msg="success";
                 }
             return resolve(msg);
+           });
+  });   
+
+      
+}; 
+
+
+
+_publics.createNewQuestion = (question ) => { 
+  var name=question.name;
+  var wording=question.wording;
+  var value=question.value;  
+  var id_test_subcategory=question.id_test_subcategory;
+  return new Promise((resolve, reject) => {  
+           var response={};
+           var questionId;
+           var sql = "INSERT INTO question SET ? ";
+           const newQuestion = { name: name,wording:wording,value:value,id_test_subcategory:id_test_subcategory};
+           con.query(sql,newQuestion, function (err, result) {
+              if (err){
+                response={
+                  msg:"failure"
+                }
+                  reject(err);
+                }else{
+                  response={
+                    msg:"success",
+                    questionId:result.insertId
+                  }
+                  
+                }
+            return resolve(response);
            });
   });   
 
@@ -536,7 +569,28 @@ _publics.createAnswer = (answer ) => {
 
       
 }; 
+_publics.createAnswers = (questionId, answers ) => { 
 
+  let promises = [];
+  for (var i in answers) {
+    promises.push(new Promise((resolve, reject) => {
+      var msg="";
+      var sql = "INSERT INTO answer SET ? ";
+      const answer = { id_question:questionId,name:answers[i].name,value:answers[i].value,ordre:answers[i].ordre};
+      con.query(sql,answer, function (err, result) {
+         if (err){
+             msg="failure";
+             reject(err);
+           }else{
+             msg="success";
+           }
+       return resolve(msg);
+      });
+    }
+    ));
+  }
+  return Promise.all(promises)      
+}; 
 _publics.updateAnswer=(req,answer) => { 
   var answer=JSON.parse(answer);
   var id_question=answer.id_question;
