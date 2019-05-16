@@ -40,4 +40,8 @@ export class TestComponent  implements OnInit{
           this.newTodoText = '';
       }
   }
+
+  onSubmit() {
+      this.router.navigate(['/login']);
+  }
 }

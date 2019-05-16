@@ -98,7 +98,9 @@
                     <div class="card-body">
                         <h5 class="card-title">{{ item.text }}</h5>
                         <p class="card-text"> Lorem ipsum dolor sit amet consectetur, adipisicing elit. Minima nulla voluptatibus, reiciendis laboriosam deserunt quia repudiandae, odit sunt . </p>
-                        <a href="NewStart.html" class="btn btn-primary">Start</a>
+                        <form [formGroup]="form" (ngSubmit)="onSubmit()" id="form_id"  role="form" class="nobottommargin">
+                            <a href="javascript:$('#form_id').submit();" class="btn btn-primary">Start</a>
+                        </form>
                     </div>
             </div>
     
