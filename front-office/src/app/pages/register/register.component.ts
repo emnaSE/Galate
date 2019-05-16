@@ -115,7 +115,7 @@ export class RegisterComponent  implements OnInit{
         this.registerService.addMember(data).subscribe(
           data=>{
             alert("ajouter avec succes")
-            this.router.navigate(['pages/login'])
+            this.router.navigate(['/login'])
           },err=>{
             console.log(err);
           }
