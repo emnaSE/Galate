@@ -4,7 +4,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { TestModule } from './test/test.module';
 import { ResultTableModule } from './resultTable/resultTable.module';
 import { LoginModule } from './login/login.module';
-import { RegisterModule } from './register/register.module';
+import { RegisterModule } from "./register/RegisterModule";
 import { StartTestModule } from './startTest/startTest.module';
 
 const PAGES_COMPONENTS = [

@@ -17,6 +17,7 @@ router.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+    res.setHeader('Access-Control-Allow-Credentials', true)
     next();
   });
 
@@ -424,7 +425,16 @@ getRawBody(req)
 .catch(next));
 
 
-
+router.post('/duplicateTest',(req, res, next)=>
+memberController.getRawBody(req)
+.then(test=>{
+    res.payload.test=test;
+    return adminController.duplicateTest(test)
+})
+.then(msg=>{
+    res.send(msg);
+})
+.catch(next));
 
 
 module.exports = router;

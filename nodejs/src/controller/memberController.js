@@ -440,5 +440,51 @@ _publics.updateManuelAnswer = (req, manuelAnswer) => {
   });
 };
 
+//test details
+_publics.getTestDetails = (req) => { 
+  var id_test=req.query.id_test;
+  return new Promise((resolve, reject) => {  
+           var sql = "select a.id, a.name, a.ordre,s.name,s.id_category from answer a left join question q on (a.id_question=q.id) left join test_subcategory ts on (ts.id=q.id_test_subcategory) left join subcategory s on(ts.id_subcategory=s.id) where id_test=?"; 
+         
+               con.query(sql,[id_test], function (err, result) {
+               if (err) reject(err);
+               return resolve(JSON.stringify(result));
+               });
+   });    
+};
+
+// vérifier password 
+_publics.verifPasswordTest = (test) => {
+  
+  var testDetails={};
+  var test=JSON.parse(test);
+  var password=test.password;
+  
+      return new Promise((resolve, reject) => {
+   
+      var sql = "select * FROM test where password=? "; 
+      con.query(sql,[password], function (err, tests) {
+        var tests=JSON.stringify(tests);
+        tests=JSON.parse(tests);
+       
+        if (err) {
+          testDetails = {
+              status: 500
+          };
+      } else if (tests[0]===undefined || (tests[0].password!==password)) {
+        testDetails = {
+              status: 403
+          };
+        
+      } else{
+        testDetails = {
+            tests:tests[0],
+              status: 200,
+          }; 
+      }
+      return resolve(JSON.stringify(testDetails));
+      });          
+     }); 
+};
 
 module.exports = _publics;
