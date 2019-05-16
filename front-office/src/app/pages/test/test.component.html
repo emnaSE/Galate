@@ -94,7 +94,15 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-6 col-md-6 col-lg-4">
+            <div class="col-sm-6 col-md-6 col-lg-4" *ngFor="let item of getTodoList()">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ item.text }}</h5>
+                        <p class="card-text"> Lorem ipsum dolor sit amet consectetur, adipisicing elit. Minima nulla voluptatibus, reiciendis laboriosam deserunt quia repudiandae, odit sunt . </p>
+                        <a href="NewStart.html" class="btn btn-primary">Start</a>
+                    </div>
+            </div>
+    
+            <!--<div class="col-sm-6 col-md-6 col-lg-4">
                     <img class="card-img-top" src="https://cdn.pixabay.com/photo/2014/11/30/14/11/kitty-551554__340.jpg" alt="Card image cap">
                     <div class="card-body">
                       <h5 class="card-title">Test Psycho 1</h5>
@@ -141,7 +149,7 @@
                       <p class="card-text"> Lorem ipsum dolor sit amet consectetur, adipisicing elit. Minima nulla voluptatibus, reiciendis laboriosam deserunt quia repudiandae, odit sunt . </p>
                       <a href="NewStart.html" class="btn btn-primary">Start</a>
                     </div>
-            </div>
+            </div>-->
     </div>
     </div>
     </div>

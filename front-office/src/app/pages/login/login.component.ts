@@ -11,14 +11,14 @@ import { LoginService } from './login.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-    public router: Router;
+
     public form: FormGroup;
     public pseudo: AbstractControl;
     public password: AbstractControl;
 
     login: Login = new Login();
     submitted = false;
-  constructor(router: Router, fb: FormBuilder, private loginService: LoginService) {
+  constructor(private router: Router, fb: FormBuilder, private loginService: LoginService) {
   
   
     this.form = fb.group({
@@ -43,7 +43,7 @@ export class LoginComponent implements OnInit {
     if (this.form.valid) {
       this.submitted = true;
       this.signIn();
-      this.router.navigate(['pages/test']);
+      this.router.navigate(['/test']);
     }
   }
 
