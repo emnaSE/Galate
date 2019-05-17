@@ -173,32 +173,23 @@ _publics.createChoiceMember = (choice_member) => {
 
 
 };
-_publics.createMemberChoices = (response) => {
 
+
+_publics.createMemberChoices = (response) => {
+  let promises = [];
   var response = JSON.parse(response);
   var choices = response.choices;
-  return new Promise((resolve, reject) => {
-    var msg = "";
-    for (var i in choices) {
-      
-      var sql = "INSERT INTO choice_member SET id_question=?,id_answer=? ,id_test_member=? ";
-      con.query(sql, [choices[i].id_question, choices[i].id_answer, choices[i].id_test_member], function (err, result) {
-        if (err) {
-          msg = "failure";
-          reject(err);
-        } else {
-          msg = "success";
-        }
-        return resolve(msg);
-      });
+  var msg = "";
+  for (var i in choices) {
+    promises.push(new Promise((resolve, reject) => {
+  
+      msg = createnewMemberChoices(choices, i, msg, reject, resolve);
+      // return resolve(response);
     }
-
-
-
-  });
-
-
-};
+    ));
+  }
+  return Promise.all(promises)
+}
 
 _publics.updateChoiceMember = (req, choiceMember) => {
   var choiceMember = JSON.parse(choiceMember);
@@ -409,50 +400,113 @@ _publics.updateManuelAnswer = (req, manuelAnswer) => {
 };
 
 //test details
-_publics.getTestDetails = (req) => { 
-  var id_test=req.query.id_test;
-  return new Promise((resolve, reject) => {  
-           var sql = "select a.id, a.name, a.ordre,s.name,s.id_category from answer a left join question q on (a.id_question=q.id) left join test_subcategory ts on (ts.id=q.id_test_subcategory) left join subcategory s on(ts.id_subcategory=s.id) where id_test=?"; 
-         
-               con.query(sql,[id_test], function (err, result) {
-               if (err) reject(err);
-               return resolve(JSON.stringify(result));
-               });
-   });    
+_publics.getTestDetails = (req) => {
+  var id_test = req.query.id_test;
+  return new Promise((resolve, reject) => {
+    var sql = "select a.id, a.name, a.ordre,s.name,s.id_category from answer a left join question q on (a.id_question=q.id) left join test_subcategory ts on (ts.id=q.id_test_subcategory) left join subcategory s on(ts.id_subcategory=s.id) where id_test=?";
+
+    con.query(sql, [id_test], function (err, result) {
+      if (err) reject(err);
+      return resolve(JSON.stringify(result));
+    });
+  });
 };
 
 // vérifier password 
 _publics.verifPasswordTest = (test) => {
-  
-  var testDetails={};
-  var test=JSON.parse(test);
-  var password=test.password;
-  
-      return new Promise((resolve, reject) => {
-   
-      var sql = "select * FROM test where password=? "; 
-      con.query(sql,[password], function (err, tests) {
-        var tests=JSON.stringify(tests);
-        tests=JSON.parse(tests);
-       
-        if (err) {
-          testDetails = {
-              status: 500
-          };
-      } else if (tests[0]===undefined || (tests[0].password!==password)) {
+
+  var testDetails = {};
+  var test = JSON.parse(test);
+  var password = test.password;
+
+  return new Promise((resolve, reject) => {
+
+    var sql = "select * FROM test where password=? ";
+    con.query(sql, [password], function (err, tests) {
+      var tests = JSON.stringify(tests);
+      tests = JSON.parse(tests);
+
+      if (err) {
         testDetails = {
-              status: 403
-          };
-        
-      } else{
+          status: 500
+        };
+      } else if (tests[0] === undefined || (tests[0].password !== password)) {
         testDetails = {
-            tests:tests[0],
-              status: 200,
-          }; 
+          status: 403
+        };
+
+      } else {
+        testDetails = {
+          tests: tests[0],
+          status: 200,
+        };
       }
       return resolve(JSON.stringify(testDetails));
-      });          
-     }); 
+    });
+  });
 };
 
+
 module.exports = _publics;
+
+function createnewMemberChoices(choices, i, msg, reject, resolve) {
+  var sql = "select count(*) as size from choice_member where id_question=? and id_test_member=?  ";
+  con.query(sql, [choices[i].id_question, choices[i].id_test_member], function (err, result) {
+  
+    if (err) {
+      msg = "failure";
+      reject(err);
+    }
+    else {
+      var size = JSON.parse(JSON.stringify(result[0].size));
+     
+      if (size === 0) {
+        var sql = "INSERT INTO choice_member SET id_question=?,id_answer=? ,id_test_member=?   ";
+        con.query(sql, [choices[i].id_question, choices[i].id_answer, choices[i].id_test_member], function (err, result) {
+          if (err) {
+            msg = "failure";
+            reject(err);
+          }
+          else {
+            msg = "record added";
+          }
+          return resolve(msg);
+        });
+      }
+      else {
+        var sql = "update choice_member SET id_answer=? where id_question=? and id_test_member=?   ";
+        con.query(sql, [choices[i].id_answer, choices[i].id_question, choices[i].id_test_member], function (err, result) {
+          if (err) {
+            msg = "failure";
+            reject(err);
+          }
+          else {
+            msg = "record updated";
+          }
+          return resolve(msg);
+        });
+      }
+      // msg = "success";
+    }
+    //return resolve(msg);
+  });
+  return msg;
+}
+
+//get test En Cours 
+_publics.getTestEnCours = (req) => { 
+  var date=new Date;
+  var id_member=req.query.id_member;
+  
+return new Promise((resolve, reject) => {  
+         var sql = " select * from test t left join test_clazz tc on (t.id=tc.id_test) left join member m on (tc.id_clazz=m.id_clazz) where m.id=? and activation_date < ? and expiration_date >?";        
+             con.query(sql,[id_member,date,date], function (err, result) {
+             if (err) reject(err);
+             return resolve(JSON.stringify(result));
+             });
+ });    
+};
+
+
+module.exports = _publics;
+

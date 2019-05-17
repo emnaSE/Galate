@@ -23,7 +23,8 @@ _publics.getCategoryById = (req) => {
          
                con.query(sql, [id],function (err, result) {
                if (err) reject(err);
-               return resolve(JSON.stringify(result));
+              
+               return resolve(JSON.stringify(result[0]));
                });
    });    
 };
@@ -107,7 +108,7 @@ _publics.getClassById = (req) => {
          
                con.query(sql, [id],function (err, result) {
                if (err) reject(err);
-               return resolve(JSON.stringify(result));
+               return resolve(JSON.stringify(result[0]));
                });
    });    
 };
@@ -226,7 +227,7 @@ _publics.getSchoolById = (req) => {
          
                con.query(sql,[id] ,function (err, result) {
                if (err) reject(err);
-               return resolve(JSON.stringify(result));
+               return resolve(JSON.stringify(result[0]));
                });
    });    
 };
@@ -303,7 +304,7 @@ _publics.getSubcategoryById = (req) => {
          
                con.query(sql,[id], function (err, result) {
                if (err) reject(err);
-               return resolve(JSON.stringify(result));
+               return resolve(JSON.stringify(result[0]));
                });
    });    
 };
@@ -364,7 +365,7 @@ _publics.createSubCategory = (subcategory) => {
   var id=req.query.id;
     return new Promise((resolve, reject) => {  
              var msg="";
-             var sql = "update  subcategory set name=?,id_category=?,down_description=?,up_description where id=?";
+             var sql = "update  subcategory set name=?,id_category=?,down_description=?,up_description=? where id=?";
              con.query(sql,[name,id_category,down_description,up_description,id], function (err, result) {
               if (err){
                 msg="failure";
@@ -430,10 +431,11 @@ _publics.createQuestion = (question ) => {
   var name=question.name;
   var wording=question.wording;
   var value=question.value;  
+  var id_test_subcategory=question.id_test_subcategory;
   return new Promise((resolve, reject) => {  
            var msg="";
            var sql = "INSERT INTO question SET ? ";
-           const newQuestion = { name: name,wording:wording,value:value};
+           const newQuestion = { name: name,wording:wording,value:value,id_test_subcategory:id_test_subcategory};
            con.query(sql,newQuestion, function (err, result) {
               if (err){
                   msg="failure";
@@ -454,10 +456,11 @@ _publics.updateQuestion=(req,question) => {
   var wording=question.wording;
   var value=question.value;
   var question_id=req.query.id;
+  var id_test_subcategory=question.id_test_subcategory;
   return new Promise((resolve, reject) => { 
            var msg="";
-           var sql = "UPDATE question SET name=?, wording=?,value=?  WHERE id = ?"; 
-           con.query(sql,[name,wording,value,question_id], function (err, result) {
+           var sql = "UPDATE question SET name=?, wording=?,value=?,id_test_subcategory=?  WHERE id = ?"; 
+           con.query(sql,[name,wording,value,id_test_subcategory,question_id], function (err, result) {
               if (err){
                   msg="failure";
                   reject(err);
@@ -504,7 +507,7 @@ _publics.getQuestionById = (req) => {
            var sql = "select * FROM question where id=?"; 
                con.query(sql,[id], function (err, result) {
                if (err) reject(err);
-               return resolve(JSON.stringify(result));
+               return resolve(JSON.stringify(result[0]));
                });
    });    
 };
@@ -590,7 +593,7 @@ _publics.getAnswerById = (req) => {
            var sql = "select * FROM answer where id=?";          
                con.query(sql,[id], function (err, result) {
                if (err) reject(err);
-               return resolve(JSON.stringify(result));
+               return resolve(JSON.stringify(result[0]));
                });
    });    
 };
@@ -604,7 +607,7 @@ _publics.getTestById = (req) => {
            var sql = "select * FROM test where id=?";         
                con.query(sql,[id], function (err, result) {
                if (err) reject(err);
-               return resolve(JSON.stringify(result));
+               return resolve(JSON.stringify(result[0]));
                });
    });    
 };
@@ -824,7 +827,6 @@ _publics.duplicateTest = (test) => {
   return new Promise((resolve, reject) => { 
   var msg="";
   var sql = "INSERT INTO test ( test_subcategories_number, name,password,activation_date,expiration_date) SELECT test_subcategories_number, name, password, activation_date,expiration_date FROM test WHERE  id=? ";
-  //const newTest = { name: name,test_subcategories_number:test_subcategories_number,password:password,activation_date:activation_date,expiration_date:expiration_date};         
   con.query(sql,[id], function (err, result) {
           if (err){
             msg="failure";
@@ -837,5 +839,34 @@ _publics.duplicateTest = (test) => {
 });      
 }; 
 
+//get test by date and class
+_publics.getTestClassDateMember = (req) => { 
+  var date=new Date;
+  var id_clazz=req.query.id_clazz;
+  var id_school=req.query.id_school;
+  var id_member=req.query.id_member;
+return new Promise((resolve, reject) => {  
+         var sql = "select * from test_member tm left join test_clazz tc on (tm.id_test=tc.id_test) left join test t on (tm.id_test=t.id) left join test_school ts on (ts.id_test=tm.id_test) where tc.id_clazz=? and ts.id_school=? and activation_date < ? and expiration_date > ? and tm.id_member=?";        
+             con.query(sql,[id_clazz,id_school,date,date,id_member], function (err, result) {
+             if (err) reject(err);
+             return resolve(JSON.stringify(result));
+             });
+ });    
+};
+
+//get test déjà fait 
+_publics.getTestFait = (req) => { 
+  var date=new Date;
+  var id_clazz=req.query.id_clazz;
+  var id_school=req.query.id_school;
+  var id_member=req.query.id_member;
+return new Promise((resolve, reject) => {  
+         var sql = "select * from test_member tm left join test_clazz tc on (tm.id_test=tc.id_test) left join test t on (tm.id_test=t.id) left join test_school ts on (ts.id_test=tm.id_test) where tc.id_clazz=? and ts.id_school=? and tm.id_member=? and tm.date_test <?";        
+             con.query(sql,[id_clazz,id_school,id_member,date], function (err, result) {
+             if (err) reject(err);
+             return resolve(JSON.stringify(result));
+             });
+ });    
+};
 
 module.exports = _publics;

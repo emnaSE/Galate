@@ -205,4 +205,12 @@ memberController.getRawBody(req)
 })
 .catch(next));
 
+
+//test fait 
+router.get('/getTestEnCours',urlencodedParser, (req, res, next) => 
+memberController.getTestEnCours(req)
+.then(tests=>{
+  res.send(tests);
+})
+.catch(next));
 module.exports = router;
