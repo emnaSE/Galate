@@ -29,11 +29,11 @@ export class AuthService {
   public get currentUserValue(): any {
     return this.currentUserSubject.value;
   }
-  Login(username: string, password: string){
-    return this.http.post<any>(this.url,{ username, password }).pipe(
+  Login(pseudo: string, password: string){
+    return this.http.post<any>(this.url,{ pseudo, password }).pipe(
       map(
         data=>{
-          if (data.status==200){
+          if (data==200){
             localStorage.setItem('currentUser', JSON.stringify(data));
             this.currentUserSubject.next(data);
 

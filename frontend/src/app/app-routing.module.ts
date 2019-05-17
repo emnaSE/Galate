@@ -1,4 +1,4 @@
-import { ExtraOptions, RouterModule, Routes } from '@angular/router';
+import {  RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 import {AuthComponent} from "./pages/auth/auth.component";
 import {RegistreComponent} from "./pages/auth/registre/registre.component";
@@ -8,7 +8,7 @@ const routes: Routes = [
   { path: 'pages', loadChildren: 'app/pages/pages.module#PagesModule' },
 
   {
-    path: 'auth',
+    path: 'login',
     component:AuthComponent,
   },
   {
@@ -20,12 +20,12 @@ const routes: Routes = [
   { path: '**', redirectTo: 'pages' },
 ];
 
-const config: ExtraOptions = {
+/*const config: ExtraOptions = {
   useHash: true,
-};
+};*/
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, config)],
+  imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
 export class AppRoutingModule {

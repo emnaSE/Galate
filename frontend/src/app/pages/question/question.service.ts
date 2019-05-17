@@ -14,7 +14,7 @@ import {Question} from "./question.model";
     providedIn: 'root'
   })
 export class QuestionService {
-  private url:string=API_URL+"admin";
+  private url:string=API_URL+"admin/";
 
 
   constructor(private http:HttpClient){

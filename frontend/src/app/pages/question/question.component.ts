@@ -24,6 +24,13 @@ export class QuestionComponent  implements OnInit{
 
       }
   ngOnInit() {
+      this.questionService.getAllQuestion().subscribe(
+        data=>{
+          this.questions=data;
+        },err=>{
+          console.log(err);
+        }
+      )
 
 
 
@@ -37,18 +44,13 @@ export class QuestionComponent  implements OnInit{
   update(question:Question){
       this.router.navigate(['pages/question/',question.id,'modifier'])
   }
-/*
+
   deleteByid(question:Question):void {
     if(confirm("êtes-vous sûr de vouloir supprimer le cette question ")) {
       this.questionService.deleteById(question.id).subscribe(
         data=>{
-          if(data==="success"){
+           alert("Suppression avec succès");
 
-            alert("Suppression avec succès");
-          }else{
-            alert("Vous ne pouvez pas supprimer cette question");
-
-          }
           this.router.navigate(['pages/question'])
           this.questionService.getAllQuestion().subscribe(
             data=>{
@@ -67,5 +69,5 @@ export class QuestionComponent  implements OnInit{
           console.log(err);
         }
       )}
-  };*/
+  }
 }
