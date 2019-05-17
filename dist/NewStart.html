@@ -9,7 +9,6 @@
         <title>Start Test</title>
 
         <!-- CSS -->        
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Josefin+Sans:300,400|Roboto:300,400,500">
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <link rel="stylesheet" href="css/font-awesome.min.css">
         <link rel="stylesheet" href="css/animate.css">
@@ -23,15 +22,7 @@
         <![endif]-->
 
     <style>
-        body {
-            font-family: 'Roboto', sans-serif;
-            font-size: 16px;
-            font-weight: 300;
-            color: #888;
-            line-height: 30px;
-            text-align: center;
-            background-image: url("img/stone.jpg");
-        }
+        
         
         .carousel-indicators{
             display:none;
@@ -51,7 +42,7 @@
             width:130px;
             margin-left: 10px;
             margin-right: 10px;
-            color:#0045cc !important;
+            color:#000000b5 !important;
         }
         .Quest{
             margin-top:10px;
@@ -66,6 +57,10 @@
         #test{
             border-collapse: collapse;
         }
+        body{
+            background-color:#f7f9fb;
+        }
+        /*------------------------------------------------------------------
         [ Button ]*/
         .container-contact100-form-btn {
         width: 100%;
@@ -77,9 +72,15 @@
         flex-wrap: wrap;
         justify-content: center;
         padding-top: 10px;
+        margin-bottom:40px;
         }
 
         .contact100-form-btn {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -moz-box;
+        display: -ms-flexbox;
+        display: flex;
         justify-content: center;
         align-items: center;
         padding: 0 20px;
@@ -88,7 +89,7 @@
         border-radius: 2px;
         background: #00ad5f;
 
-        font-family: Montserrat-Bold;
+        font-family: 'NexaBold';
         font-size: 12px;
         color: #fff;
         line-height: 1.2;
@@ -100,6 +101,7 @@
         -moz-transition: all 0.4s;
         transition: all 0.4s;
         }
+
         .contact100-form-btn:hover {
         background: #333333;
         }
@@ -109,7 +111,7 @@
     <body>
             
     	<!-- Top menu -->
-        <nav class="navbar navbar-no-bg navbar-expand-md" role="navigation">
+        <nav class="navbar navbar-expand-md" role="navigation">
                 <div class="container">
                     <button type="button" class="navbar-toggler collapsed" data-toggle="collapse"
                     data-target="#top-navbar-1">	<span class="sr-only">Toggle navigation</span>
@@ -119,11 +121,9 @@
                     links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse" id="top-navbar-1">
                         <ul class="nav navbar-nav ml-auto">
-                            <li class="nav-item"><a href="home.html" class="nav-link">Accueil</a>
+                            <li class="nav-item"><a href="home.html" class="nav-link">Nos Tests</a>
                             </li>
-                            
-                            <li class="nav-item"><a href="#" class="nav-link">Contactez Nous</a>
-                            </li>
+                           
                             <li class="nav-item"><a id="login" class="btn btn-link-3 nav-link" href="login.html">Login</a>
                             </li>
                         </ul>
@@ -142,7 +142,7 @@
             </div>
             <div class="row" id="test">
                 <div class="col-md-6 col-lg-6" id="1">
-                    <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Dynamique</a>
+                    <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices" role="button"  onclick="save(this)">Dynamique</a>
                         <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Energique</a>
                         </div>
                         <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Amical</a>
@@ -601,7 +601,7 @@
         </div>
         </div>
         <div class="container-contact100-form-btn">
-            <button class="contact100-form-btn" onclick="affiche()">
+            <button class="contact100-form-btn" onclick="showRes()">
               Show Result
             </button>
           </div>
@@ -612,7 +612,67 @@
             <script src="js/jquery-3.2.1.min.js"></script>
             <script src="js/bootstrap.min.js"></script>
             
-           
+            <script>
+                const questLength=5;
+                const subLength=12;
+                const numberOfSubs=12;
+                var answerQuest= new Array(questLength);
+                var subAnswers= new Array(subLength);
+                var answerAll= new Array(numberOfSubs);
+                for($k=0;$k<numberOfSubs;$k++){
+                    for($i=0;$i<subLength;$i++){
+                        for($j=0;$j<questLength;$j++){
+                            answerQuest[$j]=-1;
+                        }
+                        subAnswers[$i]=answerQuest.slice();
+                    }
+                    answerAll[$k]=subAnswers.slice();
+                }
+            </script>
+
+            <script>
+            function save(elem){
+                $elemParent=elem.parentNode;
+                var quest=1;
+                var val=1;
+                while(($Sib=$elemParent.previousElementSibling)!=null){
+                    $elemParent=$elemParent.previousElementSibling;
+                    quest++;
+                }
+                if(elem.previousElementSibling!=null){
+                    val=2;
+                }
+                var reponse = [elem.parentNode.parentNode.id, quest, 1, 1, val];
+                answerAll[elem.parentNode.parentNode.id-1][quest-1]=reponse;
+                
+                elem.style.backgroundColor="rgb(110, 186, 60)";
+                if(elem.previousElementSibling){
+                    elem.previousElementSibling.style.backgroundColor="";
+                }
+                if(elem.nextElementSibling){
+                    elem.nextElementSibling.style.backgroundColor="";
+                }                
+            }
+            function testAllAnswerFilled(){
+                var filled=true;
+                for($i=0;$i<numberOfSubs;$i++){
+                    for($j=0;$j<subLength;$j++){
+                        if(answerAll[$i][$j][questLength-1]==-1){
+                            filled=false;
+                        }
+                    }
+                }
+                return filled;
+            }
+            
+            function showRes(){
+                if(!testAllAnswerFilled()){
+                    alert("Veuiller Réponser à tous les questions");
+                }else{
+                    window.location.href = "resultTable.html";
+                }
+            }
+            </script>
             
     </body>
 
