@@ -15,24 +15,26 @@
         <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="id: activate to sort column descending">ID</th>
         <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="name: activate to sort column ascending">name</th>
         <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="activation: activate to sort column ascending">Date d' activation</th>
-        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="exp: activate to sort column ascending">Date D'expiration</th>
-        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="action: activate to sort column ascending">action</th>
+        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="expi: activate to sort column ascending">Date d' Expiration</th>
+        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="password: activate to sort column ascending">password</th>
+        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="action: activate to sort column ascending">nombre de test</th>
+        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="test_subcategories_number: activate to sort column ascending">action  </th>
         <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="affect: activate to sort column ascending">Affectation categorie</th>
         <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="affectsub: activate to sort column ascending">Affectation sub categorie</th>
 
           </thead>
       <tbody>
-      <tr *ngFor="let test of tests | paginate: { id: 'foo',
-                                                      itemsPerPage: pageSize,
-                                                      currentPage: p,
-                                                      totalItems: total }">
+      <tr *ngFor="let test of tests | paginate: { itemsPerPage: 7, currentPage: pageActuel }">
         <td>{{test.id}}</td>
         <td>{{test.name}}</td>
-        <td>date activation</td>
-        <td>date expiration</td>
+        <td>{{test.expiration_date | date: 'dd/MM/yyyy'}}</td>
+        <td>{{test.activation_date | date: 'dd/MM/yyyy'}}</td>
+        <td>{{test.password}}</td>
+        <td>{{test.test_subcategories_number}}</td>
+
         <td>
           <i style="cursor: pointer;color: #2c4937;  display: inline-block;margin-right: 20px !important;" class="fas fa-trash fa-2x" (click)="create()"></i>
-          <i class="fas fa-info fa-2x" style="cursor: pointer;" style="color: #2c4937;"(click)="create()"></i>
+          <i class="fas fa-info fa-2x" style="cursor: pointer;" style="color: #2c4937;"(click)="updateTest(test)"></i>
         </td>
 
         <td>

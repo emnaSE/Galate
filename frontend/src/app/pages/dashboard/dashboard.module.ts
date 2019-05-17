@@ -6,12 +6,15 @@ import { DashboardComponent } from './dashboard.component';
 import {Ng2SmartTableModule} from "ng2-smart-table";
 import {NgxPaginationModule} from "ngx-pagination";
 import {CreateCategorieComponent} from "./create-categorie/create-categorie.component";
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   imports: [
     ThemeModule,
     Ng2SmartTableModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    FormsModule,
+
   ],
   declarations: [
     DashboardComponent,

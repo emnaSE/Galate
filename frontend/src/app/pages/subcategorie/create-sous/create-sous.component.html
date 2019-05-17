@@ -2,7 +2,7 @@
 
 <nb-card>
   <nb-card-header>
-    create sous catergorie
+    {{ editMode ? 'Update': 'Create' }} sous catergorie
   </nb-card-header>
 
   <nb-card-body>
@@ -10,7 +10,7 @@
       <div class="form-group">
         <label for="name">Categorie</label>
         <angular2-multiselect [data]="dropdownList" [(ngModel)]="selectedItems"
-                              [settings]="dropdownSettings" formControlName="cat"></angular2-multiselect>
+                              [settings]="dropdownSettings" formControlName="id_category"></angular2-multiselect>
       </div>
 
       <div class="form-group">
@@ -22,8 +22,26 @@
         </ng-container>
       </div>
 
+      <div class="form-group">
+        <input type="text" class="form-control" formControlName="down_description" placeholder="Down Description">
+        <ng-container *ngIf="submitted && formvalidate.down_description.errors">
+          <p class="text-danger" >
+            prenom est obligatoire !
+          </p>
+        </ng-container>
+      </div>
 
-      <button type="submit" class="btn btn-success">ajouter</button>
+      <div class="form-group">
+        <input type="text" class="form-control" formControlName="up_description" placeholder="up description">
+        <ng-container *ngIf="submitted && formvalidate.up_description.errors">
+          <p class="text-danger" >
+            prenom est obligatoire !
+          </p>
+        </ng-container>
+      </div>
+
+
+      <button type="submit" class="btn btn-success">{{ editMode ? 'Update' : 'Ajouter' }}</button>
     </form>
 
   </nb-card-body>

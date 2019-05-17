@@ -33,4 +33,43 @@ export class DashboardComponent implements OnInit{
     this.router.navigate(['pages/categorie/create']);
   }
 
+  updateCategorie(categorie:Categorie):void{
+    this.router.navigate(['pages/categorie/',categorie.id,'modifier']);
+
+  }
+
+
+  deleteByid(categorie:Categorie):void {
+    if(confirm("êtes-vous sûr de vouloir supprimer le cette categorie ")) {
+      this.categorieServcie.deleteCategorie(categorie.id).subscribe(
+        data=>{
+          if(data==="success"){
+
+            alert("Suppression avec succès");
+          }else{
+            alert("Vous ne pouvez pas supprimer cette categorie");
+
+          }
+          this.router.navigate(['pages/categorie'])
+          this.categorieServcie.getAllCategorie().subscribe(
+            data=>{
+              this.categories=data;
+            },err=>{
+              console.log(err);
+
+            }
+          )
+
+          this.categories=this.categories.filter(c=>c !==categorie)
+          this.router.navigate(['pages/categorie'])
+
+
+        },err =>{
+          console.log(err);
+        }
+      )}
+  };
+
+
+
 }

@@ -26,8 +26,6 @@ import {AuthModule} from "./pages/auth/auth.module";
     HttpClientModule,
     AppRoutingModule,
     AuthModule,
-
-
     NgbModule.forRoot(),
     ThemeModule.forRoot(),
     CoreModule.forRoot(),

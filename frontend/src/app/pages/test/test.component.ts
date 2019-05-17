@@ -43,4 +43,8 @@ export class TestComponent  implements OnInit{
       this.router.navigate(['pages/test',test.id,'affectationsub']);
   }
 
+  updateTest(test:Test){
+      this.router.navigate(['pages/test',test.id,'modifier'])
+  }
+
 }

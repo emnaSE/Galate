@@ -1,6 +1,6 @@
 export interface Categorie {
     id?:number;
-    name?: string;
-    subCategoriesNumber?: number;
+  name?:string;
+  subcategories_number?:number;
 
   }

@@ -14,7 +14,7 @@ import {Categorie} from "./categorie.model";
   providedIn: 'root'
 })
 export class CategorieService {
-  private url:string=API_URL;
+  private url:string=API_URL+"admin/";
 
 
   constructor(private http:HttpClient){
@@ -28,6 +28,16 @@ export class CategorieService {
   getAllCategorie(): Observable<Categorie[]> {
     return this.http.get<Categorie[]>(this.url + 'getAllCategories');
 
+  }
+  getCategorieParId(id:number):Observable<Categorie>{
+    return this.http.get<Categorie>(this.url+"getCategoryById?id="+id);
+  }
+
+  deleteCategorie(id:number):Observable<string>{
+    return this.http.get<string>(this.url+"deleteCategoryById?id="+id);
+  }
+  updateCategorie(id:number,categorie:Object):Observable<Object>{
+    return this.http.post(this.url+"updateCategory?id="+id,categorie,{responseType: 'text'});
   }
 
 }
