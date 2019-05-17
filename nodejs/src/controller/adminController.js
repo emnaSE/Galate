@@ -869,4 +869,34 @@ return new Promise((resolve, reject) => {
  });    
 };
 
+//admin login
+_publics.login = (admin) => {
+
+  var status = "";
+  var admin0 = JSON.parse(admin);
+  var pseudo = admin0.pseudo;
+  var password = admin0.password;
+
+  return new Promise((resolve, reject) => {
+
+    var sql = "select * FROM member where pseudo=? and password=? and role='admin' ";
+    con.query(sql, [pseudo, password], function (err, admins) {
+      var admins = JSON.stringify(admins);
+      admins = JSON.parse(admins);
+
+      if (err) {
+          status= "500";
+      } else if (admins[0] === undefined || (admins[0].password !== password)) {
+        status= "403";
+      } else {
+        status= "200";
+      }
+      return resolve(status);
+    });
+  });
+};
+
+
+
+
 module.exports = _publics;

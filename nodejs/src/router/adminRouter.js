@@ -451,4 +451,29 @@ adminController.getTestFait(req)
   res.send(tests);
 })
 .catch(next));
+
+router.post('/login', (req, res, next) => 
+adminController.getRawBody(req)
+.then(admin=>{
+    return adminController.login(admin);
+})
+.then(response=>{
+  res.send(response);
+})
+.catch(next));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 module.exports = router;
