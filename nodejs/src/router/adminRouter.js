@@ -51,7 +51,7 @@ router.get('/getCategoryById',urlencodedParser, (req, res, next) =>
   })
   .catch(next));
   
-router.post('/updateCategory', (req, res, next) =>
+router.post('/updateCategoryById', (req, res, next) =>
 memberController.getRawBody(req)
 .then(category=>{
     return adminController.updateCategory(req,category)
@@ -61,7 +61,7 @@ memberController.getRawBody(req)
 })
 .catch(next));
 
-router.post('/deleteCategory', (req, res, next) =>
+router.post('/deleteCategoryById', (req, res, next) =>
 adminController.deleteCategory(req)
 
 .then(msg=>{
@@ -104,7 +104,7 @@ memberController.getRawBody(req)
 
 
 
-router.post('/updateClass', (req, res, next) =>
+router.post('/updateClassById', (req, res, next) =>
 memberController.getRawBody(req)
 .then(clazz=>{
     return adminController.updateClazz(req,clazz)
@@ -154,7 +154,7 @@ router.get('/getAllSchools',urlencodedParser, (req, res, next) =>
   })
   .catch(next));
   
-router.post('/updateSchool', (req, res, next) =>
+router.post('/updateSchoolById', (req, res, next) =>
 memberController.getRawBody(req)
 .then(school=>{
     return adminController.updateSchool(req,school)
@@ -164,7 +164,7 @@ memberController.getRawBody(req)
 })
 .catch(next));
 
-router.post('/deleteSchool', (req, res, next) =>
+router.post('/deleteSchoolById', (req, res, next) =>
 adminController.deleteSchool(req)
 
 .then(msg=>{
@@ -204,7 +204,7 @@ memberController.getRawBody(req)
 })
 .catch(next));
 
-router.post('/updateSubcategory', (req, res, next) =>
+router.post('/updateSubcategoryById', (req, res, next) =>
 memberController.getRawBody(req)
 .then(Subcategory=>{
   return adminController.updateSubCategory(req,Subcategory)
@@ -244,7 +244,7 @@ adminController.getRawBody(req)
 .catch(next));
 
 
-router.post('/updateQuestion',(req, res, next)=>
+router.post('/updateQuestionById',(req, res, next)=>
 adminController.getRawBody(req)
 .then(question=>{
     return adminController.updateQuestion(req,question)
@@ -254,7 +254,7 @@ adminController.getRawBody(req)
 })
 .catch(next));
 
-router.get('/deleteQuestion',urlencodedParser, (req, res, next) => 
+router.get('/deleteQuestionById',urlencodedParser, (req, res, next) => 
 adminController.deleteQuestion(req)
 .then(msg=>{
     res.send(msg);
@@ -267,6 +267,15 @@ adminController.getAllQuestion(req)
   res.send(questions);
 })
 .catch(next));
+
+router.get('/getAllQuestionsByIdSubcategory',urlencodedParser, (req, res, next) => 
+adminController.getAllQuestionsByIdSubcategory(req)
+.then(questions=>{
+  res.send(questions);
+})
+.catch(next));
+
+
 
 router.get('/getQuestionById',urlencodedParser, (req, res, next) => 
  adminController.getQuestionById(req)
@@ -309,7 +318,7 @@ adminController.getRawBody(req)
 
 
 
-router.post('/updateAnswer',(req, res, next)=>
+router.post('/updateAnswerById',(req, res, next)=>
 adminController.getRawBody(req)
 .then(answer=>{
     return adminController.updateAnswer(req,answer)
@@ -319,7 +328,7 @@ adminController.getRawBody(req)
 })
 .catch(next));
 
-router.get('/deleteAnswer',urlencodedParser, (req, res, next) => 
+router.get('/deleteAnswerById',urlencodedParser, (req, res, next) => 
 adminController.deleteAnswer(req)
 .then(msg=>{
     res.send(msg);
@@ -385,7 +394,7 @@ memberController.getRawBody(req)
 })
 .catch(next));
 
-router.post('/updateTest',(req, res, next)=>
+router.post('/updateTestById',(req, res, next)=>
 memberController.getRawBody(req)
 .then(test=>{
     //console.log(test);
@@ -397,7 +406,7 @@ memberController.getRawBody(req)
 })
 .catch(next));
 
-router.post('/deleteTest', (req, res, next) =>
+router.post('/deleteTestById', (req, res, next) =>
 adminController.deleteTest(req)
 
 .then(msg=>{
@@ -533,5 +542,7 @@ adminController.getRawBody(req)
 
 
 module.exports = router;
+
+
 
 
