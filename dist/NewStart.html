@@ -49,16 +49,59 @@
         .btn{
             border-color:gray;
             width:130px;
-            margin-left: 20px;
-            margin-right: 20px;
+            margin-left: 10px;
+            margin-right: 10px;
             color:#0045cc !important;
         }
         .Quest{
             margin-top:10px;
         }
-        .col{
+        #test > div{
             border:solid 1px gray;
+            border-collapse: collapse;
             margin-bottom: 20px;
+            padding-bottom: 20px;
+            padding-top: 10px;
+        }
+        #test{
+            border-collapse: collapse;
+        }
+        [ Button ]*/
+        .container-contact100-form-btn {
+        width: 100%;
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -moz-box;
+        display: -ms-flexbox;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding-top: 10px;
+        }
+
+        .contact100-form-btn {
+        justify-content: center;
+        align-items: center;
+        padding: 0 20px;
+        min-width: 200px;
+        height: 50px;
+        border-radius: 2px;
+        background: #00ad5f;
+
+        font-family: Montserrat-Bold;
+        font-size: 12px;
+        color: #fff;
+        line-height: 1.2;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+
+        -webkit-transition: all 0.4s;
+        -o-transition: all 0.4s;
+        -moz-transition: all 0.4s;
+        transition: all 0.4s;
+        }
+        .contact100-form-btn:hover {
+        background: #333333;
         }
     </style>
     </head>
@@ -97,8 +140,8 @@
                     <div class="divider-1"><div class="line"></div></div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
+            <div class="row" id="test">
+                <div class="col-md-6 col-lg-6" id="1">
                     <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Dynamique</a>
                         <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Energique</a>
                         </div>
@@ -136,7 +179,7 @@
                         <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Dynamique</a>
                         </div>
                 </div>
-                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
+                <div class=" col-md-6 col-lg-6" id="2">
                     <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Actif</a>
                         <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Sociable</a>
                         </div>
@@ -174,7 +217,7 @@
                         <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Conciliant</a>
                         </div>
                 </div>
-                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
+                <div class=" col-md-6 col-lg-6" id="3">
                     <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Vital</a>
                         <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Affectif</a>
                         </div>
@@ -212,7 +255,7 @@
                         <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Affectif</a>
                         </div>
                 </div>
-                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
+                <div class=" col-md-6 col-lg-6" id="4">
                     <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Remuant</a>
                         <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Habile</a>
                         </div>
@@ -250,7 +293,7 @@
                         <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Facilitateur</a>
                         </div>
                 </div>
-                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
+                <div class=" col-md-6 col-lg-6" id="5">
                     <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Vigoureux</a>
                         <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Assuré</a>
                         </div>
@@ -288,7 +331,7 @@
                         <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Assuré</a>
                         </div>
                 </div>
-                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
+                <div class=" col-md-6 col-lg-6" id="6">
                     <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Robuste</a>
                         <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Prudent</a>
                         </div>
@@ -326,7 +369,7 @@
                         <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Prudent</a>
                         </div>
                 </div>
-                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
+                <div class=" col-md-6 col-lg-6" id="7">
                     <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Vif</a>
                         <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Joyeux</a>
                         </div>
@@ -364,7 +407,7 @@
                         <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Insoucieux</a>
                         </div>
                 </div>
-                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
+                <div class=" col-md-6 col-lg-6" id="8">
                     <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Résistant</a>
                         <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Loyal</a>
                         </div>
@@ -402,7 +445,7 @@
                         <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Sincère</a>
                         </div>
                 </div>
-                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
+                <div class=" col-md-6 col-lg-6" id="9">
                     <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Dynamique</a>
                         <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Fantaisiste</a>
                         </div>
@@ -440,7 +483,7 @@
                         <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Créatif</a>
                         </div>
                 </div>
-                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
+                <div class=" col-md-6 col-lg-6" id="10">
                     <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Solide</a>
                         <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Entreprenant</a>
                         </div>
@@ -478,7 +521,7 @@
                         <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Fonceur</a>
                         </div>
                 </div>
-                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
+                <div class=" col-md-6 col-lg-6" id="11">
                     <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Agité</a>
                         <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Impartial</a>
                         </div>
@@ -516,7 +559,7 @@
                         <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Objectif</a>
                         </div>
                 </div>
-                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
+                <div class=" col-md-6 col-lg-6" id="12">
                     <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Energique</a>
                         <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Bienveillant</a>
                         </div>
@@ -557,140 +600,19 @@
 
         </div>
         </div>
+        <div class="container-contact100-form-btn">
+            <button class="contact100-form-btn" onclick="affiche()">
+              Show Result
+            </button>
+          </div>
 
         <!-- New Test Design End -->
 
 
             <script src="js/jquery-3.2.1.min.js"></script>
             <script src="js/bootstrap.min.js"></script>
-            <script>
-                $('.carousel').carousel({
-                    interval: false,
-                    wrap: false
-                }); 
-            </script>
-            <script>
-                const length=12;
-                var answerSub= new Array(length);
-                var answerAll= new Array(12);
-                var allow=true;
-                var subId=1;
-            </script>
-
-            <script>
-            function save(elem){
-                $elemParent=elem.parentNode;
-                var quest=0;
-                var val=1;
-                while(($Sib=$elemParent.previousElementSibling)!=null){
-                    $elemParent=$elemParent.previousElementSibling;
-                    quest++;
-                }
-                if(elem.previousElementSibling!=null){
-                    val=2;
-                }
-                var reponse = [elem.parentNode.parentNode.parentNode.parentNode.id, quest, 1, 1, val];
-                answerSub[quest-1]=reponse;
-                elem.style.backgroundColor="green";
-                if(elem.previousElementSibling){
-                    elem.previousElementSibling.style.backgroundColor="";
-                }
-                if(elem.nextElementSibling){
-                    elem.nextElementSibling.style.backgroundColor="";
-                }
-                
-                
-            }
-            function testAllFilled(){
-                var filled=true;
-                var i=0;
-                if(answerSub.length<length){
-                    filled=false;
-                }else{
-                    while(i<answerSub.length && filled){
-                        if(answerSub[i]==null){
-                            filled=false;
-                        }
-                        i++;
-                    }
-                }
-                return filled;
-            }
-            function emptyAnswers(){
-                while(answerSub.length > 0) {
-                    answerSub.pop();
-                }
-            }
-            function incSubNumber(){
-                subId++;
-            }
-            function decSubNumber(){
-                if(subId>1){
-                    subId--;
-                }
-                allow=true;
-            }
-            function createSub(){
-                var line="Create\n";
-                for($i=0;$i<length;$i++){
-                    for($j=0;$j<answerSub[$i].length;$j++){
-                        line+=answerSub[$i][$j]+" ";
-                    }
-                    line+="\n";
-                }
-                return line;
-            }
-            function updateAnswerAll(){
-                var updateMsg="Update:\n";
-                var diff=false;
-                for($i=0;$i<length;$i++){
-                    if(answerSub[$i]!=null){
-                        if(answerAll[subId-1][$i][4]!=answerSub[$i][4]){
-                            diff=true;
-                            answerAll[subId-1][$i]=answerSub[$i];
-                            for($j=0;$j<5;$j++){
-                                updateMsg+=answerSub[$i][$j]+" ";
-                            }
-                            updateMsg+="\n";
-                        }
-                    }
-                }
-                if(diff)
-                console.log(updateMsg);
-            }
-            function addToAnswerAll(){
-                answerAll[subId-1]=answerSub.slice();
-            }
-            function showRes(){            
-                if(answerAll[subId-1]!=null){
-                    updateAnswerAll();
-                    emptyAnswers();
-                    incSubNumber();
-                }else{
-                    var filled=testAllFilled();
-                    if(filled){
-                        allow=true;
-                        addToAnswerAll();
-                        console.log(createSub());
-                        emptyAnswers();
-                        if(subId==12){
-                            window.location.href="resultTable.html";
-                        }else{
-                            incSubNumber();
-                        }
-                    }else{
-                        allow=false;
-                        alert("please answer all the questions");
-                        $('#carousel-example-generic').on('slide.bs.carousel', function (e) {
-                            if(!allow){
-                                e.preventDefault();
-                            }
-                        });
-                    }
-                }
-                
-            }
-            </script>
+            
+           
             
     </body>
 
