@@ -591,6 +591,7 @@ _publics.createAnswers = (questionId, answers ) => {
   }
   return Promise.all(promises)      
 }; 
+
 _publics.updateAnswer=(req,answer) => { 
   var answer=JSON.parse(answer);
   var id_question=answer.id_question;
@@ -873,15 +874,95 @@ _publics.RemoveAffectationSubcategoriesToTest = (testId, subcategoriesList) => {
   return Promise.all(promises)
 }
 // duplicate test
+_publics.getFirstTest = () => { 
+  return new Promise((resolve, reject) => { 
+  var sql = "select * from test order by id asc";
+  con.query(sql, function (err, result) {
+          if (err){
+            reject(err);
+          }else{
+            return resolve(result);
+          }
+          
+     });
+});      
+}; 
+
+_publics.getTestCategoryByTestId = (testId) => { 
+
+  return new Promise((resolve, reject) => { 
+  var sql = "select * from test_category where id_test=?";
+  con.query(sql,[testId], function (err, result) {
+          if (err){
+            reject(err);
+          }else{         
+            return resolve(result);
+          }
+          
+     });
+});      
+}; 
+
+_publics.getTestSubcategoryByTestId = (testId) => { 
+
+  return new Promise((resolve, reject) => { 
+  var sql = "select * from test_subcategory where id_test=?";
+  con.query(sql,[testId], function (err, result) {
+          if (err){
+            reject(err);
+          }else{         
+            return resolve(result);
+          }
+          
+     });
+});      
+}; 
+
+_publics.getQuestionsByTestSubcategories = (testSubcategories ) => { 
+  
+  let promises = [];
+  for (var i=0;i<testSubcategories.length;i++) {
+    promises.push(new Promise((resolve, reject) => {
+      var sql = "select * from question where id_test_subcategory= ? ";
+      con.query(sql,testSubcategories[i].id, function (err, result) {
+        if (err){
+          reject(err);
+        }else{     
+          return resolve(result);
+        }
+        
+      });
+    }
+    ));
+  }
+  return Promise.all(promises)      
+}; 
+
+_publics.getAnswersByQuestions = (questions ) => { 
+  let promises = [];
+  for (var i=0;i<questions.length;i++) {
+    promises.push(new Promise((resolve, reject) => {
+      var sql = "select * from answer where id_question= ? ";
+      con.query(sql,questions[i].id, function (err, result) {
+        if (err){
+          reject(err);
+        }else{         
+          return resolve(result);
+        }
+        
+      });
+    }
+    ));
+  }
+  return Promise.all(promises)      
+}; 
 
 _publics.duplicateTest = (test) => { 
-  var test=JSON.parse(test)
-  var id=test.id;
   
   return new Promise((resolve, reject) => { 
   var msg="";
   var sql = "INSERT INTO test ( test_subcategories_number, name,password,activation_date,expiration_date) SELECT test_subcategories_number, name, password, activation_date,expiration_date FROM test WHERE  id=? ";
-  con.query(sql,[id], function (err, result) {
+  con.query(sql,test.id, function (err, result) {
           if (err){
             msg="failure";
             reject(err);
@@ -891,6 +972,31 @@ _publics.duplicateTest = (test) => {
           return resolve(msg);
      });
 });      
+}; 
+
+
+_publics.duplicateTestCategory = (testId, testCategories ) => { 
+
+  let promises = [];
+  for (var i in testCategories) {
+    promises.push(new Promise((resolve, reject) => {
+      var msg="";
+      
+      var sql = "INSERT INTO test_category (id_category,id_test) values(?,?) ";
+      const testCategorie = { id_category:testCategories[i].id_category,testId:testId};
+      con.query(sql,testCategories, function (err, result) {
+         if (err){
+             msg="failure";
+             reject(err);
+           }else{
+             msg="success";
+           }
+       return resolve(msg);
+      });
+    }
+    ));
+  }
+  return Promise.all(promises)      
 }; 
 
 //get test by date and class
@@ -922,5 +1028,41 @@ return new Promise((resolve, reject) => {
              });
  });    
 };
+
+
+_publics.getNotEmptyAnswres = (answers) => { 
+  var answerArray = [];
+    return new Promise((resolve, reject) => {  
+      for (var i = 0; i < answers.length; i++) {
+          if (answers[i].length !== 0) {
+              for (var j = 0; j < answers[i].length; j++) {
+                  answerArray.push(answers[i][j]);
+              }
+          }
+      }
+      return resolve(answerArray);   
+    });    
+};
+_publics.getNotEmptyQuestions = (questions) => { 
+  var questionArray = [];
+    return new Promise((resolve, reject) => {  
+      for (var i = 0; i < questions.length; i++) {
+        if (questions[i].length !== 0) {
+            for (var j = 0; j < questions[i].length; j++) {
+                questionArray.push(questions[i][j]);
+            }
+        }
+    }
+      return resolve(questionArray);   
+    });    
+};
+
+
+
+
+
+
+
+
 
 module.exports = _publics;

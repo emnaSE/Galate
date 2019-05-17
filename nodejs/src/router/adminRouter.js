@@ -444,17 +444,51 @@ getRawBody(req)
 })
 .catch(next));
 
+//duplicate test
 
-router.post('/duplicateTest',(req, res, next)=>
-memberController.getRawBody(req)
-.then(test=>{
-    res.payload.test=test;
-    return adminController.duplicateTest(test)
+router.post('/getFirstTest',(req, res, next)=>
+adminController.getFirstTest()
+.then(tests=>{
+    res.payload.test=tests[0];
+    return adminController.getTestCategoryByTestId(tests[0].id)
 })
-.then(msg=>{
-    res.send(msg);
+.then(testCategories=>{
+    res.payload.testCategories=testCategories;
+    return adminController.getTestSubcategoryByTestId(res.payload.test.id)
 })
+.then(testSubcategories=>{
+    res.payload.testSubcategories=testSubcategories;
+    return adminController.getQuestionsByTestSubcategories(testSubcategories)
+})
+.then(questions=>{
+    return adminController.getNotEmptyQuestions(questions);
+})
+.then(questionArray=>{
+    res.payload.questions=questionArray;
+    return adminController.getAnswersByQuestions(questionArray)
+})
+.then(answers=>{
+    return adminController.getNotEmptyAnswres(answers);
+})
+.then(answerArray=>{
+    res.payload.answers=answerArray;
+    return res.payload
+})
+.then(response=>{
+   // res.send(response);
+    //console.log("test "+res.payload.test);
+    //res.payload.test=test[0];
+    return adminController.duplicateTest(res.payload.test)
+})
+.then(testId=>{
+    // res.send(response);
+     //console.log("test "+res.payload.test);
+     //res.payload.test=test[0];
+     return adminController.duplicateTestCategory(testId,res.payload.testCategories)
+ })
 .catch(next));
+
+
 
 //test by class member date
 router.get('/getTestClassDateMember',urlencodedParser, (req, res, next) => 
@@ -471,4 +505,17 @@ adminController.getTestFait(req)
   res.send(tests);
 })
 .catch(next));
+
+
+
+
+
+
+
+
+
+
+
 module.exports = router;
+
+
