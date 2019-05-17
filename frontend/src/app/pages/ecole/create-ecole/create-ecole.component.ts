@@ -19,12 +19,21 @@ export class CreateEcoleComponent implements OnInit {
               private formBuilder:FormBuilder,
               private ecoleService:EcoleService,
               private activateRouter:ActivatedRoute){
+    this.id = this.activateRouter.snapshot.params['id'];
 
 
   }
 
   ngOnInit() {
-    this.id = this.activateRouter.snapshot.params['id'];
+
+
+    this.addForm=this.formBuilder.group({
+      name: new FormControl('', [Validators.required]),
+
+
+
+    });
+
     if(this.id){
 
       this.editMode=true;
@@ -37,11 +46,7 @@ export class CreateEcoleComponent implements OnInit {
       )
     }
 
-    this.addForm=this.formBuilder.group({
-      name: new FormControl('', [Validators.required]),
 
-
-    });
 
 
 

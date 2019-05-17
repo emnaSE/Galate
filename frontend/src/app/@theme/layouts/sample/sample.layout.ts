@@ -27,7 +27,7 @@ import { StateService } from '../../../@core/data/state.service';
                    [end]="sidebar.id === 'end'">
         <nb-sidebar-header *ngIf="currentTheme !== 'corporate'">
           <a href="#" class="btn btn-hero-success main-btn">
-            <i class="ion ion-android-add"></i> <span>Home</span>
+            <i class="ion ion-android-add"></i> <span>accueil</span>
           </a>
         </nb-sidebar-header>
         <ng-content select="nb-menu"></ng-content>
