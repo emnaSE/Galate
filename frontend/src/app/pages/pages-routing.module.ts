@@ -18,6 +18,7 @@ import {AffectSubcategorieComponent} from "./test/affect-subcategorie/affect-sub
 import {CreateClassComponent} from "./class/create-class/create-class.component";
 import {QuestionComponent} from "./question/question.component";
 import {CreateQuestionComponent} from "./question/create-question/create-question.component";
+import {InfoCategorieComponent} from "./dashboard/info-categorie/info-categorie.component";
 
 const routes: Routes = [{
   path: '',
@@ -62,6 +63,10 @@ const routes: Routes = [{
     {
       path:"categorie/:id/modifier",
       component: CreateCategorieComponent,
+    },
+    {
+      path:"categorie/:id/info",
+      component: InfoCategorieComponent,
     },
     {
       path:"etalonnage",

@@ -46,6 +46,7 @@ export class CreateSousComponent implements OnInit {
       this.subCategorieService.getSousCategorieById(this.id).subscribe(
         (value:any)=>{
           this.addForm.patchValue(value);
+          let data={...this.addForm.value}
           this.selectedItems=this.subcategories.map(cat=>{
             return {id:cat.id_category,itemName: cat.name}
           })

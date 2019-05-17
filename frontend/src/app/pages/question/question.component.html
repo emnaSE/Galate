@@ -19,7 +19,7 @@
 
           </thead>
       <tbody>
-      <tr *ngFor="let test of tests | paginate: { id: 'foo',
+      <tr *ngFor="let question of questions | paginate: { id: 'foo',
                                                       itemsPerPage: pageSize,
                                                       currentPage: p,
                                                       totalItems: total }">

@@ -37,6 +37,9 @@ export class DashboardComponent implements OnInit{
     this.router.navigate(['pages/categorie/',categorie.id,'modifier']);
 
   }
+  getInfo(categorie:Categorie){
+    this.router.navigate(['pages/categorie/',categorie.id,'info']);
+  }
 
 
   deleteByid(categorie:Categorie):void {
