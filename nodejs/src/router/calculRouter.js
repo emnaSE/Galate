@@ -20,7 +20,7 @@ router.use((req, res, next) => {
     res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
     res.setHeader('Access-Control-Allow-Credentials', true)
     next();
-  });
+});
 
 
 var getRawBody = require('raw-body')
@@ -98,5 +98,17 @@ router.get('/getEtalonnageResults', urlencodedParser, (req, res, next) =>
         .catch(next));
 
 
+router.get('/getCategoryNameByMemberIdAndTestId', urlencodedParser, (req, res, next) =>
+    calculController.getCategoryNameByMemberIdAndTestId(req)
+        .then(response => {
+            res.send(response);
+        })
+        .catch(next));
+router.get('/getEtalonnageDetails', urlencodedParser, (req, res, next) =>
+    calculController.getEtalonnageDetails(req)
+        .then(response => {
+            res.send(response);
+        })
+        .catch(next));
 
 module.exports = router;
