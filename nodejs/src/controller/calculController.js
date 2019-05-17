@@ -181,9 +181,7 @@ _publics.getEtalonnageResults = (req) => {
   var id_test=req.query.id_test;
   var id_member=req.query.id_member;
   return new Promise((resolve, reject) => {  
-           var sql = "select c.name as catName,sc.name as subCatName, sc.down_description, sc.up_description, ma.etallonage_result as result "
-           +"from manuel_answer ma left join subcategory sc on(sc.id=ma.id_subcategory) left join category c on (c.id=sc.id_category) "
-           +" where ma.id_test=? and ma.id_member=?"; 
+           var sql = "select c.name as catName,sc.name as subCatName, sc.down_description, sc.up_description, ma.etallonage_result as result from manuel_answer ma left join subcategory sc on(sc.id=ma.id_subcategory) left join category c on (c.id=sc.id_category)  where ma.id_test=? and ma.id_member=?"; 
          
                con.query(sql,[id_test,id_member], function (err, result) {
                if (err) reject(err);
