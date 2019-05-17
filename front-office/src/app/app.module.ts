@@ -22,7 +22,8 @@ import { TestService } from './pages/test/test.service';
 
 import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown';
 import { StartTestService } from './pages/startTest/startTest.service';
-
+import { MatButtonModule, MatMenuModule, MatToolbarModule, MatIconModule, MatCardModule} from '@angular/material';
+import {MatDialogModule} from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -43,9 +44,16 @@ import { StartTestService } from './pages/startTest/startTest.service';
     ReactiveFormsModule,
     AngularMultiSelectModule,
     HttpClientModule,
+    MatDialogModule,
     TooltipModule.forRoot()
   ],
-
+ exports: [
+    MatButtonModule,
+    MatMenuModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatCardModule
+  ],
   providers: [RegisterService, LoginService, TestService , StartTestService],
 
 
