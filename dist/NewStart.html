@@ -9,7 +9,6 @@
         <title>Start Test</title>
 
         <!-- CSS -->        
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Josefin+Sans:300,400|Roboto:300,400,500">
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <link rel="stylesheet" href="css/font-awesome.min.css">
         <link rel="stylesheet" href="css/animate.css">
@@ -23,15 +22,7 @@
         <![endif]-->
 
     <style>
-        body {
-            font-family: 'Roboto', sans-serif;
-            font-size: 16px;
-            font-weight: 300;
-            color: #888;
-            line-height: 30px;
-            text-align: center;
-            background-image: url("img/stone.jpg");
-        }
+        
         
         .carousel-indicators{
             display:none;
@@ -51,7 +42,7 @@
             width:130px;
             margin-left: 10px;
             margin-right: 10px;
-            color:#0045cc !important;
+            color:#000000b5 !important;
         }
         .Quest{
             margin-top:10px;
@@ -65,6 +56,9 @@
         }
         #test{
             border-collapse: collapse;
+        }
+        body{
+            background-color:#f7f9fb;
         }
         /*------------------------------------------------------------------
         [ Button ]*/
@@ -95,7 +89,7 @@
         border-radius: 2px;
         background: #00ad5f;
 
-        font-family: Montserrat-Bold;
+        font-family: 'NexaBold';
         font-size: 12px;
         color: #fff;
         line-height: 1.2;
@@ -117,7 +111,7 @@
     <body>
             
     	<!-- Top menu -->
-        <nav class="navbar navbar-no-bg navbar-expand-md" role="navigation">
+        <nav class="navbar navbar-expand-md" role="navigation">
                 <div class="container">
                     <button type="button" class="navbar-toggler collapsed" data-toggle="collapse"
                     data-target="#top-navbar-1">	<span class="sr-only">Toggle navigation</span>
@@ -127,11 +121,9 @@
                     links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse" id="top-navbar-1">
                         <ul class="nav navbar-nav ml-auto">
-                            <li class="nav-item"><a href="home.html" class="nav-link">Accueil</a>
+                            <li class="nav-item"><a href="home.html" class="nav-link">Nos Tests</a>
                             </li>
-                            
-                            <li class="nav-item"><a href="#" class="nav-link">Contactez Nous</a>
-                            </li>
+                           
                             <li class="nav-item"><a id="login" class="btn btn-link-3 nav-link" href="login.html">Login</a>
                             </li>
                         </ul>
@@ -150,7 +142,7 @@
             </div>
             <div class="row" id="test">
                 <div class="col-md-6 col-lg-6" id="1">
-                    <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Dynamique</a>
+                    <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices" role="button"  onclick="save(this)">Dynamique</a>
                         <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Energique</a>
                         </div>
                         <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Amical</a>
@@ -653,7 +645,7 @@
                 var reponse = [elem.parentNode.parentNode.id, quest, 1, 1, val];
                 answerAll[elem.parentNode.parentNode.id-1][quest-1]=reponse;
                 
-                elem.style.backgroundColor="green";
+                elem.style.backgroundColor="rgb(110, 186, 60)";
                 if(elem.previousElementSibling){
                     elem.previousElementSibling.style.backgroundColor="";
                 }
