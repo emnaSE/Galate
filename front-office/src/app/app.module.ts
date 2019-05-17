@@ -19,11 +19,12 @@ import { HttpClient } from 'selenium-webdriver/http';
 import { HttpClientModule } from '@angular/common/http';
 
 import { TestService } from './pages/test/test.service';
-
+import { MatRadioModule, MatInputModule } from '@angular/material';
 import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown';
 import { StartTestService } from './pages/startTest/startTest.service';
 import { MatButtonModule, MatMenuModule, MatToolbarModule, MatIconModule, MatCardModule} from '@angular/material';
 import {MatDialogModule} from '@angular/material';
+
 
 @NgModule({
   declarations: [
@@ -40,6 +41,8 @@ import {MatDialogModule} from '@angular/material';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    MatRadioModule,
+    MatInputModule,
     FormsModule,
     ReactiveFormsModule,
     AngularMultiSelectModule,
