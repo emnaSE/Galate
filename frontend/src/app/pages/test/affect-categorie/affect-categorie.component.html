@@ -1,37 +1,21 @@
 
 
-<nb-card>
+<nb-card style="height:80%" >
   <nb-card-header>
     affecter categorie
   </nb-card-header>
 
-  <nb-card-body>
-    <form [formGroup]="addForm" >
+  <nb-card-body >
+    <form [formGroup]="addForm" id="addForm" name="addForm" (ngSubmit)=" affecter()">
       <div class="form-group">
         <label for="name">Categorie</label>
-        <angular2-multiselect [data]="dropdownList"
+        <angular2-multiselect  [data]="dropdownList"
                               [(ngModel)]="selectedItems"
                               [settings]="settings"
-                              formControlName="cat"
+                              formControlName="categories"
         ></angular2-multiselect>
 
       </div>
-      <div class="form-group">
-        <input type="text" formControlName="name"  class="form-control" placeholder="Name" disabled>
-      </div>
-      <div class="form-group">
-
-        <label type="text">date d activation:</label>
-        <input type="date" class="form-control" formControlName="dateActivation"  placeholder="date d'activation" disabled>
-      </div>
-
-
-      <div class="form-group">
-        <label type="text" >date expiration:</label>
-        <input type="date" class="form-control" formControlName="dateExpiration" placeholder="date expiration" disabled>
-      </div>
-
-
 
 
 
@@ -39,13 +23,5 @@
     </form>
 
   </nb-card-body>
-  <style>
-    :host >>> ss-multiselect-dropdown > div.btn-group {
-      width: 100%;
-    }
 
-    :host >>> ss-multiselect-dropdown > div.btn-group > ul.dropdown-menu {
-      width: 100%;
-    }
-  </style>
 </nb-card>

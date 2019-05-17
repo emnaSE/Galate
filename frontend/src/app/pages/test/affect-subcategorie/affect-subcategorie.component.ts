@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {CategorieService} from "../../dashboard/categorie.service";
 import {Categorie} from "../../dashboard/categorie.model";
+import {SubcategorieService} from "../../subcategorie/subcategorie.service";
+import {SousCategorie} from "../../subcategorie/subcategorie.model";
+import {TestService} from "../test.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'affect-subcategorie',
@@ -17,15 +21,17 @@ export class AffectSubcategorieComponent implements OnInit {
   addForm:FormGroup;
   submitted = false;
 
-  constructor(private subCategorieService:CategorieService,
-              private formBuilder:FormBuilder) { }
+  constructor(private subCategorieService:SubcategorieService,
+              private formBuilder:FormBuilder,
+              private testService:TestService,
+              private router:Router) { }
 
   ngOnInit() {
     this.addForm=this.formBuilder.group({
       name: new FormControl('', [Validators.required]),
       dateActivation: new FormControl('', [Validators.required]),
       dateExpiration: new FormControl('', [Validators.required]),
-      cat: [[], Validators.required]
+      scat: [[], Validators.required]
     })
 
 
@@ -41,10 +47,10 @@ export class AffectSubcategorieComponent implements OnInit {
       enableSearchFilter:true,
       classes: "myclass custom-class-example"
     };
-    this.subCategorieService.getAllCategorie().subscribe(
+    this.subCategorieService.getAllSousCategorie().subscribe(
       data=>{
-        this.dropdownList =data.map((cat:Categorie)=>{
-          return{id:cat.id, itemName:cat.name};
+        this.dropdownList =data.map((scat:SousCategorie)=>{
+          return{id:scat.id, itemName:scat.name};
         })
       }
     )
@@ -54,6 +60,10 @@ export class AffectSubcategorieComponent implements OnInit {
   get Formvalidate(){
     return this.addForm.controls;
   }
+
+onSubmit(){
+
+}
 
 
   onItemSelect(item: any) {
