@@ -590,31 +590,31 @@ router.post('/getFirstTest',(req, res, next)=>
 adminController.getFirstTest()
 .then(tests=>{
     res.payload.test=tests[0];
-    console.log( "test");
+    //console.log( "test");
     return adminController.getTestCategoryByTestId(tests[0].id)
 })
 .then(testCategories=>{
-    console.log( "testCategories");
-    res.payload.testCategories=testCategories;
+   // console.log( "testCategories");
+    //res.payload.testCategories=testCategories;
     return adminController.getTestSubcategoriesByTestId(res.payload.test.id)
 })
 .then(testSubcategories=>{
-    console.log( "testSubcategories="+testSubcategories);
+    //console.log( "testSubcategories="+testSubcategories);
     res.payload.testSubcategories=testSubcategories;
     return adminController.getQuestionsByTestSubcategories(testSubcategories)
 })
-/*.then(questions=>{
+.then(questions=>{
     res.payload.questions=questions;
-    console.log( "questions="+questions);
+  //  console.log( "questions===="+JSON.stringify(questions));
     return adminController.getAllQuestionsAnswers(questions);
-})*/
+})
 .then(answers=>{
     res.payload.answers=answers;
-    console.log( "answers="+answers);
+  //  console.log( "answers==="+answers);
     return res.payload;
 })
 .then(response=>{
- 
+    //console.log( "response=="+response);
     res.send( res.payload.testSubcategories);
 })
 /*.then(questions=>{

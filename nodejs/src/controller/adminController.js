@@ -1256,8 +1256,10 @@ _publics.getNotEmptyQuestions = (questions) => {
 _publics.getAllQuestionsAnswers = (questions) => {
   let promises = []
   for(var i=0;i<questions.length;i++){ 
+    var subquestion = questions[i];
+    for(var j=0;j<subquestion.length;j++){ 
       promises.push( new Promise((resolve, reject) => request.get({
-          url :url+`/admin/getAnswersPerQuestion?id=${questions[i].id}`,
+          url :url+`/admin/getAnswersPerQuestion?id=${subquestion[j].id}`,
           method: 'GET',
           gzip: true,
         }, (e, r, b) => {
@@ -1266,7 +1268,9 @@ _publics.getAllQuestionsAnswers = (questions) => {
           } else {
              reject(e);
           }
+          
         })));
+      }
   }
   return Promise.all(promises)
 };
