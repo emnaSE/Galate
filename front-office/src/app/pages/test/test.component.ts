@@ -1,5 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
+import { TestService } from './test.service';
+import { Test } from './test';
+import { Subject } from 'rxjs';
 
 
 
@@ -7,15 +10,45 @@ import {Router} from "@angular/router";
 @Component({
   selector: 'test',
   templateUrl: './test.component.html',
+  styleUrls: ['./test.component.scss']
 })
 export class TestComponent  implements OnInit{
-  pageActuel: number =1;
+
+  private tests:Test[]=[];
+  dtTrigger: Subject<any> = new Subject();
 
 
 
+    constructor(private router:Router, private testService: TestService){ 
+      this.testsList= this.testService.getTodoList();
+    }
 
-    constructor(private router:Router){ }
-  ngOnInit() { }
-
+  ngOnInit() { 
+    this.testService.getAllTests().subscribe(
+      data=>{
+        this.tests=data;
+        this.dtTrigger.next();
+      },err=>{
+        console.log(err);
+      }
+    )
+  }
+  public getAllTests() {
+    this.testService.getAllTests().subscribe(
+      data=>{
+        this.tests=data;
+        this.dtTrigger.next();
+      },err=>{
+        console.log(err);
+      }
+    )
+  }
   
+
+  public testsList:Array<any>;
+
+  public getTodoList() {
+      return this.testService.getTodoList();
+  }
+
 }

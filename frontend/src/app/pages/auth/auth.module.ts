@@ -13,8 +13,7 @@ import {RegistreComponent} from "./registre/registre.component";
 @NgModule({
   imports: [
     ThemeModule,
-
-    FormsModule,
+FormsModule,
 
   ],
   declarations: [

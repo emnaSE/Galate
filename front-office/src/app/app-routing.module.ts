@@ -35,7 +35,7 @@ const routes: Routes = [
     path: 'startTest',
     component:StartTestComponent,
   },
-  { path: '', redirectTo: 'pages', pathMatch: 'full' },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: '**', redirectTo: 'pages' },
 ];
 

@@ -9,7 +9,6 @@
         <title>Estimation</title>
 
         <!-- CSS -->        
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Josefin+Sans:300,400|Roboto:300,400,500">
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <link rel="stylesheet" href="css/font-awesome.min.css">
         <link rel="stylesheet" href="css/animate.css">
@@ -27,7 +26,7 @@
         background-color:rgb(126,126,126);
       }
       nav *{
-        font-family: 'Roboto', sans-serif;
+        font-family: 'NexaLight', sans-serif;
             font-size: 16px;
             font-weight: 300;
             color:rgba(37, 41, 39, 0.747) !important;
@@ -46,10 +45,17 @@
             table, th, td {
             border: 1px solid black;
             text-align: center;
+            color:#000000b5;
             }
             .full{
                 background-color:rgb(218, 210, 210);
             }
+            .btn{
+            border-color:gray;
+            width:130px;
+            margin-left: 10px;
+            margin-right: 10px;
+        }
 /*------------------------------------------------------------------
 [ Button ]*/
 .container-contact100-form-btn {
@@ -78,7 +84,7 @@
   border-radius: 2px;
   background: #00ad5f;
 
-  font-family: Montserrat-Bold;
+  font-family: 'NexaBold';
   font-size: 12px;
   color: #fff;
   line-height: 1.2;
@@ -110,7 +116,7 @@
     <body>
     
     	<!-- Top menu -->
-		<nav class="navbar  navbar-no-bg navbar-expand-md" role="navigation">
+		<nav class="navbar  navbar-expand-md" role="navigation">
 			<div class="container">
 				<button type="button" class="navbar-toggler collapsed" data-toggle="collapse"
 				data-target="#top-navbar-1">	<span class="sr-only">Toggle navigation</span>
@@ -120,11 +126,9 @@
 				links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse" id="top-navbar-1">
 					<ul class="nav navbar-nav ml-auto">
-						<li class="nav-item"><a href="home.html" class="nav-link">Accueil</a>
+						<li class="nav-item"><a href="home.html" class="nav-link">Nos Tests</a>
 						</li>
 						
-						<li class="nav-item"><a href="#" class="nav-link">Contactez Nous</a>
-						</li>
 						<li class="nav-item"><a id="login" class="btn btn-link-3 nav-link" href="login.html">Login</a>
 						</li>
 					</ul>
@@ -157,13 +161,13 @@
               <th scope="row" rowspan="2">Direction</th>
               <td>Athenticité</td>
               <td>Stratège,calculateur</td>
-              <td class="Au" id="td1" onclick="content(this)"></td>
+              <td id="td1" class="Au" onclick="content(this)"></td>
               <td id="td2" class="Au" onclick="content(this)"></td>
               <td id="td3" class="Au" onclick="content(this)"></td>
               <td id="td4" class="Au" onclick="content(this)"></td>
-              <td id="td5" class="Au" onclick="content(this)"></td>
-              <td id="td6" class="Au" onclick="content(this)"></td>
-              <td id="td7" class="Au" onclick="content(this)"></td>
+              <td id="td5" style="background-color: white" class="Au" onclick="content(this)"></td>
+              <td id="td6" style="background-color: white" class="Au" onclick="content(this)"></td>
+              <td id="td7" style="background-color: white" class="Au" onclick="content(this)"></td>
               <td id="td8" class="Au" onclick="content(this)"></td>
               <td id="td9" class="Au" onclick="content(this)"></td>
               <td id="td10" class="Au" onclick="content(this)"></td>
@@ -177,9 +181,9 @@
               <td class="Di" id="td13" onclick="content(this)"></td>
               <td class="Di" id="td14" onclick="content(this)"></td>
               <td class="Di" id="td15" onclick="content(this)"></td>
-              <td class="Di" id="td16" onclick="content(this)"></td>
-              <td class="Di" id="td17" onclick="content(this)"></td>
-              <td class="Di" id="td18" onclick="content(this)"></td>
+              <td class="Di" style="background-color: white" id="td16" onclick="content(this)"></td>
+              <td class="Di" style="background-color: white" id="td17" onclick="content(this)"></td>
+              <td class="Di" style="background-color: white" id="td18" onclick="content(this)"></td>
               <td class="Di" id="td19" onclick="content(this)"></td>
               <td class="Di" id="td20" onclick="content(this)"></td>
               <td class="Di" id="td21" onclick="content(this)"></td>
@@ -212,9 +216,9 @@
               <td class="So" id="td24" onclick="content(this)"></td>
               <td class="So" id="td25" onclick="content(this)"></td>
               <td class="So" id="td26" onclick="content(this)"></td>
-              <td class="So" id="td27" onclick="content(this)"></td>
-              <td class="So" id="td28" onclick="content(this)"></td>
-              <td class="So" id="td29" onclick="content(this)"></td>
+              <td class="So" style="background-color: white" id="td27" onclick="content(this)"></td>
+              <td class="So" style="background-color: white" id="td28" onclick="content(this)"></td>
+              <td class="So" style="background-color: white" id="td29" onclick="content(this)"></td>
               <td class="So" id="td30" onclick="content(this)"></td>
               <td class="So" id="td31" onclick="content(this)"></td>
               <td class="So" id="td32" onclick="content(this)"></td>
@@ -228,9 +232,9 @@
               <td class="To" id="td35" onclick="content(this)"></td>
               <td class="To" id="td36" onclick="content(this)"></td>
               <td class="To" id="td37" onclick="content(this)"></td>
-              <td class="To" id="td38" onclick="content(this)"></td>
-              <td class="To" id="td39" onclick="content(this)"></td>
-              <td class="To" id="td40" onclick="content(this)"></td>
+              <td class="To" style="background-color: white" id="td38" onclick="content(this)"></td>
+              <td class="To" style="background-color: white" id="td39" onclick="content(this)"></td>
+              <td class="To" style="background-color: white" id="td40" onclick="content(this)"></td>
               <td class="To" id="td41" onclick="content(this)"></td>
               <td class="To" id="td42" onclick="content(this)"></td>
               <td class="To" id="td43" onclick="content(this)"></td>
@@ -262,9 +266,9 @@
               <td class="Ac" id="td46" onclick="content(this)"></td>
               <td class="Ac" id="td47" onclick="content(this)"></td>
               <td class="Ac" id="td48" onclick="content(this)"></td>
-              <td class="Ac" id="td49" onclick="content(this)"></td>
-              <td class="Ac" id="td50" onclick="content(this)"></td>
-              <td class="Ac" id="td51" onclick="content(this)"></td>
+              <td class="Ac" style="background-color: white" id="td49" onclick="content(this)"></td>
+              <td class="Ac" style="background-color: white" id="td50" onclick="content(this)"></td>
+              <td class="Ac" style="background-color: white" id="td51" onclick="content(this)"></td>
               <td class="Ac" id="td52" onclick="content(this)"></td>
               <td class="Ac" id="td53" onclick="content(this)"></td>
               <td class="Ac" id="td54" onclick="content(this)"></td>
@@ -278,9 +282,9 @@
               <td class="Ee" id="td57" onclick="content(this)"></td>
               <td class="Ee" id="td58" onclick="content(this)"></td>
               <td class="Ee" id="td59" onclick="content(this)"></td>
-              <td class="Ee" id="td60" onclick="content(this)"></td>
-              <td class="Ee" id="td61" onclick="content(this)"></td>
-              <td class="Ee" id="td62" onclick="content(this)"></td>
+              <td class="Ee" style="background-color: white" id="td60" onclick="content(this)"></td>
+              <td class="Ee" style="background-color: white" id="td61" onclick="content(this)"></td>
+              <td class="Ee" style="background-color: white" id="td62" onclick="content(this)"></td>
               <td class="Ee" id="td63" onclick="content(this)"></td>
               <td class="Ee" id="td64" onclick="content(this)"></td>
               <td class="Ee" id="td65" onclick="content(this)"></td>
@@ -294,9 +298,9 @@
               <td class="Cr" id="td68" onclick="content(this)"></td>
               <td class="Cr" id="td69" onclick="content(this)"></td>
               <td class="Cr" id="td70" onclick="content(this)"></td>
-              <td class="Cr" id="td71" onclick="content(this)"></td>
-              <td class="Cr" id="td72" onclick="content(this)"></td>
-              <td class="Cr" id="td73" onclick="content(this)"></td>
+              <td class="Cr" style="background-color: white" id="td71" onclick="content(this)"></td>
+              <td class="Cr" style="background-color: white" id="td72" onclick="content(this)"></td>
+              <td class="Cr" style="background-color: white" id="td73" onclick="content(this)"></td>
               <td class="Cr" id="td74" onclick="content(this)"></td>
               <td class="Cr" id="td75" onclick="content(this)"></td>
               <td class="Cr" id="td76" onclick="content(this)"></td>
@@ -328,9 +332,9 @@
               <td class="Re" id="td79" onclick="content(this)"></td>
               <td class="Re" id="td80" onclick="content(this)"></td>
               <td class="Re" id="td81" onclick="content(this)"></td>
-              <td class="Re" id="td82" onclick="content(this)"></td>
-              <td class="Re" id="td83" onclick="content(this)"></td>
-              <td class="Re" id="td84" onclick="content(this)"></td>
+              <td class="Re" style="background-color: white" id="td82" onclick="content(this)"></td>
+              <td class="Re" style="background-color: white" id="td83" onclick="content(this)"></td>
+              <td class="Re" style="background-color: white" id="td84" onclick="content(this)"></td>
               <td class="Re" id="td85" onclick="content(this)"></td>
               <td class="Re" id="td86" onclick="content(this)"></td>
               <td class="Re" id="td87" onclick="content(this)"></td>
@@ -344,9 +348,9 @@
               <td class="Ob" id="td90" onclick="content(this)"></td>
               <td class="Ob" id="td91" onclick="content(this)"></td>
               <td class="Ob" id="td92" onclick="content(this)"></td>
-              <td class="Ob" id="td93" onclick="content(this)"></td>
-              <td class="Ob" id="td94" onclick="content(this)"></td>
-              <td class="Ob" id="td95" onclick="content(this)"></td>
+              <td class="Ob" style="background-color: white" id="td93" onclick="content(this)"></td>
+              <td class="Ob" style="background-color: white" id="td94" onclick="content(this)"></td>
+              <td class="Ob" style="background-color: white" id="td95" onclick="content(this)"></td>
               <td class="Ob" id="td96" onclick="content(this)"></td>
               <td class="Ob" id="td97" onclick="content(this)"></td>
               <td class="Ob" id="td98" onclick="content(this)"></td>
@@ -378,9 +382,9 @@
               <td class="Co" id="td101" onclick="content(this)"></td>
               <td class="Co" id="td102" onclick="content(this)"></td>
               <td class="Co" id="td103" onclick="content(this)"></td>
-              <td class="Co" id="td104" onclick="content(this)"></td>
-              <td class="Co" id="td105" onclick="content(this)"></td>
-              <td class="Co" id="td106" onclick="content(this)"></td>
+              <td class="Co" style="background-color: white" id="td104" onclick="content(this)"></td>
+              <td class="Co" style="background-color: white" id="td105" onclick="content(this)"></td>
+              <td class="Co" style="background-color: white" id="td106" onclick="content(this)"></td>
               <td class="Co" id="td107" onclick="content(this)"></td>
               <td class="Co" id="td108" onclick="content(this)"></td>
               <td class="Co" id="td109" onclick="content(this)"></td>
@@ -394,9 +398,9 @@
               <td class="Op" id="td112" onclick="content(this)"></td>
               <td class="Op" id="td113" onclick="content(this)"></td>
               <td class="Op" id="td114" onclick="content(this)"></td>
-              <td class="Op" id="td115" onclick="content(this)"></td>
-              <td class="Op" id="td116" onclick="content(this)"></td>
-              <td class="Op" id="td117" onclick="content(this)"></td>
+              <td class="Op" style="background-color: white" id="td115" onclick="content(this)"></td>
+              <td class="Op" style="background-color: white" id="td116" onclick="content(this)"></td>
+              <td class="Op" style="background-color: white" id="td117" onclick="content(this)"></td>
               <td class="Op" id="td118" onclick="content(this)"></td>
               <td class="Op" id="td119" onclick="content(this)"></td>
               <td class="Op" id="td120" onclick="content(this)"></td>
@@ -410,9 +414,9 @@
               <td class="Se" id="td123" onclick="content(this)"></td>
               <td class="Se" id="td124" onclick="content(this)"></td>
               <td class="Se" id="td125" onclick="content(this)"></td>
-              <td class="Se" id="td126" onclick="content(this)"></td>
-              <td class="Se" id="td127" onclick="content(this)"></td>
-              <td class="Se" id="td128" onclick="content(this)"></td>
+              <td class="Se" style="background-color: white" id="td126" onclick="content(this)"></td>
+              <td class="Se" style="background-color: white" id="td127" onclick="content(this)"></td>
+              <td class="Se" style="background-color: white" id="td128" onclick="content(this)"></td>
               <td class="Se" id="td129" onclick="content(this)"></td>
               <td class="Se" id="td130" onclick="content(this)"></td>
               <td class="Se" id="td131" onclick="content(this)"></td>
@@ -444,8 +448,13 @@
         }
         $class=elem.className;
         for($i=0;$i<11;$i++){
-          document.getElementsByClassName($class)[$i].style.backgroundColor="rgb(218,210,210)";
-          document.getElementsByClassName($class)[$i].style.backgroundImage="url('')";
+          if($i<4 || $i>6){
+            document.getElementsByClassName($class)[$i].style.backgroundColor="rgb(218,210,210)";
+            document.getElementsByClassName($class)[$i].style.backgroundImage="url('')";
+          }else{
+            document.getElementsByClassName($class)[$i].style.backgroundColor="rgb(255,255,255)";
+            document.getElementsByClassName($class)[$i].style.backgroundImage="url('')";
+          }
         }
         elem.style.backgroundImage="url('img/done.png')";
         elem.style.backgroundRepeat="no-repeat";

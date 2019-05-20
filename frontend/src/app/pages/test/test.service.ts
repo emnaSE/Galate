@@ -24,8 +24,8 @@ export class TestService {
     return this.http.get<Test[]>(this.url+"getAllTests");
   }
 
-  affectCategorie(test:Test):Observable<Test[]>{
-    return this.http.post<Test[]>(this.url+"AffectCategoriesToTest",test);
+  affectCategorie(id:number,test:Test):Observable<any>{
+    return this.http.post<any>(this.url+"affectCategoriesToTest?testId="+id,test);
   }
   addTest(test:Test):Observable<Test[]>{
     return this.http.post<Test[]>(this.url+"createTest",test);
@@ -44,8 +44,8 @@ export class TestService {
   deleteTest(id:number):Observable<string>{
     return this.http.get<string>(this.url+"deleteTestById?id="+id);
   }
-  updateCategorie(id:number,categorie:Categorie):Observable<Categorie>{
-    return this.http.put<Categorie>(this.url+"updateTestById?id="+id,categorie);
+  updateTest(id:number,test:any):Observable<any>{
+    return this.http.post<any>(this.url+"updateTestById?id="+id,test);
   }
 }
 

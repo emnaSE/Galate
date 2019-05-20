@@ -17,13 +17,16 @@ export class CreateSousComponent implements OnInit {
   dropdownList = [];
   selectedItems = [];
   dropdownSettings = {};
-  id_category:any;
+
+  id:number;
+  editMode=false;
   addForm:FormGroup;
   submitted = false;
   constructor(private categorieService:CategorieService,
-              private subCategorie:SubcategorieService,
+              private subCategorieService:SubcategorieService,
               private router:Router,
-              private formBuilder:FormBuilder){
+              private formBuilder:FormBuilder,
+              private activatedRoute:ActivatedRoute){
 
   }
 
@@ -32,11 +35,25 @@ export class CreateSousComponent implements OnInit {
       name: new FormControl('', [Validators.required]),
       down_description: [[], Validators.required],
       up_description: [[], Validators.required],
-
       id_category: [[], Validators.required],
 
     });
 
+    this.id=this.activatedRoute.snapshot.params['id'];
+    //console.log(this.id);
+    if(this.id){
+      this.editMode=true;
+      this.subCategorieService.getSousCategorieById(this.id).subscribe(
+        (value:any)=>{
+          this.addForm.patchValue(value);
+          this.selectedItems=this.subcategories.map(cat=>{
+            return {id:cat.id_category,itemName: cat.name}
+          })
+        },err=>{
+          console.log(err)
+        }
+      )
+    }
 
     this.dropdownSettings = {
       singleSelection: true,
@@ -55,8 +72,7 @@ export class CreateSousComponent implements OnInit {
       data=>{
         this.dropdownList =data.map((cat:Categorie)=>{
           return{id:cat.id, itemName:cat.name};
-          this.id_category=cat.id;
-          console.log(this.id_category)
+
         })
       }
     )
@@ -70,22 +86,42 @@ export class CreateSousComponent implements OnInit {
   onSubmit(){
 
     this.submitted = true;
-    /*this.selectedItems.map(cat=>{
-      let sub = new Categorie()
-      sub.id=cat.id;
-    })*/
+    let data = {...this.addForm.value}
+    console.log(data);
+    data.id_category=data.id_category.map(c=>{
 
-    console.log(this.selectedItems);
-
-    this.subCategorie.addSousCategorie(this.addForm.value).subscribe(
-      data=>{
-        alert("ajouter vec succes");
-        this.router.navigate(['pages/sous'])
-
-      },err=>{
-        console.log(err);
+      return c.id;
+      console.log(c.id);
+    })
+    if (this.id) {
+      if (this.addForm.valid) {
+        this.subCategorieService.updateSousCategorie(this.id, data).subscribe(
+          data => {
+            alert("update with succes");
+            this.router.navigate(['pages/sous'])
+          }, err => {
+            console.log(err)
+          }
+        )
       }
-    )
+    }else{
+        if(this.addForm.valid){
+          console.log("message");
+          this.subCategorieService.addSousCategorie(data).subscribe(
+            data=>{
+              alert("ajouter vec succes");
+              this.router.navigate(['pages/sous'])
+
+            },err=>{
+              console.log(err);
+            }
+          )
+
+        }
+      }
+
+
+
 
 
   }

@@ -4,8 +4,9 @@ const _publics = {};
 var config = require('../config');
 var getRawBody = require('raw-body');
 var con=config.con;
-var url=`http://localhost:3000`;
+
 const request = require('request');
+var url=`http://localhost:`+config.port;
 
 _publics.getAllCategories = (req) => { 
   
@@ -322,6 +323,18 @@ _publics.getAllSubcategories = (req) => {
                });
    });    
 };
+
+_publics.getAllSubcategoriesByIdTest = (req) => { 
+    var idtest=req.query.id_test;
+    return new Promise((resolve, reject) => {  
+             var sql = "select name as subcategory,s.id FROM subcategory s left join test_subcategory ts on (s.id=ts.id_subcategory) where ts.id_test=?"; 
+           
+                 con.query(sql,[idtest], function (err, result) {
+                 if (err) reject(err);
+                 return resolve(JSON.stringify(result));
+                 });
+     });    
+  };
 _publics.getAllSubcategoriesByCategory = (req) => { 
   var idCategory=req.query.idCategory;
   return new Promise((resolve, reject) => {  
@@ -536,6 +549,41 @@ _publics.getAllQuestion = (req) => {
    });    
 };
 
+_publics.getAllQuestionsByIdSubcategory = (req) => { 
+ var subcategoryId=req.query.id_subcategory;
+    return new Promise((resolve, reject) => {  
+             var sql = "select * FROM question q left join test_subcategory ts on (ts.id=q.id_test_subcategory) where ts.id_subcategory=?"; 
+           
+                 con.query(sql,[subcategoryId], function (err, result) {
+                 if (err) reject(err);
+                 return resolve(JSON.stringify(result));
+                 });
+     });    
+  };
+_publics.getAllQuestionsBySubcategories = (req,subcategories,res) => { 
+    let promises = []
+    for(var i=0;i<JSON.parse(subcategories).length;i++){
+      var id_subcategory=JSON.parse(subcategories)[i].id;
+      res.id=id_subcategory;
+      res.i=i;
+        promises.push( new Promise((resolve, reject) => request.get({
+           
+            
+            url :url+`/admin/getAllQuestionsByIdSubcategory?id_subcategory=${JSON.parse(subcategories)[i].id}`,
+            method: 'GET',
+            gzip: true,
+          }, (e, r, b) => {
+            if (!e && r.statusCode == 200) {
+      
+              return resolve(b);
+            } else {
+              console.log('Error:' + reject(e));
+            }
+          })));
+    }
+    return Promise.all(promises)
+  };
+  
 _publics.getQuestionById = (req) => { 
   var id=req.query.id;
   return new Promise((resolve, reject) => {  
@@ -644,6 +692,30 @@ _publics.getAllAnswerByQuestion = (req) => {
    });    
 };
 
+
+_publics.getAllAnswersByQuestions = (req,questions,res) => {
+    let promises = []
+  for(var i=0;i<JSON.parse(questions).length;i++){
+    var id_question=JSON.parse(questions)[i].id;
+    res.id=id_question;
+    res.i=i;
+      promises.push( new Promise((resolve, reject) => request.get({
+         
+          
+          url :url+`/admin/getAllAnswerByQuestionId?id_question=${JSON.parse(questions)[i].id}`,
+          method: 'GET',
+          gzip: true,
+        }, (e, r, b) => {
+          if (!e && r.statusCode == 200) {
+    
+            return resolve(b);
+          } else {
+            console.log('Error:' + reject(e));
+          }
+        })));
+  }
+  return Promise.all(promises)
+};
 _publics.getAnswerById = (req) => { 
   var id=req.query.id;
   return new Promise((resolve, reject) => {  
@@ -1125,6 +1197,33 @@ return new Promise((resolve, reject) => {
 };
 
 
+//admin login
+_publics.login = (admin) => {
+
+  var status = "";
+  var admin0 = JSON.parse(admin);
+  var pseudo = admin0.pseudo;
+  var password = admin0.password;
+
+  return new Promise((resolve, reject) => {
+
+    var sql = "select * FROM member where pseudo=? and password=? and role='admin' ";
+    con.query(sql, [pseudo, password], function (err, admins) {
+      var admins = JSON.stringify(admins);
+      admins = JSON.parse(admins);
+
+      if (err) {
+          status= "500";
+      } else if (admins[0] === undefined || (admins[0].password !== password)) {
+        status= "403";
+      } else {
+        status= "200";
+      }
+      return resolve(status);
+    });
+  });
+}
+
 _publics.getNotEmptyAnswres = (answers) => { 
   var answerArray = [];
     return new Promise((resolve, reject) => {  
@@ -1150,6 +1249,7 @@ _publics.getNotEmptyQuestions = (questions) => {
     }
       return resolve(questionArray);   
     });    
+
 };
  
 
@@ -1171,6 +1271,24 @@ _publics.getAllQuestionsAnswers = (questions) => {
   return Promise.all(promises)
 };
 
+_publics.getAllSubcategoriesByCategories = (categories) => { 
+  let promises = [];
+  for (var i=0;i<JSON.parse(categories).length;i++) {
+    promises.push( new Promise((resolve, reject) => request.get({
+      url :url+`/calcul/getSubcategoriesByCategory?id=${JSON.parse(categories)[i].category_id}`,
+      method: 'GET',
+      gzip: true,
+    }, (e, r, b) => {
+      if (!e && r.statusCode == 200) {
+        return resolve(JSON.parse(b));
+      } else {
+        reject(e);
+      }
+    })));
+  }
+  return Promise.all(promises)      
+
+};
 
 
 

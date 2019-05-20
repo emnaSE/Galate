@@ -17,6 +17,7 @@ export class CreateCategorieComponent implements OnInit {
   editMode=false;
   addForm:FormGroup;
   submitted = false;
+  err:number;
 
   constructor(private categorieService:CategorieService,
               private formBuilder:FormBuilder,
@@ -24,16 +25,25 @@ export class CreateCategorieComponent implements OnInit {
               private router:Router){
 
 
-       this.addForm=this.formBuilder.group({
-         name:['', Validators.required],
-         subcategories_number: ['', Validators.required],
-    });
+
+
+
+
+
 
 
 
   }
 
   ngOnInit() {
+
+    this.addForm=this.formBuilder.group({
+      name: new FormControl('', Validators.required),
+      subcategories_number: ['', Validators.required],
+
+    });
+
+
     this.id=this.activateRoute.snapshot.params['id'];
     if(this.id){
       this.editMode=true;
@@ -47,6 +57,11 @@ export class CreateCategorieComponent implements OnInit {
         }
       )
     }
+
+
+
+
+
 
 
   }
@@ -65,6 +80,7 @@ export class CreateCategorieComponent implements OnInit {
       if(this.addForm.valid){
         this.categorieService.updateCategorie(this.id, this.addForm.value).subscribe(
           data=>{
+            this.err= 1;
             this.router.navigate(['pages/categorie'])
           }
         )
@@ -73,6 +89,7 @@ export class CreateCategorieComponent implements OnInit {
       if(this.addForm.valid){
         this.categorieService.addCategorie(this.addForm.value).subscribe(
           data=>{
+            this.err=2;
             this.router.navigate(['pages/categorie'])
           }
         )

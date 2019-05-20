@@ -5,8 +5,9 @@ export interface SousCategorie {
      name?: string;
      categorie?: string;
      id_category?:Categorie[];
-     down_description?:number;
-     calculateur?:any;
+     down_description?:any;
+     up_description?:any;
+
 
 
   }

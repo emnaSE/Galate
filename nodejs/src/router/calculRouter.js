@@ -20,7 +20,7 @@ router.use((req, res, next) => {
     res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
     res.setHeader('Access-Control-Allow-Credentials', true)
     next();
-  });
+});
 
 
 var getRawBody = require('raw-body')
@@ -98,5 +98,55 @@ router.get('/getEtalonnageResults', urlencodedParser, (req, res, next) =>
         .catch(next));
 
 
+router.get('/getCategoryNameByMemberIdAndTestId', urlencodedParser, (req, res, next) =>
+    calculController.getCategoryNameByMemberIdAndTestId(req)
+        .then(response => {
+            res.send(response);
+        })
+        .catch(next));
+router.get('/getEtalonnageDetails', urlencodedParser, (req, res, next) =>
+    calculController.getEtalonnageDetails(req)
+        .then(response => {
+            res.send(response);
+        })
+        .catch(next));
+
+router.get('/getAllCatrogiesByTestMember', urlencodedParser, (req, res, next) =>
+calculController.getCategoryNameByMemberIdAndTestId(req)
+.then(categories => {
+    return adminController.getAllSubcategoriesByCategories(categories)
+})
+.then(response=>{
+    res.payload.categories=response;
+    return res.payload;
+})
+.then(response=>{
+    console.log(response);
+    res.send(response);
+})
+.catch(next));
+
+router.get('/getSubcategoriesByCategory', urlencodedParser, (req, res, next) =>
+    adminController.getCategoryById(req)
+.then(category => {
+    if(category===undefined){
+        res.payload.leave=true;
+        return;
+    }
+    res.payload.categoryName=JSON.parse(category).name;
+    req.query.idCategory=JSON.parse(category).id;
+    return adminController.getAllSubcategoriesByCategory(req);
+})
+.then(subcategories=>{
+    if(res.payload.leave===true){
+        return;
+    }
+    res.payload.subcategories=JSON.parse(subcategories);
+    return  res.payload;
+})
+.then(resonse=>{
+    res.send(res.payload);
+})
+.catch(next));
 
 module.exports = router;
