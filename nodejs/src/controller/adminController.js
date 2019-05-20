@@ -8,8 +8,6 @@ var con=config.con;
 const request = require('request');
 var url=`http://localhost:`+config.port;
 
-const request = require('request');
-
 _publics.getAllCategories = (req) => { 
   
   return new Promise((resolve, reject) => {  
