@@ -32,15 +32,29 @@ this.id = this.activatedRouter.snapshot.params['id'];
   ngOnInit() {
     this.addForm=this.formBuilder.group({
       name: new FormControl('', [Validators.required]),
-      id_ecole: [[], Validators.required]
+      id_school: [[], Validators.required]
 
     });
 
+    this.ecoleService.getAllEcole().subscribe(
+      data=>{
+        this.dropdownList =data.map((ecole:Ecole)=>{
+          return{id:ecole.id, itemName:ecole.name};
+        })
+      }
+    )
+    
     if(this.id){
       this.editMode=true;
       this.classService.getClassById(this.id).subscribe(
         (value:any)=>{
           this.addForm.patchValue(value);
+          console.log(this.selectedItems)
+          this.selectedItems = this.dropdownList.filter(
+            e =>{
+              console.log("message");
+              return e.id == value.id_school;
+            })
         },err=>{
           console.log(err);
         }
@@ -77,7 +91,7 @@ this.id = this.activatedRouter.snapshot.params['id'];
     this.submitted = true;
     let data = {...this.addForm.value}
     console.log(data);
-    data.id_ecole=data.id_ecole.map(e=>{
+    data.id_school=data.id_school.map(e=>{
 
       return e.id;
 

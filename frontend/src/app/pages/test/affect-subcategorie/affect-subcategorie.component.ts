@@ -21,10 +21,17 @@ export class AffectSubcategorieComponent implements OnInit {
   addForm:FormGroup;
   submitted = false;
 
+
+
   constructor(private subCategorieService:SubcategorieService,
               private formBuilder:FormBuilder,
               private testService:TestService,
-              private router:Router) { }
+              private router:Router,
+              ) {
+
+
+
+  }
 
   ngOnInit() {
     this.addForm=this.formBuilder.group({

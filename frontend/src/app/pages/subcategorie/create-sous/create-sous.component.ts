@@ -14,6 +14,7 @@ import {SousCategorie} from "../subcategorie.model";
 })
 export class CreateSousComponent implements OnInit {
   private subcategories:SousCategorie[]
+  categories:Categorie[];
   dropdownList = [];
   selectedItems = [];
   dropdownSettings = {};
@@ -27,6 +28,7 @@ export class CreateSousComponent implements OnInit {
               private router:Router,
               private formBuilder:FormBuilder,
               private activatedRoute:ActivatedRoute){
+    this.id=this.activatedRoute.snapshot.params['id'];
 
   }
 
@@ -37,19 +39,33 @@ export class CreateSousComponent implements OnInit {
       up_description: [[], Validators.required],
       id_category: [[], Validators.required],
 
+
     });
 
-    this.id=this.activatedRoute.snapshot.params['id'];
-    //console.log(this.id);
+    this.categorieService.getAllCategorie().subscribe(
+      data=>{
+        this.dropdownList =data.map((cat:Categorie)=>{
+          return{id:cat.id, itemName:cat.name};
+
+        })
+      }
+    )
+
+
     if(this.id){
       this.editMode=true;
       this.subCategorieService.getSousCategorieById(this.id).subscribe(
         (value:any)=>{
           this.addForm.patchValue(value);
-          let data={...this.addForm.value}
-          this.selectedItems=this.subcategories.map(cat=>{
-            return {id:cat.id_category,itemName: cat.name}
-          })
+         // let data={...this.addForm.value}
+          console.log(value);
+          console.log(this.selectedItems)
+          console.log(this.dropdownList)
+          this.selectedItems = this.dropdownList.filter(
+            c =>{
+              console.log("message");
+             return c.id == value.id_category;
+               })
         },err=>{
           console.log(err)
         }
@@ -65,18 +81,9 @@ export class CreateSousComponent implements OnInit {
       itemsShowLimit: 1,
       allowSearchFilter: true,
       enableSearchFilter:true,
-      classes: "myclass custom-class-example",
     };
 
 
-    this.categorieService.getAllCategorie().subscribe(
-      data=>{
-        this.dropdownList =data.map((cat:Categorie)=>{
-          return{id:cat.id, itemName:cat.name};
-
-        })
-      }
-    )
 
   }
 

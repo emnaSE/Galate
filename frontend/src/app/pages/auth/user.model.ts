@@ -1,7 +1,7 @@
 export interface User {
 
   id?:number;
-  username?:string;
+  pseudo?:string;
   password?:string;
   firstName?:string;
   lastName?:string;

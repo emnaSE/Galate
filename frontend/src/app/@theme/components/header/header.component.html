@@ -18,7 +18,7 @@
     <nb-action *nbIsGranted="['view', 'user']" >
       <nb-user  [name]="user?.name" ></nb-user>
     </nb-action>
-    <nb-action class="control-item" disabled icon="ion-log-out"></nb-action>
+    <nb-action class="control-item" (click)="logout()" title="log out" icon="ion-log-out"></nb-action>
 
     <nb-action class="control-item">
 
