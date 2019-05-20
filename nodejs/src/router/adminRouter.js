@@ -678,22 +678,18 @@ getRawBody(req)
 router.get('/getAnswersPerQuestion', (req, res, next) =>  adminController.
 getQuestionById(req)
 .then(question=>{
-   /* if(question===undefined){
+    if(question===undefined){
         res.payload.leave=true
-        console.log("questions 1");
         return;
-    }*/
+    }
     req.query.id_question=req.query.id;
     res.payload.question=JSON.parse(question);
-    console.log("questions 2");
     return adminController.getAllAnswerByQuestion(req)
 })
 .then(answers=>{
-    /*if(res.payload.leave===true){
-        console.log("answers 1");
+    if(res.payload.leave===true){
         return;
-    }*/
-    console.log("answers 2");
+    }
     res.payload.answers=JSON.parse(answers);
    res.send(res.payload);
 })
