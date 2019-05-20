@@ -6,7 +6,7 @@ var getRawBody = require('raw-body');
 var con=config.con;
 
 const request = require('request');
-var url=`http://localhost:`+config.port;
+var url=`http://localhost:3002`;
 
 _publics.getAllCategories = (req) => { 
   
@@ -549,41 +549,53 @@ _publics.getAllQuestion = (req) => {
    });    
 };
 
-_publics.getAllQuestionsByIdSubcategory = (req) => { 
- var subcategoryId=req.query.id_subcategory;
+_publics.getAllQuestionsByIdTestSubcategory = (req) => { 
+ var idTestSubcategory=req.query.idTestSubcategory;
     return new Promise((resolve, reject) => {  
-             var sql = "select * FROM question q left join test_subcategory ts on (ts.id=q.id_test_subcategory) where ts.id_subcategory=?"; 
+             var sql = "select q.* FROM question q left join test_subcategory ts on (ts.id=q.id_test_subcategory) where ts.id=?"; 
            
-                 con.query(sql,[subcategoryId], function (err, result) {
+                 con.query(sql,[idTestSubcategory], function (err, result) {
                  if (err) reject(err);
                  return resolve(JSON.stringify(result));
                  });
      });    
   };
-_publics.getAllQuestionsBySubcategories = (req,subcategories,res) => { 
-    let promises = []
-    for(var i=0;i<JSON.parse(subcategories).length;i++){
-      var id_subcategory=JSON.parse(subcategories)[i].id;
-      res.id=id_subcategory;
-      res.i=i;
-        promises.push( new Promise((resolve, reject) => request.get({
-           
-            
-            url :url+`/admin/getAllQuestionsByIdSubcategory?id_subcategory=${JSON.parse(subcategories)[i].id}`,
-            method: 'GET',
-            gzip: true,
-          }, (e, r, b) => {
-            if (!e && r.statusCode == 200) {
-      
-              return resolve(b);
-            } else {
-              console.log('Error:' + reject(e));
-            }
-          })));
+
+
+  _publics.getAllQuestionsByQuestionsIds = (questions) => { 
+    let promises = [];
+    for (var i=0;i<JSON.parse(questions).length;i++) {
+     
+      promises.push( new Promise((resolve, reject) => request.get({
+        url :url+`/admin/getAnswersPerQuestion?id=${JSON.parse(questions)[i].id}`,
+        method: 'GET',
+        gzip: true,
+      }, (e, r, b) => {
+        console.log("statusCode="+r.statusCode);
+        if (!e && r.statusCode == 200) {
+          return resolve(JSON.parse(b));
+        } else {
+          reject(e);
+        }
+      })));
     }
-    return Promise.all(promises)
+    return Promise.all(promises)      
+  
   };
   
+  
+  _publics.getSubcategoryByTestSubcategory = (req) => { 
+    var idTestSubcategory=req.query.idTestSubcategory;
+       return new Promise((resolve, reject) => {  
+                var sql = "select * FROM subcategory sc left join test_subcategory ts on (sc.id=ts.id_subcategory) where ts.id=1"; 
+              
+                    con.query(sql,[idTestSubcategory], function (err, result) {
+                    if (err) reject(err);
+                    return resolve(JSON.stringify(result));
+                    });
+        });    
+     };
+
 _publics.getQuestionById = (req) => { 
   var id=req.query.id;
   return new Promise((resolve, reject) => {  
@@ -992,6 +1004,8 @@ _publics.getTestSubcategoriesByTestId = (testId) => {
 });      
 }; 
 
+
+
 _publics.getQuestionsByTestSubcategories = (testSubcategories ) => { 
   
   let promises = [];
@@ -1294,6 +1308,25 @@ _publics.getAllSubcategoriesByCategories = (categories) => {
 
 };
 
+
+_publics.getAllQuestionsByTestSubcategories = (testSubcategories) => { 
+  let promises = [];
+  for (var i=0;i<testSubcategories.length;i++) {
+    promises.push( new Promise((resolve, reject) => request.get({
+      url :url+`/admin/getQuestionsByTestSubcategory?idTestSubcategory=${testSubcategories[i].id}`,
+      method: 'GET',
+      gzip: true,
+    }, (e, r, b) => {
+      if (!e && r.statusCode == 200) {
+        return resolve(JSON.parse(b));
+      } else {
+        reject(e);
+      }
+    })));
+  }
+  return Promise.all(promises)      
+
+};
 
 
 module.exports = _publics;

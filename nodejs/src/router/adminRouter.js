@@ -277,18 +277,18 @@ adminController.getAllQuestion(req)
 router.get('/getAllQuestionsByIdSubcategory', urlencodedParser, (req, res, next) =>
     adminController.getAllQuestionsByIdSubcategory(req)
         .then(questions => {
-           
-            res.payload.questions=questions;
+
+            res.payload.questions = questions;
             res.send(questions);
 
-            return adminController.getAllAnswersByQuestions(req,questions,res);
+            return adminController.getAllAnswersByQuestions(req, questions, res);
         })
         .then(answers => {
-            res.payload.answers=answers;
-            
-         //console.log( res.payload);
-          //res.send(res.payload);
-          return res.payload;
+            res.payload.answers = answers;
+
+            //console.log( res.payload);
+            //res.send(res.payload);
+            return res.payload;
         })
         .catch(next));
 
@@ -335,7 +335,7 @@ router.get('/deleteAnswerById', urlencodedParser, (req, res, next) =>
 router.get('/getAllAnswerByQuestionId', urlencodedParser, (req, res, next) =>
     adminController.getAllAnswerByQuestion(req)
         .then(answers => {
-            res.answers=answers;
+            res.answers = answers;
             res.send(answers);
         })
         .catch(next));
@@ -347,68 +347,68 @@ router.get('/getAnswerById', urlencodedParser, (req, res, next) =>
         })
         .catch(next));
 
-router.post('/createAnswer',(req, res, next)=>
-adminController.getRawBody(req)
-.then(answer=>{
-    res.payload.answer=answer;
-    return adminController.createAnswer(answer)
-})
-.then(msg=>{
-    res.send(msg);
-})
-.catch(next));
+router.post('/createAnswer', (req, res, next) =>
+    adminController.getRawBody(req)
+        .then(answer => {
+            res.payload.answer = answer;
+            return adminController.createAnswer(answer)
+        })
+        .then(msg => {
+            res.send(msg);
+        })
+        .catch(next));
 
-router.post('/createQuestionAndAnswers',(req, res, next)=>
-adminController.getRawBody(req)
-.then(response=>{
-    var question=JSON.parse(response).question;
-    res.payload.answers=JSON.parse(response).answers;
-    return adminController.createNewQuestion(question)
-})
-.then(message=>{
-    if(message.msg==="success"){
-        return adminController.createAnswers(message.questionId, res.payload.answers);
-    }else{
-        return "failure";
-    }
-})
-.then(msg=>{
-    res.send(msg);
-})
-.catch(next));
+router.post('/createQuestionAndAnswers', (req, res, next) =>
+    adminController.getRawBody(req)
+        .then(response => {
+            var question = JSON.parse(response).question;
+            res.payload.answers = JSON.parse(response).answers;
+            return adminController.createNewQuestion(question)
+        })
+        .then(message => {
+            if (message.msg === "success") {
+                return adminController.createAnswers(message.questionId, res.payload.answers);
+            } else {
+                return "failure";
+            }
+        })
+        .then(msg => {
+            res.send(msg);
+        })
+        .catch(next));
 
 
 
-router.post('/updateAnswerById',(req, res, next)=>
-adminController.getRawBody(req)
-.then(answer=>{
-    return adminController.updateAnswer(req,answer)
-})
-.then(msg=>{
-    res.send(msg);
-})
-.catch(next));
+router.post('/updateAnswerById', (req, res, next) =>
+    adminController.getRawBody(req)
+        .then(answer => {
+            return adminController.updateAnswer(req, answer)
+        })
+        .then(msg => {
+            res.send(msg);
+        })
+        .catch(next));
 
-router.get('/deleteAnswerById',urlencodedParser, (req, res, next) => 
-adminController.deleteAnswer(req)
-.then(msg=>{
-    res.send(msg);
-})
-.catch(next));
+router.get('/deleteAnswerById', urlencodedParser, (req, res, next) =>
+    adminController.deleteAnswer(req)
+        .then(msg => {
+            res.send(msg);
+        })
+        .catch(next));
 
-router.get('/getAllAnswerByQuestion',urlencodedParser, (req, res, next) => 
-adminController.getAllAnswerByQuestion(req)
-.then(answers=>{
-  res.send(answers);
-})
-.catch(next));
+router.get('/getAllAnswerByQuestion', urlencodedParser, (req, res, next) =>
+    adminController.getAllAnswerByQuestion(req)
+        .then(answers => {
+            res.send(answers);
+        })
+        .catch(next));
 
-router.get('/getAnswerById',urlencodedParser, (req, res, next) => 
- adminController.getAnswerById(req)
-.then(answer=>{
-  res.send(answer);
-})
-.catch(next));
+router.get('/getAnswerById', urlencodedParser, (req, res, next) =>
+    adminController.getAnswerById(req)
+        .then(answer => {
+            res.send(answer);
+        })
+        .catch(next));
 
 
 //Test 
@@ -468,58 +468,58 @@ router.post('/updateTestById', (req, res, next) =>
         })
         .catch(next));
 
-router.get('/getAllTests',urlencodedParser, (req, res, next) => 
-adminController.getAllTests(req)
-.then(tests=>{
-  res.send(tests);
-})
-.catch(next));
+router.get('/getAllTests', urlencodedParser, (req, res, next) =>
+    adminController.getAllTests(req)
+        .then(tests => {
+            res.send(tests);
+        })
+        .catch(next));
 
-router.get('/getAllTestsById',urlencodedParser, (req, res, next) => 
-adminController.getTestById(req)
-.then(tests=>{
-  res.send(tests);
-})
-.catch(next));
-
-
-router.get('/getAllActivatedTests',urlencodedParser, (req, res, next) => 
-adminController.getAllActiveTests(req)
-.then(tests=>{
-  res.send(tests);
-})
-.catch(next));
+router.get('/getAllTestsById', urlencodedParser, (req, res, next) =>
+    adminController.getTestById(req)
+        .then(tests => {
+            res.send(tests);
+        })
+        .catch(next));
 
 
-router.get('/getAllDisabledTests',urlencodedParser, (req, res, next) => 
-adminController.getAllDisabledTests(req)
-.then(tests=>{
-  res.send(tests);
-})
-.catch(next));
+router.get('/getAllActivatedTests', urlencodedParser, (req, res, next) =>
+    adminController.getAllActiveTests(req)
+        .then(tests => {
+            res.send(tests);
+        })
+        .catch(next));
 
-router.post('/createTest',(req, res, next)=>
-memberController.getRawBody(req)
-.then(test=>{
-    res.payload.test=test;
-    return adminController.createTest(test)
-})
-.then(msg=>{
-    res.send(msg);
-})
-.catch(next));
 
-router.post('/updateTestById',(req, res, next)=>
-memberController.getRawBody(req)
-.then(test=>{
-    //console.log(test);
+router.get('/getAllDisabledTests', urlencodedParser, (req, res, next) =>
+    adminController.getAllDisabledTests(req)
+        .then(tests => {
+            res.send(tests);
+        })
+        .catch(next));
 
-    return adminController.updateTest(req,test)
-})
-.then(msg=>{
-    res.send(msg);
-})
-.catch(next));
+router.post('/createTest', (req, res, next) =>
+    memberController.getRawBody(req)
+        .then(test => {
+            res.payload.test = test;
+            return adminController.createTest(test)
+        })
+        .then(msg => {
+            res.send(msg);
+        })
+        .catch(next));
+
+router.post('/updateTestById', (req, res, next) =>
+    memberController.getRawBody(req)
+        .then(test => {
+            //console.log(test);
+
+            return adminController.updateTest(req, test)
+        })
+        .then(msg => {
+            res.send(msg);
+        })
+        .catch(next));
 
 
 router.post('/deleteTestById', (req, res, next) =>
@@ -585,6 +585,7 @@ router.post('/duplicateTest', (req, res, next) =>
 
 
 //duplicate test
+
 
 router.post('/getFirstTest',(req, res, next)=>
 adminController.getFirstTest()
@@ -664,6 +665,9 @@ adminController.getFirstTest()
 })*/
 .catch(next));
 
+
+
+
 /*router.post('/duplicateQuestions', (req, res, next) =>  adminController.
 getRawBody(req)
 .then(testSubcategory=>{
@@ -675,26 +679,56 @@ getRawBody(req)
 })
 .catch(next));*/
 
-router.get('/getAnswersPerQuestion', (req, res, next) =>  adminController.
-getQuestionById(req)
-.then(question=>{
-    if(question===undefined){
-        res.payload.leave=true
-        return;
-    }
-    req.query.id_question=req.query.id;
-    res.payload.question=JSON.parse(question);
-    return adminController.getAllAnswerByQuestion(req)
-})
-.then(answers=>{
-    if(res.payload.leave===true){
-        return;
-    }
-    res.payload.answers=JSON.parse(answers);
-   res.send(res.payload);
-})
-.catch(next));
+router.get('/getAnswersPerQuestion', (req, res, next) => adminController.
+    getQuestionById(req)
+    .then(question => {
+        if (question === undefined) {
+            res.payload.leave = true
+            return;
+        }
+        req.query.id_question = req.query.id;
+        res.payload.question = JSON.parse(question);
+        return adminController.getAllAnswerByQuestion(req)
+    })
+    .then(answers => {
+        if (res.payload.leave === true) {
+            return;
+        }
+        res.payload.answers = JSON.parse(answers);
+        res.send(res.payload);
+    })
+    .catch(next));
 
+router.get('/getQuestionsByTestSubcategory', (req, res, next) => adminController.
+    getSubcategoryByTestSubcategory(req)
+    .then(subcategory => {
+        res.payload.subcategory = JSON.parse(subcategory)[0].name;
+        return adminController.getAllQuestionsByIdTestSubcategory(req)
+    })
+    .then(questions => {
+        console.log("questions=" + questions);
+        return adminController.getAllQuestionsByQuestionsIds(questions)
+    })
+    .then(response => {
+        res.payload.questions = response;
+
+        return res.payload;
+    })
+    .then(response => {
+        res.send(response);
+    })
+    .catch(next));
+
+router.get('/getAllQuestionsByTestSubcategories', (req, res, next) => 
+adminController.getTestSubcategoriesByTestId(req.query.testId)
+  .then(testSubcategories => {
+        res.payload.testSubcategories = testSubcategories;
+        return adminController.getAllQuestionsByTestSubcategories(testSubcategories)
+    })
+    .then(response => {
+        res.send(response);
+    })
+    .catch(next));
 
 
 //test by class member date
@@ -708,23 +742,23 @@ adminController.getTestClassDateMember(req)
 //test fait 
 
 
-router.get('/getTestFait',urlencodedParser, (req, res, next) => 
-adminController.getTestFait(req)
-.then(tests=>{
-  res.send(tests);
-})
-.catch(next));
+router.get('/getTestFait', urlencodedParser, (req, res, next) =>
+    adminController.getTestFait(req)
+        .then(tests => {
+            res.send(tests);
+        })
+        .catch(next));
 
 
-router.post('/login', (req, res, next) => 
-adminController.getRawBody(req)
-.then(admin=>{
-    return adminController.login(admin);
-})
-.then(response=>{
-  res.send(response);
-})
-.catch(next));
+router.post('/login', (req, res, next) =>
+    adminController.getRawBody(req)
+        .then(admin => {
+            return adminController.login(admin);
+        })
+        .then(response => {
+            res.send(response);
+        })
+        .catch(next));
 
 
 

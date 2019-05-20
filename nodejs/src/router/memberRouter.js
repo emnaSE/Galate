@@ -190,24 +190,6 @@ memberController.getRawBody(req)
 .catch(next));
 
 
-router.get('/getTestDetails',urlencodedParser, (req, res, next) => 
-
-adminController.getAllSubcategoriesByIdTest(req)
-//memberController.getTestDetails(req)
-.then(subcategories=>{  
-    //console.log(subcategories);
-  res.payload.subcategory=subcategories;
-  //console.log(res.payload); // res.payload.tests=tests;
-  return adminController.getAllQuestionsBySubcategories(req,subcategories,res);
-   //return res.payload;
-  //res.send(tests);
-})
-.then(response=>{
- //   res.payload.
-
- return response;
-})
-.catch(next));
 
 router.post('/verifPasswordTest', (req, res, next) => 
 memberController.getRawBody(req)
