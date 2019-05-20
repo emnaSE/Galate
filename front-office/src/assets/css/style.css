@@ -22,58 +22,7 @@
 	box-shadow: 0 0 0 1px #e8c291 inset;
   }
   
-  /*--------------------*/
-  
-  #login #actions {
-	margin: 10px 0 0 0;
-  }
-  
-  #login #submit {    
-	background-color: #d14545;
-	background-image: linear-gradient(top, #e97171, #d14545);
-	-moz-border-radius: 3px;
-	-webkit-border-radius: 3px;
-	border-radius: 3px;
-	text-shadow: 0 1px 0 rgba(0,0,0,.5);
-	box-shadow: 0 0 1px rgba(0, 0, 0, 0.3), 0 1px 0 rgba(255, 255, 255, 0.3) inset;    
-	border: 1px solid #7e1515;
-	float: left;
-	height: 30px;
-	padding: 0;
-	width: 100px;
-	cursor: pointer;
-	font: bold 14px Arial, Helvetica;
-	color: #fff;
-  }
-  
-  #login #submit:hover,
-  #login #submit:focus {    
-	background-color: #e97171;
-	background-image: linear-gradient(top, #d14545, #e97171);
-  } 
-  
-  #login #submit:active {   
-	outline: none;
-	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5) inset;   
-  }
-  
-  #login #submit::-moz-focus-inner {
-	border: none;
-  }
-  
-  #login label {
-	float: right;
-	line-height: 30px;
-  }
-  
-  #login label input {
-	position: relative;
-	top: 2px;
-	right: 2px;
-  }
-
-
-/* end of dropdown login */
+/****/
 strong { font-weight: 500; }
 
 a, a:hover, a:focus {
@@ -81,8 +30,8 @@ a, a:hover, a:focus {
     -o-transition: all .3s; -moz-transition: all .3s; -webkit-transition: all .3s; -ms-transition: all .3s; transition: all .3s;
 }
 
-h1, h2 { margin-top: 10px; font-family: 'Josefin Sans', sans-serif; font-size: 48px; font-weight: 300; color: #555; line-height: 56px; }
-h3 { font-family: 'Josefin Sans', sans-serif; font-size: 32px; font-weight: 300; color: #555; line-height: 40px; }
+h1, h2 { margin-top: 10px; font-family: 'NexaBold', sans-serif; font-size: 48px; font-weight: 300; color: #555; line-height: 56px; }
+h3 { font-family: 'NexaLight', sans-serif; font-size: 32px; font-weight: 300; color: #555; line-height: 40px; }
 
 img { max-width: 100%; }
 
@@ -126,7 +75,7 @@ img { max-width: 100%; }
 }
 
 ul.navbar-nav {
-	font-family: 'Josefin Sans', sans-serif;
+	font-family: 'NexaLight', sans-serif;
 	font-size: 14px;
 	color: #888;
 	font-weight: 400;
@@ -150,7 +99,7 @@ ul.navbar-nav li a.btn-link-3 {
 	padding: 6px 15px;
 	background: #6eba3c;
 	border: 0;
-	font-family: 'Josefin Sans', sans-serif;
+	font-family: 'NexaLight', sans-serif;
 	font-size: 14px;
     font-weight: 300;
     color: #fff;
@@ -163,14 +112,15 @@ ul.navbar-nav li a.btn-link-3:active,
 ul.navbar-nav li a.btn-link-3:active:focus { outline: 0; background: #63a736; color: #fff; }
 
 .navbar-brand {
+	margin-top: 6px;
 	width: 102px;
 	height: 80px;
-	background: url(assets/img/galate.png) left top no-repeat;
+	background: url(assets/img/logo.png) left top no-repeat;
 	text-indent: -99999px;
 }
 .navbar>.container .navbar-brand, .navbar>.container-fluid .navbar-brand { margin-left: 0; }
 
-.navbar-no-bg .navbar-brand { background-image: url(assets/img/galate.png); }
+.navbar-no-bg .navbar-brand { background-image: url(assets/img/logo.png); }
 
 .navbar-toggle .icon-bar { background: #555; }
 
@@ -233,7 +183,7 @@ footer { padding: 40px 0 45px 0; background: #f8f8f8; }
 		-webkit-box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.1);
 		box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.1);
 	}
-	.navbar-no-bg .navbar-brand { background-image: url(assets/img/galate.png); }
+	.navbar-no-bg .navbar-brand { background-image: url(assets/img/logo.png); }
 	
 	.navbar-no-bg ul.navbar-nav { color: #888; }
 	.navbar-no-bg ul.navbar-nav li a { color: #888; }
@@ -276,9 +226,82 @@ only screen and (                min-resolution: 2dppx) {
 	
 	/* logo */
     .navbar-brand {
-    	background-image: url(assets/img/galate.png) !important; background-repeat: no-repeat !important; background-size: 102px 32px !important;
+    	background-image: url(assets/img/logo.png) !important; background-repeat: no-repeat !important; background-size: 102px 32px !important;
     }
     
-    .navbar-no-bg .navbar-brand { background-image: url(assets/img/galate.png); }
+    .navbar-no-bg .navbar-brand { background-image: url(assets/img/logo.png); }
 	
 }
+
+
+/* new fonts */
+@font-face {
+  font-family: NexaBold;
+  src: url(assets/fonts/NexaBold.otf);
+}
+@font-face {
+  font-family: NexaLight;
+  src: url(assets/fonts/NexaLight.otf);
+}
+
+body {
+	font-family: 'NexaBold';
+	font-size: 16px;
+	font-weight: 300;
+	color: #888;
+	line-height: 30px;
+	text-align: center;
+	}
+	
+	  /*--------------------*/
+  
+		#login #actions {
+			margin: 10px 0 0 0;
+			}
+			
+			#login #submit {    
+				background-color: #d14545;
+				background-image: linear-gradient(top, #e97171, #d14545);
+				-moz-border-radius: 3px;
+				-webkit-border-radius: 3px;
+				border-radius: 3px;
+				text-shadow: 0 1px 0 rgba(0,0,0,.5);
+				box-shadow: 0 0 1px rgba(0, 0, 0, 0.3), 0 1px 0 rgba(255, 255, 255, 0.3) inset;    
+				border: 1px solid #7e1515;
+				float: left;
+				height: 30px;
+				padding: 0;
+				width: 100px;
+				cursor: pointer;
+				font: bold 14px 'NexaBold';
+				color: #fff;
+				}
+			
+			#login #submit:hover,
+			#login #submit:focus {    
+			background-color: #e97171;
+			background-image: linear-gradient(top, #d14545, #e97171);
+			} 
+			
+			#login #submit:active {   
+			outline: none;
+			box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5) inset;   
+			}
+			
+			#login #submit::-moz-focus-inner {
+			border: none;
+			}
+			
+			#login label {
+			float: right;
+			line-height: 30px;
+			}
+			
+			#login label input {
+			position: relative;
+			top: 2px;
+			right: 2px;
+			}
+		
+		
+		/* end of dropdown login */

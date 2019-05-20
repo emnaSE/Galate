@@ -8,6 +8,7 @@ export interface ResultTable {
     up_description?: string;
     result?: number;
    
+    
 
 
   }

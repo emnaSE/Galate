@@ -9,7 +9,6 @@
         <title>Estimation</title>
 
         <!-- CSS -->        
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Josefin+Sans:300,400|Roboto:300,400,500">
         <link rel="stylesheet" href="assets/css/bootstrap.min.css">
         <link rel="stylesheet" href="assets/css/font-awesome.min.css">
         <link rel="stylesheet" href="assets/css/animate.css">
@@ -27,7 +26,7 @@
         background-color:rgb(126,126,126);
       }
       nav *{
-        font-family: 'Roboto', sans-serif;
+        font-family: 'NexaLight', sans-serif;
             font-size: 16px;
             font-weight: 300;
             color:rgba(37, 41, 39, 0.747) !important;
@@ -46,10 +45,17 @@
             table, th, td {
             border: 1px solid black;
             text-align: center;
+            color:#000000b5;
             }
             .full{
                 background-color:rgb(218, 210, 210);
             }
+            .btn{
+            border-color:gray;
+            width:130px;
+            margin-left: 10px;
+            margin-right: 10px;
+        }
 /*------------------------------------------------------------------
 [ Button ]*/
 .container-contact100-form-btn {
@@ -78,7 +84,7 @@
   border-radius: 2px;
   background: #00ad5f;
 
-  font-family: Montserrat-Bold;
+  font-family: 'NexaBold';
   font-size: 12px;
   color: #fff;
   line-height: 1.2;
@@ -110,21 +116,19 @@
     <body>
     
     	<!-- Top menu -->
-		<nav class="navbar  navbar-no-bg navbar-expand-md" role="navigation">
+		<nav class="navbar  navbar-expand-md" role="navigation">
 			<div class="container">
 				<button type="button" class="navbar-toggler collapsed" data-toggle="collapse"
 				data-target="#top-navbar-1">	<span class="sr-only">Toggle navigation</span>
 		&#x2630;</button>	<a class="navbar-brand"
-    routerLink="/login"></a>
+    routerLink="/test"></a>
 				<!-- Collect the nav
 				links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse" id="top-navbar-1">
 					<ul class="nav navbar-nav ml-auto">
-						<li class="nav-item"><a routerLink="/test" class="nav-link">Accueil</a>
+						<li class="nav-item"><a routerLink="/test" class="nav-link">Nos Tests</a>
 						</li>
 						
-						<li class="nav-item"><a href="#" class="nav-link">Contactez Nous</a>
-						</li>
 						<li class="nav-item"><a id="login" class="btn btn-link-3 nav-link" routerLink="/login">Login</a>
 						</li>
 					</ul>
@@ -153,25 +157,25 @@
             </tr>
           </thead>
           <tbody>
-            <tr class="full" *ngFor= "let resultTable of resultTables ">
-              <td >{{resultTable.catName}}</td>
-
-              <td>{{resultTable.subCatName}}</td>
-              <td>{{resultTable.down_description}}</td>
-            
-              <td class="Au" id="td1" ><input  type="radio" name="chooseone"  ></td>
-              <td id="td2" class="Au" ><input type="radio"  name="chooseone"  ></td>
-              <td id="td3" class="Au" ><input type="radio"  name="chooseone"  ></td>
-              <td id="td4" class="Au" ><input type="radio"  name="chooseone"  ></td>
-              <td id="td5" class="Au" ><input type="radio"  name="chooseone" ></td>
-              <td id="td6" class="Au" ><input type="radio"  name="chooseone" ></td>
-              <td id="td7" class="Au" ><input type="radio"  name="chooseone"  ></td>
-              <td id="td8" class="Au" ><input type="radio"  name="chooseone" ></td>
-              <td id="td9" class="Au"> <input type="radio"   name="chooseone"  ></td>
-              <td id="td10" class="Au" ><input type="radio"  name="chooseone"  ></td>
-              <td id="td11" class="Au" ><input type="radio"  name="chooseone" ></td>
+            <tr class="full"  *ngFor= "let catalogues of resultTables ">
+              <td>{{catalogues.catName}}</td>
               
-              <td>{{resultTable.up_description}}</td>
+            
+              <td>{{catalogues.subCatName}}</td>
+              <td>{{catalogues.down_description}}</td>
+              <td id="td1" class="Au" ><input  type="radio" name="chooseone" required  ></td>
+              <td id="td2" class="Au" ><input  type="radio" name="chooseone" required  ></td>
+              <td id="td3" class="Au" ><input  type="radio" name="chooseone" required  ></td>
+              <td id="td4" class="Au" ><input  type="radio" name="chooseone" required  ></td>
+              <td id="td5" style="background-color: white" class="Au" ><input  type="radio" name="chooseone" required  ></td>
+              <td id="td6" style="background-color: white" class="Au" ><input  type="radio" name="chooseone" required  ></td>
+              <td id="td7" style="background-color: white" class="Au" ><input  type="radio" name="chooseone" required  ></td>
+              <td id="td8" class="Au" ><input  type="radio" name="chooseone" required  ></td>
+              <td id="td9" class="Au" ><input  type="radio" name="chooseone" required  ></td>
+              <td id="td10" class="Au" ><input  type="radio" name="chooseone" required  ></td>
+              <td id="td11" class="Au" ><input  type="radio" name="chooseone" required  ></td>
+              <td>{{catalogues.up_description}}</td>
+             
             </tr>
            
             <tr>
@@ -192,7 +196,7 @@
               <td></td>
             </tr>
 
-          
+            
             
           </tbody>
         </table>
@@ -218,10 +222,15 @@
         }
         $class=elem.className;
         for($i=0;$i<11;$i++){
-          document.getElementsByClassName($class)[$i].style.backgroundColor="rgb(218,210,210)";
-          document.getElementsByClassName($class)[$i].style.backgroundImage="url('')";
+          if($i<4 || $i>6){
+            document.getElementsByClassName($class)[$i].style.backgroundColor="rgb(218,210,210)";
+            document.getElementsByClassName($class)[$i].style.backgroundImage="url('')";
+          }else{
+            document.getElementsByClassName($class)[$i].style.backgroundColor="rgb(255,255,255)";
+            document.getElementsByClassName($class)[$i].style.backgroundImage="url('')";
+          }
         }
-        elem.style.backgroundImage="url('img/done.png')";
+        elem.style.backgroundImage="url('assets/img/done.png')";
         elem.style.backgroundRepeat="no-repeat";
         elem.style.backgroundPositionY="center";
         elem.style.backgroundPositionX="center";

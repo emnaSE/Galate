@@ -111,4 +111,42 @@ router.get('/getEtalonnageDetails', urlencodedParser, (req, res, next) =>
         })
         .catch(next));
 
+router.get('/getAllCatrogiesByTestMember', urlencodedParser, (req, res, next) =>
+calculController.getCategoryNameByMemberIdAndTestId(req)
+.then(categories => {
+    return adminController.getAllSubcategoriesByCategories(categories)
+})
+.then(response=>{
+    res.payload.categories=response;
+    return res.payload;
+})
+.then(response=>{
+    console.log(response);
+    res.send(response);
+})
+.catch(next));
+
+router.get('/getSubcategoriesByCategory', urlencodedParser, (req, res, next) =>
+    adminController.getCategoryById(req)
+.then(category => {
+    if(category===undefined){
+        res.payload.leave=true;
+        return;
+    }
+    res.payload.categoryName=JSON.parse(category).name;
+    req.query.idCategory=JSON.parse(category).id;
+    return adminController.getAllSubcategoriesByCategory(req);
+})
+.then(subcategories=>{
+    if(res.payload.leave===true){
+        return;
+    }
+    res.payload.subcategories=JSON.parse(subcategories);
+    return  res.payload;
+})
+.then(resonse=>{
+    res.send(res.payload);
+})
+.catch(next));
+
 module.exports = router;
