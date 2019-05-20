@@ -12,7 +12,7 @@ import {NgMultiSelectDropDownModule} from "ng-multiselect-dropdown";
 import {EcoleModule} from "./ecole/ecole.module";
 import {ClassModule} from "./class/class.module";
 import {EtalonnageModule} from "./etalonnage/etalonnage.module";
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {QuestionModule} from "./question/question.module";
 
 const PAGES_COMPONENTS = [
   PagesComponent,
@@ -23,14 +23,13 @@ const PAGES_COMPONENTS = [
     PagesRoutingModule,
     ThemeModule,
     DashboardModule,
-    ReactiveFormsModule,
-    FormsModule,
     MiscellaneousModule,
     TestModule,
     SubcategorieModule,
     EcoleModule,
     ClassModule,
     EtalonnageModule,
+    QuestionModule,
     NgMultiSelectDropDownModule.forRoot()
 
   ],

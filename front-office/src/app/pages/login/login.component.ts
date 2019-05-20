@@ -11,14 +11,15 @@ import { LoginService } from './login.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-    public router: Router;
+
     public form: FormGroup;
     public pseudo: AbstractControl;
     public password: AbstractControl;
+    public bool=false;
 
     login: Login = new Login();
     submitted = false;
-  constructor(router: Router, fb: FormBuilder, private loginService: LoginService) {
+  constructor(private router: Router, fb: FormBuilder, private loginService: LoginService) {
   
   
     this.form = fb.group({
@@ -35,7 +36,13 @@ export class LoginComponent implements OnInit {
 
   signIn() {
     this.loginService.login(this.login)
-        .subscribe(data => console.log(data), error => console.log(error));
+        .subscribe(data =>{
+          var status=JSON.parse(JSON.stringify(data)).status;
+          console.log('status='+JSON.parse(JSON.stringify(data)).status);
+          if(status===200){
+            this.router.navigate(['/test']);
+          }
+        } , error => console.log('err'+error));
     this.login = new Login();
   }
 
@@ -43,7 +50,6 @@ export class LoginComponent implements OnInit {
     if (this.form.valid) {
       this.submitted = true;
       this.signIn();
-      this.router.navigate(['pages/test']);
     }
   }
 

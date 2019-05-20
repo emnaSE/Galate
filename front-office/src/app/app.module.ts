@@ -18,6 +18,14 @@ import { RegisterService } from './pages/register/register.service';
 import { HttpClient } from 'selenium-webdriver/http';
 import { HttpClientModule } from '@angular/common/http';
 
+import { TestService } from './pages/test/test.service';
+import { MatRadioModule, MatInputModule } from '@angular/material';
+import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown';
+import { StartTestService } from './pages/startTest/startTest.service';
+import { MatButtonModule, MatMenuModule, MatToolbarModule, MatIconModule, MatCardModule} from '@angular/material';
+import {MatDialogModule} from '@angular/material';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,16 +41,25 @@ import { HttpClientModule } from '@angular/common/http';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    MatRadioModule,
+    MatInputModule,
     FormsModule,
     ReactiveFormsModule,
+    AngularMultiSelectModule,
     HttpClientModule,
+    MatDialogModule,
     TooltipModule.forRoot()
   ],
-<<<<<<< HEAD
-  providers: [LoginService],
-=======
-  providers: [RegisterService],
->>>>>>> origin/ameni_raddaoui
+ exports: [
+    MatButtonModule,
+    MatMenuModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatCardModule
+  ],
+  providers: [RegisterService, LoginService, TestService , StartTestService],
+
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }

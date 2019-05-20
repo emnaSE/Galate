@@ -17,7 +17,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {AuthComponent} from "./pages/auth/auth.component";
 import {RegistreComponent} from "./pages/auth/registre/registre.component";
 import {AuthModule} from "./pages/auth/auth.module";
-import {ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [AppComponent],
@@ -27,9 +26,6 @@ import {ReactiveFormsModule} from "@angular/forms";
     HttpClientModule,
     AppRoutingModule,
     AuthModule,
-    ReactiveFormsModule,
-
-
     NgbModule.forRoot(),
     ThemeModule.forRoot(),
     CoreModule.forRoot(),
