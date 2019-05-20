@@ -2,6 +2,8 @@
 
 const router = require('express').Router();
 const memberController=require('../controller/memberController');
+const adminController=require('../controller/adminController');
+
 var options = {
     inflate: true,
     limit: '100kb',
@@ -189,9 +191,21 @@ memberController.getRawBody(req)
 
 
 router.get('/getTestDetails',urlencodedParser, (req, res, next) => 
-memberController.getTestDetails(req)
-.then(tests=>{
-  res.send(tests);
+
+adminController.getAllSubcategoriesByIdTest(req)
+//memberController.getTestDetails(req)
+.then(subcategories=>{  
+    //console.log(subcategories);
+  res.payload.subcategory=subcategories;
+  //console.log(res.payload); // res.payload.tests=tests;
+  return adminController.getAllQuestionsBySubcategories(req,subcategories,res);
+   //return res.payload;
+  //res.send(tests);
+})
+.then(response=>{
+ //   res.payload.
+
+ return response;
 })
 .catch(next));
 

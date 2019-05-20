@@ -4,6 +4,8 @@ const _publics = {};
 var config = require('../config');
 var getRawBody = require('raw-body');
 var con=config.con;
+const request = require('request');
+var url=`http://localhost:3002`;
 
 _publics.getAllCategories = (req) => { 
   
@@ -320,6 +322,18 @@ _publics.getAllSubcategories = (req) => {
                });
    });    
 };
+
+_publics.getAllSubcategoriesByIdTest = (req) => { 
+    var idtest=req.query.id_test;
+    return new Promise((resolve, reject) => {  
+             var sql = "select name as subcategory,s.id FROM subcategory s left join test_subcategory ts on (s.id=ts.id_subcategory) where ts.id_test=?"; 
+           
+                 con.query(sql,[idtest], function (err, result) {
+                 if (err) reject(err);
+                 return resolve(JSON.stringify(result));
+                 });
+     });    
+  };
 _publics.getAllSubcategoriesByCategory = (req) => { 
   var idCategory=req.query.idCategory;
   return new Promise((resolve, reject) => {  
@@ -501,6 +515,41 @@ _publics.getAllQuestion = (req) => {
    });    
 };
 
+_publics.getAllQuestionsByIdSubcategory = (req) => { 
+ var subcategoryId=req.query.id_subcategory;
+    return new Promise((resolve, reject) => {  
+             var sql = "select * FROM question q left join test_subcategory ts on (ts.id=q.id_test_subcategory) where ts.id_subcategory=?"; 
+           
+                 con.query(sql,[subcategoryId], function (err, result) {
+                 if (err) reject(err);
+                 return resolve(JSON.stringify(result));
+                 });
+     });    
+  };
+_publics.getAllQuestionsBySubcategories = (req,subcategories,res) => { 
+    let promises = []
+    for(var i=0;i<JSON.parse(subcategories).length;i++){
+      var id_subcategory=JSON.parse(subcategories)[i].id;
+      res.id=id_subcategory;
+      res.i=i;
+        promises.push( new Promise((resolve, reject) => request.get({
+           
+            
+            url :url+`/admin/getAllQuestionsByIdSubcategory?id_subcategory=${JSON.parse(subcategories)[i].id}`,
+            method: 'GET',
+            gzip: true,
+          }, (e, r, b) => {
+            if (!e && r.statusCode == 200) {
+      
+              return resolve(b);
+            } else {
+              console.log('Error:' + reject(e));
+            }
+          })));
+    }
+    return Promise.all(promises)
+  };
+  
 _publics.getQuestionById = (req) => { 
   var id=req.query.id;
   return new Promise((resolve, reject) => {  
@@ -587,6 +636,30 @@ _publics.getAllAnswerByQuestion = (req) => {
    });    
 };
 
+
+_publics.getAllAnswersByQuestions = (req,questions,res) => {
+    let promises = []
+  for(var i=0;i<JSON.parse(questions).length;i++){
+    var id_question=JSON.parse(questions)[i].id;
+    res.id=id_question;
+    res.i=i;
+      promises.push( new Promise((resolve, reject) => request.get({
+         
+          
+          url :url+`/admin/getAllAnswerByQuestionId?id_question=${JSON.parse(questions)[i].id}`,
+          method: 'GET',
+          gzip: true,
+        }, (e, r, b) => {
+          if (!e && r.statusCode == 200) {
+    
+            return resolve(b);
+          } else {
+            console.log('Error:' + reject(e));
+          }
+        })));
+  }
+  return Promise.all(promises)
+};
 _publics.getAnswerById = (req) => { 
   var id=req.query.id;
   return new Promise((resolve, reject) => {  
