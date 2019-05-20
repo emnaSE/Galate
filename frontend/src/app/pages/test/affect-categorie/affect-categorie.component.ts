@@ -40,16 +40,16 @@ export class AffectCategorieComponent implements OnInit {
         })
       }
     )
-
+//changer service getById par service get affectation test by id
     this.id=this.activateRoute.snapshot.params['id'];
     if (this.id){
       this.testService.getById(this.id).subscribe(
-        data=>{
-          this.addForm.patchValue(data);
+        (value:any)=>{
+          this.addForm.patchValue(value);
           this.selectedItems = this.dropdownList.filter(
             c =>{
               console.log("message");
-              return c.id == data.categories;
+              return c.id == value.categories;
             })
         },err=>{
           console.log(err)

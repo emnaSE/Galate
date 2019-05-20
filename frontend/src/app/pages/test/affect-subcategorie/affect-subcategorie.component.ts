@@ -5,7 +5,7 @@ import {Categorie} from "../../dashboard/categorie.model";
 import {SubcategorieService} from "../../subcategorie/subcategorie.service";
 import {SousCategorie} from "../../subcategorie/subcategorie.model";
 import {TestService} from "../test.service";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'affect-subcategorie',
@@ -20,6 +20,7 @@ export class AffectSubcategorieComponent implements OnInit {
   settings = {};
   addForm:FormGroup;
   submitted = false;
+  id:number;
 
 
 
@@ -27,7 +28,11 @@ export class AffectSubcategorieComponent implements OnInit {
               private formBuilder:FormBuilder,
               private testService:TestService,
               private router:Router,
+              private activateRoute :ActivatedRoute,
+
               ) {
+
+    this.id=this.activateRoute.snapshot.params['id'];
 
 
 
@@ -61,6 +66,22 @@ export class AffectSubcategorieComponent implements OnInit {
         })
       }
     )
+    this.testService.getAllSubcategoriesByTestId(this.id).subscribe(
+      (value:any)=>{
+        this.addForm.patchValue(value);
+        this.selectedItems=this.dropdownList.filter(
+          c=>{
+            return c.id==value.scat;
+
+          },err=>{
+            console.log(err);
+          }
+        )
+      }
+    )
+
+
+
   }
 
 
@@ -68,9 +89,23 @@ export class AffectSubcategorieComponent implements OnInit {
     return this.addForm.controls;
   }
 
-onSubmit(){
+ affecter(){
+    let data={... this.addForm.value}
+    data.scat=data.scat.map(c=>{
+      return c.id;
+    })
+   if (this.addForm.valid){
+     this.testService.affectCategorie(this.id,data).subscribe(
+       data=>{
+         alert ("add avec succes");
+         this.router.navigate(["pages/test"])
+       },err=>{
+         console.log(err)
+       }
+     )
+   }
 
-}
+ }
 
 
   onItemSelect(item: any) {

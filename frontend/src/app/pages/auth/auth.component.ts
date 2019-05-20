@@ -20,7 +20,6 @@ err:number;
               private authService:AuthService
               ) {
 
-    console.log("test")
   }
 
   ngOnInit() {

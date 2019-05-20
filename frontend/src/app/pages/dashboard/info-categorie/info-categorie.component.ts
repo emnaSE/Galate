@@ -9,8 +9,9 @@ import {ActivatedRoute} from "@angular/router";
   styleUrls: ['./info-categorie.component.scss']
 })
 export class InfoCategorieComponent implements OnInit {
-   private sousCategories:SousCategorie[]
-  id:number
+  sousCategories:SousCategorie[]
+  id:number;
+  pageActuel: number =1;
   constructor(private categorieService:CategorieService,
               private activateRouter:ActivatedRoute) { }
 

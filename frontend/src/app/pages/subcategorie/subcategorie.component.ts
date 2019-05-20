@@ -13,7 +13,7 @@ import {Categorie} from "../dashboard/categorie.model";
 })
 export class SubcategorieComponent  implements OnInit{
   pageActuel: number =1;
-  private sousCategories:SousCategorie[]
+  sousCategories:SousCategorie[]
 
 
 

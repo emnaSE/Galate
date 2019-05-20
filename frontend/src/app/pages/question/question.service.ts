@@ -34,7 +34,9 @@ export class QuestionService {
   updateById(id:number,question:any):Observable<any>{
     return this.http.post<any>(this.url+'updateQuestion?id_question='+id,question);
   }
-
+  getQuestionById(id:number):Observable<Question>{
+    return this.http.get<Question>(this.url+"getQuestionById?id="+id);
+  }
 
 }
 

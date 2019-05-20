@@ -6,6 +6,7 @@ import {Injectable} from "@angular/core";
 import { HttpClient, HttpRequest } from '@angular/common/http';
 import {API_URL} from "../../app.constant";
 import {Categorie} from "../dashboard/categorie.model";
+import {text} from "@angular/core/src/render3";
 
 
 
@@ -27,8 +28,8 @@ export class TestService {
   affectCategorie(id:number,test:Test):Observable<any>{
     return this.http.post<any>(this.url+"affectCategoriesToTest?testId="+id,test);
   }
-  addTest(test:Test):Observable<Test[]>{
-    return this.http.post<Test[]>(this.url+"createTest",test);
+  addTest(test:Object):Observable<Object>{
+    return this.http.post(this.url+"createTest",JSON.stringify(test),{responseType: 'text'});
   }
   getById(id:number):Observable<any>{
     return this.http.get<any>(this.url+"getTestById?id="+id);
@@ -44,8 +45,15 @@ export class TestService {
   deleteTest(id:number):Observable<string>{
     return this.http.get<string>(this.url+"deleteTestById?id="+id);
   }
-  updateTest(id:number,test:any):Observable<any>{
-    return this.http.post<any>(this.url+"updateTestById?id="+id,test);
+  updateTest(id:number,test:Object):Observable<Object>{
+    return this.http.post(this.url+"updateTestById?id="+id,JSON.stringify(test),{responseType: 'text'});
+  }
+  getAllSubcategoriesByTestId(id:number):Observable<any>{
+    return this.http.get<any>(this.url+"getAllSubcategoriesByTestId?id_test="+id);
+  }
+
+  affectSubCategorie(id:number,test:Test):Observable<any>{
+    return this.http.post<any>(this.url+"affectSubCategoriesToTest?testId="+id,test);
   }
 }
 

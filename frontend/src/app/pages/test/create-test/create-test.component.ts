@@ -10,6 +10,10 @@ import {TestService} from "../test.service";
 })
 export class CreateTestComponent implements OnInit {
 
+  dateActivation:Date;
+  dateFin:Date;
+  date_ereur:number;
+  p_error:number;
   id:number;
   submitted = false;
   editMode=false;
@@ -27,9 +31,6 @@ export class CreateTestComponent implements OnInit {
 
     this.addForm=this.formBuilder.group({
       name: new FormControl('', [Validators.required]),
-      down_description: [[], Validators.required],
-      up_description: [[], Validators.required],
-      id_category: [[], Validators.required],
       activation_date: [[], Validators.required],
       expiration_date: [[], Validators.required],
       password: [[], Validators.required],
@@ -50,7 +51,9 @@ export class CreateTestComponent implements OnInit {
 
   onSubmit(){
     this.submitted=true;
+
     if(this.id){
+
       if(this.addForm.valid){
         this.testService.updateTest(this.id,this.addForm.value).subscribe(
           data=>{

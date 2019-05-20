@@ -27,10 +27,11 @@ export class CreateQuestionComponent implements OnInit {
               private formBuilder:FormBuilder,
               private activateRouter:ActivatedRoute,
               private questionService:QuestionService,
-              private sousCategorieService:SubcategorieService){
+              private sousCategorieService:SubcategorieService
+             ){
 
 
-
+  this.id=this.activateRouter.snapshot.params['id'];
 
 
   }
@@ -43,6 +44,30 @@ export class CreateQuestionComponent implements OnInit {
       id_test_subcategory: [[], Validators.required],
 
     });
+
+
+
+
+
+    this.sousCategorieService.getAllSousCategorie().subscribe(
+      data=>{
+        this.dropdownList =data.map((sous:SousCategorie)=>{
+          return{id:sous.id, itemName:sous.name};
+        })
+      }
+    )
+
+    this.questionService.getQuestionById(this.id).subscribe(
+      (data:any)=>{
+        this.addForm.patchValue(data);
+        this.selectedItems=this.dropdownList.filter(
+          c=>{
+            return c.id==data.id_test_subcategory;
+          }
+        )
+      }
+    )
+
     this.dropdownSettings = {
       singleSelection: true,
       idField: 'item_id',
@@ -54,26 +79,7 @@ export class CreateQuestionComponent implements OnInit {
       enableSearchFilter:true
     };
 
-    this.sousCategorieService.getAllSousCategorie().subscribe(
-      data=>{
-        this.dropdownList =data.map((sous:SousCategorie)=>{
-          return{id:sous.id, itemName:sous.name};
-        })
-      }
-    )
 
-
-
-    /*
-
-    this.sousCategorie.getAllSousCategorie().subscribe(
-      data=>{
-        this.dropdownList =data.map((scat:SousCategorie)=>{
-          return{id:scat.id, itemName:scat.name};
-        })
-      }
-    )
-     */
 
 
   }

@@ -11,7 +11,7 @@ import {Categorie} from "./categorie.model";
 })
 export class DashboardComponent implements OnInit{
 
-  private categories:Categorie[]
+   categories:Categorie[]
   pageActuel: number =1;
 
 
