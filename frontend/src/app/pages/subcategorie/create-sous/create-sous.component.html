@@ -7,8 +7,7 @@
 
   <nb-card-body>
     <form [formGroup]="addForm" (ngSubmit)="onSubmit()">
-
-      <div  *ngIf="!editMode"  class="form-group">
+      <div class="form-group">
         <label for="name">Categorie</label>
         <angular2-multiselect [data]="dropdownList"
                               [(ngModel)]="selectedItems"

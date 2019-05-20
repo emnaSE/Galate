@@ -26,7 +26,7 @@ err:number;
   ngOnInit() {
 
     this.loginForm=this.fromBuilder.group({
-      username: ['', Validators.required],
+      pseudo: ['', Validators.required],
       password: ['', Validators.required]
 
     })
@@ -43,7 +43,7 @@ err:number;
   onSubmit(){
     this.submitted=true;
 
-    this.authService.Login(this.formValid.username.value,this.formValid.password.value).pipe(first()).subscribe(
+    this.authService.Login(this.formValid.pseudo.value,this.formValid.password.value).pipe(first()).subscribe(
       data=>{
         console.log("test");
         this.router.navigate(['pages/test'])

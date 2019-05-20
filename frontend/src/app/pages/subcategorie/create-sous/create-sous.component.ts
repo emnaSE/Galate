@@ -42,6 +42,15 @@ export class CreateSousComponent implements OnInit {
 
     });
 
+    this.categorieService.getAllCategorie().subscribe(
+      data=>{
+        this.dropdownList =data.map((cat:Categorie)=>{
+          return{id:cat.id, itemName:cat.name};
+
+        })
+      }
+    )
+
 
     if(this.id){
       this.editMode=true;
@@ -51,10 +60,12 @@ export class CreateSousComponent implements OnInit {
          // let data={...this.addForm.value}
           console.log(value);
           console.log(this.selectedItems)
-          this.selectedItems=this.subcategories.map(cat=>{
-            return {id:cat.id_category,itemName: cat.name}
-
-          })
+          console.log(this.dropdownList)
+          this.selectedItems = this.dropdownList.filter(
+            c =>{
+              console.log("message");
+             return c.id == value.id_category;
+               })
         },err=>{
           console.log(err)
         }
@@ -73,14 +84,6 @@ export class CreateSousComponent implements OnInit {
     };
 
 
-    this.categorieService.getAllCategorie().subscribe(
-      data=>{
-        this.dropdownList =data.map((cat:Categorie)=>{
-          return{id:cat.id, itemName:cat.name};
-
-        })
-      }
-    )
 
   }
 

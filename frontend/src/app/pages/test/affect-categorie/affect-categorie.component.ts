@@ -33,11 +33,26 @@ export class AffectCategorieComponent implements OnInit {
       categories: [[], Validators.required]
     })
 
+    this.categorieService.getAllCategorie().subscribe(
+      data=>{
+        this.dropdownList =data.map((cat:Categorie)=>{
+          return{id:cat.id, itemName:cat.name};
+        })
+      }
+    )
+
     this.id=this.activateRoute.snapshot.params['id'];
     if (this.id){
       this.testService.getById(this.id).subscribe(
         data=>{
           this.addForm.patchValue(data);
+          this.selectedItems = this.dropdownList.filter(
+            c =>{
+              console.log("message");
+              return c.id == data.categories;
+            })
+        },err=>{
+          console.log(err)
         }
       )
     }
@@ -56,13 +71,7 @@ export class AffectCategorieComponent implements OnInit {
       classes: "myclass custom-class-example",
 
     };
-    this.categorieService.getAllCategorie().subscribe(
-      data=>{
-        this.dropdownList =data.map((cat:Categorie)=>{
-          return{id:cat.id, itemName:cat.name};
-        })
-      }
-    )
+
  }
     affecter(){
       let data={... this.addForm.value};

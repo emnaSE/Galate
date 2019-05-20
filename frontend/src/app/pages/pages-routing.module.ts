@@ -19,6 +19,7 @@ import {CreateClassComponent} from "./class/create-class/create-class.component"
 import {QuestionComponent} from "./question/question.component";
 import {CreateQuestionComponent} from "./question/create-question/create-question.component";
 import {InfoCategorieComponent} from "./dashboard/info-categorie/info-categorie.component";
+import {AuthGuard} from "./auth/auth.guard";
 
 const routes: Routes = [{
   path: '',
@@ -34,89 +35,110 @@ const routes: Routes = [{
     },
     {
       path: 'test/create',
-      component:CreateTestComponent ,
+      component:CreateTestComponent,
+      //component:CreateTestComponent,canActivate: [AuthGuard],
     },
     {
       path: 'sous',
+      //component: SubcategorieComponent,canActivate: [AuthGuard],
       component: SubcategorieComponent,
     },
     {
       path: 'ecole',
+     // component: EcoleComponent,canActivate: [AuthGuard],
       component: EcoleComponent,
     },
     {
       path: 'sous/create',
       component: CreateSousComponent,
+      //component: CreateSousComponent,canActivate: [AuthGuard],
     },
     {
       path: 'sous/:id/modifier',
       component: CreateSousComponent,
+      //component: CreateSousComponent,canActivate: [AuthGuard],
     },
     {
       path:"categorie/create",
       component: CreateCategorieComponent,
+      //component: CreateCategorieComponent,canActivate: [AuthGuard],
     },
     {
       path:"ecole/create",
       component: CreateEcoleComponent,
+      //component: CreateEcoleComponent,canActivate: [AuthGuard],
     },
     {
       path:"categorie/:id/modifier",
+      //component: CreateCategorieComponent,canActivate: [AuthGuard],
       component: CreateCategorieComponent,
     },
     {
       path:"categorie/:id/info",
+      //component: InfoCategorieComponent,canActivate: [AuthGuard],
       component: InfoCategorieComponent,
     },
     {
       path:"etalonnage",
+      //component: EtalonnageComponent,canActivate: [AuthGuard],
       component: EtalonnageComponent,
     },
     {
       path: 'etalonnage/create',
       component:CreateEtalonnageComponent ,
+      //component:CreateEtalonnageComponent ,canActivate: [AuthGuard],
     },
     {
       path:"class",
+      //component: ClassComponent,canActivate: [AuthGuard],
       component: ClassComponent,
     },
     {
       path:"question",
+      //component: QuestionComponent,canActivate: [AuthGuard],
       component: QuestionComponent,
     },
     {
       path:"question/create",
       component: CreateQuestionComponent,
+      //component: CreateQuestionComponent,canActivate: [AuthGuard],
     },
 
     {
       path:"question/:id/modifier",
+      //component: CreateQuestionComponent,canActivate: [AuthGuard],
       component: CreateQuestionComponent,
     },
     {
       path:"class/:id/modifier",
+      //component: CreateClassComponent,canActivate: [AuthGuard],
       component: CreateClassComponent,
     },
 
     {
       path:"class/create",
+      //component: CreateClassComponent,canActivate: [AuthGuard],
       component: CreateClassComponent,
     },
     {
       path:"ecole/:id/modifier",
+      //component: CreateEcoleComponent,canActivate: [AuthGuard],
       component: CreateEcoleComponent,
     },
     {
       path: 'test/:id/affectation',
       component:AffectCategorieComponent,
+      //component:AffectCategorieComponent,canActivate: [AuthGuard],
     },
     {
       path: 'test/:id/affectationsub',
       component:AffectSubcategorieComponent,
+      //component:AffectSubcategorieComponent,canActivate: [AuthGuard],
     },
     {
       path: 'test/:id/modifier',
       component:CreateTestComponent,
+      //component:CreateTestComponent,canActivate: [AuthGuard],
     },
     {
       path: '',
