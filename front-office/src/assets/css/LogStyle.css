@@ -56,7 +56,7 @@ list-type-ulli {
   font-family: 'Montserrat';
   font-style: italic;
   font-weight: 900;
-  src: url("assets/fonts/montserrat/montserrat-v12-latin-900.ttf"), url("assets/fonts/montserrat/montserrat-v12-latin-900.eot") format("embedded-opentype"), url("assets/fonts/montserrat/montserrat-v12-latin-900.svg") format("woff2"), url("assets/fonts/montserrat/montserrat-v12-latin-900.woff") format("woff"), url("assets/fonts/montserrat/montserrat-v12-latin-900.woff2") format("truetype"); }
+  src: url("v/fonts/montserrat/montserrat-v12-latin-900.ttf"), url("assets/fonts/montserrat/montserrat-v12-latin-900.eot") format("embedded-opentype"), url("assets/fonts/montserrat/montserrat-v12-latin-900.svg") format("woff2"), url("assets/fonts/montserrat/montserrat-v12-latin-900.woff") format("woff"), url("assets/fonts/montserrat/montserrat-v12-latin-900.woff2") format("truetype"); }
 a:focus, a:active {
   text-decoration: none;
   outline: none;

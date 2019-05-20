@@ -5,7 +5,8 @@ var config = require('../config');
 var getRawBody = require('raw-body');
 var con=config.con;
 const request = require('request');
-var url=`http://localhost:3002`;
+var url=`http://localhost:`+config.port;
+const request = require('request');
 
 _publics.getAllCategories = (req) => { 
   
@@ -1163,7 +1164,24 @@ _publics.getNotEmptyQuestions = (questions) => {
 
 
 
+_publics.getAllSubcategoriesByCategories = (categories) => { 
+  let promises = [];
+  for (var i=0;i<JSON.parse(categories).length;i++) {
+    promises.push( new Promise((resolve, reject) => request.get({
+      url :url+`/calcul/getSubcategoriesByCategory?id=${JSON.parse(categories)[i].category_id}`,
+      method: 'GET',
+      gzip: true,
+    }, (e, r, b) => {
+      if (!e && r.statusCode == 200) {
+        return resolve(JSON.parse(b));
+      } else {
+        reject(e);
+      }
+    })));
+  }
+  return Promise.all(promises)      
 
+};
 
 
 

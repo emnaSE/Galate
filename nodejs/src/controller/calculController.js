@@ -4,7 +4,6 @@ const _publics = {};
 var config = require('../config');
 var getRawBody = require('raw-body');
 var con=config.con;
-var url=`http://localhost:3000`;
 //etalonnage
 var memberController=require('../controller/memberController');
 _publics.createEtalonnage = (etalonnage) => { 
@@ -215,6 +214,22 @@ _publics.getEtalonnageDetails = (req) => {
                });
    });    
 };
+
+
+_publics.getSubCategoryName = (req) => { 
+  var id_test=req.query.id_test;
+  var id_member=req.query.id_member;
+  var id_category=req.query.id_category;
+  return new Promise((resolve, reject) => {  
+           var sql = "select sc.name as subCatName from manuel_answer ma left join subcategory sc on(sc.id=ma.id_subcategory) left join category c on (c.id=sc.id_category)  where ma.id_test=? and ma.id_member=?"; 
+         
+               con.query(sql,[id_test,id_member,id_category], function (err, result) {
+               if (err) reject(err);
+               return resolve(result);
+               });
+   });    
+};
+
 
 
  module.exports = _publics;
