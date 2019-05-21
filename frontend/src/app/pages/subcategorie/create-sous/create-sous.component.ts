@@ -57,10 +57,6 @@ export class CreateSousComponent implements OnInit {
       this.subCategorieService.getSousCategorieById(this.id).subscribe(
         (value:any)=>{
           this.addForm.patchValue(value);
-         // let data={...this.addForm.value}
-          console.log(value);
-          console.log(this.selectedItems)
-          console.log(this.dropdownList)
           this.selectedItems = this.dropdownList.filter(
             c =>{
               console.log("message");

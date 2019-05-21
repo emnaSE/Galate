@@ -2,18 +2,20 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {FormBuilder,AbstractControl, FormControl, FormGroup, Validators} from "@angular/forms";
 import {SousCategorie} from "../../subcategorie/subcategorie.model";
-import {QuestionService} from "../question.service";
+import {AnswerService} from "../answer.service";
 import {Ecole} from "../../ecole/ecole.model";
 import {SubcategorieService} from "../../subcategorie/subcategorie.service";
+import {QuestionService} from "../../question/question.service";
+import {Question} from "../../question/question.model";
 
 
 
 @Component({
   selector: 'create-commercial',
-  templateUrl: './create-question.component.html',
-  styleUrls: ['./create-question.component.scss']
+  templateUrl: './create-answer.component.html',
+  styleUrls: ['./create-answer.component.scss']
 })
-export class CreateQuestionComponent implements OnInit {
+export class CreateAnswerComponent implements OnInit {
   dropdownList = [];
   sousCategorie:SousCategorie[];
   id:number;
@@ -27,7 +29,8 @@ export class CreateQuestionComponent implements OnInit {
               private formBuilder:FormBuilder,
               private activateRouter:ActivatedRoute,
               private questionService:QuestionService,
-              private sousCategorieService:SubcategorieService
+              private answerService:AnswerService
+
              ){
 
 
@@ -39,34 +42,24 @@ export class CreateQuestionComponent implements OnInit {
   ngOnInit() {
     this.addForm=this.formBuilder.group({
       name: new FormControl('', [Validators.required]),
-      wording: [[], Validators.required],
+      ordre: [[], Validators.required],
       value: [[], Validators.required],
-      id_test_subcategory: [[], Validators.required],
+      id_question: [[], Validators.required],
 
     });
 
 
 
-
-
-    this.sousCategorieService.getAllSousCategorie().subscribe(
+    this.questionService.getAllQuestion().subscribe(
       data=>{
-        this.dropdownList =data.map((sous:SousCategorie)=>{
-          return{id:sous.id, itemName:sous.name};
+          this.dropdownList=data.map((que:Question)=>{
+          return{id:que.id,itemName:que.name}
         })
       }
     )
 
-    this.questionService.getQuestionById(this.id).subscribe(
-      (data:any)=>{
-        this.addForm.patchValue(data);
-        this.selectedItems=this.dropdownList.filter(
-          c=>{
-            return c.id==data.id_test_subcategory;
-          }
-        )
-      }
-    )
+
+   //par id if update methode
 
     this.dropdownSettings = {
       singleSelection: true,
@@ -89,34 +82,39 @@ export class CreateQuestionComponent implements OnInit {
     return this.addForm.controls;
   }
   onSubmit(){
-    this.submitted = true;
 
-    let data ={... this.addForm.value}
-    data.id_test_subcategory = data.id_test_subcategory.map(
-      s=>{
-      return s.id;
-    })
-    if(this.id){
+    let data={... this.addForm.value}
+    data.id_question=data.id_question.map(
+      c=>{
+        return c.id
+      }
+    )
+    if (this.id){
       if(this.addForm.valid){
-        this.questionService.updateById(this.id,data).subscribe(
+        this.answerService.updateAnswer(this.id,data).subscribe(
           data=>{
-            alert("update avec succes")
+            alert("add avec succces");
+            this.router.navigate(['pages/question']);
           },err=>{
             console.log(err);
           }
         )
       }
     }else{
-      if ( this.addForm.valid){
-        this.questionService.addQuestion(data).subscribe(
+      if(this.addForm.valid){
+        this.answerService.addAnswer(data).subscribe(
           data=>{
-            alert("ajouter avec succes")
+            alert("addavec succes");
+
+            this.router.navigate(['pages/question']);
+
           },err=>{
             console.log(err);
           }
         )
       }
     }
+
 
   }
 

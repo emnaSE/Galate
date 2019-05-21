@@ -70,4 +70,7 @@ export class QuestionComponent  implements OnInit{
         }
       )}
   }
+  info(question:Question){
+      this.router.navigate(['pages/answer/',question.id,'question'])
+  }
 }

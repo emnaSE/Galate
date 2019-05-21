@@ -2,7 +2,7 @@
 
 <nb-card>
   <nb-card-header>
-    Listes des question
+    Listes des answers
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
 
   </nb-card-header>
@@ -15,28 +15,23 @@
       <tr role="row">
         <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="id: activate to sort column descending">ID</th>
         <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="name: activate to sort column ascending">name</th>
-        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="wording: activate to sort column ascending">wording</th>
+        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="wording: activate to sort column ascending">ordre</th>
         <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="value: activate to sort column ascending">value</th>
         <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="id_test_subcategory: activate to sort column ascending">sous categorie</th>
         <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="action: activate to sort column ascending">action</th>
-        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="anser: activate to sort column ascending">Answers</th>
 
           </thead>
       <tbody>
-      <tr *ngFor="let question of questions | paginate: { itemsPerPage: 7, currentPage: pageActuel }">
-        <td>{{question.id}}</td>
-        <td>{{question.name}}</td>
-        <td>{{question.wording}}</td>
-        <td>{{question.value}}</td>
-        <td>{{question.id_test_subcategory}}</td>
+      <tr *ngFor="let answer of answers | paginate: { itemsPerPage: 7, currentPage: pageActuel }">
+        <td >{{answer.id}}</td>
+        <td>{{answer.name}}</td>
+        <td>{{answer.ordre}}</td>
+        <td>{{answer.value}}</td>
+        <td>{{answer.id_question}}</td>
 
         <td>
-          <i   style="cursor: pointer; color: #69737f; display: inline-block;margin-right: 20px !important;" class="fas fa-trash fa-2x" (click)="deleteByid(question)"></i>
-          <i class="fas fa-info fa-2x" style="color: #298a66; cursor: pointer;color: #298a66;" (click)="update(question)"></i>
-        </td>
-        <td>
-
-          <i class="fas fa-info fa-2x" style="color: #298a66; cursor: pointer;color: #298a66;" (click)="info(question)"></i>
+          <i   style="cursor: pointer; color: #69737f; display: inline-block;margin-right: 20px !important;" class="fas fa-trash fa-2x" (click)="deleteByid(answer)"></i>
+          <i class="fas fa-info fa-2x" style="color: #298a66; cursor: pointer;color: #298a66;" (click)="update(answer)"></i>
         </td>
 
 

@@ -28,6 +28,13 @@ export class TestService {
   affectCategorie(id:number,test:Test):Observable<any>{
     return this.http.post<any>(this.url+"affectCategoriesToTest?testId="+id,test);
   }
+
+
+  affectSubCategorie(id:number,test:Test):Observable<any>{
+    return this.http.post<any>(this.url+"affectSubcategoriesToTest?testId="+id,test);
+  }
+
+
   addTest(test:Object):Observable<Object>{
     return this.http.post(this.url+"createTest",JSON.stringify(test),{responseType: 'text'});
   }
@@ -52,8 +59,13 @@ export class TestService {
     return this.http.get<any>(this.url+"getAllSubcategoriesByTestId?id_test="+id);
   }
 
-  affectSubCategorie(id:number,test:Test):Observable<any>{
-    return this.http.post<any>(this.url+"affectSubCategoriesToTest?testId="+id,test);
+
+  getAffectationById(id:number):Observable<any>{
+    return this.http.get<any>(this.url+"getSubCategoriesByTestId?testId="+id);
+  }
+
+  getAffectationCategorieById(id:number):Observable<any>{
+    return this.http.get<any>(this.url+"getCategoriesByTestId?testId="+id);
   }
 }
 

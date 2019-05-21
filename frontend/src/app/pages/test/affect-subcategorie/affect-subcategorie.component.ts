@@ -40,11 +40,34 @@ export class AffectSubcategorieComponent implements OnInit {
 
   ngOnInit() {
     this.addForm=this.formBuilder.group({
-      name: new FormControl('', [Validators.required]),
-      dateActivation: new FormControl('', [Validators.required]),
-      dateExpiration: new FormControl('', [Validators.required]),
-      scat: [[], Validators.required]
+      subcategories: [[], Validators.required],
+
     })
+
+    this.subCategorieService.getAllSousCategorie().subscribe(
+      data=>{
+        this.dropdownList =data.map((scat:SousCategorie)=>{
+          return{id:scat.id, itemName:scat.name};
+        })
+      }
+    )
+
+    if(this.id){
+
+      this.testService.getAffectationById(this.id).subscribe(
+        (value:any)=>{
+          this.addForm.patchValue(value);
+
+          this.selectedItems = this.dropdownList.filter(
+            c =>{
+              return value.map(v=> v.id).includes(c.id)
+            })
+        },err=>{
+          console.log(err)
+        }
+      )
+    }
+
 
 
 
@@ -59,27 +82,6 @@ export class AffectSubcategorieComponent implements OnInit {
       enableSearchFilter:true,
       classes: "myclass custom-class-example"
     };
-    this.subCategorieService.getAllSousCategorie().subscribe(
-      data=>{
-        this.dropdownList =data.map((scat:SousCategorie)=>{
-          return{id:scat.id, itemName:scat.name};
-        })
-      }
-    )
-    this.testService.getAllSubcategoriesByTestId(this.id).subscribe(
-      (value:any)=>{
-        this.addForm.patchValue(value);
-        this.selectedItems=this.dropdownList.filter(
-          c=>{
-            return c.id==value.scat;
-
-          },err=>{
-            console.log(err);
-          }
-        )
-      }
-    )
-
 
 
   }
@@ -90,12 +92,17 @@ export class AffectSubcategorieComponent implements OnInit {
   }
 
  affecter(){
-    let data={... this.addForm.value}
-    data.scat=data.scat.map(c=>{
-      return c.id;
-    })
+
+    let data={... this.addForm.value};
+    data.subcategories=data.subcategories.map(
+     c=>{
+       return c.id ;
+       console.log(c.id);
+     }
+   )
+
    if (this.addForm.valid){
-     this.testService.affectCategorie(this.id,data).subscribe(
+     this.testService.affectSubCategorie(this.id,data).subscribe(
        data=>{
          alert ("add avec succes");
          this.router.navigate(["pages/test"])
