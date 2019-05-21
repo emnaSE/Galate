@@ -11,7 +11,7 @@ import {Categorie} from "./categorie.model";
 })
 export class DashboardComponent implements OnInit{
 
-  private categories:Categorie[]
+   categories:Categorie[]
   pageActuel: number =1;
 
 
@@ -36,6 +36,9 @@ export class DashboardComponent implements OnInit{
   updateCategorie(categorie:Categorie):void{
     this.router.navigate(['pages/categorie/',categorie.id,'modifier']);
 
+  }
+  getInfo(categorie:Categorie){
+    this.router.navigate(['pages/categorie/',categorie.id,'info']);
   }
 
 

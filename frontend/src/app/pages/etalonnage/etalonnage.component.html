@@ -19,10 +19,7 @@
 
           </thead>
       <tbody>
-      <tr *ngFor="let test of tests | paginate: { id: 'foo',
-                                                      itemsPerPage: pageSize,
-                                                      currentPage: p,
-                                                      totalItems: total }">
+      <tr *ngFor="let etalonage of etalonages | paginate: { itemsPerPage: 7, currentPage: pageActuel }">
         <td></td>
         <td></td>
         <td></td>

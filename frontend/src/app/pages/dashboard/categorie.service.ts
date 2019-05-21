@@ -6,6 +6,7 @@ import {Injectable} from "@angular/core";
 import { HttpClient, HttpRequest } from '@angular/common/http';
 import {API_URL} from "../../app.constant";
 import {Categorie} from "./categorie.model";
+import {SousCategorie} from "../subcategorie/subcategorie.model";
 
 
 
@@ -38,6 +39,9 @@ export class CategorieService {
   }
   updateCategorie(id:number,categorie:Object):Observable<Object>{
     return this.http.post(this.url+"updateCategory?id="+id,categorie,{responseType: 'text'});
+  }
+  getAllSouCategorie(id:number):Observable<SousCategorie[]>{
+    return this.http.get<SousCategorie[]>(this.url+"getAllSubcategoriesByCategory?id_category="+id);
   }
 
 }

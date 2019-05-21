@@ -3,6 +3,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { NbMenuService, NbSidebarService } from '@nebular/theme';
 import { UserService } from '../../../@core/data/users.service';
 import { AnalyticsService } from '../../../@core/utils/analytics.service';
+import {AuthService} from "../../../pages/auth/auth.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'ngx-header',
@@ -12,7 +14,7 @@ import { AnalyticsService } from '../../../@core/utils/analytics.service';
 export class HeaderComponent implements OnInit {
 
   @Input() position = 'normal';
-
+  username:"";
   user: any;
 
   userMenu = [{ title: 'Profile' }, { title: 'Log out' }];
@@ -20,7 +22,9 @@ export class HeaderComponent implements OnInit {
   constructor(private sidebarService: NbSidebarService,
               private menuService: NbMenuService,
               private userService: UserService,
-              private analyticsService: AnalyticsService) {
+              private analyticsService: AnalyticsService,
+              private loginService:AuthService,
+              private router:Router) {
   }
 
   ngOnInit() {
@@ -47,4 +51,11 @@ export class HeaderComponent implements OnInit {
   startSearch() {
     this.analyticsService.trackEvent('startSearch');
   }
+
+
+   logout(){
+      this.loginService.logout();
+      this.router.navigate(['auth/login']);
+   }
+
 }

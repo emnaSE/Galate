@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 
 import { Subject } from 'rxjs';
+import {Etalonnage} from "./etalonnage.model";
 
 
 @Component({
@@ -10,6 +11,7 @@ import { Subject } from 'rxjs';
 })
 export class EtalonnageComponent  implements OnInit{
   pageActuel: number =1;
+  etalonages:Etalonnage[]
 
 
 

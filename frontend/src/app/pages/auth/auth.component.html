@@ -1,4 +1,4 @@
-
+<!--
 <script src="main.js"></script>
 <div style="background-color: #666666;">
   <div class="limiter">
@@ -6,7 +6,7 @@
 
       <div class="wrap-login100">
 
-        <form  [formGroup]="loginForm" (ngSubmit)="onSubmit()" )class="login100-form validate-form">
+        <form  [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login100-form validate-form">
 
           <span class="login100-form-title p-b-43">
 						Login to continue
@@ -14,15 +14,14 @@
 
           <div class="wrap-input100 validate-input" data-validate = "username est obligatoire">
             <input class="input100" type="text" formControlName="username" name="username" >
-            <span class="focus-input100"></span>
-            <span class="label-input100">username</span>
+            <span class="focus-input100">username</span>
           </div>
 
 
           <div class="wrap-input100 validate-input" data-validate="Mot de Passe est obligatoire">
             <input class="input100"  type="password" formControlName="password" name="mot_de_passe">
-            <span class="focus-input100"></span>
-            <span class="label-input100">Mot de Passe</span>
+            <span class="focus-input100">Mot de Passe</span>
+
           </div>
 
           <div class="flex-sb-m w-full p-t-3 p-b-32">
@@ -53,5 +52,79 @@
     </div>
   </div>
 </div>
+
+-->
+
+
+
+
+<div class="center"  style="background-image: ;height: 73px;width: 193px;display: block">
+      <img src="/assets/images/apple-icon-57x57.png" >
+</div>
+
+<h1 id="title" class="title">Login</h1>
+
+<p class="sub-title">bienvenue </p>
+<nb-alert outline="success" *ngIf="err==0" >You have been successfully authenticated!</nb-alert>
+
+<nb-alert outline="danger" *ngIf="err==1" >Erreur password ou username Veuillez réessayer svp</nb-alert>
+
+
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()" aria-labelledby="title">
+
+
+  <div class="form-control-group">
+    <label class="label" for="username">Username</label>
+    <input nbInput
+           fullWidth
+           type="text"
+           formControlName="pseudo"
+           class="form-control"
+           placeholder="Username"
+           autofocus
+    >
+    <ng-container *ngIf="submitted && formValid.pseudo.errors">
+      <p class="error-message" >
+        Username is required!
+      </p>
+    </ng-container>
+  </div>
+
+  <div class="form-control-group">
+    <label class="label" for="password">Password:</label>
+    <input nbInput
+           fullWidth
+           formControlName="password"
+           name="password"
+           type="password"
+           placeholder="Password"
+    >
+    <ng-container *ngIf="submitted && formValid.password.errors ">
+      <p class="error-message" *ngIf="formValid.password.errors.required">
+        Password is required!
+      </p>
+
+    </ng-container>
+  </div>
+
+
+  <!--
+
+  <div class="form-group">
+        <button [disabled]="loading" class="login100-form-btn">Login</button>
+        <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+
+    </div>-->
+  <button nbButton
+          fullWidth
+          status="success"
+
+          [class.btn-pulse]="submitted">
+    Log In
+  </button>
+</form>
+
+
+
 
 

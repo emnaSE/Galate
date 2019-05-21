@@ -10,25 +10,33 @@
 
   <nb-card-body>
     <i style="cursor: pointer;" class="fas fa-plus fa-2x" (click)="create()"> ajouter </i>
-    <table id="example2" class="my-3 table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
+    <table id="example2" class="my-3 table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info" style="text-align: center">
       <thead>
       <tr role="row">
         <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="id: activate to sort column descending">ID</th>
         <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="name: activate to sort column ascending">name</th>
+        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="wording: activate to sort column ascending">wording</th>
+        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="value: activate to sort column ascending">value</th>
+        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="id_test_subcategory: activate to sort column ascending">sous categorie</th>
         <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="action: activate to sort column ascending">action</th>
+        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="anser: activate to sort column ascending">Answers</th>
 
           </thead>
       <tbody>
-      <tr *ngFor="let test of tests | paginate: { id: 'foo',
-                                                      itemsPerPage: pageSize,
-                                                      currentPage: p,
-                                                      totalItems: total }">
-        <td></td>
-        <td></td>
-        <td></td>
+      <tr *ngFor="let question of questions | paginate: { itemsPerPage: 7, currentPage: pageActuel }">
+        <td>{{question.id}}</td>
+        <td>{{question.name}}</td>
+        <td>{{question.wording}}</td>
+        <td>{{question.value}}</td>
+        <td>{{question.id_test_subcategory}}</td>
+
         <td>
-          <i class="ion ion-trash-b" (click)="create()"></i>
-          <i class="ion ion-alert-circled" (click)="create()"></i>
+          <i   style="cursor: pointer; color: #69737f; display: inline-block;margin-right: 20px !important;" class="fas fa-trash fa-2x" (click)="deleteByid(question)"></i>
+          <i class="fas fa-info fa-2x" style="color: #298a66; cursor: pointer;color: #298a66;" (click)="update(question)"></i>
+        </td>
+        <td>
+
+          <i class="fas fa-info fa-2x" style="color: #298a66; cursor: pointer;color: #298a66;" (click)="info(question)"></i>
         </td>
 
 
