@@ -162,27 +162,14 @@
               <span *ngFor="let categoryN of catalogues.categories">
               <td>{{categoryN.categoryName}}</td>
                  <p *ngFor="let subcategories of categoryN.subcategories">
-             
+                    <!---->
+
                       <td>{{subcategories.name}}</td>
                       <td>{{subcategories.down_description}}</td>
-                      <td *ngFor="let item of items" (click)="open($event, item, subcategories.name ,categoryN.categoryName , subcategories.down_description , subcategories.up_description )">{{ item }}</td>	
+                      <td *ngFor="let item of items" (click)="open($event, item, subcategories.name ,categoryN.categoryName , subcategories.down_description , subcategories.up_description , subcategories.manualAnswerId )"><input  type="radio" name={{subcategories.id}} required ></td>	
                        
 
-                     <!-- <td>
-                       
-                         <button  type="button" name="chooseone"   (clic)="clickonone()">
-                          button</button> 
-                         </td>
-                        <td id="td2" class="Au" ><input  type="radio" name="chooseone" required  ></td>
-                        <td id="td3" class="Au" ><input  type="radio" name="chooseone" required  ></td>
-                        <td id="td4" class="Au" ><input  type="radio" name="chooseone" required  ></td>
-                        <td id="td5" style="background-color: white" class="Au" ><input  type="radio" name="chooseone" required  ></td>
-                        <td id="td6" style="background-color: white" class="Au" ><input  type="radio" name="chooseone" required  ></td>
-                        <td id="td7" style="background-color: white" class="Au" ><input  type="radio" name="chooseone" required  ></td>
-                        <td id="td8" class="Au" ><input  type="radio" name="chooseone" required  ></td>
-                        <td id="td9" class="Au" ><input  type="radio" name="chooseone" required  ></td>
-                        <td id="td10" class="Au" ><input  type="radio" name="chooseone" required  ></td>
-                        <td id="td11" class="Au" ><input  type="radio" name="chooseone" required  ></td>-->
+                    
                       
                       <td>{{subcategories.up_description}}</td>
                  </p>
@@ -214,8 +201,9 @@
         </table>
       </div>
       
+     
       <div class="container-contact100-form-btn">
-      <button class="contact100-form-btn" onclick="affiche()">
+      <button class="contact100-form-btn" (click)="download($event)">
         Show Result
       </button>
     </div>

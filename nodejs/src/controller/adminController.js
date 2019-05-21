@@ -327,7 +327,7 @@ _publics.getAllSubcategories = (req) => {
 _publics.getAllSubcategoriesByIdTest = (req) => { 
     var idtest=req.query.id_test;
     return new Promise((resolve, reject) => {  
-             var sql = "select name as subcategory,s.id FROM subcategory s left join test_subcategory ts on (s.id=ts.id_subcategory) where ts.id_test=?"; 
+             var sql = "select  distinct name as subcategory,s.id FROM subcategory s left join test_subcategory ts on (s.id=ts.id_subcategory) where ts.id_test=?"; 
            
                  con.query(sql,[idtest], function (err, result) {
                  if (err) reject(err);
