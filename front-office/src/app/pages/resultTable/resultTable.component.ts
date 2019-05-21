@@ -23,9 +23,9 @@ export class ResultTableComponent  implements OnInit{
   radioSelected:string;
   radioSelectedString:string;
   _prevSelected: any;
+  id: any;
   public items: Array<string>;
 
-  id:number =1;
   
 
 
@@ -82,10 +82,32 @@ export class ResultTableComponent  implements OnInit{
  
 
  
-  public open(event, item,name , categoryName , down_description ,up_description ) {
-    alert('Open ' + item + name + categoryName + down_description + up_description);
-    console.log('clicked');
+  public open(event, item,name , categoryName , down_description ,up_description , manualAnswerId ) {
+    alert('Open ' + item + name + categoryName + down_description + up_description + "id"
+    + manualAnswerId);
+    this.id = manualAnswerId ;
+    console.log(this.id );
+    this.resultTableService.updateManualAnswer(this.id,item).subscribe(
+      data=>{
+        alert("update avec succes");
+        
+      }
+    )
   }
+
+  public download (event){
+    alert('Telechargement avec succès');
+
+    this.resultTableService.generateReportAutodiagnostic(1 ,1).subscribe(
+      data=>{
+        alert("telegarchement avec succes");
+        
+      }
+    )
+  }
+
+ 
+  
 
   
 }
