@@ -1391,4 +1391,28 @@ _publics.duplicateQuestionAndAnswers = (questions,testSubCategId) => {
 
 
 
+_publics.getSubCategoriesByTestId = (req) => {
+  return new Promise((resolve, reject) => {   
+    var sql = "select sc.* from subcategory sc left join  test_subcategory tsc on(sc.id=tsc.id_subcategory)  where tsc.id_test=?";        
+    con.query(sql,[req.query.testId], function (err, result) {
+    if (err) reject(err);
+    return resolve(result);
+    });
+ });  
+
+}
+
+_publics.getCategoriesByTestId = (req) => {
+  return new Promise((resolve, reject) => {   
+    var sql = "select c.* from category c left join  test_category tc on(c.id=tc.id_category)  where tc.id_test=?";        
+    con.query(sql,[req.query.testId], function (err, result) {
+    if (err) reject(err);
+    return resolve(result);
+    });
+ });  
+
+}
+
+
+
 module.exports = _publics;

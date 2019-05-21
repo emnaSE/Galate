@@ -149,4 +149,16 @@ router.get('/getSubcategoriesByCategory', urlencodedParser, (req, res, next) =>
 })
 .catch(next));
 
+
+
+router.post('/updateManualAnswer', (req, res, next) =>
+    calculController.updateManualAnswer(req)
+.then(msg => {
+    res.send(msg);
+})
+.catch(next));
+
+
+
+
 module.exports = router;

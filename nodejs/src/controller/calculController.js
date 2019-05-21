@@ -230,6 +230,23 @@ _publics.getSubCategoryName = (req) => {
    });    
 };
 
+_publics.updateManualAnswer = (req) => { 
+  var manualAnwserId=req.query.manualAnwserId;
+  var response=req.query.response;
+  return new Promise((resolve, reject) => {  
+           var sql = "update manuel_answer set response=? where id=?"; 
+           var msg="";
+               con.query(sql,[response,manualAnwserId], function (err, result) {
+                if (err){
+                  msg="failure";
+                  reject(err);
+                }else{
+                  msg="success";
+                }
+                return resolve(msg);
+               });
+   });    
+};
 
 
  module.exports = _publics;

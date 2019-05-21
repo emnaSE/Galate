@@ -779,9 +779,19 @@ router.post('/login', (req, res, next) =>
         .catch(next));
 
 
+router.get('/getSubCategoriesByTestId', (req, res, next) => adminController
+.getSubCategoriesByTestId(req)
+.then(subcategories => {
+    res.send(subcategories);
+})
+.catch(next));
 
-
-
+router.get('/getCategoriesByTestId', (req, res, next) => adminController
+.getCategoriesByTestId(req)
+.then(categories => {
+    res.send(categories);
+})
+.catch(next));
 
 
 
