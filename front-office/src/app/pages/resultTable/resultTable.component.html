@@ -157,25 +157,37 @@
             </tr>
           </thead>
           <tbody>
-            <tr class="full"  *ngFor= "let catalogues of resultTables ">
-              <td>{{catalogues.catName}}</td>
-              
-            
-              <td>{{catalogues.subCatName}}</td>
-              <td>{{catalogues.down_description}}</td>
-              <td id="td1" class="Au" ><input  type="radio" name="chooseone" required  ></td>
-              <td id="td2" class="Au" ><input  type="radio" name="chooseone" required  ></td>
-              <td id="td3" class="Au" ><input  type="radio" name="chooseone" required  ></td>
-              <td id="td4" class="Au" ><input  type="radio" name="chooseone" required  ></td>
-              <td id="td5" style="background-color: white" class="Au" ><input  type="radio" name="chooseone" required  ></td>
-              <td id="td6" style="background-color: white" class="Au" ><input  type="radio" name="chooseone" required  ></td>
-              <td id="td7" style="background-color: white" class="Au" ><input  type="radio" name="chooseone" required  ></td>
-              <td id="td8" class="Au" ><input  type="radio" name="chooseone" required  ></td>
-              <td id="td9" class="Au" ><input  type="radio" name="chooseone" required  ></td>
-              <td id="td10" class="Au" ><input  type="radio" name="chooseone" required  ></td>
-              <td id="td11" class="Au" ><input  type="radio" name="chooseone" required  ></td>
-              <td>{{catalogues.up_description}}</td>
+    
+            <tr class="full"  *ngFor= "let catalogues of catalogueDetails ">
+              <span *ngFor="let categoryN of catalogues.categories">
+              <td>{{categoryN.categoryName}}</td>
+                 <p *ngFor="let subcategories of categoryN.subcategories">
              
+                      <td>{{subcategories.name}}</td>
+                      <td>{{subcategories.down_description}}</td>
+                      <td *ngFor="let item of items" (click)="open($event, item, subcategories.name ,categoryN.categoryName , subcategories.down_description , subcategories.up_description )">{{ item }}</td>	
+                       
+
+                     <!-- <td>
+                       
+                         <button  type="button" name="chooseone"   (clic)="clickonone()">
+                          button</button> 
+                         </td>
+                        <td id="td2" class="Au" ><input  type="radio" name="chooseone" required  ></td>
+                        <td id="td3" class="Au" ><input  type="radio" name="chooseone" required  ></td>
+                        <td id="td4" class="Au" ><input  type="radio" name="chooseone" required  ></td>
+                        <td id="td5" style="background-color: white" class="Au" ><input  type="radio" name="chooseone" required  ></td>
+                        <td id="td6" style="background-color: white" class="Au" ><input  type="radio" name="chooseone" required  ></td>
+                        <td id="td7" style="background-color: white" class="Au" ><input  type="radio" name="chooseone" required  ></td>
+                        <td id="td8" class="Au" ><input  type="radio" name="chooseone" required  ></td>
+                        <td id="td9" class="Au" ><input  type="radio" name="chooseone" required  ></td>
+                        <td id="td10" class="Au" ><input  type="radio" name="chooseone" required  ></td>
+                        <td id="td11" class="Au" ><input  type="radio" name="chooseone" required  ></td>-->
+                      
+                      <td>{{subcategories.up_description}}</td>
+                 </p>
+                </span>
+            
             </tr>
            
             <tr>
@@ -211,6 +223,11 @@
       $Answers = {Au: 0, Di: 0, So: 0, To:0, Ac:0, Ee:0, Cr:0, Re:0, Ob:0, Co:0, Op:0, Se:0};
     </script>
     <script>
+      function clickonone(a , b){
+        console.log("we are here");
+      }
+
+
       function content(elem){
         $count=elem.parentElement.childElementCount;
         $col = elem.cellIndex;

@@ -19,6 +19,7 @@ export class ResultTableService {
   private url:string=API_URL+"member/";
   private url2:string=API_URL+"admin/";
   private url3:string=API_URL+"calcul/";
+  _http: any;
 
 
   constructor(private http:HttpClient){
@@ -35,8 +36,9 @@ export class ResultTableService {
     
       }
 
-      getAllCatrogiesByTestMember(): Observable<ResultTable[]> {
-        return this.http.get<ResultTable[]>(this.url3 +'getAllCatrogiesByTestMember?id_test=1&id_member=1');
+      getAllCatrogiesByTestMember(): Observable<any[]> {
+        return this.http.get<any[]>(this.url3 +'getAllCatrogiesByTestMember?id_test=1&id_member=1');
+      
     
       }
   
