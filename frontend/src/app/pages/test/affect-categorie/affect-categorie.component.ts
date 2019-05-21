@@ -4,6 +4,7 @@ import {CategorieService} from "../../dashboard/categorie.service";
 import {Categorie} from "../../dashboard/categorie.model";
 import {TestService} from "../test.service";
 import {ActivatedRoute, Router} from "@angular/router";
+import arrayContaining = jasmine.arrayContaining;
 
 @Component({
   selector: 'affect-categorie',
@@ -33,11 +34,33 @@ export class AffectCategorieComponent implements OnInit {
       categories: [[], Validators.required]
     })
 
+    this.categorieService.getAllCategorie().subscribe(
+      data=>{
+        this.dropdownList =data.map((cat:Categorie)=>{
+          return{id:cat.id, itemName:cat.name};
+        })
+      }
+    )
+//changer service getById par service get affectation test by id
     this.id=this.activateRoute.snapshot.params['id'];
     if (this.id){
-      this.testService.getById(this.id).subscribe(
-        data=>{
-          this.addForm.patchValue(data);
+      this.testService.getAffectationCategorieById(this.id).subscribe(
+        (value:any)=>{
+          this.addForm.patchValue(value);
+          console.log(value)
+          this.selectedItems = this.dropdownList.filter(
+            c =>{
+
+                    return value.map(v=> v.id).includes(c.id)
+
+
+
+
+             // return {id:c.id ,itemName:c.name};
+              console.log(c.id);
+            })
+        },err=>{
+          console.log(err)
         }
       )
     }
@@ -56,13 +79,7 @@ export class AffectCategorieComponent implements OnInit {
       classes: "myclass custom-class-example",
 
     };
-    this.categorieService.getAllCategorie().subscribe(
-      data=>{
-        this.dropdownList =data.map((cat:Categorie)=>{
-          return{id:cat.id, itemName:cat.name};
-        })
-      }
-    )
+
  }
     affecter(){
       let data={... this.addForm.value};

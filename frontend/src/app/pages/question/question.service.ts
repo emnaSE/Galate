@@ -14,7 +14,7 @@ import {Question} from "./question.model";
     providedIn: 'root'
   })
 export class QuestionService {
-  private url:string=API_URL+"admin";
+  private url:string=API_URL+"admin/";
 
 
   constructor(private http:HttpClient){
@@ -34,7 +34,9 @@ export class QuestionService {
   updateById(id:number,question:any):Observable<any>{
     return this.http.post<any>(this.url+'updateQuestion?id_question='+id,question);
   }
-
+  getQuestionById(id:number):Observable<Question>{
+    return this.http.get<Question>(this.url+"getQuestionById?id="+id);
+  }
 
 }
 

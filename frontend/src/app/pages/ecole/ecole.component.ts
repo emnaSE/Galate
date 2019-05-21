@@ -13,7 +13,7 @@ import {EcoleService} from "./ecole.service";
 })
 export class EcoleComponent  implements OnInit{
   pageActuel: number =1;
-  private ecoles:Ecole[]
+  ecoles:Ecole[]
 
 
 

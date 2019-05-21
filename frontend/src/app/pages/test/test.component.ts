@@ -10,7 +10,7 @@ import {Test} from "./test.model";
   templateUrl: './test.component.html',
 })
 export class TestComponent  implements OnInit{
-       private tests:Test[];
+       tests:Test[];
        pageActuel: number =1;
 
 
@@ -30,6 +30,17 @@ export class TestComponent  implements OnInit{
       )
 
 
+  }
+  deleteByid(test:Test){
+      this.testServices.deleteTest(test.id).subscribe(
+        data=>{
+          alert("delete avec success");
+          this.router.navigate(['pages/test'])
+        },err=>{
+          alert("erruer");
+          console.log(err);
+        }
+      )
   }
 
   create(){

@@ -13,7 +13,7 @@ import {RegistreComponent} from "./registre/registre.component";
 @NgModule({
   imports: [
     ThemeModule,
-FormsModule,
+    FormsModule,
 
   ],
   declarations: [
@@ -22,4 +22,7 @@ FormsModule,
 
   ],
 })
-export class AuthModule { }
+export class AuthModule {
+
+
+}

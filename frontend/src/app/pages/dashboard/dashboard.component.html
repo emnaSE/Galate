@@ -3,7 +3,9 @@
 <nb-card>
   <nb-card-header>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
     Liste des Catégories
+
   </nb-card-header>
 
 
@@ -24,9 +26,11 @@
         <td>{{categorie.name}}</td>
         <td>{{categorie.subcategories_number}}</td>
         <td>
-          <i style="cursor: pointer; display: inline-block;margin-right: 20px !important;" class="fas fa-trash fa-2x" (click)="deleteByid(categorie)"></i>
+          <i style="cursor: pointer; color: #69737f; display: inline-block;margin-right: 20px !important;" class="fas fa-trash fa-2x" (click)="deleteByid(categorie)"></i>
           <i class="fas fa-info fa-2x" style="cursor: pointer;" (click)="updateCategorie(categorie)"></i>
+          <i class="fas fa-angle-double-right fa-2x" style="color: #298a66; cursor: pointer; margin-left: 20px" (click)="getInfo(categorie)"></i>
         </td>
+
        </tr>
       </tbody>
     </table>

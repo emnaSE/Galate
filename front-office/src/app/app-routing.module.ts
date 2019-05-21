@@ -6,6 +6,7 @@ import { ResultTableComponent } from './pages/resultTable/resultTable.component'
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { StartTestComponent } from './pages/startTest/startTest.component';
+import { LoginTestComponent } from './pages/login-test/login-test.component';
 
 
 const routes: Routes = [
@@ -34,6 +35,10 @@ const routes: Routes = [
   {
     path: 'startTest',
     component:StartTestComponent,
+  },
+  {
+    path: 'loginTest',
+    component:LoginTestComponent,
   },
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: '**', redirectTo: 'pages' },

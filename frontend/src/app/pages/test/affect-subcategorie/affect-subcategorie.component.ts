@@ -5,7 +5,7 @@ import {Categorie} from "../../dashboard/categorie.model";
 import {SubcategorieService} from "../../subcategorie/subcategorie.service";
 import {SousCategorie} from "../../subcategorie/subcategorie.model";
 import {TestService} from "../test.service";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'affect-subcategorie',
@@ -20,19 +20,54 @@ export class AffectSubcategorieComponent implements OnInit {
   settings = {};
   addForm:FormGroup;
   submitted = false;
+  id:number;
+
+
 
   constructor(private subCategorieService:SubcategorieService,
               private formBuilder:FormBuilder,
               private testService:TestService,
-              private router:Router) { }
+              private router:Router,
+              private activateRoute :ActivatedRoute,
+
+              ) {
+
+    this.id=this.activateRoute.snapshot.params['id'];
+
+
+
+  }
 
   ngOnInit() {
     this.addForm=this.formBuilder.group({
-      name: new FormControl('', [Validators.required]),
-      dateActivation: new FormControl('', [Validators.required]),
-      dateExpiration: new FormControl('', [Validators.required]),
-      scat: [[], Validators.required]
+      subcategories: [[], Validators.required],
+
     })
+
+    this.subCategorieService.getAllSousCategorie().subscribe(
+      data=>{
+        this.dropdownList =data.map((scat:SousCategorie)=>{
+          return{id:scat.id, itemName:scat.name};
+        })
+      }
+    )
+
+    if(this.id){
+
+      this.testService.getAffectationById(this.id).subscribe(
+        (value:any)=>{
+          this.addForm.patchValue(value);
+
+          this.selectedItems = this.dropdownList.filter(
+            c =>{
+              return value.map(v=> v.id).includes(c.id)
+            })
+        },err=>{
+          console.log(err)
+        }
+      )
+    }
+
 
 
 
@@ -47,13 +82,8 @@ export class AffectSubcategorieComponent implements OnInit {
       enableSearchFilter:true,
       classes: "myclass custom-class-example"
     };
-    this.subCategorieService.getAllSousCategorie().subscribe(
-      data=>{
-        this.dropdownList =data.map((scat:SousCategorie)=>{
-          return{id:scat.id, itemName:scat.name};
-        })
-      }
-    )
+
+
   }
 
 
@@ -61,9 +91,28 @@ export class AffectSubcategorieComponent implements OnInit {
     return this.addForm.controls;
   }
 
-onSubmit(){
+ affecter(){
 
-}
+    let data={... this.addForm.value};
+    data.subcategories=data.subcategories.map(
+     c=>{
+       return c.id ;
+       console.log(c.id);
+     }
+   )
+
+   if (this.addForm.valid){
+     this.testService.affectSubCategorie(this.id,data).subscribe(
+       data=>{
+         alert ("add avec succes");
+         this.router.navigate(["pages/test"])
+       },err=>{
+         console.log(err)
+       }
+     )
+   }
+
+ }
 
 
   onItemSelect(item: any) {

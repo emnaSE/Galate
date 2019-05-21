@@ -42,6 +42,8 @@ export class CreateEtalonnageComponent implements OnInit {
       classes: "myclass custom-class-example"
     };
 
+
+
     /*
 
     this.sousCategorie.getAllSousCategorie().subscribe(
@@ -54,6 +56,10 @@ export class CreateEtalonnageComponent implements OnInit {
      */
 
 
+  }
+
+  get formvalidate(){
+    return this.addForm.controls;
   }
   onSubmit(){
     this.submitted = true;

@@ -361,6 +361,7 @@ router.post('/createAnswer', (req, res, next) =>
 router.post('/createQuestionAndAnswers', (req, res, next) =>
     adminController.getRawBody(req)
 .then(response => {
+    console.log('loooooooooooool'+response);
     var question = JSON.parse(response).question;
      res.payload.answers = JSON.parse(response).answers;
     return adminController.createNewQuestion(question, req.query.testSubCategId);
@@ -662,7 +663,17 @@ getRawBody(req)
 })
 .catch(next));
 
-
+router.post('/forTest',(req, res, next)=>adminController.
+getRawBody(req)
+.then(questions=>{
+   var testSubCategId=req.query.testSubCategId;
+   var questionsObject=JSON.parse(questions).questions;
+   return adminController.duplicateQuestionAndAnswers(questionsObject, testSubCategId)
+})
+.then(response=>{
+    res.send("ok!");
+})
+.catch(next));
 
 
 

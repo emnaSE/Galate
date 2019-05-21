@@ -10,7 +10,7 @@ import {first} from "rxjs/operators";
   styleUrls: ['./auth.component.css']
 })
 export class AuthComponent implements OnInit {
-
+err:number;
   submitted=false;
   loginForm:FormGroup;
   username="";
@@ -18,12 +18,14 @@ export class AuthComponent implements OnInit {
   constructor(private router:Router,
               private fromBuilder:FormBuilder,
               private authService:AuthService
-              ) { }
+              ) {
+
+  }
 
   ngOnInit() {
 
     this.loginForm=this.fromBuilder.group({
-      username: ['', Validators.required],
+      pseudo: ['', Validators.required],
       password: ['', Validators.required]
 
     })
@@ -40,11 +42,12 @@ export class AuthComponent implements OnInit {
   onSubmit(){
     this.submitted=true;
 
-    this.authService.Login(this.formValid.username.value,this.formValid.password.value).pipe(first()).subscribe(
+    this.authService.Login(this.formValid.pseudo.value,this.formValid.password.value).pipe(first()).subscribe(
       data=>{
+
         this.router.navigate(['pages/test'])
-
-
+         },err=>{
+        this.err=1;
       }
     )
   }
