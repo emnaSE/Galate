@@ -6,7 +6,7 @@ var getRawBody = require('raw-body');
 var con=config.con;
 
 const request = require('request');
-var url=`http://localhost:3002`;
+var url=`http://localhost:`+config.port;
 
 _publics.getAllCategories = (req) => { 
   
@@ -468,11 +468,11 @@ _publics.createQuestion = (question ) => {
 
 
 
-_publics.createNewQuestion = (question ) => { 
+_publics.createNewQuestion = (question, testSubCategId) => { 
   var name=question.name;
   var wording=question.wording;
   var value=question.value;  
-  var id_test_subcategory=question.id_test_subcategory;
+  var id_test_subcategory=testSubCategId;
   return new Promise((resolve, reject) => {  
            var response={};
            var questionId;
@@ -571,7 +571,6 @@ _publics.getAllQuestionsByIdTestSubcategory = (req) => {
         method: 'GET',
         gzip: true,
       }, (e, r, b) => {
-        console.log("statusCode="+r.statusCode);
         if (!e && r.statusCode == 200) {
           return resolve(JSON.parse(b));
         } else {
@@ -1005,6 +1004,21 @@ _publics.getTestSubcategoriesByTestId = (testId) => {
 });      
 }; 
 
+_publics.getTestSubcategoriesById = (idTestSubcategory) => { 
+
+  return new Promise((resolve, reject) => { 
+  var sql = "select * from test_subcategory where id=?";
+  con.query(sql,[idTestSubcategory], function (err, result) {
+          if (err){
+            reject(err);
+          }else{         
+            return resolve(result);
+          }
+          
+     });
+});      
+}; 
+
 
 
 _publics.getQuestionsByTestSubcategories = (testSubcategories ) => { 
@@ -1097,16 +1111,13 @@ _publics.duplicateTestCategory = (testCategories, testId ) => {
 }; 
 
 
-_publics.duplicateTestSubCategories = (testSubcategories,questions,testId ) => { 
-  //console.log("questions==>"+JSON.stringify(questions));
-  //console.log("testSubcategories==>"+JSON.stringify(testSubcategories));
-  let promises = [];
-  for (var i=0; i<testSubcategories.length;i++) {
-    promises.push(new Promise((resolve, reject) => {
+_publics.duplicateTestSubCategory = (testSubcategory,testId ) => { 
+ 
+    return new Promise((resolve, reject) => {
       var msg="";
       var response={};
       var sql = "INSERT INTO test_subcategory SET ?";
-      con.query(sql,{id_category:testSubcategories[i].id_category,id_subcategory:testSubcategories[i].id_subcategory,id_test:testId,questions_number:testSubcategories[i].questions_number,wording:testSubcategories[i].wording}, function (err, result) {
+      con.query(sql,{id_category:testSubcategory.id_category,id_subcategory:testSubcategory.id_subcategory,id_test:testId,questions_number:testSubcategory.questions_number,wording:testSubcategory.wording}, function (err, result) {
         if (err){
           response={
             msg:"failure"
@@ -1121,9 +1132,8 @@ _publics.duplicateTestSubCategories = (testSubcategories,questions,testId ) => {
           return resolve(response);
       });
     }
-    ));
-  }
-  return Promise.all(promises)      
+    );
+     
 }; 
 
 
@@ -1131,15 +1141,13 @@ _publics.duplicateTestSubCategories = (testSubcategories,questions,testId ) => {
 
 
 
-_publics.duplicateQuestion = (questions,testSubcategoriesIds ) => { 
-  console.log(JSON.stringify(questions));
-  let promises = [];
-  for (var i=0;i<questions.length;i++) {
-    promises.push(new Promise((resolve, reject) => {
+_publics.duplicateQuestion = (question,testSubcategoryId ) => { 
+
+    return new Promise((resolve, reject) => {
       var msg="";
       var response={};
-      var sql = "INSERT INTO test_subcategory SET ?";
-      con.query(sql,{name:questions[i].name,wording:questions[i].wording,value:questions[i].value,testSubCategId}, function (err, result) {
+      var sql = "INSERT INTO question SET ?";
+      con.query(sql,{name:question.name,wording:question.wording,value:question.value,id_test_subcategory:testSubcategoryId}, function (err, result) {
         if (err){
           response={
             msg:"failure"
@@ -1154,31 +1162,34 @@ _publics.duplicateQuestion = (questions,testSubcategoriesIds ) => {
           return resolve(response);
       });
     }
-    ));
-  }
-  return Promise.all(promises)      
+    );
+    
 }; 
 
 
 
-_publics.duplicateAnswer = (answers ) => { 
+_publics.duplicateAnswer = (answer, questionId ) => { 
 
-  let promises = [];
-  for (var i=0;i<answers.length;i++) {
-    promises.push(new Promise((resolve, reject) => {
+   return new Promise((resolve, reject) => {
       var msg="";
-      var sql = "INSERT INTO answer (id_question, value, name, ordre) select id_question, value, name, ordre from answer where id=?";
-      con.query(sql,answers[i].id, function (err, result) {
+      var sql = "INSERT INTO answer SET ?";
+      con.query(sql,{name:answer.name,value:answer.value,ordre:answer.ordre,id_question:questionId}, function (err, result) {
         if (err){
-          reject(err);
-        }else{     
-          return resolve(result);
-        }
+          response={
+            msg:"failure"
+          }
+            reject(err);
+          }else{
+            response={
+              msg:"success",
+              questionId:result.insertId
+            }
+          }
+          return resolve(response);
       });
     }
-    ));
-  }
-  return Promise.all(promises)      
+    );
+    
 }; 
 
 //get test by date and class
@@ -1328,6 +1339,56 @@ _publics.getAllQuestionsByTestSubcategories = (testSubcategories) => {
   return Promise.all(promises)      
 
 };
+
+
+
+_publics.getQuestionsBySubcategories = (testSubcategories) => { 
+  let promises = [];
+  for (var i=0;i<testSubcategories.length;i++) {
+    promises.push( new Promise((resolve, reject) => request.get({
+      url :url+`/admin/getQuestionsByTestSubcategoryId?idTestSubcategory=${testSubcategories[i].id}`,
+      method: 'GET',
+      gzip: true,
+    }, (e, r, b) => {
+      if (!e && r.statusCode == 200) {
+        return resolve(JSON.parse(b));
+      } else {
+        reject(e);
+      }
+    })));
+  }
+  return Promise.all(promises)      
+
+};
+
+
+
+
+_publics.duplicateQuestionAndAnswers = (questions,testSubCategId) => { 
+  let promises = [];
+  for (var i=0;i<questions.length;i++) {
+    promises.push( new Promise((resolve, reject) => request.get({
+      url :url+`/admin/createQuestionAndAnswers?testSubCategId=${testSubCategId}`,
+      method: 'POST',
+      gzip: true,
+      json: true,
+      rejectUnauthorized: false,
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Content-Length': Buffer.byteLength(JSON.stringify(questions[i]))
+    }
+    }, (e, r, b) => {
+      if (!e && r.statusCode == 200) {
+        return resolve(JSON.parse(b));
+      } else {
+        reject(e);
+      }
+    })));
+  }
+  return Promise.all(promises)      
+
+};
+
 
 
 module.exports = _publics;
