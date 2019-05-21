@@ -433,7 +433,9 @@ _publics.getRawBody = (req) => {
             length: req.headers['content-length'],
             limit: '1mb',
           }, function (err, string) {
-            if (err) return next(err)
+            if (err){
+              return next(err)
+            } 
             req.text = string;
             return resolve(req.text);
           })
@@ -1367,23 +1369,30 @@ _publics.getQuestionsBySubcategories = (testSubcategories) => {
 _publics.duplicateQuestionAndAnswers = (questions,testSubCategId) => { 
   let promises = [];
   for (var i=0;i<questions.length;i++) {
-    promises.push( new Promise((resolve, reject) => request.get({
+    promises.push( 
+       new Promise((resolve, reject) => request.post({
       url :url+`/admin/createQuestionAndAnswers?testSubCategId=${testSubCategId}`,
       method: 'POST',
       gzip: true,
       json: true,
       rejectUnauthorized: false,
       headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'Content-Length': Buffer.byteLength(JSON.stringify(questions[i]))
+        'Content-Type': 'application/json',
+        'Content-Length': Buffer.byteLength(JSON.stringify(questions)),
+        //'Content-Length': Buffer.byteLength("{\"questions\":[{\"question\":{\"id\":1,\"name\":\"question1\",\"wording\":\"frensh\",\"value\":1,\"id_test_subcategory\":1},\"answers\":[{\"id\":1,\"id_question\":1,\"value\":\"1\",\"name\":\"Dymanique\",\"ordre\":1},{\"id\":2,\"id_question\":1,\"value\":\"1\",\"name\":\"Energique\",\"ordre\":2}]},"+
+       //"{\"questions\":[{\"question\":{\"id\":1,\"name\":\"question1\",\"wording\":\"frensh\",\"value\":1,\"id_test_subcategory\":1},\"answers\":[{\"id\":1,\"id_question\":1,\"value\":\"1\",\"name\":\"Dymanique\",\"ordre\":1},{\"id\":2,\"id_question\":1,\"value\":\"1\",\"name\":\"Energique\",\"ordre\":2}]}]}")
     }
     }, (e, r, b) => {
       if (!e && r.statusCode == 200) {
+        console.log("wawwwwwwwwwwww");
         return resolve(JSON.parse(b));
       } else {
+        console.log("looooooooooooool"+r.statusCode+" eroor= "+e);
         reject(e);
       }
-    })));
+    }))
+    )
+    ;
   }
   return Promise.all(promises)      
 

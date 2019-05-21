@@ -545,5 +545,36 @@ _publics.getTestEnCours = (req) => {
 };
 
 
+_publics.loginForTest = (testId, login) => {
+  var response = {};
+  var login0 = JSON.parse(login);
+  var password = login0.password;
+
+  return new Promise((resolve, reject) => {
+    var sql = "select * FROM test where id=? ";
+    con.query(sql, [testId], function (err, tests) {
+      var tests = JSON.stringify(tests);
+      tests = JSON.parse(tests);
+
+      if (err) {
+        response = {
+          status: 500
+        };
+      } else if (tests[0] === undefined || (tests[0].password !== password)) {
+        response = {
+          status: 403
+        };
+      } else {
+        response = {
+          member: tests[0],
+          status: 200,
+        };
+      }
+      return resolve(JSON.stringify(response));
+    });
+  });
+};
+
+
 module.exports = _publics;
 

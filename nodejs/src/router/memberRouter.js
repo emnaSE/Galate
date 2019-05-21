@@ -209,4 +209,23 @@ memberController.getTestEnCours(req)
   res.send(tests);
 })
 .catch(next));
+
+
+router.post('/loginForTest', (req, res, next) => 
+memberController.getRawBody(req)
+.then(login=>{
+    return memberController.loginForTest(req.query.testId,login);
+})
+.then(response=>{
+  res.send(response);
+})
+.catch(next));;
+
+
+
+
+
+
+
+
 module.exports = router;

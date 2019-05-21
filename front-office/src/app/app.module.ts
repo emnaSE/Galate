@@ -24,6 +24,8 @@ import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown';
 import { StartTestService } from './pages/startTest/startTest.service';
 import { MatButtonModule, MatMenuModule, MatToolbarModule, MatIconModule, MatCardModule} from '@angular/material';
 import {MatDialogModule} from '@angular/material';
+import { LoginTestComponent } from './pages/login-test/login-test.component';
+import { LoginTestService } from './pages/login-test/login-test.service';
 
 
 @NgModule({
@@ -36,7 +38,8 @@ import {MatDialogModule} from '@angular/material';
     RegisterComponent,
     StarterComponent,
     StarterHeaderComponent,
-    StarterFooterComponent
+    StarterFooterComponent,
+    LoginTestComponent
   ],
   imports: [
     BrowserModule,
@@ -57,7 +60,7 @@ import {MatDialogModule} from '@angular/material';
     MatIconModule,
     MatCardModule
   ],
-  providers: [RegisterService, LoginService, TestService , StartTestService],
+  providers: [RegisterService, LoginService, TestService , StartTestService, LoginTestService],
 
 
   bootstrap: [AppComponent]
