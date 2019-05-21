@@ -2,6 +2,8 @@
 
 const router = require('express').Router();
 const memberController=require('../controller/memberController');
+const adminController=require('../controller/adminController');
+
 var options = {
     inflate: true,
     limit: '100kb',
@@ -188,12 +190,6 @@ memberController.getRawBody(req)
 .catch(next));
 
 
-router.get('/getTestDetails',urlencodedParser, (req, res, next) => 
-memberController.getTestDetails(req)
-.then(tests=>{
-  res.send(tests);
-})
-.catch(next));
 
 router.post('/verifPasswordTest', (req, res, next) => 
 memberController.getRawBody(req)
