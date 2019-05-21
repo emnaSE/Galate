@@ -870,6 +870,7 @@ function ceateTestsubcategory(testId, subcategoryId, questionsNumber, wording){
       var sql = "INSERT INTO test_subcategory SET? ";
       con.query(sql,{id_test:testId,id_subcategory:subcategoryId,questions_number:questionsNumber, wording:wording}, function (err, affectation) {
         if (err){
+          console.log(err);
           msg="failure"; 
           }else{
             msg="success";  
