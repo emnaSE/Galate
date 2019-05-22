@@ -78,9 +78,9 @@ export class StartTestComponent  implements OnInit{
   public showResult(){
     console.log("mapsize= "+this.map.size+" questionsize= "+this.totalQuestionsSize());
     if(this.map.size===this.totalQuestionsSize()){
-      this.router.navigate(['/test']);
+      this.router.navigate(['/resultTable']);
     }else{
-      alert("merci de repondre à toutes les questions avant de passer");
+      alert("merci de repondre à toutes les questions avant de passer!");
     }
     let choiceMember=new ChoiceMember();
     choiceMember.id_test_member=1;
