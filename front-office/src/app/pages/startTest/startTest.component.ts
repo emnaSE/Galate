@@ -94,6 +94,7 @@ export class StartTestComponent  implements OnInit{
     this.startTestService.createMemberChoices(json)
     .subscribe(data =>{
       console.log(JSON.parse(JSON.stringify(data[0])));
+      this.router.navigate(['/resultTable']);
     } , error => console.log('err'+error));
 
   }
