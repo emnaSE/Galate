@@ -11,6 +11,6 @@ export class LoginService {
 
 
   login(login: Object): Observable<Object> {
-    return this.http.post(`${this.url}` + `/login`, login);
+    return this.http.post(`${this.url}` + `login`, login);
   }
 }

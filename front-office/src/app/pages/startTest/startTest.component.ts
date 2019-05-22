@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import { StartTestService} from './startTest.service';
-import { Question } from './startTest.model';
+import { Question, ChoiceMember } from './startTest.model';
 import { Subject } from 'rxjs';
 
 
@@ -18,7 +18,7 @@ export class StartTestComponent  implements OnInit{
   dtTrigger: Subject<any> = new Subject();
   private map:Map<string,string>=new Map();
 
-
+  private choiceMemberArray:ChoiceMember[]=[];
 
     constructor(private router:Router ,private startTestService: StartTestService){ 
 
@@ -73,18 +73,25 @@ export class StartTestComponent  implements OnInit{
   
   public showResult(){
     console.log("mapsize= "+this.map.size+" questionsize= "+this.totalQuestionsSize());
-    if(this.map.size===this.totalQuestionsSize()){
+    /*if(this.map.size===this.totalQuestionsSize()){
       this.router.navigate(['/test']);
     }else{
       alert("merci de repondre à toutes les questions avant de passer");
-    }
-    /*console.log("size== "+this.map.size);
-
+    }*/
+    let choiceMember=new ChoiceMember();
+    choiceMember.id_test_member=1;
     this.map.forEach((value: string, key: string) => {
-      console.log(key, value);
-    });*/
- 
-  
+        choiceMember.id_question=key;
+        choiceMember.id_answer=this.map.get(key); 
+        this.choiceMemberArray.push(choiceMember);   
+    })
+
+    var json = '{ "choices":'+JSON.stringify(this.choiceMemberArray)+'}';
+    this.startTestService.createMemberChoices(json)
+    .subscribe(data =>{
+      console.log(JSON.parse(JSON.stringify(data[0])));
+    } , error => console.log('err'+error));
+
   }
   
 
