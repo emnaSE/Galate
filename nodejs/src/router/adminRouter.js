@@ -361,7 +361,6 @@ router.post('/createAnswer', (req, res, next) =>
 router.post('/createQuestionAndAnswers', (req, res, next) =>
     adminController.getRawBody(req)
 .then(response => {
-    console.log('loooooooooooool'+response);
     var question = JSON.parse(response).question;
      res.payload.answers = JSON.parse(response).answers;
     return adminController.createNewQuestion(question, req.query.testSubCategId);
@@ -378,6 +377,27 @@ router.post('/createQuestionAndAnswers', (req, res, next) =>
 })
 .catch(next));
 
+router.post('/createQuestion_Answers', (req, res, next) =>
+    adminController.getRawBody(req)
+.then(response=>{
+    res.payload.question = JSON.parse(response).question;
+     res.payload.answers = JSON.parse(response).answers;
+    return adminController.getTestSubcategoryByTestIdAndSubcateoryId(req);
+})
+.then(testSubcategoryId => {
+    return adminController.createNewQuestion(res.payload.question, testSubcategoryId);
+})
+.then(message => {
+    if (message.msg === "success") {
+        return adminController.createAnswers(message.questionId, res.payload.answers);
+    } else {
+         return "failure";
+    }
+})
+.then(msg => {
+    res.send(msg);
+})
+.catch(next));
 
 router.post('/updateAnswerById', (req, res, next) =>
     adminController.getRawBody(req)
@@ -705,7 +725,6 @@ router.get('/getQuestionsByTestSubcategory', (req, res, next) => adminController
         return adminController.getAllQuestionsByIdTestSubcategory(req)
     })
     .then(questions => {
-        console.log("questions=" + questions);
         return adminController.getAllQuestionsByQuestionsIds(questions)
     })
     .then(response => {

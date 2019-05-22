@@ -500,6 +500,23 @@ _publics.createNewQuestion = (question, testSubCategId) => {
       
 }; 
 
+_publics.getTestSubcategoryByTestIdAndSubcateoryId = (req) => { 
+  var testId=req.query.testId;
+  var subcategoryId=req.query.subcategoryId;
+  return new Promise((resolve, reject) => {  
+           var sql = "select id from test_subcategory where id_test=? and id_subcategory=?";
+           con.query(sql,[testId,subcategoryId], function (err, result) {
+              if (err)
+                  reject(err);
+            return resolve(result[0].id);
+           });
+  });   
+
+      
+}; 
+
+
+
 _publics.updateQuestion=(req,question) => { 
   var question=JSON.parse(question);
   var name=question.name;

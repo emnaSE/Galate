@@ -37,7 +37,7 @@ export class LoginTestComponent implements OnInit {
           var status=JSON.parse(JSON.stringify(data)).status;
           console.log('status='+JSON.parse(JSON.stringify(data)).status);
           if(status===200){
-            this.router.navigate(['/test']);
+            this.router.navigate(['/startTest']);
           }
         } , error => console.log('err'+error));
     this.loginTest = new LoginTest();

@@ -20,7 +20,7 @@ export class TestComponent  implements OnInit{
 
 
     constructor(private router:Router, private testService: TestService){ 
-      this.testsList= this.testService.getTodoList();
+    
     }
 
   ngOnInit() { 
@@ -47,8 +47,6 @@ export class TestComponent  implements OnInit{
 
   public testsList:Array<any>;
 
-  public getTodoList() {
-      return this.testService.getTodoList();
-  }
+  
 
 }
