@@ -3,6 +3,7 @@ import {Router} from "@angular/router";
 import { ResultTable } from './resultTable.model';
 import { ResultTableService } from './resultTable.service';
 import { Catalogue } from './Catalogue.model';
+import { map } from 'rxjs-compat/operator/map';
 
 
 
@@ -25,7 +26,10 @@ export class ResultTableComponent  implements OnInit{
   _prevSelected: any;
   id: any;
   public items: Array<string>;
-
+  public map=new Map<String, String>();
+  public questionNumber : number ;
+  public answerNumber : number ;
+  public object : any ;
   
 
 
@@ -42,19 +46,10 @@ export class ResultTableComponent  implements OnInit{
   
     this.resultTableService.getAllCatrogiesByTestMember().subscribe(
       data=>{
+        this.object=data;
         this.catalogueDetails=data;
         this.catalogueDetails = Array.of(this.catalogueDetails); 
       
-        console.log(data);
-      },err=>{
-        console.log(err)
-      }
-    )
-
-
-    this.resultTableService.getCategoryNameByMemberIdAndTestId().subscribe(
-      data=>{
-        this.catalogues=data;
         console.log(data);
       },err=>{
         console.log(err)
@@ -77,37 +72,68 @@ export class ResultTableComponent  implements OnInit{
 
     this.selectNumber=event.traget;
     console.log(this.selectNumber)
-  }
+    }
   
- 
+    public saveAnswer (manualAnswerId , answer){
+
+      this.map.set(manualAnswerId , answer)
+    }
+
+    public totalSubcategoriesSize(){
+      let questionsSize=0;
+
+
+      
+      this.object.categories.forEach(category => {
+   
+        category.subcategories.forEach(subcategory => {
+        
+          questionsSize=questionsSize+1;
+       
+      });
+
+  });
+    
+      return questionsSize;
+    }
 
  
   public open(event, item,name , categoryName , down_description ,up_description , manualAnswerId ) {
-    alert('Open ' + item + name + categoryName + down_description + up_description + "id"
-    + manualAnswerId);
+    
     this.id = manualAnswerId ;
-    console.log(this.id );
+     this.saveAnswer(this.id , item)
+    
+ 
     this.resultTableService.updateManualAnswer(this.id,item).subscribe(
       data=>{
-        alert("update avec succes");
+        console.log("update avec succes");
         
       }
     )
   }
 
   public download (event){
-    alert('Telechargement avec succès');
+   
 
+    console.log("totalSubcategoriesSize= "+this.totalSubcategoriesSize()+" map size= "+this.map.size);
+  
+
+    if (this.totalSubcategoriesSize() !== this.map.size ){
+      alert("Checkbox non coché ! ");
+    }
+    else {
     this.resultTableService.generateReportAutodiagnostic(1 ,1).subscribe(
       data=>{
         alert("telegarchement avec succes");
         
       }
-    )
+    )}
+
   }
+    }
 
  
   
 
   
-}
+
