@@ -41,7 +41,12 @@ export class LoginComponent implements OnInit {
           console.log('status='+JSON.parse(JSON.stringify(data)).status);
           if(status===200){
             this.router.navigate(['/test']);
+
             console.log(JSON.parse(JSON.stringify(data)).member.id);
+
+          }else{
+            alert("Verifier votre login et mot de passe");
+ 
           }
         } , error => console.log('err'+error));
     this.login = new Login();
