@@ -3,6 +3,7 @@ import {Router} from "@angular/router";
 import { StartTestService} from './startTest.service';
 import { Question } from './startTest.model';
 import { Subject } from 'rxjs';
+import { TestService } from '../test/test.service';
 
 
 
@@ -17,16 +18,19 @@ export class StartTestComponent  implements OnInit{
   private subcatgories:Question[]=[];
   dtTrigger: Subject<any> = new Subject();
   private map:Map<string,string>=new Map();
+  testId:any;
 
 
 
-    constructor(private router:Router ,private startTestService: StartTestService){ 
+    constructor(private router:Router ,private startTestService: StartTestService , private testService:TestService){ 
 
-   
+      this.testId=localStorage.getItem('testId');
+      console.log("test  "+ this.testId); 
+      
      
     }
   ngOnInit() {
-    this.startTestService.getTestDetails().subscribe(
+    this.startTestService.getTestDetails(this.testId).subscribe(
       data=>{
         this.subcatgories=data;
         console.log(data[0].questions);
@@ -39,7 +43,7 @@ export class StartTestComponent  implements OnInit{
    }
 
    public getTestDetails() {
-    this.startTestService.getTestDetails().subscribe(
+    this.startTestService.getTestDetails(this.testId).subscribe(
       data=>{
         this.subcatgories=data;
         this.dtTrigger.next();

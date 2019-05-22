@@ -13,8 +13,8 @@ export class StartTestService {
 
   constructor(private http: HttpClient) { }
   
-  getTestDetails():Observable<Question[]>{
-    return this.http.get<Question[]>(this.url+'getAllQuestionsByTestSubcategories?testId='+1);
+  getTestDetails(testId:number):Observable<Question[]>{
+    return this.http.get<Question[]>(this.url+'getAllQuestionsByTestSubcategories?testId='+testId);
   }
 
  

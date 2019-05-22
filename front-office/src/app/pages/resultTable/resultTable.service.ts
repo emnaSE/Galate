@@ -37,8 +37,8 @@ export class ResultTableService {
     
       }
 
-      getAllCatrogiesByTestMember(): Observable<any[]> {
-        return this.http.get<any[]>(this.url3 +'getAllCatrogiesByTestMember?id_test=1&id_member=1');
+      getAllCatrogiesByTestMember(testId:number , memberId:number): Observable<any[]> {
+        return this.http.get<any[]>(this.url3 +"getAllCatrogiesByTestMember?id_test="+testId+"&id_member="+memberId);
       
     
       }

@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 
 import { Login } from './Login';
 import { LoginService } from './login.service';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Component({
   selector: 'login',
@@ -17,9 +18,17 @@ export class LoginComponent implements OnInit {
     public password: AbstractControl;
     public bool=false;
 
+    private currentUserSubject: BehaviorSubject<Login>;
+    public currentUser: Observable<Login>;
+
+
     login: Login = new Login();
     submitted = false;
   constructor(private router: Router, fb: FormBuilder, private loginService: LoginService) {
+
+    this.currentUserSubject = new BehaviorSubject<Login>(JSON.parse(localStorage.getItem('currentUser')));
+            this.currentUser = this.currentUserSubject.asObservable();
+
   
   
     this.form = fb.group({
@@ -34,6 +43,10 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
+  public get currentUserValue(): any {
+    return this.currentUserSubject.value;
+}
+
   signIn() {
     this.loginService.login(this.login)
         .subscribe(data =>{
@@ -41,6 +54,10 @@ export class LoginComponent implements OnInit {
           console.log('status='+JSON.parse(JSON.stringify(data)).status);
           if(status===200){
             this.router.navigate(['/test']);
+
+            localStorage.setItem('currentUser', JSON.stringify(data));
+
+            
 
             console.log(JSON.parse(JSON.stringify(data)).member.id);
 

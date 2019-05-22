@@ -3,6 +3,7 @@ import { FormsModule, AbstractControl, FormBuilder,  FormGroup, Validators, Form
 import { Router } from '@angular/router';
 import { LoginTest } from './login-test';
 import { LoginTestService } from './login-test.service';
+import { TestService } from '../test/test.service';
 
 
 @Component({
@@ -15,10 +16,11 @@ export class LoginTestComponent implements OnInit {
     public form: FormGroup;
     public password: AbstractControl;
     public bool=false;
+    public testId:any ; 
 
     loginTest: LoginTest = new LoginTest();
     submitted = false;
-  constructor(private router: Router, fb: FormBuilder, private loginTestService: LoginTestService) {
+  constructor(private router: Router, fb: FormBuilder, private loginTestService: LoginTestService , private testService:TestService) {
   
   
     this.form = fb.group({
@@ -26,13 +28,18 @@ export class LoginTestComponent implements OnInit {
   });
 
   this.password = this.form.controls['password'];
+
+  this.testId=localStorage.getItem('testId');
+  console.log("test  "+ this.testId);   
+  
+
   }
 
   ngOnInit() {
   }
 
   signIn() {
-    this.loginTestService.login(this.loginTest)
+    this.loginTestService.login(this.loginTest , this.testId)
         .subscribe(data =>{
           var status=JSON.parse(JSON.stringify(data)).status;
           console.log('status='+JSON.parse(JSON.stringify(data)).status);
