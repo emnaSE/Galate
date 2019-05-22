@@ -22,6 +22,7 @@
         <![endif]-->
 
     <style>
+
       nav{
         background-color:rgb(126,126,126);
       }
@@ -49,6 +50,15 @@
             }
             .full{
                 background-color:rgb(218, 210, 210);
+            }
+            .item5{
+               background-color: white ;
+            }
+            .item6{
+              background-color: white ;
+            }
+            .item7{
+              background-color: white ;
             }
             .btn{
             border-color:gray;
@@ -134,16 +144,17 @@
 					</ul>
 				</div>
 			</div>
-		</nav>
-    <div class="table-responsive">
-        <table class="table">
-          <thead>
+    </nav>
+    <div ng-app="MyApp" ng-controller="MyController">
+    <div class="table-responsive" *ngFor="let catalogues of catalogueDetails">
+        <table class="table" >
+            <thead>
             <tr>
               <th scope="col"></th>
               <th scope="col"></th>
               <th scope="col"></th>
               <th scope="col">1</th>
-              <th scope="col">2</th>
+              <th scope="col" >2</th>
               <th scope="col">3</th>
               <th scope="col">4</th>
               <th scope="col">5</th>
@@ -152,30 +163,27 @@
               <th scope="col">8</th>
               <th scope="col">9</th>
               <th scope="col">10</th>
-              <th scope="col">11</th>
+              <th scope="col" >11</th>
               <th scope="col"></th>
             </tr>
-          </thead>
-          <tbody>
-    
-            <tr class="full"  *ngFor= "let catalogues of catalogueDetails ">
-              <span *ngFor="let categoryN of catalogues.categories">
-              <td>{{categoryN.categoryName}}</td>
-                 <p *ngFor="let subcategories of categoryN.subcategories">
-                    <!---->
-
+         </thead>
+         <tbody *ngFor="let categoryN of catalogues.categories">
+           
+               <tr class="full" *ngFor="let subcategories of categoryN.subcategories">
+                  
+                     <td scope="row" >{{categoryN.categoryName}}</td>
+              
+            
+                     
                       <td>{{subcategories.name}}</td>
                       <td>{{subcategories.down_description}}</td>
-                      <td *ngFor="let item of items" (click)="open($event, item, subcategories.name ,categoryN.categoryName , subcategories.down_description , subcategories.up_description , subcategories.manualAnswerId )"><input  type="radio" name={{subcategories.id}} required ></td>	
-                       
-
-                    
-                      
+                      <td *ngFor="let item of items"  class="item{{item}}" (click)="open($event, item, subcategories.name ,categoryN.categoryName , subcategories.down_description , subcategories.up_description , subcategories.manualAnswerId )"><input  type="radio" name="radio{{subcategories.id}}" required ></td>	
                       <td>{{subcategories.up_description}}</td>
-                 </p>
-                </span>
+                   
+                 
+               </tr>
             
-            </tr>
+           
            
             <tr>
               <td></td>
@@ -197,19 +205,26 @@
 
             
             
-          </tbody>
+         </tbody>
         </table>
       </div>
       
      
       <div class="container-contact100-form-btn">
-      <button class="contact100-form-btn" (click)="download($event)">
+      <button class="contact100-form-btn" (click)="download($event)" >
         Show Result
       </button>
     </div>
+
+  </div>
     <script>
       $Answers = {Au: 0, Di: 0, So: 0, To:0, Ac:0, Ee:0, Cr:0, Re:0, Ob:0, Co:0, Op:0, Se:0};
     </script>
+
+
+
+
+
     <script>
       function clickonone(a , b){
         console.log("we are here");
