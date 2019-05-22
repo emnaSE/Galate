@@ -37,14 +37,11 @@ memberController.getRawBody(req)
 })
 .catch(next));
 
-router.post('/createMemberChoices',(req, res, next)=>
-memberController.getRawBody(req)
-
-
+router.post('/createMemberChoices',(req, res, next)=>memberController
+.getRawBody(req)
 .then(response=>{
     return memberController.createMemberChoices(response)
 })
-
 .then(msg=>{
     res.send(msg);
 })
