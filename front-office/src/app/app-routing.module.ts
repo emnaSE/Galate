@@ -7,6 +7,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { StartTestComponent } from './pages/startTest/startTest.component';
 import { LoginTestComponent } from './pages/login-test/login-test.component';
+import { DownloadComponent } from './pages/downloadPDF/download.component';
 
 
 const routes: Routes = [
@@ -35,6 +36,10 @@ const routes: Routes = [
   {
     path: 'startTest',
     component:StartTestComponent,
+  },
+  {
+    path: 'download',
+    component:DownloadComponent,
   },
   {
     path: 'loginTest',

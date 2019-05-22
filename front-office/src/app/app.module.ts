@@ -26,12 +26,15 @@ import { MatButtonModule, MatMenuModule, MatToolbarModule, MatIconModule, MatCar
 import {MatDialogModule} from '@angular/material';
 import { LoginTestComponent } from './pages/login-test/login-test.component';
 import { LoginTestService } from './pages/login-test/login-test.service';
+import { DownloadComponent } from './pages/downloadPDF/download.component';
+import { DownloadService } from './pages/downloadPDF/download.service';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     ResultTableComponent,
+    DownloadComponent,
     TestComponent,
     StartTestComponent,
     LoginComponent,
@@ -60,7 +63,7 @@ import { LoginTestService } from './pages/login-test/login-test.service';
     MatIconModule,
     MatCardModule
   ],
-  providers: [RegisterService, LoginService, TestService , StartTestService, LoginTestService],
+  providers: [RegisterService, LoginService, TestService , StartTestService, LoginTestService , DownloadService],
 
 
   bootstrap: [AppComponent]

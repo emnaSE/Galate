@@ -5,6 +5,7 @@ import { ResultTableComponent } from './resultTable/resultTable.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { StartTestComponent } from './startTest/startTest.component';
+import { DownloadComponent } from './downloadPDF/download.component';
 
 
 const routes: Routes = [
@@ -29,6 +30,10 @@ const routes: Routes = [
   {
     path: 'startTest',
     component:StartTestComponent,
+  },
+  {
+    path: 'download',
+    component:DownloadComponent,
   },
  
   { path: '', redirectTo: 'pages/test', pathMatch: 'full' },

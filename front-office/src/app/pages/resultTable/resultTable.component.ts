@@ -119,15 +119,13 @@ export class ResultTableComponent  implements OnInit{
   
 
     if (this.totalSubcategoriesSize() !== this.map.size ){
-      alert("Checkbox non coché ! ");
+      alert("merci de repondre à toutes les questions ! ");
     }
     else {
-    this.resultTableService.generateReportAutodiagnostic(1 ,1).subscribe(
-      data=>{
-        alert("telegarchement avec succes");
+      this.router.navigate(['/download'])
         
       }
-    )}
+    
 
   }
     }
