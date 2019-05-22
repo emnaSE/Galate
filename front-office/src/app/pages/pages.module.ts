@@ -6,6 +6,7 @@ import { ResultTableModule } from './resultTable/resultTable.module';
 import { LoginModule } from './login/login.module';
 import { RegisterModule } from "./register/RegisterModule";
 import { StartTestModule } from './startTest/startTest.module';
+import { DownloadModule } from './downloadPDF/download.module';
 
 const PAGES_COMPONENTS = [
   PagesComponent,
@@ -14,6 +15,7 @@ const PAGES_COMPONENTS = [
 @NgModule({
   imports: [
     ResultTableModule,
+    DownloadModule,
     TestModule,
     LoginModule,
     RegisterModule,

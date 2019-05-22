@@ -4,6 +4,8 @@ import { ResultTable } from './resultTable.model';
 import { ResultTableService } from './resultTable.service';
 import { Catalogue } from './Catalogue.model';
 import { map } from 'rxjs-compat/operator/map';
+import { LoginService } from '../login/login.service';
+import { TestService } from '../test/test.service';
 
 
 
@@ -30,21 +32,32 @@ export class ResultTableComponent  implements OnInit{
   public questionNumber : number ;
   public answerNumber : number ;
   public object : any ;
-  
+  memberId:number;
+  testId:any;
 
 
     constructor(private router:Router,
-                private resultTableService:ResultTableService){
+                private resultTableService:ResultTableService,
+                private loginService:LoginService
+                , private testService:TestService){
 
                   this.items = ["1", "2", "3" , "4", "5", "6" , "7", "8", "9", "10", "11"]   
+
+                  this.memberId=this.loginService.currentUserValue.member.id;
+                  console.log("user"+this.memberId); 
+                  
+                  this.testId=localStorage.getItem('testId');
+                  console.log("test  "+ this.testId); 
                   }
 
+
+                   
                    
   ngOnInit() { 
 
     
   
-    this.resultTableService.getAllCatrogiesByTestMember().subscribe(
+    this.resultTableService.getAllCatrogiesByTestMember(this.testId , this.memberId).subscribe(
       data=>{
         this.object=data;
         this.catalogueDetails=data;
@@ -57,14 +70,6 @@ export class ResultTableComponent  implements OnInit{
     )
 
 
-    this.resultTableService.getAllResultTable().subscribe(
-      data=>{
-        this.resultTables=data;
-        console.log(data);
-      },err=>{
-        console.log(err)
-      }
-    )
   }
   radiochangeHandler(event:any){
 
@@ -119,15 +124,13 @@ export class ResultTableComponent  implements OnInit{
   
 
     if (this.totalSubcategoriesSize() !== this.map.size ){
-      alert("Checkbox non coché ! ");
+      alert("merci de repondre à toutes les questions ! ");
     }
     else {
-    this.resultTableService.generateReportAutodiagnostic(1 ,1).subscribe(
-      data=>{
-        alert("telegarchement avec succes");
+      this.router.navigate(['/download'])
         
       }
-    )}
+    
 
   }
     }

@@ -10,7 +10,7 @@ export class LoginTestService {
   constructor(private http: HttpClient) { }
 
 
-  login(login: Object): Observable<Object> {
-    return this.http.post(`${this.url}` + `/loginForTest?testId=`+1, login);
+  login(login: Object , testId:number): Observable<Object> {
+    return this.http.post(`${this.url}` + `/loginForTest?testId=`+testId, login);
   }
 }
