@@ -2,7 +2,10 @@
 
 <nb-card>
   <nb-card-header>
-    {{ editMode ? 'Update': 'Create' }} sous catergorie
+    {{ editMode ? 'Modifier': 'Ajouter' }} sous catergorie
+    <ul style="position: relative; float: right">
+      <i style="cursor: pointer; position: relative; float: right ; color: darkgreen"  (click)="create()"> Creation du question </i>
+    </ul>
   </nb-card-header>
 
   <nb-card-body>

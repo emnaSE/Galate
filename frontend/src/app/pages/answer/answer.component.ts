@@ -43,19 +43,19 @@ export class AnswerComponent  implements OnInit{
   }
   update(answer:Answer){
       console.log("update")
-    this.router.navigate(['pages/answer/',answer.id,'modifier'])
-      //this.router.navigate(['pages/question/',question.id,'modifier'])
+      this.router.navigate(['pages/answer/',answer.id,'modifier'])
+
   }
 
   deleteByid(answer:Answer):void {
       this.answerService.deleteAnswer(answer.id).subscribe(
         data=>{
           alert("delete ave succes");
-          this.router.navigate(['pages/answer'])
+          this.router.navigate(['pages/question'])
         },err=>{
           console.log(err);
         }
       )
-  console.log("delete;")
+    console.log("delete;")
   }
 }

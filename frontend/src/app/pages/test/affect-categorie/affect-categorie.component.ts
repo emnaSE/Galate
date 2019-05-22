@@ -50,14 +50,8 @@ export class AffectCategorieComponent implements OnInit {
           console.log(value)
           this.selectedItems = this.dropdownList.filter(
             c =>{
+                return value.map(v=> v.id).includes(c.id)
 
-                    return value.map(v=> v.id).includes(c.id)
-
-
-
-
-             // return {id:c.id ,itemName:c.name};
-              console.log(c.id);
             })
         },err=>{
           console.log(err)

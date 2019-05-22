@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {LocalDataSource} from "ng2-smart-table";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {CategorieService} from "./categorie.service";
 import {Categorie} from "./categorie.model";
+import {TestService} from "../test/test.service";
 
 @Component({
   selector: 'ngx-dashboard',
@@ -13,14 +14,31 @@ export class DashboardComponent implements OnInit{
 
    categories:Categorie[]
   pageActuel: number =1;
+   id:number;
+   Valid=false;
 
 
   constructor(private router: Router,
-              private categorieServcie:CategorieService) {
+              private categorieServcie:CategorieService,
+              private testService:TestService,
+              private activatedRouter:ActivatedRoute) {
+
+    this.id = this.activatedRouter.snapshot.params['id'];
   }
 
 
   ngOnInit(): void {
+
+    if (this.id){
+      this.Valid=true;
+      this.testService.getAllCategoriesByTestId(this.id).subscribe(
+        data=>{
+          this.categories=data;
+        },err=>{
+          console.log(err);
+        }
+      )
+    }else{
       this.categorieServcie.getAllCategorie().subscribe(
         data=>{
           this.categories=data;
@@ -28,6 +46,9 @@ export class DashboardComponent implements OnInit{
           console.log(err);
         }
       )
+
+    }
+
   }
   create(){
     this.router.navigate(['pages/categorie/create']);

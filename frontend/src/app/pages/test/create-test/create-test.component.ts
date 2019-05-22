@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {FormBuilder,AbstractControl, FormControl, FormGroup, Validators} from "@angular/forms";
 import {TestService} from "../test.service";
+import {Test} from "../test.model";
 
 @Component({
   selector: 'create-commercial',
@@ -9,12 +10,12 @@ import {TestService} from "../test.service";
   styleUrls: ['./create-test.component.scss']
 })
 export class CreateTestComponent implements OnInit {
-
   dateActivation:Date;
   dateFin:Date;
   date_ereur:number;
   p_error:number;
   id:number;
+  local:any;
   submitted = false;
   editMode=false;
   erreur:number;
@@ -41,6 +42,7 @@ export class CreateTestComponent implements OnInit {
       this.testService.getById(this.id).subscribe(
         (value:any)=>{
           this.addForm.patchValue(value);
+          localStorage.setItem('currentTest', JSON.stringify(value));
         },err=>{
           console.log(err);
         }
@@ -76,6 +78,19 @@ export class CreateTestComponent implements OnInit {
     }
   }
 
+consultezCategorie(){
 
+    this.router.navigate(['pages/categorie']);
+    }
+  consultezSubCategorie(){
+
+      this.router.navigate(['pages/sous/',this.id]);
+
+    }
+
+    consulterCategorie(){
+
+    this.router.navigate(['pages/categorie/',this.id]);
+    }
 
 }

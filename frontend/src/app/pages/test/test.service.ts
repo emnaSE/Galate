@@ -7,6 +7,7 @@ import { HttpClient, HttpRequest } from '@angular/common/http';
 import {API_URL} from "../../app.constant";
 import {Categorie} from "../dashboard/categorie.model";
 import {text} from "@angular/core/src/render3";
+import {BehaviorSubject} from "rxjs";
 
 
 
@@ -15,12 +16,25 @@ import {text} from "@angular/core/src/render3";
     providedIn: 'root'
   })
 export class TestService {
+
+  private currentTestSubject: BehaviorSubject<Test>;
+  public currentTest: Observable<Test>;
   private url:string=API_URL+"admin/";
 
 
   constructor(private http:HttpClient){
 
+    this.currentTestSubject = new BehaviorSubject<Test>(JSON.parse(localStorage.getItem('currentTest')));
+    this.currentTest = this.currentTestSubject.asObservable();
+
   }
+
+  public get currentTestValue(): any {
+    return this.currentTestSubject.value;
+  }
+
+
+
   getAllTest():Observable<Test[]>{
     return this.http.get<Test[]>(this.url+"getAllTests");
   }
@@ -59,6 +73,10 @@ export class TestService {
     return this.http.get<any>(this.url+"getAllSubcategoriesByTestId?id_test="+id);
   }
 
+  getAllCategoriesByTestId(id:number):Observable<any>{
+    return this.http.get<any>(this.url+"getCategoriesByTestId?testId="+id);
+  }
+
 
   getAffectationById(id:number):Observable<any>{
     return this.http.get<any>(this.url+"getSubCategoriesByTestId?testId="+id);
@@ -67,5 +85,7 @@ export class TestService {
   getAffectationCategorieById(id:number):Observable<any>{
     return this.http.get<any>(this.url+"getCategoriesByTestId?testId="+id);
   }
+
+
 }
 
