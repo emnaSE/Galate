@@ -10,7 +10,6 @@
     <form action="" style="width:100%;" [formGroup]="addForm">
 
 
-      <!-- personal info -->
       <div class="row">
         <div class="col-6">
           <div class="form-group" >
@@ -23,7 +22,6 @@
       </div>
 
 
-      <!-- seperator -->
       <div class="row">
         <div class="col">
           <hr>
@@ -31,7 +29,6 @@
       </div>
 
 
-      <!-- address form portion -->
       <div class="row" formArrayName="answers">
         <div class="col-12" *ngFor="let group of reponseArray.controls; let i = index;" [formGroupName]="i">
           <div class="row">
@@ -76,14 +73,13 @@
         </div>
       </div>
 
-      <!-- seperator -->
       <div class="row">
         <div class="col">
           <hr>
         </div>
       </div>
 
-      <!-- final action buttons -->
+
       <div class="row justify-content-center">
         <div class="col-2">
           <button type="button"  (click)="onCreate()" class="btn btn-primary">Submit</button>

@@ -53,38 +53,7 @@ export class CreateQuestionComponent implements OnInit {
   ngOnInit() {
 
 
-     /*this.addForm=this.formBuilder.group({
 
-        name: new FormControl('', [Validators.required]),
-        wording: [[], Validators.required],
-        value: [[], Validators.required],
-        answers: this.formBuilder.array([this.createAnswers()]
-      )
-
-    });
-
-
-    this.addForm=this.formBuilder.group({
-      question:{
-        name: new FormControl('', [Validators.required]),
-        wording: ["", Validators.required],
-        value: ["", Validators.required],
-      },
-      answers: this.formBuilder.array([{
-          valeur: ['', Validators.required],
-          name: ['', Validators.required],
-          ordre: ['', Validators.required],
-
-        },
-          {
-            valeur: ['', Validators.required],
-            name: ['', Validators.required],
-            ordre: ['', Validators.required],
-          },
-        ]
-      )
-
-    });*/
 
 
 
@@ -205,10 +174,13 @@ onCreate(){
   }
 
   addReponse() {
+
     this.reponseArray.push(this.addReponseGroup());
+
   }
   removeReponse(index) {
     this.reponseArray.removeAt(index);
+    console.log(index);
   }
   get reponseArray() {
     return <FormArray>this.addForm.get('answers');
