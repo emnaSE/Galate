@@ -17,6 +17,7 @@ export class LoginTestComponent implements OnInit {
     public password: AbstractControl;
     public bool=false;
     public testId:any ; 
+    public memberId:any;
 
     loginTest: LoginTest = new LoginTest();
     submitted = false;
@@ -30,6 +31,7 @@ export class LoginTestComponent implements OnInit {
   this.password = this.form.controls['password'];
 
   this.testId=localStorage.getItem('testId');
+  this.memberId=JSON.parse(localStorage.getItem('currentUser')).member.id;
   console.log("test  "+ this.testId);   
   
 
@@ -39,7 +41,7 @@ export class LoginTestComponent implements OnInit {
   }
 
   signIn() {
-    this.loginTestService.login(this.loginTest , this.testId)
+    this.loginTestService.loginForTest(this.loginTest , this.testId, this.memberId)
         .subscribe(data =>{
           var status=JSON.parse(JSON.stringify(data)).status;
           console.log('status='+JSON.parse(JSON.stringify(data)).status);

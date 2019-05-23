@@ -19,13 +19,14 @@ export class StartTestComponent  implements OnInit{
   dtTrigger: Subject<any> = new Subject();
   private map:Map<string,string>=new Map();
   testId:any;
-
+  userId:any;
   private choiceMemberArray:ChoiceMember[]=[];
 
     constructor(private router:Router ,private startTestService: StartTestService , private testService:TestService){ 
 
       this.testId=localStorage.getItem('testId');
-      console.log("test  "+ this.testId); 
+      this.userId=JSON.parse(localStorage.getItem('currentUser')).member.id;
+      console.log("userId  "+ this.userId); 
       
      
     }
@@ -53,6 +54,15 @@ export class StartTestComponent  implements OnInit{
     )
   }
 
+  public getTestMember() {
+    this.startTestService.getTestMember(this.testId, this.userId).subscribe(
+      data=>{
+        console.log(data);
+      },err=>{
+        console.log(err);
+      }
+    )
+  }
 
  
   public totalQuestionsSize(){
@@ -82,7 +92,7 @@ export class StartTestComponent  implements OnInit{
       return;
     }
     let choiceMember=new ChoiceMember();
-    choiceMember.id_test_member=1;
+    choiceMember.id_test_member=this.userId;
     this.map.forEach((value: string, key: string) => {
         choiceMember.id_question=key;
         choiceMember.id_answer=this.map.get(key); 

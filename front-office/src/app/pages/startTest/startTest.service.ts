@@ -22,6 +22,8 @@ export class StartTestService {
     return this.http.post(`${this.url2}` + `createMemberChoices`, choices);
   }
 
-
+  getTestMember(testId:number, memberId:number): Observable<Object> {
+    return this.http.get(this.url2 +'getTestMemberByMemberIdAndTestId?idMember='+memberId+'&idTest='+testId);
+  }
   
 }

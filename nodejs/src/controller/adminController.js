@@ -508,7 +508,8 @@ _publics.getTestSubcategoryByTestIdAndSubcateoryId = (req) => {
            con.query(sql,[testId,subcategoryId], function (err, result) {
               if (err)
                   reject(err);
-            return resolve(result[0].id);
+              return resolve(result[0].id);
+            
            });
   });   
 

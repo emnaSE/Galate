@@ -198,4 +198,10 @@ alter table question add id_test_subcategory int(11);
 alter table question add constraint question_test_subcategory_fkey foreign key (id_test_subcategory) references test_subcategory(id);
 alter table test_member add column date_test date;
 alter table member add column role varchar(255);
- insert into member(pseudo,password,role)values('admin','admin','admin');
+insert into member(pseudo,password,role)values('admin','admin','admin');
+alter table test add column duration varchar(255);
+alter table test MODIFY  expiration_date timestamp;
+alter table test MODIFY  activation_date timestamp;
+alter table test_member MODIFY  date_test  timestamp;
+
+ 

@@ -268,17 +268,14 @@ _publics.getTestMembersByClassSchool = (req) => {
 
 };
 //test member 
-_publics.createTestMembers = (testMembers) => {
-  var testMembers = JSON.parse(testMembers);
-  var id_test = testMembers.id_test;
-  var id_member = testMembers.id_member;
+_publics.createTestMember = (testId,memberId) => {
 
-
+  var date=new Date;
   return new Promise((resolve, reject) => {
     var msg = "";
     var sql = "INSERT INTO test_member SET ? ";
-    const newtestMembers = { id_test: id_test, id_member: id_member };
-    con.query(sql, newtestMembers, function (err, result) {
+    const newtestMember = { id_test: testId, id_member: memberId, date_test:date };
+    con.query(sql, newtestMember, function (err, result) {
       if (err) {
         msg = "failure";
         reject(err);
@@ -343,6 +340,20 @@ _publics.getAllMemberTest = (req) => {
     });
   });
 };
+
+_publics.getTestMemberByMemberIdAndTestId = (req) => {
+  var idMember = req.query.idMember;
+  var idTest = req.query.idTest;
+  return new Promise((resolve, reject) => {
+    var sql = "select * FROM test_member where id_member=? and id_test=?";
+
+    con.query(sql, [idMember,idTest], function (err, result) {
+      if (err) reject(err);
+      return resolve(JSON.stringify(result[0]));
+    });
+  });
+};
+
 
 _publics.getTestMemberByTestId = (req) => {
   var req = JSON.parse(req);
@@ -545,10 +556,10 @@ _publics.getTestEnCours = (req) => {
 };
 
 
-_publics.loginForTest = (testId, login) => {
+_publics.loginForTest = (testId, password) => {
   var response = {};
-  var login0 = JSON.parse(login);
-  var password = login0.password;
+  var pwd = JSON.parse(password);
+  var password = pwd.password;
 
   return new Promise((resolve, reject) => {
     var sql = "select * FROM test where id=? ";

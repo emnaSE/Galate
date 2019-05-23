@@ -134,9 +134,11 @@ memberController.getMemberByClass(req)
 
 router.post('/createTestMember',(req, res, next)=>
 memberController.getRawBody(req)
-.then(test_member=>{
-    res.payload.test_member=test_member;
-    return memberController.createTestMembers(test_member)
+.then(testMember=>{
+    var testMember=JSON.parse(testMember);
+    var testId =testMember.testId;
+    var memberId=testMember.memberId;
+    return memberController.createTestMember(testId,memberId)
 })
 .then(msg=>{
     res.send(msg);
@@ -174,7 +176,12 @@ memberController.getAllMemberTest(req)
   res.send(tests);
 })
 .catch(next));
-
+router.get('/getTestMemberByMemberIdAndTestId',urlencodedParser, (req, res, next) => 
+memberController.getTestMemberByMemberIdAndTestId(req)
+.then(testMember=>{
+  res.send(testMember);
+})
+.catch(next));
 
 router.post('/updateManuelAnswer',(req, res, next)=>
 memberController.getRawBody(req)
@@ -210,11 +217,15 @@ memberController.getTestEnCours(req)
 
 router.post('/loginForTest', (req, res, next) => 
 memberController.getRawBody(req)
-.then(login=>{
-    return memberController.loginForTest(req.query.testId,login);
+.then(password=>{
+    return memberController.loginForTest(req.query.testId,password);
+})
+.then(test=>{
+    res.payload.test=test;
+    return memberController.createTestMember(req.query.testId,req.query.memberId);
 })
 .then(response=>{
-  res.send(response);
+  res.send(res.payload.test);
 })
 .catch(next));;
 
