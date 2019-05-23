@@ -95,6 +95,11 @@ const routes: Routes = [{
       component:CreateEtalonnageComponent ,canActivate: [AuthGuard],
     },
     {
+      path: 'etalonnage/:id/modifier',
+      //component:CreateEtalonnageComponent ,
+      component:CreateEtalonnageComponent ,canActivate: [AuthGuard],
+    },
+    {
       path:"class",
       component: ClassComponent,canActivate: [AuthGuard],
       //component: ClassComponent,
