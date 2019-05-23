@@ -28,6 +28,7 @@ import { LoginTestComponent } from './pages/login-test/login-test.component';
 import { LoginTestService } from './pages/login-test/login-test.service';
 import { DownloadComponent } from './pages/downloadPDF/download.component';
 import { DownloadService } from './pages/downloadPDF/download.service';
+import { TestAnnuleComponent } from './pages/testAnnule/testAnnule.component';
 
 
 @NgModule({
@@ -42,7 +43,8 @@ import { DownloadService } from './pages/downloadPDF/download.service';
     StarterComponent,
     StarterHeaderComponent,
     StarterFooterComponent,
-    LoginTestComponent
+    LoginTestComponent,
+    TestAnnuleComponent
   ],
   imports: [
     BrowserModule,

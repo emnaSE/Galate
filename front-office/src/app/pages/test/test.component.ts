@@ -19,11 +19,17 @@ export class TestComponent  implements OnInit{
   private currentUserSubject: BehaviorSubject<Test>;
     public currentUser: Observable<Test>;
 
+    private testDurationSubject: BehaviorSubject<Test>;
+    public testDuration: Observable<Test>;
+
 
 
     constructor(private router:Router, private testService: TestService){ 
       this.currentUserSubject = new BehaviorSubject<Test>(JSON.parse(localStorage.getItem('testId')));
       this.currentUser = this.currentUserSubject.asObservable();
+
+      this.testDurationSubject = new BehaviorSubject<Test>(JSON.parse(localStorage.getItem('testDuration')));
+      this.testDuration = this.currentUserSubject.asObservable();
     
     }
 
@@ -39,6 +45,10 @@ export class TestComponent  implements OnInit{
 
 
     
+  }
+
+  public get testDurationValue(): any {
+    return this.testDurationSubject.value;
   }
   public get currentUserValue(): any {
     return this.currentUserSubject.value;
@@ -57,10 +67,11 @@ export class TestComponent  implements OnInit{
 
   public testsList:Array<any>;
 
-  public startTest(event, itemId ) {
+  public startTest(event, itemId , durationTest) {
     
         console.log(itemId);
         localStorage.setItem('testId',itemId );
+        localStorage.setItem('testDuration',durationTest );
         this.router.navigate(['/loginTest'])
         
      
