@@ -34,7 +34,7 @@ export class Timer {
         this._hours = Math.floor(this.duration / 3600);
         this._minutes = this._minutes - this._hours * 60;
 
-        console.log(this.duration);
+       
        
      
        /* this._hours = Math.floor(this._totalMinutes / 3600);
