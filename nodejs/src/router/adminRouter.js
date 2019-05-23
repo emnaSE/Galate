@@ -380,7 +380,7 @@ router.post('/createQuestionAndAnswers', (req, res, next) =>
 router.post('/createQuestion_Answers', (req, res, next) =>
     adminController.getRawBody(req)
 .then(response=>{
-    res.payload.question = JSON.parse(response).question;
+    res.payload.question = response;
      res.payload.answers = JSON.parse(response).answers;
     return adminController.getTestSubcategoryByTestIdAndSubcateoryId(req);
 })

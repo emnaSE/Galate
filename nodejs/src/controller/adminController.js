@@ -471,6 +471,7 @@ _publics.createQuestion = (question ) => {
 
 
 _publics.createNewQuestion = (question, testSubCategId) => { 
+  var question=JSON.parse(question);
   var name=question.name;
   var wording=question.wording;
   var value=question.value;  
