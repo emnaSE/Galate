@@ -53,7 +53,7 @@ export class CreateQuestionComponent implements OnInit {
   ngOnInit() {
 
 
-     this.addForm=this.formBuilder.group({
+     /*this.addForm=this.formBuilder.group({
 
         name: new FormControl('', [Validators.required]),
         wording: [[], Validators.required],
@@ -64,22 +64,22 @@ export class CreateQuestionComponent implements OnInit {
     });
 
 
-   /* this.addForm=this.formBuilder.group({
+    this.addForm=this.formBuilder.group({
       question:{
         name: new FormControl('', [Validators.required]),
-        wording: [[], Validators.required],
-        value: [[], Validators.required],
+        wording: ["", Validators.required],
+        value: ["", Validators.required],
       },
       answers: this.formBuilder.array([{
-          valeur: [[], Validators.required],
-          name: [[], Validators.required],
-          ordre: [[], Validators.required],
+          valeur: ['', Validators.required],
+          name: ['', Validators.required],
+          ordre: ['', Validators.required],
 
         },
           {
-            valeur: [[], Validators.required],
-            name: [[], Validators.required],
-            ordre: [[], Validators.required],
+            valeur: ['', Validators.required],
+            name: ['', Validators.required],
+            ordre: ['', Validators.required],
           },
         ]
       )
@@ -87,6 +87,15 @@ export class CreateQuestionComponent implements OnInit {
     });*/
 
 
+
+    this.addForm = this.formBuilder.group({
+
+        name: new FormControl('', [Validators.required]),
+        wording: ['', Validators.required],
+        value: ['', Validators.required],
+
+      answers: this.formBuilder.array([this.addReponseGroup()])
+    });
 
 
 
@@ -183,6 +192,26 @@ onCreate(){
   }
   onSelectAll(items: any) {
     console.log(items);
+  }
+
+
+  addReponseGroup() {
+    return this.formBuilder.group({
+
+      value: ['', Validators.required],
+      name: ['', Validators.required],
+      ordre: ['', Validators.required],
+    });
+  }
+
+  addReponse() {
+    this.reponseArray.push(this.addReponseGroup());
+  }
+  removeReponse(index) {
+    this.reponseArray.removeAt(index);
+  }
+  get reponseArray() {
+    return <FormArray>this.addForm.get('answers');
   }
 
 

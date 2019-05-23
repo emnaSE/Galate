@@ -7,76 +7,89 @@
   </nb-card-header>
 
   <nb-card-body>
-    <form [formGroup]="addForm" (ngSubmit)="onCreate()">
+    <form action="" style="width:100%;" [formGroup]="addForm">
 
 
+      <!-- personal info -->
+      <div class="row">
+        <div class="col-6">
+          <div class="form-group" >
+            <label for="fnText">value</label>
+            <input type="number" formControlName="value" >
+          </div>
+        </div>
 
-     <div class="row full-name-input">
-       <div class="col-3 input-group my-2">
-         <input formControlName="valeur" type="number" nbInput fullWidth placeholder="valeur" min="1">
-       </div>
-     </div>
-      <label>la premiere reponse</label>
-    <div class="row full-name-inputs my-2">
-        <div class="col-sm-4 input-group">
-          <input type="number" formControlName="valeur"  nbInput fullWidth placeholder="valeur" min="1" max="2">
-          <ng-container *ngIf="submitted && f.valeur.errors">
-            <p class="text-danger" >
-              nom est obligatoire !
-            </p>
-          </ng-container>
-        </div>
-        <div class="col-sm-4 input-group">
-          <input type="text" formControlName="name"  nbInput fullWidth placeholder="nom" min="1" max="2">
-          <ng-container *ngIf="submitted && f.name.errors">
-            <p class="text-danger" >
-              prenom est obligatoire !
-            </p>
-          </ng-container>
-        </div>
-        <div class="col-sm-4 input-group">
-          <input type="number" formControlName="ordre"  nbInput fullWidth placeholder="ordre" min="1" max="2">
-          <ng-container *ngIf="submitted && f.ordre.errors">
-            <p class="text-danger" >
-              prenom est obligatoire !
-            </p>
-          </ng-container>
-        </div>
+
       </div>
 
-      <label>la deuxieme reponse</label>
-      <div class="row full-name-inputs my-2">
-        <div class="col-sm-4 input-group">
-          <input type="number" formControlName="valeur"  nbInput fullWidth placeholder="valeur">
-          <ng-container *ngIf="submitted && f.valeur.errors">
-            <p class="text-danger" >
-              nom est obligatoire !
-            </p>
-          </ng-container>
-        </div>
-        <div class="col-sm-4 input-group">
-          <input type="text" formControlName="name"  nbInput fullWidth placeholder="nom">
-          <ng-container *ngIf="submitted && f.name.errors">
-            <p class="text-danger" >
-              prenom est obligatoire !
-            </p>
-          </ng-container>
-        </div>
-        <div class="col-sm-4 input-group">
-          <input type="number" formControlName="ordre"  nbInput fullWidth placeholder="ordre">
-          <ng-container *ngIf="submitted && f.ordre.errors">
-            <p class="text-danger" >
-              prenom est obligatoire !
-            </p>
-          </ng-container>
+
+      <!-- seperator -->
+      <div class="row">
+        <div class="col">
+          <hr>
         </div>
       </div>
 
 
+      <!-- address form portion -->
+      <div class="row" formArrayName="answers">
+        <div class="col-12" *ngFor="let group of reponseArray.controls; let i = index;" [formGroupName]="i">
+          <div class="row">
+            <div class="col-12">
+              <div class="row">
+                <div class="col-8">
+                  <h4>reponse {{i+1}}</h4>
+                </div>
+                <div class="col-4 control-buttons">
+                  <i style="cursor: pointer; position: relative; float: right ; color: darkgreen"  (click)="addReponse()" > + </i><br>
+                  <i style="cursor: pointer; position: relative; float: right ;color: darkred"  (click)="removeReponse(i)"> - </i>
+                </div>
+              </div>
+              <hr>
+            </div>
 
+            <div class="col-12">
+              <div class="row">
+                <div class="col">
+                  <div class="form-group">
+                    <label for="value">valeur</label>
+                    <input type="number" formControlName="value" >
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="col">
+                    <div class="form-group">
+                      <label for="nom">nom</label>
+                      <input type="text" formControlName="name" >
+                    </div>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="form-group">
+                    <label for="order">ordre</label>
+                    <input type="number" formControlName="ordre" >
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
-      <button type="submit" class="btn btn-success">ajouter</button>
+      <!-- seperator -->
+      <div class="row">
+        <div class="col">
+          <hr>
+        </div>
+      </div>
+
+      <!-- final action buttons -->
+      <div class="row justify-content-center">
+        <div class="col-2">
+          <button type="button"  (click)="onCreate()" class="btn btn-primary">Submit</button>
+        </div>
+      </div>
+
     </form>
-
   </nb-card-body>
 </nb-card>
