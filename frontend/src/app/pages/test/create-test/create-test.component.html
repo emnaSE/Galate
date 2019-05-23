@@ -2,7 +2,11 @@
 
 <nb-card>
   <nb-card-header>
-    {{ editMode ? 'Update' : 'Ajouter' }} Sous test
+    {{ editMode ? 'Modifier' : 'Ajouter' }} Sous test
+    <ul style="position: relative; float: right">
+      <i style="cursor: pointer; position: relative; float: right ; color: darkgreen"  (click)="consulterCategorie()"> Consulter Categories </i><br>
+      <i style="cursor: pointer; position: relative; float: right ;color: darkgreen"  (click)="consultezSubCategorie()"> Consulter SubCategories </i>
+    </ul>
   </nb-card-header>
 
   <nb-card-body>
@@ -31,8 +35,7 @@
 
 
 
-      <button type="submit" class="btn btn-success">{{ editMode ? 'Update' : 'Ajouter' }}</button>
+      <button type="submit" class="btn btn-success">{{ editMode ? 'Modifier' : 'Ajouter' }}</button>
     </form>
-
   </nb-card-body>
 </nb-card>

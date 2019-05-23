@@ -21,7 +21,7 @@ import {CreateQuestionComponent} from "./question/create-question/create-questio
 import {InfoCategorieComponent} from "./dashboard/info-categorie/info-categorie.component";
 import {AuthGuard} from "./auth/auth.guard";
 import {AnswerComponent} from "./answer/answer.component";
-import {CreateAnswerComponent} from "./answer/answer-question/create-answer.component";
+import {CreateAnswerComponent} from "./answer/crate-answer/create-answer.component";
 
 const routes: Routes = [{
   path: '',
@@ -29,6 +29,10 @@ const routes: Routes = [{
   children: [
     {
       path: 'categorie',
+      component: DashboardComponent,canActivate: [AuthGuard],
+    },
+    {
+      path: 'categorie/:id',
       component: DashboardComponent,canActivate: [AuthGuard],
     },
     {
@@ -97,13 +101,13 @@ const routes: Routes = [{
     },
     {
       path:"question",
-      component: AnswerComponent,canActivate: [AuthGuard],
+      component: QuestionComponent,canActivate: [AuthGuard],
       //component: QuestionComponent,
     },
     {
-      path:"question/create",
+      path:"question/create/:id",
       //component: CreateQuestionComponent,
-      component: CreateAnswerComponent,canActivate: [AuthGuard],
+      component: CreateQuestionComponent,canActivate: [AuthGuard],
     },
 
     {
@@ -152,6 +156,11 @@ const routes: Routes = [{
       path:"answer/:id/modifier",
       component: EtalonnageComponent,canActivate: [AuthGuard],
       //component: CreateAnswerComponent,
+    },
+    {
+      path: 'sous/:id',
+      component: SubcategorieComponent,canActivate: [AuthGuard],
+      //component: SubcategorieComponent,
     },
     {
       path: '',

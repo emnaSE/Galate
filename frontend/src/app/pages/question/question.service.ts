@@ -21,7 +21,7 @@ export class QuestionService {
 
   }
 
-
+//version beta
   addQuestion(question:Object):Observable<Object>{
     return this.http.post(this.url+'createQuestion',JSON.stringify(question),{responseType: 'text'});
   }
@@ -36,6 +36,10 @@ export class QuestionService {
   }
   getQuestionById(id:number):Observable<Question>{
     return this.http.get<Question>(this.url+"getQuestionById?id="+id);
+  }
+
+  addQuestionByIdSub(id:number,test_id:number,question:Object):Observable<Object>{
+    return this.http.post(this.url+"createQuestion_Answers?testId="+test_id+"&subcategoryId="+id,JSON.stringify(question),{responseType: 'text'});
   }
 
 }

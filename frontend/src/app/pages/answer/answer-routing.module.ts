@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { CreateAnswerComponent } from './answer-question/create-answer.component';
+import { CreateAnswerComponent } from './crate-answer/create-answer.component';
 import { AnswerComponent } from './answer.component';
 
 
