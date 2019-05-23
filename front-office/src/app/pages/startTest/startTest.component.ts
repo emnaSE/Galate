@@ -4,6 +4,9 @@ import { StartTestService} from './startTest.service';
 import { Question, ChoiceMember } from './startTest.model';
 import { Subject } from 'rxjs';
 import { TestService } from '../test/test.service';
+import { Timer } from './timer';
+import { State } from './state';
+
 
 
 
@@ -40,8 +43,38 @@ export class StartTestComponent  implements OnInit{
         console.log(err);
       }
     );
+    this._timer.start();
 
-   }
+    }
+
+
+    //chronometre
+    private _btnPlay: string = 'Démarrer';
+    private _timer: Timer = new Timer(this.router);
+    private _state: State = new State();
+
+     
+    play() {
+        this._timer.start();
+        this._state.setPlay();
+        this._btnPlay = 'Continuer';
+    }
+    stop() {
+        this._timer.stop();
+        this._state.setStop();
+    }
+    backward() {
+        this._timer.reset();
+        this._state.setBackward();
+        this._btnPlay = 'Démarrer';
+    }
+
+
+
+
+   
+
+
 
    public getTestDetails() {
     this.startTestService.getTestDetails(this.testId).subscribe(
