@@ -29,7 +29,6 @@ router.use(bodyParser.urlencoded({ extended: true }));
 router.post('/createEtalonnage', (req, res, next) =>
     memberController.getRawBody(req)
         .then(etalonnage => {
-            res.payload.etalonnage = etalonnage;
             return calculController.createEtalonnage(etalonnage)
         })
         .then(msg => {

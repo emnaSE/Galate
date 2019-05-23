@@ -7,6 +7,7 @@ var con=config.con;
 
 const request = require('request');
 var url=`http://localhost:`+config.port;
+const perf = require('execution-time')();
 
 _publics.getAllCategories = (req) => { 
   
@@ -1011,7 +1012,7 @@ _publics.getTestCategoryByTestId = (testId) => {
 }; 
 
 _publics.getTestSubcategoriesByTestId = (testId) => { 
-
+  perf.start();
   return new Promise((resolve, reject) => { 
   var sql = "select * from test_subcategory where id_test=?";
   con.query(sql,[testId], function (err, result) {

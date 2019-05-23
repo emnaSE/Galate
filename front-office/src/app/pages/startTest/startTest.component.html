@@ -609,7 +609,7 @@
         </div>
         </div>
         <div class="container-contact100-form-btn">
-            <button class="contact100-form-btn" (click)="showResult()">
+            <button class="contact100-form-btn" (click)="saveResult()">
               Save Result
             </button>
         </div>
@@ -674,7 +674,7 @@
                 return filled;
             }
             
-            function showResult(){
+            function saveResult(){
                 if(!testAllAnswerFilled()){
                     alert("Veuiller Réponser à tous les questions");
                 }else{

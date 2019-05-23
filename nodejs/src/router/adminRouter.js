@@ -10,7 +10,6 @@ var options = {
   };
 const bodyParser = require('body-parser');
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
-
 router.use(bodyParser.raw(options));
 router.use((req, res, next) => {
     res.payload = {};
@@ -20,7 +19,8 @@ router.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Credentials', true)
     next();
   });
-
+  
+  const perf = require('execution-time')();
 
 
 var getRawBody = require('raw-body')
@@ -729,11 +729,7 @@ router.get('/getQuestionsByTestSubcategory', (req, res, next) => adminController
     })
     .then(response => {
         res.payload.questions = response;
-
-        return res.payload;
-    })
-    .then(response => {
-        res.send(response);
+        res.send(res.payload);
     })
     .catch(next));
 
@@ -754,13 +750,15 @@ router.get('/getQuestionsByTestSubcategory', (req, res, next) => adminController
         res.send(response);
     })
     .catch(next));
-router.get('/getAllQuestionsByTestSubcategories', (req, res, next) => 
-adminController.getTestSubcategoriesByTestId(req.query.testId)
+router.get('/getAllQuestionsByTestSubcategories', (req, res, next) =>
+    adminController.getTestSubcategoriesByTestId(req.query.testId)
   .then(testSubcategories => {
         res.payload.testSubcategories = testSubcategories;
         return adminController.getAllQuestionsByTestSubcategories(testSubcategories)
     })
     .then(response => {
+        const results = perf.stop();
+        console.log("getAllQuestionsByTestSubcategories: " +results.time);
         res.send(response);
     })
     .catch(next));
