@@ -42,7 +42,7 @@ export class Timer {
        this._secondes = this._totalSecondes - this._minutes * 60;*/
        if ((this._hours ===0)&&(this._minutes ===0)&&(this._secondes ===0)){
         this.stop();
-        this.router.navigate(['/testAnnule']);
+        this.router.navigate(['/test-terminated']);
         
      }
       }, 1000); 

@@ -63,7 +63,8 @@ router.get('/getAllEtalonnages', urlencodedParser, (req, res, next) =>
 router.get('/getEtalonnageById', urlencodedParser, (req, res, next) =>
     calculController.getEtalonnageById(req)
         .then(etalonnage => {
-            res.send(etalonnage);
+            var etalonnageObj=JSON.parse(etalonnage).length===0 ? undefined : JSON.parse(etalonnage)[0];
+            res.send(etalonnageObj);
         })
         .catch(next));
 

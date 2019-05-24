@@ -25,8 +25,8 @@ export class TestService {
     this.testDuration = this.currentUserSubject.asObservable();
    }
   
-  getAllTests():Observable<Test[]>{
-    return this.http.get<Test[]>(this.url+'getAllTests');
+   getAllActiveTests():Observable<Test[]>{
+    return this.http.get<Test[]>(this.url+'getAllActiveTests');
   }
   public get currentUserValue(): any {
     return this.currentUserSubject.value;

@@ -14,7 +14,7 @@ import { HttpClient, HttpRequest } from '@angular/common/http';
 @Injectable({
     providedIn: 'root'
   })
-export class TestAnnuleService {
+export class TestTerminatedService {
   
   _http: any;
 

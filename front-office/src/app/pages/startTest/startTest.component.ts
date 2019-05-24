@@ -29,7 +29,6 @@ export class StartTestComponent  implements OnInit{
 
       this.testId=localStorage.getItem('testId');
       this.userId=JSON.parse(localStorage.getItem('currentUser')).member.id;
-      console.log("userId  "+ this.userId); 
       
      
     }
@@ -37,7 +36,6 @@ export class StartTestComponent  implements OnInit{
     this.startTestService.getTestDetails(this.testId).subscribe(
       data=>{
         this.subcatgories=data;
-        console.log(data[0].questions);
         this.dtTrigger.next();
       },err=>{
         console.log(err);
@@ -119,7 +117,6 @@ export class StartTestComponent  implements OnInit{
  
   
   public saveResult(){
-    console.log("mapsize= "+this.map.size+" questionsize= "+this.totalQuestionsSize());
     if(this.map.size!==this.totalQuestionsSize()){
       alert("merci de repondre à toutes les questions avant de passer!");
       return;
@@ -135,7 +132,6 @@ export class StartTestComponent  implements OnInit{
     var json = '{ "choices":'+JSON.stringify(this.choiceMemberArray)+'}';
     this.startTestService.createMemberChoices(json)
     .subscribe(data =>{
-      console.log(JSON.parse(JSON.stringify(data[0])));
       this.router.navigate(['/resultTable']);
     } , error => console.log('err'+error));
 

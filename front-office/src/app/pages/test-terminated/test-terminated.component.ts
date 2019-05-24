@@ -1,7 +1,7 @@
 import {Component, OnInit, ɵConsole} from '@angular/core';
 import {Router} from "@angular/router";
+import { TestTerminatedService } from './test-terminated.service';
 
-import { TestAnnuleService } from './testAnnule.service';
 
 
 
@@ -10,15 +10,15 @@ import { TestAnnuleService } from './testAnnule.service';
 
 
 @Component({
-  selector: 'testAnnule',
-  templateUrl: './testAnnule.component.html',
+  selector: 'test-terminated',
+  templateUrl: './test-terminated.component.html',
 })
-export class TestAnnuleComponent  implements OnInit{
+export class TestTerminatedComponent  implements OnInit{
   
   
 
     constructor(private router:Router,
-                private testAnnuleervice:TestAnnuleService,
+                private testTerminatedService:TestTerminatedService
                ){
 
    

@@ -783,11 +783,11 @@ _publics.getAllTests = (req) => {
                });
    });    
 };
-_publics.getAllActiveTests = (req) => { 
+_publics.getAllActiveTests = () => { 
     var date=new Date;
   return new Promise((resolve, reject) => {  
-           var sql = "select * FROM test where expiration_date>=?";        
-               con.query(sql,[date], function (err, result) {
+           var sql = "select * FROM test where activation_date <=? and expiration_date>?";        
+               con.query(sql,[date,date], function (err, result) {
                if (err) reject(err);
                return resolve(JSON.stringify(result));
                });

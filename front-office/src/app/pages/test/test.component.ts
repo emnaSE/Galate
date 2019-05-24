@@ -34,7 +34,7 @@ export class TestComponent  implements OnInit{
     }
 
   ngOnInit() { 
-    this.testService.getAllTests().subscribe(
+    this.testService.getAllActiveTests().subscribe(
       data=>{
         this.tests=data;
         this.dtTrigger.next();
@@ -53,8 +53,8 @@ export class TestComponent  implements OnInit{
   public get currentUserValue(): any {
     return this.currentUserSubject.value;
   }
-  public getAllTests() {
-    this.testService.getAllTests().subscribe(
+  public getAllActiveTests() {
+    this.testService.getAllActiveTests().subscribe(
       data=>{
         this.tests=data;
         this.dtTrigger.next();
@@ -65,7 +65,7 @@ export class TestComponent  implements OnInit{
   }
   
 
-  public testsList:Array<any>;
+
 
   public startTest(event, itemId , durationTest) {
     

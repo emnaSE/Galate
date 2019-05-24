@@ -4,9 +4,6 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {TooltipModule} from "ngx-bootstrap";
-import { StarterComponent } from './starter/starter.component';
-import { StarterHeaderComponent } from './starter/starter-header/starter-header.component';
-import { StarterFooterComponent } from './starter/starter-footer/starter-footer.component';
 import { TestComponent } from './pages/test/test.component';
 import { ResultTableComponent } from './pages/resultTable/resultTable.component';
 import { LoginComponent } from './pages/login/login.component';
@@ -28,7 +25,7 @@ import { LoginTestComponent } from './pages/login-test/login-test.component';
 import { LoginTestService } from './pages/login-test/login-test.service';
 import { DownloadComponent } from './pages/downloadPDF/download.component';
 import { DownloadService } from './pages/downloadPDF/download.service';
-import { TestAnnuleComponent } from './pages/testAnnule/testAnnule.component';
+import { TestTerminatedComponent } from './pages/test-terminated/test-terminated.component';
 
 
 @NgModule({
@@ -40,11 +37,8 @@ import { TestAnnuleComponent } from './pages/testAnnule/testAnnule.component';
     StartTestComponent,
     LoginComponent,
     RegisterComponent,
-    StarterComponent,
-    StarterHeaderComponent,
-    StarterFooterComponent,
     LoginTestComponent,
-    TestAnnuleComponent
+    TestTerminatedComponent
   ],
   imports: [
     BrowserModule,

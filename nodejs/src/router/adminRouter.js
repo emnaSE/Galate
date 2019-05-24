@@ -433,8 +433,6 @@ router.get('/getAnswerById', urlencodedParser, (req, res, next) =>
 
 //Test 
 
-
-
 router.get('/getAllTests', urlencodedParser, (req, res, next) =>
     adminController.getAllTests(req)
         .then(tests => {
@@ -450,12 +448,12 @@ router.get('/getTestById', urlencodedParser, (req, res, next) =>
         .catch(next));
 
 
-router.get('/getAllActivatedTests', urlencodedParser, (req, res, next) =>
-    adminController.getAllActiveTests(req)
-        .then(tests => {
-            res.send(tests);
-        })
-        .catch(next));
+router.get('/getAllActiveTests', urlencodedParser, (req, res, next) => adminController
+.getAllActiveTests()
+.then(tests => {
+    res.send(tests);
+})
+.catch(next));
 
 
 router.get('/getAllDisabledTests', urlencodedParser, (req, res, next) =>
@@ -479,61 +477,6 @@ router.post('/createTest', (req, res, next) =>
 router.post('/updateTestById', (req, res, next) =>
     memberController.getRawBody(req)
         .then(test => {
-            //console.log(test);
-
-            return adminController.updateTest(req, test)
-        })
-        .then(msg => {
-            res.send(msg);
-        })
-        .catch(next));
-
-router.get('/getAllTests', urlencodedParser, (req, res, next) =>
-    adminController.getAllTests(req)
-        .then(tests => {
-            res.send(tests);
-        })
-        .catch(next));
-
-router.get('/getAllTestsById', urlencodedParser, (req, res, next) =>
-    adminController.getTestById(req)
-        .then(tests => {
-            res.send(tests);
-        })
-        .catch(next));
-
-
-router.get('/getAllActivatedTests', urlencodedParser, (req, res, next) =>
-    adminController.getAllActiveTests(req)
-        .then(tests => {
-            res.send(tests);
-        })
-        .catch(next));
-
-
-router.get('/getAllDisabledTests', urlencodedParser, (req, res, next) =>
-    adminController.getAllDisabledTests(req)
-        .then(tests => {
-            res.send(tests);
-        })
-        .catch(next));
-
-router.post('/createTest', (req, res, next) =>
-    memberController.getRawBody(req)
-        .then(test => {
-            res.payload.test = test;
-            return adminController.createTest(test)
-        })
-        .then(msg => {
-            res.send(msg);
-        })
-        .catch(next));
-
-router.post('/updateTestById', (req, res, next) =>
-    memberController.getRawBody(req)
-        .then(test => {
-            //console.log(test);
-
             return adminController.updateTest(req, test)
         })
         .then(msg => {

@@ -7,8 +7,7 @@ import { LoginModule } from './login/login.module';
 import { RegisterModule } from "./register/RegisterModule";
 import { StartTestModule } from './startTest/startTest.module';
 import { DownloadModule } from './downloadPDF/download.module';
-import { TestAnnuleComponent } from './testAnnule/testAnnule.component';
-import { TestAnnuleModule } from './testAnnule/testAnnule.module';
+import { TestTerminatedModule } from './test-terminated/test-terminated.module';
 
 const PAGES_COMPONENTS = [
   PagesComponent,
@@ -22,7 +21,7 @@ const PAGES_COMPONENTS = [
     LoginModule,
     RegisterModule,
     StartTestModule,
-    TestAnnuleModule,
+    TestTerminatedModule
     
    
   ],
