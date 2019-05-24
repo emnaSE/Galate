@@ -34,6 +34,8 @@ export class CreateTestComponent implements OnInit {
       name: new FormControl('', [Validators.required]),
       activation_date: [[], Validators.required],
       expiration_date: [[], Validators.required],
+      test_subcategories_number: [, Validators.required],
+      duration: ['', Validators.required],
       password: [[], Validators.required],
     });
 

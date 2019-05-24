@@ -63,8 +63,8 @@ export class TestService {
     return this.http.get<Test[]>(this.url+"getAllDisabledTests");
   }
 
-  deleteTest(id:number):Observable<string>{
-    return this.http.get<string>(this.url+"deleteTestById?id="+id);
+  deleteTest(id:number):Observable<Object>{
+    return this.http.get(this.url+"deleteTestById?id="+id,{responseType: 'text'});
   }
   updateTest(id:number,test:Object):Observable<Object>{
     return this.http.post(this.url+"updateTestById?id="+id,JSON.stringify(test),{responseType: 'text'});

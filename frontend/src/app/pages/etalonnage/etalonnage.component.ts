@@ -53,4 +53,12 @@ export class EtalonnageComponent  implements OnInit{
   updateEtalonage(etalonnage:Etalonnage){
     this.router.navigate(['pages/etalonnage/',etalonnage.id,"modifier"]);
   }
+
+  deleteByid(etalonage:Etalonnage){
+    this.etalonnageService.deleteEtalonage(etalonage.id).subscribe(
+      data=>{
+        this.router.navigate(['pages/etalonnage'])
+      }
+    )
+  }
 }

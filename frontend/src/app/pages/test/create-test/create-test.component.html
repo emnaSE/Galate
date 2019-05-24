@@ -17,18 +17,29 @@
 
       <div class="form-group">
         <label type="text">date d activation:</label>
-        <input type="date" class="form-control" data-date-format="yyyy-MM-dd" formControlName="activation_date" placeholder="date d'activation">
+        <input type="date" class="form-control" data-date-format="yyyy/MM/dd h:mm:ss" formControlName="activation_date" placeholder="date d'activation">
       </div>
 
 
       <div class="form-group">
         <label type="text" >date expiration:</label>
-        <input type="date" class="form-control" formControlName="expiration_date" placeholder="date expiration">
+        <input type="date"  class="form-control" formControlName="expiration_date" placeholder="date expiration">
+      </div>
+
+      <div class="form-group">
+        <label type="text" >date expiration:</label>
+        <input type="number" class="form-control" formControlName="test_subcategories_number" placeholder="nombre de sousCategorie">
+      </div>
+
+      <div class="form-group">
+        <label type="text" >date expiration:</label>
+        <input type="number" class="form-control" formControlName="duration" placeholder="duree de test">
       </div>
 
 
+
       <div class="form-group">
-        <input type="password" class="form-control" placeholder="password" formControlName="password">
+        <input type="text" class="form-control" placeholder="password" formControlName="password">
       </div>
 
 
