@@ -23,6 +23,7 @@ export class StartTestComponent  implements OnInit{
   private map:Map<string,string>=new Map();
   testId:any;
   userId:any;
+  private testMemberId:any;
   private choiceMemberArray:ChoiceMember[]=[];
 
     constructor(private router:Router ,private startTestService: StartTestService , private testService:TestService){ 
@@ -31,7 +32,7 @@ export class StartTestComponent  implements OnInit{
 
       if(localStorage.getItem('currentUser')!== null){
       this.userId=JSON.parse(localStorage.getItem('currentUser')).member.id; }
-      
+      this.getTestMember() ;
      
     }
   ngOnInit() {
@@ -48,7 +49,7 @@ export class StartTestComponent  implements OnInit{
       }
     );
     this._timer.start();
-
+    this.getTestMember() ;
     }
 
     public logout (event){
@@ -99,6 +100,8 @@ export class StartTestComponent  implements OnInit{
   public getTestMember() {
     this.startTestService.getTestMember(this.testId, this.userId).subscribe(
       data=>{
+        this.testMemberId=JSON.parse(JSON.stringify(data)).id;
+        console.log("testMemberId= "+this.testMemberId);
         console.log(data);
       },err=>{
         console.log(err);
@@ -133,7 +136,7 @@ export class StartTestComponent  implements OnInit{
       return;
     }
     let choiceMember=new ChoiceMember();
-    choiceMember.id_test_member=1;
+    choiceMember.id_test_member=this.testMemberId;
     this.map.forEach((value: string, key: string) => {
         choiceMember.id_question=key;
         choiceMember.id_answer=this.map.get(key); 

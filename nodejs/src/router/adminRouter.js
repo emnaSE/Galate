@@ -388,7 +388,7 @@ router.post('/createQuestion_Answers', (req, res, next) =>
     if(testSubcategoryId.length===0){
         return "failure";
     }
-    return adminController.createNewQuestion(res.payload.question, testSubcategoryId[0]);
+    return adminController.createNewQuestion(res.payload.question, testSubcategoryId[0].id);
 })
 .then(message => {
     if(message==="failure" || message.msg ==="failure"){
