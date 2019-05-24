@@ -33,7 +33,8 @@ const routes: Routes = [
     component:RegisterComponent,
   },
   {
-    path: 'startTest',
+    path:"startTest/:ref",
+    //path: 'startTest',
     component:StartTestComponent,
   },
   {
@@ -41,7 +42,8 @@ const routes: Routes = [
     component:DownloadComponent,
   },
   {
-    path: 'loginTest',
+    path:"loginTest/:ref",
+    //path: 'loginTest',
     component:LoginTestComponent,
   },
   { path: '', redirectTo: 'login', pathMatch: 'full' },

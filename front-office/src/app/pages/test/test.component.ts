@@ -77,7 +77,8 @@ export class TestComponent  implements OnInit{
         console.log(itemId);
         localStorage.setItem('testId',itemId );
         localStorage.setItem('testDuration',durationTest );
-        this.router.navigate(['/loginTest'])
+        this.router.navigate(['/loginTest',itemId]);
+        //this.router.navigate(['/loginTest'])
         
      
   }

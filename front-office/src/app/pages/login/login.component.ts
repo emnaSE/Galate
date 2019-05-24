@@ -60,7 +60,6 @@ export class LoginComponent implements OnInit {
             alert("Verifier votre login et mot de passe");
           }
         } , error => console.log('err'+error));
-    this.login = new Login();
   }
 
   onSubmit() {

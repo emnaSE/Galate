@@ -385,13 +385,17 @@ router.post('/createQuestion_Answers', (req, res, next) =>
     return adminController.getTestSubcategoryByTestIdAndSubcateoryId(req);
 })
 .then(testSubcategoryId => {
-    return adminController.createNewQuestion(res.payload.question, testSubcategoryId);
+    if(testSubcategoryId.length===0){
+        return "failure";
+    }
+    return adminController.createNewQuestion(res.payload.question, testSubcategoryId[0]);
 })
 .then(message => {
+    if(message==="failure" || message.msg ==="failure"){
+        return "failure";
+    }
     if (message.msg === "success") {
         return adminController.createAnswers(message.questionId, res.payload.answers);
-    } else {
-         return "failure";
     }
 })
 .then(msg => {

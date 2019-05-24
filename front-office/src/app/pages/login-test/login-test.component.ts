@@ -46,7 +46,8 @@ export class LoginTestComponent implements OnInit {
           var status=JSON.parse(JSON.stringify(data)).status;
           console.log('status='+JSON.parse(JSON.stringify(data)).status);
           if(status===200){
-            this.router.navigate(['/startTest']);
+            this.router.navigate(['/startTest',this.testId]);
+           // this.router.navigate(['/startTest']);
           }else{
             alert("Le mot de passe entré est incorrecte");
           }
