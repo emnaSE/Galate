@@ -28,6 +28,10 @@ export class TestTerminatedComponent  implements OnInit{
 
                    
   ngOnInit() {
+
+    if((localStorage.getItem("currentUser") === null)&&(localStorage.getItem("testId") === null)&&(localStorage.getItem("testDuration") === null)){
+      this.router.navigate(['/login'])
+    }
  
    }
    

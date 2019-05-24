@@ -31,13 +31,24 @@ export class LoginTestComponent implements OnInit {
   this.password = this.form.controls['password'];
 
   this.testId=localStorage.getItem('testId');
-  this.memberId=JSON.parse(localStorage.getItem('currentUser')).member.id;
+
+  if(localStorage.getItem('currentUser')!== null){
+    this.memberId=JSON.parse(localStorage.getItem('currentUser')).member.id; 
+  
+  }
+      
+
+  
   console.log("test  "+ this.testId);   
   
 
   }
 
   ngOnInit() {
+
+    if((localStorage.getItem("currentUser") === null)&&(localStorage.getItem("testId") === null)&&(localStorage.getItem("testDuration") === null)){
+      this.router.navigate(['/login'])
+    }
   }
 
   signIn() {
