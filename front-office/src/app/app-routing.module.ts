@@ -33,7 +33,7 @@ const routes: Routes = [
     component:RegisterComponent,
   },
   {
-    path:"startTest/:ref",
+    path:"startTest/:id",
     //path: 'startTest',
     component:StartTestComponent,
   },
@@ -42,7 +42,7 @@ const routes: Routes = [
     component:DownloadComponent,
   },
   {
-    path:"loginTest/:ref",
+    path:"loginTest/:id",
     //path: 'loginTest',
     component:LoginTestComponent,
   },

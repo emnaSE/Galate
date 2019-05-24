@@ -60,10 +60,14 @@ export class ResultTableComponent  implements OnInit{
                    
   ngOnInit() { 
 
-    if((localStorage.getItem("currentUser") === null)&&(localStorage.getItem("testId") === null)&&(localStorage.getItem("testDuration") === null)){
+    /*if((localStorage.getItem("currentUser") === null)&&(localStorage.getItem("testId") === null)&&(localStorage.getItem("testDuration") === null)){
       this.router.navigate(['/login'])
+    }*/
+    if(localStorage.getItem("currentUser") === null){
+      this.router.navigate(['/login']);
+    }else if(localStorage.getItem("testId") === null){
+      this.router.navigate(['/test']);
     }
-
     
   
     this.resultTableService.getAllCatrogiesByTestMember(this.testId , this.memberId).subscribe(

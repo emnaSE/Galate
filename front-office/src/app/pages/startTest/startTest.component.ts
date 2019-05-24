@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Router} from "@angular/router";
+import {Router, ActivatedRoute} from "@angular/router";
 import { StartTestService} from './startTest.service';
 import { Question, ChoiceMember } from './startTest.model';
 import { Subject } from 'rxjs';
@@ -26,18 +26,30 @@ export class StartTestComponent  implements OnInit{
   private testMemberId:any;
   private choiceMemberArray:ChoiceMember[]=[];
 
-    constructor(private router:Router ,private startTestService: StartTestService , private testService:TestService){ 
+    constructor(private router:Router ,private startTestService: StartTestService , private testService:TestService,private activatedRoute:ActivatedRoute){ 
 
       this.testId=localStorage.getItem('testId');
-
+      this.testId=this.activatedRoute.snapshot.params['id'];
+      if(this.testId!==undefined){
+        localStorage.setItem('testId', this.testId);   
+      }
       if(localStorage.getItem('currentUser')!== null){
-      this.userId=JSON.parse(localStorage.getItem('currentUser')).member.id; }
-      this.getTestMember() ;
+      this.userId=JSON.parse(localStorage.getItem('currentUser')).member.id; 
+      }
+      if(localStorage.getItem("currentUser") !== null && localStorage.getItem("testId") !== null){
+        this.getTestMember() ;
+      }
+      
      
     }
   ngOnInit() {
-    if((localStorage.getItem("currentUser") === null)&&(localStorage.getItem("testId") === null)&&(localStorage.getItem("testDuration") === null)){
-      this.router.navigate(['/login'])
+    if(localStorage.getItem("currentUser") === null){
+      this.router.navigate(['/login']);
+    }else if(localStorage.getItem("testId") === null){
+      this.router.navigate(['/test']);
+    }
+    if(localStorage.getItem("currentUser") !== null && localStorage.getItem("testId") !== null){
+      this.getTestMember() ;
     }
 
     this.startTestService.getTestDetails(this.testId).subscribe(
@@ -49,7 +61,7 @@ export class StartTestComponent  implements OnInit{
       }
     );
     this._timer.start();
-    this.getTestMember() ;
+  
     }
 
     public logout (event){
@@ -100,6 +112,7 @@ export class StartTestComponent  implements OnInit{
   public getTestMember() {
     this.startTestService.getTestMember(this.testId, this.userId).subscribe(
       data=>{
+        console.log(data);
         this.testMemberId=JSON.parse(JSON.stringify(data)).id;
         console.log("testMemberId= "+this.testMemberId);
         console.log(data);

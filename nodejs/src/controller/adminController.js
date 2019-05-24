@@ -810,10 +810,11 @@ _publics.createTest = (test) => {
       var password =test.password;
       var activation_date=test.activation_date;
       var expiration_date=test.expiration_date;
+      var duration=test.duration;
       return new Promise((resolve, reject) => { 
       var msg="";
       var sql = "insert into test set ? ";
-      const newTest = { name: name,test_subcategories_number:test_subcategories_number,password:password,activation_date:activation_date,expiration_date:expiration_date};         
+      const newTest = { name: name,test_subcategories_number:test_subcategories_number,password:password,activation_date:activation_date,expiration_date:expiration_date,duration:duration};         
       con.query(sql,newTest, function (err, result) {
               if (err){
                 msg="failure";
@@ -833,11 +834,12 @@ _publics.updateTest= (req,test) => {
       var password =test.password;
       var activation_date=test.activation_date;
       var expiration_date=test.expiration_date;
+      var duration=test.duration;
       var id=req.query.id;
     return new Promise((resolve, reject) => {  
              var msg="";
-             var sql = "update  test set name=?,test_subcategories_number=?,password=?,activation_date=?,expiration_date=? where id=?";
-             con.query(sql,[name,test_subcategories_number,password,activation_date,expiration_date,id], function (err, result) {
+             var sql = "update  test set name=?,test_subcategories_number=?,password=?,activation_date=?,expiration_date=?,duration=? where id=?";
+             con.query(sql,[name,test_subcategories_number,password,activation_date,expiration_date,duration,id], function (err, result) {
                 if (err){
                   msg="failure";
                   reject(err);

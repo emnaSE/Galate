@@ -467,26 +467,25 @@ router.get('/getAllDisabledTests', urlencodedParser, (req, res, next) =>
         })
         .catch(next));
 
-router.post('/createTest', (req, res, next) =>
-    memberController.getRawBody(req)
-        .then(test => {
-            res.payload.test = test;
-            return adminController.createTest(test)
-        })
-        .then(msg => {
-            res.send(msg);
-        })
-        .catch(next));
+router.post('/createTest', (req, res, next) =>memberController
+.getRawBody(req)
+.then(test => {
+    return adminController.createTest(test)
+})
+.then(msg => {
+    res.send(msg);
+})
+.catch(next));
 
-router.post('/updateTestById', (req, res, next) =>
-    memberController.getRawBody(req)
-        .then(test => {
-            return adminController.updateTest(req, test)
-        })
-        .then(msg => {
-            res.send(msg);
-        })
-        .catch(next));
+router.post('/updateTestById', (req, res, next) =>memberController
+.getRawBody(req)
+.then(test => {
+    return adminController.updateTest(req, test)
+})
+.then(msg => {
+    res.send(msg);
+})
+.catch(next));
 
 
 router.post('/deleteTestById', (req, res, next) =>
