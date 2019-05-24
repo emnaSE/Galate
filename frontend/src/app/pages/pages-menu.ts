@@ -32,10 +32,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
         link: '/pages/categorie',
 
       },
-      {
-        title: "Sous categorie",
-        link: '/pages/sous',
-      },
+
       {
 
         title: 'Liste des Ecoles',

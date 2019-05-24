@@ -112,10 +112,9 @@ export class StartTestComponent  implements OnInit{
   public getTestMember() {
     this.startTestService.getTestMember(this.testId, this.userId).subscribe(
       data=>{
-        console.log(data);
+
         this.testMemberId=JSON.parse(JSON.stringify(data)).id;
         console.log("testMemberId= "+this.testMemberId);
-        console.log(data);
       },err=>{
         console.log(err);
       }
