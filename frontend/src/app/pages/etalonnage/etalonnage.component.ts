@@ -3,6 +3,7 @@ import {Router} from "@angular/router";
 
 import { Subject } from 'rxjs';
 import {Etalonnage} from "./etalonnage.model";
+import {EtalonnageService} from "./etalonnage.service";
 
 
 @Component({
@@ -16,10 +17,19 @@ export class EtalonnageComponent  implements OnInit{
 
 
 
-    constructor(private router:Router){
+    constructor(private router:Router,
+                private etalonnageService:EtalonnageService){
 
       }
   ngOnInit() {
+
+    this.etalonnageService.getAllEtalonage().subscribe(
+      data=>{
+        this.etalonages=data;
+      },err=>{
+        console.log(err);
+      }
+    )
 
 
 
@@ -28,5 +38,19 @@ export class EtalonnageComponent  implements OnInit{
 
   create(){
       this.router.navigate(['pages/etalonnage/create']);
+  }
+  deleteEtalonage(etalonage:Etalonnage):void{
+    this.etalonnageService.deleteEtalonage(etalonage.id).subscribe(
+      data=>{
+        alert("delete avec succes");
+      },err=>{
+        console.log(err);
+      }
+    )
+
+  }
+
+  updateEtalonage(etalonnage:Etalonnage){
+    this.router.navigate(['pages/etalonnage/',etalonnage.id,"modifier"]);
   }
 }

@@ -22,9 +22,12 @@ export class CreateQuestionComponent implements OnInit {
   selectedItems = [];
   dropdownSettings = {};
   test_id:any;
+  create=false;
   name_test:string;
   answers:FormArray;
   addForm:FormGroup;
+  valid=false;
+  valid1=false;
   submitted = false;
   constructor(private router:Router,
               private formBuilder:FormBuilder,
@@ -143,16 +146,16 @@ export class CreateQuestionComponent implements OnInit {
 
   }
 
-onCreate(){
+      onCreate(){
 
-    this.questionService.addQuestionByIdSub(this.test_id,this.id,this.addForm.value).subscribe(
-      data=>{
-        alert("suucess");
-      },err=>{
-        console.log(err);
+          this.questionService.addQuestionByIdSub(this.test_id,this.id,this.addForm.value).subscribe(
+            data=>{
+              alert("suucess");
+            },err=>{
+              console.log(err);
+            }
+          )
       }
-    )
-}
 
 
 
@@ -166,7 +169,6 @@ onCreate(){
 
   addReponseGroup() {
     return this.formBuilder.group({
-
       value: ['', Validators.required],
       name: ['', Validators.required],
       ordre: ['', Validators.required],
@@ -174,13 +176,15 @@ onCreate(){
   }
 
   addReponse() {
-
+    this.valid=true;
+    this.create=true;
     this.reponseArray.push(this.addReponseGroup());
 
   }
   removeReponse(index) {
+    this.valid1=true;
     this.reponseArray.removeAt(index);
-    console.log(index);
+
   }
   get reponseArray() {
     return <FormArray>this.addForm.get('answers');
