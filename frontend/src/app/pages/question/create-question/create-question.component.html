@@ -2,49 +2,90 @@
 
 <nb-card>
   <nb-card-header>
-    create question
+    creation du  question
+    <p style="cursor: pointer; position: relative; float: right ; color: #888888" >nom du test:{{name_test}}</p>
   </nb-card-header>
 
   <nb-card-body>
-    <form [formGroup]="addForm" (ngSubmit)="onSubmit()">
+    <form action="" style="width:100%;" [formGroup]="addForm">
 
-      <div class="form-group">
-      <label for="name">Sub Catergorie</label>
-      <angular2-multiselect [data]="dropdownList"
-                            [(ngModel)]="selectedItems"
-                            [settings]="dropdownSettings"
-                            formControlName="id_test_subcategory"></angular2-multiselect>
-      </div>
 
-      <div class="form-group">
-        <input type="text" class="form-control" formControlName="name" placeholder="name">
-        <ng-container *ngIf="submitted && formvalidate.name.errors">
-          <p class="text-danger" >
-            name est obligatoire !
-          </p>
-        </ng-container>
-      </div>
-      <div class="form-group">
-        <input type="text" class="form-control" formControlName="wording"  placeholder="wording">
-        <ng-container *ngIf="submitted && formvalidate.wording.errors">
-          <p class="text-danger" >
-            value est obligatoire !
-          </p>
-        </ng-container>
-      </div>
-      <div class="form-group">
-        <input type="number" class="form-control"  min="0" formControlName="value" placeholder="value">
-        <ng-container *ngIf="submitted && formvalidate.value.errors">
-          <p class="text-danger" >
-            value est obligatoire !
-          </p>
-        </ng-container>
+      <div class="row">
+        <div class="col-6">
+          <div class="form-group" >
+            <label for="fnText">value</label>
+            <input type="number" formControlName="value" >
+          </div>
+        </div>
+
+
       </div>
 
 
+      <div class="row">
+        <div class="col">
+          <hr>
+        </div>
+      </div>
 
-      <button type="submit" class="btn btn-success">ajouter</button>
+
+      <div class="row" formArrayName="answers">
+        <div class="col-12" *ngFor="let group of reponseArray.controls; let i = index;" [formGroupName]="i">
+          <div class="row">
+            <div class="col-12">
+              <div class="row">
+                <div class="col-8">
+                  <h4>reponse {{i+1}}</h4>
+                </div>
+                <div class="col-4 control-buttons">
+                  <i style="cursor: pointer; position: relative; float: right ; color: darkgreen"  (click)="addReponse()" > + </i><br>
+                  <i style="cursor: pointer; position: relative; float: right ;color: darkred"  (click)="removeReponse(i)"> - </i>
+                </div>
+              </div>
+              <hr>
+            </div>
+
+            <div class="col-12">
+              <div class="row">
+                <div class="col">
+                  <div class="form-group">
+                    <label for="value">valeur</label>
+                    <input type="number" formControlName="value" >
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="col">
+                    <div class="form-group">
+                      <label for="nom">nom</label>
+                      <input type="text" formControlName="name" >
+                    </div>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="form-group">
+                    <label for="order">ordre</label>
+                    <input type="number" formControlName="ordre" >
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <hr>
+        </div>
+      </div>
+
+
+      <div class="row justify-content-center">
+        <div class="col-2">
+          <button type="button"  (click)="onCreate()" class="btn btn-primary">Submit</button>
+        </div>
+      </div>
+
     </form>
-
   </nb-card-body>
 </nb-card>

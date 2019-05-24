@@ -31,7 +31,10 @@ export class TestTerminatedComponent  implements OnInit{
  
    }
    
-
+   public logout (event){
+    localStorage.clear();
+    this.router.navigate(['/login'])
+ }
   
 
   }

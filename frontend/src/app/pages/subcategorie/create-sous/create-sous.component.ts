@@ -138,4 +138,9 @@ export class CreateSousComponent implements OnInit {
     console.log(items);
   }
 
+  create(){
+    this.router.navigate(['pages/question/create',this.id]);
+
+  }
+
 }
