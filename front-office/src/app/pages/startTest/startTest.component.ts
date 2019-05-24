@@ -47,6 +47,11 @@ export class StartTestComponent  implements OnInit{
 
     }
 
+    public logout (event){
+      localStorage.clear();
+      this.router.navigate(['/login'])
+   }
+
 
     //chronometre
     private _btnPlay: string = 'Démarrer';

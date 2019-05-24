@@ -47,6 +47,11 @@ export class TestComponent  implements OnInit{
     
   }
 
+  public logout (event){
+    localStorage.clear();
+    this.router.navigate(['/login'])
+ }
+
   public get testDurationValue(): any {
     return this.testDurationSubject.value;
   }
