@@ -26,17 +26,34 @@ export class DownloadComponent  implements OnInit{
                 private loginService:LoginService
                 , private testService:TestService){
 
-     this.memberId=this.loginService.currentUserValue.member.id;
-     console.log("user"+this.memberId);   
 
-     this.testId=localStorage.getItem('testId');
-     console.log("test  "+ this.testId); 
-     
+      if(localStorage.getItem('currentUser')!== null){
+        this.memberId=this.loginService.currentUserValue.member.id;
+        console.log("user"+this.memberId);    
+      
+      }
+                    
+                   
+      if(localStorage.getItem('testId')!== null){
+        this.testId=localStorage.getItem('testId');
+        console.log("test  "+ this.testId); 
+      
+      
+      }
+    
+
+    
      
                 }
 
                    
   ngOnInit() {
+    if((localStorage.getItem("currentUser") === null)&&(localStorage.getItem("testId") === null)&&(localStorage.getItem("testDuration") === null)){
+      this.router.navigate(['/login'])
+    }
+
+ 
+    
  
    }
    

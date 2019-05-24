@@ -43,8 +43,13 @@ export class ResultTableComponent  implements OnInit{
 
                   this.items = ["1", "2", "3" , "4", "5", "6" , "7", "8", "9", "10", "11"]   
 
-                  this.memberId=this.loginService.currentUserValue.member.id;
-                  console.log("user"+this.memberId); 
+                  if(localStorage.getItem('currentUser')!== null){
+                    this.memberId=this.loginService.currentUserValue.member.id;
+                    console.log("user"+this.memberId);    
+                  
+                  }
+                  
+                
                   
                   this.testId=localStorage.getItem('testId');
                   console.log("test  "+ this.testId); 
@@ -54,6 +59,10 @@ export class ResultTableComponent  implements OnInit{
                    
                    
   ngOnInit() { 
+
+    if((localStorage.getItem("currentUser") === null)&&(localStorage.getItem("testId") === null)&&(localStorage.getItem("testDuration") === null)){
+      this.router.navigate(['/login'])
+    }
 
     
   

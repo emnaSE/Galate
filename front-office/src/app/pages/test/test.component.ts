@@ -43,6 +43,10 @@ export class TestComponent  implements OnInit{
       }
     )
 
+    if(localStorage.getItem("currentUser") === null){
+      this.router.navigate(['/login'])
+    }
+
 
     
   }

@@ -28,11 +28,17 @@ export class StartTestComponent  implements OnInit{
     constructor(private router:Router ,private startTestService: StartTestService , private testService:TestService){ 
 
       this.testId=localStorage.getItem('testId');
-      this.userId=JSON.parse(localStorage.getItem('currentUser')).member.id;
+
+      if(localStorage.getItem('currentUser')!== null){
+      this.userId=JSON.parse(localStorage.getItem('currentUser')).member.id; }
       
      
     }
   ngOnInit() {
+    if((localStorage.getItem("currentUser") === null)&&(localStorage.getItem("testId") === null)&&(localStorage.getItem("testDuration") === null)){
+      this.router.navigate(['/login'])
+    }
+
     this.startTestService.getTestDetails(this.testId).subscribe(
       data=>{
         this.subcatgories=data;
