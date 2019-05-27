@@ -220,12 +220,15 @@ memberController.getRawBody(req)
 .then(password=>{
     return memberController.loginForTest(req.query.testId,password);
 })
-.then(test=>{
-    res.payload.test=test;
-    return memberController.createTestMember(req.query.testId,req.query.memberId);
+.then(message=>{
+    if(JSON.parse(message).status===200){
+        return memberController.createTestMember(req.query.testId,req.query.memberId);
+   }else{
+        return "failure";
+    }  
 })
 .then(response=>{
-  res.send(res.payload.test);
+  res.send(response);
 })
 .catch(next));;
 
