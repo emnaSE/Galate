@@ -53,6 +53,7 @@ export class ResultTableComponent  implements OnInit{
                   
                   this.testId=localStorage.getItem('testId');
                   console.log("test  "+ this.testId); 
+                  
                   }
 
 

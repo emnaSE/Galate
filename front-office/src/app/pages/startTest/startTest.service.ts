@@ -9,7 +9,7 @@ import { Question } from './startTest.model';
 export class StartTestService {
   private url:string=API_URL+"admin/";
   private url2:string=API_URL+"member/";
-
+  private urlCalcul:string=API_URL+"calcul/";
 
   constructor(private http: HttpClient) { }
   
@@ -18,7 +18,6 @@ export class StartTestService {
   }
 
   createMemberChoices(choices: Object): Observable<Object> {
-    console.log(choices);
     return this.http.post(`${this.url2}` + `createMemberChoices`, choices);
   }
 
@@ -26,4 +25,8 @@ export class StartTestService {
     return this.http.get(this.url2 +'getTestMemberByMemberIdAndTestId?idMember='+memberId+'&idTest='+testId);
   }
   
+  
+  saveTestResult(testId:number, memberId:number): Observable<Object> {
+    return this.http.post(this.urlCalcul +'saveTestResult?id_test='+testId+'&id_member='+memberId,JSON.stringify,{responseType:'text'});
+  }
 }

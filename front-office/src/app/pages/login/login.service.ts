@@ -3,7 +3,7 @@ import { HttpClient, HttpRequest } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import {API_URL} from "../../app.constant";
 import { BehaviorSubject } from 'rxjs';
-import { Login } from './Login';
+import { Login } from './login';
 
 @Injectable()
 export class LoginService {

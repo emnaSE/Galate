@@ -11,6 +11,6 @@ export class LoginTestService {
 
 
   loginForTest(login: Object , testId:number, memberId:number): Observable<Object> {
-    return this.http.post(`${this.url}` + `/loginForTest?testId=`+testId+'&memberId='+memberId, login);
+    return this.http.post(`${this.url}` + `loginForTest?testId=`+testId+'&memberId='+memberId, login,{responseType:'text'});
   }
 }

@@ -59,15 +59,14 @@ export class LoginTestComponent implements OnInit {
   signIn() {
     this.loginTestService.loginForTest(this.loginTest , this.testId, this.memberId)
         .subscribe(data =>{
-          var status=JSON.parse(JSON.stringify(data)).status;
-          console.log('status='+JSON.parse(JSON.stringify(data)).status);
-          if(status===200){
+          console.log('data='+JSON.parse(JSON.stringify(data)));
+          if(data==="success"){
             this.router.navigate(['/startTest',this.testId]);
            // this.router.navigate(['/startTest']);
           }else{
             alert("Le mot de passe entré est incorrecte");
           }
-        } , error => console.log('err'+error));
+        } , error => console.log('err'+JSON.stringify(error)));
     this.loginTest = new LoginTest();
   }
 

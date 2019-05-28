@@ -143,28 +143,46 @@ export class StartTestComponent  implements OnInit{
  
   
   public saveResult(){
-    if(this.map.size!==this.totalQuestionsSize()){
+  /*  if(this.map.size!==this.totalQuestionsSize()){
       alert("merci de repondre à toutes les questions avant de passer!");
       return;
-    }
+    }*/
     let choiceMember=new ChoiceMember();
     choiceMember.id_test_member=this.testMemberId;
     this.map.forEach((value: string, key: string) => {
         choiceMember.id_question=key;
-        choiceMember.id_answer=this.map.get(key); 
-        this.choiceMemberArray.push(choiceMember);   
+        console.log("key==> "+choiceMember.id_question); 
+        choiceMember.id_answer=value; 
+        console.log("value==> "+choiceMember.id_answer); 
+        this.choiceMemberArray.push(choiceMember);  
+       
     })
 
+    console.log("this.choiceMemberArray==> "+this.choiceMemberArray);
     var json = '{ "choices":'+JSON.stringify(this.choiceMemberArray)+'}';
-    this.startTestService.createMemberChoices(json)
-    .subscribe(data =>{
-      this.router.navigate(['/resultTable']);
-    } , error => console.log('err'+error));
-
+    console.log("json==> "+json);
+    this.createMemberChoices(json)
+    this.createManualAnswers(this.testId, this.userId);
+  
   }
   
 
+  public createMemberChoices(json) {
+    this.startTestService.createMemberChoices(json)
+    .subscribe(data =>{
+      //this.router.navigate(['/resultTable']);
+    } , error => console.log('err'+error));
+  }
+
+  public createManualAnswers(testId,userId) {
+    this.startTestService.saveTestResult(testId,userId)
+    .subscribe(data =>{
+      this.router.navigate(['/resultTable']);
+    } , error => console.log('err'+error));
+  }
+
   
+ 
 }
 
 

@@ -2,7 +2,7 @@ import { Component, OnInit} from '@angular/core';
 import { FormsModule, AbstractControl, FormBuilder,  FormGroup, Validators, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { Login } from './Login';
+import { Login } from './login';
 import { LoginService } from './login.service';
 import { BehaviorSubject, Observable } from 'rxjs';
 
