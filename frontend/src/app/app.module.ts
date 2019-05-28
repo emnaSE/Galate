@@ -17,6 +17,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {AuthComponent} from "./pages/auth/auth.component";
 import {RegistreComponent} from "./pages/auth/registre/registre.component";
 import {AuthModule} from "./pages/auth/auth.module";
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 @NgModule({
   declarations: [AppComponent],
@@ -29,6 +30,7 @@ import {AuthModule} from "./pages/auth/auth.module";
     NgbModule.forRoot(),
     ThemeModule.forRoot(),
     CoreModule.forRoot(),
+    BsDatepickerModule.forRoot(),
   ],
   bootstrap: [AppComponent],
   providers: [

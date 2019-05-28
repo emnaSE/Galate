@@ -22,6 +22,7 @@ import {InfoCategorieComponent} from "./dashboard/info-categorie/info-categorie.
 import {AuthGuard} from "./auth/auth.guard";
 import {AnswerComponent} from "./answer/answer.component";
 import {CreateAnswerComponent} from "./answer/crate-answer/create-answer.component";
+import {HomeComponent} from "./home/home.component";
 
 const routes: Routes = [{
   path: '',
@@ -154,12 +155,12 @@ const routes: Routes = [{
 
     {
       path:"answer/:id/question",
-      component: EtalonnageComponent,canActivate: [AuthGuard],
+      component: AnswerComponent,canActivate: [AuthGuard],
       //component: AnswerComponent,
     },
     {
       path:"answer/:id/modifier",
-      component: EtalonnageComponent,canActivate: [AuthGuard],
+      component: CreateAnswerComponent,canActivate: [AuthGuard],
       //component: CreateAnswerComponent,
     },
     {
@@ -168,8 +169,13 @@ const routes: Routes = [{
       //component: SubcategorieComponent,
     },
     {
+      path: 'stat',
+      component: HomeComponent,canActivate: [AuthGuard],
+      //component: SubcategorieComponent,
+    },
+    {
       path: '',
-      redirectTo: 'categorie',
+      redirectTo: 'stat',
       pathMatch: 'full',
     },
 

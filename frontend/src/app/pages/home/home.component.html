@@ -1,0 +1,102 @@
+
+
+<nb-card>
+
+  <div class="col-md-12 col-lg-4 col-xxxl-4">
+  <div class="alert alert-danger alert-dismissible" *ngIf="err==1">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    age min doit etre toujours inferieur a age maximum
+  </div>
+  </div>
+
+  <nb-card-header>
+
+
+    <form [formGroup]="findForm" (ngSubmit)="doSearch()" >
+    <div class="row">
+      <div class="col-xs-12 col-12 col-md-4 form-group">
+        <label>de</label>
+        <input _ngcontent-c69=""   formControlName="debut" type ="date"placeholder="debut" class="form-control" >
+
+      </div>
+      <div class="col-xs-12 col-12 col-md-4 form-group">
+        <label>a</label>
+        <input _ngcontent-c69=""   formControlName="fin" type ="date"placeholder="Form Picker" class="form-control" >
+
+      </div>
+      <div class="col-xs-12 col-12 col-sm-6 col-md-2 form-group">
+        <label>max age</label>
+        <input type="number" class="form-control" formControlName="age1" placeholder="max age">
+
+      </div>
+      <div class="col-xs-12 col-12 col-sm-6 col-md-2 form-group">
+        <label>min age</label>
+        <input type="number" class="form-control" formControlName="age2" placeholder="min age">
+
+      </div>
+      <div class="col-xs-12 col-12 col-sm-4 col-md-2 col-lg-4 form-group">
+
+        <button type="submit" class="btn btn-success" >rechercher</button>
+        <label *ngIf="findForm.errors">{{ findForm.errors?.dates | json }}</label>
+      </div>
+
+    </div>
+    </form>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+  </nb-card-header>
+
+
+<ng-template [ngIf]="affiche">
+  <nb-card-body>
+
+
+
+    <table id="example2" class="my-3 table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info" style="text-align: center">
+      <thead>
+      <tr role="row">
+        <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="name: activate to sort column descending">nom de test</th>
+        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="date_test: activate to sort column ascending">date_test</th>
+        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="clazz: activate to sort column ascending">classe</th>
+        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="firstname: activate to sort column ascending">nom</th>
+        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="lastname: activate to sort column ascending">prenom</th>
+        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="test_subcategories_number: activate to sort column ascending">generation xml  </th>
+
+      </thead>
+      <tbody>
+      <tr  *ngFor="let filter of filters | paginate: { itemsPerPage: 7, currentPage: pageActuel }">
+        <td>{{filter.name}}</td>
+        <td>{{filter.date_test | date: 'dd/MM/yyyy' }}</td>
+        <td>class</td>
+        <td>{{filter.firstname}}</td>
+        <td>{{filter.lastname}}</td>
+
+
+
+        <td>
+
+          <i style="cursor: pointer;color: #69737f;  display: inline-block;margin-right: 20px !important;" class="fas fa-download"></i>
+
+
+        </td>
+     </tr>
+      <pagination-controls
+        (pageChange)="pageActuel = $event"
+        previousLabel="Précédent"
+        nextLabel="Suivant"
+      ></pagination-controls>
+      </tbody>
+    </table>
+
+
+  </nb-card-body>
+</ng-template>
+</nb-card>
+<style>
+  i {
+    margin : 20px 0;
+  }
+  .fas{
+    margin: 10px 0;
+  }
+
+</style>

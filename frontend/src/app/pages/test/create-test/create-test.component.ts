@@ -16,6 +16,7 @@ export class CreateTestComponent implements OnInit {
   p_error:number;
   id:number;
   local:any;
+
   submitted = false;
   editMode=false;
   erreur:number;
@@ -39,6 +40,8 @@ export class CreateTestComponent implements OnInit {
       password: [[], Validators.required],
     });
 
+
+
     if(this.id){
       this.editMode=true;
       this.testService.getById(this.id).subscribe(
@@ -52,12 +55,17 @@ export class CreateTestComponent implements OnInit {
     }
 
   }
+  get valid(){
+    return this.addForm.controls;
+  }
+
 
   onSubmit(){
     this.submitted=true;
 
     if(this.id){
-
+      console.log(this.addForm.value)
+      console.log(this.valid.activation_date.value);
       if(this.addForm.valid){
         this.testService.updateTest(this.id,this.addForm.value).subscribe(
           data=>{

@@ -9,6 +9,7 @@ import {NgxPaginationModule} from 'ngx-pagination';
 import { AffectCategorieComponent } from './affect-categorie/affect-categorie.component';
 import { AffectSubcategorieComponent } from './affect-subcategorie/affect-subcategorie.component';
 import {AngularMultiSelectModule} from "angular2-multiselect-dropdown";
+import {BsDatepickerModule} from "ngx-bootstrap";
 
 @NgModule({
   imports: [
@@ -16,6 +17,7 @@ import {AngularMultiSelectModule} from "angular2-multiselect-dropdown";
     FormsModule,
     NgxPaginationModule,
     AngularMultiSelectModule,
+    BsDatepickerModule.forRoot(),
   ],
   declarations: [
     TestComponent,

@@ -29,7 +29,7 @@ export class QuestionService {
     return this.http.get<Question[]>(this.url+'getAllQuestion');
   }
   deleteById(id:number):Observable<boolean>{
-    return this.http.get<boolean>(this.url+"deleteQuestion?id_question="+id);
+    return this.http.get<boolean>(this.url+"deleteQuestionById?id_question="+id);
   }
   updateById(id:number,question:any):Observable<any>{
     return this.http.post<any>(this.url+'updateQuestion?id_question='+id,question);

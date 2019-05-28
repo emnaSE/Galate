@@ -33,8 +33,8 @@ export class ClassService {
         return this.http.get<Class>(this.url+"getClassById?id="+id);
       }
 
-      deleteClass(id:number):Observable<string>{
-        return this.http.get<string>(this.url+"deleteClassById?id="+id);
+      deleteClass(id:number):Observable<any>{
+        return this.http.post<any>(this.url+"deleteClassById?id="+id,id);
       }
       updateClass(id:number,clas:Object):Observable<Object>{
         return this.http.post(this.url+"updateClassById?id="+id,JSON.stringify(clas), {responseType: 'text'});
