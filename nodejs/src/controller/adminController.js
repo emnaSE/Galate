@@ -4,7 +4,7 @@ const _publics = {};
 var config = require('../config');
 var getRawBody = require('raw-body');
 var con=config.con;
-
+const dateFormat = require('dateformat');
 const request = require('request');
 var url=`http://localhost:`+config.port;
 const perf = require('execution-time')();
@@ -810,6 +810,10 @@ _publics.createTest = (test) => {
       var password =test.password;
       var activation_date=test.activation_date;
       var expiration_date=test.expiration_date;
+     
+      activation_date=activation_date.replace(/T/, ' ').replace(/\..+/, '');
+      expiration_date=expiration_date.replace(/T/, ' ').replace(/\..+/, '');
+
       var duration=test.duration;
       return new Promise((resolve, reject) => { 
       var msg="";
