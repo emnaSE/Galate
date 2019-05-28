@@ -183,8 +183,8 @@ _publics.createMemberChoices = (response) => {
   for (var i in choices) {
     promises.push(new Promise((resolve, reject) => {
 
-      msg = createnewMemberChoices(choices, i, msg, reject, resolve);
-      // return resolve(response);
+      response = createnewMemberChoices(choices, i, msg);
+      return resolve(response);
     }
     ));
   }
@@ -497,13 +497,12 @@ _publics.verifPasswordTest = (test) => {
 
 module.exports = _publics;
 
-function createnewMemberChoices(choices, i, msg, reject, resolve) {
+function createnewMemberChoices(choices, i, msg) {
   var sql = "select count(*) as size from choice_member where id_question=? and id_test_member=?  ";
   con.query(sql, [choices[i].id_question, choices[i].id_test_member], function (err, result) {
 
     if (err) {
       msg = "failure";
-      reject(err);
     }
     else {
       var size = JSON.parse(JSON.stringify(result[0].size));
@@ -513,12 +512,11 @@ function createnewMemberChoices(choices, i, msg, reject, resolve) {
         con.query(sql, [choices[i].id_question, choices[i].id_answer, choices[i].id_test_member], function (err, result) {
           if (err) {
             msg = "failure";
-            reject(err);
           }
           else {
             msg = "record added";
           }
-          return resolve(msg);
+          return msg;
         });
       }
       else {
@@ -526,17 +524,14 @@ function createnewMemberChoices(choices, i, msg, reject, resolve) {
         con.query(sql, [choices[i].id_answer, choices[i].id_question, choices[i].id_test_member], function (err, result) {
           if (err) {
             msg = "failure";
-            reject(err);
           }
           else {
             msg = "record updated";
           }
-          return resolve(msg);
+          return msg;
         });
       }
-      // msg = "success";
     }
-    //return resolve(msg);
   });
   return msg;
 }

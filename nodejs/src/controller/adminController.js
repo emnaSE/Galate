@@ -1446,4 +1446,32 @@ _publics.getCategoriesByTestId = (req) => {
 
 
 
+_publics.getTestsByFilter = (req) => {
+  return new Promise((resolve, reject) => {   
+    var sql = "select t.name, tm.date_test, m.firstname, m.lastname from test t left join test_member tm on(t.id=tm.id_test) left join member m on(m.id=tm.id_member) where 5=5";        
+    sql=whereClause(req, sql);
+    con.query(sql,[req.query.testId], function (err, result) {
+    if (err) reject(err);
+    return resolve(result);
+    });
+ });  
+
+}
+
+function whereClause(req, sql) {
+  if(req.query.beginDate!==undefined && req.query.beginDate!==''){
+    sql+=" and tm.date_test>='"+req.query.beginDate+"'";
+  }
+  if(req.query.endDate!==undefined && req.query.endDate!==''){
+    sql+=" and tm.date_test<='"+req.query.endDate+"'";
+  }
+  if(req.query.minAge!==undefined && req.query.minAge!==''){
+    sql+=" and m.age>='"+req.query.minAge+"'";
+  }
+  if(req.query.maxAge!==undefined && req.query.maxAge!==''){
+    sql+=" and m.age<='"+req.query.maxAge+"'";
+  }
+  console.log("sql= "+sql);
+  return sql;
+}
 module.exports = _publics;
