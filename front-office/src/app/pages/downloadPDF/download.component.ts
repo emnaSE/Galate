@@ -1,5 +1,5 @@
 import {Component, OnInit, ɵConsole} from '@angular/core';
-import {Router} from "@angular/router";
+import {Router, ActivatedRoute} from "@angular/router";
 
 import { DownloadService } from './download.service';
 
@@ -17,45 +17,36 @@ import { TestService } from '../test/test.service';
 })
 export class DownloadComponent  implements OnInit{
   pageActuel: number =1;
-  memberId:number;
+  memberId:any;
   testId:any;
-  
+  memberId1:any;
+  testId1:any;
 
     constructor(private router:Router,
                 private downloadService:DownloadService,
                 private loginService:LoginService
-                , private testService:TestService){
+                , private testService:TestService,
+                private activatedRoute:ActivatedRoute){
 
 
-      if(localStorage.getItem('currentUser')!== null){
-        this.memberId=this.loginService.currentUserValue.member.id;
-        console.log("user"+this.memberId);    
-      
-      }
-                    
-                   
-      if(localStorage.getItem('testId')!== null){
-        this.testId=localStorage.getItem('testId');
-        console.log("test  "+ this.testId); 
-      
-      
-      }
-    
-
-    
      
-                }
+                  this.testId=localStorage.getItem('testId');
+                  this.memberId=localStorage.getItem('memberId');
+                  this.testId1=this.activatedRoute.snapshot.params['idT'];
+                  this.memberId1=this.activatedRoute.snapshot.params['idM'];
+             
+            
+              }
 
-                   
+
   ngOnInit() {
-    /*if((localStorage.getItem("currentUser") === null)&&(localStorage.getItem("testId") === null)&&(localStorage.getItem("testDuration") === null)){
-      this.router.navigate(['/login'])
-    }*/
-    if(localStorage.getItem("currentUser") === null){
+    if(localStorage.getItem("memberId")  === null){
       this.router.navigate(['/login']);
-    }else if(localStorage.getItem("testId") === null){
-      this.router.navigate(['/test']);
     }
+    if((localStorage.getItem("testId")===null) && (this.testId1!== null)){
+      this.router.navigate(['/loginTest', this.testId1 , this.memberId1]);
+    }
+              
 
    }
    

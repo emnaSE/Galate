@@ -13,7 +13,7 @@ import { TestTerminatedComponent } from './pages/test-terminated/test-terminated
 const routes: Routes = [
   { path: 'pages', loadChildren: './app.module#AppModule' },
   {
-    path: 'resultTable',
+    path: 'resultTable/:idT/:idM',
     component:ResultTableComponent,
   },
   {
@@ -33,16 +33,16 @@ const routes: Routes = [
     component:RegisterComponent,
   },
   {
-    path:"startTest/:id",
+    path:"startTest/:idT/:idM",
     //path: 'startTest',
     component:StartTestComponent,
   },
   {
-    path: 'download',
+    path: 'download/:idT/:idM',
     component:DownloadComponent,
   },
   {
-    path:"loginTest/:id",
+    path:"loginTest/:idT/:idM",
     //path: 'loginTest',
     component:LoginTestComponent,
   },

@@ -1,6 +1,6 @@
 import { Component, OnInit} from '@angular/core';
 import { FormsModule, AbstractControl, FormBuilder,  FormGroup, Validators, FormControl } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { LoginTest } from './login-test';
 import { LoginTestService } from './login-test.service';
 import { TestService } from '../test/test.service';
@@ -17,29 +17,41 @@ export class LoginTestComponent implements OnInit {
     public password: AbstractControl;
     public bool=false;
     public testId:any ; 
+    public testId1:any ; 
     public memberId:any;
 
     loginTest: LoginTest = new LoginTest();
     submitted = false;
-  constructor(private router: Router, fb: FormBuilder, private loginTestService: LoginTestService , private testService:TestService) {
+  constructor(private router: Router, fb: FormBuilder, private loginTestService: LoginTestService , private testService:TestService , private activatedRoute:ActivatedRoute) {
   
-  
+    
+    this.testId1=this.activatedRoute.snapshot.params['idT'];
+    this.memberId=this.activatedRoute.snapshot.params['idM'];
+   
+   console.log(this.memberId);
+
+    /*if(this.memberId!==undefined){
+      localStorage.setItem('memberId', this.memberId);   
+    }*/
+
+
+    
     this.form = fb.group({
       password: ['', Validators.required]
   });
 
   this.password = this.form.controls['password'];
 
-  this.testId=localStorage.getItem('testId');
-
-  if(localStorage.getItem('currentUser')!== null){
-    this.memberId=JSON.parse(localStorage.getItem('currentUser')).member.id; 
+  if(localStorage.getItem('memberId')!== null){
+    this.memberId=localStorage.getItem('memberId'); 
   
   }
+
+ 
       
 
   
-  console.log("test  "+ this.testId);   
+  console.log("test URL  "+ this.testId1);   
   
 
   }
@@ -48,21 +60,29 @@ export class LoginTestComponent implements OnInit {
     /*if((localStorage.getItem("currentUser") === null)&&(localStorage.getItem("testId") === null)&&(localStorage.getItem("testDuration") === null)){
       this.router.navigate(['/login'])
     }*/
-    if(localStorage.getItem("currentUser") === null){
+    if(localStorage.getItem("memberId") === null){
       this.router.navigate(['/login']);
-    }else if(localStorage.getItem("testId") === null){
-      this.router.navigate(['/test']);
     }
     
   }
 
   signIn() {
-    this.loginTestService.loginForTest(this.loginTest , this.testId, this.memberId)
+    this.loginTestService.loginForTest(this.loginTest , this.testId1, this.memberId)
+    
+   
         .subscribe(data =>{
           var status=JSON.parse(JSON.stringify(data)).status;
           console.log('status='+JSON.parse(JSON.stringify(data)).status);
+          this.testId = localStorage.getItem('testId') ;
+         
           if(status===200){
-            this.router.navigate(['/startTest',this.testId]);
+            
+            if(this.testId===null){
+              localStorage.setItem('testId', this.testId1);   
+            }
+            this.router.navigate(['/startTest',this.testId1 , this.memberId]);
+
+           
            // this.router.navigate(['/startTest']);
           }else{
             alert("Le mot de passe entré est incorrecte");

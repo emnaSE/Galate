@@ -1,8 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {Router} from "@angular/router";
+import {Router, ActivatedRoute} from "@angular/router";
 import { TestService } from './test.service';
 import { Test } from './test';
 import { Subject, BehaviorSubject, Observable } from 'rxjs';
+import { LoginService } from '../login/login.service';
+import { moveEmbeddedView } from '@angular/core/src/view';
 
 
 
@@ -17,14 +19,24 @@ export class TestComponent  implements OnInit{
   private tests:Test[]=[];
   dtTrigger: Subject<any> = new Subject();
   private currentUserSubject: BehaviorSubject<Test>;
-    public currentUser: Observable<Test>;
+    public currentUser: any;
 
     private testDurationSubject: BehaviorSubject<Test>;
     public testDuration: Observable<Test>;
 
+    public memberId: any ;
 
 
-    constructor(private router:Router, private testService: TestService){ 
+
+    constructor(private router:Router, private testService: TestService ,private loginService:LoginService , private activatedRoute:ActivatedRoute){ 
+
+      
+
+     
+        this.memberId=localStorage.getItem('memberId');
+       
+  
+
       this.currentUserSubject = new BehaviorSubject<Test>(JSON.parse(localStorage.getItem('testId')));
       this.currentUser = this.currentUserSubject.asObservable();
 
@@ -43,11 +55,10 @@ export class TestComponent  implements OnInit{
       }
     )
 
-    if(localStorage.getItem("currentUser") === null){
+    if(localStorage.getItem("memberId") === null){
       this.router.navigate(['/login']);
-    }else  if(localStorage.getItem("testId") === null){
-      this.router.navigate(['/test']);
     }
+   
 
 
     
@@ -83,7 +94,7 @@ export class TestComponent  implements OnInit{
         console.log(itemId);
         localStorage.setItem('testId',itemId );
         localStorage.setItem('testDuration',durationTest );
-        this.router.navigate(['/loginTest',itemId]);
+        this.router.navigate(['/loginTest' ,itemId , this.memberId]);
         //this.router.navigate(['/loginTest'])
         
      

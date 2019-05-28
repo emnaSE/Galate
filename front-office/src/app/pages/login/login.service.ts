@@ -13,6 +13,9 @@ export class LoginService {
 
     this.currentUserSubject = new BehaviorSubject<Login>(JSON.parse(localStorage.getItem('currentUser')));
             this.currentUser = this.currentUserSubject.asObservable();
+
+            this.memberSubject = new BehaviorSubject<Login>(JSON.parse(localStorage.getItem('memberId')));
+            this.memberId = this.currentUserSubject.asObservable();
   }
 
 
@@ -21,8 +24,16 @@ export class LoginService {
   }
   private currentUserSubject: BehaviorSubject<Login>;
   public currentUser: Observable<Login>;
+  private memberSubject: BehaviorSubject<Login>;
+  public memberId: Observable<Login>;
+
+
 
   public get currentUserValue(): any {
     return this.currentUserSubject.value;
+}
+
+public get memberValue(): any {
+  return this.memberSubject.value;
 }
 }
