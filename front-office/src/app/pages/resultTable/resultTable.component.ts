@@ -1,5 +1,5 @@
 import {Component, OnInit, ɵConsole} from '@angular/core';
-import {Router} from "@angular/router";
+import {Router, ActivatedRoute} from "@angular/router";
 import { ResultTable } from './resultTable.model';
 import { ResultTableService } from './resultTable.service';
 import { Catalogue } from './Catalogue.model';
@@ -32,46 +32,42 @@ export class ResultTableComponent  implements OnInit{
   public questionNumber : number ;
   public answerNumber : number ;
   public object : any ;
-  memberId:number;
+  memberId:any;
   testId:any;
+  memberId1:any;
+  testId1:any;
 
 
     constructor(private router:Router,
                 private resultTableService:ResultTableService,
                 private loginService:LoginService
-                , private testService:TestService){
+                , private testService:TestService , private activatedRoute:ActivatedRoute){
 
                   this.items = ["1", "2", "3" , "4", "5", "6" , "7", "8", "9", "10", "11"]   
 
-                  if(localStorage.getItem('currentUser')!== null){
-                    this.memberId=this.loginService.currentUserValue.member.id;
-                    console.log("user"+this.memberId);    
-                  
-                  }
-                  
-                
-                  
                   this.testId=localStorage.getItem('testId');
-                  console.log("test  "+ this.testId); 
-                  
-                  }
+
+                  this.memberId=localStorage.getItem('memberId');
+                  this.testId1=this.activatedRoute.snapshot.params['idT'];
+                  this.memberId1=this.activatedRoute.snapshot.params['idM'];
+             
+            
+              }
 
 
-                   
-                   
-  ngOnInit() { 
 
-    /*if((localStorage.getItem("currentUser") === null)&&(localStorage.getItem("testId") === null)&&(localStorage.getItem("testDuration") === null)){
-      this.router.navigate(['/login'])
-    }*/
-    if(localStorage.getItem("currentUser") === null){
+  ngOnInit() {
+    if(localStorage.getItem("memberId")  === null){
       this.router.navigate(['/login']);
-    }else if(localStorage.getItem("testId") === null){
-      this.router.navigate(['/test']);
     }
+    if((localStorage.getItem("testId")===null) && (this.testId1!== null)){
+      this.router.navigate(['/loginTest', this.testId1 , this.memberId1]);
+    }
+              
     
-  
-    this.resultTableService.getAllCatrogiesByTestMember(this.testId , this.memberId).subscribe(
+
+    
+    this.resultTableService.getAllCatrogiesByTestMember(this.testId1 , this.memberId1).subscribe(
       data=>{
         this.object=data;
         this.catalogueDetails=data;
@@ -141,7 +137,7 @@ export class ResultTableComponent  implements OnInit{
       alert("merci de repondre à toutes les questions ! ");
     }
     else {
-      this.router.navigate(['/download'])
+      this.router.navigate(['/download' , this.testId1 , this.memberId1])
         
       }
     

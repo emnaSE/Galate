@@ -23,34 +23,42 @@ export class StartTestComponent  implements OnInit{
   private map:Map<string,string>=new Map();
   testId:any;
   userId:any;
+  memberId:any;
+  testId1:any;
+  memberId1:any;
   private testMemberId:any;
   private choiceMemberArray:ChoiceMember[]=[];
 
     constructor(private router:Router ,private startTestService: StartTestService , private testService:TestService,private activatedRoute:ActivatedRoute){ 
 
       this.testId=localStorage.getItem('testId');
-      this.testId=this.activatedRoute.snapshot.params['id'];
-      if(this.testId!==undefined){
-        localStorage.setItem('testId', this.testId);   
-      }
-      if(localStorage.getItem('currentUser')!== null){
-      this.userId=JSON.parse(localStorage.getItem('currentUser')).member.id; 
-      }
-      if(localStorage.getItem("currentUser") !== null && localStorage.getItem("testId") !== null){
+      this.memberId=localStorage.getItem('memberId');
+      this.testId1=this.activatedRoute.snapshot.params['idT'];
+      this.memberId1=this.activatedRoute.snapshot.params['idM'];
+ 
+
+
+      
+     
+      if(localStorage.getItem("memberId") !== null && localStorage.getItem("testId") !== null){
         this.getTestMember() ;
       }
       
      
     }
   ngOnInit() {
-    if(localStorage.getItem("currentUser") === null){
+    if(localStorage.getItem("memberId")  === null){
       this.router.navigate(['/login']);
-    }else if(localStorage.getItem("testId") === null){
-      this.router.navigate(['/test']);
     }
-    if(localStorage.getItem("currentUser") !== null && localStorage.getItem("testId") !== null){
+     if((localStorage.getItem("testId")===null) && (this.testId1!== null)){
+      this.router.navigate(['/loginTest', this.testId1 , this.memberId1]);
+    }
+    if(localStorage.getItem("memberId") !== null && localStorage.getItem("testId") !== null){
       this.getTestMember() ;
     }
+
+
+    
 
     this.startTestService.getTestDetails(this.testId).subscribe(
       data=>{
@@ -110,11 +118,13 @@ export class StartTestComponent  implements OnInit{
   }
 
   public getTestMember() {
-    this.startTestService.getTestMember(this.testId, this.userId).subscribe(
+    this.startTestService.getTestMember(this.testId, this.memberId).subscribe(
       data=>{
-
-        this.testMemberId=JSON.parse(JSON.stringify(data)).id;
-        console.log("testMemberId= "+this.testMemberId);
+        var dataObj=JSON.parse(JSON.stringify(data));
+        if(dataObj!==null){
+          this.testMemberId=JSON.parse(JSON.stringify(data)).id;
+          console.log("testMemberId= "+this.testMemberId);
+        }
       },err=>{
         console.log(err);
       }
@@ -171,6 +181,7 @@ export class StartTestComponent  implements OnInit{
     this.startTestService.createMemberChoices(json)
     .subscribe(data =>{
       //this.router.navigate(['/resultTable']);
+      this.router.navigate(['/resultTable' , this.testId , this.memberId]);
     } , error => console.log('err'+error));
   }
 
