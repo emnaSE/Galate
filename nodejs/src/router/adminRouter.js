@@ -769,7 +769,12 @@ router.get('/getCategoriesByTestId', (req, res, next) => adminController
 
 
 
-
+router.get('/getTestsByFilter',urlencodedParser, (req, res, next) => 
+adminController.getTestsByFilter(req)
+.then(tests=>{
+  res.send(tests);
+})
+.catch(next));
 
 
 

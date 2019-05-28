@@ -69,16 +69,20 @@ router.get('/getEtalonnageById', urlencodedParser, (req, res, next) =>
         .catch(next));
 
 
-router.get('/getLineSum', urlencodedParser, (req, res, next) =>
-    calculController.getLineSum(req)
-        .then(sum => {
-
-            calculController.createManuelAnswer(req, sum);
-        })
-        .then(response => {
-            res.send(response);
-        })
-        .catch(next));
+router.post('/saveTestResult', urlencodedParser, (req, res, next) =>calculController
+.getLineSum(req)
+.then(map => {
+    res.payload.map=map;
+    req.query.testId=req.query.id_test;
+    return adminController.getSubCategoriesByTestId(req);
+})
+.then(subcategories => {
+    return calculController.createListOfManuelAnswers(req, res.payload.map, subcategories);
+})
+.then(message => {
+    res.send(message);
+})
+.catch(next));
 
 router.get('/getEtalonnageValue', urlencodedParser, (req, res, next) =>
     calculController.getEtalonnageValue(req)
