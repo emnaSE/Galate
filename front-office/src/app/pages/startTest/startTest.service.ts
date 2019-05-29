@@ -17,16 +17,16 @@ export class StartTestService {
     return this.http.get<Question[]>(this.url+'getAllQuestionsByTestSubcategories?testId='+testId);
   }
 
-  createMemberChoices(choices: Object): Observable<Object> {
+  /*createMemberChoices(choices: Object): Observable<Object> {
     return this.http.post(`${this.url2}` + `createMemberChoices`, choices);
-  }
+  }*/
 
   getTestMember(testId:number, memberId:number): Observable<Object> {
     return this.http.get(this.url2 +'getTestMemberByMemberIdAndTestId?idMember='+memberId+'&idTest='+testId);
   }
   
   
-  saveTestResult(testId:number, memberId:number): Observable<Object> {
-    return this.http.post(this.urlCalcul +'saveTestResult?id_test='+testId+'&id_member='+memberId,JSON.stringify,{responseType:'text'});
+  saveTestResult(testId:number, memberId:number, choices: Object): Observable<Object> {
+    return this.http.post(this.urlCalcul +'saveTestResult?id_test='+testId+'&id_member='+memberId,choices);
   }
 }

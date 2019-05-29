@@ -115,7 +115,7 @@ _publics.getEtalonnageById = (req) => {
    });    
 };*/
 
-_publics.getLineSum = (req) => { 
+/*_publics.getLineSum = (req) => { 
   var id_test=req.query.id_test;
   var id_member=req.query.id_member;
   return new Promise((resolve, reject) => {  
@@ -125,6 +125,18 @@ _publics.getLineSum = (req) => {
                con.query(sql,[id_test,id_member], function (err, result) {
                if (err) reject(err);
                return resolve(JSON.stringify(result));
+               });
+   });    
+};*/
+_publics.getLineSum = (req) => { 
+  var id_test=req.query.id_test;
+  var id_member=req.query.id_member;
+  return new Promise((resolve, reject) => {  
+           var sql=" select tsc.id_subcategory, sum(a.value) as sum from test_subcategory tsc left join question q on(q.id_test_subcategory=tsc.id) left join answer a on(a.id_question=q.id) "
+           +"left join choice_member cm on(cm.id_answer=a.id) left join test_member tm on(tm.id=cm.id_test_member) where tm.id_member=? and tm.id_test=? group by tsc.id_subcategory ";
+               con.query(sql,[id_member,id_test], function (err, result) {
+               if (err) reject(err);
+               return resolve(result);
                });
    });    
 };
@@ -154,41 +166,16 @@ _publics.createManuelAnswer= (req,sum) => {
         });    
 };
 
-/*_publics.createListOfManuelAnswers= (req,sum, subcategories) => { 
-  let promises = [];
-  var sum=JSON.parse(sum);
- var id_test=req.query.id_test;
- var id_member=req.query.id_member;
-// var id_subcategory=req.query.id_subcategory;
 
- for (var i=0;i<subcategories.length;i++) {
-              promises.push( new Promise((resolve, reject) => {  
-                var msg="";
-                var sql = "INSERT INTO manuel_answer SET ? ";
-                const manuelAnswer = { id_test: id_test,id_member:id_member,id_subcategory:subcategories[i].id,result:sum[0].sum};
-                con.query(sql,manuelAnswer, function (err, result) {
-                if (err){
-                  msg="failure"; 
-                  reject(err);
-                }else{
-                  msg="success";
-                }
-                return resolve(msg);
-              });
-            }));
-  }
-  return Promise.all(promises)   
-};*/
-
-_publics.createListOfManuelAnswers= (req,map, subcategories) => { 
+_publics.createListOfManuelAnswers= (req, sumLines) => { 
   let promises = [];
  var id_test=req.query.id_test;
  var id_member=req.query.id_member;
- for (var i=0;i<subcategories.length;i++) {
+ for (var i=0;i<sumLines.length;i++) {
               promises.push( new Promise((resolve, reject) => {  
                 var msg="";
                 var sql = "INSERT INTO manuel_answer SET ? ";
-                const manuelAnswer = { id_test: id_test,id_member:id_member,id_subcategory:subcategories[i].id,result:map.get(subcategories[i].id)};
+                const manuelAnswer = { id_test: id_test,id_member:id_member,id_subcategory:sumLines[i].id_subcategory,result:sumLines[i].sum};
                 con.query(sql,manuelAnswer, function (err, result) {
                 if (err){
                   msg="failure"; 
