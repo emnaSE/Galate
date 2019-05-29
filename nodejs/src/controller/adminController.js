@@ -4,6 +4,9 @@ const _publics = {};
 var config = require('../config');
 var getRawBody = require('raw-body');
 var con=config.con;
+const path = require('path');
+var fs = require("fs"); // node filesystem
+var tmp = require('tmp');
 
 const request = require('request');
 var url=`http://localhost:`+config.port;
@@ -1474,4 +1477,104 @@ function whereClause(req, sql) {
   console.log("sql= "+sql);
   return sql;
 }
+
+
+
+
+
+
+
+
+
+
+
+_publics.getSubcategoryByMemberAndTestID = (req) => { 
+  var id_test=req.query.id_test;
+  var id_member=req.query.id_member;
+     return new Promise((resolve, reject) => {  
+              var sql = "select sc.name as section, ma.etallonage_result as calculated_result from manuel_answer ma left join subcategory sc on(sc.id=ma.id_subcategory) left join category c on (c.id=sc.id_category)  where ma.id_test=? and ma.id_member=?"; 
+            
+                  con.query(sql,[id_test,id_member], function (err, result) {
+                  if (err) reject(err);
+                  return resolve(JSON.stringify(result));
+                  });
+      });    
+   };
+
+
+   _publics.getMemberInformationByMemberAndTestID = (req) => { 
+    var id_test=req.query.id_test;
+    var id_member=req.query.id_member;
+       return new Promise((resolve, reject) => {  
+                var sql = "select distinct m.firstname as prenom , m.lastname as nom , m.age as age from member m left join manuel_answer ma on (ma.id_member = m.id ) where ma.id_test=? and ma.id_member=?"; 
+              
+                    con.query(sql,[id_test,id_member], function (err, result) {
+                    if (err) reject(err);
+                    return resolve(JSON.stringify(result));
+                    });
+        });    
+     };
+  
+
+_publics
+  
+  
+
+_publics.generateXMLFile = (input,req , res) => {
+  return new Promise((resolve, reject) => {   
+
+        var js2xmlparser = require("js2xmlparser");
+        var dir=tmp.tmpdir;
+ 
+        var data = js2xmlparser.parse("details", input);
+
+        
+
+       
+
+       /* doc.pipe(fs.createWriteStream(dir+'\\Member_Information.xml'));
+        var xmlFile = path.join(dir, 'Member_Information.xml');
+        var file = fs.createReadStream(xmlFile);
+        var stat = fs.statSync(xmlFile);
+        res.setHeader('Content-Length', stat.ino);
+        res.setHeader('Content-Type', 'application/xml');
+        res.setHeader('Content-Disposition', 'attachment; filename=Member_Information.xml');
+        res.setBody(data);
+        file.pipe(res);*/
+         
+    
+         fs.writeFile(dir+'\\Member_Information.xml', data, function(err) {
+          if(err) {
+              return console.log(err);
+          }
+          
+          console.log(data);
+      });
+
+      var xmlFile = path.join(dir, 'Member_Information.xml');
+      var stream = fs.createReadStream(xmlFile);
+
+      res.writeHead(200, {'Content-disposition': 'attachment; filename=Member_Information.xml'}); 
+      stream.pipe(res);
+      stream.once("end", function () {
+        stream.destroy(); // makesure stream closed, not close if download aborted.
+        fs.unlink("Member_Information.xml", function (err) {
+          if (err) {
+              console.error(err.toString());
+          } else {
+              console.warn("Member_Information.xml" + ' deleted');
+          }
+        });
+      });
+     
+
+
+ });  
+
+}
+
+
+
+
+
 module.exports = _publics;
