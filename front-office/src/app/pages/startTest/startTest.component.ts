@@ -153,42 +153,44 @@ export class StartTestComponent  implements OnInit{
  
   
   public saveResult(){
-  /*  if(this.map.size!==this.totalQuestionsSize()){
-      alert("merci de repondre à toutes les questions avant de passer!");
-      return;
-    }*/
-    let choiceMember=new ChoiceMember();
-    choiceMember.id_test_member=this.testMemberId;
-    this.map.forEach((value: string, key: string) => {
-        choiceMember.id_question=key;
-        console.log("key==> "+choiceMember.id_question); 
-        choiceMember.id_answer=value; 
-        console.log("value==> "+choiceMember.id_answer); 
-        this.choiceMemberArray.push(choiceMember);  
-       
-    })
+    /*  if(this.map.size!==this.totalQuestionsSize()){
+        alert("merci de repondre à toutes les questions avant de passer!");
+        return;
+      }*/
+      var choiceMember;
+    
+      this.map.forEach((value: string, key: string) => {
+          let choiceMember=new ChoiceMember();
+          choiceMember.id_test_member=this.testMemberId;
+          choiceMember.id_question=key;
+          choiceMember.id_answer=value; 
+          console.log("key==> "+choiceMember.id_question+" value==> "+choiceMember.id_answer); 
+          this.choiceMemberArray.push(choiceMember);  
+        
+      });
+     this.choiceMemberArray.forEach(element => {
+      console.log("element==> "+JSON.stringify(element));   
+     });
+        var json= '{ "choices":'+JSON.stringify(this.choiceMemberArray)+'}';
+        console.log("json==> "+json);   
 
-    console.log("this.choiceMemberArray==> "+this.choiceMemberArray);
-    var json = '{ "choices":'+JSON.stringify(this.choiceMemberArray)+'}';
-    console.log("json==> "+json);
-    this.createMemberChoices(json)
-    this.createManualAnswers(this.testId, this.userId);
-  
+        //this.createMemberChoices(json);
+        this.saveTestResult(this.testId, this.memberId,json); 
+       
   }
   
 
-  public createMemberChoices(json) {
+  /*public createMemberChoices(json) {
     this.startTestService.createMemberChoices(json)
     .subscribe(data =>{
-      //this.router.navigate(['/resultTable']);
-      this.router.navigate(['/resultTable' , this.testId , this.memberId]);
+      console.log("data==>"+data);
     } , error => console.log('err'+error));
-  }
+  }*/
 
-  public createManualAnswers(testId,userId) {
-    this.startTestService.saveTestResult(testId,userId)
+  public saveTestResult(testId,userId,choices) {
+    this.startTestService.saveTestResult(testId,userId,choices)
     .subscribe(data =>{
-      this.router.navigate(['/resultTable']);
+      this.router.navigate(['/resultTable' , this.testId , this.memberId]);
     } , error => console.log('err'+error));
   }
 

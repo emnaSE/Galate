@@ -69,20 +69,52 @@ router.get('/getEtalonnageById', urlencodedParser, (req, res, next) =>
         .catch(next));
 
 
-router.post('/saveTestResult', urlencodedParser, (req, res, next) =>calculController
+
+/*router.post('/saveTestResult', urlencodedParser, (req, res, next) =>calculController
 .getLineSum(req)
-.then(map => {
-    res.payload.map=map;
-    req.query.testId=req.query.id_test;
-    return adminController.getSubCategoriesByTestId(req);
+.then(sumLines => {
+    return calculController.createListOfManuelAnswers(req, sumLines);
 })
-.then(subcategories => {
-    return calculController.createListOfManuelAnswers(req, res.payload.map, subcategories);
+.then(message => {
+    res.send(message);
+})
+.catch(next));*/
+router.post('/saveTestResult',(req, res, next)=>memberController
+.getRawBody(req)
+.then(choices=>{
+    res.payload.choices=choices;
+    req.query.idMember=req.query.id_member;
+    req.query.idTest=req.query.id_test;
+    return memberController.getTestMemberByMemberIdAndTestId(req);
+})
+.then(testMember=>{
+    var test_member=JSON.parse(testMember);
+    return memberController.deleteMemberChoicesByIdTestMember(test_member.id);
+})
+.then(message=>{
+    return memberController.deleteManuelAnswersByTestMember(req);
+})
+.then(response=>{
+    return memberController.createMemberChoices(res.payload.choices);
+})
+.then(response=>{
+    if(response==="failure"){
+        res.payload.leave=true;
+        return;
+    }
+    return calculController.getLineSum(req);
+})
+.then(sumLines => {
+    if(res.payload.leave===true){
+        return "failure";
+    }
+    return calculController.createListOfManuelAnswers(req, sumLines);
 })
 .then(message => {
     res.send(message);
 })
 .catch(next));
+
 
 router.get('/getEtalonnageValue', urlencodedParser, (req, res, next) =>
     calculController.getEtalonnageValue(req)

@@ -183,7 +183,7 @@ _publics.createMemberChoices = (response) => {
   for (var i in choices) {
     promises.push(new Promise((resolve, reject) => {
 
-      response = createnewMemberChoices(choices, i, msg);
+      response = createNewMemberChoices(choices, i, msg);
       return resolve(response);
     }
     ));
@@ -497,7 +497,20 @@ _publics.verifPasswordTest = (test) => {
 
 module.exports = _publics;
 
-function createnewMemberChoices(choices, i, msg) {
+function createNewMemberChoices(choices, i, msg) {
+    var sql = "INSERT INTO choice_member SET id_question=?,id_answer=? ,id_test_member=?   ";
+    con.query(sql, [choices[i].id_question, choices[i].id_answer, choices[i].id_test_member], function (err, result) {
+      if (err) {
+        msg = "failure";
+      }
+      else {
+        msg = "success";
+      }
+      return msg;
+    });
+}
+
+/*function createNewMemberChoices(choices, i, msg) {
   var sql = "select count(*) as size from choice_member where id_question=? and id_test_member=?  ";
   con.query(sql, [choices[i].id_question, choices[i].id_test_member], function (err, result) {
 
@@ -518,8 +531,7 @@ function createnewMemberChoices(choices, i, msg) {
           }
           return msg;
         });
-      }
-      else {
+      } else {
         var sql = "update choice_member SET id_answer=? where id_question=? and id_test_member=?   ";
         con.query(sql, [choices[i].id_answer, choices[i].id_question, choices[i].id_test_member], function (err, result) {
           if (err) {
@@ -534,7 +546,7 @@ function createnewMemberChoices(choices, i, msg) {
     }
   });
   return msg;
-}
+}*/
 
 //get test En Cours 
 _publics.getTestEnCours = (req) => {
@@ -577,6 +589,44 @@ _publics.loginForTest = (testId, password) => {
         };
       }
       return resolve(JSON.stringify(response));
+    });
+  });
+};
+
+
+
+_publics.deleteMemberChoicesByIdTestMember = (testMemberId) => {
+  return new Promise((resolve, reject) => {
+    var sql = " delete from choice_member where id_test_member=?";
+    var msg="";
+    con.query(sql, [testMemberId], function (err, result) {
+      if (err) {
+        msg = "failure";
+      }
+      else {
+        msg = "success";
+      }
+      return resolve(msg);
+    });
+  });
+};
+
+
+_publics.deleteManuelAnswersByTestMember = (req) => {
+
+  var id_test=req.query.id_test;
+  var id_member=req.query.id_member;
+  return new Promise((resolve, reject) => {
+    var sql = " delete from manuel_answer where id_member=? and id_test=?";
+    var msg="";
+    con.query(sql, [id_member,id_test], function (err, result) {
+      if (err) {
+        msg = "failure";
+      }
+      else {
+        msg = "success";
+      }
+      return resolve(msg);
     });
   });
 };
