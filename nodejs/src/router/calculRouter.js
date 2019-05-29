@@ -150,7 +150,7 @@ router.get('/getEtalonnageDetails', urlencodedParser, (req, res, next) =>
 router.get('/getAllCatrogiesByTestMember', urlencodedParser, (req, res, next) =>
 calculController.getCategoryNameByMemberIdAndTestId(req)
 .then(categories => {
-    return adminController.getAllSubcategoriesByCategories(categories)
+    return adminController.getAllSubcategoriesByCategories(categories,req)
 })
 .then(response=>{
     res.payload.categories=response;

@@ -337,10 +337,12 @@ _publics.getAllSubcategoriesByIdTest = (req) => {
   };
 _publics.getAllSubcategoriesByCategory = (req) => { 
   var idCategory=req.query.idCategory;
+  var idMember=req.query.id_member;
+  console.log("idMember "+idMember);
   return new Promise((resolve, reject) => {  
-           var sql = "select sc.*, ma.id as manualAnswerId FROM subcategory sc left join manuel_answer ma on(sc.id=ma.id_subcategory) where sc.id_category=?"; 
+           var sql = "select sc.*, ma.id as manualAnswerId FROM subcategory sc left join manuel_answer ma on(sc.id=ma.id_subcategory) where sc.id_category=? and ma.id_member=?"; 
          
-               con.query(sql,[idCategory], function (err, result) {
+               con.query(sql,[idCategory,idMember], function (err, result) {
                if (err) reject(err);
                return resolve(JSON.stringify(result));
                });
@@ -1331,11 +1333,11 @@ _publics.getAllQuestionsAnswers = (questions) => {
   return Promise.all(promises)
 };
 
-_publics.getAllSubcategoriesByCategories = (categories) => { 
+_publics.getAllSubcategoriesByCategories = (categories,req) => { 
   let promises = [];
   for (var i=0;i<JSON.parse(categories).length;i++) {
     promises.push( new Promise((resolve, reject) => request.get({
-      url :url+`/calcul/getSubcategoriesByCategory?id=${JSON.parse(categories)[i].category_id}`,
+      url :url+`/calcul/getSubcategoriesByCategory?id=${JSON.parse(categories)[i].category_id}&id_member=${req.query.id_member}`,
       method: 'GET',
       gzip: true,
     }, (e, r, b) => {
