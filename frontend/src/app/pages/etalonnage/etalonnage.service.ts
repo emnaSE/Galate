@@ -33,8 +33,8 @@ export class EtalonnageService {
   getById(id:number):Observable<Etalonnage>{
     return this.http.get<Etalonnage>(this.url+"getEtalonnageById?id="+id);
   }
-  deleteEtalonage(id:number):Observable<boolean>{
-    return this.http.get<boolean>(this.url+"deleteEtalonnage?id="+id);
+  deleteEtalonage(id:number):Observable<Object>{
+    return this.http.get(this.url+"deleteEtalonnage?id="+id,{responseType: 'text'});
   }
   updateEtalonnage(id:number,etalonage:Object):Observable<Object>{
     return this.http.post(this.url+"updateEtalonnage?id="+id,JSON.stringify(etalonage),{ responseType :'text'});

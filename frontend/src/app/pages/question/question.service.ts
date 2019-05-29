@@ -28,8 +28,8 @@ export class QuestionService {
   getAllQuestion():Observable<Question[]>{
     return this.http.get<Question[]>(this.url+'getAllQuestion');
   }
-  deleteById(id:number):Observable<boolean>{
-    return this.http.get<boolean>(this.url+"deleteQuestionById?id_question="+id);
+  deleteById(id:number):Observable<Object>{
+    return this.http.get(this.url+"deleteQuestionById?id_question="+id,{responseType: 'text'});
   }
   updateById(id:number,question:any):Observable<any>{
     return this.http.post<any>(this.url+'updateQuestion?id_question='+id,question);

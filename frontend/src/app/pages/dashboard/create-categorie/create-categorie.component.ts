@@ -26,13 +26,6 @@ export class CreateCategorieComponent implements OnInit {
 
 
 
-
-
-
-
-
-
-
   }
 
   ngOnInit() {
@@ -58,17 +51,7 @@ export class CreateCategorieComponent implements OnInit {
       )
     }
 
-
-
-
-
-
-
   }
-
-
-
-
 
   get formvalidate() {
     return this.addForm.controls;

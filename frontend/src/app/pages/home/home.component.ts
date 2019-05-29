@@ -57,7 +57,7 @@ export class HomeComponent implements OnInit {
     this.submitted=true;
     if (this.f.age1.value < this.f.age2.value){
 
-     this.err = 1;
+     alert("verifier l age svp")
       return {
         age:"age min doit etre toujours inferieur a age maximum"
       };

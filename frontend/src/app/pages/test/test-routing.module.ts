@@ -4,6 +4,7 @@ import { CreateTestComponent } from './create-test/create-test.component';
 import { TestComponent } from './test.component';
 import {AffectCategorieComponent} from "./affect-categorie/affect-categorie.component";
 import {AffectSubcategorieComponent} from "./affect-subcategorie/affect-subcategorie.component";
+import {AuthGuard} from "../auth/auth.guard";
 
 
 
@@ -17,12 +18,17 @@ const routes: Routes = [{
       component:CreateTestComponent,
     },
     {
-      path: 'affectation',
+      path: ':id/affectation',
       component:AffectCategorieComponent,
     },
     {
-      path: 'affectationsub',
+      path: 'id/affectationsub',
       component:AffectSubcategorieComponent,
+    },
+    {
+      path: ':id/modifier',
+      //component:CreateTestComponent,
+      component:CreateTestComponent,
     },
 
   ],
@@ -39,10 +45,3 @@ const routes: Routes = [{
 export class TestRoutingModule {
 
 }
-
-export const routedComponents = [
-  TestComponent,
-  CreateTestComponent,
-  AffectCategorieComponent,
-  AffectSubcategorieComponent,
-];

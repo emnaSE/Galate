@@ -26,7 +26,7 @@ import {HomeComponent} from "./home/home.component";
 
 const routes: Routes = [{
   path: '',
-  component: PagesComponent,
+  component: PagesComponent,canActivate: [AuthGuard],
   children: [
     {
       path: 'categorie',
@@ -35,6 +35,21 @@ const routes: Routes = [{
     {
       path: 'categorie/:id',
       component: DashboardComponent,canActivate: [AuthGuard],
+    },
+    {
+      path:"categories/create",
+      //component: CreateCategorieComponent,
+      component: CreateCategorieComponent,
+    },
+    {
+      path:"categorie/:id/modifier",
+      component: CreateCategorieComponent,
+      //component: CreateCategorieComponent,
+    },
+    {
+      path:"categorie/:id/info",
+      component: InfoCategorieComponent,
+      //component: InfoCategorieComponent,
     },
     {
       path: 'test',
@@ -65,26 +80,14 @@ const routes: Routes = [{
       //component: CreateSousComponent,
       component: CreateSousComponent,canActivate: [AuthGuard],
     },
-    {
-      path:"categorie/create",
-      //component: CreateCategorieComponent,
-      component: CreateCategorieComponent,canActivate: [AuthGuard],
-    },
+
     {
       path:"ecole/create",
       //component: CreateEcoleComponent,
       component: CreateEcoleComponent,canActivate: [AuthGuard],
     },
-    {
-      path:"categorie/:id/modifier",
-      component: CreateCategorieComponent,canActivate: [AuthGuard],
-      //component: CreateCategorieComponent,
-    },
-    {
-      path:"categorie/:id/info",
-      component: InfoCategorieComponent,canActivate: [AuthGuard],
-      //component: InfoCategorieComponent,
-    },
+
+
     {
       path:"etalonnage",
       component: EtalonnageComponent,canActivate: [AuthGuard],
