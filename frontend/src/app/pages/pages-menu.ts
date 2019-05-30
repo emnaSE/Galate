@@ -3,7 +3,7 @@ import { NbMenuItem } from '@nebular/theme';
 export const MENU_ITEMS: NbMenuItem[] = [
 
   {
-    title: 'Dashboard',
+    title: 'tableau de bord',
     icon: 'nb-home',
     link: '/pages/stat',
     home: true,
@@ -48,7 +48,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
 
       },
       {
-        title: 'Class',
+        title: 'Classe',
         //icon: 'nb-compose',
         link: '/pages/class',
         //home: true,

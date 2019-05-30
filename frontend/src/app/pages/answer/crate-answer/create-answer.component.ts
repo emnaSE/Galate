@@ -93,7 +93,7 @@ export class CreateAnswerComponent implements OnInit {
       if(this.addForm.valid){
         this.answerService.updateAnswer(this.id,data).subscribe(
           data=>{
-            alert("add avec succces");
+            alert("modifier avec succces");
             this.router.navigate(['pages/question']);
           },err=>{
             console.log(err);
@@ -104,7 +104,7 @@ export class CreateAnswerComponent implements OnInit {
       if(this.addForm.valid){
         this.answerService.addAnswer(data).subscribe(
           data=>{
-            alert("addavec succes");
+            alert("ajouter avec succes");
 
             this.router.navigate(['pages/question']);
 

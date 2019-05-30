@@ -147,11 +147,7 @@ export class CreateQuestionComponent implements OnInit {
   }
 
       onCreate(){
-console.log("test id");
-console.log(this.test_id);
 
-        console.log("test id sub cat");
-        console.log(this.id);
           this.questionService.addQuestionByIdSub(this.id,this.test_id,this.addForm.value).subscribe(
             data=>{
               alert("suucess");

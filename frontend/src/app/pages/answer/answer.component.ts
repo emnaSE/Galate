@@ -42,7 +42,7 @@ export class AnswerComponent  implements OnInit{
      console.log("create");
   }
   update(answer:Answer){
-      console.log("update")
+
       this.router.navigate(['pages/answer/',answer.id,'modifier'])
 
   }
@@ -50,12 +50,12 @@ export class AnswerComponent  implements OnInit{
   deleteByid(answer:Answer):void {
       this.answerService.deleteAnswer(answer.id).subscribe(
         data=>{
-          alert("delete ave succes");
+          alert("Suppression avec succes");
           this.router.navigate(['pages/question'])
         },err=>{
           console.log(err);
         }
       )
-    console.log("delete;")
+
   }
 }
