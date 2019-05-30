@@ -35,6 +35,9 @@ export class AnswerService {
   getAnswerByQuestionId(id:number):Observable<Answer[]>{
     return this.http.get<Answer[]>(this.url+'getAllAnswerByQuestion?id_question='+id);
   }
+  getAnswerById(id:number):Observable<Answer>{
+    return this.http.get<Answer>(this.url+''+id);
+  }
 
 }
 

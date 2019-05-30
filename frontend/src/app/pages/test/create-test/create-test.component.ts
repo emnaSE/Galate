@@ -30,6 +30,18 @@ export class CreateTestComponent implements OnInit {
 
 
   }
+  dateLessThan(from: string, to: string) {
+    return (group: FormGroup): {[key: string]: any} => {
+      let f = group.controls[from];
+      let t = group.controls[to];
+      if (f.value > t.value) {
+        return {
+          dates: "La date d 'activation  doit être inférieure à la date expiration"
+        };
+      }
+      return {};
+    }
+  }
 
   ngOnInit() {
 
@@ -40,7 +52,7 @@ export class CreateTestComponent implements OnInit {
       test_subcategories_number: [, Validators.required],
       duration: ['', Validators.required],
       password: [[], Validators.required],
-    });
+    },{validator: this.dateLessThan('activation_date','expiration_date')});
 
 
 

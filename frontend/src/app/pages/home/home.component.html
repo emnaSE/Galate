@@ -60,7 +60,7 @@
       <tbody>
       <tr  *ngFor="let filter of filters | paginate: { itemsPerPage: 7, currentPage: pageActuel }">
         <td>{{filter.name}}</td>
-        <td>{{filter.date_test | date: 'dd/MM/yyyy' }}</td>
+        <td>{{filter.date_test | date: 'dd/MM/yyyy h:mm:ss a' }}</td>
         <td>class</td>
         <td>{{filter.firstname}}</td>
         <td>{{filter.lastname}}</td>

@@ -41,6 +41,12 @@
 
 
       </div>
+      <ng-container *ngIf="submitted && addForm.errors">
+        <p class="text-danger" >
+          {{ addForm.errors?.dates | json }}
+        </p>
+      </ng-container>
+
 
       <div class="form-group">
         <label type="text" >Nombre de sous categorie:</label>

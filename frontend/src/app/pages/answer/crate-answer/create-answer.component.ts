@@ -61,7 +61,7 @@ export class CreateAnswerComponent implements OnInit {
 
    //par id if update methode
     if (this.id){
-      this.questionService.getQuestionById(this.id).subscribe(
+      this.answerService.getAnswerByQuestionId(this.id).subscribe(
         (value:any)=>{
           this.addForm.patchValue(value);
         }
