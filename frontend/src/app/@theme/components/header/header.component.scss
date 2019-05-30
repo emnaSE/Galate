@@ -210,4 +210,10 @@
     }
   }
 
+  @include media-breakpoint-down(sm) {
+
+    nb-action /deep/ .ion-log-out {
+      display: block !important;
+    }
+  }
 }

@@ -1,10 +1,13 @@
 <nb-card>
   <nb-card-header>
-    {{ editMode ? 'Modifier' : 'Ajouter' }} Sous test
-    <ul style="position: relative; float: right">
-      <i style="cursor: pointer; position: relative; float: right ; color: darkgreen"  (click)="consulterCategorie()"> Consulter Categories </i><br>
-      <i style="cursor: pointer; position: relative; float: right ;color: darkgreen"  (click)="consultezSubCategorie()"> Consulter SubCategories </i>
-    </ul>
+    {{ editMode ? 'Modifier' : 'Ajouter' }}  test
+    <ng-template [ngIf]="editMode">
+      <ul style="position: relative; float: right">
+        <i style="cursor: pointer; position: relative; float: right ; color: darkgreen"  (click)="consulterCategorie()"> Consulter Categories </i><br>
+        <i style="cursor: pointer; position: relative; float: right ;color: darkgreen"  (click)="consultezSubCategorie()"> Consulter SubCategories </i>
+      </ul>
+    </ng-template>
+
   </nb-card-header>
 
   <nb-card-body>
