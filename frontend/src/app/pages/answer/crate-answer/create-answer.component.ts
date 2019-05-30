@@ -44,7 +44,7 @@ export class CreateAnswerComponent implements OnInit {
       name: new FormControl('', [Validators.required]),
       ordre: [[], Validators.required],
       value: [[], Validators.required],
-      id_question: [[], Validators.required],
+      //id_question: [[], Validators.required],
 
     });
 
@@ -60,6 +60,13 @@ export class CreateAnswerComponent implements OnInit {
 
 
    //par id if update methode
+    if (this.id){
+      this.questionService.getQuestionById(this.id).subscribe(
+        (value:any)=>{
+          this.addForm.patchValue(value);
+        }
+      )
+    }
 
     this.dropdownSettings = {
       singleSelection: true,
@@ -83,15 +90,15 @@ export class CreateAnswerComponent implements OnInit {
   }
   onSubmit(){
 
-    let data={... this.addForm.value}
+  /*  let data={... this.addForm.value}
     data.id_question=data.id_question.map(
       c=>{
         return c.id
       }
-    )
+    )*/
     if (this.id){
       if(this.addForm.valid){
-        this.answerService.updateAnswer(this.id,data).subscribe(
+        this.answerService.updateAnswer(this.id,this.addForm.value).subscribe(
           data=>{
             alert("modifier avec succces");
             this.router.navigate(['pages/question']);
@@ -102,7 +109,7 @@ export class CreateAnswerComponent implements OnInit {
       }
     }else{
       if(this.addForm.valid){
-        this.answerService.addAnswer(data).subscribe(
+        this.answerService.addAnswer(this.addForm.value).subscribe(
           data=>{
             alert("ajouter avec succes");
 

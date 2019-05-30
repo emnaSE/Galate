@@ -4,6 +4,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import { Subject } from 'rxjs';
 import {AnswerService} from "./answer.service";
 import {Answer} from "./answer.model";
+import {Question} from "../question/question.model";
 
 
 @Component({
@@ -47,15 +48,30 @@ export class AnswerComponent  implements OnInit{
 
   }
 
+
   deleteByid(answer:Answer):void {
+    if(confirm("êtes-vous sûr de vouloir supprimer le cette answer ")) {
       this.answerService.deleteAnswer(answer.id).subscribe(
         data=>{
-          alert("Suppression avec succes");
-          this.router.navigate(['pages/question'])
-        },err=>{
+          alert("Suppression avec succès");
+
+          this.router.navigate(['pages/answer'])
+          this.answerService.getAnswerByQuestionId(this.id).subscribe(
+            data=>{
+              this.answers=data;
+            },err=>{
+              console.log(err);
+
+            }
+          )
+
+          this.answers=this.answers.filter(a=>a !==answer)
+          this.router.navigate(['pages/answer'])
+
+
+        },err =>{
           console.log(err);
         }
-      )
-
+      )}
   }
 }

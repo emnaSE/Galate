@@ -4,7 +4,7 @@
     <ng-template [ngIf]="editMode">
       <ul style="position: relative; float: right">
         <i style="cursor: pointer; position: relative; float: right ; color: darkgreen"  (click)="consulterCategorie()"> Consulter Categories </i><br>
-        <i style="cursor: pointer; position: relative; float: right ;color: darkgreen"  (click)="consultezSubCategorie()"> Consulter SubCategories </i>
+        <i style="cursor: pointer; position: relative; float: right ;color: darkgreen"  (click)="consultezSubCategorie()"> Consulter Sous Categories </i>
       </ul>
     </ng-template>
 
@@ -13,7 +13,7 @@
   <nb-card-body>
     <form [formGroup]="addForm"(ngSubmit)="onSubmit()" >
       <div class="form-group">
-        <input type="text" class="form-control" formControlName="name" placeholder="Name">
+        <input type="text" class="form-control" formControlName="name" placeholder="nom">
       </div>
 
       <div class="form-group">
