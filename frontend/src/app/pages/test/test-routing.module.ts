@@ -12,26 +12,7 @@ import {AuthGuard} from "../auth/auth.guard";
 const routes: Routes = [{
   path: '',
   component: TestComponent,
-  children: [
-    {
-      path: 'create',
-      component:CreateTestComponent,
-    },
-    {
-      path: ':id/affectation',
-      component:AffectCategorieComponent,
-    },
-    {
-      path: 'id/affectationsub',
-      component:AffectSubcategorieComponent,
-    },
-    {
-      path: ':id/modifier',
-      //component:CreateTestComponent,
-      component:CreateTestComponent,
-    },
 
-  ],
 }];
 
 @NgModule({

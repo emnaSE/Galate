@@ -27,6 +27,7 @@ export class CreateTestComponent implements OnInit {
               private router:Router){
 
     this.id = this.activateRouter.snapshot.params['id'];
+    console.log(this.id);
 
   }
   ngOnInit() {
@@ -93,7 +94,7 @@ consultezCategorie(){
     this.router.navigate(['pages/categorie']);
     }
   consultezSubCategorie(){
-
+console.log(this.id);
       this.router.navigate(['pages/sous/',this.id]);
 
     }
