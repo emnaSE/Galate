@@ -2,6 +2,7 @@ import { NbMenuItem } from '@nebular/theme';
 
 export const MENU_ITEMS: NbMenuItem[] = [
 
+
   {
     title: 'tableau de bord',
     icon: 'nb-home',
@@ -9,6 +10,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
     home: true,
 
   },
+
   {
     title: 'Tests',
     icon: 'nb-e-commerce',
@@ -16,7 +18,8 @@ export const MENU_ITEMS: NbMenuItem[] = [
     home: true,
     children: [
       {
-        title: 'Liste des tests ',
+
+        title: 'Liste des Tests',
         link: '/pages/test',
       },
       {
@@ -41,20 +44,22 @@ export const MENU_ITEMS: NbMenuItem[] = [
 
       {
 
-        title: 'Ecole',
+        title: 'Liste des Ecoles',
         //icon: 'ion-bookmark',
         link: '/pages/ecole',
         //home: true,
 
       },
       {
-        title: 'Classe',
+
+        title: 'Liste des Classes',
+
         //icon: 'nb-compose',
         link: '/pages/class',
         //home: true,
       },
       {
-        title: 'Etalonnage',
+        title: 'Liste des Etalonnages',
         //icon: 'nb-help',
         link: '/pages/etalonnage',
         //home: true,

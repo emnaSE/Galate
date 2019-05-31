@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Estimation</title>
+
+        <!-- CSS -->        
+        <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+        <link rel="stylesheet" href="assets/css/font-awesome.min.css">
+        <link rel="stylesheet" href="assets/css/animate.css">
+        <link rel="stylesheet" href="assets/css/style.css">
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+    <style>
+
+      nav{
+        background-color:rgb(126,126,126);
+      }
+      nav *{
+        font-family: 'NexaLight', sans-serif;
+            font-size: 16px;
+            font-weight: 300;
+            color:rgba(37, 41, 39, 0.747) !important;
+            line-height: 30px;
+            text-align: center;
+      }
+      table {
+                border-collapse: collapse;
+                empty-cells: show;
+                width:100%
+            }
+            th, td {
+            padding: 7px;
+            }
+
+            table, th, td {
+            border: 1px solid black;
+            text-align: center;
+            color:#000000b5;
+            }
+            .full{
+                background-color:rgb(218, 210, 210);
+            }
+            .item5{
+               background-color: white ;
+            }
+            .item6{
+              background-color: white ;
+            }
+            .item7{
+              background-color: white ;
+            }
+            .btn{
+            border-color:gray;
+            width:130px;
+            margin-left: 10px;
+            margin-right: 10px;
+        }
+/*------------------------------------------------------------------
+[ Button ]*/
+.container-contact100-form-btn {
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding-top: 10px;
+}
+
+.contact100-form-btn {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 20px;
+  min-width: 200px;
+  height: 50px;
+  border-radius: 2px;
+  background: #00ad5f;
+
+  font-family: 'NexaBold';
+  font-size: 12px;
+  color: #fff;
+  line-height: 1.2;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+
+  -webkit-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+  transition: all 0.4s;
+}
+
+.contact100-form-btn:hover {
+  background: #333333;
+}
+        
+        #carous{
+            margin-top: 10%;
+        }
+        .carousel-indicators{
+            display:none;
+        }
+        .choices{
+            color: #41823b;
+        }
+    </style>
+    </head>
+
+    <body>
+    
+    	<!-- Top menu -->
+		<nav class="navbar  navbar-expand-md" role="navigation">
+			<div class="container">
+				<button type="button" class="navbar-toggler collapsed" data-toggle="collapse"
+				data-target="#top-navbar-1">	<span class="sr-only">Toggle navigation</span>
+		&#x2630;</button>	<a class="navbar-brand"
+    routerLink="/test"></a>
+				<!-- Collect the nav
+				links, forms, and other content for toggling -->
+				<div class="collapse navbar-collapse" id="top-navbar-1">
+					<ul class="nav navbar-nav ml-auto">
+
+						<li class="nav-item"><a routerLink="/test" class="nav-link">Nos Tests</a>
+						</li>
+						
+						<li class="nav-item"><a id="login" class="btn btn-link-3 nav-link" (click)="logout($event)">Logout </a>
+						</li>
+					</ul>
+				</div>
+			</div>
+    </nav>
+ 
+    <div class="table-responsive" >
+        <p> Merci d'avoir pris le temps de répondre à les Questions</p> 
+        <p> vous pouvez télécharger les résultats en cliquant sur le bouton « Télécharger PDF »</p> 
+
+
+        <div class="container-contact100-form-btn">
+            <button class="contact100-form-btn" (click)="telecharger($event)" >
+                Télécharger PDF
+            </button>
+          </div>
+
+    </div>
+      
+     
+      
+
+  
+    <script>
+      $Answers = {Au: 0, Di: 0, So: 0, To:0, Ac:0, Ee:0, Cr:0, Re:0, Ob:0, Co:0, Op:0, Se:0};
+    </script>
+
+
+
+
+
+    <script>
+      function clickonone(a , b){
+        console.log("we are here");
+      }
+
+
+      function content(elem){
+        $count=elem.parentElement.childElementCount;
+        $col = elem.cellIndex;
+        if($count==14){
+          $col=$col-1;
+        }
+        else{
+          $col=$col-2;
+        }
+        $class=elem.className;
+        for($i=0;$i<11;$i++){
+          if($i<4 || $i>6){
+            document.getElementsByClassName($class)[$i].style.backgroundColor="rgb(218,210,210)";
+            document.getElementsByClassName($class)[$i].style.backgroundImage="url('')";
+          }else{
+            document.getElementsByClassName($class)[$i].style.backgroundColor="rgb(255,255,255)";
+            document.getElementsByClassName($class)[$i].style.backgroundImage="url('')";
+          }
+        }
+        elem.style.backgroundImage="url('assets/img/done.png')";
+        elem.style.backgroundRepeat="no-repeat";
+        elem.style.backgroundPositionY="center";
+        elem.style.backgroundPositionX="center";
+        $Answers[$class]=$col;
+        /* if(elem.style.backgroundColor=="blue")
+        elem.style.backgroundColor="rgb(218,210,210)";
+        else
+        elem.style.backgroundColor="blue";
+        
+        
+
+        //$row = elem.parentElement.rowIndex;
+        
+        alert($class); */
+      }
+      function affiche(){
+        $text="";
+        $vide=false;
+        for($key in $Answers){
+          $text=$text+$key +':'+$Answers[$key]+".....";
+          if($Answers[$key]==0){
+            $vide=true;
+          }
+        }
+        if($vide){
+          alert("Please fill the table")
+        }
+        else{
+          alert($text);
+        }
+        
+      }
+    </script>
+        
+        
+        
+ 
+
+    </body>
+
+</html>

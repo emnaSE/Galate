@@ -9,7 +9,7 @@ const CategorySchema=mongoose.Schema({
     name: {
         type: String
     },
-    subCategoriesNumber:{
+    subCategories_number:{
         type: Number
     }
 })

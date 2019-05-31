@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Nos Tests</title>
+        <!-- CSS -->        
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Josefin+Sans:300,400|Roboto:300,400,500">
+        <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+        <link rel="stylesheet" href="assets/css/font-awesome.min.css">
+        <link rel="stylesheet" href="assets/css/animate.css">
+        <link rel="stylesheet" href="assets/css/style.css">
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+        <style>
+                body {
+                font-family: 'Roboto', sans-serif;
+                font-size: 16px;
+                font-weight: 300;
+                color: #888;
+                line-height: 30px;
+                text-align: center;
+                }
+            .card-img-top{
+                height:40%;
+            }
+            .card-body *{
+                text-align:center;
+            }
+            .card-body a{
+                display:block;
+            }
+            .form-group {
+              overflow: hidden;
+              margin-bottom: 20px; }
+
+            .form-input {
+              width: 100%;
+              border: 1px solid #ebebeb;
+              border-radius: 5px;
+              -moz-border-radius: 5px;
+              -webkit-border-radius: 5px;
+              -o-border-radius: 5px;
+              -ms-border-radius: 5px;
+              padding: 17px 20px;
+              box-sizing: border-box;
+              font-size: 14px;
+              font-weight: 500;
+              color: #222; }
+              
+              h2 {
+              line-height: 1.66;
+              margin: 0;
+              padding: 0;
+              font-weight: 900;
+              color: #222;
+              font-family: 'Montserrat';
+              font-size: 24px;
+              text-transform: uppercase;
+              text-align: center;
+              margin-bottom: 40px; }
+              .form-submit {
+              width: 100%;
+              border-radius: 5px;
+              -moz-border-radius: 5px;
+              -webkit-border-radius: 5px;
+              -o-border-radius: 5px;
+              -ms-border-radius: 5px;
+              padding: 17px 20px;
+              box-sizing: border-box;
+              font-size: 14px;
+              font-weight: 700;
+              color: #fff;
+              text-transform: uppercase;
+              border: none;
+              background-image: -moz-linear-gradient(to left, #74ebd5, #9face6);
+              background-image: -ms-linear-gradient(to left, #74ebd5, #9face6);
+              background-image: -o-linear-gradient(to left, #74ebd5, #9face6);
+              background-image: -webkit-linear-gradient(to left, #74ebd5, #9face6);
+              background-image: linear-gradient(to left, #74ebd5, #9face6); }
+            
+        </style>
+    
+    </head>
+
+    <body>
+    
+    	<!-- Top menu -->
+		<nav class="navbar fixed-top navbar-no-bg navbar-expand-md" role="navigation">
+			<div class="container">
+				<button type="button" class="navbar-toggler collapsed" data-toggle="collapse"
+				data-target="#top-navbar-1">	<span class="sr-only">Toggle navigation</span>
+		&#x2630;</button>	<a class="navbar-brand" routerLink="/test"></a>
+				<!-- Collect the nav
+				links, forms, and other content for toggling -->
+				<div class="collapse navbar-collapse" id="top-navbar-1">
+					<ul class="nav navbar-nav ml-auto">
+							<li class="nav-item"><a routerLink="/test" class="nav-link">Nos Tests</a>
+                            </li>
+                            
+                            <li class="nav-item"><a id="login" class="btn btn-link-3 nav-link" (click)="logout($event)">Logout </a>
+                            </li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+    
+    	<!-- Top content -->
+        <div class="top-content">
+        	<div class="container">
+				<div class="row">
+					<div class="col-sm-12 text wow fadeInLeft">
+						<h1>Chose the test you like</h1>
+						<div class="description">
+							<p class="medium-paragraph">
+								Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum officiis aliquid sint sapiente vero odit ex omnis accusamus!
+							</p>
+						</div>
+					</div>
+				</div>
+            </div>
+        </div>
+        <!-- Features -->
+        <div class="features-container section-container">
+        <div class="container">
+        <div class="row">
+            <div class="col-sm-12 features section-description wow fadeIn">
+                <h2>Nos Tests</h2>
+                <div class="divider-1"><div class="line"></div></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 col-md-6 col-lg-4" *ngFor="let item of tests">
+                    <div class="card-body">
+                      <h5 class="card-title">{{ item.name }}</h5>
+                      <p class="card-text"> {{ item.activation_date }}</p>
+                        <p class="card-text"> {{ item.expiration_date }}</p>
+                        <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" (click)="startTest($event  , item.id , item.duration)"  >Start</button>
+                    
+                    </div>
+            </div>
+
+           
+           <!-- <div class="col-sm-6 col-md-6 col-lg-4">
+                    <img class="card-img-top" src="https://cdn.pixabay.com/photo/2014/11/30/14/11/kitty-551554__340.jpg" alt="Card image cap">
+                    <div class="card-body">
+                      <h5 class="card-title">Test Psycho 2</h5>
+                      <p class="card-text"> Lorem ipsum dolor sit amet consectetur, adipisicing elit. Minima nulla voluptatibus, reiciendis laboriosam deserunt quia repudiandae, odit sunt . </p>
+                      <a href="NewStart.html" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Start</a>
+                    </div>
+            </div>
+            <div class="col-sm-6 col-md-6 col-lg-4">
+                    <img class="card-img-top" src="https://cdn.pixabay.com/photo/2014/11/30/14/11/kitty-551554__340.jpg" alt="Card image cap">
+                    <div class="card-body">
+                      <h5 class="card-title">Test Psycho 3</h5>
+                      <p class="card-text"> Lorem ipsum dolor sit amet consectetur, adipisicing elit. Minima nulla voluptatibus, reiciendis laboriosam deserunt quia repudiandae, odit sunt . </p>
+                      <a href="NewStart.html" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Start</a>
+                    </div>
+            </div>
+            <div class="col-sm-6 col-md-6 col-lg-4">
+                    <img class="card-img-top" src="https://cdn.pixabay.com/photo/2014/11/30/14/11/kitty-551554__340.jpg" alt="Card image cap">
+                    <div class="card-body">
+                      <h5 class="card-title">Test Psycho 4</h5>
+                      <p class="card-text"> Lorem ipsum dolor sit amet consectetur, adipisicing elit. Minima nulla voluptatibus, reiciendis laboriosam deserunt quia repudiandae, odit sunt . </p>
+                      <a href="NewStart.html" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Start</a>
+                    </div>
+            </div>
+            <div class="col-sm-6 col-md-6 col-lg-4">
+                    <img class="card-img-top" src="https://cdn.pixabay.com/photo/2014/11/30/14/11/kitty-551554__340.jpg" alt="Card image cap">
+                    <div class="card-body">
+                      <h5 class="card-title">Test Psycho 5</h5>
+                      <p class="card-text"> Lorem ipsum dolor sit amet consectetur, adipisicing elit. Minima nulla voluptatibus, reiciendis laboriosam deserunt quia repudiandae, odit sunt . </p>
+                      <a href="NewStart.html" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Start</a>
+                    </div>
+            </div>
+            <div class="col-sm-6 col-md-6 col-lg-4">
+                    <img class="card-img-top" src="https://cdn.pixabay.com/photo/2014/11/30/14/11/kitty-551554__340.jpg" alt="Card image cap">
+                    <div class="card-body">
+                      <h5 class="card-title">Test Psycho 6</h5>
+                      <p class="card-text"> Lorem ipsum dolor sit amet consectetur, adipisicing elit. Minima nulla voluptatibus, reiciendis laboriosam deserunt quia repudiandae, odit sunt . </p>
+                      <a href="NewStart.html" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Start</a>
+                    </div>
+            </div>-->
+    </div>
+    </div>
+    </div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+
+      <div class="modal-body">
+        <form method="POST" id="signup-form" class="signup-form">
+          <h2 class="form-title">Enter Test Password</h2>
+          
+          <div class="form-group">
+              <input type="password" class="form-input" name="password" id="password" placeholder="Password"/>
+              <span toggle="#password" class="zmdi zmdi-eye field-icon toggle-password"></span>
+          </div>
+          <div class="form-group">
+              <input type="submit" name="submit" id="submit" class="form-submit" value="Check in"/>
+          </div>
+      </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+        <!-- Javascript  -->
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <script src="assets/js/jquery-1.11.1.min.js"></script>
+        <script src="assets/js/bootstrap.min.js"></script>
+        <script src="assets/js/jquery.backstretch.min.js"></script>
+        <script src="assets/js/wow.min.js"></script>
+        <script src="assets/js/retina-1.1.0.min.js"></script>
+        <script src="assets/js/waypoints.min.js"></script>
+        <script src="assets/js/scripts.js"></script>
+       
+        <!--[if lt IE 10]>
+            <script src="assets/js/placeholder.js"></script>
+        <![endif]-->
+
+    </body>
+
+    </html>

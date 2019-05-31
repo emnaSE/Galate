@@ -3,7 +3,6 @@
 var testController=require('../controller/controllerForTest');
 const router = require('express').Router();
 const bodyParser = require('body-parser');
-var urlencodedParser = bodyParser.urlencoded({ extended: false })
 var options = {
     inflate: true,
     limit: '100kb',
@@ -19,31 +18,6 @@ router.use((req, res, next) => {
     next();
   });
 router.use(bodyParser.urlencoded({extended : true}));
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-router.post('/createTest', (req, res, next) => testController.
-getRawBody(req)
-.then(test=>{
-    return testController.createTest(test)
-})
-.catch(next));
-
 
 
 
@@ -167,6 +141,50 @@ router.post('/createClazz', (req, res, next) => testController
 router.post('/createEtalonnage', (req, res, next) => testController
 .createEtalonnage(req)
 .then(response => {
+  res.send(response);
+})
+.catch(next));
+
+router.post('/createTest', (req, res, next) => testController.
+getRawBody(req)
+.then(test=>{
+    return testController.createTest(test)
+})
+.catch(next));
+
+
+
+router.post('/AffectCategoriesToTest', (req, res, next) => testController.
+getRawBody(req)
+.then(affectation=>{
+  var affectation=JSON.parse(affectation);
+  res.payload.testId=affectation.testId;
+  res.payload.categoriesList=affectation.categories;
+  return testController.RemoveAffectationCategoriesToTest(affectation.testId, affectation.categories);
+})
+.then(response=>{
+  return testController.AffectCategoriesToTest(res.payload.testId,  res.payload.categoriesList);
+})
+.then(response=>{
+  res.send(response);
+})
+.catch(next));
+
+
+router.post('/AffectSubcategoriesToTest', (req, res, next) => testController.
+getRawBody(req)
+.then(affectation=>{
+  var affectation=JSON.parse(affectation);
+  res.payload.testId=affectation.testId;
+  res.payload.subcategoriesList=affectation.subcategories;
+  res.payload.questionsNumber=affectation.questionsNumber;
+  res.payload.wording=affectation.wording;
+  return testController.RemoveAffectationSubcategoriesToTest(affectation.testId, affectation.subcategories);
+})
+.then(response=>{
+  return testController.AffectSubcategoriesToTest(res.payload.testId,  res.payload.subcategoriesList,res.payload.questionsNumber,res.payload.wording);
+})
+.then(response=>{
   res.send(response);
 })
 .catch(next));

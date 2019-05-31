@@ -4,10 +4,8 @@
 const _publics = {};
 var config = require('../config');
 var con=config.con;
-var url=`http://localhost:3001`;
-var URL = require('url').URL;
-const path = require('path');
-var getRawBody = require('raw-body')
+var getRawBody = require('raw-body');
+const request = require('request');
 
 
 
@@ -192,6 +190,9 @@ _publics.createEtalonnage = (req) => {
    });  
   
 }
+
+
+
 
 
 

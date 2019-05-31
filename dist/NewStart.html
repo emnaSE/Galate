@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Start Test</title>
+
+        <!-- CSS -->        
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/font-awesome.min.css">
+        <link rel="stylesheet" href="css/animate.css">
+        <link rel="stylesheet" href="css/style.css">
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+    <style>
+        
+        
+        .carousel-indicators{
+            display:none;
+        }
+        .choices{
+            color: #41823b;
+        }
+        
+        .carousel-control-prev{
+            position:fixed;
+        }
+        .carousel-control-next{
+            position: fixed;
+        }
+        .btn{
+            border-color:gray;
+            width:130px;
+            margin-left: 10px;
+            margin-right: 10px;
+            color:#000000b5 !important;
+        }
+        .Quest{
+            margin-top:10px;
+        }
+        #test > div{
+            border:solid 1px gray;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            padding-top: 10px;
+        }
+        #test{
+            border-collapse: collapse;
+        }
+        body{
+            background-color:#f7f9fb;
+        }
+        /*------------------------------------------------------------------
+        [ Button ]*/
+        .container-contact100-form-btn {
+        width: 100%;
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -moz-box;
+        display: -ms-flexbox;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding-top: 10px;
+        margin-bottom:40px;
+        }
+
+        .contact100-form-btn {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -moz-box;
+        display: -ms-flexbox;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0 20px;
+        min-width: 200px;
+        height: 50px;
+        border-radius: 2px;
+        background: #00ad5f;
+
+        font-family: 'NexaBold';
+        font-size: 12px;
+        color: #fff;
+        line-height: 1.2;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+
+        -webkit-transition: all 0.4s;
+        -o-transition: all 0.4s;
+        -moz-transition: all 0.4s;
+        transition: all 0.4s;
+        }
+
+        .contact100-form-btn:hover {
+        background: #333333;
+        }
+    </style>
+    </head>
+
+    <body>
+            
+    	<!-- Top menu -->
+        <nav class="navbar navbar-expand-md" role="navigation">
+                <div class="container">
+                    <button type="button" class="navbar-toggler collapsed" data-toggle="collapse"
+                    data-target="#top-navbar-1">	<span class="sr-only">Toggle navigation</span>
+            &#x2630;</button>	<a class="navbar-brand"
+                    href="home.html"></a>
+                    <!-- Collect the nav
+                    links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="top-navbar-1">
+                        <ul class="nav navbar-nav ml-auto">
+                            <li class="nav-item"><a href="home.html" class="nav-link">Nos Tests</a>
+                            </li>
+                           
+                            <li class="nav-item"><a id="login" class="btn btn-link-3 nav-link" href="login.html">Login</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        
+        <!-- New Test Design -->
+
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 features section-description wow fadeIn">
+                    <h2>Complete The Test</h2>
+                    <div class="divider-1"><div class="line"></div></div>
+                </div>
+            </div>
+            <div class="row" id="test">
+                <div class="col-md-6 col-lg-6" id="1">
+                    <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices" role="button"  onclick="save(this)">Dynamique</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Energique</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Amical</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Actif</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Poétique</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Vital</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Diplomate</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Remuant</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Sûr de soi</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Vigoureux</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Sérieux</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Robuste</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Positif</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Vif</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Sincère</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Résistant</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Créatif</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Dynamique</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Audacieux</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Solide</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Factuel</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Agité</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Audacieux</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Dynamique</a>
+                        </div>
+                </div>
+                <div class=" col-md-6 col-lg-6" id="2">
+                    <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Actif</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Sociable</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Conciliant</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Coopératif</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Sentimental</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Collectif</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Rusé</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Solidaire</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Assuré</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Interdépendant</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Prévoyant</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Attentionné</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Optimiste</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Chaleureux</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Fidèle</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Groupal</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Fantaisiste</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Amical</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Fonceur</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Communicatif</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Impartial</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Aimable</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Aidant</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Conciliant</a>
+                        </div>
+                </div>
+                <div class=" col-md-6 col-lg-6" id="3">
+                    <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Vital</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Affectif</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Aimable</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Sensible</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Esthétique</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Emotif</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Malin</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Romantique</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Solide</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Impressionable</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Réfléchi</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Esthétique</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Enjoué</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Délicat</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Honnête</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Tendre</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Imaginatif</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Sentimental</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Aventureux</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Poétique</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Raisonable</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Sensible</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Compatissant</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Affectif</a>
+                        </div>
+                </div>
+                <div class=" col-md-6 col-lg-6" id="4">
+                    <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Remuant</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Habile</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Communicatif</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Adroit</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Tendre</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Diplomate</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Négociateur</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Tacticien</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Equilibré</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Adaptable</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Précis</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Rusé</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Content de vivre</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Négociateur</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Droit</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Stratège</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Idéaliste</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Malin</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Indépendant</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Diplomate</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Rationnel</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Subtil</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Complaisant</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Facilitateur</a>
+                        </div>
+                </div>
+                <div class=" col-md-6 col-lg-6" id="5">
+                    <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Vigoureux</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Assuré</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Groupal</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Serein</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Sensible</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Détendu</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Subtil</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">A l'aise</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Tranquille</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Sûr de soi</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Avisé</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Tranquille</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Insouciant</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Confiant</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Probe</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Content de soi</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Inventif</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Equilibré</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Hardi</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Solide</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Esprit d'analyse</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Assuré</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Altruiste</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Assuré</a>
+                        </div>
+                </div>
+                <div class=" col-md-6 col-lg-6" id="6">
+                    <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Robuste</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Prudent</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Sociable</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Réfléchi</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Affectif</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Sérieux</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Adroit</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Méthodique</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Content de soi</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Vigilant</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Sensé</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Mesuré</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Bon vivant</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Avisé</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Transparent</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Logique</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Ingénieux</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Prévoyant</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Téméraire</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Sensé</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Esprit critique</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Précis</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Tolérant</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Prudent</a>
+                        </div>
+                </div>
+                <div class=" col-md-6 col-lg-6" id="7">
+                    <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Vif</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Joyeux</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Attentionné</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Positif</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Délicat</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Jovial</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Diplomate</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Enjoué</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Serein</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Bon vivant</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Vigilant</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Content de vivre</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Joyeux</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Insouciant</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Loyal</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Optimiste</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Intuitif</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Imprévoyant</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Décidé</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Heureux</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Objectif</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Jovial</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Compréhensif</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Insoucieux</a>
+                        </div>
+                </div>
+                <div class=" col-md-6 col-lg-6" id="8">
+                    <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Résistant</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Loyal</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Interdépendant</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Sincère</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Impressionnable</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Honnête</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Habile</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Droit</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Détendu</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Franc</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Prudent</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Vrai</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Jovial</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Fidèle</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Vrai</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Intègre</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Futuriste</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Authentique</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Déterminé</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Probe</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Equitable</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Transparent</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Généreux</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Sincère</a>
+                        </div>
+                </div>
+                <div class=" col-md-6 col-lg-6" id="9">
+                    <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Dynamique</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Fantaisiste</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Chaleureux</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Inventif</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Romantique</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Imaginatif</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Adaptable</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Idéaliste</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Confiant</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Innovant</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Mesuré</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Ingénieux</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Heureux</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Intuitif</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Franc</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Futuriste</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Original</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Inventif</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Entreprenant</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Original</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Sans affect</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Curieux</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Charitable</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Créatif</a>
+                        </div>
+                </div>
+                <div class=" col-md-6 col-lg-6" id="10">
+                    <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Solide</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Entreprenant</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Solidaire</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Audacieux</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Emotif</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Courageux</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Tacticien</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Aventuruex</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Assuré</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Résolu</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Logique</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Indépendant</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Imprévoyant</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Intrépide</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Authentique</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Décidé</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Curieux</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Déterminé</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Résolu</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Téméraire</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Non influençable</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Hardi</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Respectueux</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Fonceur</a>
+                        </div>
+                </div>
+                <div class=" col-md-6 col-lg-6" id="11">
+                    <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Agité</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Impartial</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Collectif</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Juste</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Sentimental</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Equitable</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Stratège</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Objectif</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">A l'aise</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Esprit d'analyse</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Méthodique</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Esprit critique</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Insoucieux</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Sans affect</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Intègre</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Rationnel</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Futuriste</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Non influençable</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Courageux</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Raisonable</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Juste</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Factuel</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Empathique</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Objectif</a>
+                        </div>
+                </div>
+                <div class=" col-md-6 col-lg-6" id="12">
+                    <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Energique</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Bienveillant</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Sociable</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Empathique</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Affectif</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Respectueux</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Facilitateur</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Charitable</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Détendu</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Généreux</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Réfléchi</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Compréhensif</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Joyeux</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Tolérant</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Sincère</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Altruiste</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Innovant</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Compatissant</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Intrépide</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Complaisant</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Rationnel</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Aidant</a>
+                        </div>
+                        <div class="Quest"> <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Bienveillant</a>
+                        <a class="btn btn-theme btn-sm btn-min-block choices"  role="button"  onclick="save(this)">Indulgent</a>
+                        </div>
+                </div>
+
+        </div>
+        </div>
+        <div class="container-contact100-form-btn">
+            <button class="contact100-form-btn" onclick="showRes()">
+              Show Result
+            </button>
+          </div>
+
+        <!-- New Test Design End -->
+
+
+            <script src="js/jquery-3.2.1.min.js"></script>
+            <script src="js/bootstrap.min.js"></script>
+            
+            <script>
+                const questLength=5;
+                const subLength=12;
+                const numberOfSubs=12;
+                var answerQuest= new Array(questLength);
+                var subAnswers= new Array(subLength);
+                var answerAll= new Array(numberOfSubs);
+                for($k=0;$k<numberOfSubs;$k++){
+                    for($i=0;$i<subLength;$i++){
+                        for($j=0;$j<questLength;$j++){
+                            answerQuest[$j]=-1;
+                        }
+                        subAnswers[$i]=answerQuest.slice();
+                    }
+                    answerAll[$k]=subAnswers.slice();
+                }
+            </script>
+
+            <script>
+            function save(elem){
+                $elemParent=elem.parentNode;
+                var quest=1;
+                var val=1;
+                while(($Sib=$elemParent.previousElementSibling)!=null){
+                    $elemParent=$elemParent.previousElementSibling;
+                    quest++;
+                }
+                if(elem.previousElementSibling!=null){
+                    val=2;
+                }
+                var reponse = [elem.parentNode.parentNode.id, quest, 1, 1, val];
+                answerAll[elem.parentNode.parentNode.id-1][quest-1]=reponse;
+                
+                elem.style.backgroundColor="rgb(110, 186, 60)";
+                if(elem.previousElementSibling){
+                    elem.previousElementSibling.style.backgroundColor="";
+                }
+                if(elem.nextElementSibling){
+                    elem.nextElementSibling.style.backgroundColor="";
+                }                
+            }
+            function testAllAnswerFilled(){
+                var filled=true;
+                for($i=0;$i<numberOfSubs;$i++){
+                    for($j=0;$j<subLength;$j++){
+                        if(answerAll[$i][$j][questLength-1]==-1){
+                            filled=false;
+                        }
+                    }
+                }
+                return filled;
+            }
+            
+            function showRes(){
+                if(!testAllAnswerFilled()){
+                    alert("Veuiller Réponser à tous les questions");
+                }else{
+                    window.location.href = "resultTable.html";
+                }
+            }
+            </script>
+            
+    </body>
+
+</html>

@@ -2,6 +2,8 @@
 
 const router = require('express').Router();
 const memberController=require('../controller/memberController');
+const adminController=require('../controller/adminController');
+
 var options = {
     inflate: true,
     limit: '100kb',
@@ -11,14 +13,14 @@ const bodyParser = require('body-parser');
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 router.use(bodyParser.raw(options));
-router.use((req, res, next) => {
+  router.use((req, res, next) => {
     res.payload = {};
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+    res.setHeader('Access-Control-Allow-Credentials', true)
     next();
   });
-
 
 
 var getRawBody = require('raw-body')
@@ -35,11 +37,13 @@ memberController.getRawBody(req)
 })
 .catch(next));
 
-router.post('/createMember',(req, res, next)=>
+
+
+router.post('/register',(req, res, next)=>
 memberController.getRawBody(req)
 .then(member=>{
     res.payload.member=member;
-    return memberController.createMember(member)
+    return memberController.register(member)
 })
 .then(msg=>{
     res.send(msg);
@@ -121,9 +125,11 @@ memberController.getMemberByClass(req)
 
 router.post('/createTestMember',(req, res, next)=>
 memberController.getRawBody(req)
-.then(test_member=>{
-    res.payload.test_member=test_member;
-    return memberController.createTestMembers(test_member)
+.then(testMember=>{
+    var testMember=JSON.parse(testMember);
+    var testId =testMember.testId;
+    var memberId=testMember.memberId;
+    return memberController.createTestMember(testId,memberId)
 })
 .then(msg=>{
     res.send(msg);
@@ -161,4 +167,67 @@ memberController.getAllMemberTest(req)
   res.send(tests);
 })
 .catch(next));
+router.get('/getTestMemberByMemberIdAndTestId',urlencodedParser, (req, res, next) => 
+memberController.getTestMemberByMemberIdAndTestId(req)
+.then(testMember=>{
+  res.send(testMember);
+})
+.catch(next));
+
+router.post('/updateManuelAnswer',(req, res, next)=>
+memberController.getRawBody(req)
+.then(manuelAnswer=>{
+    return memberController.updateManuelAnswer(req,manuelAnswer)
+})
+.then(msg=>{
+    res.send(msg);
+})
+.catch(next));
+
+
+
+router.post('/verifPasswordTest', (req, res, next) => 
+memberController.getRawBody(req)
+.then(test=>{
+    return memberController.verifPasswordTest(test);
+})
+.then(response=>{
+  res.send(response);
+})
+.catch(next));
+
+
+//test fait 
+router.get('/getTestEnCours',urlencodedParser, (req, res, next) => 
+memberController.getTestEnCours(req)
+.then(tests=>{
+  res.send(tests);
+})
+.catch(next));
+
+
+router.post('/loginForTest', (req, res, next) => 
+memberController.getRawBody(req)
+.then(password=>{
+    return memberController.loginForTest(req.query.testId,password);
+})
+.then(message=>{
+    if(JSON.parse(message).status===200){
+        return memberController.createTestMember(req.query.testId,req.query.memberId);
+   }else{
+        return "failure";
+    }  
+})
+.then(response=>{
+  res.send(response);
+})
+.catch(next));;
+
+
+
+
+
+
+
+
 module.exports = router;
