@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {SubcategorieService} from "../subcategorie.service";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {SousCategorie} from "../subcategorie.model";
 import {TestService} from "../../test/test.service";
 import {Question} from "../../question/question.model";
+import {Answer} from "../../answer/answer.model";
 
 @Component({
   selector: 'sub-info',
@@ -16,14 +17,15 @@ export class SubInfoComponent implements OnInit {
   questions:any;
   id:number;
   name:string
-  test_id:number;
+  test_id:any;
   constructor(private subCategorieService:SubcategorieService,
               private activatedRouter:ActivatedRoute,
-              private testService:TestService) {
+              private testService:TestService,
+              private router:Router) {
 
     this.id = this.activatedRouter.snapshot.params['id'];
     console.log(this.id);
-    this.test_id= this.testService.currentTestValue.id;
+    this.test_id = localStorage.getItem('catnom');
     console.log(this.test_id);
   }
 
@@ -41,6 +43,14 @@ export class SubInfoComponent implements OnInit {
         console.log(err);
       }
     )
+  }
+
+
+  update(question:any){
+   // console.log(this.questions.question.id);
+    //this.router.navigate(['pages/answer/',question.id_question,'modifier'])
+
+
   }
 
 }

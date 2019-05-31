@@ -26,7 +26,7 @@
           </thead>
       <tbody>
       <tr *ngFor="let test of tests | paginate: { itemsPerPage: 7, currentPage: pageActuel }">
-        <td>{{test.id}}</td>
+        <td (click)="getinfo(test)">{{test.id}}</td>
         <td>{{test.name}}</td>
         <td>{{test.expiration_date | date: 'dd/MM/yyyy h:mm a'}}</td>
         <td>{{test.activation_date | date: 'dd/MM/yyyy h:mm a'}}</td>

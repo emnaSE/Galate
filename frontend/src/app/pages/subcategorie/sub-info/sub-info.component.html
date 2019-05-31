@@ -1,7 +1,9 @@
 <nb-card>
 
   <nb-card-header>
-    <div style="text-align: center">{{name}}</div>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+
   </nb-card-header>
     <nb-card-body>
 
@@ -14,6 +16,7 @@
     <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="action: activate to sort column ascending">question</th>
     <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="questio: activate to sort column ascending">valeur</th>
     <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="valeur: activate to sort column ascending">order</th>
+    <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="action: activate to sort column ascending">action</th>
 
   </thead>
   <tbody>
@@ -33,6 +36,10 @@
     <td>{{question[0].ordre}}
     <br>
       {{question[1].ordre}}
+    </td>
+    <td>
+      <i  style="cursor: pointer; color: #69737f; display: inline-block;margin-right: 20px !important;" class="fas fa-trash fa-1x" ></i>
+      <i class="fa fa-edit fa-1x" style="color: #298a66; cursor: pointer;color: #298a66;"  ></i>
     </td>
 
 

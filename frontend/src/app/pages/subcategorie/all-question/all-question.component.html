@@ -1,0 +1,103 @@
+<nb-card>
+
+  <nb-card-header>
+
+  </nb-card-header>
+  <nb-card-body>
+
+
+    <!-- Top menu -->
+
+
+
+
+    <div class="table-responsive" >
+
+      <table id="example2" class="my-3 table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info" style="text-align: center">
+
+
+      <tbody>
+        <tr  *ngFor="let catalogue of catalogueDetails">
+
+          <td (click)="getinfo(catalogue)">{{catalogue.subcategory}}</td>
+
+          <td *ngFor="let question of catalogue.questions" ><p  *ngIf="question[0]!==undefined">{{question[0].name}} <br/> {{question[0].ordre}} ,<br/>{{question[1].name}} <br/>{{question[1].ordre}} </p></td>
+
+        </tr>
+
+        </tbody>
+      </table>
+
+
+
+    </div>
+    <script>
+      $Answers = {Au: 0, Di: 0, So: 0, To:0, Ac:0, Ee:0, Cr:0, Re:0, Ob:0, Co:0, Op:0, Se:0};
+    </script>
+
+
+
+
+
+    <script>
+      function clickonone(a , b){
+        console.log("we are here");
+      }
+
+
+      function content(elem){
+        $count=elem.parentElement.childElementCount;
+        $col = elem.cellIndex;
+        if($count==14){
+          $col=$col-1;
+        }
+        else{
+          $col=$col-2;
+        }
+        $class=elem.className;
+        for($i=0;$i<11;$i++){
+          if($i<4 || $i>6){
+            document.getElementsByClassName($class)[$i].style.backgroundColor="rgb(218,210,210)";
+            document.getElementsByClassName($class)[$i].style.backgroundImage="url('')";
+          }else{
+            document.getElementsByClassName($class)[$i].style.backgroundColor="rgb(255,255,255)";
+            document.getElementsByClassName($class)[$i].style.backgroundImage="url('')";
+          }
+        }
+        elem.style.backgroundImage="url('assets/img/done.png')";
+        elem.style.backgroundRepeat="no-repeat";
+        elem.style.backgroundPositionY="center";
+        elem.style.backgroundPositionX="center";
+        $Answers[$class]=$col;
+        /* if(elem.style.backgroundColor=="blue")
+        elem.style.backgroundColor="rgb(218,210,210)";
+        else
+        elem.style.backgroundColor="blue";
+
+
+
+        //$row = elem.parentElement.rowIndex;
+
+        alert($class); */
+      }
+      function affiche(){
+        $text="";
+        $vide=false;
+        for($key in $Answers){
+          $text=$text+$key +':'+$Answers[$key]+".....";
+          if($Answers[$key]==0){
+            $vide=true;
+          }
+        }
+        if($vide){
+          alert("Please fill the table")
+        }
+        else{
+          alert($text);
+        }
+
+      }
+    </script>
+
+  </nb-card-body>
+</nb-card>
