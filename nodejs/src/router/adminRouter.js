@@ -800,7 +800,8 @@ adminController.getMemberInformationByMemberAndTestID(req)
     return res.payload;
 })
 .then(memberInformation=>{
-    return adminController.generateXMLFile(memberInformation,req , res);
+    
+    return adminController.generateXMLFile(memberInformation,req , res );
 })
 .catch(next));
 

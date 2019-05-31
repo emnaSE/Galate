@@ -1527,56 +1527,180 @@ _publics.getSubcategoryByMemberAndTestID = (req) => {
      };
   
 
-_publics
-  
-  
-
-_publics.generateXMLFile = (input,req , res) => {
-  return new Promise((resolve, reject) => {   
-
-        var js2xmlparser = require("js2xmlparser");
-        var dir=tmp.tmpdir;
- 
-        var data = js2xmlparser.parse("details", input);
-
-        
-
-       
-
-       /* doc.pipe(fs.createWriteStream(dir+'\\Member_Information.xml'));
-        var xmlFile = path.join(dir, 'Member_Information.xml');
-        var file = fs.createReadStream(xmlFile);
-        var stat = fs.statSync(xmlFile);
-        res.setHeader('Content-Length', stat.ino);
-        res.setHeader('Content-Type', 'application/xml');
-        res.setHeader('Content-Disposition', 'attachment; filename=Member_Information.xml');
-        res.setBody(data);
-        file.pipe(res);*/
-         
-    
-         fs.writeFile(dir+'\\Member_Information.xml', data, function(err) {
-          if(err) {
-              return console.log(err);
-          }
+     function createSubcategories(subcategories ){
+      let promises = [];
+      var decode = require('unescape');
+     
+      //var subcategories = ['authenticité' , 'Diplomatie' , 'Sociabilité' , 'Tolérance'];
+      for (var i=0;i<subcategories.length;i++) {
+        promises.push( new Promise((resolve, reject) => { 
           
-          console.log(data);
-      });
+        
+            subc = subc+ "<Cell> <Data>" +subcategories[i] +"</Data> </Cell>" ;
+           
+              
+            
+            
+          }));
+      }
+      
 
-      var xmlFile = path.join(dir, 'Member_Information.xml');
-      var stream = fs.createReadStream(xmlFile);
 
-      res.writeHead(200, {'Content-disposition': 'attachment; filename=Member_Information.xml'}); 
-      stream.pipe(res);
-      stream.once("end", function () {
-        stream.destroy(); // makesure stream closed, not close if download aborted.
-        fs.unlink("Member_Information.xml", function (err) {
-          if (err) {
-              console.error(err.toString());
-          } else {
-              console.warn("Member_Information.xml" + ' deleted');
-          }
-        });
-      });
+      return Promise.all(promises);   
+    
+    }
+    
+  
+
+_publics.generateXMLFile = (input,req , res  ) => {
+  return new Promise((resolve, reject) => {   
+    
+    var subcategories = ['authenticité' , 'Diplomatie' , 'Sociabilité' , 'Tolérance'];
+    var categoryNum = 8 ; 
+    var memberNum = 3 ;
+    var builder = require('xmlbuilder');
+    
+   
+    var subc = "" ;
+
+    var decode = require('unescape');
+
+    for (var i=0;i<subcategories.length;i++) {
+    subc = subc+ "<Cell> <Data>" +subcategories[i] +"</Data> </Cell>" ;
+    }
+
+
+
+    var doc = builder.create('Workbook');
+    doc.att('xmlns:o', 'urn:schemas-microsoft-com:office:office');
+    doc.att('xmlns:x', 'urn:schemas-microsoft-com:office:excel');
+    doc.att('xmlns:ss', 'urn:schemas-microsoft-com:office:spreadsheet');
+    doc.att('xmlns', 'urn:schemas-microsoft-com:office:spreadsheet');
+    doc.att('xmlns:x2', 'urn:schemas-microsoft-com:office:excel2');
+    var styles =doc.ele('Styles');
+     var style1 = styles.ele('Style');
+        style1.att('ss:ID', 'Default');
+        style1.att('ss:Name', 'Normal');
+        var alignement =style1.ele('ss:Alignment');
+        alignement.att('ss:Vertical', 'Bottom');
+        alignement.up();
+        var font = style1.ele('ss:Font');
+        font.att('ss:Color', '#000000');
+        font.att('ss:FontName', 'Calibri');
+        font.att('ss:Size', '11');
+        font.up();
+        style1.up();
+      
+      var style2 = styles.ele('Style');
+        style2.att('ss:ID', 'S21');
+          var alignement2= style2.ele('ss:Alignment');
+            alignement2.att('ss:Vertical', 'Bottom');
+            alignement2.up();
+            var font2 = style2.ele('ss:Font');
+            font2.att('ss:Color', '#000000');
+            font2.att('ss:FontName', 'Calibri');
+            font2.att('ss:Size', '11');
+            font2.up();
+            var numberFormat=style2.ele('ss:NumberFormat')
+            numberFormat.att('ss:Format', '@')
+            numberFormat.up();
+            style2.up();
+     styles.up();
+
+   var worksheet = doc.ele('Worksheet');
+     worksheet.att('ss:Name' , 'Feuil1');
+     var table =  worksheet.ele('ss:Table');
+     table.att('ss:DefaultRowHeight', '15');   
+     table.att('ss:DefaultColumnWidth', '60');
+     table.att('ss:ExpandedRowCount', memberNum);
+     table.att('ss:ExpandedColumnCount', 4+categoryNum) ; 
+       var row = table.ele('Row');
+          var cell1 =row.ele('Cell');
+              var data1 = cell1.ele('Data');
+                  data1.att('ss:Type', 'String') ;
+                  data1.txt('nom')  ;
+              data1.up();
+            cell1.up();
+
+          var cell2 =row.ele('Cell');
+            var data2 = cell2.ele('Data');
+                data2.att('ss:Type', 'String') ;
+                data2.txt('prenom')  ;
+            data2.up();
+          cell2.up();
+
+           var cell3 =row.ele('Cell');
+            var data3 = cell3.ele('Data');
+                data3.att('ss:Type', 'String') ;
+                data3.txt('age')  ;
+            data3.up();
+          cell3.up();
+
+          var cell4 =row.ele('Cell');
+            var data4 = cell4.ele('Data');
+                data4.att('ss:Type', 'String') ;
+                data4.txt('niveau Etude')  ;
+            data4.up();
+          cell4.up();
+
+          for (var i=0;i<subcategories.length;i++) {
+          var subcategory =row.ele('Cell')
+             var data5 =  subcategory.ele('Data');
+                data5.att('ss:Type', 'String'); 
+                data5.txt(subcategories[i]) ; 
+              data5.up();
+            subcategory.up();
+           
+            }
+
+         row.up();
+
+
+
+
+
+         
+       table.up();    
+      worksheet.up();
+
+     
+
+  var xml = doc.end({ pretty: true }); 
+  console.log(xml);
+
+
+  
+
+                  //working example : convert json to xml and download xml File
+                  /*  var js2xmlparser = require("js2xmlparser");
+                    var dir=tmp.tmpdir;
+            
+                    var data = js2xmlparser.parse("details", input);
+
+                    
+                    fs.writeFile(dir+'\\Member_Information.xml', data, function(err) {
+                      if(err) {
+                          return console.log(err);
+                      }
+                      
+                      console.log(data);
+                  });
+
+                  var xmlFile = path.join(dir, 'Member_Information.xml');
+                  var stream = fs.createReadStream(xmlFile);
+
+                  res.writeHead(200, {'Content-disposition': 'attachment; filename=Member_Information.xml'}); 
+                  stream.pipe(res);
+                  stream.once("end", function () {
+                    stream.destroy(); // makesure stream closed, not close if download aborted.
+                    fs.unlink("Member_Information.xml", function (err) {
+                      if (err) {
+                          console.error(err.toString());
+                      } else {
+                          console.warn("Member_Information.xml" + ' deleted');
+                      }
+                    });
+                  });*/
      
 
 
