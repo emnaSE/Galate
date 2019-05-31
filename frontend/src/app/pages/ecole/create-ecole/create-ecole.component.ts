@@ -64,7 +64,7 @@ export class CreateEcoleComponent implements OnInit {
       if(this.addForm.valid){
         this.ecoleService.updateEcole(this.id, this.addForm.value).subscribe(
           data=>{
-            alert("update avec success")
+            alert("modifiée avec succès ")
             this.router.navigate(['pages/ecole'])
           }
         )

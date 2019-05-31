@@ -2,7 +2,8 @@
 
 <nb-card>
   <nb-card-header>
-    Liste des Classes
+ 
+    Listes des classes
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
 
@@ -15,8 +16,8 @@
       <thead>
       <tr role="row">
         <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="id: activate to sort column descending">ID</th>
-        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="name: activate to sort column ascending">name</th>
-        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="id_school: activate to sort column ascending">id_school</th>
+        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="name: activate to sort column ascending">nom</th>
+        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="id_school: activate to sort column ascending">id_ecole</th>
         <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="action: activate to sort column ascending">action</th>
 
           </thead>
@@ -28,7 +29,7 @@
 
         <td>
           <i style="cursor: pointer; color: #69737f; display: inline-block;margin-right: 20px !important;" class="fas fa-trash fa-1x" (click)="deleteByid(clas)"></i>
-          <i class="fas fa-broom fa-1x" style="color: #298a66; cursor: pointer;" (click)="updateClass(clas)"></i>
+          <i class="fa fa-edit fa-1x" style="color: #298a66; cursor: pointer;" (click)="updateClass(clas)"></i>
         </td>
 
 

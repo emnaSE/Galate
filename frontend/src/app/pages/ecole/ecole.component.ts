@@ -50,29 +50,23 @@ export class EcoleComponent  implements OnInit{
     if(confirm("êtes-vous sûr de vouloir supprimer le cette ecole ")) {
       this.ecoleService.deleteEcole(ecole.id).subscribe(
         data=>{
-          if(data==="success"){
+          if(data==200){
 
             alert("Suppression avec succès");
           }else{
             alert("Vous ne pouvez pas supprimer cette categorie");
 
           }
-          this.router.navigate(['pages/ecole'])
-          this.ecoleService.getAllEcole().subscribe(
-            data=>{
-              this.ecoles=data;
-            },err=>{
-              console.log(err);
 
-            }
-          )
 
           this.ecoles=this.ecoles.filter(e=>e !==ecole)
           this.router.navigate(['pages/ecole'])
 
 
         },err =>{
+          this.ecoles=this.ecoles.filter(e=>e !==ecole)
           console.log(err);
+
         }
       )}
   };

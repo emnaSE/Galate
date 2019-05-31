@@ -1,34 +1,68 @@
-
-
 <nb-card>
   <nb-card-header>
-    {{ editMode ? 'Modifier' : 'Ajouter' }} Sous test
-    <ul style="position: relative; float: right">
-      <i style="cursor: pointer; position: relative; float: right ; color: darkgreen"  (click)="consulterCategorie()"> Consulter Categories </i><br>
-      <i style="cursor: pointer; position: relative; float: right ;color: darkgreen"  (click)="consultezSubCategorie()"> Consulter SubCategories </i>
-    </ul>
+    {{ editMode ? 'Modifier' : 'Ajouter' }}  test
+    <ng-template [ngIf]="editMode">
+      <ul style="position: relative; float: right">
+        <i style="cursor: pointer; position: relative; float: right ; color: darkgreen"  (click)="consulterCategorie()"> Consulter Categories </i><br>
+        <i style="cursor: pointer; position: relative; float: right ;color: darkgreen"  (click)="consultezSubCategorie()"> Consulter Sous Categories </i>
+      </ul>
+    </ng-template>
+
   </nb-card-header>
 
   <nb-card-body>
     <form [formGroup]="addForm"(ngSubmit)="onSubmit()" >
       <div class="form-group">
-        <input type="text" class="form-control" formControlName="name" placeholder="Name">
+        <input type="text" class="form-control" formControlName="name" placeholder="nom">
       </div>
 
       <div class="form-group">
         <label type="text">date d activation:</label>
-        <input type="date" class="form-control" data-date-format="yyyy-MM-dd" formControlName="activation_date" placeholder="date d'activation">
+        <input
+          class="form-control"
+          #dpMDY="bsDatepicker"
+          bsDatepicker
+          formControlName="activation_date"
+          [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD, hh:mm:ss '}">
+
       </div>
 
 
       <div class="form-group">
         <label type="text" >date expiration:</label>
-        <input type="date" class="form-control" formControlName="expiration_date" placeholder="date expiration">
+        <input
+          class="form-control"
+          #dpMDY="bsDatepicker"
+          bsDatepicker
+
+
+          formControlName="expiration_date"
+          [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD, hh:mm:ss ' }">
+
+
       </div>
+      <ng-container *ngIf="submitted && addForm.errors">
+        <p class="text-danger" >
+          {{ addForm.errors?.dates | json }}
+        </p>
+      </ng-container>
 
 
       <div class="form-group">
-        <input type="password" class="form-control" placeholder="password" formControlName="password">
+        <label type="text" >Nombre de sous categorie:</label>
+        <input type="number" class="form-control" formControlName="test_subcategories_number" placeholder="nombre de sousCategorie">
+      </div>
+
+      <div class="form-group">
+        <label type="text" >Dureé:</label>
+        <input type="number" class="form-control" formControlName="duration" placeholder="duree de test">
+      </div>
+
+
+
+      <div class="form-group">
+        <label type="text" >Password:</label>
+        <input type="text" class="form-control" placeholder="password" formControlName="password">
       </div>
 
 

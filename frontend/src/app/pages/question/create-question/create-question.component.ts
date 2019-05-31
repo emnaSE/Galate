@@ -148,7 +148,7 @@ export class CreateQuestionComponent implements OnInit {
 
       onCreate(){
 
-          this.questionService.addQuestionByIdSub(this.test_id,this.id,this.addForm.value).subscribe(
+          this.questionService.addQuestionByIdSub(this.id,this.test_id,this.addForm.value).subscribe(
             data=>{
               alert("suucess");
             },err=>{

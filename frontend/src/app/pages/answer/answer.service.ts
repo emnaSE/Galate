@@ -25,8 +25,8 @@ export class AnswerService {
     return this.http.post(this.url+'createAnswer',JSON.stringify(answer),{responseType: 'text'});
   }
 
-  deleteAnswer(id:number):Observable<boolean>{
-    return this.http.get<boolean>(this.url+'deleteAnswer?answer_id='+id);
+  deleteAnswer(id:number):Observable<Object>{
+    return this.http.get(this.url+'deleteAnswer?answer_id='+id,{responseType: 'text'});
   }
 
   updateAnswer(id:number,anwser:any):Observable<any>{
@@ -34,6 +34,9 @@ export class AnswerService {
   }
   getAnswerByQuestionId(id:number):Observable<Answer[]>{
     return this.http.get<Answer[]>(this.url+'getAllAnswerByQuestion?id_question='+id);
+  }
+  getAnswerById(id:number):Observable<Answer>{
+    return this.http.get<Answer>(this.url+''+id);
   }
 
 }

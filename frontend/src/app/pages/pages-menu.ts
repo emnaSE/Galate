@@ -2,6 +2,15 @@ import { NbMenuItem } from '@nebular/theme';
 
 export const MENU_ITEMS: NbMenuItem[] = [
 
+
+  {
+    title: 'tableau de bord',
+    icon: 'nb-home',
+    link: '/pages/stat',
+    home: true,
+
+  },
+
   {
     title: 'Tests',
     icon: 'nb-e-commerce',
@@ -42,7 +51,11 @@ export const MENU_ITEMS: NbMenuItem[] = [
 
       },
       {
+<<<<<<< HEAD
         title: 'Liste des Classes',
+=======
+        title: 'Classe',
+>>>>>>> origin/mouadh
         //icon: 'nb-compose',
         link: '/pages/class',
         //home: true,

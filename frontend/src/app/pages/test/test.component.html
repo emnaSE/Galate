@@ -13,14 +13,15 @@
       <thead>
       <tr role="row">
         <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="id: activate to sort column descending">ID</th>
-        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="name: activate to sort column ascending">name</th>
+        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="name: activate to sort column ascending">nom</th>
         <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="activation: activate to sort column ascending">Date d' activation</th>
         <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="expi: activate to sort column ascending">Date d' Expiration</th>
-        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="password: activate to sort column ascending">password</th>
+        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="password: activate to sort column ascending">mot de pass</th>
         <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="action: activate to sort column ascending">nombre de test</th>
+        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="duree: activate to sort column ascending">duree du test</th>
         <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="test_subcategories_number: activate to sort column ascending">action  </th>
         <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="affect: activate to sort column ascending">Affectation categorie</th>
-        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="affectsub: activate to sort column ascending">Affectation sub categorie</th>
+        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="affectsub: activate to sort column ascending">Affectation sous categorie</th>
 
           </thead>
       <tbody>
@@ -31,9 +32,10 @@
         <td>{{test.activation_date | date: 'dd/MM/yyyy'}}</td>
         <td>{{test.password}}</td>
         <td>{{test.test_subcategories_number}}</td>
+        <td>{{test.duration}}</td>
 
         <td>
-          <i style="cursor: pointer;color: #69737f;  display: inline-block;margin-right: 20px !important;" class="fas fa-trash fa-1x" (click)="deleteByid()"></i>
+          <i style="cursor: pointer;color: #69737f;  display: inline-block;margin-right: 20px !important;" class="fas fa-trash fa-1x" (click)="deleteByid(test)"></i>
           <i class="fa fa-edit fa-1x" style="cursor: pointer;" style="color: #298a66;"(click)="updateTest(test)"></i>
         </td>
 
