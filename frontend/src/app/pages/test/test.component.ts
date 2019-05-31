@@ -80,4 +80,8 @@ export class TestComponent  implements OnInit{
       this.router.navigate(['pages/test',test.id,'modifier'])
   }
 
+  getinfo(test:Test){
+    this.router.navigate(['pages/test/all',test.id]);
+  }
+
 }

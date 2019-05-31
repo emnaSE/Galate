@@ -24,6 +24,8 @@ import {AnswerComponent} from "./answer/answer.component";
 import {CreateAnswerComponent} from "./answer/crate-answer/create-answer.component";
 import {HomeComponent} from "./home/home.component";
 import {SubInfoComponent} from "./subcategorie/sub-info/sub-info.component";
+import {NotFoundComponent} from "./miscellaneous/not-found/not-found.component";
+import {AllQuestionComponent} from "./subcategorie/all-question/all-question.component";
 
 const routes: Routes = [{
   path: '',
@@ -183,10 +185,19 @@ const routes: Routes = [{
       //component: SubcategorieComponent,
     },
     {
+      path: 'test/all/:id',
+      component: AllQuestionComponent,canActivate: [AuthGuard],
+      //component: SubcategorieComponent,
+    },
+    {
       path: '',
       redirectTo: 'stat',
       pathMatch: 'full',
     },
+    {
+      path: '**',
+      component: NotFoundComponent,
+    }
 
   ],
 }];
