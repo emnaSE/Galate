@@ -26,6 +26,7 @@ import { LoginTestService } from './pages/login-test/login-test.service';
 import { DownloadComponent } from './pages/downloadPDF/download.component';
 import { DownloadService } from './pages/downloadPDF/download.service';
 import { TestTerminatedComponent } from './pages/test-terminated/test-terminated.component';
+import { TestTableComponent } from './pages/testTable/testTable.component';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { TestTerminatedComponent } from './pages/test-terminated/test-terminated
     LoginComponent,
     RegisterComponent,
     LoginTestComponent,
-    TestTerminatedComponent
+    TestTerminatedComponent,
+    TestTableComponent
   ],
   imports: [
     BrowserModule,
