@@ -203,5 +203,7 @@ alter table test add column duration varchar(255);
 alter table test MODIFY  expiration_date timestamp;
 alter table test MODIFY  activation_date timestamp;
 alter table test_member MODIFY  date_test  timestamp;
+alter table question add column ordre int(11);
+alter table test_subcategory add column ordre int(11);
 
  

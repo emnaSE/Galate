@@ -317,7 +317,7 @@ router.post('/createAnswer', (req, res, next) =>
 
 
 router.post('/updateAnswerById', (req, res, next) =>
-    adminController.getRawBody(req)
+    memberController.getRawBody(req)
         .then(answer => {
             return adminController.updateAnswer(req, answer)
         })
@@ -404,15 +404,7 @@ router.post('/createQuestion_Answers', (req, res, next) =>
 })
 .catch(next));
 
-router.post('/updateAnswerById', (req, res, next) =>
-    adminController.getRawBody(req)
-        .then(answer => {
-            return adminController.updateAnswer(req, answer)
-        })
-        .then(msg => {
-            res.send(msg);
-        })
-        .catch(next));
+
 
 router.get('/deleteAnswerById', urlencodedParser, (req, res, next) =>
     adminController.deleteAnswer(req)
@@ -668,6 +660,7 @@ router.get('/getQuestionsByTestSubcategory', (req, res, next) => adminController
     getSubcategoryByTestSubcategory(req)
     .then(subcategory => {
         res.payload.subcategory = JSON.parse(subcategory)[0].name;
+        res.payload.id = JSON.parse(subcategory)[0].id;
         return adminController.getAllQuestionsByIdTestSubcategory(req)
     })
     .then(questions => {
@@ -896,9 +889,19 @@ router.get('/getQuestionsByTestSubc', (req, res, next) => adminController.
 
 
 
+router.get('/getAllTestSubcategoriesByTestAndSubcategoryIds', (req, res, next) => adminController
+.getAllTestSubcategoriesByTestAndSubcategoryIds(req)
+.then(response => {
+    res.send(response);
+})
+.catch(next));
 
-
-
+router.post('/updateSubcategoriesOrder', (req, res, next) => adminController
+.updateSubcategoriesOrder(req)
+.then(response => {
+    res.send(response);
+})
+.catch(next));
 
 
 

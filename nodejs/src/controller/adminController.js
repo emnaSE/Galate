@@ -483,11 +483,12 @@ _publics.createNewQuestion = (question, testSubCategId) => {
   var wording=question.wording;
   var value=question.value;  
   var id_test_subcategory=testSubCategId;
+  var ordre=question.ordre; 
   return new Promise((resolve, reject) => {  
            var response={};
            var questionId;
            var sql = "INSERT INTO question SET ? ";
-           const newQuestion = { name: name,wording:wording,value:value,id_test_subcategory:id_test_subcategory};
+           const newQuestion = { name: name,wording:wording,value:value,id_test_subcategory:id_test_subcategory,ordre:ordre};
            con.query(sql,newQuestion, function (err, result) {
               if (err){
                 response={
@@ -531,12 +532,13 @@ _publics.updateQuestion=(req,question) => {
   var name=question.name;
   var wording=question.wording;
   var value=question.value;
+  var ordre=question.ordre;
   var question_id=req.query.id;
   var id_test_subcategory=question.id_test_subcategory;
   return new Promise((resolve, reject) => { 
            var msg="";
-           var sql = "UPDATE question SET name=?, wording=?,value=?,id_test_subcategory=?  WHERE id = ?"; 
-           con.query(sql,[name,wording,value,id_test_subcategory,question_id], function (err, result) {
+           var sql = "UPDATE question SET name=?, wording=?,value=?,id_test_subcategory=?,ordre=?  WHERE id = ?"; 
+           con.query(sql,[name,wording,value,id_test_subcategory,ordre,question_id], function (err, result) {
               if (err){
                   msg="failure";
                   reject(err);
@@ -682,6 +684,7 @@ _publics.createAnswers = (questionId, answers ) => {
 }; 
 
 _publics.updateAnswer=(req,answer) => { 
+  console.log("answer= "+answer);
   var answer=JSON.parse(answer);
   var id_question=answer.id_question;
   var name=answer.name;
@@ -1765,6 +1768,25 @@ _publics.generateXMLFile = (input,req , res  ) => {
  });  
 
 }
+
+
+
+
+
+_publics.getAllTestSubcategoriesByTestAndSubcategoryIds = (req) => {
+  var tesId=req.query.testId;
+  return new Promise((resolve, reject) => {  
+    var sql = "select sc.name,tsc.ordre from subcategory sc left join test_subcategory tsc on(sc.id=tsc.id_subcategory) where tsc.id_test=?";      
+    con.query(sql,[tesId], function (err, result) {
+    if (err) reject(err);
+    return resolve(result);
+    });
+  }); 
+}
+
+
+
+
 
 
 
