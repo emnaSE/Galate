@@ -807,10 +807,33 @@ adminController.getMemberInformationByMemberAndTestID(req)
 
 
 
+router.get('/getAllQuestionsByTestId', (req, res, next) =>
+    adminController.getTestSubcategoriesByTestId(req.query.testId)
+  .then(testSubcategories => {
+        res.payload.testSubcategories = testSubcategories;
+        return adminController.getAllQuestionsByTestSubc(testSubcategories)
+    })
+    .then(response => {
+        const results = perf.stop();
+        console.log("getAllQuestionsByTestSubcategories: " +results.time);
+        res.send(response);
+    })
+    .catch(next));
 
-
-
-
+router.get('/getQuestionsByTestSubc', (req, res, next) => adminController.
+    getSubcategoryByTestSubcategory(req)
+    .then(subcategory => {
+        res.payload.subcategory = JSON.parse(subcategory)[0].name;
+        return adminController.getAllQuestionsByIdTestSubcategory(req)
+    })
+    .then(questions => {
+        return adminController.getAllQuestionsByQuestionsIds(questions)
+    })
+    .then(response => {
+        res.payload.questions = response;
+        res.send(res.payload);
+    })
+    .catch(next));
 
 
 

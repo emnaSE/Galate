@@ -615,7 +615,7 @@ _publics.getAllQuestionsByIdTestSubcategory = (req) => {
   _publics.getSubcategoryByTestSubcategory = (req) => { 
     var idTestSubcategory=req.query.idTestSubcategory;
        return new Promise((resolve, reject) => {  
-                var sql = "select * FROM subcategory sc left join test_subcategory ts on (sc.id=ts.id_subcategory) where ts.id=1"; 
+                var sql = "select * FROM subcategory sc left join test_subcategory ts on (sc.id=ts.id_subcategory) where ts.id=?"; 
               
                     con.query(sql,[idTestSubcategory], function (err, result) {
                     if (err) reject(err);
@@ -1380,6 +1380,29 @@ _publics.getAllQuestionsByTestSubcategories = (testSubcategories) => {
 
 
 
+_publics.getAllQuestionsByTestSubc = (testSubcategories) => { 
+  let promises = [];
+  for (var i=0;i<testSubcategories.length;i++) {
+    promises.push( new Promise((resolve, reject) => request.get({
+      url :url+`/admin/getQuestionsByTestSubc?idTestSubcategory=${testSubcategories[i].id}`,
+      method: 'GET',
+      gzip: true,
+    }, (e, r, b) => {
+      if (!e && r.statusCode == 200) {
+        return resolve(JSON.parse(b));
+      } else {
+        reject(e);
+      }
+    })));
+  }
+  return Promise.all(promises)      
+
+};
+
+
+
+
+
 _publics.getQuestionsBySubcategories = (testSubcategories) => { 
   let promises = [];
   for (var i=0;i<testSubcategories.length;i++) {
@@ -1659,7 +1682,7 @@ _publics.generateXMLFile = (input,req , res  ) => {
 
 
 
-         
+
        table.up();    
       worksheet.up();
 
