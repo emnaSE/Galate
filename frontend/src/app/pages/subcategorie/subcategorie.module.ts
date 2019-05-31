@@ -8,6 +8,7 @@ import { CreateSousComponent } from './create-sous/create-sous.component';
 import {NgxPaginationModule} from 'ngx-pagination';
 import {NgMultiSelectDropDownModule} from "ng-multiselect-dropdown";
 import {AngularMultiSelectModule} from "angular2-multiselect-dropdown";
+import { SubInfoComponent } from './sub-info/sub-info.component';
 
 @NgModule({
   imports: [
@@ -20,6 +21,7 @@ import {AngularMultiSelectModule} from "angular2-multiselect-dropdown";
   declarations: [
     SubcategorieComponent,
     CreateSousComponent,
+    SubInfoComponent,
   ],
 })
 export class SubcategorieModule { }

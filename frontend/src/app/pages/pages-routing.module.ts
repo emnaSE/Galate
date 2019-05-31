@@ -23,6 +23,7 @@ import {AuthGuard} from "./auth/auth.guard";
 import {AnswerComponent} from "./answer/answer.component";
 import {CreateAnswerComponent} from "./answer/crate-answer/create-answer.component";
 import {HomeComponent} from "./home/home.component";
+import {SubInfoComponent} from "./subcategorie/sub-info/sub-info.component";
 
 const routes: Routes = [{
   path: '',
@@ -79,6 +80,11 @@ const routes: Routes = [{
       path: 'sous/:id/modifier',
       //component: CreateSousComponent,
       component: CreateSousComponent,canActivate: [AuthGuard],
+    },
+    {
+      path: 'sous/:id/info',
+      //component: CreateSousComponent,
+      component: SubInfoComponent,canActivate: [AuthGuard],
     },
 
     {
