@@ -16,6 +16,7 @@ export class CreateTestComponent implements OnInit {
   p_error:number;
   id:number;
   local:any;
+
   submitted = false;
   editMode=false;
   erreur:number;
@@ -27,15 +28,33 @@ export class CreateTestComponent implements OnInit {
 
     this.id = this.activateRouter.snapshot.params['id'];
 
+
   }
+  dateLessThan(from: string, to: string) {
+    return (group: FormGroup): {[key: string]: any} => {
+      let f = group.controls[from];
+      let t = group.controls[to];
+      if (f.value > t.value) {
+        return {
+          dates: "La date d 'activation  doit être inférieure à la date expiration"
+        };
+      }
+      return {};
+    }
+  }
+
   ngOnInit() {
 
     this.addForm=this.formBuilder.group({
       name: new FormControl('', [Validators.required]),
       activation_date: [[], Validators.required],
       expiration_date: [[], Validators.required],
+      test_subcategories_number: [, Validators.required],
+      duration: ['', Validators.required],
       password: [[], Validators.required],
-    });
+    },{validator: this.dateLessThan('activation_date','expiration_date')});
+
+
 
     if(this.id){
       this.editMode=true;
@@ -50,12 +69,17 @@ export class CreateTestComponent implements OnInit {
     }
 
   }
+  get valid(){
+    return this.addForm.controls;
+  }
+
 
   onSubmit(){
     this.submitted=true;
 
     if(this.id){
-
+      console.log(this.addForm.value)
+      console.log(this.valid.activation_date.value);
       if(this.addForm.valid){
         this.testService.updateTest(this.id,this.addForm.value).subscribe(
           data=>{

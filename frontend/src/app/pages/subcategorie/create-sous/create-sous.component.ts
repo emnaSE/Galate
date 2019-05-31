@@ -113,7 +113,7 @@ export class CreateSousComponent implements OnInit {
           console.log("message");
           this.subCategorieService.addSousCategorie(data).subscribe(
             data=>{
-              alert("ajouter vec succes");
+              alert("ajouter avec succes");
               this.router.navigate(['pages/sous'])
 
             },err=>{

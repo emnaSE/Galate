@@ -34,8 +34,8 @@ export class CategorieService {
     return this.http.get<Categorie>(this.url+"getCategoryById?id="+id);
   }
 
-  deleteCategorie(id:number):Observable<string>{
-    return this.http.get<string>(this.url+"deleteCategoryById?id="+id);
+  deleteCategorie(id:number):Observable<Object>{
+    return this.http.post(this.url+"deleteCategoryById?id="+id,id,{responseType: 'text'});
   }
   updateCategorie(id:number,categorie:Object):Observable<Object>{
     return this.http.post(this.url+"updateCategory?id="+id,categorie,{responseType: 'text'});

@@ -26,13 +26,6 @@ export class CreateCategorieComponent implements OnInit {
 
 
 
-
-
-
-
-
-
-
   }
 
   ngOnInit() {
@@ -58,17 +51,7 @@ export class CreateCategorieComponent implements OnInit {
       )
     }
 
-
-
-
-
-
-
   }
-
-
-
-
 
   get formvalidate() {
     return this.addForm.controls;
@@ -80,7 +63,7 @@ export class CreateCategorieComponent implements OnInit {
       if(this.addForm.valid){
         this.categorieService.updateCategorie(this.id, this.addForm.value).subscribe(
           data=>{
-            this.err= 1;
+            alert("modifiée avec succès ")
             this.router.navigate(['pages/categorie'])
           }
         )

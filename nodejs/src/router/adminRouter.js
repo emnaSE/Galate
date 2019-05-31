@@ -779,6 +779,7 @@ adminController.getTestsByFilter(req)
 
 
 
+
 router.get('/createDefaultTestResult', (req, res, next) =>memberController
 .getTestMemberByMemberIdAndTestId(req)
 .then(testMember=>{
@@ -814,6 +815,16 @@ router.get('/createDefaultTestResult', (req, res, next) =>memberController
 .catch(next));
 
 
+
+router.get('/generateXMLFile',urlencodedParser, (req, res, next) => 
+adminController.generateXMLFile(req ,res)
+.then(response=>{
+  res.send(response);
+})
+.catch(next));
+
+
+
 router.get('/getTestSubcategoryByTestIdAndSubcateoryId', (req, res, next) => 
 adminController.getTestSubcategoryByTestIdAndSubcateoryId(req)//testId//subcategoryId;
 .then(testSubcategory=>{
@@ -834,6 +845,61 @@ adminController.getTestSubcategoryByTestIdAndSubcateoryId(req)//testId//subcateg
     res.send(res.payload);
 })
 .catch(next));
+
+
+
+router.get('/generateXml', urlencodedParser, (req, res, next) =>
+adminController.getMemberInformationByMemberAndTestID(req)
+.then(member => {
+    res.payload.member = JSON.parse(member) ;
+    return adminController.getSubcategoryByMemberAndTestID(req)
+})
+.then(subCategory=>{
+    res.payload.subCategory=JSON.parse(subCategory);
+    return res.payload;
+})
+.then(memberInformation=>{
+    
+    return adminController.generateXMLFile(memberInformation,req , res );
+})
+.catch(next));
+
+
+
+router.get('/getAllQuestionsByTestId', (req, res, next) =>
+    adminController.getTestSubcategoriesByTestId(req.query.testId)
+  .then(testSubcategories => {
+        res.payload.testSubcategories = testSubcategories;
+        return adminController.getAllQuestionsByTestSubc(testSubcategories)
+    })
+    .then(response => {
+        const results = perf.stop();
+        console.log("getAllQuestionsByTestSubcategories: " +results.time);
+        res.send(response);
+    })
+    .catch(next));
+
+router.get('/getQuestionsByTestSubc', (req, res, next) => adminController.
+    getSubcategoryByTestSubcategory(req)
+    .then(subcategory => {
+        res.payload.subcategory = JSON.parse(subcategory)[0].name;
+        return adminController.getAllQuestionsByIdTestSubcategory(req)
+    })
+    .then(questions => {
+        return adminController.getAllQuestionsByQuestionsIds(questions)
+    })
+    .then(response => {
+        res.payload.questions = response;
+        res.send(res.payload);
+    })
+    .catch(next));
+
+
+
+
+
+
+
 
 
 module.exports = router;
