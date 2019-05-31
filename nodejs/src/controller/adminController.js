@@ -4,6 +4,12 @@ const _publics = {};
 var config = require('../config');
 var getRawBody = require('raw-body');
 var con=config.con;
+
+const path = require('path');
+var fs = require("fs"); // node filesystem
+var tmp = require('tmp');
+
+
 const request = require('request');
 var url=`http://localhost:`+config.port;
 const perf = require('execution-time')();
@@ -1482,4 +1488,228 @@ function whereClause(req, sql) {
   console.log("sql= "+sql);
   return sql;
 }
+
+
+
+
+
+
+
+
+
+
+
+_publics.getSubcategoryByMemberAndTestID = (req) => { 
+  var id_test=req.query.id_test;
+  var id_member=req.query.id_member;
+     return new Promise((resolve, reject) => {  
+              var sql = "select sc.name as section, ma.etallonage_result as calculated_result from manuel_answer ma left join subcategory sc on(sc.id=ma.id_subcategory) left join category c on (c.id=sc.id_category)  where ma.id_test=? and ma.id_member=?"; 
+            
+                  con.query(sql,[id_test,id_member], function (err, result) {
+                  if (err) reject(err);
+                  return resolve(JSON.stringify(result));
+                  });
+      });    
+   };
+
+
+   _publics.getMemberInformationByMemberAndTestID = (req) => { 
+    var id_test=req.query.id_test;
+    var id_member=req.query.id_member;
+       return new Promise((resolve, reject) => {  
+                var sql = "select distinct m.firstname as prenom , m.lastname as nom , m.age as age from member m left join manuel_answer ma on (ma.id_member = m.id ) where ma.id_test=? and ma.id_member=?"; 
+              
+                    con.query(sql,[id_test,id_member], function (err, result) {
+                    if (err) reject(err);
+                    return resolve(JSON.stringify(result));
+                    });
+        });    
+     };
+  
+
+     function createSubcategories(subcategories ){
+      let promises = [];
+      var decode = require('unescape');
+     
+      //var subcategories = ['authenticité' , 'Diplomatie' , 'Sociabilité' , 'Tolérance'];
+      for (var i=0;i<subcategories.length;i++) {
+        promises.push( new Promise((resolve, reject) => { 
+          
+        
+            subc = subc+ "<Cell> <Data>" +subcategories[i] +"</Data> </Cell>" ;
+           
+              
+            
+            
+          }));
+      }
+      
+
+
+      return Promise.all(promises);   
+    
+    }
+    
+  
+
+_publics.generateXMLFile = (input,req , res  ) => {
+  return new Promise((resolve, reject) => {   
+    
+    var subcategories = ['authenticité' , 'Diplomatie' , 'Sociabilité' , 'Tolérance'];
+    var categoryNum = 8 ; 
+    var memberNum = 3 ;
+    var builder = require('xmlbuilder');
+    
+   
+    var subc = "" ;
+
+    var decode = require('unescape');
+
+    for (var i=0;i<subcategories.length;i++) {
+    subc = subc+ "<Cell> <Data>" +subcategories[i] +"</Data> </Cell>" ;
+    }
+
+
+
+    var doc = builder.create('Workbook');
+    doc.att('xmlns:o', 'urn:schemas-microsoft-com:office:office');
+    doc.att('xmlns:x', 'urn:schemas-microsoft-com:office:excel');
+    doc.att('xmlns:ss', 'urn:schemas-microsoft-com:office:spreadsheet');
+    doc.att('xmlns', 'urn:schemas-microsoft-com:office:spreadsheet');
+    doc.att('xmlns:x2', 'urn:schemas-microsoft-com:office:excel2');
+    var styles =doc.ele('Styles');
+     var style1 = styles.ele('Style');
+        style1.att('ss:ID', 'Default');
+        style1.att('ss:Name', 'Normal');
+        var alignement =style1.ele('ss:Alignment');
+        alignement.att('ss:Vertical', 'Bottom');
+        alignement.up();
+        var font = style1.ele('ss:Font');
+        font.att('ss:Color', '#000000');
+        font.att('ss:FontName', 'Calibri');
+        font.att('ss:Size', '11');
+        font.up();
+        style1.up();
+      
+      var style2 = styles.ele('Style');
+        style2.att('ss:ID', 'S21');
+          var alignement2= style2.ele('ss:Alignment');
+            alignement2.att('ss:Vertical', 'Bottom');
+            alignement2.up();
+            var font2 = style2.ele('ss:Font');
+            font2.att('ss:Color', '#000000');
+            font2.att('ss:FontName', 'Calibri');
+            font2.att('ss:Size', '11');
+            font2.up();
+            var numberFormat=style2.ele('ss:NumberFormat')
+            numberFormat.att('ss:Format', '@')
+            numberFormat.up();
+            style2.up();
+     styles.up();
+
+   var worksheet = doc.ele('Worksheet');
+     worksheet.att('ss:Name' , 'Feuil1');
+     var table =  worksheet.ele('ss:Table');
+     table.att('ss:DefaultRowHeight', '15');   
+     table.att('ss:DefaultColumnWidth', '60');
+     table.att('ss:ExpandedRowCount', memberNum);
+     table.att('ss:ExpandedColumnCount', 4+categoryNum) ; 
+       var row = table.ele('Row');
+          var cell1 =row.ele('Cell');
+              var data1 = cell1.ele('Data');
+                  data1.att('ss:Type', 'String') ;
+                  data1.txt('nom')  ;
+              data1.up();
+            cell1.up();
+
+          var cell2 =row.ele('Cell');
+            var data2 = cell2.ele('Data');
+                data2.att('ss:Type', 'String') ;
+                data2.txt('prenom')  ;
+            data2.up();
+          cell2.up();
+
+           var cell3 =row.ele('Cell');
+            var data3 = cell3.ele('Data');
+                data3.att('ss:Type', 'String') ;
+                data3.txt('age')  ;
+            data3.up();
+          cell3.up();
+
+          var cell4 =row.ele('Cell');
+            var data4 = cell4.ele('Data');
+                data4.att('ss:Type', 'String') ;
+                data4.txt('niveau Etude')  ;
+            data4.up();
+          cell4.up();
+
+          for (var i=0;i<subcategories.length;i++) {
+          var subcategory =row.ele('Cell')
+             var data5 =  subcategory.ele('Data');
+                data5.att('ss:Type', 'String'); 
+                data5.txt(subcategories[i]) ; 
+              data5.up();
+            subcategory.up();
+           
+            }
+
+         row.up();
+
+
+
+
+
+         
+       table.up();    
+      worksheet.up();
+
+     
+
+  var xml = doc.end({ pretty: true }); 
+  console.log(xml);
+
+
+  
+
+                  //working example : convert json to xml and download xml File
+                  /*  var js2xmlparser = require("js2xmlparser");
+                    var dir=tmp.tmpdir;
+            
+                    var data = js2xmlparser.parse("details", input);
+
+                    
+                    fs.writeFile(dir+'\\Member_Information.xml', data, function(err) {
+                      if(err) {
+                          return console.log(err);
+                      }
+                      
+                      console.log(data);
+                  });
+
+                  var xmlFile = path.join(dir, 'Member_Information.xml');
+                  var stream = fs.createReadStream(xmlFile);
+
+                  res.writeHead(200, {'Content-disposition': 'attachment; filename=Member_Information.xml'}); 
+                  stream.pipe(res);
+                  stream.once("end", function () {
+                    stream.destroy(); // makesure stream closed, not close if download aborted.
+                    fs.unlink("Member_Information.xml", function (err) {
+                      if (err) {
+                          console.error(err.toString());
+                      } else {
+                          console.warn("Member_Information.xml" + ' deleted');
+                      }
+                    });
+                  });*/
+     
+
+
+ });  
+
+}
+
+
+
+
+
 module.exports = _publics;

@@ -779,6 +779,45 @@ adminController.getTestsByFilter(req)
 
 
 
+router.get('/generateXMLFile',urlencodedParser, (req, res, next) => 
+adminController.generateXMLFile(req ,res)
+.then(response=>{
+  res.send(response);
+})
+.catch(next));
+
+
+
+
+router.get('/generateXml', urlencodedParser, (req, res, next) =>
+adminController.getMemberInformationByMemberAndTestID(req)
+.then(member => {
+    res.payload.member = JSON.parse(member) ;
+    return adminController.getSubcategoryByMemberAndTestID(req)
+})
+.then(subCategory=>{
+    res.payload.subCategory=JSON.parse(subCategory);
+    return res.payload;
+})
+.then(memberInformation=>{
+    
+    return adminController.generateXMLFile(memberInformation,req , res );
+})
+.catch(next));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 module.exports = router;
 
