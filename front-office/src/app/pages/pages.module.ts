@@ -9,6 +9,7 @@ import { StartTestModule } from './startTest/startTest.module';
 import { DownloadModule } from './downloadPDF/download.module';
 import { TestTerminatedModule } from './test-terminated/test-terminated.module';
 
+
 const PAGES_COMPONENTS = [
   PagesComponent,
 ];
@@ -22,6 +23,7 @@ const PAGES_COMPONENTS = [
     RegisterModule,
     StartTestModule,
     TestTerminatedModule
+   
     
    
   ],

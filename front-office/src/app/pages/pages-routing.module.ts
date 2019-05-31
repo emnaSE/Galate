@@ -9,6 +9,7 @@ import { DownloadComponent } from './downloadPDF/download.component';
 import { TestTerminatedComponent } from './test-terminated/test-terminated.component';
 
 
+
 const routes: Routes = [
   { path: 'pages', loadChildren: 'app/pages/pages.module#PagesModule' },
 
