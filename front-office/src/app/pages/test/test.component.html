@@ -107,7 +107,7 @@
 							<li class="nav-item"><a routerLink="/test" class="nav-link">Nos Tests</a>
                             </li>
                             
-                            <li class="nav-item"><a id="login" class="btn btn-link-3 nav-link" (click)="logout($event)">Logout </a>
+                            <li class="nav-item"><a id="login" class="btn btn-link-3 nav-link" (click)="logout($event)">Déconnexion </a>
                             </li>
 					</ul>
 				</div>
@@ -119,10 +119,10 @@
         	<div class="container">
 				<div class="row">
 					<div class="col-sm-12 text wow fadeInLeft">
-						<h1>Chose the test you like</h1>
+						<h1>hoisissez le teste que vous convient</h1>
 						<div class="description">
 							<p class="medium-paragraph">
-								Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum officiis aliquid sint sapiente vero odit ex omnis accusamus!
+								<!--Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum officiis aliquid sint sapiente vero odit ex omnis accusamus!-->
 							</p>
 						</div>
 					</div>
@@ -142,9 +142,9 @@
             <div class="col-sm-6 col-md-6 col-lg-4" *ngFor="let item of tests">
                     <div class="card-body">
                       <h5 class="card-title">{{ item.name }}</h5>
-                      <p class="card-text"> {{ item.activation_date }}</p>
-                        <p class="card-text"> {{ item.expiration_date }}</p>
-                        <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" (click)="startTest($event  , item.id , item.duration)"  >Start</button>
+                      <p class="card-text"> {{ item.activation_date| date: 'dd/MM/yyyy  h:mm:ss ' }}</p>
+                        <p class="card-text"> {{ item.expiration_date| date: 'dd/MM/yyyy  h:mm:ss ' }}</p>
+                        <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" (click)="startTest($event  , item.id , item.duration)"  >Commencer</button>
                     
                     </div>
             </div>

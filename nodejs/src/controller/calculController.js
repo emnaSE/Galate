@@ -191,6 +191,54 @@ _publics.createListOfManuelAnswers= (req, sumLines) => {
 };
 
 
+
+_publics.updateListOfManuelAnswers= (req, sumLines) => { 
+  let promises = [];
+ var id_test=req.query.id_test;
+ var id_member=req.query.id_member;
+ for (var i=0;i<sumLines.length;i++) {
+              promises.push( new Promise((resolve, reject) => {  
+                var msg="";
+                var sql = "update manuel_answer set result=?  where  id_member=? and id_test=? and id_subcategory=?";
+                con.query(sql,[sumLines[i].sum,id_member,id_test,sumLines[i].id_subcategory], function (err, result) {
+                if (err){
+                  msg="failure"; 
+                  reject(err);
+                }else{
+                  msg="success";
+                }
+                return resolve(msg);
+              });
+            }));
+  }
+  return Promise.all(promises)   
+};
+
+_publics.updateManualAnswerEtalonnageResult= (req, sumLines) => { 
+  let promises = [];
+ var id_test=req.query.id_test;
+ var id_member=req.query.id_member;
+ for (var i=0;i<sumLines.length;i++) {
+              promises.push( new Promise((resolve, reject) => {  
+                var msg="";
+                var sql = "update manuel_answer set etallonage_result = coalesce( ("+
+                  " select max(value) from etalonnage where id_subcategory=? and ? between lower_bound and upper_bound) ,0) where id_member=? and id_test=? and id_subcategory=?";
+                con.query(sql,[sumLines[i].id_subcategory,sumLines[i].sum,id_member,id_test,sumLines[i].id_subcategory], function (err, result) {
+                if (err){
+                  msg="failure"; 
+                  reject(err);
+                }else{
+                  msg="success";
+                }
+                return resolve(msg);
+              });
+            }));
+  }
+  return Promise.all(promises)   
+};
+
+
+
 _publics.setEtalonnageValue= (req,value) => { 
 
    

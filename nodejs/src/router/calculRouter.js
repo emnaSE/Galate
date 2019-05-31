@@ -91,9 +91,9 @@ router.post('/saveTestResult',(req, res, next)=>memberController
     var test_member=JSON.parse(testMember);
     return memberController.deleteMemberChoicesByIdTestMember(test_member.id);
 })
-.then(message=>{
+/*.then(message=>{
     return memberController.deleteManuelAnswersByTestMember(req);
-})
+})*/
 .then(response=>{
     return memberController.createMemberChoices(res.payload.choices);
 })
@@ -104,11 +104,25 @@ router.post('/saveTestResult',(req, res, next)=>memberController
     }
     return calculController.getLineSum(req);
 })
-.then(sumLines => {
+/*.then(sumLines => {
+    res.payload.sumLines=sumLines;
     if(res.payload.leave===true){
         return "failure";
     }
     return calculController.createListOfManuelAnswers(req, sumLines);
+})*/
+.then(sumLines => {
+    res.payload.sumLines=sumLines;
+    if(res.payload.leave===true){
+        return "failure";
+    }
+    return calculController.updateListOfManuelAnswers(req, sumLines);
+})
+.then(response => {
+    if(res.payload.leave===true){
+        return "failure";
+    }
+    return calculController.updateManualAnswerEtalonnageResult(req, res.payload.sumLines);
 })
 .then(message => {
     res.send(message);
@@ -157,7 +171,6 @@ calculController.getCategoryNameByMemberIdAndTestId(req)
     return res.payload;
 })
 .then(response=>{
-    console.log(response);
     res.send(response);
 })
 .catch(next));
