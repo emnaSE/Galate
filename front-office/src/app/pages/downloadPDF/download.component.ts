@@ -56,7 +56,7 @@ export class DownloadComponent  implements OnInit{
 
     this.downloadService.generateReportAutodiagnostic(this.testId ,this.memberId).subscribe(
       data=>{
-        alert("telegarchement avec succes");
+        alert("telegarchement avec succès");
 
         
       }

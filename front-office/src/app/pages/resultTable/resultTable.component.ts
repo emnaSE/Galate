@@ -137,7 +137,7 @@ export class ResultTableComponent  implements OnInit{
       alert("merci de repondre à toutes les questions ! ");
     }
     else {
-      this.router.navigate(['/download' , this.testId1 , this.memberId1])
+      this.router.navigate(['/startTest' , this.testId1 , this.memberId1])
         
       }
     

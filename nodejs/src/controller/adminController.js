@@ -344,7 +344,6 @@ _publics.getAllSubcategoriesByIdTest = (req) => {
 _publics.getAllSubcategoriesByCategory = (req) => { 
   var idCategory=req.query.idCategory;
   var idMember=req.query.id_member;
-  console.log("idMember "+idMember);
   return new Promise((resolve, reject) => {  
            var sql = "select sc.*, ma.id as manualAnswerId FROM subcategory sc left join manuel_answer ma on(sc.id=ma.id_subcategory) where sc.id_category=? and ma.id_member=?"; 
          
@@ -750,7 +749,7 @@ _publics.getAllAnswersByQuestions = (req,questions,res) => {
     
             return resolve(b);
           } else {
-            console.log('Error:' + reject(e));
+            reject(e);
           }
         })));
   }
@@ -875,7 +874,6 @@ _publics.updateTest= (req,test) => {
              con.query(sql,[id], function (err, result) {
               if (err){
                 msg="failure";
-                reject(err);
               }else{
                 msg="success";
               }
@@ -891,7 +889,6 @@ _publics.updateTest= (req,test) => {
       var sql = "INSERT INTO test_category SET? ";
       con.query(sql,{id_test:testId,id_category:categoryId}, function (err, affectation) {
         if (err){
-          console.log(err);
           msg="failure"; 
           }else{
             msg="success";  
@@ -1514,6 +1511,44 @@ function whereClause(req, sql) {
 
 
 
+_publics.createDefaultTestResult = (questions,idTestMember) => {
+  let promises = [];
+  for (var i=0;i<questions.length;i++) {
+      promises.push( new Promise((resolve, reject) => {  
+          let quest=questions[i].questions;
+          var response=createDefaultMemberChoices(quest,idTestMember);
+          return resolve(response);
+      }));
+  }
+  return Promise.all(promises);  
+
+}
+
+function createDefaultMemberChoices(quest,idTestMember){
+  let promises = [];
+  for (var j=0;j<quest.length;j++) {
+      promises.push( new Promise((resolve, reject) => {  
+        var msg="";
+        var sql = "INSERT INTO choice_member SET ? ";
+        var answers=quest[j].answers;
+        var question=quest[j].question;
+        const choiceMember = { id_question:question.id ,id_answer:answers[0].id,id_test_member:idTestMember};
+        con.query(sql,choiceMember, function (err, result) {
+        if (err){
+          msg="failure"; 
+          reject(err);
+        }else{
+          msg="success";
+        }
+        return resolve(msg);
+      });
+    }));
+  }
+  return Promise.all(promises); 
+}
+
+
+
 
 
 
@@ -1730,6 +1765,7 @@ _publics.generateXMLFile = (input,req , res  ) => {
  });  
 
 }
+
 
 
 

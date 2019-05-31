@@ -153,10 +153,10 @@ export class StartTestComponent  implements OnInit{
  
   
   public saveResult(){
-    /*  if(this.map.size!==this.totalQuestionsSize()){
+      if(this.map.size!==this.totalQuestionsSize()){
         alert("merci de repondre à toutes les questions avant de passer!");
         return;
-      }*/
+      }
       var choiceMember;
     
       this.map.forEach((value: string, key: string) => {
@@ -190,7 +190,7 @@ export class StartTestComponent  implements OnInit{
   public saveTestResult(testId,userId,choices) {
     this.startTestService.saveTestResult(testId,userId,choices)
     .subscribe(data =>{
-      this.router.navigate(['/resultTable' , this.testId , this.memberId]);
+      this.router.navigate(['/download' , this.testId , this.memberId]);
     } , error => console.log('err'+error));
   }
 
