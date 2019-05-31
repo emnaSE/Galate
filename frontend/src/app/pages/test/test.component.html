@@ -28,8 +28,8 @@
       <tr *ngFor="let test of tests | paginate: { itemsPerPage: 7, currentPage: pageActuel }">
         <td>{{test.id}}</td>
         <td>{{test.name}}</td>
-        <td>{{test.expiration_date | date: 'dd/MM/yyyy'}}</td>
-        <td>{{test.activation_date | date: 'dd/MM/yyyy'}}</td>
+        <td>{{test.expiration_date | date: 'dd/MM/yyyy h:mm a'}}</td>
+        <td>{{test.activation_date | date: 'dd/MM/yyyy h:mm a'}}</td>
         <td>{{test.password}}</td>
         <td>{{test.test_subcategories_number}}</td>
         <td>{{test.duration}}</td>

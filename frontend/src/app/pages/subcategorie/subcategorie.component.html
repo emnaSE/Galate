@@ -60,9 +60,12 @@
         <tr *ngFor="let sousCategorie of sousCategories | paginate: { itemsPerPage: 7, currentPage: pageActuel }">
           <td>{{sousCategorie.id}}</td>
           <td>{{sousCategorie.subcategory}}</td>
-          <td></td>
+
           <td>
             <i class="fa fa-edit fa-1x" style="color: #298a66; cursor: pointer;" (click)="updateSousCategorie(sousCategorie)"></i>
+          </td>
+          <td>
+            <i class="fa fa-edit fa-1x" style="color: #298a66; cursor: pointer;" (click)="consulterQuestion(sousCategorie)"></i>
           </td>
 
 

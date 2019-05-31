@@ -89,6 +89,11 @@ export class SubcategorieComponent  implements OnInit{
   };
 
 
+    consulterQuestion(subCategorie:SousCategorie){
+      console.log(subCategorie.name);
+      this.router.navigate(['pages/sous',subCategorie.id,'info']);
+      localStorage.setItem('catnom',subCategorie.name);
+    }
 
 }
 

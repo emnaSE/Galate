@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import {SubcategorieService} from "../subcategorie.service";
+import {ActivatedRoute} from "@angular/router";
+import {SousCategorie} from "../subcategorie.model";
+import {TestService} from "../../test/test.service";
+import {Question} from "../../question/question.model";
 
 @Component({
   selector: 'sub-info',
@@ -7,9 +12,35 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SubInfoComponent implements OnInit {
 
-  constructor() { }
+  subCategories:any;
+  questions:any;
+  id:number;
+  name:string
+  test_id:number;
+  constructor(private subCategorieService:SubcategorieService,
+              private activatedRouter:ActivatedRoute,
+              private testService:TestService) {
+
+    this.id = this.activatedRouter.snapshot.params['id'];
+    console.log(this.id);
+    this.test_id= this.testService.currentTestValue.id;
+    console.log(this.test_id);
+  }
 
   ngOnInit() {
+
+
+
+    this.subCategorieService.getAllTest(this.test_id,this.id).subscribe(
+      data=>{
+        this.subCategories=data;
+        this.name=this.subCategories.subcategory;
+        this.questions=this.subCategories.questions;
+        console.log(this.questions)
+      },err=>{
+        console.log(err);
+      }
+    )
   }
 
 }
