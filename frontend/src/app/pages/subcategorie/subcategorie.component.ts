@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 
 import { Subject } from 'rxjs';
 import {SousCategorie} from "./subcategorie.model";
@@ -13,23 +13,39 @@ import {Categorie} from "../dashboard/categorie.model";
 })
 export class SubcategorieComponent  implements OnInit{
   pageActuel: number =1;
-  private sousCategories:SousCategorie[]
-
+  sousCategories:SousCategorie[]
+  id:number;
+  isAvailable = false;
 
 
 
     constructor(private router:Router,
-                private sousCategorieService:SubcategorieService){
-
+                private sousCategorieService:SubcategorieService,
+                private activatedRouter:ActivatedRoute){
+  this.id = this.activatedRouter.snapshot.params['id'];
       }
   ngOnInit(): void {
-    this.sousCategorieService.getAllSousCategorie().subscribe(
-      data=>{
-        this.sousCategories=data;
-      },err=>{
-        console.log(err);
+
+      if (this.id){
+        this.isAvailable = true;
+        this.sousCategorieService.getAllSubCateByIdTest(this.id).subscribe(
+          data=>{
+            this.sousCategories=data;
+          },err=>{
+            console.log(err);
+          }
+        )
+      }else{
+        this.sousCategorieService.getAllSousCategorie().subscribe(
+          data=>{
+            this.sousCategories=data;
+          },err=>{
+            console.log(err);
+          }
+        )
+
       }
-    )
+
   }
 
   create(){

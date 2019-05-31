@@ -57,10 +57,6 @@ export class CreateSousComponent implements OnInit {
       this.subCategorieService.getSousCategorieById(this.id).subscribe(
         (value:any)=>{
           this.addForm.patchValue(value);
-         // let data={...this.addForm.value}
-          console.log(value);
-          console.log(this.selectedItems)
-          console.log(this.dropdownList)
           this.selectedItems = this.dropdownList.filter(
             c =>{
               console.log("message");
@@ -117,7 +113,7 @@ export class CreateSousComponent implements OnInit {
           console.log("message");
           this.subCategorieService.addSousCategorie(data).subscribe(
             data=>{
-              alert("ajouter vec succes");
+              alert("ajouter avec succes");
               this.router.navigate(['pages/sous'])
 
             },err=>{
@@ -140,6 +136,11 @@ export class CreateSousComponent implements OnInit {
   }
   onSelectAll(items: any) {
     console.log(items);
+  }
+
+  create(){
+    this.router.navigate(['pages/question/create',this.id]);
+
   }
 
 }

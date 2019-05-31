@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
-import {FormBuilder,AbstractControl, FormControl, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, AbstractControl, FormControl, FormGroup, Validators, FormArray} from "@angular/forms";
 import {SousCategorie} from "../../subcategorie/subcategorie.model";
 import {QuestionService} from "../question.service";
 import {Ecole} from "../../ecole/ecole.model";
 import {SubcategorieService} from "../../subcategorie/subcategorie.service";
+import {TestService} from "../../test/test.service";
 
 
 
@@ -20,29 +21,75 @@ export class CreateQuestionComponent implements OnInit {
   editMode=false;
   selectedItems = [];
   dropdownSettings = {};
-
+  test_id:any;
+  create=false;
+  name_test:string;
+  answers:FormArray;
   addForm:FormGroup;
+  valid=false;
+  valid1=false;
   submitted = false;
   constructor(private router:Router,
               private formBuilder:FormBuilder,
               private activateRouter:ActivatedRoute,
               private questionService:QuestionService,
-              private sousCategorieService:SubcategorieService){
+              private sousCategorieService:SubcategorieService,
+              private testService:TestService
+             ){
 
 
+  this.id=this.activateRouter.snapshot.params['id'];
 
-
-
+  this.name_test=this.testService.currentTestValue.name;
+  this.test_id=this.testService.currentTestValue.id;
+  console.log(this.name_test,this.test_id);
   }
 
-  ngOnInit() {
-    this.addForm=this.formBuilder.group({
-      name: new FormControl('', [Validators.required]),
-      wording: [[], Validators.required],
-      value: [[], Validators.required],
-      id_test_subcategory: [[], Validators.required],
 
+  createAnswers(): FormGroup {
+    return this.formBuilder.group({
+      valeur: ["", Validators.required],
+      name: ["", Validators.required],
+      ordre: ["", Validators.required],
     });
+  }
+  ngOnInit() {
+
+
+
+
+
+
+    this.addForm = this.formBuilder.group({
+
+        name: new FormControl('', [Validators.required]),
+        wording: ['', Validators.required],
+        value: ['', Validators.required],
+
+      answers: this.formBuilder.array([this.addReponseGroup()])
+    });
+
+
+
+    this.sousCategorieService.getAllSousCategorie().subscribe(
+      data=>{
+        this.dropdownList =data.map((sous:SousCategorie)=>{
+          return{id:sous.id, itemName:sous.name};
+        })
+      }
+    )
+
+    this.questionService.getQuestionById(this.id).subscribe(
+      (data:any)=>{
+       // this.addForm.patchValue(data);
+        this.selectedItems=this.dropdownList.filter(
+          c=>{
+            return c.id==this.id;
+          }
+        )
+      }
+    )
+
     this.dropdownSettings = {
       singleSelection: true,
       idField: 'item_id',
@@ -54,27 +101,12 @@ export class CreateQuestionComponent implements OnInit {
       enableSearchFilter:true
     };
 
-    this.sousCategorieService.getAllSousCategorie().subscribe(
-      data=>{
-        this.dropdownList =data.map((sous:SousCategorie)=>{
-          return{id:sous.id, itemName:sous.name};
-        })
-      }
-    )
 
-
-
-    /*
-
-    this.sousCategorie.getAllSousCategorie().subscribe(
-      data=>{
-        this.dropdownList =data.map((scat:SousCategorie)=>{
-          return{id:scat.id, itemName:scat.name};
-        })
-      }
-    )
-     */
-
+   /* this.testinfo=localStorage.getItem("currentTest");
+    //this.name_test=this.testinfo.name;
+    let nameTest=this.testinfo.valueOf().name;
+    console.log(this.testinfo)
+    console.log(nameTest);*/
 
   }
 
@@ -111,10 +143,19 @@ export class CreateQuestionComponent implements OnInit {
         )
       }
     }
-    console.log("workk")
+
   }
 
+      onCreate(){
 
+          this.questionService.addQuestionByIdSub(this.id,this.test_id,this.addForm.value).subscribe(
+            data=>{
+              alert("suucess");
+            },err=>{
+              console.log(err);
+            }
+          )
+      }
 
 
 
@@ -123,6 +164,30 @@ export class CreateQuestionComponent implements OnInit {
   }
   onSelectAll(items: any) {
     console.log(items);
+  }
+
+
+  addReponseGroup() {
+    return this.formBuilder.group({
+      value: ['', Validators.required],
+      name: ['', Validators.required],
+      ordre: ['', Validators.required],
+    });
+  }
+
+  addReponse() {
+    this.valid=true;
+    this.create=true;
+    this.reponseArray.push(this.addReponseGroup());
+
+  }
+  removeReponse(index) {
+    this.valid1=true;
+    this.reponseArray.removeAt(index);
+
+  }
+  get reponseArray() {
+    return <FormArray>this.addForm.get('answers');
   }
 
 

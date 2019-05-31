@@ -20,7 +20,6 @@ err:number;
               private authService:AuthService
               ) {
 
-    console.log("test")
   }
 
   ngOnInit() {
@@ -45,7 +44,7 @@ err:number;
 
     this.authService.Login(this.formValid.pseudo.value,this.formValid.password.value).pipe(first()).subscribe(
       data=>{
-        console.log("test");
+
         this.router.navigate(['pages/test'])
          },err=>{
         this.err=1;

@@ -4,13 +4,15 @@ import { TestService } from './test.service';
 
 import { Subject } from 'rxjs';
 import {Test} from "./test.model";
+import {Question} from "../question/question.model";
+import {Class} from "../class/class.model";
 
 @Component({
   selector: 'ngx-dashboard',
   templateUrl: './test.component.html',
 })
 export class TestComponent  implements OnInit{
-       private tests:Test[];
+       tests:Test[];
        pageActuel: number =1;
 
 
@@ -31,6 +33,37 @@ export class TestComponent  implements OnInit{
 
 
   }
+  deleteByid(test:Test):void {
+    if(confirm("êtes-vous sûr de vouloir supprimer ce test ")) {
+      this.testServices.deleteTest(test.id).subscribe(
+        data=>{
+          if(data==="success"){
+
+            alert("Suppression avec succès");
+          }else
+            if (data=="failure"){
+            alert("Vous ne pouvez pas supprimer ce test car il est lieé a categorie");
+
+          }
+          this.router.navigate(['pages/test'])
+          this.testServices.getAllTest().subscribe(
+            data=>{
+              this.tests=data;
+            },err=>{
+              console.log(err);
+
+            }
+          )
+
+          this.tests=this.tests.filter(t=>t !==test)
+          this.router.navigate(['pages/test'])
+
+
+        },err =>{
+          console.log(err);
+        }
+      )}
+  };
 
   create(){
       this.router.navigate(['pages/test/create'])

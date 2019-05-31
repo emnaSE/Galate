@@ -13,7 +13,7 @@ import {ClassService} from "./class.service";
 })
 export class ClassComponent  implements OnInit{
   pageActuel: number =1;
-  private classes:Class[];
+  classes:Class[];
 
 
 

@@ -36,8 +36,8 @@ export class EcoleService {
     return this.http.get<Ecole>(this.url+"getSchoolbyId?id="+id);
   }
 
-  deleteEcole(id:number):Observable<string>{
-    return this.http.get<string>(this.url+"deleteSchoolById?id="+id);
+  deleteEcole(id:number):Observable<Object>{
+    return this.http.post(this.url+"deleteSchoolById?id="+id,id,{responseType: 'text'});
   }
   updateEcole(id:number,ecole:Object):Observable<Object>{
     return this.http.post(this.url+"updateSchoolById?id="+id,ecole, {responseType: 'text'});

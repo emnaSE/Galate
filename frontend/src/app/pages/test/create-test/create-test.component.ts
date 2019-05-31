@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {FormBuilder,AbstractControl, FormControl, FormGroup, Validators} from "@angular/forms";
 import {TestService} from "../test.service";
+import {Test} from "../test.model";
 
 @Component({
   selector: 'create-commercial',
@@ -9,8 +10,13 @@ import {TestService} from "../test.service";
   styleUrls: ['./create-test.component.scss']
 })
 export class CreateTestComponent implements OnInit {
-
+  dateActivation:Date;
+  dateFin:Date;
+  date_ereur:number;
+  p_error:number;
   id:number;
+  local:any;
+
   submitted = false;
   editMode=false;
   erreur:number;
@@ -22,24 +28,40 @@ export class CreateTestComponent implements OnInit {
 
     this.id = this.activateRouter.snapshot.params['id'];
 
+
   }
+  dateLessThan(from: string, to: string) {
+    return (group: FormGroup): {[key: string]: any} => {
+      let f = group.controls[from];
+      let t = group.controls[to];
+      if (f.value > t.value) {
+        return {
+          dates: "La date d 'activation  doit être inférieure à la date expiration"
+        };
+      }
+      return {};
+    }
+  }
+
   ngOnInit() {
 
     this.addForm=this.formBuilder.group({
       name: new FormControl('', [Validators.required]),
-      down_description: [[], Validators.required],
-      up_description: [[], Validators.required],
-      id_category: [[], Validators.required],
       activation_date: [[], Validators.required],
       expiration_date: [[], Validators.required],
+      test_subcategories_number: [, Validators.required],
+      duration: ['', Validators.required],
       password: [[], Validators.required],
-    });
+    },{validator: this.dateLessThan('activation_date','expiration_date')});
+
+
 
     if(this.id){
       this.editMode=true;
       this.testService.getById(this.id).subscribe(
         (value:any)=>{
           this.addForm.patchValue(value);
+          localStorage.setItem('currentTest', JSON.stringify(value));
         },err=>{
           console.log(err);
         }
@@ -47,10 +69,17 @@ export class CreateTestComponent implements OnInit {
     }
 
   }
+  get valid(){
+    return this.addForm.controls;
+  }
+
 
   onSubmit(){
     this.submitted=true;
+
     if(this.id){
+      console.log(this.addForm.value)
+      console.log(this.valid.activation_date.value);
       if(this.addForm.valid){
         this.testService.updateTest(this.id,this.addForm.value).subscribe(
           data=>{
@@ -73,6 +102,19 @@ export class CreateTestComponent implements OnInit {
     }
   }
 
+consultezCategorie(){
 
+    this.router.navigate(['pages/categorie']);
+    }
+  consultezSubCategorie(){
+
+      this.router.navigate(['pages/sous/',this.id]);
+
+    }
+
+    consulterCategorie(){
+
+    this.router.navigate(['pages/categorie/',this.id]);
+    }
 
 }

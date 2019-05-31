@@ -14,7 +14,7 @@
       <thead>
       <tr role="row">
         <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="id: activate to sort column descending">ID</th>
-        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="name: activate to sort column ascending">name</th>
+        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="name: activate to sort column ascending">nom</th>
         <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="action: activate to sort column ascending">action</th>
 
           </thead>
@@ -24,8 +24,8 @@
         <td>{{ecole.name}}</td>
 
         <td>
-          <i style="cursor: pointer; display: inline-block;margin-right: 20px !important;" class="fas fa-trash fa-2x" (click)="deleteByid(ecole)"></i>
-          <i class="fas fa-info fa-2x" style="cursor: pointer;" (click)="updateEcole(ecole)"></i>
+          <i style="cursor: pointer; color: #69737f; display: inline-block;margin-right: 20px !important;" class="fas fa-trash fa-1x" (click)="deleteByid(ecole)"></i>
+          <i class="fa fa-edit fa-1x" style="color: #298a66; cursor: pointer;" (click)="updateEcole(ecole)"></i>
         </td>
 
 

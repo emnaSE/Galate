@@ -4,6 +4,7 @@ import { CreateTestComponent } from './create-test/create-test.component';
 import { TestComponent } from './test.component';
 import {AffectCategorieComponent} from "./affect-categorie/affect-categorie.component";
 import {AffectSubcategorieComponent} from "./affect-subcategorie/affect-subcategorie.component";
+import {AuthGuard} from "../auth/auth.guard";
 
 
 
@@ -11,21 +12,7 @@ import {AffectSubcategorieComponent} from "./affect-subcategorie/affect-subcateg
 const routes: Routes = [{
   path: '',
   component: TestComponent,
-  children: [
-    {
-      path: 'create',
-      component:CreateTestComponent,
-    },
-    {
-      path: 'affectation',
-      component:AffectCategorieComponent,
-    },
-    {
-      path: 'affectationsub',
-      component:AffectSubcategorieComponent,
-    },
 
-  ],
 }];
 
 @NgModule({
@@ -39,10 +26,3 @@ const routes: Routes = [{
 export class TestRoutingModule {
 
 }
-
-export const routedComponents = [
-  TestComponent,
-  CreateTestComponent,
-  AffectCategorieComponent,
-  AffectSubcategorieComponent,
-];

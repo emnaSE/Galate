@@ -41,5 +41,9 @@ export class SubcategorieService {
     return this.http.post(this.url+"deleteSubcategoryById?id="+id, {responseType: 'text'});
   }
 
+  getAllSubCateByIdTest(id:number):Observable<SousCategorie[]>{
+    return this.http.get<SousCategorie[]>(this.url+"getAllSubcategoriesByTestId?id_test="+id);
+  }
+
 }
 
