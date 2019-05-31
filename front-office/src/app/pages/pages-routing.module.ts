@@ -7,7 +7,7 @@ import { RegisterComponent } from './register/register.component';
 import { StartTestComponent } from './startTest/startTest.component';
 import { DownloadComponent } from './downloadPDF/download.component';
 import { TestTerminatedComponent } from './test-terminated/test-terminated.component';
-import { TestTableComponent } from './testTable/testTable.component';
+
 
 
 const routes: Routes = [
@@ -40,10 +40,6 @@ const routes: Routes = [
   {
     path: 'download',
     component:DownloadComponent,
-  },
-  {
-    path: 'testTable',
-    component:TestTableComponent,
   },
  
   { path: '', redirectTo: 'pages/test', pathMatch: 'full' },
