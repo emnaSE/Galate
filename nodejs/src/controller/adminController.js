@@ -1583,27 +1583,107 @@ _publics.getSubcategoryByMemberAndTestID = (req) => {
                     });
         });    
      };
-  
 
-     function createSubcategories(subcategories ){
+     //xml
+     _publics.getSubcategoryResultByMemberAndTestID =(id_test,id_member) =>{ 
+         return new Promise((resolve, reject) => {  
+                  var sql = "select distinct  ma.etallonage_result,s.name from member m left join manuel_answer ma on(ma.id_member=m.id) left join test_subcategory ts on(ts.id_subcategory=ma.id_subcategory) left join subcategory s on(s.id=ts.id_subcategory) where ma.id_test=? and ma.id_member=?";
+                      con.query(sql,[id_test,id_member], function (err, result) {
+                      if (err) reject(err);
+                      return resolve(result);
+                      });
+          });    
+       };
+    
+       _publics.getMembersResults = (members, testId) => { 
+        let promises = [];
+        for (var i=0;i<JSON.parse(members).length;i++) {
+          promises.push( new Promise((resolve, reject) => request.get({
+            url :url+`/admin/getMemberResult?id_test=${testId}&id=${JSON.parse(members)[i].id}`,
+            method: 'GET',
+            gzip: true,
+          }, (e, r, b) => {
+            if (!e && r.statusCode == 200) {
+              return resolve(JSON.parse(b));
+            } else {
+              reject(e);
+            }
+          })));
+        }
+        return Promise.all(promises)      
+      
+      };
+       
+      
+
+     _publics.getSubcategoriesByTestID = (req) => { 
+      var id_test=req.query.id_test;
+      
+         return new Promise((resolve, reject) => {  
+                  var sql = " select distinct  s.name from member m left join manuel_answer ma on(ma.id_member=m.id) left join test_subcategory ts on(ts.id_subcategory=ma.id_subcategory) left join subcategory s on(s.id=ts.id_subcategory) where ma.id_test=?";
+
+                      con.query(sql,[id_test], function (err, result) {
+                      if (err) reject(err);
+                      return resolve(JSON.stringify(result));
+                      });
+          });    
+     };
+
+
+  _publics.getMembersInformationByTestID = (req) => { 
+      var id_test=req.query.id_test;
+      
+         return new Promise((resolve, reject) => {  
+                  var sql = "select distinct  m.id ,m.firstname,m.lastname,m.age from member m left join manuel_answer ma on(ma.id_member=m.id) left join test_subcategory ts on(ts.id_subcategory=ma.id_subcategory) left join subcategory s on(s.id=ts.id_subcategory) where ma.id_test=? "; 
+                
+                      con.query(sql,[id_test], function (err, result) {
+                      if (err) reject(err);
+                      return resolve(JSON.stringify(result));
+                      });
+          });    
+     };
+
+     //fin xml
+
+     function createResultSubCat(data5 , subcategories , memberResult){
       let promises = [];
-      var decode = require('unescape');
-     
-      //var subcategories = ['authenticité' , 'Diplomatie' , 'Sociabilité' , 'Tolérance'];
-      for (var i=0;i<subcategories.length;i++) {
-        promises.push( new Promise((resolve, reject) => { 
+    
+        for (var j=0 ; j<memberResult.length ; i++){
+          for(var k=0;k<subcategories.length;k++){
+          promises.push( new Promise((resolve, reject) => { 
+            
           
+          if (((memberResult[j].name).toString().trim()) === ((subcategories[k].name).toString().trim())){
+          data5.txt(memberResult[j].etallonage_result) ;}
         
-            subc = subc+ "<Cell> <Data>" +subcategories[i] +"</Data> </Cell>" ;
-           
+        }));
+      }
+    }
+      
+      return Promise.all(promises);   
+    
+    }
+    
+     
+     function createRow(row , subcategories , memberResult){
+      let promises = [];
+     
+     for (var i=0;i<subcategories.length;i++) {
+        promises.push( new Promise((resolve, reject) => {         
+          var subcategory =row.ele('Cell');
+          subcategory.att('ss:StyleID' , 'S21');
+          var data5 =  subcategory.ele('Data');
+              data5.att('ss:Type', 'String'); 
               
+               ///createResultSubCat(data5 , subcategories , memberResult)
+              data5.txt(memberResult[i].etallonage_result) ; 
             
-            
+              
+            data5.up();
+          subcategory.up();          
           }));
       }
       
-
-
       return Promise.all(promises);   
     
     }
@@ -1612,24 +1692,12 @@ _publics.getSubcategoryByMemberAndTestID = (req) => {
 
 _publics.generateXMLFile = (input,req , res  ) => {
   return new Promise((resolve, reject) => {   
+
     
-    var subcategories = ['authenticité' , 'Diplomatie' , 'Sociabilité' , 'Tolérance'];
-    var categoryNum = 8 ; 
-    var memberNum = 3 ;
+  
     var builder = require('xmlbuilder');
-    
-   
-    var subc = "" ;
-
-    var decode = require('unescape');
-
-    for (var i=0;i<subcategories.length;i++) {
-    subc = subc+ "<Cell> <Data>" +subcategories[i] +"</Data> </Cell>" ;
-    }
-
-
-
     var doc = builder.create('Workbook');
+    
     doc.att('xmlns:o', 'urn:schemas-microsoft-com:office:office');
     doc.att('xmlns:x', 'urn:schemas-microsoft-com:office:excel');
     doc.att('xmlns:ss', 'urn:schemas-microsoft-com:office:spreadsheet');
@@ -1667,13 +1735,16 @@ _publics.generateXMLFile = (input,req , res  ) => {
 
    var worksheet = doc.ele('Worksheet');
      worksheet.att('ss:Name' , 'Feuil1');
+     var names = worksheet.ele('ss:Names');
+     names.up();
      var table =  worksheet.ele('ss:Table');
      table.att('ss:DefaultRowHeight', '15');   
      table.att('ss:DefaultColumnWidth', '60');
-     table.att('ss:ExpandedRowCount', memberNum);
-     table.att('ss:ExpandedColumnCount', 4+categoryNum) ; 
+     table.att('ss:ExpandedRowCount', 3+input.members.length);
+     table.att('ss:ExpandedColumnCount', 3+input.subcategories.length) ; 
        var row = table.ele('Row');
           var cell1 =row.ele('Cell');
+            cell1.att('ss:StyleID' , 'S21')
               var data1 = cell1.ele('Data');
                   data1.att('ss:Type', 'String') ;
                   data1.txt('nom')  ;
@@ -1681,6 +1752,7 @@ _publics.generateXMLFile = (input,req , res  ) => {
             cell1.up();
 
           var cell2 =row.ele('Cell');
+          cell2.att('ss:StyleID' , 'S21')
             var data2 = cell2.ele('Data');
                 data2.att('ss:Type', 'String') ;
                 data2.txt('prenom')  ;
@@ -1688,34 +1760,60 @@ _publics.generateXMLFile = (input,req , res  ) => {
           cell2.up();
 
            var cell3 =row.ele('Cell');
+           cell3.att('ss:StyleID' , 'S21')
             var data3 = cell3.ele('Data');
                 data3.att('ss:Type', 'String') ;
                 data3.txt('age')  ;
             data3.up();
           cell3.up();
 
-          var cell4 =row.ele('Cell');
-            var data4 = cell4.ele('Data');
-                data4.att('ss:Type', 'String') ;
-                data4.txt('niveau Etude')  ;
-            data4.up();
-          cell4.up();
+         
 
-          for (var i=0;i<subcategories.length;i++) {
+        for (var i=0;i<input.subcategories.length;i++) {
           var subcategory =row.ele('Cell')
+          subcategory.att('ss:StyleID' , 'S21')
              var data5 =  subcategory.ele('Data');
                 data5.att('ss:Type', 'String'); 
-                data5.txt(subcategories[i]) ; 
+                data5.txt(input.subcategories[i].name) ; 
               data5.up();
             subcategory.up();
            
             }
 
-         row.up();
+      row.up();
 
+    for(var i=0 ; i<input.members.length ; i++){
+                var row = table.ele('Row');
+                var cell1 =row.ele('Cell');
+                cell1.att('ss:StyleID' , 'S21')
+                    var data1 = cell1.ele('Data');
+                        data1.att('ss:Type', 'String') ;
+                        data1.txt(input.members[i].firstname);
+                    data1.up();
+                  cell1.up();
 
+                var cell2 =row.ele('Cell');
+                cell2.att('ss:StyleID' , 'S21')
+                  var data2 = cell2.ele('Data');
+                      data2.att('ss:Type', 'String') ;
+                      data2.txt(input.members[i].lastname);
+                  data2.up();
+                cell2.up();
 
+                var cell3 =row.ele('Cell');
+                cell3.att('ss:StyleID' , 'S21')
+                  var data3 = cell3.ele('Data');
+                      data3.att('ss:Type', 'String') ;
+                      data3.txt(input.members[i].age)  ;
+                  data3.up();
+                cell3.up();
 
+               
+
+           
+              createRow(row , input.subcategories , input.members[i].result);
+              row.up();
+    }
 
 
        table.up();    
@@ -1723,25 +1821,28 @@ _publics.generateXMLFile = (input,req , res  ) => {
 
      
 
-  var xml = doc.end({ pretty: true }); 
-  console.log(xml);
+  var data = doc.end({ pretty: true }); 
+ // console.log(data);
+  var txt = "<?mso-application progid='Excel.Sheet'?>" ;
 
-
-  
+var searchTerm = '>';
+var indexOfFirst = data.indexOf(searchTerm);
+console.log( indexOfFirst);
+var newData = data.substr(0, 21) + txt + data.substr(21) ;
 
                   //working example : convert json to xml and download xml File
                   /*  var js2xmlparser = require("js2xmlparser");
                     var dir=tmp.tmpdir;
             
-                    var data = js2xmlparser.parse("details", input);
+                    var data = js2xmlparser.parse("details", input);*/
 
-                    
-                    fs.writeFile(dir+'\\Member_Information.xml', data, function(err) {
+                    var dir=tmp.tmpdir;
+                    fs.writeFile(dir+'\\Member_Information.xml', newData, function(err) {
                       if(err) {
                           return console.log(err);
                       }
                       
-                      console.log(data);
+                      console.log(newData);
                   });
 
                   var xmlFile = path.join(dir, 'Member_Information.xml');
@@ -1751,14 +1852,8 @@ _publics.generateXMLFile = (input,req , res  ) => {
                   stream.pipe(res);
                   stream.once("end", function () {
                     stream.destroy(); // makesure stream closed, not close if download aborted.
-                    fs.unlink("Member_Information.xml", function (err) {
-                      if (err) {
-                          console.error(err.toString());
-                      } else {
-                          console.warn("Member_Information.xml" + ' deleted');
-                      }
-                    });
-                  });*/
+                   
+                  });
      
 
 
