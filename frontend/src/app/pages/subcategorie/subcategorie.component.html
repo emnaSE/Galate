@@ -53,17 +53,19 @@
           <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="id: activate to sort column descending">ID</th>
           <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="name: activate to sort column ascending">nom</th>
           <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="action: activate to sort column ascending">consulter Sous Categorie</th>
-          <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="questio: activate to sort column ascending">consulter les questions</th>
 
         </thead>
         <tbody>
         <tr *ngFor="let sousCategorie of sousCategories | paginate: { itemsPerPage: 7, currentPage: pageActuel }">
           <td>{{sousCategorie.id}}</td>
           <td>{{sousCategorie.subcategory}}</td>
-          <td></td>
+
           <td>
             <i class="fa fa-edit fa-1x" style="color: #298a66; cursor: pointer;" (click)="updateSousCategorie(sousCategorie)"></i>
           </td>
+          <!--<td>
+            <i class="fa fa-edit fa-1x" style="color: #298a66; cursor: pointer;" (click)="consulterQuestion(sousCategorie)"></i>
+          </td>-->
 
 
         </tr>

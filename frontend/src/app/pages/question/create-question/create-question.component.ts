@@ -65,6 +65,7 @@ export class CreateQuestionComponent implements OnInit {
         name: new FormControl('', [Validators.required]),
         wording: ['', Validators.required],
         value: ['', Validators.required],
+        order: ['', Validators.required],
 
       answers: this.formBuilder.array([this.addReponseGroup()])
     });

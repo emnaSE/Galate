@@ -9,6 +9,7 @@ import {NgxPaginationModule} from 'ngx-pagination';
 import {NgMultiSelectDropDownModule} from "ng-multiselect-dropdown";
 import {AngularMultiSelectModule} from "angular2-multiselect-dropdown";
 import { SubInfoComponent } from './sub-info/sub-info.component';
+import { AllQuestionComponent } from './all-question/all-question.component';
 
 @NgModule({
   imports: [
@@ -22,6 +23,7 @@ import { SubInfoComponent } from './sub-info/sub-info.component';
     SubcategorieComponent,
     CreateSousComponent,
     SubInfoComponent,
+    AllQuestionComponent,
   ],
 })
 export class SubcategorieModule { }
