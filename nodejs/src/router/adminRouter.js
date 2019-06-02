@@ -817,6 +817,14 @@ adminController.generateXMLFile(req ,res)
 .catch(next));
 
 
+router.get('/getMembersInformationByTestID',urlencodedParser, (req , res ,next) => 
+adminController.getMembersInformationByTestID(req)
+.then(response=>{
+  res.send(response);
+})
+.catch(next));
+
+
 
 router.get('/getTestSubcategoryByTestIdAndSubcateoryId', (req, res, next) => 
 adminController.getTestSubcategoryByTestIdAndSubcateoryId(req)//testId//subcategoryId;
@@ -841,22 +849,36 @@ adminController.getTestSubcategoryByTestIdAndSubcateoryId(req)//testId//subcateg
 
 
 
-router.get('/generateXml', urlencodedParser, (req, res, next) =>
-adminController.getMemberInformationByMemberAndTestID(req)
+router.get('/getMemberResult', urlencodedParser, (req, res, next) =>
+memberController.getMemberById(req)
 .then(member => {
-    res.payload.member = JSON.parse(member) ;
-    return adminController.getSubcategoryByMemberAndTestID(req)
-})
-.then(subCategory=>{
-    res.payload.subCategory=JSON.parse(subCategory);
-    return res.payload;
-})
-.then(memberInformation=>{
+    var m=JSON.parse(member);
+    res.payload.firstname=m[0].firstname;
+    res.payload.lastname=m[0].lastname;
+    res.payload.age=m[0].age;
     
-    return adminController.generateXMLFile(memberInformation,req , res );
+    return adminController.getSubcategoryResultByMemberAndTestID(req.query.id_test, m[0].id)
+})
+.then(result => {
+    res.payload.result=result;
+    res.send(res.payload);
 })
 .catch(next));
 
+router.get('/generateXml', urlencodedParser, (req, res, next) =>
+adminController.getMembersInformationByTestID(req)
+.then(members=>{
+    return adminController.getMembersResults(members, req.query.id_test)
+})
+.then(response => {
+    res.payload.members=response;
+    return adminController.getSubcategoriesByTestID(req);
+})
+.then(subcategories=>{
+    res.payload.subcategories=JSON.parse(subcategories);
+    return adminController.generateXMLFile(res.payload,req , res );
+})
+.catch(next));
 
 
 router.get('/getAllQuestionsByTestId', (req, res, next) =>
