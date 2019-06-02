@@ -28,7 +28,7 @@
             <div class="container">
                 <div class="signup-content">
                     <form [formGroup]="addForm" (ngSubmit)="onSubmit()">
-                        <h2 class="form-title">Créer Un Compte</h2>
+                        <h2 class="form-title">Entrer vos informations Personnelles</h2>
                         <div class="form-group">
                             <input type="text" class="form-input" formControlName="firstname"  placeholder="Nom" required/>
                         </div>
@@ -38,14 +38,32 @@
                         <div class="form-group">
                             <input type="text" class="form-input" formControlName="age"  placeholder="age" required/>
                         </div>
-                        <div class="form-group">
+                        <!--<div class="form-group">
                             <input type="text" class="form-input" formControlName="civility"  placeholder="civilité" required/>   
-                        </div>
+                        </div>-->
                         <div class="form-group">
                             <input type="email" class="form-input" formControlName="email" placeholder="Email" required/>
                         </div>
 
-                      
+                       <!-- <div class=“dropdown” style="width: 465px;" aria-labelledby=“dropdownMenuButton”>
+                            <label for="name">Sexe</label>
+                            <angular2-multiselect [data]="dropdownList0" [(ngModel)]="selectedItems0"
+                                                  [settings]="dropdownSettings0" formControlName="sexe"></angular2-multiselect>
+                        </div>-->
+                        
+                        <div class=“dropdown” style="width: 465px;" aria-labelledby=“dropdownMenuButton”>
+                            <label for="name">Sexe</label>
+                            <select class=“dropdown” style="width: 490px;height:35px;" formControlName="sexe">
+                                <option value="femme"> Femme </option>
+                                <option value="homme"> Homme </option>
+                            </select>
+                        </div>
+                        <br/> <br/>
+
+                        <div class="form-group">
+                            <input type="text" class="form-input" formControlName="city"  placeholder="Ville" required/>   
+                        </div>
+                        
 
                         <div class=“dropdown” style="width: 465px;" aria-labelledby=“dropdownMenuButton”>
                             <label for="name">Class</label>
@@ -63,26 +81,28 @@
                             </div>
            
                             <br/>
-                          
+                            <div class="form-group">
+                                <input type="text" class="form-input" formControlName="study_level"  placeholder="Niveau d'Etude" required/>   
+                            </div>
 
 
-                        <div class="form-group">
+                        <!--<div class="form-group">
                             <input type="text" class="form-input" formControlName="pseudo"  placeholder="Pseudo" required/>   
                         </div>
                        
                         <div class="form-group">
                             <input type="password" class="form-input" formControlName="password"  placeholder="Mot de passe" required/>
                             <span toggle="#password" class="zmdi zmdi-eye field-icon toggle-password"></span>
-                        </div>
+                        </div>-->
 
                        
                         <div class="form-group">
-                            <button type="submit"  id="submit" class="form-submit" >Ajouter</button>
+                            <button type="submit"  id="submit" class="form-submit" >Entrer</button>
                         </div>
                     </form>
-                    <p class="loginhere">
+                    <!--<p class="loginhere">
                         Vous avez un compte ? <a routerLink="/login" class="loginhere-link">Se connecter</a>
-                    </p>
+                    </p>-->
                 </div>
             </div>
         </section>

@@ -140,7 +140,7 @@
                             <li class="nav-item"><a routerLink="/test" class="nav-link">Nos Tests</a>
                             </li>
                            
-                            <li class="nav-item"><a id="login" class="btn btn-link-3 nav-link" (click)="logout($event)">Déconnexion </a>
+                            <li class="nav-item"><a id="login" class="btn btn-link-3 nav-link" (click)="logout($event)">Quitter </a>
                             </li>
                         </ul>
                     </div>
@@ -159,10 +159,10 @@
             <div class="row" id="test">
                 <div class="col-md-6 col-lg-6" id="1" *ngFor="let testSubcategory of subcatgories">
                         <div *ngFor="let question of testSubcategory.questions" class="Quest">
-                            <input *ngIf="question.answers[0]!==undefined" type="radio" name={{question.question.id}}   (click)="saveAnswer(question.question.id, question.answers[0].id)"> 
-                            <a   *ngIf="question.answers[0]!==undefined" class="btn btn-theme btn-sm btn-min-block choices" role="button" >{{question.answers[0].name}}</a>
-                            <input *ngIf="question.answers[0]!==undefined" type="radio"  name={{question.question.id}} (click)="saveAnswer(question.question.id, question.answers[1].id)">  
-                            <a  *ngIf="question.answers[1]!==undefined" class="btn btn-theme btn-sm btn-min-block choices"  role="button" >{{question.answers[1].name}}</a>                     
+                            <input *ngIf="question[0]!==undefined" type="radio" name={{question[0].id_question}}   (click)="saveAnswer(question[0].id_question, question[0].id)"> 
+                            <a   *ngIf="question[0]!==undefined" class="btn btn-theme btn-sm btn-min-block choices" role="button" >{{question[0].name}}</a>
+                            <input *ngIf="question[1]!==undefined" type="radio"  name={{question[1].id_question}} (click)="saveAnswer(question[1].id_question, question[1].id)">  
+                            <a  *ngIf="question[1]!==undefined" class="btn btn-theme btn-sm btn-min-block choices"  role="button" >{{question[1].name}}</a>                     
                         </div>
                 </div>
                <!-- <div class="col-md-6 col-lg-6" id="1">

@@ -6,6 +6,9 @@ var getRawBody = require('raw-body');
 var con=config.con;
 //etalonnage
 var memberController=require('../controller/memberController');
+var SECOND_ANSWER=2;
+var FIRST_ANSWER=1;
+
 _publics.createEtalonnage = (etalonnage) => { 
     var etalonnage=JSON.parse(etalonnage);
     var lower_bound=etalonnage.lower_bound;
@@ -76,7 +79,7 @@ _publics.deleteEtalonnage = (req) => {
 _publics.getAllEtalonnages = (req) => { 
   
     return new Promise((resolve, reject) => {  
-             var sql = "select * FROM etalonnage"; 
+             var sql = "select e.*, sc.name as subcategory FROM etalonnage e left join subcategory sc on(e.id_subcategory=sc.id) "; 
            
                  con.query(sql, function (err, result) {
                  if (err) reject(err);
@@ -133,15 +136,39 @@ _publics.getLineSum = (req) => {
   var id_member=req.query.id_member;
   return new Promise((resolve, reject) => {  
            var sql=" select tsc.id_subcategory, sum(a.value) as sum from test_subcategory tsc left join question q on(q.id_test_subcategory=tsc.id) left join answer a on(a.id_question=q.id) "
-           +"left join choice_member cm on(cm.id_answer=a.id) left join test_member tm on(tm.id=cm.id_test_member) where tm.id_member=? and tm.id_test=? group by tsc.id_subcategory ";
-               con.query(sql,[id_member,id_test], function (err, result) {
+           +"left join choice_member cm on(cm.id_answer=a.id) left join test_member tm on(tm.id=cm.id_test_member) where tm.id_member=? and tm.id_test=? and a.ordre=? group by tsc.id_subcategory ";
+               con.query(sql,[id_member,id_test, SECOND_ANSWER], function (err, result) {
                if (err) reject(err);
                return resolve(result);
                });
    });    
 };
 
+function getLineValuesSum (req,order){ 
+  var id_test=req.query.id_test;
+  var id_member=req.query.id_member;
+  return new Promise((resolve, reject) => {  
+           var sql=" select tsc.id_subcategory, sum(a.value) as sum from test_subcategory tsc left join question q on(q.id_test_subcategory=tsc.id) left join answer a on(a.id_question=q.id) "
+           +"left join choice_member cm on(cm.id_answer=a.id) left join test_member tm on(tm.id=cm.id_test_member) where tm.id_member=? and tm.id_test=? and a.ordre=? and tsc.ordre=? group by tsc.id_subcategory ";
+               con.query(sql,[id_member,id_test, SECOND_ANSWER,order], function (err, result) {
+               if (err) reject(err);
+               return resolve(result);
+               });
+   });    
+};
 
+function getColumnValuesSum (req,order){ 
+  var id_test=req.query.id_test;
+  var id_member=req.query.id_member;
+  return new Promise((resolve, reject) => {  
+           var sql=" select tsc.id_subcategory, sum(a.value) as sum from test_subcategory tsc left join question q on(q.id_test_subcategory=tsc.id) left join answer a on(a.id_question=q.id) "
+           +"left join choice_member cm on(cm.id_answer=a.id) left join test_member tm on(tm.id=cm.id_test_member) where tm.id_member=? and tm.id_test=? and a.ordre=? and q.ordre=? group by tsc.id_subcategory ";
+               con.query(sql,[id_member,id_test, FIRST_ANSWER,order], function (err, result) {
+               if (err) reject(err);
+               return resolve(result);
+               });
+   });    
+};
 
 _publics.createManuelAnswer= (req,sum) => { 
   

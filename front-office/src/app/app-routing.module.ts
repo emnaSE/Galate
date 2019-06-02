@@ -48,7 +48,7 @@ const routes: Routes = [
     component:LoginTestComponent,
   },
  
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: '', redirectTo: 'register', pathMatch: 'full' },
   { path: '**', redirectTo: 'pages' },
 ];
 

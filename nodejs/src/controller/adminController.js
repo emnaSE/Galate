@@ -102,7 +102,7 @@ _publics.createCategory = (category) => {
 _publics.getAllClasses = (req) => { 
   
   return new Promise((resolve, reject) => {  
-           var sql = "select * FROM clazz"; 
+           var sql = "select c.*, s.name as school FROM clazz c left join school s on(s.id=c.id_school)"; 
          
                con.query(sql, function (err, result) {
                if (err) reject(err);
@@ -1519,6 +1519,8 @@ _publics.createDefaultTestResult = (questions,idTestMember) => {
   for (var i=0;i<questions.length;i++) {
       promises.push( new Promise((resolve, reject) => {  
           let quest=questions[i].questions;
+        //  console.log("######" + JSON.stringify(questions)+"#######");
+
           var response=createDefaultMemberChoices(quest,idTestMember);
           return resolve(response);
       }));
@@ -1529,14 +1531,17 @@ _publics.createDefaultTestResult = (questions,idTestMember) => {
 
 function createDefaultMemberChoices(quest,idTestMember){
   let promises = [];
+ // console.log("" + JSON.stringify(quest));
   for (var j=0;j<quest.length;j++) {
       promises.push( new Promise((resolve, reject) => {  
         var msg="";
         var sql = "INSERT INTO choice_member SET ? ";
-        var answers=quest[j].answers;
-        var question=quest[j].question;
-        const choiceMember = { id_question:question.id ,id_answer:answers[0].id,id_test_member:idTestMember};
-        con.query(sql,choiceMember, function (err, result) {
+        var firstQuestion =quest[j][0];
+    //    var question=quest[j][1];
+       
+        const defaultResponse = { id_question:firstQuestion.id_question ,id_answer:firstQuestion.id,id_test_member:idTestMember};
+     //   console.log("j= "+JSON.stringify(choiceMember));
+        con.query(sql,defaultResponse, function (err, result) {
         if (err){
           msg="failure"; 
           reject(err);

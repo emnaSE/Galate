@@ -45,8 +45,8 @@ memberController.getRawBody(req)
     res.payload.member=member;
     return memberController.register(member)
 })
-.then(msg=>{
-    res.send(msg);
+.then(message=>{
+        res.send(message);    
 })
 .catch(next));
 
@@ -218,7 +218,6 @@ memberController.getRawBody(req)
         return "failure";
     }  
 })
-//
 .then(response=>{
     res.payload.response=response;
     req.query.idMember=req.query.memberId;

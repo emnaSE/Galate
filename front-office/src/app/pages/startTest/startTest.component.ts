@@ -74,7 +74,7 @@ export class StartTestComponent  implements OnInit{
 
     public logout (event){
       localStorage.clear();
-      this.router.navigate(['/login'])
+      this.router.navigate(['/register'])
    }
 
 
@@ -137,7 +137,7 @@ export class StartTestComponent  implements OnInit{
     this.subcatgories.forEach(subcatgory => {
 
         subcatgory.questions.forEach(question => {
-          if(question.answers.length!=0){
+          if(question.length!=0){
             questionsSize=questionsSize+1;
           }
         });

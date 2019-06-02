@@ -17,19 +17,22 @@ _publics.register = (member) => {
   var civility = member.civility;
   var id_school = member.id_school;
   var id_clazz = member.id_clazz;
+  var sexe = member.sexe;
+  var city = member.city;
+  var study_level = member.study_level;
 
   return new Promise((resolve, reject) => {
-    var msg = "";
+    var message = {};
     var sql = "INSERT INTO member SET ? ";
-    const newMember = { firstname: firstname, lastname: lastname, email: email, age: age, pseudo: pseudo, password: password, civility: civility, id_school: id_school, id_clazz: id_clazz };
+    const newMember = { firstname: firstname, lastname: lastname, email: email, age: age, pseudo: pseudo, password: password, civility: civility, id_school: id_school, id_clazz: id_clazz, sexe:sexe, city:city, study_level:study_level};
     con.query(sql, newMember, function (err, result) {
       if (err) {
-        msg = "failure";
+        message ={msg:"failure"};
         reject(err);
       } else {
-        msg = "success";
+        message = {msg:"success",memberId:result.insertId};
       }
-      return resolve(msg);
+      return resolve(message);
     });
   });
 

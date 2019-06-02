@@ -205,5 +205,9 @@ alter table test MODIFY  activation_date timestamp;
 alter table test_member MODIFY  date_test  timestamp;
 alter table question add column ordre int(11);
 alter table test_subcategory add column ordre int(11);
+alter table member add column city varchar(255);
+alter table member add column study_level  varchar(255);
+ alter table member add column sexe  varchar(255);
+ 
 
  
