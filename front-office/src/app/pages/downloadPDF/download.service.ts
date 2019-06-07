@@ -33,9 +33,9 @@ export class DownloadService {
         var url8 = "http://localhost:883/galateProject/rest/galate/generateReportAutodiagnostic?testId="+idTest+"&memberId="+idMember ;
         window.location.href=url8;
         return this.http.get<any>(url8);
-       
-      
-    
-      }
+
+
+
+    }
   
  }

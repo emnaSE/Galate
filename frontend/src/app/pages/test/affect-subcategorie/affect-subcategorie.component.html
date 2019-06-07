@@ -2,13 +2,13 @@
 
 <nb-card style="height:80%" >
   <nb-card-header>
-    affecter Sous Categorie
+    Affecter Sous Categories
   </nb-card-header>
 
   <nb-card-body>
     <form [formGroup]="addForm" id="addForm" name="addForm" (ngSubmit)=" affecter()">
       <div class="form-group">
-        <label for="name">Sub Categorie</label>
+        <label for="name">Sous Categories</label>
         <angular2-multiselect [data]="dropdownList"
                               [(ngModel)]="selectedItems"
                               [settings]="settings"
@@ -19,7 +19,7 @@
       </div>
 
 
-      <button type="submit" class="btn btn-success">ajouter</button>
+      <button type="submit" class="btn btn-success">Ajouter</button>
     </form>
 
   </nb-card-body>

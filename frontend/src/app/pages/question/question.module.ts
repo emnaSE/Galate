@@ -8,6 +8,7 @@ import { CreateQuestionComponent } from './create-question/create-question.compo
 import {NgxPaginationModule} from 'ngx-pagination';
 import {NgMultiSelectDropDownModule} from "ng-multiselect-dropdown";
 import {AngularMultiSelectModule} from "angular2-multiselect-dropdown";
+import {UpdateQuestionComponent} from "./create-question/update-question.component";
 
 @NgModule({
   imports: [
@@ -20,6 +21,7 @@ import {AngularMultiSelectModule} from "angular2-multiselect-dropdown";
   declarations: [
     QuestionComponent,
     CreateQuestionComponent,
+    UpdateQuestionComponent,
   ],
 })
 export class QuestionModule { }

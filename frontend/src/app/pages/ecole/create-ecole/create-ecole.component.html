@@ -2,7 +2,7 @@
 
 <nb-card>
   <nb-card-header>
-    {{ editMode ? 'Modifier' : 'Ajouter' }} ecole
+    {{ editMode ? 'Modifier' : 'Ajouter' }} Ecole
   </nb-card-header>
 
   <nb-card-body>
@@ -10,10 +10,11 @@
 
 
       <div class="form-group">
-        <input type="text" class="form-control" formControlName="name" placeholder="nom d 'ecole">
+        <label for="fnText">Nom de l'école</label>
+        <input type="text" class="form-control" formControlName="name" placeholder="Nom de l'école">
         <ng-container *ngIf="submitted && formValidate.name.errors">
           <p class="text-danger" >
-            prenom est obligatoire !
+            nom est obligatoire !
           </p>
         </ng-container>
       </div>

@@ -18,10 +18,11 @@
 
 
       <div class="form-group">
+        <label for="fnText">Nom du sous categorie</label>
         <input type="text" class="form-control" formControlName="name" placeholder="Nom du sous categorie">
         <ng-container *ngIf="submitted && formvalidate.name.errors">
           <p class="text-danger" >
-            name est obligatoire !
+            Nom est obligatoire !
           </p>
         </ng-container>
       </div>

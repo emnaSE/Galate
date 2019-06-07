@@ -84,4 +84,16 @@ export class TestComponent  implements OnInit{
     this.router.navigate(['pages/test/all',test.id]);
   }
 
+  public telecharger (test:Test){
+
+
+    this.testServices.generateXMLFile(test.id).subscribe(
+      data=>{
+        console.log("telegarchement avec succes");
+
+
+      }
+    )}
+
+
 }

@@ -2,7 +2,7 @@
 
 <nb-card>
   <nb-card-header>
-    {{ editMode ? 'Modifier': 'Ajouter' }} sous catergorie
+    {{ editMode ? 'Modifier': 'Ajouter' }} Sous catergorie
     <ul style="position: relative; float: right">
       <i style="cursor: pointer; position: relative; float: right ; color: darkgreen"  (click)="create()"> Creation du question </i>
     </ul>
@@ -19,28 +19,31 @@
       </div>
 
       <div  class="form-group">
-        <input type="text" class="form-control" formControlName="name" placeholder="Nom du sous categorie">
+        <label for="fnText">Nom du sous categories</label>
+        <input type="text" class="form-control" formControlName="name" placeholder="Nom du sous categories">
         <ng-container *ngIf="submitted && formvalidate.name.errors">
           <p class="text-danger" >
-            prenom est obligatoire !
+            Nom est obligatoire !
           </p>
         </ng-container>
       </div>
 
       <div class="form-group">
+        <label for="fnText">Down Description</label>
         <input type="text" class="form-control" formControlName="down_description" placeholder="Down Description">
         <ng-container *ngIf="submitted && formvalidate.down_description.errors">
           <p class="text-danger" >
-            prenom est obligatoire !
+            description est obligatoire !
           </p>
         </ng-container>
       </div>
 
       <div class="form-group">
-        <input type="text" class="form-control" formControlName="up_description" placeholder="up description">
+        <label for="fnText">Up Description</label>
+        <input type="text" class="form-control" formControlName="up_description" placeholder="Up Description">
         <ng-container *ngIf="submitted && formvalidate.up_description.errors">
           <p class="text-danger" >
-            prenom est obligatoire !
+            description est obligatoire !
           </p>
         </ng-container>
       </div>

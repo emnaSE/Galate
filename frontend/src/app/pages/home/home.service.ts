@@ -26,11 +26,10 @@ export class HomeService {
 
   }
 
-getStat(debut:any,fin:any,age1:number,age2:number):Observable<any>{
+    getStat(debut:any,fin:any,age1:number,age2:number):Observable<any>{
 
-    return this.http.get<any>(this.url+'getTestsByFilter?beginDate='+debut+'&endDate='+fin+'&maxAge='+age1+'&minAge='+age2);
-}
-
+        return this.http.get<any>(this.url+'getTestsByFilter?beginDate='+debut+'&endDate='+fin+'&maxAge='+age1+'&minAge='+age2);
+    }
 
 
 

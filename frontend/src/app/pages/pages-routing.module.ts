@@ -26,6 +26,7 @@ import {HomeComponent} from "./home/home.component";
 import {SubInfoComponent} from "./subcategorie/sub-info/sub-info.component";
 import {NotFoundComponent} from "./miscellaneous/not-found/not-found.component";
 import {AllQuestionComponent} from "./subcategorie/all-question/all-question.component";
+import {UpdateQuestionComponent} from "./question/create-question/update-question.component";
 
 const routes: Routes = [{
   path: '',
@@ -127,9 +128,10 @@ const routes: Routes = [{
       component: CreateQuestionComponent,canActivate: [AuthGuard],
     },
 
+
     {
       path:"question/:id/modifier",
-      component: CreateAnswerComponent,canActivate: [AuthGuard],
+      component: UpdateQuestionComponent,canActivate: [AuthGuard],
       //component: CreateQuestionComponent,
     },
     {
