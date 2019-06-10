@@ -19,23 +19,27 @@
         <section class="signup">
             <!-- <img src="images/signup-bg.jpg" alt=""> -->
             <div class="container">
+                <img style=" margin-bottom: 50px ;height: 100px;
+        width: 100px;
+        display: block;
+        margin-left: 300px;" src="assets/img/gal1.png" >
                 <div class="signup-content">
                         <form [formGroup]="form" (ngSubmit)="onSubmit()" id="signup-form" class="signup-form">
-                        <h2 class="form-title">Login</h2>
+                        <h2 class="form-title">Se connecter</h2>
                         
                         <div class="form-group">
-                                <input [formControl]="pseudo" [(ngModel)]="login.pseudo" type="text" class="form-input" name="pseudo" id="pseudo" placeholder="Login"/>
+                                <input [formControl]="pseudo" [(ngModel)]="login.pseudo" type="text" class="form-input" name="pseudo" id="pseudo" placeholder="Pseudo"/>
                         </div>
                         <div class="form-group">
-                                <input  [formControl]="password"  [(ngModel)]="login.password" type="password" class="form-input" name="password" id="password" placeholder="Password"/>
+                                <input  [formControl]="password"  [(ngModel)]="login.password" type="password" class="form-input" name="password" id="password" placeholder="Mot de passe"/>
                                 <span toggle="#password" class="zmdi zmdi-eye field-icon toggle-password"></span>                        </div>  
 
                         <div class="form-group">
-                                <button  name="submit" id="submit" class="form-submit" value="Sign in" type="submit" >Sign in</button>
+                                <button  name="submit" id="submit" class="form-submit" value="Sign in" type="submit" >Se connecter</button>
                         </div>
                     </form>
                     <p class="loginhere">
-                        Dont Have an account ? <a routerLink="/register" class="loginhere-link">Register here</a>
+                        Dont Have an account ? <a routerLink="/register" class="loginhere-link">Créer un compte</a>
                     </p>
                 </div>
             </div>

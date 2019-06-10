@@ -58,7 +58,8 @@ export class ResultTableComponent  implements OnInit{
 
   ngOnInit() {
     if(localStorage.getItem("memberId")  === null){
-      this.router.navigate(['/login']);
+      //this.router.navigate(['/login']);
+      this.router.navigate(['/register']);
     }
     if((localStorage.getItem("testId")===null) && (this.testId1!== null)){
       this.router.navigate(['/loginTest', this.testId1 , this.memberId1]);
@@ -137,7 +138,7 @@ export class ResultTableComponent  implements OnInit{
       alert("merci de repondre à toutes les questions ! ");
     }
     else {
-      this.router.navigate(['/download' , this.testId1 , this.memberId1])
+      this.router.navigate(['/startTest' , this.testId1 , this.memberId1])
         
       }
     
@@ -146,7 +147,7 @@ export class ResultTableComponent  implements OnInit{
 
   public logout (event){
     localStorage.clear();
-    this.router.navigate(['/login'])
+    this.router.navigate(['/register'])
  }
     }
 

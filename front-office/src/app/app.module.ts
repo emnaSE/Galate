@@ -28,6 +28,7 @@ import { DownloadService } from './pages/downloadPDF/download.service';
 import { TestTerminatedComponent } from './pages/test-terminated/test-terminated.component';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,6 +40,7 @@ import { TestTerminatedComponent } from './pages/test-terminated/test-terminated
     RegisterComponent,
     LoginTestComponent,
     TestTerminatedComponent
+ 
   ],
   imports: [
     BrowserModule,

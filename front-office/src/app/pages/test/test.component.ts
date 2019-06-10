@@ -56,7 +56,8 @@ export class TestComponent  implements OnInit{
     )
 
     if(localStorage.getItem("memberId") === null){
-      this.router.navigate(['/login']);
+     // this.router.navigate(['/login']);
+     this.router.navigate(['/register']);
     }
    
 
@@ -66,7 +67,7 @@ export class TestComponent  implements OnInit{
 
   public logout (event){
     localStorage.clear();
-    this.router.navigate(['/login'])
+    this.router.navigate(['/register'])
  }
 
   public get testDurationValue(): any {

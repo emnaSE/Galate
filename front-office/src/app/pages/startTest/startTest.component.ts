@@ -48,7 +48,8 @@ export class StartTestComponent  implements OnInit{
     }
   ngOnInit() {
     if(localStorage.getItem("memberId")  === null){
-      this.router.navigate(['/login']);
+      //this.router.navigate(['/login']);
+      this.router.navigate(['/register']);
     }
      if((localStorage.getItem("testId")===null) && (this.testId1!== null)){
       this.router.navigate(['/loginTest', this.testId1 , this.memberId1]);
@@ -74,7 +75,7 @@ export class StartTestComponent  implements OnInit{
 
     public logout (event){
       localStorage.clear();
-      this.router.navigate(['/login'])
+      this.router.navigate(['/register'])
    }
 
 
@@ -137,7 +138,7 @@ export class StartTestComponent  implements OnInit{
     this.subcatgories.forEach(subcatgory => {
 
         subcatgory.questions.forEach(question => {
-          if(question.answers.length!=0){
+          if(question.length!=0){
             questionsSize=questionsSize+1;
           }
         });
@@ -153,10 +154,10 @@ export class StartTestComponent  implements OnInit{
  
   
   public saveResult(){
-    /*  if(this.map.size!==this.totalQuestionsSize()){
+      if(this.map.size!==this.totalQuestionsSize()){
         alert("merci de repondre à toutes les questions avant de passer!");
         return;
-      }*/
+      }
       var choiceMember;
     
       this.map.forEach((value: string, key: string) => {
@@ -190,7 +191,7 @@ export class StartTestComponent  implements OnInit{
   public saveTestResult(testId,userId,choices) {
     this.startTestService.saveTestResult(testId,userId,choices)
     .subscribe(data =>{
-      this.router.navigate(['/resultTable' , this.testId , this.memberId]);
+      this.router.navigate(['/download' , this.testId , this.memberId]);
     } , error => console.log('err'+error));
   }
 

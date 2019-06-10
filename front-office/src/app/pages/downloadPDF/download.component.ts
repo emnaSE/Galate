@@ -41,7 +41,8 @@ export class DownloadComponent  implements OnInit{
 
   ngOnInit() {
     if(localStorage.getItem("memberId")  === null){
-      this.router.navigate(['/login']);
+      //this.router.navigate(['/login']);
+      this.router.navigate(['/register']);
     }
     if((localStorage.getItem("testId")===null) && (this.testId1!== null)){
       this.router.navigate(['/loginTest', this.testId1 , this.memberId1]);
@@ -56,7 +57,7 @@ export class DownloadComponent  implements OnInit{
 
     this.downloadService.generateReportAutodiagnostic(this.testId ,this.memberId).subscribe(
       data=>{
-        alert("telegarchement avec succes");
+        alert("telegarchement avec succès");
 
         
       }
@@ -65,7 +66,7 @@ export class DownloadComponent  implements OnInit{
 
     public logout (event){
       localStorage.clear();
-      this.router.navigate(['/login'])
+      this.router.navigate(['/register'])
    }
 
   }

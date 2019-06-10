@@ -21,13 +21,13 @@
             <div class="container">
                 <div class="signup-content">
                         <form [formGroup]="form" (ngSubmit)="onSubmit()" id="signup-form" class="signup-form">
-                        <h2 class="form-title">Login For Test</h2>
+                        <h2 class="form-title">Enter le mot de passe du test</h2>
                         <div class="form-group">
-                                <input  [formControl]="password"  [(ngModel)]="loginTest.password" type="password" class="form-input" name="password" id="password" placeholder="Password"/>
+                                <input  [formControl]="password"  [(ngModel)]="loginTest.password" type="password" class="form-input" name="password" id="password" placeholder="Mot de passe"/>
                                 <span toggle="#password" class="zmdi zmdi-eye field-icon toggle-password"></span>                        </div>  
 
                         <div class="form-group">
-                                <button  name="submit" id="submit" class="form-submit" value="Sign in" type="submit" >Sign in</button>
+                                <button  name="submit" id="submit" class="form-submit" value="Sign in" type="submit" >se connecter</button>
                         </div>
                     </form>
                 </div>

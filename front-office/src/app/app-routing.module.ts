@@ -10,6 +10,7 @@ import { DownloadComponent } from './pages/downloadPDF/download.component';
 import { TestTerminatedComponent } from './pages/test-terminated/test-terminated.component';
 
 
+
 const routes: Routes = [
   { path: 'pages', loadChildren: './app.module#AppModule' },
   {
@@ -46,7 +47,8 @@ const routes: Routes = [
     //path: 'loginTest',
     component:LoginTestComponent,
   },
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
+ 
+  { path: '', redirectTo: 'register', pathMatch: 'full' },
   { path: '**', redirectTo: 'pages' },
 ];
 
