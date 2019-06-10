@@ -1841,7 +1841,7 @@ var newData = data.substr(0, 21) + txt + data.substr(21) ;
 
                     var dir=tmp.tmpdir;
                     console.log(dir);
-                    fs.writeFile(dir+'\\MembersInformations.xml', newData, function(err) {
+                    fs.writeFile(dir+'/MembersInformations.xml', newData, function(err) {
                       if(err) {
                           return console.log(err);
                       }
@@ -1850,7 +1850,7 @@ var newData = data.substr(0, 21) + txt + data.substr(21) ;
 
 
 
-                 var xmlFile = path.join(dir ,'\\MembersInformations.xml');
+                 var xmlFile = path.join(dir ,'/MembersInformations.xml');
                  console.log(xmlFile);
                   var stream = fs.createReadStream(xmlFile);
 
