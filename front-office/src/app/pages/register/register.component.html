@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Register</title>
-
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <!-- Font Icon -->
     <link rel="stylesheet" href="assets/fonts/material-icon/css/material-design-iconic-font.min.css">
 
@@ -84,10 +84,31 @@
                                                   [settings]="dropdownSettings0" formControlName="sexe"></angular2-multiselect>
                         </div>-->
 
-                        <div class=“form-group” >
 
-                            <select class=“form-group” style="width: 100%;height:35px;" formControlName="sexe" >
-                                <option value="" disabled selected> sexe</option>
+
+                        <div class=“form-group”  >
+
+                            <select class=“form-control” style="width: 80%;height:35px;
+                                                                display: block;
+                                                                font-size: 16px;
+                                                                font-family: sans-serif;
+                                                                font-weight: 400;
+                                                                color: #999;
+                                                                line-height: 1.3;
+                                                                padding: .6em 1.4em .5em .8em;
+                                                                width: 100%;
+                                                                max-width: 100%;
+                                                                box-sizing: border-box;
+                                                                margin: 0;
+                                                                border: 1px solid #aaa;
+                                                                box-shadow: 0 1px 0 1px rgba(0,0,0,.04);
+                                                                border-radius: .5em;
+                                                                -moz-appearance: none;
+                                                                -webkit-appearance: none;
+                                                                appearance: none;
+                                                                background-color: #fff;" formControlName="sexe" >
+                                <option value="" disabled selected> Sexe</option>
+
                                 <option  value="femme"> Femme </option>
                                 <option value="homme"> Homme </option>
                             </select>
