@@ -8,6 +8,7 @@ import { RegisterComponent } from './register/register.component';
 import { StartTestComponent } from './startTest/startTest.component';
 import { DownloadComponent } from './downloadPDF/download.component';
 import { TestTerminatedComponent } from './test-terminated/test-terminated.component';
+import {RgpdComponent} from "../rgpd/rgpd.component";
 
 
 
@@ -42,6 +43,7 @@ const routes: Routes = [
     path: 'download',
     component:DownloadComponent,
   },
+
  
   { path: '', redirectTo: 'pages/test', pathMatch: 'full' },
   { path: '**', redirectTo: 'pages' },
