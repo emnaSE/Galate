@@ -118,23 +118,10 @@ _publics.getEtalonnageById = (req) => {
    });    
 };*/
 
-/*_publics.getLineSum = (req) => { 
-  var id_test=req.query.id_test;
-  var id_member=req.query.id_member;
-  return new Promise((resolve, reject) => {  
-           var sql = "select tsc.id_subcategory, sum(a.value) as sum from answer a left join choice_member cm on(cm.id_answer=a.id) left join question q on (q.id=cm.id_question)"+
-           " left join test_member tm on(tm.id_test=cm.id_test_member) left join test_subcategory tsc on(tm.id_test=tsc.id_test) where ordre=1 and tm.id_test=? and tm.id_member=? group by tsc.id_subcategory"; 
-         
-               con.query(sql,[id_test,id_member], function (err, result) {
-               if (err) reject(err);
-               return resolve(JSON.stringify(result));
-               });
-   });    
-};*/
+
 _publics.getLineSum = (req) => { 
   var id_test=req.query.id_test;
   var id_member=req.query.id_member;
-  console.log("&&&&&&&&& sum");
   return new Promise((resolve, reject) => {  
            var sql=" select tsc.id_subcategory, count(*) as sum from test_subcategory tsc left join question q on(q.id_test_subcategory=tsc.id) left join answer a on(a.id_question=q.id) "
            +"left join choice_member cm on(cm.id_answer=a.id) left join test_member tm on(tm.id=cm.id_test_member) where tm.id_member=? and tm.id_test=? and a.ordre=? group by tsc.id_subcategory ";
@@ -145,20 +132,68 @@ _publics.getLineSum = (req) => {
                });
    });    
 };
+/*_publics.getLineSum = (req, line) => { 
+  var id_test=req.query.id_test;
+  var id_member=req.query.id_member;
+  return new Promise((resolve, reject) => {  
+           var sql=" select tsc.id_subcategory, count(*) from test_subcategory tsc "+
+           "left join question q on(q.id_test_subcategory=tsc.id) left join choice_member cm on(cm.id_question=q.id) "+
+           "left join test_member tm on(tm.id=cm.id_test_member)   left join answer a on(a.id=cm.id_answer) where tm.id_test=? and tm.id_member=? and tsc.ordre=? and a.ordre=? ";
+               con.query(sql,[id_test, id_member, line, SECOND_ANSWER], function (err, result) {
+               if (err) reject(err);
+               return resolve(result);
+               });
+   });  
+};*/
+
+
+_publics.getSumByOrder = (req) => { 
+
+  let promises = [];
+  for (var order=1;order<=12;order++) {
+    promises.push( new Promise((resolve, reject) => {  
+            var sum=getSumByOrder(req, order);
+            return resolve(sum);
+          }));
+   }
+   return Promise.all(promises)  
+};
+
+
+
+function getSumByOrder(req, order){ 
+  var id_test=req.query.id_test;
+  var id_member=req.query.id_member;
+  return new Promise((resolve, reject) => {  
+           var sql="select tscat.id_subcategory as subcat , "+
+           "(select count(*) from test_subcategory tsc "+
+             "left join question q on(q.id_test_subcategory=tsc.id) left join choice_member cm on(cm.id_question=q.id) "+
+             "left join test_member tm on(tm.id=cm.id_test_member)   left join answer a on(a.id=cm.id_answer) where tm.id_test=? and tm.id_member=? and tsc.ordre=? and a.ordre=?) "+
+           "+ (select count(*) from test_subcategory tsc  left join question q on(q.id_test_subcategory=tsc.id) "+
+            " left join choice_member cm on(cm.id_question=q.id) left join test_member tm on(tm.id=cm.id_test_member)   "+
+            " left join answer a on(a.id=cm.id_answer) where tm.id_test=? and tm.id_member=? and q.ordre=? and a.ordre=?) as total "+
+           "from test_subcategory tscat  left join test_member tm on(tm.id_test=tscat.id_test)  where tm.id_test=? and tm.id_member=? and tscat.ordre=? ";
+               con.query(sql,[id_test, id_member, order, SECOND_ANSWER, id_test, id_member, order, FIRST_ANSWER,id_test, id_member, order], function (err, result) {
+               if (err) reject(err);
+               return resolve(result[0]);
+               });
+   });  
+};
 
 _publics.getSubcategoriesAnswers = (req) => { 
   var id_test=req.query.id_test;
   var id_member=req.query.id_member;
   return new Promise((resolve, reject) => {  
-           var sql=" select tsc.id_subcategory, a.id as answer, tsc.ordre as x, q.odre as y from subcategory sc left join test_subcategory tsc on(sc.id=tsc.id_subcategory) left join question q on(q.id_test_subcategory=tsc.id) left join answer a on(a.id_question=q.id) "
-           +"left join choice_member cm on(cm.id_answer=a.id) left join test_member tm on(tm.id=cm.id_test_member) where tm.id_member=? and tm.id_test=? ";
-               con.query(sql,[id_member,id_test, SECOND_ANSWER], function (err, result) {
-                console.log("result is " + JSON.stringify(result));
+           var sql=" select tsc.id_subcategory, cm.id_answer as answer, tsc.ordre as x, q.ordre as y from test_subcategory tsc "+
+           "left join question q on(q.id_test_subcategory=tsc.id) left join choice_member cm on(cm.id_question=q.id) "+
+           "left join test_member tm on(tm.id=cm.id_test_member)  where tm.id_test=? and tm.id_member=? ";
+               con.query(sql,[id_test, id_member], function (err, result) {
                if (err) reject(err);
                return resolve(result);
                });
    });    
 };
+
 
 _publics.getResultLinePerSubcategory = (req,subcategories) => { 
 
@@ -261,15 +296,15 @@ _publics.createListOfManuelAnswers= (req, sumLines) => {
 
 
 
-_publics.updateListOfManuelAnswers= (req, sumLines) => { 
+_publics.updateListOfManuelAnswers= (req, sum) => { 
   let promises = [];
  var id_test=req.query.id_test;
  var id_member=req.query.id_member;
- for (var i=0;i<sumLines.length;i++) {
+ for (var i=0;i<sum.length;i++) {
               promises.push( new Promise((resolve, reject) => {  
                 var msg="";
                 var sql = "update manuel_answer set result=?  where  id_member=? and id_test=? and id_subcategory=?";
-                con.query(sql,[sumLines[i].sum,id_member,id_test,sumLines[i].id_subcategory], function (err, result) {
+                con.query(sql,[sum[i].total,id_member,id_test,sum[i].subcat], function (err, result) {
                 if (err){
                   msg="failure"; 
                   reject(err);
@@ -283,20 +318,17 @@ _publics.updateListOfManuelAnswers= (req, sumLines) => {
   return Promise.all(promises)   
 };
 
-_publics.updateManualAnswerEtalonnageResult= (req, sumLines) => { 
-  console.log("##################" + sumLines);
+_publics.updateManualAnswerEtalonnageResult= (req, sum) => { 
   let promises = [];
  var id_test=req.query.id_test;
  var id_member=req.query.id_member;
 
- for (var i=0;i<sumLines.length;i++) {
+ for (var i=0;i<sum.length;i++) {
               promises.push( new Promise((resolve, reject) => {  
                 var msg="";
-                //var sql = "update manuel_answer set etallonage_result = coalesce( ("+
-                //  " select max(value) from etalonnage where id_subcategory=? and ? between lower_bound and upper_bound) ,0) where id_member=? and id_test=? and id_subcategory=?";
-                var sql = "update manuel_answer set etallonage_result = 7 where id_member=? and id_test=? ";
-                //con.query(sql,[sumLines[i].id_subcategory,sumLines[i].sum,id_member,id_test], function (err, result) {
-                  con.query(sql,[id_member,id_test], function (err, result) {
+                var sql = "update manuel_answer set etallonage_result = coalesce( ("+
+                  " select max(value) from etalonnage where id_subcategory=? and ? between lower_bound and upper_bound) ,0) where id_member=? and id_test=? and id_subcategory=?";
+                con.query(sql,[sum[i].subcat,sum[i].total,id_member,id_test,sum[i].subcat], function (err, result) {
                 if (err){
                   msg="failure"; 
                   reject(err);
