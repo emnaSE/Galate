@@ -30,7 +30,7 @@ export class DownloadService {
      
 
       generateReportAutodiagnostic(idTest:number , idMember:number):Observable<any> {
-        var url8 = "http://localhost:883/galateProject/rest/galate/generateReportAutodiagnostic?testId="+idTest+"&memberId="+idMember ;
+        var url8 = "http://localhost:8081/galateProject/rest/galate/generateReportAutodiagnostic?testId="+idTest+"&memberId="+idMember ;
         window.location.href=url8;
         return this.http.get<any>(url8);
        
