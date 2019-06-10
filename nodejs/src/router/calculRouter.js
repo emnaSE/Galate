@@ -79,6 +79,17 @@ router.get('/getEtalonnageById', urlencodedParser, (req, res, next) =>
     res.send(message);
 })
 .catch(next));*/
+
+
+router.get('/getSum',(req, res, next)=>calculController
+.getSumByOrder(req)
+.then(sum=>{
+    res.send(sum);
+})
+.catch(next));
+
+
+
 router.post('/saveTestResult',(req, res, next)=>memberController
 .getRawBody(req)
 .then(choices=>{
@@ -97,6 +108,7 @@ router.post('/saveTestResult',(req, res, next)=>memberController
 .then(response=>{
     return memberController.createMemberChoices(res.payload.choices);
 })
+/*
 .then(response=>{
     return adminController.getAllSubcategoriesByIdTest(req);
 })
@@ -106,25 +118,25 @@ router.post('/saveTestResult',(req, res, next)=>memberController
 })
 .then(lineSum=>{
     res.payload.lineSum=lineSum;
-   // console.log(lineSum);
     return calculController.getResultColumnPerSubcategory(req,res.payload.subcategories);
 })
 .then(response=>{
-    console.log(" line sum =======> " + JSON.stringify(response));
     return calculController.getLineSum(req);
 })
 .then(sumLines => {
     res.payload.sumLines=sumLines;
     return calculController.createListOfManuelAnswers(req, sumLines);
 })
-.then(columnSum => {
-    console.log(" column sum =======> "  + JSON.stringifycolumnSum);
-    res.payload.columnSum=columnSum;
-   // return calculController.updateListOfManuelAnswers(req, sumLines);
-   return "ok";
+*/
+.then(response=>{
+    return calculController.getSumByOrder(req);
+})
+.then(sum => {
+    res.payload.sum=sum;
+   return calculController.updateListOfManuelAnswers(req, sum);
 })
 .then(response => {
-    return calculController.updateManualAnswerEtalonnageResult(req, res.payload.lineSum);
+    return calculController.updateManualAnswerEtalonnageResult(req, res.payload.sum);
 })
 .then(message => {
     res.send(message);

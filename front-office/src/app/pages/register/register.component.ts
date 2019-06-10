@@ -53,8 +53,9 @@ export class RegisterComponent  implements OnInit{
       id_clazz: [[], Validators.required],
       id_school: [[], Validators.required],
       checked: new FormControl('',[Validators.required]),
-      study_level: new FormControl('', [Validators.required]),
+      //study_level: new FormControl('', [Validators.required]),
       sexe: [[],[Validators.required]],
+
       city: new FormControl('', [Validators.required]),
 
     });
@@ -148,7 +149,7 @@ export class RegisterComponent  implements OnInit{
           }
         )
       }else{
-      alert("verifier votre données svp !!");
+      alert("merci de verifier vos données");
         this.err=5;
       }
     }

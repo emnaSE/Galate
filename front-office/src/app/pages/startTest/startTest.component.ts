@@ -156,10 +156,10 @@ export class StartTestComponent  implements OnInit{
  
   
   public saveResult(){
-      if(this.map.size!==this.totalQuestionsSize()){
+     /* if(this.map.size!==this.totalQuestionsSize()){
         alert("merci de repondre à toutes les questions avant de passer!");
         return;
-      }
+      }*/
       var choiceMember;
     
       this.map.forEach((value: string, key: string) => {
