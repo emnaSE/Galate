@@ -55,6 +55,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
 
         title: 'Liste des Classes',
 
+
         //icon: 'nb-compose',
         link: '/pages/class',
         //home: true,

@@ -3,7 +3,7 @@
 const router = require('express').Router();
 const memberController=require('../controller/memberController');
 const adminController=require('../controller/adminController');
-
+const calculController=require('../controller/calculController');
 var options = {
     inflate: true,
     limit: '100kb',
@@ -45,8 +45,8 @@ memberController.getRawBody(req)
     res.payload.member=member;
     return memberController.register(member)
 })
-.then(msg=>{
-    res.send(msg);
+.then(message=>{
+        res.send(message);    
 })
 .catch(next));
 
@@ -219,9 +219,43 @@ memberController.getRawBody(req)
     }  
 })
 .then(response=>{
-  res.send(response);
+    res.payload.response=response;
+    req.query.idMember=req.query.memberId;
+    req.query.idTest=req.query.testId;
+    return memberController.getTestMemberByMemberIdAndTestId(req);
 })
-.catch(next));;
+.then(testMember=>{
+    var testMemberId=JSON.parse(testMember).id;
+    res.payload.testMemberId=testMemberId;
+    return memberController.deleteMemberChoicesByIdTestMember(testMemberId);
+})
+.then(message=>{
+    req.query.id_test=req.query.idTest;
+    req.query.id_member=req.query.idMember;
+    return memberController.deleteManuelAnswersByTestMember(req);
+})
+.then(message => {
+    return adminController.getTestSubcategoriesByTestId(req.query.idTest);
+})
+.then(testSubcategories => {
+    return adminController.getAllQuestionsByTestSubcategories(testSubcategories)
+})
+.then(questions=>{
+    res.payload.questions=questions;
+    return adminController.createDefaultTestResult(res.payload.questions,res.payload.testMemberId);
+})
+
+.then(response=>{
+    return calculController.getLineSum(req);
+})
+.then(sumLines => {
+    return calculController.createListOfManuelAnswers(req, sumLines);
+})
+.then(response => {
+    res.send(res.payload.response);
+})
+.catch(next));
+
 
 
 

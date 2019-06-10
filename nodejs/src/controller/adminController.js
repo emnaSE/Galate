@@ -102,7 +102,7 @@ _publics.createCategory = (category) => {
 _publics.getAllClasses = (req) => { 
   
   return new Promise((resolve, reject) => {  
-           var sql = "select * FROM clazz"; 
+           var sql = "select c.*, s.name as school FROM clazz c left join school s on(s.id=c.id_school)"; 
          
                con.query(sql, function (err, result) {
                if (err) reject(err);
@@ -333,7 +333,7 @@ _publics.getAllSubcategories = (req) => {
 _publics.getAllSubcategoriesByIdTest = (req) => { 
     var idtest=req.query.id_test;
     return new Promise((resolve, reject) => {  
-             var sql = "select  distinct name as subcategory,s.id FROM subcategory s left join test_subcategory ts on (s.id=ts.id_subcategory) where ts.id_test=?"; 
+             var sql = "select  distinct name as subcategory,s.id , ts.ordre, ts.id as testSubcategoryId  FROM subcategory s left join test_subcategory ts on (s.id=ts.id_subcategory) where ts.id_test=?"; 
            
                  con.query(sql,[idtest], function (err, result) {
                  if (err) reject(err);
@@ -344,7 +344,6 @@ _publics.getAllSubcategoriesByIdTest = (req) => {
 _publics.getAllSubcategoriesByCategory = (req) => { 
   var idCategory=req.query.idCategory;
   var idMember=req.query.id_member;
-  console.log("idMember "+idMember);
   return new Promise((resolve, reject) => {  
            var sql = "select sc.*, ma.id as manualAnswerId FROM subcategory sc left join manuel_answer ma on(sc.id=ma.id_subcategory) where sc.id_category=? and ma.id_member=?"; 
          
@@ -484,11 +483,12 @@ _publics.createNewQuestion = (question, testSubCategId) => {
   var wording=question.wording;
   var value=question.value;  
   var id_test_subcategory=testSubCategId;
+  var ordre=question.ordre; 
   return new Promise((resolve, reject) => {  
            var response={};
            var questionId;
            var sql = "INSERT INTO question SET ? ";
-           const newQuestion = { name: name,wording:wording,value:value,id_test_subcategory:id_test_subcategory};
+           const newQuestion = { name: name,wording:wording,value:value,id_test_subcategory:id_test_subcategory,ordre:ordre};
            con.query(sql,newQuestion, function (err, result) {
               if (err){
                 response={
@@ -532,12 +532,13 @@ _publics.updateQuestion=(req,question) => {
   var name=question.name;
   var wording=question.wording;
   var value=question.value;
+  var ordre=question.ordre;
   var question_id=req.query.id;
   var id_test_subcategory=question.id_test_subcategory;
   return new Promise((resolve, reject) => { 
            var msg="";
-           var sql = "UPDATE question SET name=?, wording=?,value=?,id_test_subcategory=?  WHERE id = ?"; 
-           con.query(sql,[name,wording,value,id_test_subcategory,question_id], function (err, result) {
+           var sql = "UPDATE question SET name=?, wording=?,value=?,id_test_subcategory=?,ordre=?  WHERE id = ?"; 
+           con.query(sql,[name,wording,value,id_test_subcategory,ordre,question_id], function (err, result) {
               if (err){
                   msg="failure";
                   reject(err);
@@ -615,7 +616,7 @@ _publics.getAllQuestionsByIdTestSubcategory = (req) => {
   _publics.getSubcategoryByTestSubcategory = (req) => { 
     var idTestSubcategory=req.query.idTestSubcategory;
        return new Promise((resolve, reject) => {  
-                var sql = "select * FROM subcategory sc left join test_subcategory ts on (sc.id=ts.id_subcategory) where ts.id=1"; 
+                var sql = "select * FROM subcategory sc left join test_subcategory ts on (sc.id=ts.id_subcategory) where ts.id=?"; 
               
                     con.query(sql,[idTestSubcategory], function (err, result) {
                     if (err) reject(err);
@@ -683,6 +684,7 @@ _publics.createAnswers = (questionId, answers ) => {
 }; 
 
 _publics.updateAnswer=(req,answer) => { 
+  console.log("answer= "+answer);
   var answer=JSON.parse(answer);
   var id_question=answer.id_question;
   var name=answer.name;
@@ -750,7 +752,7 @@ _publics.getAllAnswersByQuestions = (req,questions,res) => {
     
             return resolve(b);
           } else {
-            console.log('Error:' + reject(e));
+            reject(e);
           }
         })));
   }
@@ -875,7 +877,6 @@ _publics.updateTest= (req,test) => {
              con.query(sql,[id], function (err, result) {
               if (err){
                 msg="failure";
-                reject(err);
               }else{
                 msg="success";
               }
@@ -891,7 +892,6 @@ _publics.updateTest= (req,test) => {
       var sql = "INSERT INTO test_category SET? ";
       con.query(sql,{id_test:testId,id_category:categoryId}, function (err, affectation) {
         if (err){
-          console.log(err);
           msg="failure"; 
           }else{
             msg="success";  
@@ -1380,6 +1380,29 @@ _publics.getAllQuestionsByTestSubcategories = (testSubcategories) => {
 
 
 
+_publics.getAllQuestionsByTestSubc = (testSubcategories) => { 
+  let promises = [];
+  for (var i=0;i<testSubcategories.length;i++) {
+    promises.push( new Promise((resolve, reject) => request.get({
+      url :url+`/admin/getQuestionsByTestSubc?idTestSubcategory=${testSubcategories[i].id}`,
+      method: 'GET',
+      gzip: true,
+    }, (e, r, b) => {
+      if (!e && r.statusCode == 200) {
+        return resolve(JSON.parse(b));
+      } else {
+        reject(e);
+      }
+    })));
+  }
+  return Promise.all(promises)      
+
+};
+
+
+
+
+
 _publics.getQuestionsBySubcategories = (testSubcategories) => { 
   let promises = [];
   for (var i=0;i<testSubcategories.length;i++) {
@@ -1462,7 +1485,8 @@ _publics.getCategoriesByTestId = (req) => {
 
 _publics.getTestsByFilter = (req) => {
   return new Promise((resolve, reject) => {   
-    var sql = "select t.name, tm.date_test, m.firstname, m.lastname from test t left join test_member tm on(t.id=tm.id_test) left join member m on(m.id=tm.id_member) where 5=5";        
+    var sql = "select t.name, tm.date_test, m.firstname, m.lastname, c.name as class, s.name as school from test t left join test_member tm on(t.id=tm.id_test) left join member m on(m.id=tm.id_member) "
+     +"left join clazz c on(m.id_clazz=c.id) left join school s on(m.id_school=s.id) where 5=5";        
     sql=whereClause(req, sql);
     con.query(sql,[req.query.testId], function (err, result) {
     if (err) reject(err);
@@ -1485,8 +1509,45 @@ function whereClause(req, sql) {
   if(req.query.maxAge!==undefined && req.query.maxAge!==''){
     sql+=" and m.age<='"+req.query.maxAge+"'";
   }
-  console.log("sql= "+sql);
   return sql;
+}
+
+
+
+_publics.createDefaultTestResult = (questions,idTestMember) => {
+  let promises = [];
+  for (var i=0;i<questions.length;i++) {
+      promises.push( new Promise((resolve, reject) => {  
+          let quest=questions[i].questions;
+          var response=createDefaultMemberChoices(quest,idTestMember);
+          return resolve(response);
+      }));
+  }
+  return Promise.all(promises);  
+
+}
+
+function createDefaultMemberChoices(quest,idTestMember){
+  let promises = [];
+  for (var j=0;j<quest.length;j++) {
+      promises.push( new Promise((resolve, reject) => {  
+        var msg="";
+        var sql = "INSERT INTO choice_member SET ? ";
+        var firstQuestion =quest[j][1];
+       
+        const defaultResponse = { id_question:firstQuestion.id_question ,id_answer:firstQuestion.id,id_test_member:idTestMember};
+        con.query(sql,defaultResponse, function (err, result) {
+        if (err){
+          msg="failure"; 
+          reject(err);
+        }else{
+          msg="success";
+        }
+        return resolve(msg);
+      });
+    }));
+  }
+  return Promise.all(promises); 
 }
 
 
@@ -1525,27 +1586,107 @@ _publics.getSubcategoryByMemberAndTestID = (req) => {
                     });
         });    
      };
-  
 
-     function createSubcategories(subcategories ){
+     //xml
+     _publics.getSubcategoryResultByMemberAndTestID =(id_test,id_member) =>{ 
+         return new Promise((resolve, reject) => {  
+                  var sql = "select distinct  ma.etallonage_result,s.name from member m left join manuel_answer ma on(ma.id_member=m.id) left join test_subcategory ts on(ts.id_subcategory=ma.id_subcategory) left join subcategory s on(s.id=ts.id_subcategory) where ma.id_test=? and ma.id_member=?";
+                      con.query(sql,[id_test,id_member], function (err, result) {
+                      if (err) reject(err);
+                      return resolve(result);
+                      });
+          });    
+       };
+    
+       _publics.getMembersResults = (members, testId) => { 
+        let promises = [];
+        for (var i=0;i<JSON.parse(members).length;i++) {
+          promises.push( new Promise((resolve, reject) => request.get({
+            url :url+`/admin/getMemberResult?id_test=${testId}&id=${JSON.parse(members)[i].id}`,
+            method: 'GET',
+            gzip: true,
+          }, (e, r, b) => {
+            if (!e && r.statusCode == 200) {
+              return resolve(JSON.parse(b));
+            } else {
+              reject(e);
+            }
+          })));
+        }
+        return Promise.all(promises)      
+      
+      };
+       
+      
+
+     _publics.getSubcategoriesByTestID = (req) => { 
+      var id_test=req.query.id_test;
+      
+         return new Promise((resolve, reject) => {  
+                  var sql = " select distinct  s.name from member m left join manuel_answer ma on(ma.id_member=m.id) left join test_subcategory ts on(ts.id_subcategory=ma.id_subcategory) left join subcategory s on(s.id=ts.id_subcategory) where ma.id_test=?";
+
+                      con.query(sql,[id_test], function (err, result) {
+                      if (err) reject(err);
+                      return resolve(JSON.stringify(result));
+                      });
+          });    
+     };
+
+
+  _publics.getMembersInformationByTestID = (req) => { 
+      var id_test=req.query.id_test;
+      
+         return new Promise((resolve, reject) => {  
+                  var sql = "select distinct  m.id ,m.firstname,m.lastname,m.age from member m left join manuel_answer ma on(ma.id_member=m.id) left join test_subcategory ts on(ts.id_subcategory=ma.id_subcategory) left join subcategory s on(s.id=ts.id_subcategory) where ma.id_test=? "; 
+                
+                      con.query(sql,[id_test], function (err, result) {
+                      if (err) reject(err);
+                      return resolve(JSON.stringify(result));
+                      });
+          });    
+     };
+
+     //fin xml
+
+     function createResultSubCat(data5 , subcategories , memberResult){
       let promises = [];
-      var decode = require('unescape');
-     
-      //var subcategories = ['authenticité' , 'Diplomatie' , 'Sociabilité' , 'Tolérance'];
-      for (var i=0;i<subcategories.length;i++) {
-        promises.push( new Promise((resolve, reject) => { 
+    
+        for (var j=0 ; j<memberResult.length ; i++){
+          for(var k=0;k<subcategories.length;k++){
+          promises.push( new Promise((resolve, reject) => { 
+            
           
+          if (((memberResult[j].name).toString().trim()) === ((subcategories[k].name).toString().trim())){
+          data5.txt(memberResult[j].etallonage_result) ;}
         
-            subc = subc+ "<Cell> <Data>" +subcategories[i] +"</Data> </Cell>" ;
-           
+        }));
+      }
+    }
+      
+      return Promise.all(promises);   
+    
+    }
+    
+     
+     function createRow(row , subcategories , memberResult){
+      let promises = [];
+     
+     for (var i=0;i<subcategories.length;i++) {
+        promises.push( new Promise((resolve, reject) => {         
+          var subcategory =row.ele('Cell');
+          subcategory.att('ss:StyleID' , 'S21');
+          var data5 =  subcategory.ele('Data');
+              data5.att('ss:Type', 'String'); 
               
+               ///createResultSubCat(data5 , subcategories , memberResult)
+              data5.txt(memberResult[i].etallonage_result) ; 
             
-            
+              
+            data5.up();
+          subcategory.up();          
           }));
       }
       
-
-
       return Promise.all(promises);   
     
     }
@@ -1554,24 +1695,12 @@ _publics.getSubcategoryByMemberAndTestID = (req) => {
 
 _publics.generateXMLFile = (input,req , res  ) => {
   return new Promise((resolve, reject) => {   
+
     
-    var subcategories = ['authenticité' , 'Diplomatie' , 'Sociabilité' , 'Tolérance'];
-    var categoryNum = 8 ; 
-    var memberNum = 3 ;
+  
     var builder = require('xmlbuilder');
-    
-   
-    var subc = "" ;
-
-    var decode = require('unescape');
-
-    for (var i=0;i<subcategories.length;i++) {
-    subc = subc+ "<Cell> <Data>" +subcategories[i] +"</Data> </Cell>" ;
-    }
-
-
-
     var doc = builder.create('Workbook');
+    
     doc.att('xmlns:o', 'urn:schemas-microsoft-com:office:office');
     doc.att('xmlns:x', 'urn:schemas-microsoft-com:office:excel');
     doc.att('xmlns:ss', 'urn:schemas-microsoft-com:office:spreadsheet');
@@ -1609,13 +1738,16 @@ _publics.generateXMLFile = (input,req , res  ) => {
 
    var worksheet = doc.ele('Worksheet');
      worksheet.att('ss:Name' , 'Feuil1');
+     var names = worksheet.ele('ss:Names');
+     names.up();
      var table =  worksheet.ele('ss:Table');
      table.att('ss:DefaultRowHeight', '15');   
      table.att('ss:DefaultColumnWidth', '60');
-     table.att('ss:ExpandedRowCount', memberNum);
-     table.att('ss:ExpandedColumnCount', 4+categoryNum) ; 
+     table.att('ss:ExpandedRowCount', 3+input.members.length);
+     table.att('ss:ExpandedColumnCount', 3+input.subcategories.length) ; 
        var row = table.ele('Row');
           var cell1 =row.ele('Cell');
+            cell1.att('ss:StyleID' , 'S21')
               var data1 = cell1.ele('Data');
                   data1.att('ss:Type', 'String') ;
                   data1.txt('nom')  ;
@@ -1623,6 +1755,7 @@ _publics.generateXMLFile = (input,req , res  ) => {
             cell1.up();
 
           var cell2 =row.ele('Cell');
+          cell2.att('ss:StyleID' , 'S21')
             var data2 = cell2.ele('Data');
                 data2.att('ss:Type', 'String') ;
                 data2.txt('prenom')  ;
@@ -1630,60 +1763,89 @@ _publics.generateXMLFile = (input,req , res  ) => {
           cell2.up();
 
            var cell3 =row.ele('Cell');
+           cell3.att('ss:StyleID' , 'S21')
             var data3 = cell3.ele('Data');
                 data3.att('ss:Type', 'String') ;
                 data3.txt('age')  ;
             data3.up();
           cell3.up();
 
-          var cell4 =row.ele('Cell');
-            var data4 = cell4.ele('Data');
-                data4.att('ss:Type', 'String') ;
-                data4.txt('niveau Etude')  ;
-            data4.up();
-          cell4.up();
+         
 
-          for (var i=0;i<subcategories.length;i++) {
+        for (var i=0;i<input.subcategories.length;i++) {
           var subcategory =row.ele('Cell')
+          subcategory.att('ss:StyleID' , 'S21')
              var data5 =  subcategory.ele('Data');
                 data5.att('ss:Type', 'String'); 
-                data5.txt(subcategories[i]) ; 
+                data5.txt(input.subcategories[i].name) ; 
               data5.up();
             subcategory.up();
            
             }
 
-         row.up();
+      row.up();
+
+    for(var i=0 ; i<input.members.length ; i++){
+                var row = table.ele('Row');
+                var cell1 =row.ele('Cell');
+                cell1.att('ss:StyleID' , 'S21')
+                    var data1 = cell1.ele('Data');
+                        data1.att('ss:Type', 'String') ;
+                        data1.txt(input.members[i].firstname);
+                    data1.up();
+                  cell1.up();
+
+                var cell2 =row.ele('Cell');
+                cell2.att('ss:StyleID' , 'S21')
+                  var data2 = cell2.ele('Data');
+                      data2.att('ss:Type', 'String') ;
+                      data2.txt(input.members[i].lastname);
+                  data2.up();
+                cell2.up();
+
+                var cell3 =row.ele('Cell');
+                cell3.att('ss:StyleID' , 'S21')
+                  var data3 = cell3.ele('Data');
+                      data3.att('ss:Type', 'String') ;
+                      data3.txt(input.members[i].age)  ;
+                  data3.up();
+                cell3.up();
+
+               
+
+           
+              createRow(row , input.subcategories , input.members[i].result);
+              row.up();
+    }
 
 
-
-
-
-         
        table.up();    
       worksheet.up();
 
      
 
-  var xml = doc.end({ pretty: true }); 
-  console.log(xml);
+  var data = doc.end({ pretty: true }); 
+ // console.log(data);
+  var txt = "<?mso-application progid='Excel.Sheet'?>" ;
 
+var searchTerm = '>';
+var indexOfFirst = data.indexOf(searchTerm);
 
-  
+var newData = data.substr(0, 21) + txt + data.substr(21) ;
 
                   //working example : convert json to xml and download xml File
                   /*  var js2xmlparser = require("js2xmlparser");
                     var dir=tmp.tmpdir;
             
-                    var data = js2xmlparser.parse("details", input);
+                    var data = js2xmlparser.parse("details", input);*/
 
-                    
-                    fs.writeFile(dir+'\\Member_Information.xml', data, function(err) {
+                    var dir=tmp.tmpdir;
+                    fs.writeFile(dir+'\\Member_Information.xml', newData, function(err) {
                       if(err) {
                           return console.log(err);
                       }
                       
-                      console.log(data);
+                    
                   });
 
                   var xmlFile = path.join(dir, 'Member_Information.xml');
@@ -1693,20 +1855,34 @@ _publics.generateXMLFile = (input,req , res  ) => {
                   stream.pipe(res);
                   stream.once("end", function () {
                     stream.destroy(); // makesure stream closed, not close if download aborted.
-                    fs.unlink("Member_Information.xml", function (err) {
-                      if (err) {
-                          console.error(err.toString());
-                      } else {
-                          console.warn("Member_Information.xml" + ' deleted');
-                      }
-                    });
-                  });*/
+                   
+                  });
      
 
 
  });  
 
 }
+
+
+
+
+
+_publics.getAllTestSubcategoriesByTestAndSubcategoryIds = (req) => {
+  var tesId=req.query.testId;
+  return new Promise((resolve, reject) => {  
+    var sql = "select sc.name,tsc.ordre from subcategory sc left join test_subcategory tsc on(sc.id=tsc.id_subcategory) where tsc.id_test=?";      
+    con.query(sql,[tesId], function (err, result) {
+    if (err) reject(err);
+    return resolve(result);
+    });
+  }); 
+}
+
+
+
+
+
 
 
 

@@ -1,3 +1,4 @@
+
 import { NgModule } from '@angular/core';
 import { PagesComponent } from './pages.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
@@ -33,3 +34,4 @@ const PAGES_COMPONENTS = [
 })
 export class PagesModule {
 }
+

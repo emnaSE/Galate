@@ -2,6 +2,7 @@
 
 const router = require('express').Router();
 const adminController = require('../controller/adminController');
+const calculController=require('../controller/calculController');
 const memberController = require('../controller/memberController');
 var options = {
     inflate: true,
@@ -316,7 +317,7 @@ router.post('/createAnswer', (req, res, next) =>
 
 
 router.post('/updateAnswerById', (req, res, next) =>
-    adminController.getRawBody(req)
+    memberController.getRawBody(req)
         .then(answer => {
             return adminController.updateAnswer(req, answer)
         })
@@ -403,15 +404,7 @@ router.post('/createQuestion_Answers', (req, res, next) =>
 })
 .catch(next));
 
-router.post('/updateAnswerById', (req, res, next) =>
-    adminController.getRawBody(req)
-        .then(answer => {
-            return adminController.updateAnswer(req, answer)
-        })
-        .then(msg => {
-            res.send(msg);
-        })
-        .catch(next));
+
 
 router.get('/deleteAnswerById', urlencodedParser, (req, res, next) =>
     adminController.deleteAnswer(req)
@@ -490,7 +483,6 @@ router.post('/updateTestById', (req, res, next) =>memberController
 
 router.post('/deleteTestById', (req, res, next) =>
 adminController.deleteTest(req)
-
 .then(msg => {
     res.send(msg);
 })
@@ -652,7 +644,7 @@ router.get('/getAnswersPerQuestion', (req, res, next) => adminController.
             return;
         }
         req.query.id_question = req.query.id;
-        res.payload.question = JSON.parse(question);
+       // res.payload.question = JSON.parse(question);
         return adminController.getAllAnswerByQuestion(req)
     })
     .then(answers => {
@@ -660,7 +652,7 @@ router.get('/getAnswersPerQuestion', (req, res, next) => adminController.
             return;
         }
         res.payload.answers = JSON.parse(answers);
-        res.send(res.payload);
+        res.send(JSON.parse(answers));
     })
     .catch(next));
 
@@ -668,6 +660,7 @@ router.get('/getQuestionsByTestSubcategory', (req, res, next) => adminController
     getSubcategoryByTestSubcategory(req)
     .then(subcategory => {
         res.payload.subcategory = JSON.parse(subcategory)[0].name;
+        res.payload.id = JSON.parse(subcategory)[0].id;
         return adminController.getAllQuestionsByIdTestSubcategory(req)
     })
     .then(questions => {
@@ -779,6 +772,69 @@ adminController.getTestsByFilter(req)
 
 
 
+/************** if login page exist *********************/
+router.get('/createDefaultTestResult0', (req, res, next) =>memberController
+.getTestMemberByMemberIdAndTestId(req)
+.then(testMember=>{
+    var testMemberId=JSON.parse(testMember).id;
+    res.payload.testMemberId=testMemberId;
+    return memberController.deleteMemberChoicesByIdTestMember(testMemberId);
+})
+.then(message=>{
+    req.query.id_test=req.query.idTest;
+    req.query.id_member=req.query.idMember;
+    return memberController.deleteManuelAnswersByTestMember(req);
+})
+.then(message => {
+    return adminController.getTestSubcategoriesByTestId(req.query.idTest);
+})
+.then(testSubcategories => {
+    return adminController.getAllQuestionsByTestSubcategories(testSubcategories)
+})
+.then(questions=>{
+    res.payload.questions=questions;
+    return adminController.createDefaultTestResult(res.payload.questions,res.payload.testMemberId);
+})
+
+.then(response=>{
+    return calculController.getLineSum(req);
+})
+.then(sumLines => {
+    return calculController.createListOfManuelAnswers(req, sumLines);
+})
+.then(response => {
+    res.send(response);
+})
+.catch(next));
+
+/************** if no login page *********************/
+router.get('/createDefaultTestResult', (req, res, next) =>memberController
+.getTestMemberByMemberIdAndTestId(req)
+.then(testMember=>{
+    var testMemberId=JSON.parse(testMember).id;
+    res.payload.testMemberId=testMemberId;
+    return adminController.getTestSubcategoriesByTestId(req.query.idTest);
+})
+.then(testSubcategories => {
+    return adminController.getAllQuestionsByTestSubcategories(testSubcategories)
+})
+.then(questions=>{
+    res.payload.questions=questions;
+    return adminController.createDefaultTestResult(res.payload.questions,res.payload.testMemberId);
+})
+
+.then(response=>{
+    return calculController.getLineSum(req);
+})
+.then(sumLines => {
+    return calculController.createListOfManuelAnswers(req, sumLines);
+})
+.then(response => {
+    res.send(response);
+})
+.catch(next));
+
+
 router.get('/generateXMLFile',urlencodedParser, (req, res, next) => 
 adminController.generateXMLFile(req ,res)
 .then(response=>{
@@ -787,35 +843,113 @@ adminController.generateXMLFile(req ,res)
 .catch(next));
 
 
-
-
-router.get('/generateXml', urlencodedParser, (req, res, next) =>
-adminController.getMemberInformationByMemberAndTestID(req)
-.then(member => {
-    res.payload.member = JSON.parse(member) ;
-    return adminController.getSubcategoryByMemberAndTestID(req)
-})
-.then(subCategory=>{
-    res.payload.subCategory=JSON.parse(subCategory);
-    return res.payload;
-})
-.then(memberInformation=>{
-    
-    return adminController.generateXMLFile(memberInformation,req , res );
+router.get('/getMembersInformationByTestID',urlencodedParser, (req , res ,next) => 
+adminController.getMembersInformationByTestID(req)
+.then(response=>{
+  res.send(response);
 })
 .catch(next));
 
 
 
+router.get('/getTestSubcategoryByTestIdAndSubcateoryId', (req, res, next) => 
+adminController.getTestSubcategoryByTestIdAndSubcateoryId(req)//testId//subcategoryId;
+.then(testSubcategory=>{
+    req.query.idTestSubcategory=testSubcategory.id;
+    req.query.id=req.query.subcategoryId;
+    return adminController.getSubcategoryById(req);
+})
+.then(subcategory => {
+    res.payload.subcategory = JSON.parse(subcategory).name;
+    req.query.idTestSubcategory=req.query.subcategoryId;
+    return adminController.getAllQuestionsByIdTestSubcategory(req)
+})
+.then(questions => {
+    return adminController.getAllQuestionsByQuestionsIds(questions)
+})
+.then(response => {
+    res.payload.questions = response;
+    res.send(res.payload);
+})
+.catch(next));
 
 
 
+router.get('/getMemberResult', urlencodedParser, (req, res, next) =>
+memberController.getMemberById(req)
+.then(member => {
+    var m=JSON.parse(member);
+    res.payload.firstname=m[0].firstname;
+    res.payload.lastname=m[0].lastname;
+    res.payload.age=m[0].age;
+    
+    return adminController.getSubcategoryResultByMemberAndTestID(req.query.id_test, m[0].id)
+})
+.then(result => {
+    res.payload.result=result;
+    res.send(res.payload);
+})
+.catch(next));
+
+router.get('/generateXml', urlencodedParser, (req, res, next) =>
+adminController.getMembersInformationByTestID(req)
+.then(members=>{
+    return adminController.getMembersResults(members, req.query.id_test)
+})
+.then(response => {
+    res.payload.members=response;
+    return adminController.getSubcategoriesByTestID(req);
+})
+.then(subcategories=>{
+    res.payload.subcategories=JSON.parse(subcategories);
+    return adminController.generateXMLFile(res.payload,req , res );
+})
+.catch(next));
+
+
+router.get('/getAllQuestionsByTestId', (req, res, next) =>
+    adminController.getTestSubcategoriesByTestId(req.query.testId)
+  .then(testSubcategories => {
+        res.payload.testSubcategories = testSubcategories;
+        return adminController.getAllQuestionsByTestSubc(testSubcategories)
+    })
+    .then(response => {
+        const results = perf.stop();
+        console.log("getAllQuestionsByTestSubcategories: " +results.time);
+        res.send(response);
+    })
+    .catch(next));
+
+router.get('/getQuestionsByTestSubc', (req, res, next) => adminController.
+    getSubcategoryByTestSubcategory(req)
+    .then(subcategory => {
+        res.payload.subcategory = JSON.parse(subcategory)[0].name;
+        return adminController.getAllQuestionsByIdTestSubcategory(req)
+    })
+    .then(questions => {
+        return adminController.getAllQuestionsByQuestionsIds(questions)
+    })
+    .then(response => {
+        res.payload.questions = response;
+        res.send(res.payload);
+    })
+    .catch(next));
 
 
 
+router.get('/getAllTestSubcategoriesByTestAndSubcategoryIds', (req, res, next) => adminController
+.getAllTestSubcategoriesByTestAndSubcategoryIds(req)
+.then(response => {
+    res.send(response);
+})
+.catch(next));
 
-
-
+router.post('/updateSubcategoriesOrder', (req, res, next) => adminController
+.updateSubcategoriesOrder(req)
+.then(response => {
+    res.send(response);
+})
+.catch(next));
 
 
 
