@@ -150,7 +150,7 @@ export class RegisterComponent  implements OnInit{
           }
         )
       }else{
-      alert("verifier votre données svp !!");
+      alert("merci de verifier vos données");
         this.err=5;
       }
     }
