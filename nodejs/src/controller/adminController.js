@@ -333,7 +333,7 @@ _publics.getAllSubcategories = (req) => {
 _publics.getAllSubcategoriesByIdTest = (req) => { 
     var idtest=req.query.id_test;
     return new Promise((resolve, reject) => {  
-             var sql = "select  distinct name as subcategory,s.id FROM subcategory s left join test_subcategory ts on (s.id=ts.id_subcategory) where ts.id_test=?"; 
+             var sql = "select  distinct name as subcategory,s.id , ts.ordre, ts.id as testSubcategoryId  FROM subcategory s left join test_subcategory ts on (s.id=ts.id_subcategory) where ts.id_test=?"; 
            
                  con.query(sql,[idtest], function (err, result) {
                  if (err) reject(err);
@@ -1485,7 +1485,8 @@ _publics.getCategoriesByTestId = (req) => {
 
 _publics.getTestsByFilter = (req) => {
   return new Promise((resolve, reject) => {   
-    var sql = "select t.name, tm.date_test, m.firstname, m.lastname from test t left join test_member tm on(t.id=tm.id_test) left join member m on(m.id=tm.id_member) where 5=5";        
+    var sql = "select t.name, tm.date_test, m.firstname, m.lastname, c.name as class, s.name as school from test t left join test_member tm on(t.id=tm.id_test) left join member m on(m.id=tm.id_member) "
+     +"left join clazz c on(m.id_clazz=c.id) left join school s on(m.id_school=s.id) where 5=5";        
     sql=whereClause(req, sql);
     con.query(sql,[req.query.testId], function (err, result) {
     if (err) reject(err);
@@ -1508,7 +1509,6 @@ function whereClause(req, sql) {
   if(req.query.maxAge!==undefined && req.query.maxAge!==''){
     sql+=" and m.age<='"+req.query.maxAge+"'";
   }
-  console.log("sql= "+sql);
   return sql;
 }
 
@@ -1519,8 +1519,6 @@ _publics.createDefaultTestResult = (questions,idTestMember) => {
   for (var i=0;i<questions.length;i++) {
       promises.push( new Promise((resolve, reject) => {  
           let quest=questions[i].questions;
-        //  console.log("######" + JSON.stringify(questions)+"#######");
-
           var response=createDefaultMemberChoices(quest,idTestMember);
           return resolve(response);
       }));
@@ -1531,16 +1529,13 @@ _publics.createDefaultTestResult = (questions,idTestMember) => {
 
 function createDefaultMemberChoices(quest,idTestMember){
   let promises = [];
- // console.log("" + JSON.stringify(quest));
   for (var j=0;j<quest.length;j++) {
       promises.push( new Promise((resolve, reject) => {  
         var msg="";
         var sql = "INSERT INTO choice_member SET ? ";
-        var firstQuestion =quest[j][0];
-    //    var question=quest[j][1];
+        var firstQuestion =quest[j][1];
        
         const defaultResponse = { id_question:firstQuestion.id_question ,id_answer:firstQuestion.id,id_test_member:idTestMember};
-     //   console.log("j= "+JSON.stringify(choiceMember));
         con.query(sql,defaultResponse, function (err, result) {
         if (err){
           msg="failure"; 
@@ -1835,7 +1830,7 @@ _publics.generateXMLFile = (input,req , res  ) => {
 
 var searchTerm = '>';
 var indexOfFirst = data.indexOf(searchTerm);
-console.log( indexOfFirst);
+
 var newData = data.substr(0, 21) + txt + data.substr(21) ;
 
                   //working example : convert json to xml and download xml File
@@ -1850,7 +1845,7 @@ var newData = data.substr(0, 21) + txt + data.substr(21) ;
                           return console.log(err);
                       }
                       
-                      console.log(newData);
+                    
                   });
 
                   var xmlFile = path.join(dir, 'Member_Information.xml');

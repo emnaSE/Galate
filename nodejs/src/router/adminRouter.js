@@ -772,8 +772,8 @@ adminController.getTestsByFilter(req)
 
 
 
-
-router.get('/createDefaultTestResult', (req, res, next) =>memberController
+/************** if login page exist *********************/
+router.get('/createDefaultTestResult0', (req, res, next) =>memberController
 .getTestMemberByMemberIdAndTestId(req)
 .then(testMember=>{
     var testMemberId=JSON.parse(testMember).id;
@@ -807,6 +807,32 @@ router.get('/createDefaultTestResult', (req, res, next) =>memberController
 })
 .catch(next));
 
+/************** if no login page *********************/
+router.get('/createDefaultTestResult', (req, res, next) =>memberController
+.getTestMemberByMemberIdAndTestId(req)
+.then(testMember=>{
+    var testMemberId=JSON.parse(testMember).id;
+    res.payload.testMemberId=testMemberId;
+    return adminController.getTestSubcategoriesByTestId(req.query.idTest);
+})
+.then(testSubcategories => {
+    return adminController.getAllQuestionsByTestSubcategories(testSubcategories)
+})
+.then(questions=>{
+    res.payload.questions=questions;
+    return adminController.createDefaultTestResult(res.payload.questions,res.payload.testMemberId);
+})
+
+.then(response=>{
+    return calculController.getLineSum(req);
+})
+.then(sumLines => {
+    return calculController.createListOfManuelAnswers(req, sumLines);
+})
+.then(response => {
+    res.send(response);
+})
+.catch(next));
 
 
 router.get('/generateXMLFile',urlencodedParser, (req, res, next) => 

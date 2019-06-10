@@ -41,18 +41,18 @@ export class RegisterComponent  implements OnInit{
     
   
     this.addForm=this.formBuilder.group({
-      firstname: new FormControl('', [Validators.required]),
-      lastname: new FormControl('', [Validators.required]),
-      email: new FormControl('', [Validators.required]),
+      firstname: new FormControl('bacem', [Validators.required]),
+      lastname: new FormControl('bergaoui', [Validators.required]),
+      email: new FormControl('a@a.a', [Validators.required]),
       //password: new FormControl('', [Validators.required]),
       //pseudo: new FormControl('', [Validators.required]),
       //civility: new FormControl('', [Validators.required]),
-      age: new FormControl('', [Validators.required]),
+      age: new FormControl('10', [Validators.required]),
       id_clazz: [[], Validators.required],
       id_school: [[], Validators.required],
-      study_level: new FormControl('', [Validators.required]),
+      study_level: new FormControl('10', [Validators.required]),
       sexe: [[]],
-      city: new FormControl('', [Validators.required]),
+      city: new FormControl('10', [Validators.required]),
 
     });
     this.dropdownSettings0 = {

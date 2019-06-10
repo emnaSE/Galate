@@ -98,31 +98,33 @@ router.post('/saveTestResult',(req, res, next)=>memberController
     return memberController.createMemberChoices(res.payload.choices);
 })
 .then(response=>{
-    if(response==="failure"){
-        res.payload.leave=true;
-        return;
-    }
+    return adminController.getAllSubcategoriesByIdTest(req);
+})
+.then(subcategories=>{
+    res.payload.subcategories=subcategories;
+    return calculController.getResultLinePerSubcategory(req,subcategories);
+})
+.then(lineSum=>{
+    res.payload.lineSum=lineSum;
+   // console.log(lineSum);
+    return calculController.getResultColumnPerSubcategory(req,res.payload.subcategories);
+})
+.then(response=>{
+    console.log(" line sum =======> " + JSON.stringify(response));
     return calculController.getLineSum(req);
 })
-/*.then(sumLines => {
-    res.payload.sumLines=sumLines;
-    if(res.payload.leave===true){
-        return "failure";
-    }
-    return calculController.createListOfManuelAnswers(req, sumLines);
-})*/
 .then(sumLines => {
     res.payload.sumLines=sumLines;
-    if(res.payload.leave===true){
-        return "failure";
-    }
-    return calculController.updateListOfManuelAnswers(req, sumLines);
+    return calculController.createListOfManuelAnswers(req, sumLines);
+})
+.then(columnSum => {
+    console.log(" column sum =======> "  + JSON.stringifycolumnSum);
+    res.payload.columnSum=columnSum;
+   // return calculController.updateListOfManuelAnswers(req, sumLines);
+   return "ok";
 })
 .then(response => {
-    if(res.payload.leave===true){
-        return "failure";
-    }
-    return calculController.updateManualAnswerEtalonnageResult(req, res.payload.sumLines);
+    return calculController.updateManualAnswerEtalonnageResult(req, res.payload.lineSum);
 })
 .then(message => {
     res.send(message);

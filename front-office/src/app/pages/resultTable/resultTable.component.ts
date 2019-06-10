@@ -58,7 +58,8 @@ export class ResultTableComponent  implements OnInit{
 
   ngOnInit() {
     if(localStorage.getItem("memberId")  === null){
-      this.router.navigate(['/login']);
+      //this.router.navigate(['/login']);
+      this.router.navigate(['/register']);
     }
     if((localStorage.getItem("testId")===null) && (this.testId1!== null)){
       this.router.navigate(['/loginTest', this.testId1 , this.memberId1]);

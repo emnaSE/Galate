@@ -61,7 +61,8 @@ export class LoginTestComponent implements OnInit {
       this.router.navigate(['/login'])
     }*/
     if(localStorage.getItem("memberId") === null){
-      this.router.navigate(['/login']);
+      //this.router.navigate(['/login']);
+      this.router.navigate(['/register']);
     }
     
   }

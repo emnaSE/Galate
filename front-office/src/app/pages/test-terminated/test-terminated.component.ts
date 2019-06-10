@@ -33,7 +33,8 @@ export class TestTerminatedComponent  implements OnInit{
       this.router.navigate(['/login'])
     }*/
     if(localStorage.getItem("currentUser") === null){
-      this.router.navigate(['/login']);
+     // this.router.navigate(['/login']);
+     this.router.navigate(['/register']);
     }else if(localStorage.getItem("testId") === null){
       this.router.navigate(['/test']);
     }
