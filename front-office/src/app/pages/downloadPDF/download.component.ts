@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 import {Component, OnInit, ɵConsole} from '@angular/core';
 import {Router, ActivatedRoute} from "@angular/router";
 

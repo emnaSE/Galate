@@ -16,6 +16,7 @@ import { State } from './state';
 @Component({
   selector: 'startTest',
   templateUrl: './startTest.component.html',
+    styleUrls: ['./startTest.component.css']
 })
 export class StartTestComponent  implements OnInit{
   pageActuel: number =1;
