@@ -15,6 +15,7 @@ import { element } from '@angular/core/src/render3';
 })
 export class RegisterComponent  implements OnInit{
   private register:Register[]
+
   private map:Map<number,string>=new Map();
   dropdownList = [];
   dropdownList1 = [];
@@ -50,6 +51,7 @@ export class RegisterComponent  implements OnInit{
       age: new FormControl('', [Validators.required]),
       id_clazz: [[], Validators.required],
       id_school: [[], Validators.required],
+      checked: new FormControl('',[Validators.required]),
       study_level: new FormControl('', [Validators.required]),
       sexe: [[]],
       city: new FormControl('', [Validators.required]),
@@ -120,6 +122,7 @@ export class RegisterComponent  implements OnInit{
   }
 
   onSubmit(){
+
     //console.log("----------------------------- add member")
     this.submitted=true;
     let registration = {...this.addForm.value}
