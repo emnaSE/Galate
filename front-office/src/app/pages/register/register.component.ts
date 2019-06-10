@@ -1,3 +1,4 @@
+
 import {Component, OnInit} from '@angular/core';
 import {Router, ActivatedRoute} from "@angular/router";
 import { FormGroup, FormBuilder, FormControl, Validators  } from '@angular/forms';
@@ -15,6 +16,7 @@ import { element } from '@angular/core/src/render3';
 })
 export class RegisterComponent  implements OnInit{
   private register:Register[]
+
   private map:Map<number,string>=new Map();
   dropdownList = [];
   dropdownList1 = [];
@@ -41,18 +43,19 @@ export class RegisterComponent  implements OnInit{
     
   
     this.addForm=this.formBuilder.group({
-      firstname: new FormControl('bacem', [Validators.required]),
-      lastname: new FormControl('bergaoui', [Validators.required]),
-      email: new FormControl('a@a.a', [Validators.required]),
+      firstname: new FormControl('', [Validators.required]),
+      lastname: new FormControl('', [Validators.required]),
+      email: new FormControl('', [Validators.required]),
       //password: new FormControl('', [Validators.required]),
       //pseudo: new FormControl('', [Validators.required]),
       //civility: new FormControl('', [Validators.required]),
-      age: new FormControl('10', [Validators.required]),
+      age: new FormControl('', [Validators.required]),
       id_clazz: [[], Validators.required],
       id_school: [[], Validators.required],
-      study_level: new FormControl('10', [Validators.required]),
+      checked: new FormControl('',[Validators.required]),
+      study_level: new FormControl('', [Validators.required]),
       sexe: [[]],
-      city: new FormControl('10', [Validators.required]),
+      city: new FormControl('', [Validators.required]),
 
     });
     this.dropdownSettings0 = {
@@ -74,6 +77,7 @@ export class RegisterComponent  implements OnInit{
       selectAllText: 'Select All',
       unSelectAllText: 'UnSelect All',
       itemsShowLimit: 1,
+      text:"Veuillez faire votre choix",
       allowSearchFilter: true,
       enableSearchFilter:true,
       classes: "myclass custom-class-example",
@@ -85,6 +89,7 @@ export class RegisterComponent  implements OnInit{
       textField: 'item_text',
       selectAllText: 'Select All',
       unSelectAllText: 'UnSelect All',
+      text:"Veuillez faire votre choix",
       itemsShowLimit: 1,
       allowSearchFilter: true,
       enableSearchFilter:true,
@@ -118,6 +123,7 @@ export class RegisterComponent  implements OnInit{
   }
 
   onSubmit(){
+
     //console.log("----------------------------- add member")
     this.submitted=true;
     let registration = {...this.addForm.value}

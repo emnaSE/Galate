@@ -26,7 +26,7 @@ export class AllQuestionComponent implements OnInit {
     this.id_test = this.activatedRouter.snapshot.params['id'];
     localStorage.setItem('catnom',this.id_test);
    // this.id_test=this.testService.currentTestValue.id;
-    this.test_name=this.testService.currentTestValue.name;
+    //this.test_name=this.testService.currentTestValue.name;
     this.items = ["1", "2", "3" , "4", "5", "6" , "7", "8", "9", "10", "11"]
   }
 

@@ -42,7 +42,7 @@ export class QuestionComponent  implements OnInit{
       this.router.navigate(['pages/question/create']);
   }
   update(question:Question){
-      this.router.navigate(['pages/question/',question.id,'modifier'])
+      this.router.navigate(['pages/question',question.id,'modifier'])
   }
 
   deleteByid(question:Question):void {

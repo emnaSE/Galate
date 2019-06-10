@@ -14,7 +14,7 @@
 
           <div class="wrap-input100 validate-input" data-validate = "username est obligatoire">
             <input class="input100" type="text" formControlName="username" name="username" >
-            <span class="focus-input100">username</span>
+            <span class="focus-input100">Nom d'utilisateur</span>
           </div>
 
 
@@ -41,7 +41,7 @@
 
           <div class="container-login100-form-btn">
             <button type="submit" class="login100-form-btn">
-              Login
+              Se connecter
             </button>
           </div>
 
@@ -62,19 +62,19 @@
       <img src="/assets/images/gal1.png" >
 </div>
 
-<h1 id="title" class="title">Login</h1>
+<h1 id="title" class="title">Connexion</h1>
 
 <p class="sub-title">bienvenue </p>
-<nb-alert outline="success" *ngIf="err==0" >You have been successfully authenticated!</nb-alert>
+<nb-alert outline="success" *ngIf="err==0" >Authentifié avec succès!</nb-alert>
 
-<nb-alert outline="danger" *ngIf="err==1" >Erreur password ou username Veuillez réessayer svp</nb-alert>
+<nb-alert outline="danger" *ngIf="err==1" > Veuillez vérifier votre login et mot de passe svp</nb-alert>
 
 
 <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" aria-labelledby="title">
 
 
   <div class="form-control-group">
-    <label class="label" for="username">Username</label>
+    <label class="label" for="username">Nom d'utilisateur:</label>
     <input nbInput
            fullWidth
            type="text"
@@ -85,13 +85,13 @@
     >
     <ng-container *ngIf="submitted && formValid.pseudo.errors">
       <p class="error-message" >
-        Username is required!
+        Nom d'utilisateur est obligatoire
       </p>
     </ng-container>
   </div>
 
   <div class="form-control-group">
-    <label class="label" for="password">Password:</label>
+    <label class="label" for="password">Mot de passe:</label>
     <input nbInput
            fullWidth
            formControlName="password"
@@ -101,7 +101,7 @@
     >
     <ng-container *ngIf="submitted && formValid.password.errors ">
       <p class="error-message" *ngIf="formValid.password.errors.required">
-        Password is required!
+        Mot de Passe est obligatoire
       </p>
 
     </ng-container>
@@ -120,7 +120,7 @@
           status="success"
 
           [class.btn-pulse]="submitted">
-    Log In
+    Se connecter
   </button>
 </form>
 

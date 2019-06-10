@@ -2,7 +2,7 @@
 
 <nb-card>
   <nb-card-header>
-    modifier reponse
+    Modifier réponse
   </nb-card-header>
 
   <nb-card-body>
@@ -11,26 +11,29 @@
 
 
       <div class="form-group">
-        <input type="text" class="form-control" formControlName="name" placeholder="name">
+        <label for="fnText">Nom</label>
+        <input type="text" class="form-control" formControlName="name" placeholder="Nom">
         <ng-container *ngIf="submitted && formvalidate.name.errors">
           <p class="text-danger" >
-            name est obligatoire !
+            nom est obligatoire !
           </p>
         </ng-container>
       </div>
       <div class="form-group">
-        <input type="number" min="0" class="form-control" formControlName="value"  placeholder="value">
+        <label for="fnText">Valeur</label>
+        <input type="number" min="0" class="form-control" formControlName="value"  placeholder="Valeur">
         <ng-container *ngIf="submitted && formvalidate.value.errors">
           <p class="text-danger" >
-            value est obligatoire !
+            valeur est obligatoire !
           </p>
         </ng-container>
       </div>
       <div class="form-group">
-        <input type="number" class="form-control"  min="0" formControlName="ordre" placeholder="ordre">
+        <label for="fnText">Ordre</label>
+        <input type="number" class="form-control"  min="0" formControlName="ordre" placeholder="Ordre">
         <ng-container *ngIf="submitted && formvalidate.value.errors">
           <p class="text-danger" >
-            value est obligatoire !
+            ordre est obligatoire !
           </p>
         </ng-container>
       </div>

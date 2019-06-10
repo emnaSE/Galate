@@ -1,3 +1,4 @@
+
 import {Component, OnInit, ɵConsole} from '@angular/core';
 import {Router, ActivatedRoute} from "@angular/router";
 import { ResultTable } from './resultTable.model';

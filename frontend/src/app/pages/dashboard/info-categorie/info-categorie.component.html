@@ -4,7 +4,7 @@
   <nb-card-header>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
 
-    Listes des sous catergorie
+    Liste des sous catergories
   </nb-card-header>
 
 
@@ -15,30 +15,30 @@
 
       <thead>
       <tr role="row">
-        <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="id: activate to sort column descending">ID</th>
-        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="name: activate to sort column ascending">name</th>
-        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="description: activate to sort column ascending">description</th>
-        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="up_description: activate to sort column ascending">up_description</th>
+        <!--<th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="id: activate to sort column descending">ID</th>-->
+        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="name: activate to sort column ascending">Nom</th>
+        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="description: activate to sort column ascending">Description</th>
+        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="up_description: activate to sort column ascending">Up_description</th>
 
       </thead>
       <tbody>
       <tr *ngFor="let sousCategorie of sousCategories | paginate: { itemsPerPage: 7, currentPage: pageActuel }">
-        <td>{{sousCategorie.id}}</td>
-        <td>{{sousCategorie.name}}</td>
-        <td>{{sousCategorie.down_description}}</td>
-        <td>{{sousCategorie.up_description}}</td>
+        <!--  <td>{{sousCategorie.id}}</td>-->
+          <td>{{sousCategorie.name}}</td>
+          <td>{{sousCategorie.down_description}}</td>
+          <td>{{sousCategorie.up_description}}</td>
 
 
 
-      </tr>
-      </tbody>
-    </table>
-    <pagination-controls
-      (pageChange)="pageActuel = $event"
-      previousLabel="Précédent"
-      nextLabel="Suivant"
-    ></pagination-controls>
+        </tr>
+        </tbody>
+      </table>
+      <pagination-controls
+        (pageChange)="pageActuel = $event"
+        previousLabel="Précédent"
+        nextLabel="Suivant"
+      ></pagination-controls>
 
-  </nb-card-body>
-</nb-card>
+    </nb-card-body>
+  </nb-card>
 

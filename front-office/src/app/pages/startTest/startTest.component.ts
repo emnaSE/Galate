@@ -1,3 +1,4 @@
+
 import {Component, OnInit} from '@angular/core';
 import {Router, ActivatedRoute} from "@angular/router";
 import { StartTestService} from './startTest.service';
@@ -198,21 +199,4 @@ export class StartTestComponent  implements OnInit{
   
  
 }
-
-
-
-
-
-
-
-
-
-
-
-
- 
-  
-
-  
-
 

@@ -115,12 +115,12 @@ ul.navbar-nav li a.btn-link-3:active:focus { outline: 0; background: #63a736; co
 	margin-top: 6px;
 	width: 102px;
 	height: 80px;
-	background: url(assets/img/logo.png) left top no-repeat;
+	background: url(assets/img/galateee.png) left top no-repeat;
 	text-indent: -99999px;
 }
 .navbar>.container .navbar-brand, .navbar>.container-fluid .navbar-brand { margin-left: 0; }
 
-.navbar-no-bg .navbar-brand { background-image: url(assets/img/logo.png); }
+.navbar-no-bg .navbar-brand { background-image: url(assets/img/galateee.png); }
 
 .navbar-toggle .icon-bar { background: #555; }
 
@@ -183,7 +183,7 @@ footer { padding: 40px 0 45px 0; background: #f8f8f8; }
 		-webkit-box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.1);
 		box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.1);
 	}
-	.navbar-no-bg .navbar-brand { background-image: url(assets/img/logo.png); }
+	.navbar-no-bg .navbar-brand { background-image: url(assets/img/galateee.png); }
 	
 	.navbar-no-bg ul.navbar-nav { color: #888; }
 	.navbar-no-bg ul.navbar-nav li a { color: #888; }
@@ -226,10 +226,11 @@ only screen and (                min-resolution: 2dppx) {
 	
 	/* logo */
     .navbar-brand {
-    	background-image: url(assets/img/logo.png) !important; background-repeat: no-repeat !important; background-size: 102px 32px !important;
+    	background-image: url(assets/img/galateee.png) !important; background-repeat: no-repeat !important; background-size: 102px 32px !important;
     }
     
-    .navbar-no-bg .navbar-brand { background-image: url(assets/img/logo.png); }
+    .navbar-no-bg .navbar-brand { background-image: url(assets/img/galateee.png);
+	}
 	
 }
 

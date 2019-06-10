@@ -1,3 +1,4 @@
+
 import {Component, OnInit, ɵConsole} from '@angular/core';
 import {Router} from "@angular/router";
 import { TestTerminatedService } from './test-terminated.service';
@@ -53,4 +54,3 @@ export class TestTerminatedComponent  implements OnInit{
   
 
   
-

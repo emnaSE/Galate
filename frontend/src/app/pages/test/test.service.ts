@@ -86,6 +86,18 @@ export class TestService {
     return this.http.get<any>(this.url+"getCategoriesByTestId?testId="+id);
   }
 
+  generateXMLFile(idTest:number):Observable<any> {
+    var url8 = this.url+"generateXml?id_test="+idTest ;
+    window.location.href=url8;
+    const requestOptions: Object = {
+      responseType: 'text'
+    }
+
+    return this.http.get<any>(url8 , requestOptions );
+
+
+
+  }
 
 }
 

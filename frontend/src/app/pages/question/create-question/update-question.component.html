@@ -1,0 +1,35 @@
+
+
+<nb-card>
+  <nb-card-header>
+    Modifier question
+  </nb-card-header>
+
+  <nb-card-body>
+    <form [formGroup]="updateForm" (ngSubmit)="onSubmit()">
+
+
+
+      <div class="row">
+        <div class="col-6">
+          <div class="form-group" >
+            <label for="fnText">Valeur</label>
+            <input type="number" formControlName="value" >
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="form-group" >
+            <label for="fnText">Ordre</label>
+            <input type="number" formControlName="ordre" >
+          </div>
+        </div>
+
+
+      </div>
+
+
+      <button type="submit" class="btn btn-success">Modifier</button>
+    </form>
+
+  </nb-card-body>
+</nb-card>

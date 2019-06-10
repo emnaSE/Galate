@@ -1840,24 +1840,36 @@ var newData = data.substr(0, 21) + txt + data.substr(21) ;
                     var data = js2xmlparser.parse("details", input);*/
 
                     var dir=tmp.tmpdir;
-                    fs.writeFile(dir+'\\Member_Information.xml', newData, function(err) {
+                    console.log(dir);
+                    fs.writeFile(dir+'\\MembersInformations.xml', newData, function(err) {
                       if(err) {
                           return console.log(err);
                       }
-                      
-                    
+                      console.log("The file was saved!");   
                   });
 
-                  var xmlFile = path.join(dir, 'Member_Information.xml');
+
+
+                 var xmlFile = path.join(dir ,'\\MembersInformations.xml');
+                 console.log(xmlFile);
                   var stream = fs.createReadStream(xmlFile);
 
-                  res.writeHead(200, {'Content-disposition': 'attachment; filename=Member_Information.xml'}); 
-                  stream.pipe(res);
-                  stream.once("end", function () {
+                  res.writeHead(200, {'Content-disposition': 'attachment; filename=MembersInformations.xml'}); 
+                  stream.once("close", function () {
                     stream.destroy(); // makesure stream closed, not close if download aborted.
-                   
+                    fs.unlink(xmlFile, function (err) {
+                      if (err) {
+                          console.error(err.toString());
+                      } else {
+                          console.warn(xmlFile + ' deleted');
+                      }
                   });
+                }).pipe(res);
+                
+
+            
      
+
 
 
  });  

@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -152,17 +153,18 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-12 features section-description wow fadeIn">
-                    <h2>Complete The Test</h2>
+                    <h2>Merci de cocher la caractéristique qui vous représente le mieux.</h2>
                     <div class="divider-1"><div class="line"></div></div>
                 </div>
             </div>
             <div class="row" id="test">
                 <div class="col-md-6 col-lg-6" id="1" *ngFor="let testSubcategory of subcatgories">
                         <div *ngFor="let question of testSubcategory.questions" class="Quest">
-                            <input *ngIf="question[0]!==undefined" type="radio" name={{question[0].id_question}}   (click)="saveAnswer(question[0].id_question, question[0].id)"> 
+                            <input class="form-check-input" *ngIf="question[0]!==undefined" type="radio" name={{question[0].id_question}}   (click)="saveAnswer(question[0].id_question, question[0].id)">
                             <a   *ngIf="question[0]!==undefined" class="btn btn-theme btn-sm btn-min-block choices" role="button" >{{question[0].name}}</a>
-                            <input *ngIf="question[1]!==undefined" type="radio"  name={{question[1].id_question}} (click)="saveAnswer(question[1].id_question, question[1].id)">  
-                            <a  *ngIf="question[1]!==undefined" class="btn btn-theme btn-sm btn-min-block choices"  role="button" >{{question[1].name}}</a>                     
+                            <input class="form-check-input" *ngIf="question[1]!==undefined" type="radio"  name={{question[1].id_question}} (click)="saveAnswer(question[1].id_question, question[1].id)">
+                            <a  *ngIf="question[1]!==undefined" class="btn btn-theme btn-sm btn-min-block choices"  role="button" >{{question[1].name}}</a>
+                            <hr>
                         </div>
                 </div>
                <!-- <div class="col-md-6 col-lg-6" id="1">
@@ -626,7 +628,7 @@
         </div>
         <div class="container-contact100-form-btn">
             <button class="contact100-form-btn" (click)="saveResult()">
-              Save Result
+                Valider les résultats
             </button>
         </div>
 

@@ -11,15 +11,17 @@
   <nb-card-body>
     <form [formGroup]="addForm"  (ngSubmit)=" onSubmit()">
       <div class="form-group">
+        <label for="fnText">Nom du categorie</label>
         <input type="text"  formControlName="name"  nbInput fullWidth placeholder="Nom du categorie">
         <ng-container *ngIf="submitted && formvalidate.name.errors">
           <p class="text-danger" >
-            name est obligatoire !
+            Nom est obligatoire !
           </p>
         </ng-container>
       </div>
       <div  class="input-group input-group-sm">
-        <input formControlName="subcategories_number" type="number"  id="subcategories_number"   nbInput fullWidth placeholder="nombre de sous categotire">
+        <label for="fnText">Nombre des sous categories</label>
+        <input formControlName="subcategories_number" type="number"  id="subcategories_number"   nbInput fullWidth placeholder="Nombre de sous categories">
       </div>
 
 

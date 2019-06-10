@@ -2,7 +2,7 @@
 
 <nb-card>
   <nb-card-header>
-    {{ editMode ? 'Modifier': 'Ajouter' }}  etalonage
+    {{ editMode ? 'Modifier': 'Ajouter' }}  Etalonage
   </nb-card-header>
 
   <nb-card-body>
@@ -20,26 +20,29 @@
 
 
       <div class="form-group">
-        <input type="number" class="form-control" formControlName="lower_bound" min="0" placeholder="lower_bound">
+        <label for="fnText">Borne inférieure</label>
+        <input type="number" class="form-control" formControlName="lower_bound" min="0" placeholder="Borne inférieure">
         <ng-container *ngIf="submitted && formvalidate.lower_bound.errors">
           <p class="text-danger" >
-            lowerBound est obligatoire !
+            borne inférieure est obligatoire !
           </p>
         </ng-container>
       </div>
       <div class="form-group">
-        <input type="number" class="form-control"  min="0" formControlName="upper_bound" placeholder="upper_bound">
+        <label for="fnText">Borne supérieure</label>
+        <input type="number" class="form-control"  min="0" formControlName="upper_bound" placeholder="Borne supérieure">
         <ng-container *ngIf="submitted && formvalidate.upper_bound.errors">
           <p class="text-danger" >
-            upperBound est obligatoire !
+            borne supérieure est obligatoire !
           </p>
         </ng-container>
       </div>
       <div class="form-group">
-        <input type="number" min="0" class="form-control" formControlName="value" placeholder="value">
+        <label for="fnText">Valeur</label>
+        <input type="number" min="0" class="form-control" formControlName="value" placeholder="Valeur">
         <ng-container *ngIf="submitted && formvalidate.value.errors">
           <p class="text-danger" >
-            value est obligatoire !
+            valeur est obligatoire !
           </p>
         </ng-container>
       </div>

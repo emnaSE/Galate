@@ -2,8 +2,10 @@
 
 <nb-card>
   <nb-card-header>
-    creation du  question
+    creation du question
     <p style="cursor: pointer; position: relative; float: right ; color: #888888" >nom du test:{{name_test}}</p>
+
+
   </nb-card-header>
 
   <nb-card-body>
@@ -13,14 +15,14 @@
       <div class="row">
         <div class="col-6">
           <div class="form-group" >
-            <label for="fnText">value</label>
+            <label for="fnText">Valeur</label>
             <input type="number" formControlName="value" >
           </div>
         </div>
         <div class="col-6">
           <div class="form-group" >
-            <label for="fnText">order</label>
-            <input type="number" formControlName="order" >
+            <label for="fnText">Ordre</label>
+            <input type="number" formControlName="ordre" >
           </div>
         </div>
 
@@ -55,21 +57,21 @@
               <div class="row">
                 <div class="col">
                   <div class="form-group">
-                    <label for="value">valeur</label>
+                    <label for="value">Valeur</label>
                     <input type="number" formControlName="value" >
                   </div>
                 </div>
                 <div class="col">
                   <div class="col">
                     <div class="form-group">
-                      <label for="nom">nom</label>
+                      <label for="nom">Nom</label>
                       <input type="text" formControlName="name" >
                     </div>
                   </div>
                 </div>
                 <div class="col">
                   <div class="form-group">
-                    <label for="order">ordre</label>
+                    <label for="order">Ordre</label>
                     <input type="number" formControlName="ordre" >
                   </div>
                 </div>
@@ -88,7 +90,8 @@
 
       <div class="row justify-content-center">
         <div class="col-2">
-          <button type="button" [disabled]="!create" (click)="onCreate()" class="btn btn-primary">Submit</button>
+        <button type="button" [disabled]="!create" (click)="onCreate()" class="btn btn-primary">créer</button>
+
         </div>
       </div>
 
