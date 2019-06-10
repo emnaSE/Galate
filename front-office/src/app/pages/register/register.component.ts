@@ -53,7 +53,7 @@ export class RegisterComponent  implements OnInit{
       id_clazz: [[], Validators.required],
       id_school: [[], Validators.required],
       checked: new FormControl('',[Validators.required]),
-      study_level: new FormControl('', [Validators.required]),
+      //study_level: new FormControl('', [Validators.required]),
       sexe: [[]],
       city: new FormControl('', [Validators.required]),
 
