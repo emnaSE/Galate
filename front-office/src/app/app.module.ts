@@ -27,6 +27,7 @@ import { LoginTestService } from './pages/login-test/login-test.service';
 import { DownloadComponent } from './pages/downloadPDF/download.component';
 import { DownloadService } from './pages/downloadPDF/download.service';
 import { TestTerminatedComponent } from './pages/test-terminated/test-terminated.component';
+import { RgpdComponent } from './rgpd/rgpd.component';
 
 
 
@@ -40,7 +41,8 @@ import { TestTerminatedComponent } from './pages/test-terminated/test-terminated
     LoginComponent,
     RegisterComponent,
     LoginTestComponent,
-    TestTerminatedComponent
+    TestTerminatedComponent,
+    RgpdComponent
  
   ],
   imports: [

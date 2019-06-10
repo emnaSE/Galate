@@ -12,7 +12,7 @@ import {Answer} from "../../answer/answer.model";
   styleUrls: ['./sub-info.component.scss']
 })
 export class SubInfoComponent implements OnInit {
-
+  pageActuel:number=1;
   subCategories:any;
   questions:any;
   id:number;

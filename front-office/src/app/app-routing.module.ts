@@ -9,6 +9,7 @@ import { StartTestComponent } from './pages/startTest/startTest.component';
 import { LoginTestComponent } from './pages/login-test/login-test.component';
 import { DownloadComponent } from './pages/downloadPDF/download.component';
 import { TestTerminatedComponent } from './pages/test-terminated/test-terminated.component';
+import {RgpdComponent} from "./rgpd/rgpd.component";
 
 
 
@@ -47,6 +48,10 @@ const routes: Routes = [
     path:"loginTest/:idT/:idM",
     //path: 'loginTest',
     component:LoginTestComponent,
+  },
+  {
+    path: 'rgpd',
+    component:RgpdComponent,
   },
  
   { path: '', redirectTo: 'register', pathMatch: 'full' },

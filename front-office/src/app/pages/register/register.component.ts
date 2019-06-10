@@ -16,7 +16,7 @@ import { element } from '@angular/core/src/render3';
 })
 export class RegisterComponent  implements OnInit{
   private register:Register[]
-
+  err:number;
   private map:Map<number,string>=new Map();
   dropdownList = [];
   dropdownList1 = [];
@@ -53,8 +53,10 @@ export class RegisterComponent  implements OnInit{
       id_clazz: [[], Validators.required],
       id_school: [[], Validators.required],
       checked: new FormControl('',[Validators.required]),
+      //study_level: new FormControl('', [Validators.required]),
       study_level: new FormControl('', [Validators.required]),
-      sexe: [[]],
+      sexe: [[],[Validators.required]],
+
       city: new FormControl('', [Validators.required]),
 
     });
@@ -123,6 +125,7 @@ export class RegisterComponent  implements OnInit{
   }
 
   onSubmit(){
+    console.log(this.addForm.value)
 
     //console.log("----------------------------- add member")
     this.submitted=true;
@@ -147,7 +150,8 @@ export class RegisterComponent  implements OnInit{
           }
         )
       }else{
-        alert("Vérifier les données entrées");
+      alert("verifier votre données svp !!");
+        this.err=5;
       }
     }
 
