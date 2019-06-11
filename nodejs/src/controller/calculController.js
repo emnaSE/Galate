@@ -79,7 +79,7 @@ _publics.deleteEtalonnage = (req) => {
 _publics.getAllEtalonnages = (req) => { 
   
     return new Promise((resolve, reject) => {  
-             var sql = "select e.*, sc.name as subcategory FROM etalonnage e left join subcategory sc on(e.id_subcategory=sc.id) "; 
+             var sql = "select e.*, sc.name as subcategory FROM etalonnage e left join subcategory sc on(e.id_subcategory=sc.id) order by id DESC"; 
            
                  con.query(sql, function (err, result) {
                  if (err) reject(err);
@@ -126,7 +126,6 @@ _publics.getLineSum = (req) => {
            var sql=" select tsc.id_subcategory, count(*) as sum from test_subcategory tsc left join question q on(q.id_test_subcategory=tsc.id) left join answer a on(a.id_question=q.id) "
            +"left join choice_member cm on(cm.id_answer=a.id) left join test_member tm on(tm.id=cm.id_test_member) where tm.id_member=? and tm.id_test=? and a.ordre=? group by tsc.id_subcategory ";
                con.query(sql,[id_member,id_test, SECOND_ANSWER], function (err, result) {
-                console.log("result is " + JSON.stringify(result));
                if (err) reject(err);
                return resolve(result);
                });
@@ -147,12 +146,13 @@ _publics.getLineSum = (req) => {
 };*/
 
 
-_publics.getSumByOrder = (req) => { 
+_publics.getSumByOrder = (req, testSubcategories) => { 
 
   let promises = [];
-  for (var order=1;order<=12;order++) {
+  for (var i=0;i<testSubcategories.length;i++) {
     promises.push( new Promise((resolve, reject) => {  
-            var sum=getSumByOrder(req, order);
+      console.log(testSubcategories[i].ordre);
+            var sum=getSumByOrder(req, testSubcategories[i].ordre);
             return resolve(sum);
           }));
    }

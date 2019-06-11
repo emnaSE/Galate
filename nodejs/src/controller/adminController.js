@@ -17,7 +17,7 @@ const perf = require('execution-time')();
 _publics.getAllCategories = (req) => { 
   
   return new Promise((resolve, reject) => {  
-           var sql = "select * FROM category"; 
+           var sql = "select * FROM category order by id DESC"; 
          
                con.query(sql, function (err, result) {
                if (err) reject(err);
@@ -102,7 +102,7 @@ _publics.createCategory = (category) => {
 _publics.getAllClasses = (req) => { 
   
   return new Promise((resolve, reject) => {  
-           var sql = "select c.*, s.name as school FROM clazz c left join school s on(s.id=c.id_school)"; 
+           var sql = "select c.*, s.name as school FROM clazz c left join school s on(s.id=c.id_school) order by id DESC"; 
          
                con.query(sql, function (err, result) {
                if (err) reject(err);
@@ -221,7 +221,7 @@ _publics.getAllClassesByIdSchool = (req) => {
  _publics.getAllSchools = (req) => { 
   
   return new Promise((resolve, reject) => {  
-           var sql = "select * FROM school"; 
+           var sql = "select * FROM school order by id DESC"; 
          
                con.query(sql, function (err, result) {
                if (err) reject(err);
@@ -567,10 +567,10 @@ _publics.deleteQuestion = (req) => {
         });    
 };
 
-_publics.getAllQuestion = (req) => { 
+_publics.getAllQuestions = (req) => { 
   
   return new Promise((resolve, reject) => {  
-           var sql = "select * FROM question "; 
+           var sql = "select q.*, t.name as test, sc.name as subcategory  FROM question q left join test_subcategory tsc on(q.id_test_subcategory=tsc.id) left join subcategory sc on(sc.id=tsc.id_subcategory) left join test t on(t.id=tsc.id_test) order by id DESC"; 
          
                con.query(sql, function (err, result) {
                if (err) reject(err);
@@ -684,7 +684,6 @@ _publics.createAnswers = (questionId, answers ) => {
 }; 
 
 _publics.updateAnswer=(req,answer) => { 
-  console.log("answer= "+answer);
   var answer=JSON.parse(answer);
   var id_question=answer.id_question;
   var name=answer.name;
@@ -693,8 +692,8 @@ _publics.updateAnswer=(req,answer) => {
   var answer_id=req.query.id;
   return new Promise((resolve, reject) => { 
            var msg="";
-           var sql = "UPDATE answer SET id_question=?, name=?,value=?,ordre=?  WHERE id = ?"; 
-           con.query(sql,[id_question,name,value,ordre,answer_id], function (err, result) {
+           var sql = "UPDATE answer SET name=?,value=?,ordre=?  WHERE id = ?"; 
+           con.query(sql,[name,value,ordre,answer_id], function (err, result) {
               if (err){
                   msg="failure";
                   reject(err);
@@ -785,7 +784,7 @@ _publics.getTestById = (req) => {
 
 _publics.getAllTests = (req) => {  
   return new Promise((resolve, reject) => {  
-           var sql = "select * FROM test";          
+           var sql = "select * FROM test order by id DESC";          
                con.query(sql, function (err, result) {
                if (err) reject(err);
                return resolve(JSON.stringify(result));
@@ -1883,7 +1882,7 @@ var newData = data.substr(0, 21) + txt + data.substr(21) ;
 _publics.getAllTestSubcategoriesByTestAndSubcategoryIds = (req) => {
   var tesId=req.query.testId;
   return new Promise((resolve, reject) => {  
-    var sql = "select sc.name,tsc.ordre from subcategory sc left join test_subcategory tsc on(sc.id=tsc.id_subcategory) where tsc.id_test=?";      
+    var sql = "select tsc.id as testSubcatId, sc.name,tsc.ordre from subcategory sc left join test_subcategory tsc on(sc.id=tsc.id_subcategory) where tsc.id_test=?";      
     con.query(sql,[tesId], function (err, result) {
     if (err) reject(err);
     return resolve(result);
@@ -1893,7 +1892,20 @@ _publics.getAllTestSubcategoriesByTestAndSubcategoryIds = (req) => {
 
 
 
-
+_publics.updateSubcategoriesOrder = (ordre, req) => {
+  return new Promise((resolve, reject) => {  
+    var sql = "update test_subcategory  set ordre=? where id=?"; 
+    var msg="";     
+    con.query(sql,[ordre, req.query.id], function (err, result) {
+    if (err){
+      msg="failed";
+    }else{
+      msg="success";
+    }
+    return resolve(msg);
+    });
+  }); 
+}
 
 
 
