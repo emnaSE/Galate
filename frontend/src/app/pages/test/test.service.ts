@@ -98,6 +98,9 @@ export class TestService {
 
 
   }
+  updateOrder(testSubcatId:number,order:number):Observable<any>{
+    return this.http.post<any>(this.url+'updateTestSubcategoryOrder?id='+testSubcatId,order);
+  }
 
 }
 
