@@ -63,7 +63,7 @@ export class SubcategorieComponent  implements OnInit{
         data=>{
           if(data==="success"){
 
-            alert("Suppression avec succès");
+            alert("cette sous categorie est lié à des  categorie vous ne pouvez pas le supprimer");
           }else{
             alert("Vous ne pouvez pas supprimer cette categorie");
 

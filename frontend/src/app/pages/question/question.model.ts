@@ -5,6 +5,7 @@ export interface Question {
     name?: string;
     wording?:string;
     value?:number;
+  id_question?:number;
     id_test_subcategory?:SousCategorie[];
 
 

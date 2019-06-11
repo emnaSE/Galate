@@ -69,7 +69,7 @@ export class DashboardComponent implements OnInit{
         data=>{
           if(data==="success"){
 
-            alert("Suppression avec succès");
+            alert("cette categorie est lié à des sous categorie vous ne pouvez pas le supprimer");
           }else{
             alert("Vous ne pouvez pas supprimer cette categorie");
 

@@ -39,7 +39,7 @@ export class TestComponent  implements OnInit{
         data=>{
           if(data==="success"){
 
-            alert("Suppression avec succès");
+            alert("cette test est lié à des sous categorie vous ne pouvez pas le supprimer");
           }else
             if (data=="failure"){
             alert("Vous ne pouvez pas supprimer ce test car il est lieé a categorie");

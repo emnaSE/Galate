@@ -46,7 +46,9 @@ export class SubInfoComponent implements OnInit {
   }
 
 
-  update(question:any){
+  update(question:Question){
+    console.log(question.id_question)
+    this.router.navigate(['pages/answer',question.id_question,'question'])
    // console.log(this.questions.question.id);
     //this.router.navigate(['pages/answer/',question.id_question,'modifier'])
 
