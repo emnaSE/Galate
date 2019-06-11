@@ -27,6 +27,7 @@ import {SubInfoComponent} from "./subcategorie/sub-info/sub-info.component";
 import {NotFoundComponent} from "./miscellaneous/not-found/not-found.component";
 import {AllQuestionComponent} from "./subcategorie/all-question/all-question.component";
 import {UpdateQuestionComponent} from "./question/create-question/update-question.component";
+import {TestOrderComponent} from "./test/test-order/test-order.component";
 
 const routes: Routes = [{
   path: '',
@@ -197,9 +198,15 @@ const routes: Routes = [{
       pathMatch: 'full',
     },
     {
+      path: 'test/:id/ordre',
+      //component:AffectSubcategorieComponent,
+      component:TestOrderComponent,canActivate: [AuthGuard],
+    },
+    {
       path: '**',
       component: NotFoundComponent,
     }
+
 
   ],
 }];
