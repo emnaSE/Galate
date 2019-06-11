@@ -26,13 +26,13 @@ export class QuestionService {
     return this.http.post(this.url+'createQuestion',JSON.stringify(question),{responseType: 'text'});
   }
   getAllQuestion():Observable<Question[]>{
-    return this.http.get<Question[]>(this.url+'getAllQuestion');
+    return this.http.get<Question[]>(this.url+'getAllQuestions');
   }
   deleteById(id:number):Observable<Object>{
     return this.http.get(this.url+"deleteQuestionById?id_question="+id,{responseType: 'text'});
   }
-  updateById(id:number,question:any):Observable<any>{
-    return this.http.post<any>(this.url+'updateQuestionById?id='+id,question );
+  updateById(id:number,question:Object):Observable<Object>{
+    return this.http.post(this.url+'updateQuestionById?id='+id,JSON.stringify(question),{responseType: 'text'});
   }
   getQuestionById(id:number):Observable<Question>{
     return this.http.get<Question>(this.url+"getQuestionById?id="+id);

@@ -29,8 +29,8 @@ export class AnswerService {
     return this.http.get(this.url+'deleteAnswer?answer_id='+id,{responseType: 'text'});
   }
 
-  updateAnswer(id:number,anwser:any):Observable<any>{
-    return this.http.post<any>(this.url+'updateAnswer?answer_id='+id,anwser)
+  updateAnswer(id:number,anwser:Object):Observable<Object>{
+    return this.http.post(this.url+'updateAnswerById?id='+id,JSON.stringify(anwser),{responseType: 'text'});
   }
   getAnswerByQuestionId(id:number):Observable<Answer[]>{
     return this.http.get<Answer[]>(this.url+'getAllAnswerByQuestion?id_question='+id);

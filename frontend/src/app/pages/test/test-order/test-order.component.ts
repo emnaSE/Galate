@@ -29,10 +29,7 @@ export class TestOrderComponent implements OnInit {
     },
     selectMode: 'multi',
     columns: {
-      testSubcatId: {
-        title: 'ID',
-        editable: false,
-      },
+
       name: {
         title: 'Sous categorie',
         editable: false,
@@ -64,16 +61,16 @@ export class TestOrderComponent implements OnInit {
   }
   onEditConfirm(event): void {
 
-    if (window.confirm('Are you sure you want to update?')) {
-      console.log(event.newData.name);
+    if (window.confirm('Êtes-vous sûr de vouloir mettre à jour?')) {
+      console.log(event.newData.testSubcatId);
         this.testService.updateOrder(event.newData.testSubcatId,event.newData.ordre).subscribe(
           data=>{
-            alert("succes");
+            alert("succès");
           }
         )
 
     } else {
-      console.log("test");
+      console.log("erreur");
     }
 
   }

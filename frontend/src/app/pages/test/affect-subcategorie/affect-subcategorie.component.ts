@@ -131,4 +131,9 @@ export class AffectSubcategorieComponent implements OnInit {
   onDeSelectAll(items: any) {
     console.log(items);
   }
+  consultezSubCategorie(){
+
+    this.router.navigate(['pages/test/',this.id,'ordre'])
+
+  }
 }

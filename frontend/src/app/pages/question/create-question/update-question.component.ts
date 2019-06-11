@@ -78,7 +78,7 @@ export class UpdateQuestionComponent implements OnInit {
         this.questionService.updateById(this.id,this.updateForm.value).subscribe(
           data=>{
             alert("modifiée avec succès ")
-            this.router.navigate(['pages/question'])
+            this.router.navigate(['pages/question']);
           },err=>{
             console.log(err);
           }

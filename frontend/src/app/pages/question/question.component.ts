@@ -49,7 +49,7 @@ export class QuestionComponent  implements OnInit{
     if(confirm("êtes-vous sûr de vouloir supprimer le cette question ")) {
       this.questionService.deleteById(question.id).subscribe(
         data=>{
-           alert("Suppression avec succès");
+           alert("cette questions est lié à des sous categorie vous ne pouvez pas le supprimer");
 
           this.router.navigate(['pages/question'])
           this.questionService.getAllQuestion().subscribe(
