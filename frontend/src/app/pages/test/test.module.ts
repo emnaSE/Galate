@@ -11,6 +11,9 @@ import { AffectSubcategorieComponent } from './affect-subcategorie/affect-subcat
 import {AngularMultiSelectModule} from "angular2-multiselect-dropdown";
 import {BsDatepickerModule} from "ngx-bootstrap";
 import {TestRoutingModule} from "./test-routing.module";
+import { TestOrderComponent } from './test-order/test-order.component';
+import { AddOrderComponent } from './test-order/add-order/add-order.component';
+import {Ng2SmartTableModule} from "ng2-smart-table";
 
 
 const components = [
@@ -26,11 +29,14 @@ const components = [
     TestRoutingModule,
     NgxPaginationModule,
     AngularMultiSelectModule,
+    Ng2SmartTableModule,
 
     BsDatepickerModule.forRoot(),
   ],
   declarations: [
     ...components,
+    TestOrderComponent,
+    AddOrderComponent,
   ],
 })
 export class TestModule { }

@@ -61,7 +61,8 @@ export class AffectSubcategorieComponent implements OnInit {
           this.selectedItems = this.dropdownList.filter(
             c =>{
               return value.map(v=> v.id).includes(c.id)
-            })
+            });
+
         },err=>{
           console.log(err)
         }
@@ -105,7 +106,8 @@ export class AffectSubcategorieComponent implements OnInit {
      this.testService.affectSubCategorie(this.id,data).subscribe(
        data=>{
          alert ("add avec succes");
-         this.router.navigate(["pages/test"])
+         this.router.navigate(['pages/test/',this.id,'ordre'])
+         //this.router.navigate(["pages/test"])
        },err=>{
          console.log(err)
        }

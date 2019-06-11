@@ -144,23 +144,105 @@
                 links, forms, and other content for toggling -->
                 <div class="" id="top-navbar-1">
                     <ul class="nav navbar-nav ml-auto">
-                        <li class="nav-item"><a routerLink="/test" class="nav-link" style="color: green" >Nos Tests</a>
+                        <li class="nav-item"><a routerLink="/test" class="nav-link" style="color:  white !important " >Nos Tests</a>
                         </li>
 
-                        <li class="nav-item"><a id="login" class="btn btn-link-3 nav-link" (click)="logout($event)">Quitter </a>
+                        <li class="nav-item"><a id="login" class="btn btn-link-3 nav-link" (click)="logout($event)" style="color:  white !important ">Quitter </a>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
-    <div ng-app="MyApp" ng-controller="MyController">
-    <div class="table-responsive" *ngFor="let catalogues of catalogueDetails">
-        <table class="table" >
+
+        <div ng-app="MyApp" ng-controller="MyController" id="desktop">
+            <div class="table-responsive" *ngFor="let catalogues of catalogueDetails">
+                <table class="table" >
+                    <thead>
+                    <tr>
+                      <th scope="col"></th>
+                      <th scope="col"></th>
+                      <th scope="col"></th>
+                      <th scope="col">1</th>
+                      <th scope="col" >2</th>
+                      <th scope="col">3</th>
+                      <th scope="col">4</th>
+                      <th scope="col">5</th>
+                      <th scope="col">6</th>
+                      <th scope="col">7</th>
+                      <th scope="col">8</th>
+                      <th scope="col">9</th>
+                      <th scope="col">10</th>
+                      <th scope="col" >11</th>
+                      <th scope="col"></th>
+                    </tr>
+                 </thead>
+                 <tbody *ngFor="let categoryN of catalogues.categories">
+         
+                       <tr class="full" *ngFor="let subcategories of categoryN.subcategories">
+         
+                             <td scope="row" >{{categoryN.categoryName}}</td>
+         
+         
+         
+                              <td>{{subcategories.name}}</td>
+                              <td>{{subcategories.down_description}}</td>
+                              <td *ngFor="let item of items"  class="item{{item}}" (click)="open($event, item, subcategories.name ,categoryN.categoryName , subcategories.down_description , subcategories.up_description , subcategories.manualAnswerId )"><input  type="radio" name="radio{{subcategories.id}}" required ></td>    
+                              <td>{{subcategories.up_description}}</td>
+         
+         
+                       </tr>
+         
+         
+         
+                    <tr>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+         
+         
+         
+                 </tbody>
+                </table>
+              </div>
+         
+         
+              <div class="container-contact100-form-btn">
+              <button class="contact100-form-btn" (click)="download($event)"  >
+                  VALIDER
+              </button>
+            </div>
+         
+          </div>
+
+
+
+
+
+    <div ng-app="MyApp" ng-controller="MyController" *ngFor="let catalogues of catalogueDetails" id="mobile" style = "display: none">
+    <div class="table-responsive" *ngFor="let categoryN of catalogues.categories" >
+       <h3 style=" border-bottom: solid 3px;margin-bottom: 10px"> {{categoryN.categoryName}}</h3>
+        
+        <div *ngFor="let subcategories of categoryN.subcategories">
+               <h5>  {{subcategories.name}}</h5>
+          <table class="table"  >
             <thead>
             <tr>
+              
               <th scope="col"></th>
-              <th scope="col"></th>
-              <th scope="col"></th>
+             
               <th scope="col">1</th>
               <th scope="col" >2</th>
               <th scope="col">3</th>
@@ -175,15 +257,15 @@
               <th scope="col"></th>
             </tr>
          </thead>
-         <tbody *ngFor="let categoryN of catalogues.categories">
+         <tbody >
            
-               <tr class="full" *ngFor="let subcategories of categoryN.subcategories">
+               <tr class="full" >
                   
-                     <td scope="row" >{{categoryN.categoryName}}</td>
+               
               
             
                      
-                      <td>{{subcategories.name}}</td>
+                    
                       <td>{{subcategories.down_description}}</td>
                       <td *ngFor="let item of items"  class="item{{item}}" (click)="open($event, item, subcategories.name ,categoryN.categoryName , subcategories.down_description , subcategories.up_description , subcategories.manualAnswerId )"><input  type="radio" name="radio{{subcategories.id}}" required ></td>	
                       <td>{{subcategories.up_description}}</td>
@@ -207,8 +289,8 @@
               <td></td>
               <td></td>
               <td></td>
-              <td></td>
-              <td></td>
+             
+             
             </tr>
 
             
@@ -218,11 +300,14 @@
       </div>
       
      
-      <div class="container-contact100-form-btn">
-      <button class="contact100-form-btn" (click)="download($event)"  >
-          VALIDER
-      </button>
+     
     </div>
+
+    <div class="container-contact100-form-btn">
+        <button class="contact100-form-btn" (click)="download($event)"  >
+            VALIDER
+        </button>
+      </div>
 
   </div>
     <script>
