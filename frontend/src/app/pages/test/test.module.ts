@@ -14,6 +14,7 @@ import {TestRoutingModule} from "./test-routing.module";
 import { TestOrderComponent } from './test-order/test-order.component';
 import { AddOrderComponent } from './test-order/add-order/add-order.component';
 import {Ng2SmartTableModule} from "ng2-smart-table";
+import { DuplicationComponent } from './duplication/duplication.component';
 
 
 const components = [
@@ -37,6 +38,7 @@ const components = [
     ...components,
     TestOrderComponent,
     AddOrderComponent,
+    DuplicationComponent,
   ],
 })
 export class TestModule { }

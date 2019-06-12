@@ -80,6 +80,7 @@ export class CreateTestComponent implements OnInit {
     if(this.id){
       console.log(this.addForm.value)
       console.log(this.valid.activation_date.value);
+      console.log(this.valid.expiration_date.value);
       if(this.addForm.valid){
         this.testService.updateTest(this.id,this.addForm.value).subscribe(
           data=>{
@@ -117,4 +118,7 @@ consultezCategorie(){
     this.router.navigate(['pages/categorie/',this.id]);
     }
 
+    duplication(){
+    this.router.navigate(['']);
+    }
 }
