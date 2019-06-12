@@ -28,6 +28,7 @@ import {NotFoundComponent} from "./miscellaneous/not-found/not-found.component";
 import {AllQuestionComponent} from "./subcategorie/all-question/all-question.component";
 import {UpdateQuestionComponent} from "./question/create-question/update-question.component";
 import {TestOrderComponent} from "./test/test-order/test-order.component";
+import {DuplicationComponent} from "./test/duplication/duplication.component";
 
 const routes: Routes = [{
   path: '',
@@ -89,6 +90,11 @@ const routes: Routes = [{
       path: 'sous/:id/info',
       //component: CreateSousComponent,
       component: SubInfoComponent,canActivate: [AuthGuard],
+    },
+    {
+      path: 'test/duplication',
+      //component: CreateSousComponent,
+      component: DuplicationComponent,canActivate: [AuthGuard],
     },
 
     {

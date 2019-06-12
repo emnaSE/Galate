@@ -15,6 +15,11 @@
       <div class="form-group">
         <label type="text">Nom:</label>
         <input type="text" class="form-control" formControlName="name" placeholder="Nom">
+        <ng-container *ngIf="submitted && valid.name.errors">
+          <p class="text-danger" style="color: red">
+            name  est obligatoire !
+          </p>
+        </ng-container>
       </div>
 
       <div class="form-group">
@@ -53,11 +58,21 @@
       <div class="form-group">
         <label type="text" >Nombre de sous categories:</label>
         <input type="number" class="form-control" formControlName="test_subcategories_number" placeholder="Nombre de sousCategories">
+        <ng-container *ngIf="submitted && valid.test_subcategories_number.errors">
+          <p class="text-danger" style="color: red">
+            nombre de sous categorie  est obligatoire !
+          </p>
+        </ng-container>
       </div>
 
       <div class="form-group">
         <label type="text" >Durée du test:</label>
         <input type="number" class="form-control" formControlName="duration" placeholder="Durée du test">
+        <ng-container *ngIf="submitted && valid.duration.errors">
+          <p class="text-danger" style="color: red">
+            Durée du test est obligatoire !
+          </p>
+        </ng-container>
       </div>
 
 
@@ -65,6 +80,11 @@
       <div class="form-group">
         <label type="text" >Mot de passe:</label>
         <input type="text" class="form-control" placeholder="Mot de passe" formControlName="password">
+        <ng-container *ngIf="submitted && valid.password.errors">
+          <p class="text-danger" style="color: red">
+            password est obligatoire !
+          </p>
+        </ng-container>
       </div>
 
 

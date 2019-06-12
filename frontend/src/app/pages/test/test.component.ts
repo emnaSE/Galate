@@ -68,6 +68,10 @@ export class TestComponent  implements OnInit{
   create(){
       this.router.navigate(['pages/test/create'])
   }
+
+  duplication(){
+    this.router.navigate(['pages/test/duplication'])
+  }
   affCatergorie(test:Test){
       this.router.navigate(['pages/test',test.id,'affectation']);
 
