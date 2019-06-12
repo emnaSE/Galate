@@ -1742,14 +1742,16 @@ _publics.generateXMLFile = (input,req , res  ) => {
      var table =  worksheet.ele('ss:Table');
      table.att('ss:DefaultRowHeight', '15');   
      table.att('ss:DefaultColumnWidth', '60');
-     table.att('ss:ExpandedRowCount', 3+input.members.length);
-     table.att('ss:ExpandedColumnCount', 3+input.subcategories.length) ; 
+     table.att('ss:ExpandedRowCount', 15+input.members.length);
+     table.att('ss:ExpandedColumnCount', 15+input.subcategories.length) ; 
        var row = table.ele('Row');
           var cell1 =row.ele('Cell');
             cell1.att('ss:StyleID' , 'S21')
+                
               var data1 = cell1.ele('Data');
                   data1.att('ss:Type', 'String') ;
-                  data1.txt('nom')  ;
+                  data1.txt('Nom')  ;
+
               data1.up();
             cell1.up();
 
@@ -1757,7 +1759,7 @@ _publics.generateXMLFile = (input,req , res  ) => {
           cell2.att('ss:StyleID' , 'S21')
             var data2 = cell2.ele('Data');
                 data2.att('ss:Type', 'String') ;
-                data2.txt('prenom')  ;
+                data2.txt('Prenom')  ;
             data2.up();
           cell2.up();
 
@@ -1765,11 +1767,57 @@ _publics.generateXMLFile = (input,req , res  ) => {
            cell3.att('ss:StyleID' , 'S21')
             var data3 = cell3.ele('Data');
                 data3.att('ss:Type', 'String') ;
-                data3.txt('age')  ;
+                data3.txt('Age')  ;
             data3.up();
           cell3.up();
 
+          var cell31 =row.ele('Cell');
+          cell31.att('ss:StyleID' , 'S21')
+           var data31 = cell31.ele('Data');
+           data31.att('ss:Type', 'String') ;
+           data31.txt('Email')  ;
+           data31.up();
+         cell31.up();
+
+
+         var cell012 =row.ele('Cell');
+         cell012.att('ss:StyleID' , 'S21')
+          var data012 = cell012.ele('Data');
+          data012.att('ss:Type', 'String') ;
+          data012.txt('Sexe')  ;
+          data012.up();
+        cell31.up();
+
+        var cell013 =row.ele('Cell');
+        cell013.att('ss:StyleID' , 'S21')
+         var data013 = cell013.ele('Data');
+         data013.att('ss:Type', 'String') ;
+         data013.txt('Ville')  ;
+         data013.up();
+       cell013.up();
+
+
+
+         var cell01 =row.ele('Cell');
+         cell01.att('ss:StyleID' , 'S21')
+          var data01 = cell01.ele('Data');
+              data01.att('ss:Type', 'String') ;
+              data01.txt('Niveau_etude')  ;
+          data01.up();
+        cell01.up();
+
+        var cell08 =row.ele('Cell');
+        cell08.att('ss:StyleID' , 'S21')
+         var data08 = cell08.ele('Data');
+             data08.att('ss:Type', 'String') ;
+             data08.txt('Ecole')  ;
+         data08.up();
+       cell08.up();
+
+
          
+    
+   
 
         for (var i=0;i<input.subcategories.length;i++) {
           var subcategory =row.ele('Cell')
@@ -1809,6 +1857,54 @@ _publics.generateXMLFile = (input,req , res  ) => {
                       data3.txt(input.members[i].age)  ;
                   data3.up();
                 cell3.up();
+
+
+                var cell31 =row.ele('Cell');
+                cell31.att('ss:StyleID' , 'S21')
+                  var data31 = cell31.ele('Data');
+                      data31.att('ss:Type', 'String') ;
+                      data31.txt(input.members[i].email)  ;
+                  data31.up();
+                cell31.up();
+
+                
+                var cell012 =row.ele('Cell');
+                cell012.att('ss:StyleID' , 'S21')
+                  var data012 = cell012.ele('Data');
+                      data012.att('ss:Type', 'String') ;
+                      data012.txt(input.members[i].sexe)  ;
+                  data012.up();
+                cell012.up();
+               
+
+                var cell013 =row.ele('Cell');
+                cell013.att('ss:StyleID' , 'S21')
+                  var data013 = cell013.ele('Data');
+                      data013.att('ss:Type', 'String') ;
+                      data013.txt(input.members[i].city)  ;
+                  data013.up();
+                cell013.up();
+
+                var cell01 =row.ele('Cell');
+                cell01.att('ss:StyleID' , 'S21')
+                  var data01 = cell01.ele('Data');
+                      data01.att('ss:Type', 'String') ;
+                      data01.txt(input.members[i].clazz_name)  ;
+                  data01.up();
+                cell01.up();
+
+                var cell08 =row.ele('Cell');
+                cell08.att('ss:StyleID' , 'S21')
+                  var data08 = cell08.ele('Data');
+                      data08.att('ss:Type', 'String') ;
+                      data08.txt(input.members[i].school_name)  ;
+                  data08.up();
+                cell08.up();
+
+              
+               
+                
+               
 
                
 

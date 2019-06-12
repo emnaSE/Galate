@@ -151,6 +151,17 @@ _publics.getMemberById = (req) => {
     });
   });
 };
+
+_publics.getMemberDetailsById = (req) => {
+  var idMember = req.query.id;
+  return new Promise((resolve, reject) => {
+    var sql = "select m.firstname , m.lastname , m.age , m.email , m.city , m.sexe , m.civility , c.name as clazz_name , s.name as school_name FROM member m left join clazz c on (c.id = m.id_clazz) left join school s on (s.id = m.id_school) where m.id=?";
+    con.query(sql, [idMember], function (err, result) {
+      if (err) reject(err);
+      return resolve(JSON.stringify(result));
+    });
+  });
+};
 //choice member
 _publics.createChoiceMember = (choice_member) => {
   var choice_member = JSON.parse(choice_member);

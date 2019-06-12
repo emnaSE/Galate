@@ -128,7 +128,7 @@
     <body>
     
     	<!-- Top menu -->
-        <nav style="background-color: #555555;
+        <nav style="background-color: #fff;
 
         padding-bottom: 20px;" class="navbar  navbar-no-bg navbar-expand-md" role="navigation">
             <div class="container">
@@ -144,9 +144,7 @@
                 links, forms, and other content for toggling -->
                 <div class="" id="top-navbar-1">
                     <ul class="nav navbar-nav ml-auto">
-                        <li class="nav-item"><a routerLink="/test" class="nav-link" style="color:  white !important " >Nos Tests</a>
-                        </li>
-
+                        
                         <li class="nav-item"><a id="login" class="btn btn-link-3 nav-link" (click)="logout($event)" style="color:  white !important ">Quitter </a>
                         </li>
                     </ul>
@@ -186,7 +184,7 @@
          
                               <td>{{subcategories.name}}</td>
                               <td>{{subcategories.down_description}}</td>
-                              <td *ngFor="let item of items"  class="item{{item}}" (click)="open($event, item, subcategories.name ,categoryN.categoryName , subcategories.down_description , subcategories.up_description , subcategories.manualAnswerId )"><input  type="radio" name="radio{{subcategories.id}}" required ></td>    
+                              <td *ngFor="let item of items"  class="item{{item}}" onclick="fill(this)" (click)="open($event, item, subcategories.name ,categoryN.categoryName , subcategories.down_description , subcategories.up_description , subcategories.manualAnswerId )"><input  type="radio"   name="radio{{subcategories.id}}" style="visibility:hidden"  required ></td>    
                               <td>{{subcategories.up_description}}</td>
          
          
@@ -267,7 +265,7 @@
                      
                     
                       <td>{{subcategories.down_description}}</td>
-                      <td *ngFor="let item of items"  class="item{{item}}" (click)="open($event, item, subcategories.name ,categoryN.categoryName , subcategories.down_description , subcategories.up_description , subcategories.manualAnswerId )"><input  type="radio" name="radio{{subcategories.id}}" required ></td>	
+                      <td *ngFor="let item of items"  class="item{{item}}"  onclick="fill(this)" (click)="open($event, item, subcategories.name ,categoryN.categoryName , subcategories.down_description , subcategories.up_description , subcategories.manualAnswerId )"><input  type="radio" name="radio{{subcategories.id}}"  style="visibility:hidden"  required ></td>	
                       <td>{{subcategories.up_description}}</td>
                    
                  
@@ -276,7 +274,7 @@
            
            
             <tr>
-              <td></td>
+              <td></td> 
               <td></td>
               <td></td>
               <td></td>

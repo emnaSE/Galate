@@ -27,7 +27,9 @@
               "node_modules/angular2-multiselect-dropdown/themes/default.theme.css"
 
             ],
-            "scripts": []
+            "scripts": [
+              "src/assets/js/check.js"
+            ]
           },
           "configurations": {
             "production": {

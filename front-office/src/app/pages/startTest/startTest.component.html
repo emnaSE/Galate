@@ -112,7 +112,7 @@
 
     <body>
 
-        <div  class="container-contact100-form-btn"> 
+      <!-- <div  class="container-contact100-form-btn"> 
                 <div class="text-center">
                         <h1>il vous reste</h1>
                         <hr>
@@ -126,8 +126,9 @@
                        
                     </div>
 
-        </div>
-        <nav style="background-color: #555555;
+        </div>--> 
+        <nav style="background-color: #fff;
+            border-bottom: solid 1px;
 
         padding-bottom: 20px;" class="navbar  navbar-no-bg navbar-expand-md" role="navigation">
             <div class="container">
@@ -143,9 +144,7 @@
                 links, forms, and other content for toggling -->
                 <div class="" id="top-navbar-1">
                     <ul class="nav navbar-nav ml-auto">
-                        <li class="nav-item"><a routerLink="/test" class="nav-link" style="color:  white !important " >Nos Tests</a>
-                        </li>
-
+                      
                         <li class="nav-item"><a id="login" class="btn btn-link-3 nav-link" (click)="logout($event)" style="color:  white !important ">Quitter </a>
                         </li>
                     </ul>
@@ -186,10 +185,10 @@
             <div class="row" id="test">
                 <div class="col-md-6 col-lg-6 " id="1" *ngFor="let testSubcategory of subcatgories">
                         <div class="custom-control custom-radio" *ngFor="let question of testSubcategory.questions" class="Quest">
-                            <input class="form-check-input" *ngIf="question[0]!==undefined" type="radio" name={{question[0].id_question}}   (click)="saveAnswer(question[0].id_question, question[0].id)">
-                            <a   *ngIf="question[0]!==undefined" class="btn btn-theme btn-sm btn-min-block choices" role="button" >{{question[0].name}}</a>
-                            <input class="form-check-input" *ngIf="question[1]!==undefined" type="radio"  name={{question[1].id_question}} (click)="saveAnswer(question[1].id_question, question[1].id)">
-                            <a  *ngIf="question[1]!==undefined" class="btn btn-theme btn-sm btn-min-block choices"  role="button" >{{question[1].name}}</a>
+                            <input class="form-check-input" *ngIf="question[0]!==undefined" type="radio" name={{question[0].id_question}}   style="visibility: hidden"   (click)="saveAnswer(question[0].id_question, question[0].id)">
+                            <a   *ngIf="question[0]!==undefined" class="btn btn-theme btn-sm btn-min-block choices" onclick="checkButton(this)" role="button" >{{question[0].name}}</a>
+                            <input class="form-check-input" *ngIf="question[1]!==undefined" type="radio"  name={{question[1].id_question}} style="visibility: hidden" (click)="saveAnswer(question[1].id_question, question[1].id)">
+                            <a  *ngIf="question[1]!==undefined" class="btn btn-theme btn-sm btn-min-block choices" onclick="checkButton(this)"  role="button" >{{question[1].name}}</a>
                             <hr>
                         </div>
                 </div>
@@ -659,76 +658,10 @@
         </div>
 
         <!-- New Test Design End -->
-
-
-            <script src="assets/js/jquery-3.2.1.min.js"></script>
-            <script src="assets/js/jquery-3.2.1.min.js"></script>
             <script src="js/bootstrap.min.js"></script>
-            
-            <script>
-                const questLength=5;
-                const subLength=12;
-                const numberOfSubs=12;
-                var answerQuest= new Array(questLength);
-                var subAnswers= new Array(subLength);
-                var answerAll= new Array(numberOfSubs);
-                for($k=0;$k<numberOfSubs;$k++){
-                    for($i=0;$i<subLength;$i++){
-                        for($j=0;$j<questLength;$j++){
-                            answerQuest[$j]=-1;
-                        }
-                        subAnswers[$i]=answerQuest.slice();
-                    }
-                    answerAll[$k]=subAnswers.slice();
-                }
-            </script>
+           
 
-            <script>
-            function save(elem){
-                $elemParent=elem.parentNode;
-                var quest=1;
-                var val=1;
-                while(($Sib=$elemParent.previousElementSibling)!=null){
-                    $elemParent=$elemParent.previousElementSibling;
-                    quest++;
-                }
-                if(elem.previousElementSibling!=null){
-                    val=2;
-                }
-                var reponse = [elem.parentNode.parentNode.id, quest, 1, 1, val];
-                answerAll[elem.parentNode.parentNode.id-1][quest-1]=reponse;
-                
-                elem.style.backgroundColor="rgb(110, 186, 60)";
-                if(elem.previousElementSibling){
-                    elem.previousElementSibling.style.backgroundColor="";
-                }
-                if(elem.nextElementSibling){
-                    elem.nextElementSibling.style.backgroundColor="";
-                }                
-            }
-            function testAllAnswerFilled(){
-                var filled=true;
-                for($i=0;$i<numberOfSubs;$i++){
-                    for($j=0;$j<subLength;$j++){
-                        if(answerAll[$i][$j][questLength-1]==-1){
-                            filled=false;
-                        }
-                    }
-                }
-                return filled;
-            }
-            
-            function saveResult(){
-                if(!testAllAnswerFilled()){
-                    alert("Veuiller Réponser à tous les questions");
-                }else{
-                    window.location.href = "resultTable.html";
-                }
-            }
-            </script>
-
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
             
