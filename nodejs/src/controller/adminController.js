@@ -1934,33 +1934,110 @@ var newData = data.substr(0, 21) + txt + data.substr(21) ;
             
                     var data = js2xmlparser.parse("details", input);*/
 
-                    var dir=tmp.tmpdir;
-                    console.log(dir);
-                    fs.writeFile(dir+'/MembersInformations.xml', newData, function(err) {
+                    try {
+
+
+
+                      var dir=tmp.tmpdir;
+                   
+                      console.log(dir);
+                      fs.writeFile(dir+'/MembersInformations.xml', newData, function(err) {
+                        if(err) {
+                            return console.log(err);
+                        }
+                        console.log("The file was saved!");   
+                    });
+  
+  
+  
+  
+               /*var xmlFile = path.join(dir ,'/MembersInformations'+Date.now()+'.xml');
+                   console.log(xmlFile);
+                    var stream = fs.createReadStream(xmlFile);
+  
+                  res.writeHead(200, {'Content-disposition': 'attachment; filename=MembersInformations.xml'});
+                   
+                  stream.once("close", function () {
+                      stream.destroy(); // makesure stream closed, not close if download aborted.
+                      fs.unlink(xmlFile, function (err) {
+                        if (err) {
+                            console.error(err.toString());
+                        } else {
+                            console.warn(xmlFile + ' deleted');
+                        }
+                    });
+                  }).pipe(res);*/
+                  var path = require('path');
+                  var mime = require('mime');
+
+                  var file = dir+'/MembersInformations.xml';
+
+                  var filename = path.basename(file);
+                  var mimetype = mime.lookup(file);
+                
+                  res.setHeader('Content-disposition', 'attachment; filename=' + filename);
+                  res.setHeader('Content-type', mimetype);
+                
+                  var filestream = fs.createReadStream(file);
+                  filestream.once("close", function () {
+                    filestream.destroy(); // makesure stream closed, not close if download aborted.
+                    fs.unlink(filename, function (err) {
+                      if (err) {
+                          console.error(err.toString());
+                      } else {
+                          console.warn(filename + ' deleted');
+                      }
+                  });
+                }).pipe(res);
+                 
+
+                      
+                    } catch (error) {
+                      console.log(error);
+                    }
+
+
+
+                  
+
+                 /*   fs.writeFile(dir+'/MembersInformationsInput.xml','',function(err) {
                       if(err) {
                           return console.log(err);
                       }
-                      console.log("The file was saved!");   
+                      console.log("The fileInput was saved!");   
                   });
 
 
+                  fs.writeFile(dir+'/MembersInformationsOutput.xml','',function(err) {
+                    if(err) {
+                        return console.log(err);
+                    }
+                    console.log("The fileOutput was saved!");   
+                });
 
-                 var xmlFile = path.join(dir ,'/MembersInformations.xml');
-                 console.log(xmlFile);
-                  var stream = fs.createReadStream(xmlFile);
 
-                  res.writeHead(200, {'Content-disposition': 'attachment; filename=MembersInformations.xml'}); 
-                  stream.once("close", function () {
-                    stream.destroy(); // makesure stream closed, not close if download aborted.
-                    fs.unlink(xmlFile, function (err) {
+                var writeStream = fs.createWriteStream(dir+'/MembersInformationsOutput.xml');
+                    writeStream.write('aa');
+                    writeStream.end();
+                    var readstream = fs.createReadStream(dir+'/MembersInformationsInput.xml');
+                    
+                    
+
+                    
+
+                 // res.writeHead(200, {'Content-disposition': 'attachment; filename=MembersInformations.xml'});
+               
+                  readstream.once("close", function () {
+                    //stream.destroy(); // makesure stream closed, not close if download aborted.
+                   /* fs.unlink(xmlFile, function (err) {
                       if (err) {
                           console.error(err.toString());
                       } else {
                           console.warn(xmlFile + ' deleted');
                       }
-                  });
-                }).pipe(res);
-                
+                  });*/
+                //}).pipe(writeStream);  
+                  
 
             
      
