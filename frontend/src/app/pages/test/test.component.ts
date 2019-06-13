@@ -93,8 +93,8 @@ export class TestComponent  implements OnInit{
 
     this.testServices.generateXMLFile(test.id).subscribe(
       data=>{
-        console.log("telegarchement avec succes");
-
+        //console.log("telegarchement avec succes");
+          alert("telegarchement avec succes");
 
       }
     )}

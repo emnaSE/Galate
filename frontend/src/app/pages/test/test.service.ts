@@ -102,5 +102,10 @@ export class TestService {
     return this.http.post(this.url+'updateTestSubcategoryOrder?id='+testSubcatId,JSON.stringify(order),{responseType: 'text'})
   }
 
+  duplicateTest(test:Object):Observable<Object>{
+
+    return this.http.post(this.url+'duplicateTest',JSON.stringify(test),{responseType: 'text'});
+  }
+
 }
 

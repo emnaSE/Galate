@@ -70,7 +70,7 @@ export class TestOrderComponent implements OnInit {
         )
 
     } else {
-      console.log("erreur");
+      alert ("erreur");
     }
 
   }

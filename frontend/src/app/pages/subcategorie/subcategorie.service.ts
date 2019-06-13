@@ -44,8 +44,8 @@ export class SubcategorieService {
   getAllSubCateByIdTest(id:number):Observable<SousCategorie[]>{
     return this.http.get<SousCategorie[]>(this.url+"getAllSubcategoriesByTestId?id_test="+id);
   }
-  getAllTest(id_subCat:number,id_test:number):Observable<any>{
-    return this.http.get<any>(this.url+"getTestSubcategoryByTestIdAndSubcateoryId?testId="+id_test+"&subcategoryId="+id_subCat);
+  getAllTest(id_subCat:number):Observable<any>{
+    return this.http.get<any>(this.url+"getTestSubcategoryById?idTestSubcategory="+id_subCat);
   }
 
 
