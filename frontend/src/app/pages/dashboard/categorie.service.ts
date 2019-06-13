@@ -41,7 +41,7 @@ export class CategorieService {
     return this.http.post(this.url+"updateCategoryById?id="+id,categorie,{responseType: 'text'});
   }
   getAllSouCategorie(id:number):Observable<SousCategorie[]>{
-    return this.http.get<SousCategorie[]>(this.url+"getAllSubcategoriesByCategory?id_category="+id);
+    return this.http.get<SousCategorie[]>(this.url+"getAllSubcategoriesByCategory?idCategory="+id);
   }
 
 }

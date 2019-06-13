@@ -17,6 +17,7 @@ export class AffectSubcategorieComponent implements OnInit {
 
   dropdownList = [];
   selectedItems = [];
+  onDeSelect =[];
   settings = {};
   addForm:FormGroup;
   submitted = false;
@@ -41,6 +42,7 @@ export class AffectSubcategorieComponent implements OnInit {
   ngOnInit() {
     this.addForm=this.formBuilder.group({
       subcategories: [[], Validators.required],
+      unselect:[[]],
 
     })
 
@@ -103,6 +105,7 @@ export class AffectSubcategorieComponent implements OnInit {
    )
 
    if (this.addForm.valid){
+     console.log(this.OnItemDeSelect);
      this.testService.affectSubCategorie(this.id,data).subscribe(
        data=>{
          alert ("add avec succes");
@@ -117,19 +120,64 @@ export class AffectSubcategorieComponent implements OnInit {
  }
 
 
-  onItemSelect(item: any) {
-    console.log(item);
-    console.log(this.selectedItems);
+  onItemSelect(event) {
+    console.log(event.id);
+    this.testService.addAfect(this.id,event.id).subscribe(
+      data=>{
+        if(data==='success'){
+          alert("ajout avec sucess");
+        }else{
+          alert('désolé un problème est survenu. veuillez réessayer plus tard.');
+        }
+      },err=>{
+        alert("erreur"+err);
+      }
+    )
+    //console.log(this.selectedItems);
   }
-  OnItemDeSelect(item: any) {
-    console.log(item);
-    console.log(this.selectedItems);
+  OnItemDeSelect(event: any) {
+    //console.log(event.id);
+    this.testService.deleteafect(this.id,event.id).subscribe(
+      data=>{
+        //console.log(data);
+
+        if(data==='success'){
+
+          alert("suppression avec succès");
+        }else{
+          alert("Vous ne pouvez pas supprimer cette sous categorie");
+          this.testService.getAffectationById(this.id).subscribe(
+            (value:any)=>{
+              this.addForm.patchValue(value);
+
+              this.selectedItems = this.dropdownList.filter(
+                c =>{
+                  return value.map(v=> v.id).includes(c.id)
+                });
+
+            },err=>{
+              console.log(err)
+            }
+          )
+        }
+
+      },err=>{
+        //console.log(err);
+        alert("Vous ne pouvez pas supprimer cette sous categorie");
+
+    }
+    )
+    console.log(event.id);
   }
+
+
+
+
   onSelectAll(items: any) {
     console.log(items);
   }
-  onDeSelectAll(items: any) {
-    console.log(items);
+  onDeSelectAll(event) {
+    console.log(event);
   }
   consultezSubCategorie(){
 
