@@ -41,7 +41,7 @@ export class AllQuestionComponent implements OnInit {
 
 
 
-        console.log("this is the list   " +JSON.stringify(data));
+        //console.log("this is the list   " +JSON.stringify(data));
       },err=>{
         console.log(err)
       }

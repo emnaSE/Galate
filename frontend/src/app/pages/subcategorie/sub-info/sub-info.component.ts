@@ -33,7 +33,7 @@ export class SubInfoComponent implements OnInit {
 
 
 
-    this.subCategorieService.getAllTest(this.test_id,this.id).subscribe(
+    this.subCategorieService.getAllTest(this.id).subscribe(
       data=>{
         this.subCategories=data;
         this.name=this.subCategories.subcategory;

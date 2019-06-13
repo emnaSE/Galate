@@ -137,7 +137,8 @@ export class CreateQuestionComponent implements OnInit {
       if ( this.addForm.valid){
         this.questionService.addQuestion(data).subscribe(
           data=>{
-            alert("ajouter avec succes")
+            alert("ajouter avec succes ");
+            alert("veuillez ajouter autre réponse svp");
           },err=>{
             console.log(err);
           }

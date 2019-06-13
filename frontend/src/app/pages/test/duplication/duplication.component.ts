@@ -58,9 +58,10 @@ export class DuplicationComponent implements OnInit {
 
     })
     if (this.addForm.valid){
-      this.testService.addTest(data).subscribe(
+      this.testService.duplicateTest(data).subscribe(
         data=>{
           alert("succes")
+          this.router.navigate(['pages/test']);
         },err=>{
           console.log(err);
         }
