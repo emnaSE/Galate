@@ -1922,8 +1922,8 @@ _publics.getSubcategoryByMemberAndTestID = (req) => {
               data5.att('ss:Type', 'String'); 
               
                ///createResultSubCat(data5 , subcategories , memberResult)
+             //data5.txt(memberResult[i]===null ? " " : memberResult[i].etallonage_result) ; 
               data5.txt(memberResult[i].etallonage_result) ; 
-            
               
             data5.up();
           subcategory.up();          
@@ -2195,7 +2195,7 @@ var newData = data.substr(0, 21) + txt + data.substr(21) ;
   
   
   
-               /*var xmlFile = path.join(dir ,'/MembersInformations'+Date.now()+'.xml');
+               var xmlFile = path.join(dir ,'/MembersInformations.xml');
                    console.log(xmlFile);
                     var stream = fs.createReadStream(xmlFile);
   
@@ -2210,8 +2210,8 @@ var newData = data.substr(0, 21) + txt + data.substr(21) ;
                             console.warn(xmlFile + ' deleted');
                         }
                     });
-                  }).pipe(res);*/
-                  var path = require('path');
+                  }).pipe(res);
+                /*  var path = require('path');
                   var mime = require('mime');
 
                   var file = dir+'/MembersInformations.xml';
@@ -2219,20 +2219,21 @@ var newData = data.substr(0, 21) + txt + data.substr(21) ;
                   var filename = path.basename(file);
                   var mimetype = mime.lookup(file);
                 
-                  res.setHeader('Content-disposition', 'attachment; filename=' + filename);
+                  res.setHeader('Content-disposition', 'attachment; filename='  + filename);
                   res.setHeader('Content-type', mimetype);
                 
                   var filestream = fs.createReadStream(file);
-                  filestream.once("close", function () {
-                    filestream.destroy(); // makesure stream closed, not close if download aborted.
-                    fs.unlink(filename, function (err) {
+                  filestream.pipe(res);
+                 /* filestream.once("close", function () {
+                    filestream.destroy(); 
+                    fs.unlink(file, function (err) {
                       if (err) {
                           console.error(err.toString());
                       } else {
-                          console.warn(filename + ' deleted');
+                          console.warn(file + ' deleted');
                       }
                   });
-                }).pipe(res);
+                }).pipe(res);*/
                  
 
                       
@@ -2240,51 +2241,6 @@ var newData = data.substr(0, 21) + txt + data.substr(21) ;
                       console.log(error);
                     }
 
-
-
-                  
-
-                 /*   fs.writeFile(dir+'/MembersInformationsInput.xml','',function(err) {
-                      if(err) {
-                          return console.log(err);
-                      }
-                      console.log("The fileInput was saved!");   
-                  });
-
-
-                  fs.writeFile(dir+'/MembersInformationsOutput.xml','',function(err) {
-                    if(err) {
-                        return console.log(err);
-                    }
-                    console.log("The fileOutput was saved!");   
-                });
-
-
-                var writeStream = fs.createWriteStream(dir+'/MembersInformationsOutput.xml');
-                    writeStream.write('aa');
-                    writeStream.end();
-                    var readstream = fs.createReadStream(dir+'/MembersInformationsInput.xml');
-                    
-                    
-
-                    
-
-                 // res.writeHead(200, {'Content-disposition': 'attachment; filename=MembersInformations.xml'});
-               
-                  readstream.once("close", function () {
-                    //stream.destroy(); // makesure stream closed, not close if download aborted.
-                   /* fs.unlink(xmlFile, function (err) {
-                      if (err) {
-                          console.error(err.toString());
-                      } else {
-                          console.warn(xmlFile + ' deleted');
-                      }
-                  });*/
-                //}).pipe(writeStream);  
-                  
-
-            
-     
 
 
 
