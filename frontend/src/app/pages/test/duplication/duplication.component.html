@@ -1,0 +1,36 @@
+
+
+<nb-card>
+  <nb-card-header>
+    Duplication d'un test
+  </nb-card-header>
+
+  <nb-card-body>
+    <form [formGroup]="addForm" (ngSubmit)="onSubmit()">
+
+      <div class="form-group">
+        <label for="name">Test</label>
+        <angular2-multiselect [data]="dropdownList"
+                              [(ngModel)]="selectedItems"
+                              [settings]="dropdownSettings"
+                              formControlName="id_test"></angular2-multiselect>
+      </div>
+
+
+      <div class="form-group">
+        <label for="fnText">Nom du test</label>
+        <input type="text" class="form-control" formControlName="name" placeholder="Nom du sous categorie">
+        <ng-container *ngIf="submitted && formvalidate.name.errors">
+          <p class="text-danger" >
+            Nom est obligatoire !
+          </p>
+        </ng-container>
+      </div>
+
+
+
+      <button type="submit" class="btn btn-success">Ajouter</button>
+    </form>
+
+  </nb-card-body>
+</nb-card>

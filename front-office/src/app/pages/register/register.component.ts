@@ -43,20 +43,36 @@ export class RegisterComponent  implements OnInit{
     
   
     this.addForm=this.formBuilder.group({
-      firstname: new FormControl('', [Validators.required]),
-      lastname: new FormControl('', [Validators.required]),
-      email: new FormControl('', [Validators.required]),
+      firstname:  new FormControl('', Validators.compose([
+        Validators.required,
+        Validators.maxLength(12),
+        Validators.pattern('[a-zA-Z ]*')
+      ])),
+      lastname:  new FormControl('', Validators.compose([
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(12),
+        Validators.pattern('[a-zA-Z ]*')
+      ])),
+      email:new FormControl('', Validators.compose([
+        Validators.required,
+        Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
+      ])),
       //password: new FormControl('', [Validators.required]),
       //pseudo: new FormControl('', [Validators.required]),
       //civility: new FormControl('', [Validators.required]),
-      age: new FormControl('', [Validators.required]),
+      age: new FormControl('', Validators.compose([
+          Validators.required,
+          Validators.maxLength(2),
+          Validators.pattern('[0-9]2')
+      ])),
       id_clazz: [[], Validators.required],
       id_school: [[], Validators.required],
       checked: new FormControl('',[Validators.required]),
       //study_level: new FormControl('', [Validators.required]),
       sexe: [[],[Validators.required]],
 
-      city: new FormControl('', [Validators.required]),
+      city:new FormControl('',[Validators.required]),
 
     });
     this.dropdownSettings0 = {
