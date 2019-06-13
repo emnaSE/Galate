@@ -45,6 +45,7 @@ export class RegisterComponent  implements OnInit{
     this.addForm=this.formBuilder.group({
       firstname:  new FormControl('', Validators.compose([
         Validators.required,
+        Validators.minLength(3),
         Validators.maxLength(12),
         Validators.pattern('[a-zA-Z ]*')
       ])),
@@ -64,16 +65,16 @@ export class RegisterComponent  implements OnInit{
       age: new FormControl('', Validators.compose([
           Validators.required,
           Validators.maxLength(2),
-          Validators.pattern('[0-9]2')
+          Validators.pattern('[0-9]*')
       ])),
       id_clazz: [[], Validators.required],
       id_school: [[], Validators.required],
       checked: new FormControl('',[Validators.required]),
       //study_level: new FormControl('', [Validators.required]),
       sexe: [[],[Validators.required]],
-
+ 
       city:new FormControl('',[Validators.required]),
-
+ 
     });
     this.dropdownSettings0 = {
       singleSelection: true,

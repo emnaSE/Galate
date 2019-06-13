@@ -870,14 +870,19 @@ adminController.getTestSubcategoryByTestIdAndSubcateoryId(req)//testId//subcateg
 
 
 router.get('/getMemberResult', urlencodedParser, (req, res, next) =>
-memberController.getMemberById(req)
+memberController.getMemberDetailsById(req)
 .then(member => {
     var m=JSON.parse(member);
     res.payload.firstname=m[0].firstname;
     res.payload.lastname=m[0].lastname;
     res.payload.age=m[0].age;
+    res.payload.email=m[0].email;
+    res.payload.city=m[0].city;
+    res.payload.sexe=m[0].sexe;
+    res.payload.clazz_name=m[0].clazz_name;
+    res.payload.school_name=m[0].school_name;
     
-    return adminController.getSubcategoryResultByMemberAndTestID(req.query.id_test, m[0].id)
+    return adminController.getSubcategoryResultByMemberAndTestID(req.query.id_test, req.query.id)
 })
 .then(result => {
     res.payload.result=result;

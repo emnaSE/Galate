@@ -45,16 +45,16 @@
                             <input type="text" class="form-input" formControlName="firstname"  placeholder="Nom" required/>
                             <ng-container *ngIf="submitted && formValidate.firstname.errors">
                                 <p class="text-danger" style="color: red">
-                                    nom est obligatoire !
+                                    verifier votre Nom svp !
                                 </p>
                             </ng-container>
                         </div>
 
                         <div class="form-group">
                             <input type="text" class="form-input" formControlName="lastname"  placeholder="Prénom" required/>
-                            <ng-container *ngIf="submitted && formValidate.age.errors">
+                            <ng-container *ngIf="submitted && formValidate.lastname.errors">
                                 <p class="text-danger" style="color: red">
-                                    Prénom est obligatoire !
+                                    verifier votre Prénom svp !
                                 </p>
                             </ng-container>
                         </div>
@@ -62,7 +62,7 @@
                             <input type="text" class="form-input" formControlName="age"  placeholder="Âge" required/>
                             <ng-container *ngIf="submitted && formValidate.age.errors">
                                 <p class="text-danger" style="color: red">
-                                    Âge est obligatoire !
+                                    verifier votre Âge svp !
                                 </p>
                             </ng-container>
                         </div>
@@ -73,7 +73,7 @@
                             <input type="email" class="form-input" formControlName="email" placeholder="Email" required/>
                             <ng-container *ngIf="submitted && formValidate.email.errors">
                                 <p class="text-danger" style="color: red">
-                                    Email est obligatoire !
+                                    verifier votre Email svp !
                                 </p>
                             </ng-container>
                         </div>
@@ -123,7 +123,7 @@
                             <input type="text" class="form-input" formControlName="city"  placeholder="Ville" required/>
                             <ng-container *ngIf="submitted && formValidate.city.errors">
                                 <p class="text-danger" style="color: red">
-                                    Ville" est obligatoire !
+                                    verifier votre Ville svp !
                                 </p>
                             </ng-container>
                         </div>
