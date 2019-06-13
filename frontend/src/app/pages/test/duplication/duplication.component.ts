@@ -38,9 +38,13 @@ export class DuplicationComponent implements OnInit {
       singleSelection: true,
       idField: 'item_id',
       textField: 'item_text',
-      selectAllText: 'Select All',
-      unSelectAllText: 'UnSelect All',
+      searchPlaceholderText: 'chercher',
+      filterSelectAllText: 'Sélectionner tous les résultats filtrés',
+      selectAllText: 'Tout sélectionner',
+      unSelectAllText: 'Tout déselectionner',
+      noDataLabel: 'Pas de données disponibles',
       text:"choisissez un test",
+
       itemsShowLimit: 1,
       allowSearchFilter: true,
       enableSearchFilter:true
