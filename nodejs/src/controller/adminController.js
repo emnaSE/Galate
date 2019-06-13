@@ -529,16 +529,16 @@ _publics.getTestSubcategoryByTestIdAndSubcateoryId = (req) => {
 
 _publics.updateQuestion=(req,question) => { 
   var question=JSON.parse(question);
-  var name=question.name;
+  /*var name=question.name;
   var wording=question.wording;
+  var id_test_subcategory=question.id_test_subcategory;*/
   var value=question.value;
   var ordre=question.ordre;
   var question_id=req.query.id;
-  var id_test_subcategory=question.id_test_subcategory;
   return new Promise((resolve, reject) => { 
            var msg="";
-           var sql = "UPDATE question SET name=?, wording=?,value=?,id_test_subcategory=?,ordre=?  WHERE id = ?"; 
-           con.query(sql,[name,wording,value,id_test_subcategory,ordre,question_id], function (err, result) {
+           var sql = "UPDATE question SET value=?,ordre=?  WHERE id = ?"; 
+           con.query(sql,[value,ordre,question_id], function (err, result) {
               if (err){
                   msg="failure";
                   reject(err);
@@ -682,6 +682,8 @@ _publics.createAnswers = (questionId, answers ) => {
   }
   return Promise.all(promises)      
 }; 
+
+
 
 _publics.updateAnswer=(req,answer) => { 
   var answer=JSON.parse(answer);
@@ -1104,10 +1106,15 @@ _publics.duplicateTest = (test) => {
   var password =test.password;
   var activation_date=test.activation_date;
   var expiration_date=test.expiration_date;
+  activation_date=activation_date.replace(/T/, ' ').replace(/\..+/, '');
+  expiration_date=expiration_date.replace(/T/, ' ').replace(/\..+/, '');
+  var duration=test.duration;
+
+
   return new Promise((resolve, reject) => { 
   var response={};
   var sql = "insert into test set ? ";
-  const newTest = { name: name,test_subcategories_number:test_subcategories_number,password:password,activation_date:activation_date,expiration_date:expiration_date};         
+  const newTest = { name: name,test_subcategories_number:test_subcategories_number,password:password,activation_date:activation_date,expiration_date:expiration_date,duration:duration};         
   con.query(sql,newTest, function (err, result) {
         if (err){
           response={
@@ -1175,8 +1182,201 @@ _publics.duplicateTestSubCategory = (testSubcategory,testId ) => {
 
 
 
+_publics.duplicateTestSubCategories = (req, res, testSubcategories,testId ) => { 
+  let promises = [];
+  for (var i=0; i<testSubcategories.length;i++) {
+    promises.push(new Promise((resolve, reject) => {
+      var response=duplicateTestSubCategories(req, res, testSubcategories[i], testId);
+     return resolve(response);
+    }
+    ));
+  }
+  return Promise.all(promises)
+   
+}; 
+
+function duplicateTestSubCategories(req, res, testSubcategory, testId ) { 
+  return new Promise((resolve, reject) => { 
+        duplicateTestSubCategory(testSubcategory.testSubcategory, testId)
+        .then(message =>{
+          console.log("create testsubcategory "+JSON.stringify(message));
+            if (message.msg === "success") {
+              return duplicateQuestionAndAnswers(req, res, testSubcategory.questions,message.testSubCategId);
+            } else {
+                return "failure";
+            }
+        })
+        .then(message=>{
+            return resolve(message);
+        });
+  });
+
+}
 
 
+ function duplicateTestSubCategory(testSubcategory,testId ){
+  return new Promise((resolve, reject) => {
+    var msg="";
+    var response={};
+    var sql = "INSERT INTO test_subcategory SET ?";
+    con.query(sql,{id_category:testSubcategory.id_category,id_subcategory:testSubcategory.id_subcategory,id_test:testId,questions_number:testSubcategory.questions_number,wording:testSubcategory.wording}, function (err, result) {
+      if (err){
+        response={
+          msg:"failure"
+        }
+          reject(err);
+        }else{
+          response={
+            msg:"success",
+            testSubCategId:result.insertId
+          }
+        }
+        return resolve(response);
+    });
+  }
+  );
+   
+}; 
+
+function duplicateQuestionAndAnswers(req, res, questions,testSubCategId){
+    req.query.testSubCategId= testSubCategId;
+    let promises = [];
+    for (var i=0;i<questions.length;i++) {
+        promises.push( new Promise((resolve, reject) => {  
+            var response=createQuestionAndAnswers(questions[i], req, res );
+            return resolve(response);
+        }));
+    }
+    return Promise.all(promises);       
+}
+
+function createAnswers (questionId, answers ) { 
+  if(answers[0]===undefined){
+    return;
+  }
+  let promises = [];
+  for (var i in answers) {
+    promises.push(new Promise((resolve, reject) => {
+      var msg="";
+      var sql = "INSERT INTO answer SET ? ";
+      const answer = { id_question:questionId,name:answers[i].name,value:answers[i].value,ordre:answers[i].ordre};
+      con.query(sql,answer, function (err, result) {
+         if (err){
+             msg="failure";
+             reject(err);
+           }else{
+             msg="success";
+           }
+           
+       return resolve(msg);
+      });
+    }
+    ));
+  }
+  return Promise.all(promises)      
+}; 
+
+
+function createQuestionAndAnswers(input, req, res ) { 
+  return new Promise((resolve, reject) => { 
+      getQuestionById(input)
+      .then(question=>{
+        if(question===null){
+          res.payload.leave=true;
+          return;
+        }
+      return createQuestion(question, req, res);
+      })
+      .then(message =>{
+          if(res.payload.leave===true){
+            return "failure";
+          }
+
+          if (message.msg === "success") {
+            return createAnswers(message.questionId, input);
+          } else {
+              return "failure";
+          }
+      })
+      .then(message=>{
+        if(res.payload.leave===true){
+          return resolve("failure");
+        }
+
+      });
+  });
+}
+
+function getQuestionById(input){ 
+  
+  return new Promise((resolve, reject) => {  
+    if(input[0]===undefined){
+      return resolve(null);
+    }
+    var questionId=input[0].id_question;
+           var sql = "select * FROM question where id=?"; 
+               con.query(sql,[questionId], function (err, result) {
+               if (err) reject(err);
+               return resolve(JSON.stringify(result[0]));
+               });
+   });    
+};
+
+/*function createQuestionAndAnswers(input, req, res ) { 
+
+  createQuestion(JSON.stringify(input), req, res)
+  .then(message =>{
+    console.log("create question ==>"+message.msg);
+    if (message.msg === "success") {
+      return createAnswers(message.questionId, JSON.parse(input).answers);
+  } else {
+       return "failure";
+  }
+  });
+
+}*/
+
+
+
+
+
+
+function createQuestion (question,req, res ){ 
+  var testSubCategId=req.query.testSubCategId;
+  var question=JSON.parse(question);
+  var name=question.name;
+  var wording=question.wording;
+  var value=question.value;  
+  var id_test_subcategory=testSubCategId;
+  var ordre=question.ordre; 
+  return new Promise((resolve, reject) => {  
+          if(question===undefined){
+            return resolve("failure");
+          }else{
+              var response={};
+              var questionId;
+              var sql = "INSERT INTO question SET ? ";
+              const newQuestion = { name: name,wording:wording,value:value,id_test_subcategory:id_test_subcategory,ordre:ordre};
+              con.query(sql,newQuestion, function (err, result) {
+                  if (err){
+                    response={
+                      msg:"failure"
+                    }
+                      reject(err);
+                    }else{
+                      response={
+                        msg:"success",
+                        questionId:result.insertId
+                      }
+                      
+                    }
+                return resolve(response);
+              });
+            }
+  });   
+
+      
+};
 
 _publics.duplicateQuestion = (question,testSubcategoryId ) => { 
 
@@ -1424,35 +1624,48 @@ _publics.getQuestionsBySubcategories = (testSubcategories) => {
 
 
 
-_publics.duplicateQuestionAndAnswers = (questions,testSubCategId) => { 
+/*_publics.duplicateQuestionAndAnswers = (questions,testSubCategId) => { 
   let promises = [];
   for (var i=0;i<questions.length;i++) {
+    var data=JSON.stringify(questions[i]);
     promises.push( 
-       new Promise((resolve, reject) => request.post({
-      url :url+`/admin/createQuestionAndAnswers?testSubCategId=${testSubCategId}`,
-      method: 'POST',
-      gzip: true,
-      json: true,
-      rejectUnauthorized: false,
-      headers: {
-        'Content-Type': 'application/json',
-        'Content-Length': Buffer.byteLength(JSON.stringify(questions)),
-        //'Content-Length': Buffer.byteLength("{\"questions\":[{\"question\":{\"id\":1,\"name\":\"question1\",\"wording\":\"frensh\",\"value\":1,\"id_test_subcategory\":1},\"answers\":[{\"id\":1,\"id_question\":1,\"value\":\"1\",\"name\":\"Dymanique\",\"ordre\":1},{\"id\":2,\"id_question\":1,\"value\":\"1\",\"name\":\"Energique\",\"ordre\":2}]},"+
-       //"{\"questions\":[{\"question\":{\"id\":1,\"name\":\"question1\",\"wording\":\"frensh\",\"value\":1,\"id_test_subcategory\":1},\"answers\":[{\"id\":1,\"id_question\":1,\"value\":\"1\",\"name\":\"Dymanique\",\"ordre\":1},{\"id\":2,\"id_question\":1,\"value\":\"1\",\"name\":\"Energique\",\"ordre\":2}]}]}")
-    }
-    }, (e, r, b) => {
-      if (!e && r.statusCode == 200) {
-        console.log("wawwwwwwwwwwww");
-        return resolve(JSON.parse(b));
-      } else {
-        console.log("looooooooooooool"+r.statusCode+" eroor= "+e);
-        reject(e);
-      }
-    }))
-    )
-    ;
+      new Promise((resolve, reject) => request.post({
+     url :url+`/admin/createQuestionAndAnswers?testSubCategId=${testSubCategId}`,
+     method: 'POST',
+     gzip: true,
+     json: true,
+     rejectUnauthorized: false,
+     headers: {
+       'Content-Type': 'application/json',
+       'Content-Length': Buffer.byteLength(data),
+       //'Content-Length': Buffer.byteLength("{\"questions\":[{\"question\":{\"id\":1,\"name\":\"question1\",\"wording\":\"frensh\",\"value\":1,\"id_test_subcategory\":1},\"answers\":[{\"id\":1,\"id_question\":1,\"value\":\"1\",\"name\":\"Dymanique\",\"ordre\":1},{\"id\":2,\"id_question\":1,\"value\":\"1\",\"name\":\"Energique\",\"ordre\":2}]},"+
+      //"{\"questions\":[{\"question\":{\"id\":1,\"name\":\"question1\",\"wording\":\"frensh\",\"value\":1,\"id_test_subcategory\":1},\"answers\":[{\"id\":1,\"id_question\":1,\"value\":\"1\",\"name\":\"Dymanique\",\"ordre\":1},{\"id\":2,\"id_question\":1,\"value\":\"1\",\"name\":\"Energique\",\"ordre\":2}]}]}")
+   }
+   }, (e, r, b) => {
+     if (!e && r.statusCode == 200) {
+       console.log("yessssssssssssssss");
+       return resolve(JSON.parse(b));
+     } else {
+       console.log("errreuuuuuuuuuuuuur "+r.statusCode+" eroor= "+e);
+       reject(e);
+     }
+   }))
+   );
   }
   return Promise.all(promises)      
+
+};*/
+
+_publics.duplicateQuestionAndAnswers = (req, res, questions,testSubCategId) => {
+  req.query.testSubCategId= testSubCategId;
+  let promises = [];
+  for (var i=0;i<questions.length;i++) {
+      promises.push( new Promise((resolve, reject) => {  
+          var response=createQuestionAndAnswers(JSON.stringify(questions[i]), req, res );
+          return resolve(response);
+      }));
+  }
+  return Promise.all(promises);     
 
 };
 

@@ -359,12 +359,14 @@ router.post('/createAnswer', (req, res, next) =>
         })
         .catch(next));
 
-router.post('/createQuestionAndAnswers', (req, res, next) =>
-    adminController.getRawBody(req)
+router.post('/createQuestionAndAnswers', (req, res, next) =>adminController
+.getRawBody(req)
 .then(response => {
-    var question = JSON.parse(response).question;
-     res.payload.answers = JSON.parse(response).answers;
-    return adminController.createNewQuestion(question, req.query.testSubCategId);
+    var question = response.question;
+    var quest=JSON.stringify(question);
+    console.log("response ="+JSON.stringify(response));
+     res.payload.answers = response.answers;
+    return adminController.createNewQuestion(quest, req.query.testSubCategId);
 })
 .then(message => {
     if (message.msg === "success") {
@@ -552,8 +554,8 @@ router.post('/getFirstTest',(req, res, next)=>memberController
     return adminController.getTestById(req)
 })
 .then(test=>{
-    res.payload.test=test;
-    var testId=test.id;
+    res.payload.test=JSON.parse(test);
+    var testId=JSON.parse(test).id;
     return adminController.getTestCategoryByTestId(testId)
 })
 .then(testCategories=>{
@@ -561,35 +563,37 @@ router.post('/getFirstTest',(req, res, next)=>memberController
     return adminController.getTestSubcategoriesByTestId(res.payload.test.id)
 })
 .then(testSubcategories=>{
+ 
     return adminController.getQuestionsBySubcategories(testSubcategories);
 })
-.then(testSubcategories=>{
-    res.payload.testSubcategories=testSubcategories;
-    return res.payload;
-})
 .then(response=>{ 
-    console.log(JSON.parse(res.payload.test));
-    return adminController.duplicateTest(res.payload.test)
+    
+    res.payload.testSubcategories=response;
+    //console.log("ccccc "+response);
+    res.send(JSON.stringify(response));
+    
+    return adminController.duplicateTest(res.payload.test);
 })
 .then(response=>{
     if(response.msg==="failure"){
         res.payload.leave=true;
         return;
     }
-    res.payload.testId=response.testId;
-    // return adminController.duplicateTestCategory(res.payload.testCategories,res.payload.testId)
-    return "ok";
+    var newTestId=response.testId;
+    res.payload.testId=newTestId;
+    return adminController.duplicateTestCategory(res.payload.testCategories,newTestId)
  })
 .then(response=>{
-    var testSubcategories=res.payload.testSubcategories;
     if(res.payload.leave===true){
         return;
     }
-   //return adminController.duplicateTestSubCategories(res.payload.testSubcategories,res.payload.testId)
-   res.send(testSubcategories);
+   return adminController.duplicateTestSubCategories(req, res, res.payload.testSubcategories, res.payload.testId)
 })
+.then(response=>{
+    
+ })
 /*.then(response=>{
-    if(res.payload.leave===true){
+   if(res.payload.leave===true){
         return;
     }
     return adminController.duplicateQuestion(res.payload.questions,response)
@@ -620,10 +624,10 @@ getRawBody(req)
         res.payload.leave=true;
         return;
     }
-    return adminController.duplicateQuestionAndAnswers(res.payload.questions, message.testSubCategId)
+    return adminController.duplicateQuestionAndAnswers(req, res, res.payload.questions, message.testSubCategId)
 })
 .then(response=>{
-    res.send("ok!");
+    res.send(response);
 })
 .catch(next));
 
