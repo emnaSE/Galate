@@ -846,16 +846,15 @@ adminController.getMembersInformationByTestID(req)
 
 
 
-router.get('/getTestSubcategoryByTestIdAndSubcateoryId', (req, res, next) => 
-adminController.getTestSubcategoryByTestIdAndSubcateoryId(req)//testId//subcategoryId;
+router.get('/getTestSubcategoryById', (req, res, next) => 
+//adminController.getTestSubcategoryByTestIdAndSubcateoryId(req)//testId//subcategoryId;
+adminController.getTestSubcategoriesById(req.query.idTestSubcategory)//idTestSubcategory
 .then(testSubcategory=>{
-    req.query.idTestSubcategory=testSubcategory.id;
-    req.query.id=req.query.subcategoryId;
+    req.query.id=testSubcategory[0].id_subcategory;
     return adminController.getSubcategoryById(req);
 })
 .then(subcategory => {
     res.payload.subcategory = JSON.parse(subcategory).name;
-    req.query.idTestSubcategory=req.query.subcategoryId;
     return adminController.getAllQuestionsByIdTestSubcategory(req)
 })
 .then(questions => {
