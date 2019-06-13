@@ -1099,9 +1099,10 @@ _publics.getAnswersByQuestions = (questions ) => {
   return Promise.all(promises)      
 }; 
 
-_publics.duplicateTest = (test) => { 
+_publics.duplicateTest = (testName,test) => { 
   
-  var name=test.name;
+  //var name=test.name;
+  var name=testName;
   var test_subcategories_number=test.test_subcategories_number;
   var password =test.password;
   var activation_date=test.activation_date;
@@ -1182,11 +1183,11 @@ _publics.duplicateTestSubCategory = (testSubcategory,testId ) => {
 
 
 
-_publics.duplicateTestSubCategories = (req, res, testSubcategories,testId ) => { 
+_publics.duplicateTestSubCategories = ( res, testSubcategories,testId ) => { 
   let promises = [];
   for (var i=0; i<testSubcategories.length;i++) {
     promises.push(new Promise((resolve, reject) => {
-      var response=duplicateTestSubCategories(req, res, testSubcategories[i], testId);
+      var response=duplicateTestSubCategories( res, testSubcategories[i], testId);
      return resolve(response);
     }
     ));
@@ -1195,31 +1196,36 @@ _publics.duplicateTestSubCategories = (req, res, testSubcategories,testId ) => {
    
 }; 
 
-function duplicateTestSubCategories(req, res, testSubcategory, testId ) { 
+function duplicateTestSubCategories( res, testSubcategory, testId ) { 
   return new Promise((resolve, reject) => { 
-        duplicateTestSubCategory(testSubcategory.testSubcategory, testId)
+    var response=duplicateTestSubCategory(testSubcategory.testSubcategory, testId);
+        return resolve(response);
+      })
         .then(message =>{
-          console.log("create testsubcategory "+JSON.stringify(message));
-            if (message.msg === "success") {
-              return duplicateQuestionAndAnswers(req, res, testSubcategory.questions,message.testSubCategId);
-            } else {
-                return "failure";
-            }
+          return new Promise((resolve, reject) => { 
+              if (message.msg === "success") {
+                var response= duplicateQuestionAndAnswers(testSubcategory.testSubcategory.id, res, testSubcategory.questions,message.testSubCategId);
+                return resolve(response);
+              } else {
+                return resolve("failure");
+              }
+          })
         })
         .then(message=>{
+          return new Promise((resolve, reject) => { 
             return resolve(message);
+          })
         });
-  });
 
 }
 
 
- function duplicateTestSubCategory(testSubcategory,testId ){
+ async function duplicateTestSubCategory(testSubcategory,testId ){
   return new Promise((resolve, reject) => {
     var msg="";
     var response={};
     var sql = "INSERT INTO test_subcategory SET ?";
-    con.query(sql,{id_category:testSubcategory.id_category,id_subcategory:testSubcategory.id_subcategory,id_test:testId,questions_number:testSubcategory.questions_number,wording:testSubcategory.wording}, function (err, result) {
+    con.query(sql,{id_category:testSubcategory.id_category,id_subcategory:testSubcategory.id_subcategory,id_test:testId,questions_number:testSubcategory.questions_number,wording:testSubcategory.wording, ordre:testSubcategory.ordre}, function (err, result) {
       if (err){
         response={
           msg:"failure"
@@ -1238,12 +1244,11 @@ function duplicateTestSubCategories(req, res, testSubcategory, testId ) {
    
 }; 
 
-function duplicateQuestionAndAnswers(req, res, questions,testSubCategId){
-    req.query.testSubCategId= testSubCategId;
+function duplicateQuestionAndAnswers(idLasttestSubcategory, res, questions,testSubCategId){
     let promises = [];
     for (var i=0;i<questions.length;i++) {
-        promises.push( new Promise((resolve, reject) => {  
-            var response=createQuestionAndAnswers(questions[i], req, res );
+        promises.push( new Promise((resolve, reject) => {       
+            var response=createQuestionAndAnswers(idLasttestSubcategory,questions[i], testSubCategId, res );
             return resolve(response);
         }));
     }
@@ -1277,20 +1282,13 @@ function createAnswers (questionId, answers ) {
 }; 
 
 
-function createQuestionAndAnswers(input, req, res ) { 
+function createQuestionAndAnswers(idLasttestSubcategory,input, testSubCategId, res ) { 
   return new Promise((resolve, reject) => { 
       getQuestionById(input)
       .then(question=>{
-        if(question===null){
-          res.payload.leave=true;
-          return;
-        }
-      return createQuestion(question, req, res);
+      return createQuestion(question, testSubCategId, res);
       })
       .then(message =>{
-          if(res.payload.leave===true){
-            return "failure";
-          }
 
           if (message.msg === "success") {
             return createAnswers(message.questionId, input);
@@ -1301,6 +1299,8 @@ function createQuestionAndAnswers(input, req, res ) {
       .then(message=>{
         if(res.payload.leave===true){
           return resolve("failure");
+        }else{
+          return resolve("success");
         }
 
       });
@@ -1341,22 +1341,22 @@ function getQuestionById(input){
 
 
 
-function createQuestion (question,req, res ){ 
-  var testSubCategId=req.query.testSubCategId;
+function createQuestion (question,testSubCategId, res ){ 
   var question=JSON.parse(question);
-  var name=question.name;
-  var wording=question.wording;
-  var value=question.value;  
-  var id_test_subcategory=testSubCategId;
-  var ordre=question.ordre; 
   return new Promise((resolve, reject) => {  
-          if(question===undefined){
+          if(question===null){
             return resolve("failure");
           }else{
               var response={};
-              var questionId;
+               
+              
+              var name=question.name;
+              var wording=question.wording;
+              var value=question.value;  
+              var id_test_subcategory=testSubCategId;
+              var order=question.ordre; 
               var sql = "INSERT INTO question SET ? ";
-              const newQuestion = { name: name,wording:wording,value:value,id_test_subcategory:id_test_subcategory,ordre:ordre};
+              const newQuestion = { name: name,wording:wording,value:value,id_test_subcategory:id_test_subcategory,ordre:order};
               con.query(sql,newQuestion, function (err, result) {
                   if (err){
                     response={

@@ -531,7 +531,7 @@ getRawBody(req)
 .catch(next));
 
 
-router.post('/duplicateTest', (req, res, next) =>memberController
+/*router.post('/duplicateTest', (req, res, next) =>memberController
 .getRawBody(req)
 .then(test => {
     return adminController.duplicateTest(test)
@@ -539,18 +539,20 @@ router.post('/duplicateTest', (req, res, next) =>memberController
 .then(msg => {
     res.send(msg);
 })
-.catch(next));
+.catch(next));*/
 
 
 
-//duplicate test
 
 
-router.post('/getFirstTest',(req, res, next)=>memberController
+
+router.post('/duplicateTest',(req, res, next)=>memberController
 .getRawBody(req)
 .then(test=>{
     var testParsed=JSON.parse(test);
-    req.query.id=testParsed.id;
+    //req.query.id=testParsed.id;
+    req.query.id=testParsed.id_test[0];
+    res.payload.testName=testParsed.name;
     return adminController.getTestById(req)
 })
 .then(test=>{
@@ -563,16 +565,11 @@ router.post('/getFirstTest',(req, res, next)=>memberController
     return adminController.getTestSubcategoriesByTestId(res.payload.test.id)
 })
 .then(testSubcategories=>{
- 
     return adminController.getQuestionsBySubcategories(testSubcategories);
 })
 .then(response=>{ 
-    
-    res.payload.testSubcategories=response;
-    //console.log("ccccc "+response);
-    res.send(JSON.stringify(response));
-    
-    return adminController.duplicateTest(res.payload.test);
+    res.payload.testSubcategories=response; 
+    return adminController.duplicateTest(res.payload.testName, res.payload.test);
 })
 .then(response=>{
     if(response.msg==="failure"){
@@ -587,24 +584,11 @@ router.post('/getFirstTest',(req, res, next)=>memberController
     if(res.payload.leave===true){
         return;
     }
-   return adminController.duplicateTestSubCategories(req, res, res.payload.testSubcategories, res.payload.testId)
+   return adminController.duplicateTestSubCategories(res, res.payload.testSubcategories, res.payload.testId)
 })
 .then(response=>{
-    
+    res.send("ok");
  })
-/*.then(response=>{
-   if(res.payload.leave===true){
-        return;
-    }
-    return adminController.duplicateQuestion(res.payload.questions,response)
-})*/
-/*.then(questionId=>{
-    if(res.payload.leave===true){
-        return;
-    }
-    res.payload.questionId=response.questionId;
-    return adminController.duplicateAnswer(res.payload.answers,res.payload.questionId)
-})*/
 .catch(next));
 
 
