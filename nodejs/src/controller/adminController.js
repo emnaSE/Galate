@@ -353,6 +353,19 @@ _publics.getAllSubcategoriesByCategory = (req) => {
                });
    });    
 };
+
+_publics.getAllSubcategoriesByCategoryId = (req) => { 
+  var idCategory=req.query.idCategory;
+  return new Promise((resolve, reject) => {  
+           var sql = "select * FROM subcategory  where id_category=? "; 
+         
+               con.query(sql,[idCategory], function (err, result) {
+               if (err) reject(err);
+               return resolve(JSON.stringify(result));
+               });
+   });    
+};
+
 _publics.createSubCategory = (subcategory) => { 
     var subcategory=JSON.parse(subcategory)
     var name=subcategory.name;
@@ -971,7 +984,38 @@ _publics.AffectSubcategoriesToTest = (testId, subcategoriesList, questionsNumber
 }
 
 
-_publics.RemoveAffectationCategoriesToTest = (testId, categoriesList) => {
+_publics.removeAffectationSubcategoryToTest=(testId, subcategoryId) => {
+  var bool=false;
+  return new Promise((resolve, reject) => {
+    var msg="";
+      var sql = "delete from test_subcategory where id_test=? and id_subcategory=? ";
+      con.query(sql,[testId,subcategoryId], function (err, result) {
+        if (err){
+          msg="failed";
+        }else{
+          msg="success";
+        }     
+        return resolve(msg);
+      });   
+    });
+}
+
+_publics.AffectSubcategoryToTest = (testId, subcategoryId) => {
+  var msg="";
+  return new Promise((resolve, reject) => {
+      var sql = "INSERT INTO test_subcategory SET? ";
+      con.query(sql,{id_test:testId,id_subcategory:subcategoryId}, function (err, affectation) {
+        if (err){
+          msg="failed"; 
+          }else{
+            msg="success";  
+          }
+          return resolve(msg);
+      });   
+    });
+}
+
+_publics.removeAffectationCategoriesToTest = (testId, categoriesList) => {
   let promises = [];
   let response;
   for(var i=0;i<categoriesList.length;i++){
@@ -998,20 +1042,7 @@ _publics.RemoveAffectationSubcategoriesToTest = (testId, subcategoriesList) => {
   }
   return Promise.all(promises)
 }
-// duplicate test
-_publics.getFirstTest = () => { 
-  return new Promise((resolve, reject) => { 
-  var sql = "select * from test order by id asc";
-  con.query(sql, function (err, result) {
-          if (err){
-            reject(err);
-          }else{
-            return resolve(result);
-          }
-          
-     });
-});      
-}; 
+ 
 
 _publics.getTestCategoryByTestId = (testId) => { 
 

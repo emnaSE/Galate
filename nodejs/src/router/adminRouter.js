@@ -188,7 +188,7 @@ router.get('/getSubcategoryById', urlencodedParser, (req, res, next) =>
 .catch(next));
 
 router.get('/getAllSubcategoriesByCategory', urlencodedParser, (req, res, next) => 
- adminController.getAllSubcategoriesByCategory(req)
+ adminController.getAllSubcategoriesByCategoryId(req)
 .then(subcategories => {
   res.send(subcategories);
 })
@@ -511,7 +511,6 @@ getRawBody(req)
 
 
 router.post('/affectSubcategoriesToTest', (req, res, next) => adminController.
-
 getRawBody(req)
 .then(affectation => {
   var affectation = JSON.parse(affectation);
@@ -531,15 +530,22 @@ getRawBody(req)
 .catch(next));
 
 
-/*router.post('/duplicateTest', (req, res, next) =>memberController
-.getRawBody(req)
-.then(test => {
-    return adminController.duplicateTest(test)
-})
+
+
+router.get('/removeAffectation_SubcategoryToTest', (req, res, next) => adminController
+.removeAffectationSubcategoryToTest(req.query.testId, req.query.subcategoryId)
 .then(msg => {
     res.send(msg);
 })
-.catch(next));*/
+.catch(next));
+
+router.post('/AffectSubcategoryToTest', (req, res, next) => adminController
+.AffectSubcategoryToTest(req.query.testId, req.query.subcategoryId)
+.then(msg => {
+    res.send(msg);
+})
+.catch(next));
+
 
 
 
