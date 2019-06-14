@@ -1061,7 +1061,7 @@ _publics.getTestCategoryByTestId = (testId) => {
 _publics.getTestSubcategoriesByTestId = (testId) => { 
   perf.start();
   return new Promise((resolve, reject) => { 
-  var sql = "select * from test_subcategory where id_test=?";
+  var sql = "select * from test_subcategory where id_test=? order by ordre";
   con.query(sql,[testId], function (err, result) {
           if (err){
             reject(err);
