@@ -595,7 +595,7 @@ _publics.getAllQuestions = (req) => {
 _publics.getAllQuestionsByIdTestSubcategory = (req) => { 
  var idTestSubcategory=req.query.idTestSubcategory;
     return new Promise((resolve, reject) => {  
-             var sql = "select q.* FROM question q left join test_subcategory ts on (ts.id=q.id_test_subcategory) where ts.id=?"; 
+             var sql = "select q.* FROM question q left join test_subcategory ts on (ts.id=q.id_test_subcategory) where ts.id=? order by ordre"; 
            
                  con.query(sql,[idTestSubcategory], function (err, result) {
                  if (err) reject(err);
