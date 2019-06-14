@@ -26,7 +26,7 @@ export class AnswerService {
   }
 
   deleteAnswer(id:number):Observable<Object>{
-    return this.http.get(this.url+'deleteAnswer?answer_id='+id,{responseType: 'text'});
+    return this.http.get(this.url+'deleteAnswerById?id='+id,{responseType: 'text'});
   }
 
   updateAnswer(id:number,anwser:Object):Observable<Object>{

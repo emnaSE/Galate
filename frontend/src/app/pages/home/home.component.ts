@@ -41,7 +41,7 @@ export class HomeComponent implements OnInit {
       let t = group.controls[to];
       if (f.value > t.value) {
         return {
-          dates: "La date du doit être inférieure à la date du"
+         // dates: "La date du doit être inférieure à la date du"
         };
       }
       return {};
@@ -55,14 +55,38 @@ export class HomeComponent implements OnInit {
 
   Recherche(){
     this.submitted=true;
-    if (this.f.age1.value < this.f.age2.value){
+    if ((this.f.age1.value < this.f.age2.value) && (this.f.debut.value > this.f.fin.value )){
 
-     alert("verifier l age svp")
+     alert("verifier l'age et les dates svp");
+
       return {
         age:"age min doit etre toujours inferieur a age maximum"
       };
 
-    }else{
+    }
+
+    else if ((this.f.age1.value < this.f.age2.value)){
+
+      alert("verifier l'age  svp ! Age minimum doit etre toujours inferieur a l'age maximum");
+ 
+       return {
+         age:"age min doit etre toujours inferieur a age maximum"
+       };
+ 
+     }
+
+    else  if ((this.f.debut.value > this.f.fin.value )){
+
+      alert("verifier les dates  svp ! date debut doit etre inferieur à la date de fin");
+ 
+       return {
+         age:"date debut doit etre inferieur à la date de fin"
+       };
+ 
+     }
+    
+    
+    else{
       this.affiche=true;
       this.homeService.getStat(this.f.debut.value,this.f.fin.value,this.f.age1.value,this.f.age2.value).subscribe(
         data=>{

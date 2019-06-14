@@ -64,14 +64,16 @@ export class DashboardComponent implements OnInit{
 
 
   deleteByid(categorie:Categorie):void {
-    if(confirm("êtes-vous sûr de vouloir supprimer le cette categorie ")) {
+    
+    if(confirm("êtes-vous sûr de vouloir supprimer cette categorie!")) {
       this.categorieServcie.deleteCategorie(categorie.id).subscribe(
         data=>{
           if(data==="success"){
 
-            alert("cette categorie est lié à des sous categorie vous ne pouvez pas le supprimer");
-          }else{
-            alert("Vous ne pouvez pas supprimer cette categorie");
+            alert("supprimée avec succès!");
+          }else
+            if (data=="failure"){
+            alert("cette categorie est liée à des sous categories , vous ne pouvez pas le supprimer!");
 
           }
           this.router.navigate(['pages/categorie'])
@@ -83,7 +85,6 @@ export class DashboardComponent implements OnInit{
 
             }
           )
-
           this.categories=this.categories.filter(c=>c !==categorie)
           this.router.navigate(['pages/categorie'])
 
@@ -92,6 +93,7 @@ export class DashboardComponent implements OnInit{
           console.log(err);
         }
       )}
+     
   };
 
 
