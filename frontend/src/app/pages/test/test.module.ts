@@ -15,7 +15,8 @@ import { TestOrderComponent } from './test-order/test-order.component';
 import { AddOrderComponent } from './test-order/add-order/add-order.component';
 import {Ng2SmartTableModule} from "ng2-smart-table";
 import { DuplicationComponent } from './duplication/duplication.component';
-
+import { AlertsModule } from 'angular-alert-module';
+import swal from 'sweetalert';
 
 const components = [
   TestComponent,
@@ -31,8 +32,8 @@ const components = [
     NgxPaginationModule,
     AngularMultiSelectModule,
     Ng2SmartTableModule,
-
     BsDatepickerModule.forRoot(),
+    AlertsModule.forRoot(),
   ],
   declarations: [
     ...components,
