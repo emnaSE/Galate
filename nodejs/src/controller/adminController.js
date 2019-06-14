@@ -83,11 +83,10 @@ _publics.createCategory = (category) => {
     var id=req.query.id;
     return new Promise((resolve, reject) => { 
              var msg=""; 
-             var sql = "delete from   category where id=?";
+             var sql = "delete from category where id=?";
              con.query(sql,[id], function (err, result) {
               if (err){
                 msg="failure";
-                reject(err);
               }else{
                 msg="success";
               }

@@ -50,12 +50,12 @@ export class AnswerComponent  implements OnInit{
 
 
   deleteByid(answer:Answer):void {
-    if(confirm("êtes-vous sûr de vouloir supprimer le cette answer ")) {
+    if(confirm("êtes-vous sûr de vouloir supprimer cette réponse !")) {
       this.answerService.deleteAnswer(answer.id).subscribe(
         data=>{
           alert("Suppression avec succès");
 
-          this.router.navigate(['pages/answer'])
+          this.router.navigate(['pages/answer/',this.id,'question'])
           this.answerService.getAnswerByQuestionId(this.id).subscribe(
             data=>{
               this.answers=data;
@@ -66,7 +66,7 @@ export class AnswerComponent  implements OnInit{
           )
 
           this.answers=this.answers.filter(a=>a !==answer)
-          this.router.navigate(['pages/answer'])
+          this.router.navigate(['pages/answer/',this.id,'question'])
 
 
         },err =>{

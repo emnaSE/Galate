@@ -39,10 +39,10 @@ export class TestComponent  implements OnInit{
         data=>{
           if(data==="success"){
 
-            alert("cette test est lié à des sous categorie vous ne pouvez pas le supprimer");
+            alert("cette test est liée à des sous categorie vous ne pouvez pas le supprimer");
           }else
             if (data=="failure"){
-            alert("Vous ne pouvez pas supprimer ce test car il est lieé a categorie");
+            alert("Vous ne pouvez pas supprimer ce test !");
 
           }
           this.router.navigate(['pages/test'])
