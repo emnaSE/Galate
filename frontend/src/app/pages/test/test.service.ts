@@ -107,5 +107,16 @@ export class TestService {
     return this.http.post(this.url+'duplicateTest',JSON.stringify(test),{responseType: 'text'});
   }
 
+
+
+
+  deleteafect(id:number,idSub:number):Observable<Object>{
+    return this.http.get(this.url+'removeAffectation_SubcategoryToTest?testId='+id+'&subcategoryId='+idSub,{responseType: 'text'});
+  }
+
+  addAfect(id:number,idSub):Observable<Object>{
+    return this.http.post(this.url+'AffectSubcategoryToTest?testId='+id+'&subcategoryId='+idSub,JSON.stringify(id),{responseType: 'text'});
+  }
+
 }
 

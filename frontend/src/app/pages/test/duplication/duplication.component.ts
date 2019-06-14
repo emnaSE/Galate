@@ -13,6 +13,7 @@ import {Ecole} from "../../ecole/ecole.model";
 export class DuplicationComponent implements OnInit {
   dropdownList = [];
   tests:Test[];
+  submitted=false;
   selectedItems = [];
   dropdownSettings = {};
   addForm:FormGroup;
@@ -54,6 +55,7 @@ export class DuplicationComponent implements OnInit {
     return this.addForm.controls;
   }
   onSubmit(){
+    this.submitted=true;
     let data = {...this.addForm.value}
     console.log(data);
     data.id_test=data.id_test.map(t=>{
