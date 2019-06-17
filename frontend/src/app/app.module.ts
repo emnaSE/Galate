@@ -19,6 +19,7 @@ import {RegistreComponent} from "./pages/auth/registre/registre.component";
 import {AuthModule} from "./pages/auth/auth.module";
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
+
 @NgModule({
   declarations: [AppComponent],
   imports: [

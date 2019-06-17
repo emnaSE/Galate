@@ -16,7 +16,7 @@ export class CreateTestComponent implements OnInit {
   p_error:number;
   id:number;
   local:any;
-
+  err=1;
   submitted = false;
   editMode=false;
   erreur:number;
@@ -82,6 +82,7 @@ export class CreateTestComponent implements OnInit {
       console.log(this.valid.activation_date.value);
       console.log(this.valid.expiration_date.value);
       if(this.addForm.valid){
+        console.log(this.valid.activation_date.value);
         this.testService.updateTest(this.id,this.addForm.value).subscribe(
           data=>{
             alert("update avec succes");
@@ -102,6 +103,8 @@ export class CreateTestComponent implements OnInit {
       }
     }
   }
+
+
 
 consultezCategorie(){
 

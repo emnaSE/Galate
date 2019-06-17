@@ -15,6 +15,7 @@ import { TestOrderComponent } from './test-order/test-order.component';
 import { AddOrderComponent } from './test-order/add-order/add-order.component';
 import {Ng2SmartTableModule} from "ng2-smart-table";
 import { DuplicationComponent } from './duplication/duplication.component';
+import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 
 
 const components = [
@@ -31,7 +32,7 @@ const components = [
     NgxPaginationModule,
     AngularMultiSelectModule,
     Ng2SmartTableModule,
-
+    NgbModule,
     BsDatepickerModule.forRoot(),
   ],
   declarations: [
