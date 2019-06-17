@@ -81,8 +81,11 @@ router.get('/getEtalonnageById', urlencodedParser, (req, res, next) =>
 .catch(next));*/
 
 
-router.get('/getSum',(req, res, next)=>calculController
-.getSumByOrder(req)
+router.get('/getSum',(req, res, next)=>
+ adminController.getTestSubcategoriesByTestId(req.query.id_test)
+.then(testSubcategories=>{
+    return calculController.getSumByOrder(req,testSubcategories);
+})
 .then(sum=>{
     res.send(sum);
 })
@@ -129,7 +132,10 @@ router.post('/saveTestResult',(req, res, next)=>memberController
 })
 */
 .then(response=>{
-    return calculController.getSumByOrder(req);
+    return adminController.getTestSubcategoriesByTestId(req.query.id_test);
+})
+.then(testSubcategories=>{
+    return calculController.getSumByOrder(req, testSubcategories);
 })
 .then(sum => {
     res.payload.sum=sum;

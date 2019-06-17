@@ -197,7 +197,6 @@ export class StartTestComponent  implements OnInit{
     } , error => console.log('err'+error));
   }
 
-  
- 
+
 }
 

@@ -127,7 +127,7 @@ export class CreateQuestionComponent implements OnInit {
       if(this.addForm.valid){
         this.questionService.updateById(this.id,data).subscribe(
           data=>{
-            alert("update avec succes")
+            alert("Modifiée avec succès")
           },err=>{
             console.log(err);
           }
@@ -137,8 +137,8 @@ export class CreateQuestionComponent implements OnInit {
       if ( this.addForm.valid){
         this.questionService.addQuestion(data).subscribe(
           data=>{
-            alert("ajouter avec succes ");
-            alert("veuillez ajouter autre réponse svp");
+            alert("ajout avec succès ");
+            alert("veuillez ajouter une autre réponse svp!");
           },err=>{
             console.log(err);
           }
@@ -152,7 +152,7 @@ export class CreateQuestionComponent implements OnInit {
 
           this.questionService.addQuestionByIdSub(this.id,this.test_id,this.addForm.value).subscribe(
             data=>{
-              alert("suucess");
+              alert("succes");
             },err=>{
               console.log(err);
             }

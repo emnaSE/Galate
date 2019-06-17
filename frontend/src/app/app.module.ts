@@ -14,10 +14,10 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ThemeModule } from './@theme/theme.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import {AuthComponent} from "./pages/auth/auth.component";
-import {RegistreComponent} from "./pages/auth/registre/registre.component";
 import {AuthModule} from "./pages/auth/auth.module";
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { AlertsModule } from 'angular-alert-module';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 
 @NgModule({
@@ -32,10 +32,15 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
     ThemeModule.forRoot(),
     CoreModule.forRoot(),
     BsDatepickerModule.forRoot(),
+    AlertsModule.forRoot(),
+    ModalModule.forRoot(),
+  
   ],
-  bootstrap: [AppComponent],
+    
+  bootstrap: [AppComponent ],
   providers: [
     { provide: APP_BASE_HREF, useValue: '/' },
+   
   ],
 })
 export class AppModule {

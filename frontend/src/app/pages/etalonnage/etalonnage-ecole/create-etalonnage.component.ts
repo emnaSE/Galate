@@ -90,7 +90,7 @@ export class CreateEtalonnageComponent implements OnInit {
       if (this.addForm.valid){
         this.etalonnageService.updateEtalonnage(this.id, data).subscribe(
           data=>{
-            alert("update avec succes");
+            alert("Modification avec succes");
             this.router.navigate(['pages/etalonnage']);
           },err=>{
             console.log(err)
@@ -102,7 +102,7 @@ export class CreateEtalonnageComponent implements OnInit {
       if(this.addForm.valid){
         this.etalonnageService.addEtalongae(data).subscribe(
           data=>{
-            alert("ad avec suuces");
+            alert("Ajout avec succes");
             this.router.navigate(['pages/etalonnage']);
           },err=>{
             console.log(err);

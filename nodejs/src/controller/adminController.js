@@ -17,7 +17,7 @@ const perf = require('execution-time')();
 _publics.getAllCategories = (req) => { 
   
   return new Promise((resolve, reject) => {  
-           var sql = "select * FROM category"; 
+           var sql = "select * FROM category order by id DESC"; 
          
                con.query(sql, function (err, result) {
                if (err) reject(err);
@@ -83,11 +83,10 @@ _publics.createCategory = (category) => {
     var id=req.query.id;
     return new Promise((resolve, reject) => { 
              var msg=""; 
-             var sql = "delete from   category where id=?";
+             var sql = "delete from category where id=?";
              con.query(sql,[id], function (err, result) {
               if (err){
                 msg="failure";
-                reject(err);
               }else{
                 msg="success";
               }
@@ -102,7 +101,7 @@ _publics.createCategory = (category) => {
 _publics.getAllClasses = (req) => { 
   
   return new Promise((resolve, reject) => {  
-           var sql = "select c.*, s.name as school FROM clazz c left join school s on(s.id=c.id_school)"; 
+           var sql = "select c.*, s.name as school FROM clazz c left join school s on(s.id=c.id_school) order by id DESC"; 
          
                con.query(sql, function (err, result) {
                if (err) reject(err);
@@ -221,7 +220,7 @@ _publics.getAllClassesByIdSchool = (req) => {
  _publics.getAllSchools = (req) => { 
   
   return new Promise((resolve, reject) => {  
-           var sql = "select * FROM school"; 
+           var sql = "select * FROM school order by id DESC"; 
          
                con.query(sql, function (err, result) {
                if (err) reject(err);
@@ -353,6 +352,19 @@ _publics.getAllSubcategoriesByCategory = (req) => {
                });
    });    
 };
+
+_publics.getAllSubcategoriesByCategoryId = (req) => { 
+  var idCategory=req.query.idCategory;
+  return new Promise((resolve, reject) => {  
+           var sql = "select * FROM subcategory  where id_category=? "; 
+         
+               con.query(sql,[idCategory], function (err, result) {
+               if (err) reject(err);
+               return resolve(JSON.stringify(result));
+               });
+   });    
+};
+
 _publics.createSubCategory = (subcategory) => { 
     var subcategory=JSON.parse(subcategory)
     var name=subcategory.name;
@@ -529,16 +541,16 @@ _publics.getTestSubcategoryByTestIdAndSubcateoryId = (req) => {
 
 _publics.updateQuestion=(req,question) => { 
   var question=JSON.parse(question);
-  var name=question.name;
+  /*var name=question.name;
   var wording=question.wording;
+  var id_test_subcategory=question.id_test_subcategory;*/
   var value=question.value;
   var ordre=question.ordre;
   var question_id=req.query.id;
-  var id_test_subcategory=question.id_test_subcategory;
   return new Promise((resolve, reject) => { 
            var msg="";
-           var sql = "UPDATE question SET name=?, wording=?,value=?,id_test_subcategory=?,ordre=?  WHERE id = ?"; 
-           con.query(sql,[name,wording,value,id_test_subcategory,ordre,question_id], function (err, result) {
+           var sql = "UPDATE question SET value=?,ordre=?  WHERE id = ?"; 
+           con.query(sql,[value,ordre,question_id], function (err, result) {
               if (err){
                   msg="failure";
                   reject(err);
@@ -567,10 +579,10 @@ _publics.deleteQuestion = (req) => {
         });    
 };
 
-_publics.getAllQuestion = (req) => { 
+_publics.getAllQuestions = (req) => { 
   
   return new Promise((resolve, reject) => {  
-           var sql = "select * FROM question "; 
+           var sql = "select q.*, t.name as test, sc.name as subcategory  FROM question q left join test_subcategory tsc on(q.id_test_subcategory=tsc.id) left join subcategory sc on(sc.id=tsc.id_subcategory) left join test t on(t.id=tsc.id_test) order by id DESC"; 
          
                con.query(sql, function (err, result) {
                if (err) reject(err);
@@ -582,7 +594,7 @@ _publics.getAllQuestion = (req) => {
 _publics.getAllQuestionsByIdTestSubcategory = (req) => { 
  var idTestSubcategory=req.query.idTestSubcategory;
     return new Promise((resolve, reject) => {  
-             var sql = "select q.* FROM question q left join test_subcategory ts on (ts.id=q.id_test_subcategory) where ts.id=?"; 
+             var sql = "select q.* FROM question q left join test_subcategory ts on (ts.id=q.id_test_subcategory) where ts.id=? order by ordre"; 
            
                  con.query(sql,[idTestSubcategory], function (err, result) {
                  if (err) reject(err);
@@ -683,8 +695,9 @@ _publics.createAnswers = (questionId, answers ) => {
   return Promise.all(promises)      
 }; 
 
+
+
 _publics.updateAnswer=(req,answer) => { 
-  console.log("answer= "+answer);
   var answer=JSON.parse(answer);
   var id_question=answer.id_question;
   var name=answer.name;
@@ -693,8 +706,8 @@ _publics.updateAnswer=(req,answer) => {
   var answer_id=req.query.id;
   return new Promise((resolve, reject) => { 
            var msg="";
-           var sql = "UPDATE answer SET id_question=?, name=?,value=?,ordre=?  WHERE id = ?"; 
-           con.query(sql,[id_question,name,value,ordre,answer_id], function (err, result) {
+           var sql = "UPDATE answer SET name=?,value=?,ordre=?  WHERE id = ?"; 
+           con.query(sql,[name,value,ordre,answer_id], function (err, result) {
               if (err){
                   msg="failure";
                   reject(err);
@@ -785,7 +798,7 @@ _publics.getTestById = (req) => {
 
 _publics.getAllTests = (req) => {  
   return new Promise((resolve, reject) => {  
-           var sql = "select * FROM test";          
+           var sql = "select * FROM test order by id DESC";          
                con.query(sql, function (err, result) {
                if (err) reject(err);
                return resolve(JSON.stringify(result));
@@ -970,7 +983,38 @@ _publics.AffectSubcategoriesToTest = (testId, subcategoriesList, questionsNumber
 }
 
 
-_publics.RemoveAffectationCategoriesToTest = (testId, categoriesList) => {
+_publics.removeAffectationSubcategoryToTest=(testId, subcategoryId) => {
+  var bool=false;
+  return new Promise((resolve, reject) => {
+    var msg="";
+      var sql = "delete from test_subcategory where id_test=? and id_subcategory=? ";
+      con.query(sql,[testId,subcategoryId], function (err, result) {
+        if (err){
+          msg="failed";
+        }else{
+          msg="success";
+        }     
+        return resolve(msg);
+      });   
+    });
+}
+
+_publics.AffectSubcategoryToTest = (testId, subcategoryId) => {
+  var msg="";
+  return new Promise((resolve, reject) => {
+      var sql = "INSERT INTO test_subcategory SET? ";
+      con.query(sql,{id_test:testId,id_subcategory:subcategoryId}, function (err, affectation) {
+        if (err){
+          msg="failed"; 
+          }else{
+            msg="success";  
+          }
+          return resolve(msg);
+      });   
+    });
+}
+
+_publics.removeAffectationCategoriesToTest = (testId, categoriesList) => {
   let promises = [];
   let response;
   for(var i=0;i<categoriesList.length;i++){
@@ -997,20 +1041,7 @@ _publics.RemoveAffectationSubcategoriesToTest = (testId, subcategoriesList) => {
   }
   return Promise.all(promises)
 }
-// duplicate test
-_publics.getFirstTest = () => { 
-  return new Promise((resolve, reject) => { 
-  var sql = "select * from test order by id asc";
-  con.query(sql, function (err, result) {
-          if (err){
-            reject(err);
-          }else{
-            return resolve(result);
-          }
-          
-     });
-});      
-}; 
+ 
 
 _publics.getTestCategoryByTestId = (testId) => { 
 
@@ -1030,7 +1061,7 @@ _publics.getTestCategoryByTestId = (testId) => {
 _publics.getTestSubcategoriesByTestId = (testId) => { 
   perf.start();
   return new Promise((resolve, reject) => { 
-  var sql = "select * from test_subcategory where id_test=?";
+  var sql = "select * from test_subcategory where id_test=? order by ordre";
   con.query(sql,[testId], function (err, result) {
           if (err){
             reject(err);
@@ -1098,17 +1129,23 @@ _publics.getAnswersByQuestions = (questions ) => {
   return Promise.all(promises)      
 }; 
 
-_publics.duplicateTest = (test) => { 
+_publics.duplicateTest = (testName,test) => { 
   
-  var name=test.name;
+  //var name=test.name;
+  var name=testName;
   var test_subcategories_number=test.test_subcategories_number;
   var password =test.password;
   var activation_date=test.activation_date;
   var expiration_date=test.expiration_date;
+  activation_date=activation_date.replace(/T/, ' ').replace(/\..+/, '');
+  expiration_date=expiration_date.replace(/T/, ' ').replace(/\..+/, '');
+  var duration=test.duration;
+
+
   return new Promise((resolve, reject) => { 
   var response={};
   var sql = "insert into test set ? ";
-  const newTest = { name: name,test_subcategories_number:test_subcategories_number,password:password,activation_date:activation_date,expiration_date:expiration_date};         
+  const newTest = { name: name,test_subcategories_number:test_subcategories_number,password:password,activation_date:activation_date,expiration_date:expiration_date,duration:duration};         
   con.query(sql,newTest, function (err, result) {
         if (err){
           response={
@@ -1176,8 +1213,200 @@ _publics.duplicateTestSubCategory = (testSubcategory,testId ) => {
 
 
 
+_publics.duplicateTestSubCategories = ( res, testSubcategories,testId ) => { 
+  let promises = [];
+  for (var i=0; i<testSubcategories.length;i++) {
+    promises.push(new Promise((resolve, reject) => {
+      var response=duplicateTestSubCategories( res, testSubcategories[i], testId);
+     return resolve(response);
+    }
+    ));
+  }
+  return Promise.all(promises)
+   
+}; 
+
+function duplicateTestSubCategories( res, testSubcategory, testId ) { 
+  return new Promise((resolve, reject) => { 
+    var response=duplicateTestSubCategory(testSubcategory.testSubcategory, testId);
+        return resolve(response);
+      })
+        .then(message =>{
+          return new Promise((resolve, reject) => { 
+              if (message.msg === "success") {
+                var response= duplicateQuestionAndAnswers(testSubcategory.testSubcategory.id, res, testSubcategory.questions,message.testSubCategId);
+                return resolve(response);
+              } else {
+                return resolve("failure");
+              }
+          })
+        })
+        .then(message=>{
+          return new Promise((resolve, reject) => { 
+            return resolve(message);
+          })
+        });
+
+}
 
 
+ async function duplicateTestSubCategory(testSubcategory,testId ){
+  return new Promise((resolve, reject) => {
+    var msg="";
+    var response={};
+    var sql = "INSERT INTO test_subcategory SET ?";
+    con.query(sql,{id_category:testSubcategory.id_category,id_subcategory:testSubcategory.id_subcategory,id_test:testId,questions_number:testSubcategory.questions_number,wording:testSubcategory.wording, ordre:testSubcategory.ordre}, function (err, result) {
+      if (err){
+        response={
+          msg:"failure"
+        }
+          reject(err);
+        }else{
+          response={
+            msg:"success",
+            testSubCategId:result.insertId
+          }
+        }
+        return resolve(response);
+    });
+  }
+  );
+   
+}; 
+
+function duplicateQuestionAndAnswers(idLasttestSubcategory, res, questions,testSubCategId){
+    let promises = [];
+    for (var i=0;i<questions.length;i++) {
+        promises.push( new Promise((resolve, reject) => {       
+            var response=createQuestionAndAnswers(idLasttestSubcategory,questions[i], testSubCategId, res );
+            return resolve(response);
+        }));
+    }
+    return Promise.all(promises);       
+}
+
+function createAnswers (questionId, answers ) { 
+  if(answers[0]===undefined){
+    return;
+  }
+  let promises = [];
+  for (var i in answers) {
+    promises.push(new Promise((resolve, reject) => {
+      var msg="";
+      var sql = "INSERT INTO answer SET ? ";
+      const answer = { id_question:questionId,name:answers[i].name,value:answers[i].value,ordre:answers[i].ordre};
+      con.query(sql,answer, function (err, result) {
+         if (err){
+             msg="failure";
+             reject(err);
+           }else{
+             msg="success";
+           }
+           
+       return resolve(msg);
+      });
+    }
+    ));
+  }
+  return Promise.all(promises)      
+}; 
+
+
+function createQuestionAndAnswers(idLasttestSubcategory,input, testSubCategId, res ) { 
+  return new Promise((resolve, reject) => { 
+      getQuestionById(input)
+      .then(question=>{
+      return createQuestion(question, testSubCategId, res);
+      })
+      .then(message =>{
+
+          if (message.msg === "success") {
+            return createAnswers(message.questionId, input);
+          } else {
+              return "failure";
+          }
+      })
+      .then(message=>{
+        if(res.payload.leave===true){
+          return resolve("failure");
+        }else{
+          return resolve("success");
+        }
+
+      });
+  });
+}
+
+function getQuestionById(input){ 
+  
+  return new Promise((resolve, reject) => {  
+    if(input[0]===undefined){
+      return resolve(null);
+    }
+    var questionId=input[0].id_question;
+           var sql = "select * FROM question where id=?"; 
+               con.query(sql,[questionId], function (err, result) {
+               if (err) reject(err);
+               return resolve(JSON.stringify(result[0]));
+               });
+   });    
+};
+
+/*function createQuestionAndAnswers(input, req, res ) { 
+
+  createQuestion(JSON.stringify(input), req, res)
+  .then(message =>{
+    console.log("create question ==>"+message.msg);
+    if (message.msg === "success") {
+      return createAnswers(message.questionId, JSON.parse(input).answers);
+  } else {
+       return "failure";
+  }
+  });
+
+}*/
+
+
+
+
+
+
+function createQuestion (question,testSubCategId, res ){ 
+  var question=JSON.parse(question);
+  return new Promise((resolve, reject) => {  
+          if(question===null){
+            return resolve("failure");
+          }else{
+              var response={};
+               
+              
+              var name=question.name;
+              var wording=question.wording;
+              var value=question.value;  
+              var id_test_subcategory=testSubCategId;
+              var order=question.ordre; 
+              var sql = "INSERT INTO question SET ? ";
+              const newQuestion = { name: name,wording:wording,value:value,id_test_subcategory:id_test_subcategory,ordre:order};
+              con.query(sql,newQuestion, function (err, result) {
+                  if (err){
+                    response={
+                      msg:"failure"
+                    }
+                      reject(err);
+                    }else{
+                      response={
+                        msg:"success",
+                        questionId:result.insertId
+                      }
+                      
+                    }
+                return resolve(response);
+              });
+            }
+  });   
+
+      
+};
 
 _publics.duplicateQuestion = (question,testSubcategoryId ) => { 
 
@@ -1425,35 +1654,48 @@ _publics.getQuestionsBySubcategories = (testSubcategories) => {
 
 
 
-_publics.duplicateQuestionAndAnswers = (questions,testSubCategId) => { 
+/*_publics.duplicateQuestionAndAnswers = (questions,testSubCategId) => { 
   let promises = [];
   for (var i=0;i<questions.length;i++) {
+    var data=JSON.stringify(questions[i]);
     promises.push( 
-       new Promise((resolve, reject) => request.post({
-      url :url+`/admin/createQuestionAndAnswers?testSubCategId=${testSubCategId}`,
-      method: 'POST',
-      gzip: true,
-      json: true,
-      rejectUnauthorized: false,
-      headers: {
-        'Content-Type': 'application/json',
-        'Content-Length': Buffer.byteLength(JSON.stringify(questions)),
-        //'Content-Length': Buffer.byteLength("{\"questions\":[{\"question\":{\"id\":1,\"name\":\"question1\",\"wording\":\"frensh\",\"value\":1,\"id_test_subcategory\":1},\"answers\":[{\"id\":1,\"id_question\":1,\"value\":\"1\",\"name\":\"Dymanique\",\"ordre\":1},{\"id\":2,\"id_question\":1,\"value\":\"1\",\"name\":\"Energique\",\"ordre\":2}]},"+
-       //"{\"questions\":[{\"question\":{\"id\":1,\"name\":\"question1\",\"wording\":\"frensh\",\"value\":1,\"id_test_subcategory\":1},\"answers\":[{\"id\":1,\"id_question\":1,\"value\":\"1\",\"name\":\"Dymanique\",\"ordre\":1},{\"id\":2,\"id_question\":1,\"value\":\"1\",\"name\":\"Energique\",\"ordre\":2}]}]}")
-    }
-    }, (e, r, b) => {
-      if (!e && r.statusCode == 200) {
-        console.log("wawwwwwwwwwwww");
-        return resolve(JSON.parse(b));
-      } else {
-        console.log("looooooooooooool"+r.statusCode+" eroor= "+e);
-        reject(e);
-      }
-    }))
-    )
-    ;
+      new Promise((resolve, reject) => request.post({
+     url :url+`/admin/createQuestionAndAnswers?testSubCategId=${testSubCategId}`,
+     method: 'POST',
+     gzip: true,
+     json: true,
+     rejectUnauthorized: false,
+     headers: {
+       'Content-Type': 'application/json',
+       'Content-Length': Buffer.byteLength(data),
+       //'Content-Length': Buffer.byteLength("{\"questions\":[{\"question\":{\"id\":1,\"name\":\"question1\",\"wording\":\"frensh\",\"value\":1,\"id_test_subcategory\":1},\"answers\":[{\"id\":1,\"id_question\":1,\"value\":\"1\",\"name\":\"Dymanique\",\"ordre\":1},{\"id\":2,\"id_question\":1,\"value\":\"1\",\"name\":\"Energique\",\"ordre\":2}]},"+
+      //"{\"questions\":[{\"question\":{\"id\":1,\"name\":\"question1\",\"wording\":\"frensh\",\"value\":1,\"id_test_subcategory\":1},\"answers\":[{\"id\":1,\"id_question\":1,\"value\":\"1\",\"name\":\"Dymanique\",\"ordre\":1},{\"id\":2,\"id_question\":1,\"value\":\"1\",\"name\":\"Energique\",\"ordre\":2}]}]}")
+   }
+   }, (e, r, b) => {
+     if (!e && r.statusCode == 200) {
+       console.log("yessssssssssssssss");
+       return resolve(JSON.parse(b));
+     } else {
+       console.log("errreuuuuuuuuuuuuur "+r.statusCode+" eroor= "+e);
+       reject(e);
+     }
+   }))
+   );
   }
   return Promise.all(promises)      
+
+};*/
+
+_publics.duplicateQuestionAndAnswers = (req, res, questions,testSubCategId) => {
+  req.query.testSubCategId= testSubCategId;
+  let promises = [];
+  for (var i=0;i<questions.length;i++) {
+      promises.push( new Promise((resolve, reject) => {  
+          var response=createQuestionAndAnswers(JSON.stringify(questions[i]), req, res );
+          return resolve(response);
+      }));
+  }
+  return Promise.all(promises);     
 
 };
 
@@ -1679,8 +1921,8 @@ _publics.getSubcategoryByMemberAndTestID = (req) => {
               data5.att('ss:Type', 'String'); 
               
                ///createResultSubCat(data5 , subcategories , memberResult)
+             //data5.txt(memberResult[i]===null ? " " : memberResult[i].etallonage_result) ; 
               data5.txt(memberResult[i].etallonage_result) ; 
-            
               
             data5.up();
           subcategory.up();          
@@ -1743,14 +1985,16 @@ _publics.generateXMLFile = (input,req , res  ) => {
      var table =  worksheet.ele('ss:Table');
      table.att('ss:DefaultRowHeight', '15');   
      table.att('ss:DefaultColumnWidth', '60');
-     table.att('ss:ExpandedRowCount', 3+input.members.length);
-     table.att('ss:ExpandedColumnCount', 3+input.subcategories.length) ; 
+     table.att('ss:ExpandedRowCount', 15+input.members.length);
+     table.att('ss:ExpandedColumnCount', 15+input.subcategories.length) ; 
        var row = table.ele('Row');
           var cell1 =row.ele('Cell');
             cell1.att('ss:StyleID' , 'S21')
+                
               var data1 = cell1.ele('Data');
                   data1.att('ss:Type', 'String') ;
-                  data1.txt('nom')  ;
+                  data1.txt('Nom')  ;
+
               data1.up();
             cell1.up();
 
@@ -1758,7 +2002,7 @@ _publics.generateXMLFile = (input,req , res  ) => {
           cell2.att('ss:StyleID' , 'S21')
             var data2 = cell2.ele('Data');
                 data2.att('ss:Type', 'String') ;
-                data2.txt('prenom')  ;
+                data2.txt('Prenom')  ;
             data2.up();
           cell2.up();
 
@@ -1766,11 +2010,57 @@ _publics.generateXMLFile = (input,req , res  ) => {
            cell3.att('ss:StyleID' , 'S21')
             var data3 = cell3.ele('Data');
                 data3.att('ss:Type', 'String') ;
-                data3.txt('age')  ;
+                data3.txt('Age')  ;
             data3.up();
           cell3.up();
 
+          var cell31 =row.ele('Cell');
+          cell31.att('ss:StyleID' , 'S21')
+           var data31 = cell31.ele('Data');
+           data31.att('ss:Type', 'String') ;
+           data31.txt('Email')  ;
+           data31.up();
+         cell31.up();
+
+
+         var cell012 =row.ele('Cell');
+         cell012.att('ss:StyleID' , 'S21')
+          var data012 = cell012.ele('Data');
+          data012.att('ss:Type', 'String') ;
+          data012.txt('Sexe')  ;
+          data012.up();
+        cell31.up();
+
+        var cell013 =row.ele('Cell');
+        cell013.att('ss:StyleID' , 'S21')
+         var data013 = cell013.ele('Data');
+         data013.att('ss:Type', 'String') ;
+         data013.txt('Ville')  ;
+         data013.up();
+       cell013.up();
+
+
+
+         var cell01 =row.ele('Cell');
+         cell01.att('ss:StyleID' , 'S21')
+          var data01 = cell01.ele('Data');
+              data01.att('ss:Type', 'String') ;
+              data01.txt('Niveau_etude')  ;
+          data01.up();
+        cell01.up();
+
+        var cell08 =row.ele('Cell');
+        cell08.att('ss:StyleID' , 'S21')
+         var data08 = cell08.ele('Data');
+             data08.att('ss:Type', 'String') ;
+             data08.txt('Ecole')  ;
+         data08.up();
+       cell08.up();
+
+
          
+    
+   
 
         for (var i=0;i<input.subcategories.length;i++) {
           var subcategory =row.ele('Cell')
@@ -1811,6 +2101,54 @@ _publics.generateXMLFile = (input,req , res  ) => {
                   data3.up();
                 cell3.up();
 
+
+                var cell31 =row.ele('Cell');
+                cell31.att('ss:StyleID' , 'S21')
+                  var data31 = cell31.ele('Data');
+                      data31.att('ss:Type', 'String') ;
+                      data31.txt(input.members[i].email)  ;
+                  data31.up();
+                cell31.up();
+
+                
+                var cell012 =row.ele('Cell');
+                cell012.att('ss:StyleID' , 'S21')
+                  var data012 = cell012.ele('Data');
+                      data012.att('ss:Type', 'String') ;
+                      data012.txt(input.members[i].sexe)  ;
+                  data012.up();
+                cell012.up();
+               
+
+                var cell013 =row.ele('Cell');
+                cell013.att('ss:StyleID' , 'S21')
+                  var data013 = cell013.ele('Data');
+                      data013.att('ss:Type', 'String') ;
+                      data013.txt(input.members[i].city)  ;
+                  data013.up();
+                cell013.up();
+
+                var cell01 =row.ele('Cell');
+                cell01.att('ss:StyleID' , 'S21')
+                  var data01 = cell01.ele('Data');
+                      data01.att('ss:Type', 'String') ;
+                      data01.txt(input.members[i].clazz_name)  ;
+                  data01.up();
+                cell01.up();
+
+                var cell08 =row.ele('Cell');
+                cell08.att('ss:StyleID' , 'S21')
+                  var data08 = cell08.ele('Data');
+                      data08.att('ss:Type', 'String') ;
+                      data08.txt(input.members[i].school_name)  ;
+                  data08.up();
+                cell08.up();
+
+              
+               
+                
+               
+
                
 
            
@@ -1839,36 +2177,69 @@ var newData = data.substr(0, 21) + txt + data.substr(21) ;
             
                     var data = js2xmlparser.parse("details", input);*/
 
-                    var dir=tmp.tmpdir;
-                    console.log(dir);
-                    fs.writeFile(dir+'/MembersInformations.xml', newData, function(err) {
-                      if(err) {
-                          return console.log(err);
-                      }
-                      console.log("The file was saved!");   
-                  });
+                    try {
 
 
 
-                 var xmlFile = path.join(dir ,'/MembersInformations.xml');
-                 console.log(xmlFile);
-                  var stream = fs.createReadStream(xmlFile);
-
-                  res.writeHead(200, {'Content-disposition': 'attachment; filename=MembersInformations.xml'}); 
+                      var dir=tmp.tmpdir;
+                   
+                      console.log(dir);
+                      fs.writeFile(dir+'/MembersInformations.xml', newData, function(err) {
+                        if(err) {
+                            return console.log(err);
+                        }
+                        console.log("The file was saved!");   
+                    });
+  
+  
+  
+  
+               var xmlFile = path.join(dir ,'/MembersInformations.xml');
+                   console.log(xmlFile);
+                    var stream = fs.createReadStream(xmlFile);
+  
+                  res.writeHead(200, {'Content-disposition': 'attachment; filename=MembersInformations.xml'});
+                   
                   stream.once("close", function () {
-                    stream.destroy(); // makesure stream closed, not close if download aborted.
-                    fs.unlink(xmlFile, function (err) {
+                      stream.destroy(); // makesure stream closed, not close if download aborted.
+                      fs.unlink(xmlFile, function (err) {
+                        if (err) {
+                            console.error(err.toString());
+                        } else {
+                            console.warn(xmlFile + ' deleted');
+                        }
+                    });
+                  }).pipe(res);
+                /*  var path = require('path');
+                  var mime = require('mime');
+
+                  var file = dir+'/MembersInformations.xml';
+
+                  var filename = path.basename(file);
+                  var mimetype = mime.lookup(file);
+                
+                  res.setHeader('Content-disposition', 'attachment; filename='  + filename);
+                  res.setHeader('Content-type', mimetype);
+                
+                  var filestream = fs.createReadStream(file);
+                  filestream.pipe(res);
+                 /* filestream.once("close", function () {
+                    filestream.destroy(); 
+                    fs.unlink(file, function (err) {
                       if (err) {
                           console.error(err.toString());
                       } else {
-                          console.warn(xmlFile + ' deleted');
+                          console.warn(file + ' deleted');
                       }
                   });
-                }).pipe(res);
-                
+                }).pipe(res);*/
+                 
 
-            
-     
+                      
+                    } catch (error) {
+                      console.log(error);
+                    }
+
 
 
 
@@ -1883,7 +2254,7 @@ var newData = data.substr(0, 21) + txt + data.substr(21) ;
 _publics.getAllTestSubcategoriesByTestAndSubcategoryIds = (req) => {
   var tesId=req.query.testId;
   return new Promise((resolve, reject) => {  
-    var sql = "select sc.name,tsc.ordre from subcategory sc left join test_subcategory tsc on(sc.id=tsc.id_subcategory) where tsc.id_test=?";      
+    var sql = "select tsc.id as testSubcatId, sc.name,tsc.ordre from subcategory sc left join test_subcategory tsc on(sc.id=tsc.id_subcategory) where tsc.id_test=?";      
     con.query(sql,[tesId], function (err, result) {
     if (err) reject(err);
     return resolve(result);
@@ -1893,7 +2264,20 @@ _publics.getAllTestSubcategoriesByTestAndSubcategoryIds = (req) => {
 
 
 
-
+_publics.updateSubcategoriesOrder = (ordre, req) => {
+  return new Promise((resolve, reject) => {  
+    var sql = "update test_subcategory  set ordre=? where id=?"; 
+    var msg="";     
+    con.query(sql,[ordre, req.query.id], function (err, result) {
+    if (err){
+      msg="failed";
+    }else{
+      msg="success";
+    }
+    return resolve(msg);
+    });
+  }); 
+}
 
 
 

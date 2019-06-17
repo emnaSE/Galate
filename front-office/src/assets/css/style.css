@@ -169,7 +169,23 @@ footer { padding: 40px 0 45px 0; background: #f8f8f8; }
 	.features-box .features-box-icon { font-size: 50px; line-height: 50px; }
 
 }
-
+@media (max-width: 960px) {
+	body {
+		font-size: 13px !important;
+		}
+		.table td{
+			padding: 0 !important;
+		}
+		.table th{
+			padding: 7px !important;
+		}
+		#mobile{
+			display: block !important;
+		}
+		#desktop{
+			display: none;
+		}
+}
 @media (max-width: 767px) {
 	
 	.navbar { padding-top: 0; }
@@ -249,6 +265,7 @@ body {
 	line-height: 30px;
 	text-align: center;
 	}
+
 	
 	  /*--------------------*/
   
