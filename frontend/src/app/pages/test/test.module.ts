@@ -20,6 +20,7 @@ import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 
 
 import { AlertsModule } from 'angular-alert-module';
+import {TranslateModule} from "@ngx-translate/core";
 
 
 
@@ -35,11 +36,11 @@ const components = [
     FormsModule,
     TestRoutingModule,
     NgxPaginationModule,
+    TranslateModule,
     AngularMultiSelectModule,
     Ng2SmartTableModule,
     NgbModule,
-
-    BsDatepickerModule.forRoot(),
+     BsDatepickerModule.forRoot(),
     AlertsModule.forRoot(),
   ],
   declarations: [

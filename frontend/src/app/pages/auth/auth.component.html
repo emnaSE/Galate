@@ -62,19 +62,19 @@
       <img src="/assets/images/gal1.png" >
 </div>
 
-<h1 id="title" class="title">Connexion</h1>
+<h1 id="title" class="title" i18n="@@login">Connexion</h1>
 
 <p class="sub-title">bienvenue </p>
-<nb-alert outline="success" *ngIf="err==0" >Authentifié avec succès!</nb-alert>
+<nb-alert outline="success" *ngIf="err==0" i18n="@@loginAlert1" >Authentifié avec succès!</nb-alert>
 
-<nb-alert outline="danger" *ngIf="err==1" > Veuillez vérifier votre login et mot de passe svp</nb-alert>
+<nb-alert outline="danger" *ngIf="err==1" i18n="@@loginAlert2"> Veuillez vérifier votre login et mot de passe svp</nb-alert>
 
 
 <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" aria-labelledby="title">
 
 
   <div class="form-control-group">
-    <label class="label" for="username">Nom d'utilisateur:</label>
+    <label i18n="@@loginlabel" class="label" for="username">Nom d'utilisateur:</label>
     <input nbInput
            fullWidth
            type="text"
@@ -84,14 +84,14 @@
            autofocus
     >
     <ng-container *ngIf="submitted && formValid.pseudo.errors">
-      <p class="error-message" >
+      <p class="error-message" i18n="@@loginAlert3" >
         Nom d'utilisateur est obligatoire
       </p>
     </ng-container>
   </div>
 
   <div class="form-control-group">
-    <label class="label" for="password">Mot de passe:</label>
+    <label i18n="@@loginlabel3" class="label" for="password">Mot de passe:</label>
     <input nbInput
            fullWidth
            formControlName="password"
@@ -100,7 +100,7 @@
            placeholder="Password"
     >
     <ng-container *ngIf="submitted && formValid.password.errors ">
-      <p class="error-message" *ngIf="formValid.password.errors.required">
+      <p i18n="@@loginAlert5" class="error-message" *ngIf="formValid.password.errors.required">
         Mot de Passe est obligatoire
       </p>
 
@@ -118,7 +118,7 @@
   <button nbButton
           fullWidth
           status="success"
-
+          i18n="@@loginSubmit"
           [class.btn-pulse]="submitted">
     Se connecter
   </button>

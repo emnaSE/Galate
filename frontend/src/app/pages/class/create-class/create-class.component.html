@@ -1,15 +1,15 @@
 
 
 <nb-card>
-  <nb-card-header>
-    {{ editMode ? 'Modifier': 'Ajouter'}} classe
+  <nb-card-header >
+    {{ editMode ? 'Modifier': 'Ajouter'}} {{ 'CLAZZ.CREATE.classe' | translate }}
   </nb-card-header>
 
   <nb-card-body>
     <form [formGroup]="addForm" (ngSubmit)="onSubmit()">
 
       <div class="form-group">
-        <label for="name">Ecole</label>
+        <label  for="name"> {{ 'CLAZZ.CREATE.school' | translate }}</label>
         <angular2-multiselect [data]="dropdownList"
                               [(ngModel)]="selectedItems"
                               [settings]="dropdownSettings"
@@ -18,17 +18,17 @@
 
 
       <div class="form-group">
-        <label for="fnText">Nom du sous categorie</label>
+        <label  for="fnText">{{ 'CLAZZ.CREATE.Nom' | translate }}</label>
         <input type="text" class="form-control" formControlName="name" placeholder="Nom du sous categorie">
         <ng-container *ngIf="submitted && formvalidate.name.errors">
-          <p class="text-danger" >
-            Nom est obligatoire !
+          <p class="text-danger"  >
+            {{ 'CLAZZ.CREATE.alertNom' | translate }}
           </p>
         </ng-container>
       </div>
 
 
-      <button type="submit" class="btn btn-success">{{editMode ? 'Modifier':'Ajouter'}}</button>
+      <button type="submit" class="btn btn-success" >{{editMode ? 'Modifier':'Ajouter'}}</button>
     </form>
 
   </nb-card-body>

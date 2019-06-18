@@ -9,6 +9,7 @@ import {NgxPaginationModule} from 'ngx-pagination';
 import {NgMultiSelectDropDownModule} from "ng-multiselect-dropdown";
 import {AngularMultiSelectModule} from "angular2-multiselect-dropdown";
 import {UpdateQuestionComponent} from "./create-question/update-question.component";
+import {TranslateModule} from "@ngx-translate/core";
 
 @NgModule({
   imports: [
@@ -16,6 +17,7 @@ import {UpdateQuestionComponent} from "./create-question/update-question.compone
     FormsModule,
     NgxPaginationModule,
     AngularMultiSelectModule,
+    TranslateModule,
     NgMultiSelectDropDownModule.forRoot(),
   ],
   declarations: [

@@ -1,0 +1,1502 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="en" datatype="plaintext" original="ng2.template">
+    <body>
+      <trans-unit id="ngb.alert.close" datatype="html">
+        <source>Close</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/alert/alert.d.ts</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.carousel.previous" datatype="html">
+        <source>Previous</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/carousel/carousel.d.ts</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.carousel.next" datatype="html">
+        <source>Next</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/carousel/carousel.d.ts</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.datepicker.previous-month" datatype="html">
+        <source>Previous month</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/datepicker/datepicker-navigation.d.ts</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/datepicker/datepicker-navigation.d.ts</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.datepicker.next-month" datatype="html">
+        <source>Next month</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/datepicker/datepicker-navigation.d.ts</context>
+          <context context-type="linenumber">26</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/datepicker/datepicker-navigation.d.ts</context>
+          <context context-type="linenumber">27</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.datepicker.select-month" datatype="html">
+        <source>Select month</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/datepicker/datepicker-navigation-select.d.ts</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/datepicker/datepicker-navigation-select.d.ts</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.datepicker.select-year" datatype="html">
+        <source>Select year</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/datepicker/datepicker-navigation-select.d.ts</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/datepicker/datepicker-navigation-select.d.ts</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.pagination.first" datatype="html">
+        <source>««</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/pagination/pagination.d.ts</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.pagination.previous" datatype="html">
+        <source>«</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/pagination/pagination.d.ts</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.pagination.next" datatype="html">
+        <source>»</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/pagination/pagination.d.ts</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.pagination.last" datatype="html">
+        <source>»»</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/pagination/pagination.d.ts</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.pagination.first-aria" datatype="html">
+        <source>First</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/pagination/pagination.d.ts</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.pagination.previous-aria" datatype="html">
+        <source>Previous</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/pagination/pagination.d.ts</context>
+          <context context-type="linenumber">23</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.pagination.next-aria" datatype="html">
+        <source>Next</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/pagination/pagination.d.ts</context>
+          <context context-type="linenumber">41</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.pagination.last-aria" datatype="html">
+        <source>Last</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/pagination/pagination.d.ts</context>
+          <context context-type="linenumber">49</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.progressbar.value" datatype="html">
+        <source><x id="INTERPOLATION" equiv-text="{{getPercentValue()}}"/>%</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/progressbar/progressbar.d.ts</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.timepicker.increment-hours" datatype="html">
+        <source>Increment hours</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/timepicker/timepicker.d.ts</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.timepicker.HH" datatype="html">
+        <source>HH</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/timepicker/timepicker.d.ts</context>
+          <context context-type="linenumber">12</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.timepicker.hours" datatype="html">
+        <source>Hours</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/timepicker/timepicker.d.ts</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.timepicker.decrement-hours" datatype="html">
+        <source>Decrement hours</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/timepicker/timepicker.d.ts</context>
+          <context context-type="linenumber">21</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.timepicker.increment-minutes" datatype="html">
+        <source>Increment minutes</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/timepicker/timepicker.d.ts</context>
+          <context context-type="linenumber">30</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.timepicker.MM" datatype="html">
+        <source>MM</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/timepicker/timepicker.d.ts</context>
+          <context context-type="linenumber">33</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.timepicker.minutes" datatype="html">
+        <source>Minutes</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/timepicker/timepicker.d.ts</context>
+          <context context-type="linenumber">35</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.timepicker.decrement-minutes" datatype="html">
+        <source>Decrement minutes</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/timepicker/timepicker.d.ts</context>
+          <context context-type="linenumber">42</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.timepicker.increment-seconds" datatype="html">
+        <source>Increment seconds</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/timepicker/timepicker.d.ts</context>
+          <context context-type="linenumber">51</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.timepicker.SS" datatype="html">
+        <source>SS</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/timepicker/timepicker.d.ts</context>
+          <context context-type="linenumber">54</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.timepicker.seconds" datatype="html">
+        <source>Seconds</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/timepicker/timepicker.d.ts</context>
+          <context context-type="linenumber">56</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.timepicker.decrement-seconds" datatype="html">
+        <source>Decrement seconds</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/timepicker/timepicker.d.ts</context>
+          <context context-type="linenumber">63</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.timepicker.PM" datatype="html">
+        <source>PM</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/timepicker/timepicker.d.ts</context>
+          <context context-type="linenumber">71</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.timepicker.AM" datatype="html">
+        <source>AM</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/timepicker/timepicker.d.ts</context>
+          <context context-type="linenumber">72</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="login" datatype="html">
+        <source>Connexion</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/auth/auth.component.html</context>
+          <context context-type="linenumber">65</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="loginAlert1" datatype="html">
+        <source>Authentifié avec succès!</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/auth/auth.component.html</context>
+          <context context-type="linenumber">68</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="loginAlert2" datatype="html">
+        <source> Veuillez vérifier votre login et mot de passe svp</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/auth/auth.component.html</context>
+          <context context-type="linenumber">70</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="loginlabel" datatype="html">
+        <source>Nom d&apos;utilisateur:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/auth/auth.component.html</context>
+          <context context-type="linenumber">77</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="loginAlert3" datatype="html">
+        <source>
+        Nom d&apos;utilisateur est obligatoire
+      </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/auth/auth.component.html</context>
+          <context context-type="linenumber">87</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="loginlabel3" datatype="html">
+        <source>Mot de passe:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/auth/auth.component.html</context>
+          <context context-type="linenumber">94</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="loginAlert5" datatype="html">
+        <source>
+        Mot de Passe est obligatoire
+      </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/auth/auth.component.html</context>
+          <context context-type="linenumber">103</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="loginSubmit" datatype="html">
+        <source>
+    Se connecter
+  </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/auth/auth.component.html</context>
+          <context context-type="linenumber">122</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="dashboard" datatype="html">
+        <source>
+    <x id="MEDIA_LINK" ctype="x-link" equiv-text="&lt;link/&gt;"/>
+
+
+
+    Liste des Catégories
+
+
+
+  </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/dashboard/dashboard.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="dashAdd" datatype="html">
+        <source> Ajouter </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/dashboard/dashboard.component.html</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="dashlabel" datatype="html">
+        <source>Nom</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/dashboard/dashboard.component.html</context>
+          <context context-type="linenumber">23</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="dashlabel1" datatype="html">
+        <source>Nombre des sous Categories </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/dashboard/dashboard.component.html</context>
+          <context context-type="linenumber">24</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="dashlabel2" datatype="html">
+        <source>Action</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/dashboard/dashboard.component.html</context>
+          <context context-type="linenumber">25</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="dashlabel3" datatype="html">
+        <source>Nom</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/dashboard/dashboard.component.html</context>
+          <context context-type="linenumber">55</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="dashlabel4" datatype="html">
+        <source>Action</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/dashboard/dashboard.component.html</context>
+          <context context-type="linenumber">56</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="test" datatype="html">
+        <source>
+    Liste des tests
+    <x id="MEDIA_LINK" ctype="x-link" equiv-text="&lt;link/&gt;"/>
+  
+  
+
+  </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/test/test.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="testadd" datatype="html">
+        <source> Ajouter </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/test/test.component.html</context>
+          <context context-type="linenumber">25</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="testduplication" datatype="html">
+        <source> duplication test </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/test/test.component.html</context>
+          <context context-type="linenumber">27</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="testLabel" datatype="html">
+        <source>Nom</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/test/test.component.html</context>
+          <context context-type="linenumber">46</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="testLabel1" datatype="html">
+        <source>Date d&apos;activation</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/test/test.component.html</context>
+          <context context-type="linenumber">47</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="testLabel2" datatype="html">
+        <source>Date d&apos;éxpiration</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/test/test.component.html</context>
+          <context context-type="linenumber">48</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="testLabel3" datatype="html">
+        <source>Mot de passe</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/test/test.component.html</context>
+          <context context-type="linenumber">49</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="testLabel4" datatype="html">
+        <source>Nombre de test</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/test/test.component.html</context>
+          <context context-type="linenumber">50</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="testLabel5" datatype="html">
+        <source>Durée du test</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/test/test.component.html</context>
+          <context context-type="linenumber">51</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="testLabel6" datatype="html">
+        <source>Action </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/test/test.component.html</context>
+          <context context-type="linenumber">52</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="testLabel7" datatype="html">
+        <source>Affectation categorie</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/test/test.component.html</context>
+          <context context-type="linenumber">53</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="testLabel8" datatype="html">
+        <source>Affectation sous categorie</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/test/test.component.html</context>
+          <context context-type="linenumber">54</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="testLabel9" datatype="html">
+        <source>Generation fichier XML </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/test/test.component.html</context>
+          <context context-type="linenumber">55</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="testAlert" datatype="html">
+        <source>veuillez confirmer la suppression?</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/test/test.component.html</context>
+          <context context-type="linenumber">75</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="testConfir" datatype="html">
+        <source>OUI</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/test/test.component.html</context>
+          <context context-type="linenumber">76</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="testNon" datatype="html">
+        <source>NON</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/test/test.component.html</context>
+          <context context-type="linenumber">77</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="sousGategorie" datatype="html">
+        <source>
+    <x id="MEDIA_LINK" ctype="x-link" equiv-text="&lt;link/&gt;"/>
+
+
+    Liste des sous Catergories
+
+  </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/subcategorie/subcategorie.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="sousGategorieI" datatype="html">
+        <source> Ajouter </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/subcategorie/subcategorie.component.html</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="sousGategorieLabel" datatype="html">
+        <source>Nom</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/subcategorie/subcategorie.component.html</context>
+          <context context-type="linenumber">21</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="sousGategorieLabel1" datatype="html">
+        <source>Description</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/subcategorie/subcategorie.component.html</context>
+          <context context-type="linenumber">22</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="sousGategorieLabel2" datatype="html">
+        <source>Up_description</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/subcategorie/subcategorie.component.html</context>
+          <context context-type="linenumber">23</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="sousGategorieLabel3" datatype="html">
+        <source>Action</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/subcategorie/subcategorie.component.html</context>
+          <context context-type="linenumber">24</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="sousGategorieLabel7" datatype="html">
+        <source>Nom</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/subcategorie/subcategorie.component.html</context>
+          <context context-type="linenumber">54</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="sousGategorieLabel8" datatype="html">
+        <source>Consulter Sous Categories</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/subcategorie/subcategorie.component.html</context>
+          <context context-type="linenumber">55</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="dashCreateAlert" datatype="html">
+        <source>update avec success</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/dashboard/create-categorie/create-categorie.component.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="dashCreateAlert2" datatype="html">
+        <source>ajout avec success</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/dashboard/create-categorie/create-categorie.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="dashCreate" datatype="html">
+        <source>
+    <x id="INTERPOLATION" equiv-text="{{ editMode ? &apos;Modifier&apos;:&apos;Ajouter&apos;}}"/> categorie
+  </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/dashboard/create-categorie/create-categorie.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="dashCreateLabel" datatype="html">
+        <source>Nom du categorie</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/dashboard/create-categorie/create-categorie.component.html</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="dashCreateRequired" datatype="html">
+        <source>
+            Nom est obligatoire !
+          </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/dashboard/create-categorie/create-categorie.component.html</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="dashCreateLabel1" datatype="html">
+        <source>Nombre des sous categories</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/dashboard/create-categorie/create-categorie.component.html</context>
+          <context context-type="linenumber">23</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="dashCreateSubmit" datatype="html">
+        <source><x id="INTERPOLATION" equiv-text="{{ editMode ? &apos;Modifier&apos;:&apos;Ajouter&apos;}}"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/dashboard/create-categorie/create-categorie.component.html</context>
+          <context context-type="linenumber">28</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="sousGategorieCreate" datatype="html">
+        <source>
+    <x id="INTERPOLATION" equiv-text="{{ editMode ? &apos;Modifier&apos;: &apos;Ajouter&apos; }}"/> Sous catergorie
+    <x id="START_UNORDERED_LIST" ctype="x-ul" equiv-text="&lt;ul&gt;"/>
+      <x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;"/> Creation du question <x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/>
+    <x id="CLOSE_UNORDERED_LIST" ctype="x-ul" equiv-text="&lt;/ul&gt;"/>
+  </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/subcategorie/create-sous/create-sous.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="sousGategorieCreateLabel" datatype="html">
+        <source>Categorie</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/subcategorie/create-sous/create-sous.component.html</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="sousGategorieCreateLabel1" datatype="html">
+        <source>Nom du sous categories</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/subcategorie/create-sous/create-sous.component.html</context>
+          <context context-type="linenumber">22</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="sousGategorieCreateRequired" datatype="html">
+        <source>
+            Nom est obligatoire !
+          </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/subcategorie/create-sous/create-sous.component.html</context>
+          <context context-type="linenumber">25</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="sousGategorieCreateLabel2" datatype="html">
+        <source>Down Description</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/subcategorie/create-sous/create-sous.component.html</context>
+          <context context-type="linenumber">32</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="sousGategorieCreateRequired2" datatype="html">
+        <source>
+            description est obligatoire !
+          </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/subcategorie/create-sous/create-sous.component.html</context>
+          <context context-type="linenumber">35</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="sousGategorieCreateLabel3" datatype="html">
+        <source>Up Description</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/subcategorie/create-sous/create-sous.component.html</context>
+          <context context-type="linenumber">42</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="sousGategorieCreateRequired3" datatype="html">
+        <source>
+            description est obligatoire !
+          </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/subcategorie/create-sous/create-sous.component.html</context>
+          <context context-type="linenumber">45</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="sousGategorieCreateButton" datatype="html">
+        <source><x id="INTERPOLATION" equiv-text="{{ editMode ? &apos;Update&apos; : &apos;Ajouter&apos; }}"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/subcategorie/create-sous/create-sous.component.html</context>
+          <context context-type="linenumber">52</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="testCreate" datatype="html">
+        <source>
+    <x id="INTERPOLATION" equiv-text="{{ editMode ? &apos;Modifier&apos; : &apos;Ajouter&apos; }}"/>  Test
+
+   
+    <x id="START_TAG_NB-ALERT" ctype="x-nb-alert" equiv-text="&lt;nb-alert&gt;"/>You have been successfully authenticated!<x id="CLOSE_TAG_NB-ALERT" ctype="x-nb-alert" equiv-text="&lt;/nb-alert&gt;"/>
+
+
+    <x id="START_TAG_NG-TEMPLATE" ctype="x-ng-template" equiv-text="&lt;ng-template&gt;"/>
+      <x id="START_UNORDERED_LIST" ctype="x-ul" equiv-text="&lt;ul&gt;"/>
+        <x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;"/> Consulter Categories <x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/><x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br/&gt;"/>
+        <x id="START_ITALIC_TEXT_1" ctype="x-i" equiv-text="&lt;i&gt;"/> Consulter Sous Categories <x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/>
+      <x id="CLOSE_UNORDERED_LIST" ctype="x-ul" equiv-text="&lt;/ul&gt;"/>
+    <x id="CLOSE_TAG_NG-TEMPLATE" ctype="x-ng-template" equiv-text="&lt;/ng-template&gt;"/>
+
+  </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/test/create-test/create-test.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="testCreatelabel" datatype="html">
+        <source>Nom:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/test/create-test/create-test.component.html</context>
+          <context context-type="linenumber">26</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="testCreateRequired" datatype="html">
+        <source>
+            name  est obligatoire !
+          </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/test/create-test/create-test.component.html</context>
+          <context context-type="linenumber">29</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="testCreateLabel1" datatype="html">
+        <source>Date d&apos;activation:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/test/create-test/create-test.component.html</context>
+          <context context-type="linenumber">36</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="testCreateLabel2" datatype="html">
+        <source>Date expiration:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/test/create-test/create-test.component.html</context>
+          <context context-type="linenumber">48</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="testCreatelabel3" datatype="html">
+        <source>Nombre de sous categories:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/test/create-test/create-test.component.html</context>
+          <context context-type="linenumber">69</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="testCreateRequired2" datatype="html">
+        <source>
+            nombre de sous categorie  est obligatoire !
+          </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/test/create-test/create-test.component.html</context>
+          <context context-type="linenumber">72</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="testCreateLabel4" datatype="html">
+        <source>Durée du test:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/test/create-test/create-test.component.html</context>
+          <context context-type="linenumber">79</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="testCreaterequired3" datatype="html">
+        <source>
+            Durée du test est obligatoire !
+          </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/test/create-test/create-test.component.html</context>
+          <context context-type="linenumber">82</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="testCreatelabel5" datatype="html">
+        <source>Mot de passe:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/test/create-test/create-test.component.html</context>
+          <context context-type="linenumber">91</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="testCreateRequired4" datatype="html">
+        <source>
+            password est obligatoire !
+          </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/test/create-test/create-test.component.html</context>
+          <context context-type="linenumber">94</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="testCreateAdd" datatype="html">
+        <source><x id="INTERPOLATION" equiv-text="{{ editMode ? &apos;Modifier&apos; : &apos;Ajouter&apos; }}"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/test/create-test/create-test.component.html</context>
+          <context context-type="linenumber">104</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ecole" datatype="html">
+        <source>
+    Liste des écoles
+
+    <x id="MEDIA_LINK" ctype="x-link" equiv-text="&lt;link/&gt;"/>
+
+  </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/ecole/ecole.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ecoleadd" datatype="html">
+        <source> ajouter </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/ecole/ecole.component.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ecolelabel1" datatype="html">
+        <source>Nom</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/ecole/ecole.component.html</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ecolelabel2" datatype="html">
+        <source>Action</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/ecole/ecole.component.html</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="clazz" datatype="html">
+        <source>
+    Liste des Classes
+
+
+    <x id="MEDIA_LINK" ctype="x-link" equiv-text="&lt;link/&gt;"/>
+
+  </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/class/class.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="clazzadd" datatype="html">
+        <source> ajouter </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/class/class.component.html</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="clazzlabel" datatype="html">
+        <source>Nom</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/class/class.component.html</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="clazzlabel2" datatype="html">
+        <source>Nom de l&apos;école</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/class/class.component.html</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="clazzlabel3" datatype="html">
+        <source>Action</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/class/class.component.html</context>
+          <context context-type="linenumber">21</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ecoleCreate" datatype="html">
+        <source>
+    <x id="INTERPOLATION" equiv-text="{{ editMode ? &apos;Modifier&apos; : &apos;Ajouter&apos; }}"/> Ecole
+  </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/ecole/create-ecole/create-ecole.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ecolelabel" datatype="html">
+        <source>Nom de l&apos;école</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/ecole/create-ecole/create-ecole.component.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ecoleRequired" datatype="html">
+        <source>
+            nom est obligatoire !
+          </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/ecole/create-ecole/create-ecole.component.html</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ecoleButton" datatype="html">
+        <source><x id="INTERPOLATION" equiv-text="{{ editMode ? &apos;Modifier&apos; : &apos;Ajouter&apos; }}"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/ecole/create-ecole/create-ecole.component.html</context>
+          <context context-type="linenumber">23</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="etalonage" datatype="html">
+        <source>
+    Liste des Etalonnages
+    <x id="MEDIA_LINK" ctype="x-link" equiv-text="&lt;link/&gt;"/>
+
+  </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/etalonnage/etalonnage.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="etalonnageAdd" datatype="html">
+        <source> ajouter </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/etalonnage/etalonnage.component.html</context>
+          <context context-type="linenumber">12</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="etalonnageLabel" datatype="html">
+        <source>Sous categorie</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/etalonnage/etalonnage.component.html</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/etalonnage/etalonnage-ecole/create-etalonnage.component.html</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="etalonageLabel1" datatype="html">
+        <source>Borne inférieure</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/etalonnage/etalonnage.component.html</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="etalonagelabe2" datatype="html">
+        <source>Borne supérieure</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/etalonnage/etalonnage.component.html</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="etalonnage3" datatype="html">
+        <source>Valeur</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/etalonnage/etalonnage.component.html</context>
+          <context context-type="linenumber">21</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="etalonage4" datatype="html">
+        <source>Action</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/etalonnage/etalonnage.component.html</context>
+          <context context-type="linenumber">23</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="etalonnageCreate" datatype="html">
+        <source>
+    <x id="INTERPOLATION" equiv-text="{{ editMode ? &apos;Modifier&apos;: &apos;Ajouter&apos; }}"/>  Etalonage
+  </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/etalonnage/etalonnage-ecole/create-etalonnage.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="etalonnageCreateLabel" datatype="html">
+        <source>Borne inférieure</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/etalonnage/etalonnage-ecole/create-etalonnage.component.html</context>
+          <context context-type="linenumber">23</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="etalonnageCreateRequired" datatype="html">
+        <source>
+            borne inférieure est obligatoire !
+          </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/etalonnage/etalonnage-ecole/create-etalonnage.component.html</context>
+          <context context-type="linenumber">26</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="etalonnageCreateLabel1" datatype="html">
+        <source>Borne supérieure</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/etalonnage/etalonnage-ecole/create-etalonnage.component.html</context>
+          <context context-type="linenumber">32</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="etalonnageCreateRequired1" datatype="html">
+        <source>
+            borne supérieure est obligatoire !
+          </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/etalonnage/etalonnage-ecole/create-etalonnage.component.html</context>
+          <context context-type="linenumber">35</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="etalonnageCreateLabel2" datatype="html">
+        <source>Valeur</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/etalonnage/etalonnage-ecole/create-etalonnage.component.html</context>
+          <context context-type="linenumber">41</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="etalonnageCreateRequired2" datatype="html">
+        <source>
+            valeur est obligatoire !
+          </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/etalonnage/etalonnage-ecole/create-etalonnage.component.html</context>
+          <context context-type="linenumber">44</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="etalonnageCreateSubmit" datatype="html">
+        <source><x id="INTERPOLATION" equiv-text="{{ editMode ? &apos;Modifier&apos;: &apos;Ajouter&apos; }}"/> </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/etalonnage/etalonnage-ecole/create-etalonnage.component.html</context>
+          <context context-type="linenumber">51</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="testAffectationCat" datatype="html">
+        <source>
+    Affecter categorie
+  </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/test/affect-categorie/affect-categorie.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="testAffectationCatLabel" datatype="html">
+        <source>Categorie</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/test/affect-categorie/affect-categorie.component.html</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="testAffectationCatAdd" datatype="html">
+        <source>Ajouter</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/test/affect-categorie/affect-categorie.component.html</context>
+          <context context-type="linenumber">22</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="testAffectationSubCat" datatype="html">
+        <source>
+    Affecter Sous Categories
+    <x id="START_UNORDERED_LIST" ctype="x-ul" equiv-text="&lt;ul&gt;"/>
+
+      <x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;"/> affecter des orders <x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/>
+    <x id="CLOSE_UNORDERED_LIST" ctype="x-ul" equiv-text="&lt;/ul&gt;"/>
+  </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/test/affect-subcategorie/affect-subcategorie.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="testAffectationSubCatlabel" datatype="html">
+        <source>Sous Categories</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/test/affect-subcategorie/affect-subcategorie.component.html</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ceationClazz" datatype="html">
+        <source>
+    <x id="INTERPOLATION" equiv-text="{{ editMode ? &apos;Modifier&apos;: &apos;Ajouter&apos;}}"/> classe
+  </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/class/create-class/create-class.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ceationClazzlabel" datatype="html">
+        <source>Ecole</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/class/create-class/create-class.component.html</context>
+          <context context-type="linenumber">12</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ceationClazzlabel1" datatype="html">
+        <source>Nom du sous categorie</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/class/create-class/create-class.component.html</context>
+          <context context-type="linenumber">21</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ceationClazzalert" datatype="html">
+        <source>
+            Nom est obligatoire !
+          </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/class/create-class/create-class.component.html</context>
+          <context context-type="linenumber">24</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ceationClazzsubmit" datatype="html">
+        <source><x id="INTERPOLATION" equiv-text="{{editMode ? &apos;Modifier&apos;:&apos;Ajouter&apos;}}"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/class/create-class/create-class.component.html</context>
+          <context context-type="linenumber">31</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="question" datatype="html">
+        <source>
+    Liste des questions
+    <x id="MEDIA_LINK" ctype="x-link" equiv-text="&lt;link/&gt;"/>
+
+  </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/question/question.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="questionLabel" datatype="html">
+        <source>Valeur</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/question/question.component.html</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="questionLabel1" datatype="html">
+        <source>Ordre</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/question/question.component.html</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="questionLabel2" datatype="html">
+        <source>nom de test</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/question/question.component.html</context>
+          <context context-type="linenumber">21</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="questionLabel3" datatype="html">
+        <source>sous categorie</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/question/question.component.html</context>
+          <context context-type="linenumber">22</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="questionLabel4" datatype="html">
+        <source>Action</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/question/question.component.html</context>
+          <context context-type="linenumber">24</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="questionLabel5" datatype="html">
+        <source>Réponse</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/question/question.component.html</context>
+          <context context-type="linenumber">25</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="questionCreate" datatype="html">
+        <source>
+    creation du question
+    <x id="START_PARAGRAPH" ctype="x-p" equiv-text="&lt;p&gt;"/>nom du test:<x id="INTERPOLATION" equiv-text="{{name_test}}"/><x id="CLOSE_PARAGRAPH" ctype="x-p" equiv-text="&lt;/p&gt;"/>
+
+
+  </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/question/create-question/create-question.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="questionCreateLabel" datatype="html">
+        <source>Valeur</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/question/create-question/create-question.component.html</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="questionCreateLabel1" datatype="html">
+        <source>Ordre</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/question/create-question/create-question.component.html</context>
+          <context context-type="linenumber">24</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="questionCreateLabel4" datatype="html">
+        <source>reponse <x id="INTERPOLATION" equiv-text="{{i+1}}"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/question/create-question/create-question.component.html</context>
+          <context context-type="linenumber">46</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="questionCreateLabel5" datatype="html">
+        <source>Valeur</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/question/create-question/create-question.component.html</context>
+          <context context-type="linenumber">60</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="questionCreateLabel6" datatype="html">
+        <source>Nom</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/question/create-question/create-question.component.html</context>
+          <context context-type="linenumber">67</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="questionCreateLabel7" datatype="html">
+        <source>Ordre</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/question/create-question/create-question.component.html</context>
+          <context context-type="linenumber">74</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="questionCreateLabel8" datatype="html">
+        <source>créer</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/question/create-question/create-question.component.html</context>
+          <context context-type="linenumber">93</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="dashInfo" datatype="html">
+        <source>
+    <x id="MEDIA_LINK" ctype="x-link" equiv-text="&lt;link/&gt;"/>
+
+    Liste des sous catergories
+  </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/dashboard/info-categorie/info-categorie.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="dashInfolabel" datatype="html">
+        <source>Nom</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/dashboard/info-categorie/info-categorie.component.html</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="dashInfolabel1" datatype="html">
+        <source>Description</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/dashboard/info-categorie/info-categorie.component.html</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="dashInfolabel2" datatype="html">
+        <source>Up_description</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/dashboard/info-categorie/info-categorie.component.html</context>
+          <context context-type="linenumber">21</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="answerCard" datatype="html">
+        <source>
+    Liste des réponses
+    <x id="MEDIA_LINK" ctype="x-link" equiv-text="&lt;link/&gt;"/>
+
+  </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/answer/answer.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="answerlabel1" datatype="html">
+        <source>Nom</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/answer/answer.component.html</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="answerlabel2" datatype="html">
+        <source>Ordre</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/answer/answer.component.html</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="answerlabel3" datatype="html">
+        <source>Valeur</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/answer/answer.component.html</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="answerlabel4" datatype="html">
+        <source>Action</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/answer/answer.component.html</context>
+          <context context-type="linenumber">21</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="createAnswer" datatype="html">
+        <source>
+    Modifier réponse
+  </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/answer/crate-answer/create-answer.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="createAnswerLabel1" datatype="html">
+        <source>Nom</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/answer/crate-answer/create-answer.component.html</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="createAnsweralert1" datatype="html">
+        <source>
+            nom est obligatoire !
+          </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/answer/crate-answer/create-answer.component.html</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="createAnswerLabel2" datatype="html">
+        <source>Valeur</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/answer/crate-answer/create-answer.component.html</context>
+          <context context-type="linenumber">23</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="createAnswerAlert2" datatype="html">
+        <source>
+            valeur est obligatoire !
+          </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/answer/crate-answer/create-answer.component.html</context>
+          <context context-type="linenumber">26</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="createAnswerLabel3" datatype="html">
+        <source>Ordre</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/answer/crate-answer/create-answer.component.html</context>
+          <context context-type="linenumber">32</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="createAnswerAlert3" datatype="html">
+        <source>
+            ordre est obligatoire !
+          </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/answer/crate-answer/create-answer.component.html</context>
+          <context context-type="linenumber">35</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="createAnswerModif" datatype="html">
+        <source>Modifier</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/answer/crate-answer/create-answer.component.html</context>
+          <context context-type="linenumber">43</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="homeRe" datatype="html">
+        <source>De</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/home/home.component.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="home1" datatype="html">
+        <source>à</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/home/home.component.html</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="home2" datatype="html">
+        <source>Age maximum</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/home/home.component.html</context>
+          <context context-type="linenumber">23</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="home3" datatype="html">
+        <source>Age minimum</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/home/home.component.html</context>
+          <context context-type="linenumber">28</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="homeBut" datatype="html">
+        <source>Rechercher</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/home/home.component.html</context>
+          <context context-type="linenumber">34</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="homeLabel" datatype="html">
+        <source>Nom</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/home/home.component.html</context>
+          <context context-type="linenumber">53</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="homeLabel1" datatype="html">
+        <source>Prenom</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/home/home.component.html</context>
+          <context context-type="linenumber">54</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="homeLabel2" datatype="html">
+        <source>Nom du test</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/home/home.component.html</context>
+          <context context-type="linenumber">55</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="homeLabel3" datatype="html">
+        <source>Date du test</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/home/home.component.html</context>
+          <context context-type="linenumber">56</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="homeLabel4" datatype="html">
+        <source>Ecole</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/home/home.component.html</context>
+          <context context-type="linenumber">57</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="homeLabel5" datatype="html">
+        <source>Classe</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/home/home.component.html</context>
+          <context context-type="linenumber">58</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="sousGategorieInfiLabel" datatype="html">
+        <source>Question</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/subcategorie/sub-info/sub-info.component.html</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="sousGategorieInfiLabel1" datatype="html">
+        <source>Valeur</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/subcategorie/sub-info/sub-info.component.html</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="sousGategorieInfiLabel2" datatype="html">
+        <source>Order</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/subcategorie/sub-info/sub-info.component.html</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="sousGategorieInfiLabel3" datatype="html">
+        <source>Action</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/subcategorie/sub-info/sub-info.component.html</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="notfound" datatype="html">
+        <source>404  Page non trouvée</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/miscellaneous/not-found/not-found.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="notfoundpage" datatype="html">
+        <source>La page que vous recherchez n&apos;existe pas</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/miscellaneous/not-found/not-found.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="button" datatype="html">
+        <source>
+               Ramène-moi à la maison
+          </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/miscellaneous/not-found/not-found.component.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="testOrder" datatype="html">
+        <source>
+    Liste des sous Categorie
+    <x id="MEDIA_LINK" ctype="x-link" equiv-text="&lt;link/&gt;"/>
+
+  </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/test/test-order/test-order.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="testDuplication" datatype="html">
+        <source>
+    Duplication d&apos;un test
+  </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/test/duplication/duplication.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="testDuplicationLabel" datatype="html">
+        <source>Test</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/test/duplication/duplication.component.html</context>
+          <context context-type="linenumber">12</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="testDuplicationLabel1" datatype="html">
+        <source>Nom du test</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/test/duplication/duplication.component.html</context>
+          <context context-type="linenumber">21</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="testDuplicationAlert" datatype="html">
+        <source>
+            Nom est obligatoire !
+          </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/test/duplication/duplication.component.html</context>
+          <context context-type="linenumber">24</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="testDuplicationSubmit" datatype="html">
+        <source>Ajouter</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/test/duplication/duplication.component.html</context>
+          <context context-type="linenumber">32</context>
+        </context-group>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

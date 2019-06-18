@@ -1,14 +1,14 @@
 
 
 <nb-card style="height:80%" >
-  <nb-card-header>
-    Affecter categorie
+  <nb-card-header >
+    {{ 'TEST.AFFECTCATE.Affecter' | translate }}
   </nb-card-header>
 
   <nb-card-body >
     <form [formGroup]="addForm" id="addForm" name="addForm" (ngSubmit)=" affecter()">
       <div class="form-group">
-        <label for="name">Categorie</label>
+        <label  for="name">{{ 'TEST.AFFECTCATE.Categorie' | translate }}</label>
         <angular2-multiselect  [data]="dropdownList"
                               [(ngModel)]="selectedItems"
                               [settings]="settings"
@@ -19,7 +19,7 @@
 
 
 
-      <button type="submit" class="btn btn-success">Ajouter</button>
+      <button  type="submit" class="btn btn-success">{{ 'TEST.AFFECTCATE.Ajouter' | translate }}</button>
     </form>
 
   </nb-card-body>

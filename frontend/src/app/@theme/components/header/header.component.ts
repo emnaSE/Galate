@@ -5,6 +5,7 @@ import { UserService } from '../../../@core/data/users.service';
 import { AnalyticsService } from '../../../@core/utils/analytics.service';
 import {AuthService} from "../../../pages/auth/auth.service";
 import {Router} from "@angular/router";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'ngx-header',
@@ -24,7 +25,13 @@ export class HeaderComponent implements OnInit {
               private userService: UserService,
               private analyticsService: AnalyticsService,
               private loginService:AuthService,
-              private router:Router) {
+              private router:Router,
+              private translate:TranslateService) {
+   // translateService.addLangs(['fr','en']);
+    //translateService.setDefaultLang('fr');
+
+    const  browserLang= translate.getBrowserLang();
+    translate.use(browserLang.match(/fr|en/) ? browserLang : 'en');
   }
 
   ngOnInit() {

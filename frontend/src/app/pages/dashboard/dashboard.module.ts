@@ -8,6 +8,7 @@ import {NgxPaginationModule} from "ngx-pagination";
 import {CreateCategorieComponent} from "./create-categorie/create-categorie.component";
 import {FormsModule} from "@angular/forms";
 import {InfoCategorieComponent} from "./info-categorie/info-categorie.component";
+import {TranslateModule} from "@ngx-translate/core";
 
 @NgModule({
   imports: [
@@ -15,6 +16,7 @@ import {InfoCategorieComponent} from "./info-categorie/info-categorie.component"
     Ng2SmartTableModule,
     NgxPaginationModule,
     FormsModule,
+    TranslateModule,
 
   ],
   declarations: [

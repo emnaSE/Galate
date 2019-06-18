@@ -1,0 +1,219 @@
+{
+  "HOME": {
+    "DATED": "of",
+    "DATEF": "to",
+    "ageMax": "Maximum age",
+    "agemin": "Minimum age",
+    "recherch": "SEARCH",
+    "nom": "Name",
+    "prenom": "First name",
+    "nomtest": "Test name",
+    "datetest": "Date of the test",
+    "ecole": "school",
+    "classe": "class"
+
+  },
+  "QUESTION": {
+    "list": "List of questions",
+    "valeur": "value",
+    "order": "ordre",
+    "nom": "test name",
+    "sous": "sub-category",
+    "action": "Action",
+    "reponse": "answer",
+    "precedant": "previous",
+    "suivante": "next",
+          "CREATE": {
+            "create": "creation of the question",
+            "modif": "Update question",
+            "nom": "name of test",
+            "valeur": "Value",
+            "order": "Ordre",
+            "reponse": "Answer",
+            "submit": "Add",
+            "submitQ": "Update"
+
+          }
+  },
+
+
+  "ANSWER": {
+    "list": "List of answers",
+    "Nom": "Name",
+    "Ordre": "Order",
+    "Valeur": "Value",
+    "Action": "Action",
+    "precedant": "previous",
+    "suivante": "next",
+          "CREATE": {
+            "modif": "Edit answer",
+            "Nom": "Name",
+            "Valeur": "Value",
+            "Ordre": "Order",
+            "submit": "Update",
+            "alertNom": "name is required!",
+              "ALertValeur": "value is required!",
+            "AlertOrder": "order is required!"
+          }
+  },
+  "CLAZZ": {
+    "list": " List of classes",
+    "ajouter": "Add",
+    "Nom": "Name",
+    "NomEcole": "Name of the school",
+    "Action": "Action",
+    "precedant": "previous",
+    "suivante": "next",
+      "CREATE": {
+        "modif": "Edit answer",
+        "classe": "class",
+        "Nom": "Name of the sub category",
+        "Ordre": "Ordre",
+        "school": "school",
+        "submit": "Modifier",
+        "alertNom": "name is required!"
+      }
+  },
+  "DASH": {
+    "list": " List of Categories",
+    "ajouter": "Add",
+    "Nom": "Name",
+    "Nombre": "Number of subcategories",
+    "Action": "Action",
+    "precedant": "previous",
+    "suivante": "next",
+        "CREATE": {
+          "categorie": "category",
+          "nom": "Category name",
+          "nombre": "Number of sub categories",
+          "Nom": "Name of the sub category",
+          "alertNom": "name is required!",
+          "alertNombre": "number of subcategories is mandatory!"
+        },
+        "INFO": {
+          "liste": "List of sub catergories",
+          "nom": "Name",
+          "Description": "Description",
+          "Up_description": "Up description",
+          "precedant": "previous",
+          "suivante": "next"
+        }
+  },
+   "ETALONAGE": {
+        "list": " Calibration list",
+        "ajouter": "Add",
+        "sousCateg": "Sub-category",
+        "borni": "Lower bound",
+        "borns": "Upper bound",
+        "Valeur": "Value",
+        "Action": "Action",
+        "precedant": "previous",
+        "suivante": "next",
+        "CREATE": {
+          "modif": "Calibration",
+          "sousC": "Sub-category",
+          "borni": "Lower bound",
+          "bornf": "Upper bound",
+          "Valeur": "Value",
+          "alertBorni": "lower bound is required!",
+          "alertBorns": "upper bound is required!",
+          "alertvaleur": "value is required!"
+        }
+      },
+
+  "TEST": {
+    "list": " List of tests",
+    "ajouter": "Add",
+    "duplicat": "duplication test",
+    "Nom": "Name",
+    "date": "Activation date:",
+    "dateEx": "Expiration date:",
+    "password": "password:",
+    "nombre": "Number of sub categories:",
+    "duree": "Duration of the test:",
+    "Action": "Action",
+    "affectationC": "Assignment category",
+    "AffectationSouC": "Assignment under category",
+    "xml": "XML file generation",
+    "precedant": "previous",
+    "suivante": "next",
+    "CREATE": {
+      "Consulter": "Consult Categories",
+      "ConsulterS": "Consult Under Categories",
+      "Nom": "Name:",
+      "date": "Activation date:",
+      "dateEx": "Expiration date:",
+      "nombre": "Number of sub categories:",
+      "duree": "Duration of the test:",
+      "password": "password:",
+      "alertNom": "name is required!",
+      "alertNombre": " number of subcategories is required!",
+      "alertDuree": "Duration of the test is required!",
+      "alertPass": "password is required!"
+    },
+    "DUPLIC": {
+      "duplic": "Duplicate a test",
+      "Test": "Test",
+      "testN": "Test name",
+      "alertNom": "Name is required!",
+      "Ajouter": "Add"
+    },
+    "AFFECTCATE": {
+      "Affecter": "Assign category",
+      "Categorie": "Category",
+      "Ajouter": "Add"
+    },
+    "AFFECTSOUS": {
+      "Affecter": "Assign Under Categories",
+      "order": "Assign orders",
+      "Categorie": "Under Categories"
+    }
+  },
+
+  "ECOLE": {
+    "list": " List of schools",
+    "ajouter": "Add",
+    "Nom": "Name",
+    "Action": "Action",
+    "precedant": "previous",
+    "suivante": "next",
+    "CREATE": {
+      "ecole": "school",
+      "nom": "School name",
+      "alertNom": "name is required!"
+    }
+  },
+  "SOUSCATEGORIE": {
+    "list": " List of Catergories",
+    "ajouter": "Add",
+    "Nom": "Name",
+    "Description": "Description",
+    "Up_description": "Up description",
+    "Action": "Action",
+    "precedant": "previous",
+    "suivante": "next",
+    "nom1": "Name",
+    "ConsulterSou": "Consult Under Categories",
+    "CREATE": {
+      "Nom": "Sub-category",
+      "creation": " Creation of the question",
+      "categorie": "Category",
+      "NomSousC": "Name of the sub categories",
+      "Down": "Down Description",
+      "uP": "Up Description",
+      "AalertNom": "Name is required!",
+      "AlertDescriptionDown": "description is required!",
+      "AlertDescriptionUp": "description is required!"
+    },
+    "INFO": {
+      "Nom": "name",
+      "Question": "Question",
+      "Valeur": "Value",
+      "Order": "Ordre",
+      "Action": "Action",
+      "precedant": "previous",
+      "suivante": "next"
+    }
+
+  }
+}

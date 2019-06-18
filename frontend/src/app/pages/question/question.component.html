@@ -1,8 +1,8 @@
 
 
 <nb-card>
-  <nb-card-header>
-    Liste des questions
+  <nb-card-header >
+    {{ 'QUESTION.list' | translate }}
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
 
   </nb-card-header>
@@ -16,13 +16,13 @@
         <!--<th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="id: activate to sort column descending">ID</th>-->
         <!--<th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="name: activate to sort column ascending">Nom</th>
         <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="wording: activate to sort column ascending">Formulation</th>-->
-        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="value: activate to sort column ascending">Valeur</th>
-        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="order: activate to sort column ascending">Ordre</th>
-        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="test: activate to sort column ascending">nom de test</th>
-        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="sub: activate to sort column ascending">sous categorie</th>
+        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="value: activate to sort column ascending">{{ 'QUESTION.valeur' | translate }}</th>
+        <th  class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="order: activate to sort column ascending">{{ 'QUESTION.order' | translate }}</th>
+        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="test: activate to sort column ascending">{{ 'QUESTION.nom' | translate }}</th>
+        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="sub: activate to sort column ascending">{{ 'QUESTION.sous' | translate }}</th>
 
-        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="action: activate to sort column ascending">Action</th>
-        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="anser: activate to sort column ascending">Réponse</th>
+        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="action: activate to sort column ascending">{{ 'QUESTION.action' | translate }}</th>
+        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="anser: activate to sort column ascending">{{ 'QUESTION.reponse' | translate }}</th>
 
           </thead>
       <tbody>
@@ -51,8 +51,8 @@
      </table>
      <pagination-controls
        (pageChange)="pageActuel = $event"
-       previousLabel="Précédent"
-       nextLabel="Suivant"
+       previousLabel="{{ 'QUESTION.precedant' | translate }}"
+       nextLabel="{{ 'QUESTION.suivante' | translate }}"
      ></pagination-controls>
 
    </nb-card-body>

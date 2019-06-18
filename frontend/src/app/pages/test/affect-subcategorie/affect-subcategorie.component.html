@@ -1,18 +1,18 @@
 
 
 <nb-card style="height:80%" >
-  <nb-card-header>
-    Affecter Sous Categories
+  <nb-card-header >
+    {{ 'TEST.AFFECTSOUS.Affecter' | translate }}
     <ul style="position: relative; float: right">
 
-      <i style="cursor: pointer; position: relative; float: right ;color: darkgreen"  (click)="consultezSubCategorie()"> affecter des orders </i>
+      <i style="cursor: pointer; position: relative; float: right ;color: darkgreen"  (click)="consultezSubCategorie()"> {{ 'TEST.AFFECTSOUS.order' | translate }} </i>
     </ul>
   </nb-card-header>
 
   <nb-card-body>
     <form [formGroup]="addForm" id="addForm" name="addForm" (ngSubmit)=" affecter()">
       <div class="form-group">
-        <label for="name">Sous Categories</label>
+        <label  for="name">{{ 'TEST.AFFECTSOUS.Categorie' | translate }}</label>
         <angular2-multiselect [data]="dropdownList"
                               [(ngModel)]="selectedItems"
                               (onSelect)="onItemSelect($event)"

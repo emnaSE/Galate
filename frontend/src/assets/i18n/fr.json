@@ -1,0 +1,220 @@
+{
+  "HOME": {
+    "DATED": "de",
+    "DATEF": "à",
+    "ageMax": "Age maximum",
+    "agemin": "Age minimum",
+    "recherch": "RECHERCHER",
+    "nom": "Nom",
+    "prenom": "Prenom",
+    "nomtest": "Nom de test",
+    "datetest": "Date du test",
+    "ecole": "ecole",
+    "classe": "classe"
+
+  },
+  "QUESTION": {
+    "list": "Liste des questions",
+    "valeur": "valeur",
+    "order": "order",
+    "nom": "nom de teste",
+    "sous": "Sous Categories",
+    "action": "Action",
+    "reponse": "Reponse",
+    "precedant": "précédant",
+    "suivante": "suivant",
+       "CREATE": {
+          "create": "creation du question",
+          "modif": "Modifier question",
+          "nom": "nom du test:",
+          "valeur": "Valeur",
+          "order": "Order",
+          "reponse": "reponse",
+          "submit": "créer",
+          "submitQ": "Modifier"
+
+        }
+  },
+  "ANSWER": {
+    "list": "Liste des réponses",
+    "Nom": "Nom",
+    "Ordre": "Ordre",
+    "Valeur": "Valeur",
+    "Action": "Action",
+    "precedant": "précédant",
+    "suivante": "suivant",
+        "CREATE": {
+          "modif": "Modifier réponse",
+          "Nom": "Nom",
+          "Valeur": "Valeur",
+          "Ordre": "Ordre",
+          "submit": "Modifier",
+          "alertNom": "nom est obligatoire !",
+          "ALertValeur": "valeur est obligatoire !",
+          "AlertOrder": "ordre est obligatoire !"
+        }
+  },
+  "CLAZZ": {
+    "list": " Liste des Classes",
+    "ajouter": "ajouter",
+    "Nom": "Nom",
+    "NomEcole": "Nom de l'école",
+    "Action": "Action",
+    "precedant": "précédant",
+    "suivante": "suivant",
+    "CREATE": {
+      "modif": "Modifier réponse",
+      "classe": "classe",
+      "school": "ecole",
+      "Nom": "Nom du sous categorie",
+      "Ordre": "Ordre",
+      "submit": "Modifier",
+      "alertNom": "nom est obligatoire !"
+    }
+  },
+  "DASH": {
+    "list": " Liste des Catégories",
+    "ajouter": "ajouter",
+    "Nom": "Nom",
+    "Nombre": "Nombre des sous Categories",
+    "Action": "Action",
+    "precedant": "précédant",
+    "suivante": "suivant",
+        "CREATE": {
+          "categorie": "categorie",
+          "nom": "Nom du categorie",
+          "nombre": "Nombre des sous categories",
+          "Nom": "Nom du sous categorie",
+          "alertNom": "nom est obligatoire !",
+          "alertNombre": "nombre des sous categorie est obligatoire !"
+        },
+        "INFO": {
+          "liste": "Liste des sous catergories",
+          "nom": "Nom ",
+          "Description": "Description",
+          "Up_description": "up description",
+          "precedant": "précédant",
+          "suivante": "suivant"
+        }
+  },
+  "ETALONAGE": {
+    "list": " Liste des Etalonnages",
+    "ajouter": "ajouter",
+    "sousCateg": "Sous categorie",
+    "borni": "Borne inférieure",
+    "borns": "Borne supérieure",
+    "Valeur": "Valeur",
+    "Action": "Action",
+    "precedant": "précédant",
+    "suivante": "suivant",
+    "CREATE": {
+      "modif": "Etalonage",
+      "sousC": "Sous Categorie",
+      "borni": "Borne inférieure",
+      "bornf": "Borne supérieure",
+      "Valeur": "Valeur",
+      "alertBorni": "borne inférieure est obligatoire !",
+      "alertBorns": "borne supérieure est obligatoire !",
+      "alertvaleur": "valeur est obligatoire !"
+    }
+  },
+
+
+  "TEST": {
+    "list": " Liste des tests",
+    "ajouter": "Ajouter",
+    "duplicat": "duplication test",
+    "Nom": "Nom",
+    "date": "Date d'activation",
+    "dateEx": "Date d'éxpiration",
+    "password": "Mot de passe",
+    "nombre": "Nombre de test",
+    "duree": "Durée du test",
+    "Action": "Action",
+    "affectationC": "Affectation categorie",
+    "AffectationSouC": "Affectation sous categorie",
+    "xml": "Generation fichier XML",
+    "precedant": "précédant",
+    "suivante": "suivant",
+    "CREATE": {
+      "list": "Test",
+      "Consulter": "Consulter Categories",
+      "ConsulterS": "Consulter Sous Categories",
+      "Nom": "Nom:",
+      "date": "Date d'activation:",
+      "dateEx": "Date expiration:",
+      "nombre": "Nombre de sous categories:",
+      "duree": "Durée du test:",
+      "password": "Mot de passe:",
+      "alertNom": "name  est obligatoire !",
+      "alertNombre": " nombre de sous categorie  est obligatoire !",
+      "alertDuree": "Durée du test est obligatoire !",
+      "alertPass": "password est obligatoire !"
+    },
+    "DUPLIC": {
+      "duplic": "Duplication d'un test",
+      "Test": "Test",
+      "testN": "Nom du test",
+      "alertNom": "Nom est obligatoire !",
+      "Ajouter": "Ajouter"
+    },
+    "AFFECTCATE": {
+      "Affecter": "Affecter categorie",
+      "Categorie": "Categorie",
+      "Ajouter": "Ajouter"
+    },
+    "AFFECTSOUS": {
+      "Affecter": "Affecter Sous Categories",
+      "order": "affecter des orders",
+      "Categorie": "Sous Categories"
+    }
+  },
+  "ECOLE": {
+    "list": " Liste des écoles",
+    "ajouter": "ajouter",
+    "Nom": "Nom",
+    "Action": "Action",
+    "precedant": "précédant",
+    "suivante": "suivant",
+    "CREATE": {
+      "ecole": "Ecole",
+      "nom": "Nom de l'école",
+      "alertNom": "nom est obligatoire !"
+    }
+  },
+
+
+  "SOUSCATEGORIE": {
+    "list": " Liste des sous Catergories",
+    "ajouter": "Ajouter",
+    "Nom": "Nom",
+    "Description": "Description",
+    "Up_description": "Up description",
+    "Action": "Action",
+    "precedant": "précédant",
+    "suivante": "suivant",
+    "nom1": "Nom",
+    "ConsulterSou": "Consulter Sous Categories",
+    "CREATE": {
+      "Nom": "Sous catergorie",
+      "creation": " Creation du question",
+      "categorie": "Categorie",
+      "NomSousC": "Nom du sous categories",
+      "Down": "Down Description",
+      "uP": "Up Description",
+      "AalertNom": "Nom est obligatoire !",
+      "AlertDescriptionDown": "description est obligatoire !",
+      "AlertDescriptionUp": "description est obligatoire !"
+    },
+    "INFO": {
+      "Nom": "nom",
+      "Question": "Question",
+      "Valeur": "Valeur",
+      "Order": "Order",
+      "Action": "Action",
+      "precedant": "précédant",
+      "suivante": "suivant"
+    }
+
+  }
+}

@@ -1,8 +1,8 @@
 
 
 <nb-card>
-  <nb-card-header>
-    {{ editMode ? 'Modifier' : 'Ajouter' }} Ecole
+  <nb-card-header >
+    {{ editMode ? 'Modifier' : 'Ajouter' }} {{ 'ECOLE.CREATE.ecole' | translate }}
   </nb-card-header>
 
   <nb-card-body>
@@ -10,17 +10,17 @@
 
 
       <div class="form-group">
-        <label for="fnText">Nom de l'école</label>
+        <label  for="fnText">{{ 'ECOLE.CREATE.nom' | translate }}</label>
         <input type="text" class="form-control" formControlName="name" placeholder="Nom de l'école">
-        <ng-container *ngIf="submitted && formValidate.name.errors">
-          <p class="text-danger" >
-            nom est obligatoire !
+        <ng-container  *ngIf="submitted && formValidate.name.errors">
+          <p  class="text-danger" >
+            {{ 'ECOLE.CREATE.alertNom' | translate }}
           </p>
         </ng-container>
       </div>
 
 
-      <button type="submit" class="btn btn-success">{{ editMode ? 'Modifier' : 'Ajouter' }}</button>
+      <button  type="submit" class="btn btn-success">{{ editMode ? 'Modifier' : 'Ajouter' }}</button>
     </form>
 
   </nb-card-body>

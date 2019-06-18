@@ -1,10 +1,20 @@
 <nb-card>
-  <nb-card-header>
-    {{ editMode ? 'Modifier' : 'Ajouter' }}  Test
+  <nb-card-header  >
+    {{ editMode ? 'Modifier' : 'Ajouter' }}  {{ 'TEST.CREATE.list' | translate }}
+
+   <!-- <div *ngIf="p_error==1">
+      <nb-alert  status="success" closable (close)="onClose()" style="position: absolute">
+
+      </nb-alert>
+
+    </div>-->
+    <nb-alert *ngIf="p_error==1" outline="success">You have been successfully authenticated!</nb-alert>
+
+
     <ng-template [ngIf]="editMode">
       <ul style="position: relative; float: right">
-        <i style="cursor: pointer; position: relative; float: right ; color: darkgreen"  (click)="consulterCategorie()"> Consulter Categories </i><br>
-        <i style="cursor: pointer; position: relative; float: right ;color: darkgreen"  (click)="consultezSubCategorie()"> Consulter Sous Categories </i>
+        <i  style="cursor: pointer; position: relative; float: right ; color: darkgreen"  (click)="consulterCategorie()"> {{ 'TEST.CREATE.Consulter' | translate }} </i><br>
+        <i  style="cursor: pointer; position: relative; float: right ;color: darkgreen"  (click)="consultezSubCategorie()"> {{ 'TEST.CREATE.ConsulterS' | translate }} </i>
       </ul>
     </ng-template>
 
@@ -13,17 +23,17 @@
   <nb-card-body>
     <form [formGroup]="addForm"(ngSubmit)="onSubmit()" >
       <div class="form-group">
-        <label type="text">Nom:</label>
+        <label type="text">{{ 'TEST.CREATE.Nom' | translate }}</label>
         <input type="text" class="form-control" formControlName="name" placeholder="Nom">
         <ng-container *ngIf="submitted && valid.name.errors">
-          <p class="text-danger" style="color: red">
-            name  est obligatoire !
+          <p  class="text-danger" style="color: red">
+            {{ 'TEST.CREATE.alertNom' | translate }}
           </p>
         </ng-container>
       </div>
 
       <div class="form-group">
-        <label type="text">Date d'activation:</label>
+        <label  type="text">{{ 'TEST.CREATE.date' | translate }}</label>
         <input
           class="form-control"
           #dpMDY="bsDatepicker"
@@ -35,7 +45,7 @@
 
 
       <div class="form-group">
-        <label type="text" >Date expiration:</label>
+        <label  type="text" >{{ 'TEST.CREATE.dateEx' | translate }}</label>
         <input
           class="form-control"
           #dpMDY="bsDatepicker"
@@ -56,21 +66,21 @@
 
 
       <div class="form-group">
-        <label type="text" >Nombre de sous categories:</label>
+        <label  type="text" >{{ 'TEST.CREATE.nombre' | translate }}</label>
         <input type="number" class="form-control" formControlName="test_subcategories_number" placeholder="Nombre de sousCategories">
         <ng-container *ngIf="submitted && valid.test_subcategories_number.errors">
-          <p class="text-danger" style="color: red">
-            nombre de sous categorie  est obligatoire !
+          <p  class="text-danger" style="color: red">
+            {{ 'TEST.CREATE.alertNombre' | translate }}
           </p>
         </ng-container>
       </div>
 
       <div class="form-group">
-        <label type="text" >Durée du test:</label>
+        <label  type="text" >{{ 'TEST.CREATE.duree' | translate }}</label>
         <input type="number" class="form-control" formControlName="duration" placeholder="Durée du test">
         <ng-container *ngIf="submitted && valid.duration.errors">
-          <p class="text-danger" style="color: red">
-            Durée du test est obligatoire !
+          <p  class="text-danger" style="color: red">
+            {{ 'TEST.CREATE.alertDuree' | translate }}
           </p>
         </ng-container>
       </div>
@@ -78,11 +88,11 @@
 
 
       <div class="form-group">
-        <label type="text" >Mot de passe:</label>
+        <label  type="text" >{{ 'TEST.CREATE.password' | translate }}</label>
         <input type="text" class="form-control" placeholder="Mot de passe" formControlName="password">
         <ng-container *ngIf="submitted && valid.password.errors">
           <p class="text-danger" style="color: red">
-            password est obligatoire !
+            {{ 'TEST.CREATE.alertPass' | translate }}
           </p>
         </ng-container>
       </div>
@@ -91,7 +101,7 @@
 
 
 
-      <button type="submit" class="btn btn-success">{{ editMode ? 'Modifier' : 'Ajouter' }}</button>
+      <button  type="submit" class="btn btn-success">{{ editMode ? 'Modifier' : 'Ajouter' }}</button>
     </form>
   </nb-card-body>
 </nb-card>

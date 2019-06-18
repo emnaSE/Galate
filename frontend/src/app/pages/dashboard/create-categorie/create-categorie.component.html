@@ -2,30 +2,35 @@
 
 <nb-card>
 
-  <nb-alert outline="info" *ngIf="err==1" >update avec success</nb-alert>
-  <nb-alert outline="info" *ngIf="err==2" >ajout avec success</nb-alert>
-  <nb-card-header>
-    {{ editMode ? 'Modifier':'Ajouter'}} categorie
+  <nb-alert  outline="info" *ngIf="err==1" >update avec success</nb-alert>
+  <nb-alert  outline="info" *ngIf="err==2" >ajout avec success</nb-alert>
+  <nb-card-header >
+    {{ editMode ? 'Modifier':'Ajouter'}} {{ 'DASH.CREATE.categorie' | translate }}
   </nb-card-header>
 
   <nb-card-body>
     <form [formGroup]="addForm"  (ngSubmit)=" onSubmit()">
       <div class="form-group">
-        <label for="fnText">Nom du categorie</label>
+        <label  for="fnText">{{ 'DASH.CREATE.Nom' | translate }}</label>
         <input type="text"  formControlName="name"  nbInput fullWidth placeholder="Nom du categorie">
         <ng-container *ngIf="submitted && formvalidate.name.errors">
           <p class="text-danger" >
-            Nom est obligatoire !
+            {{ 'DASH.CREATE.alertNom' | translate }}
           </p>
         </ng-container>
       </div>
       <div  class="input-group input-group-sm">
-        <label for="fnText">Nombre des sous categories</label>
+        <label  for="fnText">{{ 'DASH.CREATE.nombre' | translate }}</label>
         <input formControlName="subcategories_number" type="number"  id="subcategories_number"   nbInput fullWidth placeholder="Nombre de sous categories">
+        <ng-container *ngIf="submitted && formvalidate.subcategories_number.errors">
+          <p class="text-danger" >
+            {{ 'DASH.CREATE.alertNombre' | translate }}
+          </p>
+        </ng-container>
       </div>
 
 
-      <button class="btn btn-success">{{ editMode ? 'Modifier':'Ajouter'}}</button>
+      <button  class="btn btn-success">{{ editMode ? 'Modifier':'Ajouter'}}</button>
     </form>
 
   </nb-card-body>

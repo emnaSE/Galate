@@ -15,11 +15,23 @@
     [class.right]="position === 'normal'"
     [class.left]="position === 'inverse'">
 
+
     <nb-action *nbIsGranted="['view', 'user']" >
+
       <nb-user  [name]="user?.name" ></nb-user>
     </nb-action>
+
     <nb-action style="display:block !important;margin-right:10px;height: 35px;" class="control-item" (click)="logout()" title="log out" icon="ion-log-out"></nb-action>
 
-
+    <nb-action>
+      <select style="color: gray;
+              margin-right: 7px;
+              border-color: gray;
+              width: 50px;
+              text-transform: capitalize;
+              border-radius: 20px;" #langSelect (change)="translate.use(langSelect.value)">
+        <option *ngFor="let lang of translate.getLangs()" [value]="lang" [selected]="lang === translate.currentLang">{{ lang }}</option>
+      </select>
+    </nb-action>
   </nb-actions>
 </div>
