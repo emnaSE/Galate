@@ -26,7 +26,7 @@ export class HeaderComponent implements OnInit {
               private analyticsService: AnalyticsService,
               private loginService:AuthService,
               private router:Router,
-              private translate:TranslateService) {
+              public translate:TranslateService) {
    // translateService.addLangs(['fr','en']);
     //translateService.setDefaultLang('fr');
 
