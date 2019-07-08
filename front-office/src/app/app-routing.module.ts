@@ -10,6 +10,8 @@ import { LoginTestComponent } from './pages/login-test/login-test.component';
 import { DownloadComponent } from './pages/downloadPDF/download.component';
 import { TestTerminatedComponent } from './pages/test-terminated/test-terminated.component';
 import {RgpdComponent} from "./rgpd/rgpd.component";
+import { FinalResultComponent } from './pages/final-result/finalResult.component';
+import { FinalResultComponentP2 } from './pages/final-resultP2/finalResultP2.component';
 
 
 
@@ -48,6 +50,14 @@ const routes: Routes = [
     path:"loginTest/:idT/:idM",
     //path: 'loginTest',
     component:LoginTestComponent,
+  },
+  {
+    path: 'finalResult/:idT/:idM',
+    component:FinalResultComponent,
+  },
+  {
+    path: 'finalResultP2/:idT/:idM',
+    component:FinalResultComponentP2
   },
   {
     path: 'rgpd',

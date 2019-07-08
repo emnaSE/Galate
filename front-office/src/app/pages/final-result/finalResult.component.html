@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    
+    
+    
+</head>
+<style>
+    body {
+        background-color: #1c4170 !important;
+    }
+
+    .table td,
+    .table th {
+        padding: 0 !important;
+        vertical-align: top;
+        border: 1px solid black;
+        text-align: center;
+    }
+
+    header {
+        text-align: center;
+        color: white;
+    }
+
+
+
+    .sousCat {
+        border: solid black;
+        border-width: 2px 0px 2px 0px;
+        margin-top: -2px;
+        margin-left: -2px;
+    }
+
+    .sousCat:nth-child(odd) {
+        background-color: #7fa2cc;
+    }
+
+    .sousCat:nth-child(even) {
+        background-color: #e45251;
+    }
+
+    th {
+        color: white;
+        width: 40%;
+    }
+</style>
+
+<body>
+    <header>
+        <div>
+
+        </div>
+        <h3>Personnalite Analyse</h3>
+        <h5>Who am I ? What are my behaviours</h5>
+        <div>
+            <img src="gal1.png">
+        </div>
+    </header>
+    <main>
+      <div class="table-responsive" *ngFor="let catalogue of catalogueDetails" >
+        <div class="sousCat">
+            <h5>{{catalogue.categoryName}}</h5>
+            <div class="table-responsive">
+                <table class="table">
+                    <tbody>
+                        <tr *ngFor="let subcategory of catalogue.subcategories">
+                            <th scope="row"> {{subcategory.name}}</th>
+                            <td [ngStyle]="{'background-color':subcategory.score === 1 ? 'green' : '' }">1</td>
+                            <td [ngStyle]="{'background-color':subcategory.score === 2 ? 'green' : '' }">2</td>
+                            <td [ngStyle]="{'background-color':subcategory.score === 3 ? 'green' : '' }">3</td>
+                            <td [ngStyle]="{'background-color':subcategory.score === 4 ? 'green' : '' }">4</td>
+                            <td [ngStyle]="{'background-color':subcategory.score === 5 ? 'green' : '' }">5</td>
+                            <td [ngStyle]="{'background-color':subcategory.score === 6 ? 'green' : '' }">6</td>
+                            <td [ngStyle]="{'background-color':subcategory.score === 7 ? 'green' : '' }">7</td>
+                            <td [ngStyle]="{'background-color':subcategory.score === 8 ? 'green' : '' }">8</td>
+                            <td [ngStyle]="{'background-color':subcategory.score === 9 ? 'green' : '' }">9</td>
+                            <td [ngStyle]="{'background-color':subcategory.score === 10 ? 'green' : '' }">10</td>
+                            <td [ngStyle]="{'background-color':subcategory.score === 11 ? 'green' : '' }">11</td>
+                        </tr>
+                    </tbody>
+                </table>              
+            </div>
+        </div>
+      </div>
+    </main>
+
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+        
+        
+        
+</body>
+
+</html>

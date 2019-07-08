@@ -8,6 +8,19 @@ var con=config.con;
 var memberController=require('../controller/memberController');
 var SECOND_ANSWER=2;
 var FIRST_ANSWER=1;
+const router = require('express').Router();
+router.use((req, res, next) => {
+  res.payload = {};
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+  res.setHeader('Access-Control-Allow-Credentials', true)
+  next();
+});
+const request = require('request');
+var config = require('../config');
+var url=`http://localhost:`+config.port;
+
 
 _publics.createEtalonnage = (etalonnage) => { 
     var etalonnage=JSON.parse(etalonnage);
@@ -449,6 +462,49 @@ _publics.updateManualAnswer = (req) => {
                });
    });    
 };
+
+
+
+_publics.getAllCriterionsBySubcategories = (req,subcategories) => { 
+  let promises = [];
+  for (var i=0;i<JSON.parse(subcategories).length;i++) {
+    promises.push( new Promise((resolve, reject) => request.get({
+      url :url+`/calcul/getAllCriterionBySubcategoryId?id=${JSON.parse(subcategories)[i].id}&id_test=${req.query.id_test}&id_member=${req.query.id_member}`,
+      method: 'GET',
+      gzip: true,
+    }, (e, r, b) => {
+      if (!e && r.statusCode == 200) {
+        return resolve(JSON.parse(b));
+      } else {
+        reject(e);
+      }
+    })));
+  }
+  return Promise.all(promises)    
+};
+
+
+
+_publics.getAllCriterionsByCategories=(req,categories) => { 
+  let promises = [];
+  for (var i=0;i<JSON.parse(categories).length;i++) {
+    promises.push( new Promise((resolve, reject) => request.get({
+      url :url+`/calcul/getAllCriterionsByCategory?id=${JSON.parse(categories)[i].category_id}&id_test=${req.query.id_test}&id_member=${req.query.id_member}`,
+      method: 'GET',
+      gzip: true,
+    }, (e, r, b) => {
+      if (!e && r.statusCode == 200) {
+        return resolve(JSON.parse(b));
+      } else {
+        reject(e);
+      }
+    })));
+  }
+  return Promise.all(promises)    
+};
+
+
+
 
 
  module.exports = _publics;

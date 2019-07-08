@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+    <title>Document</title>
+</head>
+<style>
+    .table td,
+    .table th {
+        padding: 0 !important;
+        vertical-align: top;
+        border: 1px solid black;
+        text-align: center;
+    }
+
+    header {
+        text-align: center;
+        color: white;
+        background-color: #1c4170;
+        height: 100%;
+    }
+
+    #bloc1 {
+        background-color: #7fa2cc;
+    }
+
+    #bloc2 {
+        background-color: #e45251;
+    }
+
+
+
+    th {
+        color: white;
+        width: 40%;
+    }
+
+    .catName {
+        text-align: center;
+    }
+
+    .sousCatName {
+        color: black;
+    }
+
+    .sousCat {
+        margin-bottom: 20px;
+    }
+
+    .cat:nth-child(even) {
+        background-color: #7fa2cc;
+    }
+
+    .cat:nth-child(odd) {
+        background-color: #e45251;
+    }
+
+    .name {
+        font-size: 23px;
+    }
+
+    h4,
+    .name {
+        text-transform: uppercase;
+    }
+
+    #nbCompet {
+        margin-left: 20px;
+    }
+</style>
+
+<body>
+    <header>
+        <div>
+
+        </div>
+        <h4>PorteFeuille</h4>
+        <h4>De compétences comportementales</h4>
+        <h6>What are my soft skills</h6>
+    </header>
+    <main>
+        <div class="table-responsive" *ngFor="let catalogue of catalogueDetails" >
+                <div class="cat">
+                    <div class="catName">
+                        <p><span class="name">{{catalogue.category.name}}</span> <span id="nbCompet">compétences mesurés</span></p>
+                    </div>
+                    <div class="sousCat" *ngFor="let subcategory of catalogue.subcategories">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <tbody>
+                                    <tr>
+                                        <th scope="row" class="sousCatName">{{subcategory.subcategory.name}}</th>
+                                        <td [ngStyle]="{'background-color':subcategory.subcategory.score === 1 ? 'green' : '' }">1</td>
+                                        <td [ngStyle]="{'background-color':subcategory.subcategory.score === 2 ? 'green' : '' }">2</td>
+                                        <td [ngStyle]="{'background-color':subcategory.subcategory.score === 3 ? 'green' : '' }">3</td>
+                                        <td [ngStyle]="{'background-color':subcategory.subcategory.score === 4 ? 'green' : '' }">4</td>
+                                        <td [ngStyle]="{'background-color':subcategory.subcategory.score === 5 ? 'green' : '' }">5</td>
+                                        <td [ngStyle]="{'background-color':subcategory.subcategory.score === 6 ? 'green' : '' }">6</td>
+                                        <td [ngStyle]="{'background-color':subcategory.subcategory.score === 7 ? 'green' : '' }">7</td>
+                                        <td [ngStyle]="{'background-color':subcategory.subcategory.score === 8 ? 'green' : '' }">8</td>
+                                        <td [ngStyle]="{'background-color':subcategory.subcategory.score === 9 ? 'green' : '' }">9</td>
+                                        <td [ngStyle]="{'background-color':subcategory.subcategory.score === 10 ? 'green' : '' }">10</td>
+                                        <td [ngStyle]="{'background-color':subcategory.subcategory.score === 11 ? 'green' : '' }">11</td>
+                                    </tr>
+                                </tbody>
+                            </table> 
+                            <table class="table">
+                                    <tbody>
+                                        <tr *ngFor="let criterion of subcategory.criterions">
+                                            <th scope="row">{{criterion.name}}</th>
+                                            <td [ngStyle]="{'background-color':criterion.score === 1 ? 'green' : '' }">1</td>
+                                            <td [ngStyle]="{'background-color':criterion.score === 2 ? 'green' : '' }">2</td>
+                                            <td [ngStyle]="{'background-color':criterion.score === 3 ? 'green' : '' }">3</td>
+                                            <td [ngStyle]="{'background-color':criterion.score === 4 ? 'green' : '' }">4</td>
+                                            <td [ngStyle]="{'background-color':criterion.score === 5 ? 'green' : '' }">5</td>
+                                            <td [ngStyle]="{'background-color':criterion.score === 6 ? 'green' : '' }">6</td>
+                                            <td [ngStyle]="{'background-color':criterion.score === 7 ? 'green' : '' }">7</td>
+                                            <td [ngStyle]="{'background-color':criterion.score === 8 ? 'green' : '' }">8</td>
+                                            <td [ngStyle]="{'background-color':criterion.score === 9 ? 'green' : '' }">9</td>
+                                            <td [ngStyle]="{'background-color':criterion.score === 10 ? 'green' : '' }">10</td>
+                                            <td [ngStyle]="{'background-color':criterion.score === 11 ? 'green' : '' }">11</td>
+                                        </tr>
+                                    </tbody>
+                                </table>                        
+                        </div>
+                    </div>
+                   
+                </div>
+        </div>
+
+    </main>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function () {
+            //nom sousCategory
+            var sousCat = "Activite";
+            //valeur de sous Category
+            var sousCatRes = 5;
+            //ça c'est le nombre de compétence tout en haut du page
+            var nbCompet = 12;
+            $('#nbCompet').prepend(nbCompet + " ");
+            $("th:contains('" + sousCat + "')").parent().find($("td:contains('" + sousCatRes + "')")).css('background-color', 'green');;
+        });
+    </script>
+
+</body>
+
+</html>

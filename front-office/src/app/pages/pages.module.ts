@@ -9,6 +9,8 @@ import { RegisterModule } from "./register/RegisterModule";
 import { StartTestModule } from './startTest/startTest.module';
 import { DownloadModule } from './downloadPDF/download.module';
 import { TestTerminatedModule } from './test-terminated/test-terminated.module';
+import { FinalResultModule } from './final-result/finalResult.module';
+import { FinalResultComponentP2 } from './final-resultP2/finalResultP2.component';
 
 
 const PAGES_COMPONENTS = [
@@ -23,7 +25,9 @@ const PAGES_COMPONENTS = [
     LoginModule,
     RegisterModule,
     StartTestModule,
-    TestTerminatedModule
+    TestTerminatedModule,
+    FinalResultModule,
+    FinalResultComponentP2
    
     
    

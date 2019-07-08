@@ -207,7 +207,22 @@ alter table question add column ordre int(11);
 alter table test_subcategory add column ordre int(11);
 alter table member add column city varchar(255);
 alter table member add column study_level  varchar(255);
- alter table member add column sexe  varchar(255);
- 
+alter table member add column sexe  varchar(255);
+create table criterion(
+     id int(11) AUTO_INCREMENT,
+     name varchar(255),
+	 id_subcategory int(11),
+	 FOREIGN KEY (id_subcategory) REFERENCES subcategory(id) ,
+     PRIMARY KEY (id) 
+);
+
+create table subcategory_criterion(
+	 id int(11) AUTO_INCREMENT,
+     id_subcategory int(11),
+	 id_criterion int(11),
+	 FOREIGN KEY (id_subcategory) REFERENCES subcategory(id) ,
+	 FOREIGN KEY (id_criterion) REFERENCES criterion(id) ,
+     PRIMARY KEY (id) 
+);
 
  

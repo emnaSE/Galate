@@ -227,6 +227,62 @@ router.post('/updateManualAnswer', (req, res, next) =>
 })
 .catch(next));
 
+router.get('/getAllSubcategoriesByTestMember', urlencodedParser, (req, res, next) =>
+calculController.getCategoryNameByMemberIdAndTestId(req)
+.then(categories => {
+    return adminController.getAllSubcategoriesByCategories(categories,req)
+})
+.then(response=>{
+    res.payload.categories=response;
+    res.send(res.payload);
+})
+.catch(next));
+
+
+
+
+
+router.get('/getAllCriterionsByTestMember', urlencodedParser, (req, res, next) =>
+calculController.getCategoryNameByMemberIdAndTestId(req)
+.then(categories => {
+    return calculController.getAllCriterionsByCategories(req,categories)
+})
+.then(response=>{
+    res.payload.categories=response;
+    res.send(res.payload);
+})
+.catch(next));
+
+router.get('/getAllCriterionsByCategory', urlencodedParser, (req, res, next) =>adminController
+.getCategoryById(req)
+.then(category=>{
+    res.payload.category=JSON.parse(category);
+    req.query.idCategory=req.query.id;
+    return adminController.getAllSubcategoriesByCategoryId(req)
+})
+.then(subcategories => {
+    return calculController.getAllCriterionsBySubcategories(req,subcategories)
+})
+.then(response=>{
+    res.payload.subcategories=response;
+    res.send(res.payload);
+})
+.catch(next));
+
+
+router.get('/getAllCriterionBySubcategoryId', urlencodedParser, (req, res, next) =>
+adminController.getSubcategoryWithScoreById(req)
+.then(subcategory => {
+  res.payload.subcategory=JSON.parse(subcategory);
+  return adminController.getAllCriterionsBySubcategoryId(req);
+})
+.then(criterion=>{
+    res.payload.criterions=criterion;
+    res.send(res.payload);
+})
+.catch(next));
+
+
 
 
 

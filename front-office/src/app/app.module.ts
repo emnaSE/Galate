@@ -28,6 +28,9 @@ import { DownloadComponent } from './pages/downloadPDF/download.component';
 import { DownloadService } from './pages/downloadPDF/download.service';
 import { TestTerminatedComponent } from './pages/test-terminated/test-terminated.component';
 import { RgpdComponent } from './rgpd/rgpd.component';
+import { FinalResultComponent } from './pages/final-result/finalResult.component';
+import { FinalResultService } from './pages/final-result/finalResult.service';
+import { FinalResultComponentP2 } from './pages/final-resultP2/finalResultP2.component';
 
 
 
@@ -42,6 +45,8 @@ import { RgpdComponent } from './rgpd/rgpd.component';
     RegisterComponent,
     LoginTestComponent,
     TestTerminatedComponent,
+    FinalResultComponent,
+    FinalResultComponentP2,
     RgpdComponent
  
   ],
@@ -64,7 +69,7 @@ import { RgpdComponent } from './rgpd/rgpd.component';
     MatIconModule,
     MatCardModule
   ],
-  providers: [RegisterService, LoginService, TestService , StartTestService, LoginTestService , DownloadService],
+  providers: [RegisterService, LoginService, TestService , StartTestService, LoginTestService , DownloadService, FinalResultService],
 
 
   bootstrap: [AppComponent]
