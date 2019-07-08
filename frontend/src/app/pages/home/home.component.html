@@ -10,28 +10,28 @@
     <form [formGroup]="findForm" (ngSubmit)="doSearch()" >
     <div class="row">
       <div class="col-xs-12 col-12 col-md-4 form-group">
-        <label>De</label>
+        <label > {{ 'HOME.DATED' | translate }}</label>
         <input _ngcontent-c69=""   formControlName="debut" type ="date"placeholder="Debut" class="form-control" >
 
       </div>
       <div class="col-xs-12 col-12 col-md-4 form-group">
-        <label>à</label>
+        <label >{{ 'HOME.DATEF' | translate }}</label>
         <input _ngcontent-c69=""   formControlName="fin" type ="date"placeholder="Form Picker" class="form-control" >
 
       </div>
       <div class="col-xs-12 col-12 col-sm-6 col-md-2 form-group">
-        <label>Age maximum</label>
+        <label >{{ 'HOME.ageMax' | translate }}</label>
         <input type="number" class="form-control" formControlName="age1" placeholder="Age maximum">
 
       </div>
       <div class="col-xs-12 col-12 col-sm-6 col-md-2 form-group">
-        <label>Age minimum</label>
+        <label >{{ 'HOME.agemin' | translate }}</label>
         <input type="number" class="form-control" formControlName="age2" placeholder="Age minimum">
 
       </div>
       <div class="col-xs-12 col-12 col-sm-4 col-md-2 col-lg-4 form-group">
 
-        <button type="submit" class="btn btn-success" >Rechercher</button>
+        <button  type="submit" class="btn btn-success" >{{ 'HOME.recherch' | translate }}</button>
         <label *ngIf="findForm.errors">{{ findForm.errors?.dates | json }}</label>
       </div>
 
@@ -50,12 +50,12 @@
       <thead>
       <tr role="row">
 
-        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="firstname: activate to sort column ascending">Nom</th>
-        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="lastname: activate to sort column ascending">Prenom</th>
-        <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="name: activate to sort column descending">Nom du test</th>
-        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="date_test: activate to sort column ascending">Date du test</th>
-        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="clazz: activate to sort column ascending">Ecole</th>
-        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="clazz: activate to sort column ascending">Classe</th>
+        <th  class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="firstname: activate to sort column ascending">{{ 'HOME.nom' | translate }}</th>
+        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="lastname: activate to sort column ascending">{{ 'HOME.prenom' | translate }}</th>
+        <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="name: activate to sort column descending">{{ 'HOME.nomtest' | translate }}</th>
+        <th  class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="date_test: activate to sort column ascending">{{ 'HOME.datetest' | translate }}</th>
+        <th  class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="clazz: activate to sort column ascending">{{ 'HOME.ecole' | translate }}</th>
+        <th  class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="clazz: activate to sort column ascending">{{ 'HOME.classe' | translate }}</th>
 
 
       </thead>

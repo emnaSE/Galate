@@ -3,6 +3,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {FormBuilder,AbstractControl, FormControl, FormGroup, Validators} from "@angular/forms";
 import {TestService} from "../test.service";
 import {Test} from "../test.model";
+import {AlertsService} from "angular-alert-module";
 
 @Component({
   selector: 'create-commercial',
@@ -16,7 +17,7 @@ export class CreateTestComponent implements OnInit {
   p_error:number;
   id:number;
   local:any;
-
+  err=1;
   submitted = false;
   editMode=false;
   erreur:number;
@@ -24,7 +25,8 @@ export class CreateTestComponent implements OnInit {
   constructor(private testService:TestService,
               private activateRouter:ActivatedRoute,
               private formBuilder:FormBuilder,
-              private router:Router){
+              private router:Router,
+              private alerts:AlertsService){
 
     this.id = this.activateRouter.snapshot.params['id'];
 
@@ -82,9 +84,12 @@ export class CreateTestComponent implements OnInit {
       console.log(this.valid.activation_date.value);
       console.log(this.valid.expiration_date.value);
       if(this.addForm.valid){
+        console.log(this.valid.activation_date.value);
         this.testService.updateTest(this.id,this.addForm.value).subscribe(
           data=>{
-            alert("update avec succes");
+            this.p_error=1;
+            this.alerts.setMessage('update avec succes', 'warn');
+            //alert("update avec succes");
             this.router.navigate(['pages/test'])
           }
         )
@@ -102,6 +107,8 @@ export class CreateTestComponent implements OnInit {
       }
     }
   }
+
+
 
 consultezCategorie(){
 

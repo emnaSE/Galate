@@ -1,8 +1,8 @@
 
 
 <nb-card>
-  <nb-card-header>
-    Liste des tests
+  <nb-card-header  >
+    {{ 'TEST.list' | translate }}
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
   
   
@@ -22,9 +22,9 @@
       <div id="popup" style="margin-bottom:50px"><app-alerts ></app-alerts></div>
     
     <div>
-        <i style="cursor: pointer ; font-size: 1.6rem; " class="fas fa-plus fa-2x" (click)="create()"> Ajouter </i>
+        <i  style="cursor: pointer ; font-size: 1.6rem; " class="fas fa-plus fa-2x" (click)="create()"> {{ 'TEST.ajouter' | translate }} </i>
     <ul style="position: relative; float: right">
-      <i  class="fas fa-plus fa-2x" style="cursor: pointer; font-size: 1.6rem; position: relative; float: right "  (click)="duplication()"> duplication test </i>
+      <i   class="fas fa-plus fa-2x" style="cursor: pointer; font-size: 1.6rem; position: relative; float: right "  (click)="duplication()"> {{ 'TEST.duplicat' | translate }} </i>
     </ul>
   </div>
    
@@ -43,23 +43,23 @@
       <thead>
       <tr role="row">
        <!-- <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="id: activate to sort column descending">ID</th>-->
-        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="name: activate to sort column ascending">Nom</th>
-        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="activation: activate to sort column ascending">Date d'activation</th>
-        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="expi: activate to sort column ascending">Date d'éxpiration</th>
-        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="password: activate to sort column ascending">Mot de passe</th>
-        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="action: activate to sort column ascending">Nombre de test</th>
-        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="duree: activate to sort column ascending">Durée du test</th>
-        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="test_subcategories_number: activate to sort column ascending">Action </th>
-        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="affect: activate to sort column ascending">Affectation categorie</th>
-        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="affectsub: activate to sort column ascending">Affectation sous categorie</th>
-        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="test_subcategories_number: activate to sort column ascending">Generation fichier XML </th>
+        <th  class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="name: activate to sort column ascending">{{ 'TEST.Nom' | translate }}</th>
+        <th  class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="activation: activate to sort column ascending">{{ 'TEST.date' | translate }}</th>
+        <th  class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="expi: activate to sort column ascending">{{ 'TEST.dateEx' | translate }}</th>
+        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="password: activate to sort column ascending">{{ 'TEST.password' | translate }}</th>
+        <th  class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="action: activate to sort column ascending">{{ 'TEST.nombre' | translate }}</th>
+        <th  class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="duree: activate to sort column ascending">{{ 'TEST.duree' | translate }}</th>
+        <th  class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="test_subcategories_number: activate to sort column ascending">{{ 'TEST.Action' | translate }} </th>
+        <th  class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="affect: activate to sort column ascending">{{ 'TEST.affectationC' | translate }}</th>
+        <th  class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="affectsub: activate to sort column ascending">{{ 'TEST.AffectationSouC' | translate }}</th>
+        <th  class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="test_subcategories_number: activate to sort column ascending">{{ 'TEST.xml' | translate }} </th>
           </thead>
       <tbody>
       <tr *ngFor="let test of tests | paginate: { itemsPerPage: 7, currentPage: pageActuel }">
         <!--  <td (click)="getinfo(test)">{{test.id}}</td>-->
         <td ><a style="color:green ; cursor: pointer;text-decoration: underline" (click)="getinfo(test)">{{test.name}}</a></td>
-          <td>{{test.activation_date | date: 'dd/MM/yyyy h:mm a'}}</td>
-          <td>{{test.expiration_date | date: 'dd/MM/yyyy h:mm a'}}</td>
+          <td>{{test.activation_date | date: 'long':'+0100'}}</td>
+          <td>{{test.expiration_date | date: 'long':'+0100'}}</td>
 
           <td>{{test.password}}</td>
           <td>{{test.test_subcategories_number}}</td>
@@ -72,9 +72,9 @@
             
             <ng-template #template>
               <div class="modal-body text-center">
-                <p>veuillez confirmer la suppression?</p>
-                <button type="button" class="btn btn-default" (click)="confirm(test)" >OUI</button>
-                <button type="button" class="btn btn-primary" (click)="decline()" >NON</button>
+                <p >veuillez confirmer la suppression?</p>
+                <button  type="button" style="margin-right: 20%" class="btn btn-success" (click)="confirm(test)" >OUI</button>
+                <button  type="button" class="btn btn-primary" (click)="decline()" >NON</button>
               </div>
             </ng-template>
 
@@ -101,8 +101,8 @@
       </table>
       <pagination-controls
         (pageChange)="pageActuel = $event"
-        previousLabel="Précédent"
-        nextLabel="Suivant"
+        previousLabel="{{ 'TEST.precedant' | translate }}"
+        nextLabel="{{ 'TEST.suivante' | translate }}"
       ></pagination-controls>
 
     </nb-card-body>

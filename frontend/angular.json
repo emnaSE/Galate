@@ -56,7 +56,15 @@
                   "with": "src/environments/environment.prod.ts"
                 }
               ]
-            }
+            },
+            "eng": {
+              "aot": true,
+              "outputPath": "dist/under-construction-eng/",
+              "i18nFile": "src/locale/messages.eng.xlf",
+              "i18nFormat": "xlf",
+              "i18nLocale": "eng",
+              "i18nMissingTranslation": "error"
+            },
           }
         },
         "serve": {
@@ -67,6 +75,9 @@
           "configurations": {
             "production": {
               "browserTarget": "ngx-admin-demo:build:production"
+            },
+            "eng": {
+              "browserTarget": "ngx-admin-demo:build:eng"
             }
           }
         },

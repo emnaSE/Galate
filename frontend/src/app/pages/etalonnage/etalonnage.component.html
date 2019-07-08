@@ -1,26 +1,26 @@
 
 
 <nb-card>
-  <nb-card-header>
-    Liste des Etalonnages
+  <nb-card-header >
+    {{ 'ETALONAGE.list' | translate }}
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
 
   </nb-card-header>
 
 
   <nb-card-body>
-    <i style="cursor: pointer;" class="fas fa-plus fa-2x" (click)="create()"> ajouter </i>
+    <i  style="cursor: pointer;" class="fas fa-plus fa-2x" (click)="create()"> {{ 'ETALONAGE.ajouter' | translate }} </i>
     <table id="example2" class="my-3 table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info" style="text-align: center">
       <thead>
       <tr role="row">
         <!--<th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="id: activate to sort column descending">ID</th>-->
 
-        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="sub: activate to sort column ascending">Sous categorie</th>
-       <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="lower: activate to sort column ascending">Borne inférieure</th>
-       <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="upper: activate to sort column ascending">Borne supérieure</th>
-       <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="value: activate to sort column ascending">Valeur</th>
+        <th  class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="sub: activate to sort column ascending">{{ 'ETALONAGE.sousCateg' | translate }}</th>
+       <th  class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="lower: activate to sort column ascending">{{ 'ETALONAGE.borni' | translate }}</th>
+       <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="upper: activate to sort column ascending">{{ 'ETALONAGE.borns' | translate }}</th>
+       <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="value: activate to sort column ascending">{{ 'ETALONAGE.Valeur' | translate }}</th>
 
-       <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="action: activate to sort column ascending">Action</th>
+       <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="action: activate to sort column ascending">{{ 'ETALONAGE.Action' | translate }}</th>
 
          </thead>
      <tbody>
@@ -41,9 +41,10 @@
     </tbody>
   </table>
   <pagination-controls
+
     (pageChange)="pageActuel = $event"
-    previousLabel="Précédent"
-    nextLabel="Suivant"
+    previousLabel="{{ 'ETALONAGE.precedant' | translate }}"
+    nextLabel="{{ 'ETALONAGE.suivante' | translate }}"
   ></pagination-controls>
 
 </nb-card-body>

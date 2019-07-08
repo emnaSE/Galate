@@ -1,17 +1,17 @@
 
 
 <nb-card>
-  <nb-card-header>
-    {{ editMode ? 'Modifier': 'Ajouter' }} Sous catergorie
+  <nb-card-header >
+    {{ editMode ? 'Modifier': 'Ajouter' }} {{ 'SOUSCATEGORIE.CREATE.Nom' | translate }}
     <ul style="position: relative; float: right">
-      <i style="cursor: pointer; position: relative; float: right ; color: darkgreen"  (click)="create()"> Creation du question </i>
+      <i style="cursor: pointer; position: relative; float: right ; color: darkgreen"  (click)="create()"> {{ 'SOUSCATEGORIE.CREATE.creation' | translate }} </i>
     </ul>
   </nb-card-header>
 
   <nb-card-body>
     <form [formGroup]="addForm" (ngSubmit)="onSubmit()">
       <div class="form-group">
-        <label for="name">Categorie</label>
+        <label  for="name">{{ 'SOUSCATEGORIE.CREATE.categorie' | translate }}</label>
         <angular2-multiselect [data]="dropdownList"
                               [(ngModel)]="selectedItems"
                               [settings]="dropdownSettings"
@@ -19,37 +19,37 @@
       </div>
 
       <div  class="form-group">
-        <label for="fnText">Nom du sous categories</label>
+        <label   for="fnText">{{ 'SOUSCATEGORIE.CREATE.NomSousC' | translate }}</label>
         <input type="text" class="form-control" formControlName="name" placeholder="Nom du sous categories">
         <ng-container *ngIf="submitted && formvalidate.name.errors">
-          <p class="text-danger" >
-            Nom est obligatoire !
+          <p   class="text-danger" >
+            {{ 'SOUSCATEGORIE.CREATE.AalertNom' | translate }}
           </p>
         </ng-container>
       </div>
 
       <div class="form-group">
-        <label for="fnText">Down Description</label>
+        <label   for="fnText">{{ 'SOUSCATEGORIE.CREATE.Down' | translate }}</label>
         <input type="text" class="form-control" formControlName="down_description" placeholder="Down Description">
         <ng-container *ngIf="submitted && formvalidate.down_description.errors">
-          <p class="text-danger" >
-            description est obligatoire !
+          <p class="text-danger"  >
+            {{ 'SOUSCATEGORIE.CREATE.AlertDescriptionDown' | translate }}
           </p>
         </ng-container>
       </div>
 
       <div class="form-group">
-        <label for="fnText">Up Description</label>
+        <label   for="fnText">{{ 'SOUSCATEGORIE.CREATE.uP' | translate }}</label>
         <input type="text" class="form-control" formControlName="up_description" placeholder="Up Description">
         <ng-container *ngIf="submitted && formvalidate.up_description.errors">
-          <p class="text-danger" >
-            description est obligatoire !
+          <p class="text-danger"  >
+            {{ 'SOUSCATEGORIE.CREATE.AlertDescriptionUp' | translate }}
           </p>
         </ng-container>
       </div>
 
 
-      <button type="submit" class="btn btn-success">{{ editMode ? 'Update' : 'Ajouter' }}</button>
+      <button   type="submit" class="btn btn-success">{{ editMode ? 'Update' : 'Ajouter' }}</button>
     </form>
 
   </nb-card-body>

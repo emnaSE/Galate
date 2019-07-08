@@ -54,7 +54,7 @@ export class TestComponent  implements OnInit{
         
         }else
           if (data=="failure"){
-            //this.alerts.setMessage('Ce test est liée à des sous categorie vous ne pouvez pas le supprimer', 'warn');
+            this.alerts.setMessage('Ce test est liée à des sous categorie vous ne pouvez pas le supprimer', 'warn');
            //this.err=1;
 
            alert("ce test est liée à des sous categorie vous ne pouvez pas le supprimer!")

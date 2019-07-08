@@ -1,15 +1,15 @@
 
 
 <nb-card>
-  <nb-card-header>
-    {{ editMode ? 'Modifier': 'Ajouter' }}  Etalonage
+  <nb-card-header >
+    {{ editMode ? 'Modifier': 'Ajouter' }}  {{ 'ETALONAGE.CREATE.modif' | translate }}
   </nb-card-header>
 
   <nb-card-body>
     <form [formGroup]="addForm" (ngSubmit)="onSubmit()">
 
-      <div class="form-group">
-        <label for="name">Sous Categorie</label>
+      <div  class="form-group">
+        <label for="name">{{ 'ETALONAGE.CREATE.sousC' | translate }}</label>
         <angular2-multiselect [data]="dropdownList"
                               [(ngModel)]="selectedItems"
                               [settings]="dropdownSettings"
@@ -20,35 +20,35 @@
 
 
       <div class="form-group">
-        <label for="fnText">Borne inférieure</label>
+        <label  for="fnText">{{ 'ETALONAGE.CREATE.borni' | translate }}</label>
         <input type="number" class="form-control" formControlName="lower_bound" min="0" placeholder="Borne inférieure">
         <ng-container *ngIf="submitted && formvalidate.lower_bound.errors">
-          <p class="text-danger" >
-            borne inférieure est obligatoire !
+          <p  class="text-danger" >
+            {{ 'ETALONAGE.CREATE.alertBorni' | translate }}
           </p>
         </ng-container>
       </div>
       <div class="form-group">
-        <label for="fnText">Borne supérieure</label>
+        <label  for="fnText">{{ 'ETALONAGE.CREATE.bornf' | translate }}</label>
         <input type="number" class="form-control"  min="0" formControlName="upper_bound" placeholder="Borne supérieure">
         <ng-container *ngIf="submitted && formvalidate.upper_bound.errors">
-          <p class="text-danger" >
-            borne supérieure est obligatoire !
+          <p  class="text-danger" >
+            {{ 'ETALONAGE.CREATE.alertBorns' | translate }}
           </p>
         </ng-container>
       </div>
       <div class="form-group">
-        <label for="fnText">Valeur</label>
+        <label  for="fnText">{{ 'ETALONAGE.CREATE.Valeur' | translate }}</label>
         <input type="number" min="0" class="form-control" formControlName="value" placeholder="Valeur">
         <ng-container *ngIf="submitted && formvalidate.value.errors">
           <p class="text-danger" >
-            valeur est obligatoire !
+            {{ 'ETALONAGE.CREATE.alertvaleur' | translate }}
           </p>
         </ng-container>
       </div>
 
 
-      <button type="submit" class="btn btn-success">{{ editMode ? 'Modifier': 'Ajouter' }} </button>
+      <button  type="submit" class="btn btn-success">{{ editMode ? 'Modifier': 'Ajouter' }} </button>
     </form>
 
   </nb-card-body>

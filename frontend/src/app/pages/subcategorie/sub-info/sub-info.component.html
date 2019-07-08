@@ -11,12 +11,12 @@
 
   <thead>
   <tr role="row">
-    <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="id: activate to sort column descending">Nom</th>
+    <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="id: activate to sort column descending">{{ 'SOUSCATEGORIE.INFO.uP' | translate }}</th>
     <!-- <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="name: activate to sort column ascending">id</th>-->
-    <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="action: activate to sort column ascending">Question</th>
-    <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="questio: activate to sort column ascending">Valeur</th>
-    <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="valeur: activate to sort column ascending">Order</th>
-    <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="action: activate to sort column ascending">Action</th>
+    <th  class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="action: activate to sort column ascending">{{ 'SOUSCATEGORIE.INFO.Question' | translate }}</th>
+    <th  class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="questio: activate to sort column ascending">{{ 'SOUSCATEGORIE.INFO.Valeur' | translate }}</th>
+    <th  class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="valeur: activate to sort column ascending">{{ 'SOUSCATEGORIE.INFO.Order' | translate }}</th>
+    <th  class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="action1: activate to sort column ascending">{{ 'SOUSCATEGORIE.INFO.Action' | translate }}</th>
 
   </thead>
   <tbody>
@@ -50,8 +50,8 @@
 </table>
       <pagination-controls
         (pageChange)="pageActuel = $event"
-        previousLabel="Précédent"
-        nextLabel="Suivant"
+        previousLabel="{{ 'SOUSCATEGORIE.INFO.precedant' | translate }}"
+        nextLabel="{{ 'SOUSCATEGORIE.INFO.suivante' | translate }}"
       ></pagination-controls>
     </nb-card-body>
 </nb-card>

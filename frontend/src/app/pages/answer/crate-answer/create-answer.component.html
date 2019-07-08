@@ -1,8 +1,8 @@
 
 
 <nb-card>
-  <nb-card-header>
-    Modifier réponse
+  <nb-card-header >
+    {{ 'ANSWER.CREATE.modif' | translate }}
   </nb-card-header>
 
   <nb-card-body>
@@ -11,36 +11,36 @@
 
 
       <div class="form-group">
-        <label for="fnText">Nom</label>
+        <label  for="fnText">{{ 'ANSWER.CREATE.Nom' | translate }}</label>
         <input type="text" class="form-control" formControlName="name" placeholder="Nom">
         <ng-container *ngIf="submitted && formvalidate.name.errors">
           <p class="text-danger" >
-            nom est obligatoire !
+            {{ 'ANSWER.CREATE.alertNom' | translate }}
           </p>
         </ng-container>
       </div>
       <div class="form-group">
-        <label for="fnText">Valeur</label>
+        <label  for="fnText">{{ 'ANSWER.CREATE.Valeur' | translate }}</label>
         <input type="number" min="0" class="form-control" formControlName="value"  placeholder="Valeur">
         <ng-container *ngIf="submitted && formvalidate.value.errors">
           <p class="text-danger" >
-            valeur est obligatoire !
+            {{ 'ANSWER.CREATE.ALertValeur' | translate }}
           </p>
         </ng-container>
       </div>
       <div class="form-group">
-        <label for="fnText">Ordre</label>
+        <label for="fnText"  >{{ 'ANSWER.CREATE.Ordre' | translate }}</label>
         <input type="number" class="form-control"  min="0" formControlName="ordre" placeholder="Ordre">
         <ng-container *ngIf="submitted && formvalidate.value.errors">
-          <p class="text-danger" >
-            ordre est obligatoire !
+          <p class="text-danger"  >
+            {{ 'ANSWER.CREATE.AlertOrder' | translate }}
           </p>
         </ng-container>
       </div>
 
 
 
-      <button type="submit" class="btn btn-success">Modifier</button>
+      <button type="submit" class="btn btn-success" >{{ 'ANSWER.CREATE.submit' | translate }}</button>
     </form>
 
   </nb-card-body>

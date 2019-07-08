@@ -5,6 +5,7 @@ import {FormsModule} from "@angular/forms";
 import {NgxPaginationModule} from "ngx-pagination";
 import {HomeComponent} from "./home.component";
 import {BsDatepickerModule} from "ngx-bootstrap";
+import {TranslateModule} from "@ngx-translate/core";
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import {BsDatepickerModule} from "ngx-bootstrap";
     CommonModule,
     ThemeModule,
     FormsModule,
+    TranslateModule,
     NgxPaginationModule,
     BsDatepickerModule.forRoot()
   ]
