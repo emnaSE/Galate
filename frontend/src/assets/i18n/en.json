@@ -166,7 +166,7 @@
     "AFFECTSOUS": {
       "Affecter": "Assign Under Categories",
       "order": "Assign orders",
-      "Categorie": "Under Categories"
+      "Categorie": "SubCategories"
     }
   },
 
@@ -194,6 +194,7 @@
     "suivante": "next",
     "nom1": "Name",
     "ConsulterSou": "Consult Under Categories",
+    "subcategory":"Sub-category",
     "CREATE": {
       "Nom": "Sub-category",
       "creation": " Creation of the question",
@@ -203,7 +204,7 @@
       "uP": "Up Description",
       "AalertNom": "Name is required!",
       "AlertDescriptionDown": "description is required!",
-      "AlertDescriptionUp": "description is required!"
+      "AlertDescriptionUp": "description is required!"    
     },
     "INFO": {
       "Nom": "name",
@@ -215,5 +216,6 @@
       "suivante": "next"
     }
 
-  }
+  },
+  "CATEGORY":"kkkkkkkkkkk"
 }

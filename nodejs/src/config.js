@@ -4,7 +4,7 @@
 
 
 module.exports = {
-    port: process.env.PORT || 3007,
+    port: process.env.PORT || 3000,
     env: process.env.NODE_ENV || 'development',
    
 
@@ -12,8 +12,12 @@ module.exports = {
         host: "localhost",
         user: "root",
         password: "wqtqVSROVpdhilqI00",
-        database: "galate",
+        //password: "tbEsNGfMcF8Htt7n",
+        //password: "root",
+        database: "galate1",
         port: 3306
-    })
+    }),
+
+    mediane: 6,
   };
   

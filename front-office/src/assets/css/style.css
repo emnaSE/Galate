@@ -97,7 +97,7 @@ ul.navbar-nav li a.btn-link-3 {
 	display: inline-block;
 	margin: 9px 0 0 15px;
 	padding: 6px 15px;
-	background: #6eba3c;
+	background: rgb(31, 73, 125);
 	border: 0;
 	font-family: 'NexaLight', sans-serif;
 	font-size: 14px;
@@ -109,7 +109,7 @@ ul.navbar-nav li a.btn-link-3 {
 ul.navbar-nav li a.btn-link-3:hover,
 ul.navbar-nav li a.btn-link-3:focus,
 ul.navbar-nav li a.btn-link-3:active,
-ul.navbar-nav li a.btn-link-3:active:focus { outline: 0; background: #63a736; color: #fff; }
+ul.navbar-nav li a.btn-link-3:active:focus { outline: 0; background: rgb(31, 73, 125);; color: #fff; }
 
 .navbar-brand {
 	margin-top: 6px;

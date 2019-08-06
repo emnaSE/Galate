@@ -1,0 +1,9 @@
+.subCatS:nth-child(3n){
+    background-color: #ff5b5b;
+}
+.subCatS:nth-child(3n+1){
+    background-color: #8cb3e3;
+}
+.subCatS:nth-child(3n+2){
+    background-color: #1f497d;
+}

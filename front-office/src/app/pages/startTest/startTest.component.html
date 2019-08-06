@@ -44,7 +44,7 @@
             width:130px;
             margin-left: 10px;
             margin-right: 10px;
-            color:#000000b5 !important;
+            color:#000000b5 ;
         }
         .Quest{
             margin-top:10px;
@@ -89,7 +89,7 @@
         min-width: 200px;
         height: 50px;
         border-radius: 2px;
-        background: #00ad5f;
+        background: rgb(31, 73, 125);
 
         font-family: 'NexaBold';
         font-size: 12px;
@@ -105,7 +105,7 @@
         }
 
         .contact100-form-btn:hover {
-        background: #333333;
+        background: rgb(31, 73, 125);
         }
     </style>
     </head>
@@ -178,7 +178,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-12 features section-description wow fadeIn">
-                    <h2>Merci de cocher la caractéristique qui vous représente le mieux.</h2>
+                    <h2>Merci de cocher le mot qui vous représente le mieux.</h2>
                     <div class="divider-1"><div class="line"></div></div>
                 </div>
             </div>
@@ -186,9 +186,9 @@
                 <div class="col-md-6 col-lg-6 " id="1" *ngFor="let testSubcategory of subcatgories">
                         <div class="custom-control custom-radio" *ngFor="let question of testSubcategory.questions" class="Quest">
                             <input class="form-check-input" *ngIf="question[0]!==undefined" type="radio" name={{question[0].id_question}}   style="visibility: hidden"  >
-                            <a   *ngIf="question[0]!==undefined" class="btn btn-theme btn-sm btn-min-block choices" onclick="checkButton(this)" role="button"  (click)="saveAnswer(question[0].id_question, question[0].id)">{{question[0].name}}</a>
+                            <a   *ngIf="question[0]!==undefined" class="btn btn-theme btn-sm btn-min-block choices" onclick="checkButton(this)" role="button" style="color: #000000b5;"  (click)="saveAnswer(question[0].id_question, question[0].id)">{{question[0].name}}</a>
                             <input class="form-check-input" *ngIf="question[1]!==undefined" type="radio"  name={{question[1].id_question}} style="visibility: hidden" >
-                            <a  *ngIf="question[1]!==undefined" class="btn btn-theme btn-sm btn-min-block choices" onclick="checkButton(this)"  role="button"  (click)="saveAnswer(question[1].id_question, question[1].id)">{{question[1].name}}</a>
+                            <a  *ngIf="question[1]!==undefined" class="btn btn-theme btn-sm btn-min-block choices" onclick="checkButton(this)"  role="button"  style="color: #000000b5;" (click)="saveAnswer(question[1].id_question, question[1].id)">{{question[1].name}}</a>
                             <hr>
                         </div>
                 </div>

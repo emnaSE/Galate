@@ -13,7 +13,7 @@
     <!-- Main css -->
     <link rel="stylesheet" href="assets/css/LogStyle.css">
 </head>
-<body>
+<body style="margin: -8px;">
 
     <div class="main">
 
@@ -27,7 +27,7 @@
     padding-bottom: 40px;" src="assets/img/gal1.png" >
                 <div class="signup-content">
                         <form [formGroup]="form" (ngSubmit)="onSubmit()" id="signup-form" class="signup-form">
-                        <h2 class="form-title">Enter le mot de passe du test</h2>
+                        <h2 class="form-title">Entrer le mot de passe du test</h2>
                         <div class="form-group">
                                 <input  [formControl]="password"  [(ngModel)]="loginTest.password" type="password" class="form-input" name="password" id="password" placeholder="Mot de passe"/>
                                 <span toggle="#password" class="zmdi zmdi-eye field-icon toggle-password"></span>                        </div>  

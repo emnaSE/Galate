@@ -283,7 +283,15 @@ adminController.getSubcategoryWithScoreById(req)
 .catch(next));
 
 
-
+router.get('/calculateSkills', urlencodedParser, (req, res, next) =>
+adminController.getAllCriterionsByTestId(req)
+.then(criterions=>{
+    calculController.calculateSkills(req,res,criterions);
+})
+.then(response=>{
+    res.send("calcul success");
+})
+.catch(next));
 
 
 module.exports = router;

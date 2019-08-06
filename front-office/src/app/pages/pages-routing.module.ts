@@ -46,7 +46,7 @@ const routes: Routes = [
     component:DownloadComponent,
   },
   {
-    path: 'finalResult',
+    path: 'finalResult/:idT/:idM',
     component:FinalResultComponent,
   },
   {

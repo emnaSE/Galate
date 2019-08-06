@@ -77,7 +77,15 @@ export class FinalResultComponent  implements OnInit{
       data=>{
         this.object=data;
         this.catalogueDetails=JSON.parse(JSON.stringify(data)).categories;
-        console.log("*************"+JSON.stringify(this.catalogueDetails));
+        //console.log("*************"+JSON.stringify(this.catalogueDetails));
+      },err=>{
+        console.log(err)
+      }
+    )
+
+    this.finalResultService.calculateSkills(this.testId1 , this.memberId1).subscribe(
+      data=>{
+        console.log(data);
       },err=>{
         console.log(err)
       }
@@ -90,14 +98,34 @@ export class FinalResultComponent  implements OnInit{
     
  
  
+  public next(event){
+    this.router.navigate(['/finalResultP2', this.testId1 , this.memberId1]);
+ }
 
-
+  public back(event){
+    this.router.navigate(['/download', this.testId1 , this.memberId1]);
+  }
 
   public logout (event){
     localStorage.clear();
     this.router.navigate(['/register'])
  }
-    }
+
+ getColor(i){
+  switch (i%3) {
+    case 0:
+    return '#8cb3e3';
+    case 1:
+    return '#1f497d';
+    default:
+     return '#ff5b5b';
+  }
+}
+
+
+
+
+}
 
  
   

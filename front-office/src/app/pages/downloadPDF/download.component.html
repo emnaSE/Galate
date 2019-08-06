@@ -93,7 +93,7 @@
   min-width: 200px;
   height: 50px;
   border-radius: 2px;
-  background: #00ad5f;
+  background: rgb(31, 73, 125);
 
   font-family: 'NexaBold';
   font-size: 12px;
@@ -109,7 +109,7 @@
 }
 
 .contact100-form-btn:hover {
-  background: #333333;
+  background: rgb(31, 73, 125);
 }
         
         #carous{
@@ -155,13 +155,16 @@
  
     <div class="table-responsive"  style="margin-top : 70px">
         <p> Merci de votre participation</p>
-        <p> Vos résultats sont téléchargeable en cliquant sur le bouton suivant:</p>
+        <p> Vos résultats sont téléchargeables en cliquant sur le bouton suivant:</p>
 
 
         <div class="container-contact100-form-btn">
             <button class="contact100-form-btn" (click)="telecharger($event)" >
                 Obtenir mes résultats
             </button>
+            <button class="contact100-form-btn" (click)="redirect($event)" >
+              Consulter mes compétences
+           </button>
           </div>
 
     </div>
@@ -203,7 +206,8 @@
             document.getElementsByClassName($class)[$i].style.backgroundImage="url('')";
           }
         }
-        elem.style.backgroundImage="url('assets/img/done.png')";
+        elem.style.backgroundImage="url('assets/img/done2.png')";
+        elem.style.backgroundSize="25px";
         elem.style.backgroundRepeat="no-repeat";
         elem.style.backgroundPositionY="center";
         elem.style.backgroundPositionX="center";

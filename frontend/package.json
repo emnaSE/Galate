@@ -17,7 +17,7 @@
   "scripts": {
     "ng": "ng",
     "conventional-changelog": "conventional-changelog",
-    "start": "ng serve --port 4301",
+    "start": "ng serve --port 4302",
     "build": "ng build",
     "build:prod": "npm run build -- --prod --aot",
     "start:eng": "ng serve --configuration=eng",
@@ -76,6 +76,7 @@
     "socicon": "3.0.5",
     "typeface-exo": "0.0.22",
     "web-animations-js": "2.2.5",
+    "xmlbuilder": "^13.0.2",
     "zone.js": "^0.8.26"
   },
   "devDependencies": {

@@ -37,8 +37,18 @@ export const MENU_ITEMS: NbMenuItem[] = [
     home: true,
     children:[
       {
-        title:"Categorie",
+        title:"Liste des Categories",
         link: '/pages/categorie',
+
+      },
+      {
+        title:"Liste des Critères",
+        link: '/pages/sous',
+
+      },
+      {
+        title:"Liste des Compétences",
+        link: '/pages/criterion',
 
       },
 

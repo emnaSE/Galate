@@ -8,7 +8,7 @@ import {Clazz} from './clazz.model';
 import { School } from './school.model';
 import { map } from 'rxjs-compat/operator/map';
 import { element } from '@angular/core/src/render3';
-
+import {TEST_ID} from "../../app.constant";
 
 @Component({
   selector: 'register',
@@ -29,6 +29,7 @@ export class RegisterComponent  implements OnInit{
   dropdownSettings0 = {};
   addForm:FormGroup;
   submitted = false;
+  currentTestId= TEST_ID;
   constructor(private router:Router,
               private registerService:RegisterService,
               private formBuilder:FormBuilder,
@@ -86,6 +87,7 @@ export class RegisterComponent  implements OnInit{
       allowSearchFilter: true,
       enableSearchFilter:true,
       classes: "myclass custom-class-example",
+      searchPlaceholderText:"Rechercher"
     };
 
     this.dropdownSettings = {
@@ -99,6 +101,7 @@ export class RegisterComponent  implements OnInit{
       allowSearchFilter: true,
       enableSearchFilter:true,
       classes: "myclass custom-class-example",
+      searchPlaceholderText:"Rechercher"
     };
 
     this.dropdownSettings1 = {
@@ -112,6 +115,7 @@ export class RegisterComponent  implements OnInit{
       allowSearchFilter: true,
       enableSearchFilter:true,
       classes: "myclass custom-class-example",
+      searchPlaceholderText:"Rechercher"
     };
 
     this.registerService.getAllClazz().subscribe(
@@ -160,12 +164,15 @@ export class RegisterComponent  implements OnInit{
             localStorage.setItem('memberId', JSON.parse(JSON.stringify(data)).memberId);
             //alert("ajouter avec succes")
             //this.router.navigate(['/login'])
-            this.router.navigate(['/test'])
+            //this.router.navigate(['/test'])
+            console.log(this.currentTestId);
+            localStorage.setItem('testId', this.currentTestId);
+            this.router.navigate(['/loginTest' , this.currentTestId , JSON.parse(JSON.stringify(data)).memberId])
           },err=>{
             console.log(err);
           }
         )
-      }else{
+      }else{      
       alert("merci de verifier vos données");
         this.err=5;
       }

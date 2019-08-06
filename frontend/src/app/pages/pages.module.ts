@@ -15,6 +15,7 @@ import {EtalonnageModule} from "./etalonnage/etalonnage.module";
 import {QuestionModule} from "./question/question.module";
 import {AnswerModule} from "./answer/answer.module";
 import {HomeModule} from "./home/home.module";
+import { CriterionModule } from './criterion/criterion.module';
 
 const PAGES_COMPONENTS = [
   PagesComponent,
@@ -28,6 +29,7 @@ const PAGES_COMPONENTS = [
     MiscellaneousModule,
     TestModule,
     SubcategorieModule,
+    CriterionModule,
     EcoleModule,
     ClassModule,
     EtalonnageModule,

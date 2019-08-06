@@ -8,6 +8,8 @@ var con=config.con;
 const path = require('path');
 var fs = require("fs"); // node filesystem
 var tmp = require('tmp');
+const lineReader = require('line-reader');
+
 
 
 const request = require('request');
@@ -359,7 +361,7 @@ _publics.getAllSubcategoriesByCategory = (req) => {
   var idCategory=req.query.idCategory;
   var idMember=req.query.id_member;
   return new Promise((resolve, reject) => {  
-           var sql = "select sc.*, ma.id as manualAnswerId, ma.etallonage_result as score FROM subcategory sc left join manuel_answer ma on(sc.id=ma.id_subcategory) where sc.id_category=? and ma.id_member=?"; 
+           var sql = "select sc.*, ma.id as manualAnswerId, ma.etallonage_result as score FROM subcategory sc left join manuel_answer ma on(sc.id=ma.id_subcategory) where sc.id_category=? and ma.id_member=? order by sc.ordre asc"; 
          
                con.query(sql,[idCategory,idMember], function (err, result) {
                if (err) reject(err);
@@ -401,9 +403,7 @@ _publics.createSubCategory = (subcategory) => {
               }
              return resolve(msg);
          });
-});   
-
-    
+});    
 }; 
 
  _publics.updateSubCategory = (req,subcategory) => { 
@@ -2304,22 +2304,242 @@ _publics.getAllCriterionsBySubcategoryId = (req) => {
   var subCategoryId=req.query.id;
   var testId=req.query.id_test;
   var memberId=req.query.id_member;
-  console.log(testId, testId, testId);
   return new Promise((resolve, reject) => {  
-           //var sql = "select c.* FROM criterion c left join subcategory_criterion sc on(sc.id_criterion=c.id) where sc.id_subcategory=?"; 
-             //var sql="select c.*, coalesce(FLOOR(sum(ma.etallonage_result)/count(*)),0) from manuel_answer ma  left join subcategory_criterion sc on(ma.id_subcategory=sc.id_subcategory) "+
-               //       "left join criterion c on(c.id=sc.id_criterion) where c.id_subcategory=? and ma.id_test=? and id_member=?";
-               var sql="select distinct c1.* , "+
+           
+              /* var sql="select distinct c1.* , "+
                "(select coalesce(FLOOR(sum(ma.etallonage_result)/count(ma.id)),0)  from manuel_answer ma  left join subcategory_criterion sc on(ma.id_subcategory=sc.id_subcategory) "+
-               "left join criterion c2 on(c2.id=sc.id_criterion) where c2.id_subcategory=5 and ma.id_test=152 and id_member=141 and c1.id=c2.id) as score "+
+               "left join criterion c2 on(c2.id=sc.id_criterion) where c2.id_subcategory=? and ma.id_test=? and id_member=? and c1.id=c2.id) as score "+
                "from manuel_answer ma  left join subcategory_criterion sc on(ma.id_subcategory=sc.id_subcategory) "+
-               "left join criterion c1 on(c1.id=sc.id_criterion) where c1.id_subcategory=? and ma.id_test=? and id_member=?"
-               con.query(sql,[subCategoryId,testId,memberId,subCategoryId,testId,memberId], function (err, result) {
+               "left join criterion c1 on(c1.id=sc.id_criterion) where c1.id_subcategory=? and ma.id_test=? and id_member=?"*/
+               var sql="select distinct c.* , c.result as score   from manuel_answer ma  left join criterion c on(ma.id_subcategory=c.id_subcategory) "+
+               "where c.id_subcategory=? and ma.id_test=? and id_member=?;"
+               con.query(sql,[subCategoryId,testId,memberId], function (err, result) {
                if (err) reject(err);
                return resolve(result);
                });
    });    
 };
+
+
+_publics.createCriterion = (criterion) => { 
+  var name=criterion.name;
+  var subcategoryId=criterion.id_subcategory[0].id;
+
+  return new Promise((resolve, reject) => { 
+    var msg="";
+    var sql = "insert into criterion set ? ";
+    const newsubcategory = { name: name,id_subcategory:subcategoryId};         
+    con.query(sql,newsubcategory, function (err, result) {
+            if (err){
+              msg="failure";
+              reject(err);
+            }else{
+              msg="success";
+            }
+           return resolve(msg);
+       });
+});    
+};
+
+_publics.createSubcategoryCriterions = (criterionId, subcategories) => { 
+  let promises = [];
+  for (var i=0;i<subcategories.length;i++) {
+    promises.push( new Promise((resolve, reject) => {  
+            var response=createSubcategoryCriterion(criterionId, subcategories[i].id);
+            return resolve(response);
+          }));
+   }
+   return Promise.all(promises)   
+};
+
+function createSubcategoryCriterion(criterionId,subcategoryId){
+  return new Promise((resolve, reject) => { 
+    var msg="";
+    var sql = "insert into subcategory_criterion set ? ";
+    const object = { id_criterion: criterionId,id_subcategory:subcategoryId};         
+    con.query(sql,object, function (err, result) {
+            if (err){
+              msg="failure";
+              reject(err);
+            }else{
+              msg="success";
+            }
+           return resolve(msg);
+       });
+}); 
+}
+
+
+_publics.deleteAllSubcategoryCriterions = (criterionId) => { 
+  return new Promise((resolve, reject) => { 
+        var sql = "DELETE FROM subcategory_criterion WHERE id_criterion=?"; 
+        var msg="";
+        con.query(sql,[criterionId], function (err, result) {
+          if (err){
+            msg="failure";
+            reject(err);
+          }else{
+            msg="success";
+          }
+        return resolve(msg);
+        });
+  });
+};
+
+
+
+
+_publics.getAllCriterions = (req) => { 
+  
+  return new Promise((resolve, reject) => {  
+           var sql = "select c.*, sc.name as subcategory FROM criterion c left join subcategory sc on(c.id_subcategory=sc.id) "; 
+         
+               con.query(sql, function (err, result) {
+               if (err) reject(err);
+               return resolve(JSON.stringify(result));
+               });
+   });    
+};
+
+_publics.getCriterionById = (req) => { 
+  var id=req.query.id;
+  return new Promise((resolve, reject) => {  
+           var sql = "select * FROM criterion where id=?"; 
+         
+               con.query(sql,[id], function (err, result) {
+               if (err) reject(err);
+               return resolve(JSON.stringify(result[0]));
+               });
+   });    
+};
+
+_publics.getAllCriterionsByCategoryId = (req) => { 
+  var idSubcategory=req.query.idSubcategory;
+  return new Promise((resolve, reject) => {  
+           var sql = "select * FROM criterion  where id_subcategory=? "; 
+         
+               con.query(sql,[idSubcategory], function (err, result) {
+               if (err) reject(err);
+               return resolve(JSON.stringify(result));
+               });
+   });    
+};
+
+_publics.updateCriterion = (req,criterion) => { 
+ var name=criterion.name;
+ var id_subcategory=criterion.id_subcategory[0].id;
+ var id=req.query.id;
+   return new Promise((resolve, reject) => {  
+            var msg="";
+            var sql = "update  criterion set name=?,id_subcategory=? where id=?";
+            con.query(sql,[name,id_subcategory,id], function (err, result) {
+             if (err){
+               msg="failure";
+               reject(err);
+             }else{
+               msg="success";
+             }
+            return resolve(msg);
+            });
+          });    
+}; 
+
+
+_publics.deleteCriterion = (req) => { 
+  var id=req.query.id;
+  return new Promise((resolve, reject) => {  
+           var msg="";
+           var sql = "delete from criterion where id=?";
+           con.query(sql,[id], function (err, result) {
+            if (err){
+              msg="failure";
+              reject(err);
+            }else{
+              msg="success";
+            }
+           return resolve(msg);
+           });
+         });    
+}; 
+
+
+_publics.deleteSubcategorycriterionByCriterionId = (req) => { 
+  var id=req.query.id;
+  return new Promise((resolve, reject) => {  
+           var msg="";
+           var sql = "delete from subcategory_criterion where id_criterion=?";
+           con.query(sql,[id], function (err, result) {
+            if (err){
+              msg="failure";
+              reject(err);
+            }else{
+              msg="success";
+            }
+           return resolve(msg);
+           });
+         });    
+}; 
+
+
+_publics.getAllCriterionsByTestId = (req) => { 
+  var idtest=req.query.id_test;
+  return new Promise((resolve, reject) => {  
+           var sql = "select  distinct c.name as subcategory,c.id , ts.ordre, ts.id as testSubcategoryId  FROM criterion c left join test_subcategory ts on (c.id_subcategory=ts.id_subcategory) where ts.id_test=?"; 
+         
+               con.query(sql,[idtest], function (err, result) {
+               if (err) reject(err);
+               return resolve(JSON.stringify(result));
+               });
+   });    
+};
+
+
+_publics.getAllSubcategoriesByCriterionId = (req) => {
+  return new Promise((resolve, reject) => {   
+    var sql = "select sc.* from subcategory sc left join subcategory_criterion scc on(sc.id=scc.id_subcategory) where scc.id_criterion=?";        
+    con.query(sql,[req.query.criterionId], function (err, result) {
+    if (err) reject(err);
+    return resolve(result);
+    });
+ });  
+
+}
+
+_publics.getJsonFromFile = () => {
+      var source=__dirname+"/subCatDetails.json";
+      return new Promise((resolve, reject) => {   
+        let jsonData = require(source);
+        return resolve(jsonData);
+     }); 
+}
+
+_publics.getSubcategoryDetails = (req,json) => {
+  var subcategoryName=req.query.subcategoryName;
+  return new Promise((resolve, reject) => { 
+    for (var i = 0; i < json.length; i++) {  
+        if(json[i].name===subcategoryName){
+          return resolve(json[i].definition);
+        }
+      }
+      return resolve("");
+ }); 
+
+}
+
+
+
+_publics.getAllCriterionsByTestId = (req) => {
+  var testId=req.query.testId;
+  return new Promise((resolve, reject) => {   
+    var sql = "select c.* from criterion c left join test_subcategory ts on(ts.id_subcategory=c.id_subcategory) where ts.id_test=?";        
+    con.query(sql,[testId], function (err, result) {
+    if (err) reject(err);
+    return resolve(result);
+    });
+ }); 
+
+}
+
 
 
 

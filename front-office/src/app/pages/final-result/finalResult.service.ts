@@ -35,6 +35,10 @@ export class FinalResultService {
       getAllSubcategoriesByTestMember(testId:number , memberId:number): Observable<any[]> {
         return this.http.get<any[]>(this.url3 +"getAllSubcategoriesByTestMember?id_test="+testId+"&id_member="+memberId);
       }
-    
+
+      calculateSkills(testId:number , memberId:number): Observable<any[]> {
+        return this.http.get<any[]>(this.url3 +"calculateSkills?testId="+testId+"&memberId="+memberId);
+      }
+      
   
  }

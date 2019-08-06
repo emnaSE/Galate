@@ -88,8 +88,14 @@ export class FinalResultComponentP2  implements OnInit{
 
 
     
- 
- 
+  public next(event){
+    this.router.navigate(['/finalResultP2', this.testId1 , this.memberId1]);
+ }
+
+  public back(event){
+    this.router.navigate(['/finalResult', this.testId1 , this.memberId1]);
+ }
+
 
 
 
@@ -97,7 +103,18 @@ export class FinalResultComponentP2  implements OnInit{
     localStorage.clear();
     this.router.navigate(['/register'])
  }
-    }
+
+ getColor(i){
+  switch (i%3) {
+    case 0:
+    return '#8cb3e3';
+    case 1:
+    return '#1f497d';
+    default:
+     return '#ff5b5b';
+  }
+}
+}
 
  
   

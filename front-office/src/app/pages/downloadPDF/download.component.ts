@@ -63,7 +63,10 @@ export class DownloadComponent  implements OnInit{
         
       }
     )}
-
+    
+    public redirect(event){
+      this.router.navigate(['/finalResult', this.testId1 , this.memberId1]);
+   }
 
     public logout (event){
       localStorage.clear();

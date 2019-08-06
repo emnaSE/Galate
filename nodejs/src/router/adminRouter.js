@@ -9,6 +9,7 @@ var options = {
     limit: '100kb',
     type: 'application/octet-stream'
   };
+var fs = require("fs"); 
 const bodyParser = require('body-parser');
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
 router.use(bodyParser.raw(options));
@@ -180,6 +181,7 @@ router.get('/getAllSubcategories', urlencodedParser, (req, res, next) =>
   res.send(subcategories);
 })
 .catch(next));
+
 router.get('/getSubcategoryById', urlencodedParser, (req, res, next) => 
  adminController.getSubcategoryById(req)
 .then(subcategories => {
@@ -193,6 +195,7 @@ router.get('/getAllSubcategoriesByCategory', urlencodedParser, (req, res, next) 
   res.send(subcategories);
 })
 .catch(next));
+
 router.get('/getAllSubcategoriesByTestId', urlencodedParser, (req, res, next) =>
 adminController.getAllSubcategoriesByIdTest(req)
     .then(subcategories => {
@@ -223,7 +226,6 @@ memberController.getRawBody(req)
 
 router.post('/deleteSubcategoryById', (req, res, next) =>
 adminController.deleteSubCategoryById(req)
-
 .then(msg => {
   res.send(msg);
 })
@@ -364,7 +366,6 @@ router.post('/createQuestionAndAnswers', (req, res, next) =>adminController
 .then(response => {
     var question = response.question;
     var quest=JSON.stringify(question);
-    console.log("response ="+JSON.stringify(response));
      res.payload.answers = response.answers;
     return adminController.createNewQuestion(quest, req.query.testSubCategId);
 })
@@ -959,6 +960,109 @@ router.post('/updateTestSubcategoryOrder', (req, res, next) =>   adminController
     res.send(response);
 })
 .catch(next));
+
+/***********  criterion  *************/
+router.post('/createCriterion', (req, res, next) =>
+memberController.getRawBody(req)
+.then(response => {
+    var criterion=JSON.parse(response);
+    res.payload.criterionId=criterion.id_subcategory[0].id;
+    res.payload.subcategories=criterion.id_subcategories;
+    return adminController.createCriterion(criterion)
+})
+/*.then(response => { // in case 
+    return adminController.createSubcategoryCriterions(res.payload.criterionId, res.payload.subcategories);
+})*/
+.then(msg => {
+    res.send(msg);
+})
+.catch(next));
+
+
+router.get('/getAllCriterions', urlencodedParser, (req, res, next) => 
+ adminController.getAllCriterions(req)
+.then(criterions => {
+  res.send(criterions);
+})
+.catch(next));
+
+router.get('/getCriterionById', urlencodedParser, (req, res, next) => 
+ adminController.getCriterionById(req)
+.then(criterion => {
+  res.send(criterion);
+})
+.catch(next));
+
+router.get('/getAllCriterionsBySubcategory', urlencodedParser, (req, res, next) => 
+ adminController.getAllCriterionsByCategoryId(req)
+.then(criterions => {
+  res.send(criterions);
+})
+.catch(next));
+
+router.post('/updateCriterion', (req, res, next) =>
+memberController.getRawBody(req)
+.then(response => {
+    var criterion=JSON.parse(response);
+    res.payload.subcategories=criterion.id_subcategories;
+    return adminController.updateCriterion(req, criterion);
+})
+.then(response => {
+    return adminController.deleteAllSubcategoryCriterions(req.query.id);
+})
+.then(response => {
+    return adminController.createSubcategoryCriterions(req.query.id, res.payload.subcategories);
+})
+.then(msg => {
+    res.send(msg);
+})
+.catch(next));
+
+
+
+
+
+router.post('/deleteCriterion', (req, res, next) =>adminController
+.deleteSubcategorycriterionByCriterionId(req)
+.then(msg => {
+    return adminController.deleteCriterion(req);
+  })
+.then(msg => {
+  res.send(msg);
+})
+.catch(next));
+
+
+router.get('/getAllCriterionsByTestId', urlencodedParser, (req, res, next) =>adminController
+.getAllCriterionsByTestId(req)////à verifier la requete
+.then(criterions => {
+    res.send(criterions);
+})
+.catch(next));
+
+
+router.get('/getAllSubcategoriesByCriterionId', urlencodedParser, (req, res, next) => 
+ adminController.getAllSubcategoriesByCriterionId(req)
+.then(subcategories => {
+  res.send(subcategories);
+})
+.catch(next));
+
+
+router.get('/getSubcategoryDetails', urlencodedParser, (req, res, next) =>
+adminController.getJsonFromFile()
+/*.then(json => {
+    return adminController.getSubcategoryDetails(req,json);
+})*/
+.then(response => {
+    res.send(response);
+})
+.catch(next));
+
+
+
+
+
 
 
 

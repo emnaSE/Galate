@@ -28,8 +28,12 @@ export class CategorieService {
 
   getAllCategorie(): Observable<Categorie[]> {
     return this.http.get<Categorie[]>(this.url + 'getAllCategories');
+  }
+  getAllSubcategorie(): Observable<Categorie[]> {
+    return this.http.get<Categorie[]>(this.url + 'getAllSubcategories');
 
   }
+
   getCategorieParId(id:number):Observable<Categorie>{
     return this.http.get<Categorie>(this.url+"getCategoryById?id="+id);
   }

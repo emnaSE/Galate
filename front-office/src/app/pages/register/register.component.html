@@ -85,9 +85,9 @@
                         </div>-->
 
 
-                        <div class=“form-group”  >
+                        <div class="form-group"  >
 
-                            <select class=“form-control” style="width: 80%;height:35px;
+                            <select class="form-control" style="width: 80%;height:60px;
                                                                 display: block;
                                                                 font-size: 16px;
                                                                 font-family: sans-serif;
@@ -99,7 +99,7 @@
                                                                 max-width: 100%;
                                                                 box-sizing: border-box;
                                                                 margin: 0;
-                                                                border: 1px solid #aaa;
+                                                                border: 1px solid #ebebeb;
                                                                 box-shadow: 0 1px 0 1px rgba(0,0,0,.04);
                                                                 border-radius: .5em;
                                                                 -moz-appearance: none;
@@ -109,7 +109,7 @@
                                 <option value="" disabled selected> Sexe</option>
 
                                 <option  value="femme"> Femme </option>
-                                <option value="homme"> Homme </option>
+                                <option  value="homme"> Homme </option>
                             </select>
                             <ng-container *ngIf="submitted && formValidate.sexe.errors">
                                 <p class="text-danger" style="color: red">
@@ -117,7 +117,6 @@
                                 </p>
                             </ng-container>
                         </div>
-                        <br/> <br/>
 
                         <div class="form-group">
                             <input type="text" class="form-input" formControlName="city"  placeholder="Ville" required/>
@@ -127,7 +126,6 @@
                                 </p>
                             </ng-container>
                         </div>
-                        <br/> <br/>
 
 
 

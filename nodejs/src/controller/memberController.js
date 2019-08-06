@@ -199,8 +199,7 @@ _publics.createMemberChoices = (response) => {
 
       response = createNewMemberChoices(choices, i, msg);
       return resolve(response);
-    }
-    ));
+    }));
   }
   return Promise.all(promises)
 }

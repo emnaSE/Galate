@@ -29,6 +29,9 @@ import {AllQuestionComponent} from "./subcategorie/all-question/all-question.com
 import {UpdateQuestionComponent} from "./question/create-question/update-question.component";
 import {TestOrderComponent} from "./test/test-order/test-order.component";
 import {DuplicationComponent} from "./test/duplication/duplication.component";
+import { CriterionComponent } from './criterion/criterion.component';
+import { CreateCriterionComponent } from './criterion/create-criterion/create-criterion.component';
+import { CriterionInfoComponent } from './criterion/criterion-info/criterion-info.component';
 
 const routes: Routes = [{
   path: '',
@@ -207,6 +210,18 @@ const routes: Routes = [{
       path: 'test/:id/ordre',
       //component:AffectSubcategorieComponent,
       component:TestOrderComponent,canActivate: [AuthGuard],
+    },
+   {
+      path: 'criterion',
+      component: CriterionComponent,canActivate: [AuthGuard],
+    },
+    {
+      path:'criterion/create',
+      component: CreateCriterionComponent,
+    },
+    {
+      path: 'criterion/:id/info',
+      component: CreateCriterionComponent,canActivate: [AuthGuard],
     },
     {
       path: '**',

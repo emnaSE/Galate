@@ -164,7 +164,7 @@ _publics.getSumByOrder = (req, testSubcategories) => {
   let promises = [];
   for (var i=0;i<testSubcategories.length;i++) {
     promises.push( new Promise((resolve, reject) => {  
-      console.log(testSubcategories[i].ordre);
+     // console.log(testSubcategories[i].ordre);
             var sum=getSumByOrder(req, testSubcategories[i].ordre);
             return resolve(sum);
           }));
@@ -248,13 +248,11 @@ function getLineValuesSum (req,order,id_test_subcategory){
 function getColumnValuesSum (req,order){ 
   var id_test=req.query.id_test;
   var id_member=req.query.id_member;
-  console.log("&&&&&&&& " + "getColumnSum");  
   return new Promise((resolve, reject) => {  
            var sql="select tsc.id_subcategory as subcategoryOrder, count(*) as sum from test_subcategory tsc left join question q on(q.id_test_subcategory=tsc.id) left join answer a on(a.id_question=q.id) "
            +"left join choice_member cm on(cm.id_answer=a.id) left join test_member tm on(tm.id=cm.id_test_member) where tm.id_member=? and tm.id_test=? and a.ordre=? and q.ordre=?";
                con.query(sql,[id_member,id_test, FIRST_ANSWER,order], function (err, result) {
                if (err) reject(err);
-              console.log(" order is " +order + "||||||||||||==>"+JSON.stringify(result[0]));
                return resolve(result);
                });
    });    
@@ -408,7 +406,7 @@ _publics.getCategoryNameByMemberIdAndTestId = (req) => {
   var id_test=req.query.id_test;
   var id_member=req.query.id_member;
   return new Promise((resolve, reject) => {  
-           var sql = "select distinct c.name  as name , c.id as category_id  from manuel_answer ma left join subcategory sc on(sc.id=ma.id_subcategory) left join category c on (c.id=sc.id_category)  where ma.id_test=? and ma.id_member=? "; 
+           var sql = "select distinct c.name  as name , c.id as category_id, c.ordre  from manuel_answer ma left join subcategory sc on(sc.id=ma.id_subcategory) left join category c on (c.id=sc.id_category)  where ma.id_test=? and ma.id_member=? order by c.ordre asc"; 
          
                con.query(sql,[id_test,id_member], function (err, result) {
                if (err) reject(err);
@@ -506,5 +504,127 @@ _publics.getAllCriterionsByCategories=(req,categories) => {
 
 
 
+
+_publics.calculateSkills = (req,res,criterionsList) => { 
+    let promises = [];
+    var memberId=req.query.memberId;
+    var testId=req.query.testId;
+    for (var i=0;i<criterionsList.length;i++) {
+        promises.push( new Promise((resolve, reject) => {  
+          if(criterionsList[i].median===0){
+            calculateYellowSkill(testId,memberId,criterionsList[i]);//two subcategories without median
+          }else if(criterionsList[i].id_subcategory2===null){
+            calculateBlueSkill(testId,memberId,criterionsList[i]);//one subcategory with median
+          }else{
+            calculateBlueSkySkill(res,testId,memberId,criterionsList[i]);//two subcategories with median
+          }
+      }));
+    }
+     return Promise.all(promises)  
+
+}
+
+
+function calculateYellowSkill(testId,memberId,criterion){
+  return new Promise((resolve, reject) => {  
+    getSubcategoriesScore(testId,memberId,criterion)
+    .then(score=>{
+      var result=score[0].result;
+      var sql = "update criterion set result= ? where id=?"; 
+      con.query(sql,[result,criterion.id], function (err, result) {
+      if (err)
+        reject(err);
+      return resolve(result);
+      });
+    })
+  });  
+}
+
+
+function getSubcategoriesScore(testId,memberId,criterion){
+  
+  return new Promise((resolve, reject) => {  
+    var sql ="select 	coalesce(  FLOOR(( (select ma.etallonage_result from manuel_answer ma where id_member=? and id_test=? and id_subcategory=?) " +
+    " + (select ma.etallonage_result from manuel_answer ma where id_member=? and id_test=? and id_subcategory=?) ) /2) ,0) as result ";
+        con.query(sql,[memberId,testId,criterion.id_subcategory1,memberId,testId,criterion.id_subcategory2, criterion.id], function (err, result) {
+         if (err){
+           reject(err);
+         }
+         return resolve(result);
+        });
+  }); 
+
+}
+
+
+function calculateBlueSkill(testId,memberId,criterion){
+  return new Promise((resolve, reject) => {  
+    getSubcategoryScore(testId,memberId,criterion.id_subcategory1)
+    .then(score=>{
+      var mediane=config.mediane;
+      var result=score-mediane;
+      result=mediane-result;
+      return result;
+    })
+    .then(result=>{
+      var sql = "update criterion set result= ? where id=?"; 
+      con.query(sql,[result,criterion.id], function (err, result) {
+      if (err)
+        reject(err);
+      return resolve(result);
+      });
+    })
+  });   
+}
+
+function calculateBlueSkySkill(res,testId,memberId,criterion){
+  return new Promise((resolve, reject) => {  
+    getSubcategoryScore(testId,memberId,criterion.id_subcategory1)
+    .then(score1=>{
+      res.payload.score1=score1;
+      return getSubcategoryScore(testId,memberId,criterion.id_subcategory2);
+    })
+    .then(score2=>{
+      res.payload.score2=score2;
+      return calculateScoreWithMedian( res.payload.score1,res.payload.score2);
+    })
+    .then(result=>{
+      updateCriterionResult(result,criterion);
+    })
+  }); 
+}
+
+function calculateScoreWithMedian(score1, score2){
+  return new Promise((resolve, reject) => { 
+    var score=(score1+score2)/2;
+    var mediane=config.mediane;
+    var result=score-mediane;
+    result=mediane-result;
+    var intResult=Math.floor(result);
+    return resolve(intResult);
+  });
+}
+
+function updateCriterionResult(result,criterion){
+  return new Promise((resolve, reject) => { 
+    var sql = "update criterion set result= ? where id=?"; 
+    con.query(sql,[result,criterion.id], function (err, result) {
+    if (err)
+      reject(err);
+    return resolve(result);
+    });
+  });
+}
+function getSubcategoryScore(testId,memberId,subcategoryId){
+  return new Promise((resolve, reject) => {  
+    var sql ="select FLOOR(m.etallonage_result) as score from manuel_answer m where m.id_member=? and id_test=? and m.id_subcategory=?";
+        con.query(sql,[memberId,testId,subcategoryId], function (err, result) {
+         if (err){
+           reject(err);
+         }
+         return resolve(result[0].score);
+        });
+  });   
+}
 
  module.exports = _publics;

@@ -18,7 +18,7 @@ export class DownloadService {
   private url:string=API_URL+"member/";
   private url2:string=API_URL+"admin/";
   private url3:string=API_URL+"calcul/";
-  private url8;
+  private url8:string=API_URL+"pdf/";
   _http: any;
 
 
@@ -30,9 +30,11 @@ export class DownloadService {
      
 
       generateReportAutodiagnostic(idTest:number , idMember:number):Observable<any> {
-        var url8 = "http://localhost:8081/galateProject/rest/galate/generateReportAutodiagnostic?testId="+idTest+"&memberId="+idMember ;
-        window.location.href=url8;
-        return this.http.get<any>(url8);
+        //var url9 = "http://localhost:8081/galateProject/rest/galate/generateReportAutodiagnostic?testId="+idTest+"&memberId="+idMember ;
+        //var url9 = "http://173.212.247.77:8080/pdf/rest/galate/generateReportAutodiagnostic?testId="+idTest+"&memberId="+idMember ;
+        var url9 = "http://167.86.108.108:8080/pdf/rest/galate/generateReportAutodiagnostic?testId="+idTest+"&memberId="+idMember ;
+        window.location.href=url9;
+        return this.http.get<any>(url9);
        
       
     

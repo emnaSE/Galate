@@ -7,6 +7,309 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
         crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+    <title>Galatée</title>
+</head>
+<style>
+    body * {
+        font-family: 'Montserrat', sans-serif;
+    }
+
+    .table td,
+    .table th {
+        padding: 0 !important;
+        vertical-align: top;
+        border: 1px solid black;
+        text-align: center;
+    }
+
+    header {
+        text-align: center;
+        color: white;
+        background-color: #1c4170;
+        height: 100%;
+    }
+
+    #bloc1 {
+        background-color: #7fa2cc;
+    }
+
+    #bloc2 {
+        background-color: #e45251;
+    }
+
+
+
+    th {
+        color: white;
+        width: 40%;
+    }
+
+    .catName {
+        text-align: center;
+    }
+
+    .sousCatName {
+        color: black;
+    }
+
+    .sousCat {
+        margin-bottom: 20px;
+    }
+
+    .cat:nth-child(even) {
+        background-color: #7fa2cc;
+    }
+
+    .cat:nth-child(odd) {
+        background-color: #e45251;
+    }
+
+    .name {
+        font-size: 23px;
+    }
+
+    h4,
+    .name {
+        text-transform: uppercase;
+    }
+
+    #nbCompet {
+        margin-left: 20px;
+    }
+
+
+
+    #ho1 {
+        height: 100px;
+        margin: 0px 15%;
+        border: solid 2px;
+        background-color: white;
+        text-align: center;
+    }
+
+    #ho2 {
+        height: 200px;
+        margin: 0px 15%;
+        border: solid 2px;
+        margin-top: -2px;
+        background-color: #1c4170;
+        text-align: center;
+    }
+
+    body {
+        background-color: #4774aa;
+    }
+
+
+
+    #bs img {
+        width: 90vw;
+        height: 400px;
+        padding: 0 15%;
+        object-fit: fill;
+        text-align: center;
+    }
+
+    #bs {
+        text-align: center;
+        z-index: -1;
+    }
+
+    #res {
+        text-align: center;
+        position: relative;
+        z-index: 1;
+        margin-bottom: -180px;
+        margin-top: 180px;
+        padding: 0 40%;
+    }
+
+    @media (max-width:1000px) {
+
+        #ho1,
+        #ho2 {
+            margin: 0px 15px;
+        }
+
+        #bs img {
+            padding: 0 20px;
+        }
+    }
+
+    /*@media (max-width:633px) {
+        #res {
+            padding: 0 35%;
+            margin-bottom: -180px;
+            margin-top: 180px;
+        }
+    }
+
+    @media (max-width:533px) {
+        #res {
+            margin-bottom: -200px;
+            margin-top: 200px;
+        }
+    }*/
+    @media (max-width:1094px) {
+        #res {
+            margin-bottom: -210px;
+            margin-top: 210px;
+        }
+    }
+
+    @media(max-width:793px) {
+        #res {
+            margin-bottom: -240px;
+            margin-top: 150px;
+        }
+    }
+
+
+
+    #icones img {
+        width: 50px;
+        height: 50px;
+        margin: 0 2%;
+    }
+
+    #icones {
+        margin: 0 auto;
+        margin-bottom: 40px;
+        padding-top: 20px;
+    }
+
+    header h5 {
+        text-transform: uppercase;
+    }
+</style>
+
+<body>
+    <header>
+        <div id="icones">
+            <img src="assets/img/briefcase.png">
+            <img src="assets/img/growth.png">
+            <img src="assets/img/coins.png">
+        </div>
+        <h5>PorteFeuille</h5>
+        <h5>De compétences comportementales</h5>
+        <p>What are my soft skills</p>
+        <div id="links" style="    padding-bottom: 50px;">
+                <a  class="btn btn-link-3 nav-link" (click)="back($event)" style="color:  white !important;display: inline-block;float: right;font-size: 24px;padding: 0 1rem;"> <<< </a>
+        </div>
+    </header>
+    <main>
+
+           
+            <div  *ngFor="let catalogue of catalogueDetails; let i = index" >
+                    <div  class="cat" [style.background]="getColor(i)">
+                        <div class="catName">
+                            <p><span class="name">{{catalogue.category.name}}</span> <span id="nbCompet">compétences mesurés</span></p>
+                        </div>
+                        <div class="sousCat" >
+                            <div class="table-responsive" *ngFor="let subcategory of catalogue.subcategories">
+                                <table class="table">
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row" class="sousCatName">{{subcategory.subcategory.name}}</th>
+                                            <td [ngStyle]="{'background-color':subcategory.subcategory.score === 1 ? 'white' : '' }">1</td>
+                                            <td [ngStyle]="{'background-color':subcategory.subcategory.score === 2 ? 'white' : '' }">2</td>
+                                            <td [ngStyle]="{'background-color':subcategory.subcategory.score === 3 ? 'white' : '' }">3</td>
+                                            <td [ngStyle]="{'background-color':subcategory.subcategory.score === 4 ? 'white' : '' }">4</td>
+                                            <td [ngStyle]="{'background-color':subcategory.subcategory.score === 5 ? 'white' : '' }">5</td>
+                                            <td [ngStyle]="{'background-color':subcategory.subcategory.score === 6 ? 'white' : '' }">6</td>
+                                            <td [ngStyle]="{'background-color':subcategory.subcategory.score === 7 ? 'white' : '' }">7</td>
+                                            <td [ngStyle]="{'background-color':subcategory.subcategory.score === 8 ? 'white' : '' }">8</td>
+                                            <td [ngStyle]="{'background-color':subcategory.subcategory.score === 9 ? 'white' : '' }">9</td>
+                                            <td [ngStyle]="{'background-color':subcategory.subcategory.score === 10 ? 'white' : '' }">10</td>
+                                            <td [ngStyle]="{'background-color':subcategory.subcategory.score === 11 ? 'white' : '' }">11</td>
+                                        </tr>
+                                    </tbody>
+                                </table> 
+                                <table class="table">
+                                        <tbody>
+                                            <tr *ngFor="let criterion of subcategory.criterions">
+                                                <th scope="row">{{criterion.name}}</th>
+                                                <td [ngStyle]="{'background-color':criterion.score === 1 ? 'white' : '' }">1</td>
+                                                <td [ngStyle]="{'background-color':criterion.score === 2 ? 'white' : '' }">2</td>
+                                                <td [ngStyle]="{'background-color':criterion.score === 3 ? 'white' : '' }">3</td>
+                                                <td [ngStyle]="{'background-color':criterion.score === 4 ? 'white' : '' }">4</td>
+                                                <td [ngStyle]="{'background-color':criterion.score === 5 ? 'white' : '' }">5</td>
+                                                <td [ngStyle]="{'background-color':criterion.score === 6 ? 'white' : '' }">6</td>
+                                                <td [ngStyle]="{'background-color':criterion.score === 7 ? 'white' : '' }">7</td>
+                                                <td [ngStyle]="{'background-color':criterion.score === 8 ? 'white' : '' }">8</td>
+                                                <td [ngStyle]="{'background-color':criterion.score === 9 ? 'white' : '' }">9</td>
+                                                <td [ngStyle]="{'background-color':criterion.score === 10 ? 'white' : '' }">10</td>
+                                                <td [ngStyle]="{'background-color':criterion.score === 11 ? 'white' : '' }">11</td>
+                                            </tr>
+                                        </tbody>
+                                </table>                        
+                            </div>
+                        </div>
+                       
+                    </div>
+            </div>
+            
+       
+        <div id="res">
+            <span><strong>Le top</strong><br> de mes compétences acquise</span><br>
+            <a href="#" style="text-decoration:underline">MOBILISABLE</a>
+        </div>
+
+        <div id="bs">
+            <img src="assets/img/backg.png">
+        </div>
+        <div id="ho1">
+            compétences moyennisés:en cours d'aquésition?
+        </div>
+        <div id="ho2">
+            Mes compétences non acquises<br>
+            <a href="#" style="text-decoration: underline;">A developper</a>
+        </div>
+
+
+    </main>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function () {
+            //nom sousCategory
+            var sousCat = "Activite";
+            //valeur de sous Category
+            var sousCatRes = 5;
+            //ça c'est le nombre de compétence tout en haut du page
+            var nbCompet = 12;
+            $('#nbCompet').prepend(nbCompet + " ");
+            $("th:contains('" + sousCat + "')").parent().find($("td:contains('" + sousCatRes + "')")).css('background-color', 'green');;
+        });
+    </script>
+
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+<!--<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
     <title>Document</title>
 </head>
 <style>
@@ -82,6 +385,9 @@
         <h4>PorteFeuille</h4>
         <h4>De compétences comportementales</h4>
         <h6>What are my soft skills</h6>
+        <div class="" id="top-navbar-1" style="margin-left: 90%">
+                <a  class="btn btn-link-3 nav-link" (click)="back($event)" style="color:  white !important ">Précedent </a>
+        </div>
     </header>
     <main>
         <div class="table-responsive" *ngFor="let catalogue of catalogueDetails" >
@@ -156,4 +462,4 @@
 
 </body>
 
-</html>
+</html>-->

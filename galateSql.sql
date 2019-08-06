@@ -224,5 +224,12 @@ create table subcategory_criterion(
 	 FOREIGN KEY (id_criterion) REFERENCES criterion(id) ,
      PRIMARY KEY (id) 
 );
-
- 
+alter table subcategory add column definition text;
+alter table criterion add column id_subcategory1 int(11);
+alter table criterion add column id_subcategory2 int(11);
+alter table criterion add column median bool;
+alter table criterion add FOREIGN KEY (id_subcategory1) REFERENCES subcategory(id);
+alter table criterion add FOREIGN KEY (id_subcategory2) REFERENCES subcategory(id);
+alter table criterion add column result bigint;
+alter table category add column ordre  int(11);
+alter table subcategory add column ordre int(11);
