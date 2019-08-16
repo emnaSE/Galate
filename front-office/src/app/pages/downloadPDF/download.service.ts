@@ -35,9 +35,18 @@ export class DownloadService {
         var url9 = "http://167.86.108.108:8080/pdf/rest/galate/generateReportAutodiagnostic?testId="+idTest+"&memberId="+idMember ;
         window.location.href=url9;
         return this.http.get<any>(url9);
-       
-      
-    
+      }
+
+      downloadPersonalityAnalyse(idTest:number , idMember:number):Observable<any> {
+        var url9 = "http://167.86.108.108:8080/pdf/rest/galate/generateReportPersonalityAnalyse?testId="+idTest+"&memberId="+idMember ;
+        window.location.href=url9;
+        return this.http.get<any>(url9);
+      }
+
+      downloadCompetences(idTest:number , idMember:number):Observable<any> {
+        var url9 = "http://167.86.108.108:8080/pdf/rest/galate/generateReportCompetence?testId="+idTest ;
+        window.location.href=url9;
+        return this.http.get<any>(url9);
       }
   
  }

@@ -243,7 +243,7 @@ calculController.getCategoryNameByMemberIdAndTestId(req)
 
 
 router.get('/getAllCriterionsByTestMember', urlencodedParser, (req, res, next) =>
-calculController.getCategoryNameByMemberIdAndTestId(req)
+calculController.getCategoryNameByMemberIdAndTestIdBySecondOrder(req)
 .then(categories => {
     return calculController.getAllCriterionsByCategories(req,categories)
 })
@@ -256,15 +256,21 @@ calculController.getCategoryNameByMemberIdAndTestId(req)
 router.get('/getAllCriterionsByCategory', urlencodedParser, (req, res, next) =>adminController
 .getCategoryById(req)
 .then(category=>{
-    res.payload.category=JSON.parse(category);
-    req.query.idCategory=req.query.id;
+    res.payload.category0=JSON.parse(category);
+    var categoryId=JSON.parse(category).id;
+    /*req.query.idCategory=req.query.id;
     return adminController.getAllSubcategoriesByCategoryId(req)
 })
-.then(subcategories => {
-    return calculController.getAllCriterionsBySubcategories(req,subcategories)
+.then(subcategories => {*/
+    return calculController.getAllCriterionsByCategoryId(categoryId)
 })
 .then(response=>{
-    res.payload.subcategories=response;
+    
+    if(response.length!==0){
+        res.payload.category=res.payload.category0;
+        res.payload.criterions=response;
+    }
+    delete res.payload.category0;
     res.send(res.payload);
 })
 .catch(next));

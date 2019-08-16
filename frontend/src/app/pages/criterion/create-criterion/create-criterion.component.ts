@@ -40,14 +40,15 @@ export class CreateCriterionComponent implements OnInit {
   ngOnInit() {
     this.addForm=this.formBuilder.group({
       name: new FormControl('', [Validators.required]),
-      id_subcategory: [[], Validators.required],
+      id_category: [[], Validators.required],
+      ordre: [[], Validators.required],
      // id_subcategories: [[], Validators.required],
       
 
 
     });
 
-    this.categorieService.getAllSubcategorie().subscribe(
+    this.criterionService.getAllCategories().subscribe(
       data=>{
         this.dropdownList =data.map((cat:Categorie)=>{
           return{id:cat.id, itemName:cat.name};
@@ -68,14 +69,14 @@ export class CreateCriterionComponent implements OnInit {
           this.addForm.patchValue(value);
                 this.selectedItems = this.dropdownList.filter(
                   c =>{
-                    return c.id == value.id_subcategory;
+                    return c.id == value.id_category;
                   });
         },err=>{
           console.log(err)
         }
       );
 
-      this.criterionService.getAllSubcategoriesByCriterionId(this.id).subscribe(
+      /*this.criterionService.getAllSubcategoriesByCriterionId(this.id).subscribe(
         (value:any)=>{
           this.addForm.patchValue(value);
                this.selectedItems1=this.dropdownList1.filter(
@@ -85,7 +86,7 @@ export class CreateCriterionComponent implements OnInit {
         },err=>{
           console.log(err)
         }
-      );
+      );*/
     }
 
     this.dropdownSettings = {

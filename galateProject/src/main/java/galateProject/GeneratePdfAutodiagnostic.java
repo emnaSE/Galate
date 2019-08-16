@@ -30,7 +30,7 @@ public class GeneratePdfAutodiagnostic
             final DateFormat date = DateFormat.getDateTimeInstance(2, 2);
             final String dateD = date.format(aujourdhui);
             Class.forName("com.mysql.jdbc.Driver");
-            final Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/galate?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "root");
+            final Connection connection = DriverManager.getConnection(ConnectionConfig.connectionString, ConnectionConfig.user, ConnectionConfig.password);
             final Map<String, Object> params = new HashMap<String, Object>();
             final InputStream logo = GeneratePdfEtalonnage.class.getResourceAsStream("logo.png");
             final InputStream logoT = GeneratePdfEtalonnage.class.getResourceAsStream("logo.png");

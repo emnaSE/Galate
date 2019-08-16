@@ -195,7 +195,7 @@
     "suivante": "suivant",
     "nom1": "Nom",
     "ConsulterSou": "Consulter Sous Categories",
-    "subcategory":"Critère",
+    "category":"Categorie",
     "CREATE": {
       "Nom": "Sous catergorie",
       "creation": " Creation du question",
@@ -215,6 +215,9 @@
       "Action": "Action",
       "precedant": "précédant",
       "suivante": "suivant"
+    },
+    "CRITERION":{
+      "Order": "Ordre"
     }
 
   },

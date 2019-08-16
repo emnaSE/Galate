@@ -15,7 +15,7 @@
         <angular2-multiselect [data]="dropdownList"
                               [(ngModel)]="selectedItems"
                               [settings]="dropdownSettings"
-                              formControlName="id_subcategory"></angular2-multiselect>
+                              formControlName="id_category"></angular2-multiselect>
       </div>
 
       <div  class="form-group">
@@ -26,6 +26,11 @@
             {{ 'SOUSCATEGORIE.CREATE.AalertNom' | translate }}
           </p>
         </ng-container>
+      </div>
+
+      <div  class="form-group">
+        <label  for="fnText">{{ 'QUESTION.CREATE.order' | translate }}</label>
+        <input  class="form-control" type="number" formControlName="ordre">
       </div>
 
       <!-- <div class="form-group">

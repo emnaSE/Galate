@@ -32,7 +32,7 @@ export class CriterionService {
     return this.http.get<Criterion>(this.url+"getCriterionById?id="+id);
   }
   getAllCriterionsBySubcategory(id:number):Observable<Criterion[]>{
-    return this.http.get<Criterion[]>(this.url+"getAllCriterionsBySubcategory?id_category="+id);
+    return this.http.get<Criterion[]>(this.url+"getAllCriterionsByCategory?id_category="+id);
   }
   updateCriterion(id:number,criterion:any):Observable<any>{
     
@@ -46,11 +46,13 @@ export class CriterionService {
   getAllCriterionsByTestId(id:number):Observable<Criterion[]>{
     return this.http.get<Criterion[]>(this.url+"getAllCriterionsByTestId?id_test="+id);
   }
-  getAllTest(id_subCat:number):Observable<any>{
+  /*getAllTest(id_subCat:number):Observable<any>{
     return this.http.get<any>(this.url+"getCriterionById?idTestSubcategory="+id_subCat);
-  }
+  }*/
 
-  
+  getAllCategories(): Observable<Categorie[]> {
+    return this.http.get<Categorie[]>(this.url + 'getAllCategories');
+  }
   
   getAllSubcategoriesByCriterionId(criterionId:number): Observable<Categorie[]> {
     return this.http.get<Categorie[]>(this.url + "getAllSubcategoriesByCriterionId?criterionId="+criterionId);

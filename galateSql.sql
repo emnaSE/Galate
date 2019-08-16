@@ -233,3 +233,9 @@ alter table criterion add FOREIGN KEY (id_subcategory2) REFERENCES subcategory(i
 alter table criterion add column result bigint;
 alter table category add column ordre  int(11);
 alter table subcategory add column ordre int(11);
+alter table criterion drop  FOREIGN KEY criterion_ibfk_1;
+alter table criterion drop column id_subcategory;
+alter table criterion add column id_category int(11);
+alter table criterion add FOREIGN KEY (id_category) REFERENCES category(id);
+drop table subcategory_criterion;
+alter table category add column ordre2 int(11);

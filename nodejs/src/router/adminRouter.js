@@ -966,8 +966,7 @@ router.post('/createCriterion', (req, res, next) =>
 memberController.getRawBody(req)
 .then(response => {
     var criterion=JSON.parse(response);
-    res.payload.criterionId=criterion.id_subcategory[0].id;
-    res.payload.subcategories=criterion.id_subcategories;
+    res.payload.criterionId=criterion.id_category[0].id;
     return adminController.createCriterion(criterion)
 })
 /*.then(response => { // in case 
@@ -993,7 +992,7 @@ router.get('/getCriterionById', urlencodedParser, (req, res, next) =>
 })
 .catch(next));
 
-router.get('/getAllCriterionsBySubcategory', urlencodedParser, (req, res, next) => 
+router.get('/getAllCriterionsByCategory', urlencodedParser, (req, res, next) => 
  adminController.getAllCriterionsByCategoryId(req)
 .then(criterions => {
   res.send(criterions);
@@ -1004,15 +1003,15 @@ router.post('/updateCriterion', (req, res, next) =>
 memberController.getRawBody(req)
 .then(response => {
     var criterion=JSON.parse(response);
-    res.payload.subcategories=criterion.id_subcategories;
+    res.payload.categories=criterion.id_categories;
     return adminController.updateCriterion(req, criterion);
 })
-.then(response => {
+/*.then(response => {
     return adminController.deleteAllSubcategoryCriterions(req.query.id);
-})
-.then(response => {
-    return adminController.createSubcategoryCriterions(req.query.id, res.payload.subcategories);
-})
+})*/
+/*.then(response => {
+    return adminController.createSubcategoryCriterions(req.query.id, res.payload.categories);
+})*/
 .then(msg => {
     res.send(msg);
 })
@@ -1022,11 +1021,8 @@ memberController.getRawBody(req)
 
 
 
-router.post('/deleteCriterion', (req, res, next) =>adminController
-.deleteSubcategorycriterionByCriterionId(req)
-.then(msg => {
-    return adminController.deleteCriterion(req);
-  })
+router.post('/deleteCriterion', (req, res, next) =>
+adminController.deleteCriterion(req)
 .then(msg => {
   res.send(msg);
 })

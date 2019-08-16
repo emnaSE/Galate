@@ -16,7 +16,7 @@
   "QUESTION": {
     "list": "List of questions",
     "valeur": "value",
-    "order": "ordre",
+    "order": "order",
     "nom": "test name",
     "sous": "sub-category",
     "action": "Action",
@@ -28,7 +28,7 @@
             "modif": "Update question",
             "nom": "name of test",
             "valeur": "Value",
-            "order": "Ordre",
+            "order": "Order",
             "reponse": "Answer",
             "submit": "Add",
             "submitQ": "Update"
@@ -68,7 +68,7 @@
         "modif": "Edit answer",
         "classe": "class",
         "Nom": "Name of the sub category",
-        "Ordre": "Ordre",
+        "Ordre": "Order",
         "school": "school",
         "submit": "Modifier",
         "alertNom": "name is required!"
@@ -194,7 +194,7 @@
     "suivante": "next",
     "nom1": "Name",
     "ConsulterSou": "Consult Under Categories",
-    "subcategory":"Sub-category",
+    "category":"Category",
     "CREATE": {
       "Nom": "Sub-category",
       "creation": " Creation of the question",
@@ -210,10 +210,13 @@
       "Nom": "name",
       "Question": "Question",
       "Valeur": "Value",
-      "Order": "Ordre",
+      "Order": "Order",
       "Action": "Action",
       "precedant": "previous",
       "suivante": "next"
+    },
+    "CRITERION":{
+      "Order": "Order"
     }
 
   },

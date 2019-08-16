@@ -15,7 +15,7 @@ import { SubcategorieService } from '../subcategorie/subcategorie.service';
 })
 export class CriterionComponent  implements OnInit{
   pageActuel: number =1;
-  sousCategories:SousCategorie[]
+  criterions:SousCategorie[]
   id:number;
   isAvailable = false;
 
@@ -32,7 +32,7 @@ export class CriterionComponent  implements OnInit{
         this.isAvailable = true;
         this.criterionService.getAllCriterionsByTestId(this.id).subscribe(
           data=>{
-            this.sousCategories=data;
+            this.criterions=data;
           },err=>{
             console.log(err);
           }
@@ -40,7 +40,7 @@ export class CriterionComponent  implements OnInit{
       }else{
         this.criterionService.getAllCriterions().subscribe(
           data=>{
-            this.sousCategories=data;
+            this.criterions=data;
           },err=>{
             console.log(err);
           }
@@ -59,9 +59,9 @@ export class CriterionComponent  implements OnInit{
   }
 
 
-  deleteByid(sousCategorie:SousCategorie):void {
+  deleteByid(criterion:SousCategorie):void {
     if(confirm("êtes-vous sûr de vouloir supprimer le ce critère? ")) {
-      this.criterionService.deleteCriterion(sousCategorie.id).subscribe(
+      this.criterionService.deleteCriterion(criterion.id).subscribe(
         data=>{
           if(data==="success"){
 
@@ -70,17 +70,18 @@ export class CriterionComponent  implements OnInit{
             alert("Vous ne pouvez pas supprimer ce critère");
 
           }
-          this.router.navigate(['pages/criterion'])
+         
+          //this.router.navigate(['pages/criterion'])
           this.criterionService.getAllCriterions().subscribe(
             data=>{
-              this.sousCategories=data;
+              this.criterions=data;
             },err=>{
               console.log(err);
 
             }
           )
 
-          this.sousCategories=this.sousCategories.filter(s=>s !==sousCategorie)
+          this.criterions=this.criterions.filter(s=>s !==criterion)
           this.router.navigate(['pages/criterion'])
 
 
@@ -92,12 +93,6 @@ export class CriterionComponent  implements OnInit{
   };
 
 
-    consulterQuestion(subCategorie:SousCategorie){
-      console.log(subCategorie.name);
-      this.router.navigate(['pages/criterion',subCategorie.id,'info']);
-      localStorage.setItem('catnom',subCategorie.name);
-    }
-
-
+ 
 }
 

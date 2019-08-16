@@ -14,7 +14,7 @@ public class GeneratePdfEtalonnage
     public static void genererPdfEtalonnage(final Long testId, final UUID uuid) {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            final Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/galate?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "root");
+            final Connection connection = DriverManager.getConnection(ConnectionConfig.connectionString, ConnectionConfig.user, ConnectionConfig.password);
             final Map<String, Object> params = new HashMap<String, Object>();
             params.put("idtest", testId);
             final JasperPrint jasperPrint = JasperFillManager.fillReport(GeneratePdfEtalonnage.class.getResourceAsStream("etalonnage.jasper"), (Map)params, connection);

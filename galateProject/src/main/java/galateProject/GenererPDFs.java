@@ -50,4 +50,50 @@ public class GenererPDFs
             return null;
         }
     }
+    
+    
+    
+    @GET
+    @Path("/generateReportPersonalityAnalyse")
+    @Produces({ "application/octet-stream" })
+    public Response generateReportPersonalityAnalyse(@QueryParam("testId") final Long testId, @QueryParam("memberId") final Long memberId) {
+        final UUID uuid = UUID.randomUUID();
+        GeneratePdfPersonnalityAnalyse.GeneratePdfCompetences(testId, uuid, memberId);
+        try {
+            final File file = new File(String.valueOf(System.getProperty("java.io.tmpdir")) + "//" + uuid + "//personalityAnalyse.pdf");
+            System.out.println(file.getAbsolutePath());
+            final FileInputStream inputStream = new FileInputStream(file);
+            final Response.ResponseBuilder response = Response.ok((Object)file);
+            response.header("Content-Disposition", (Object)"attachment; filename=personalityAnalyse.pdf");
+            return response.build();
+        }
+        catch (Exception e) {
+            System.out.println("could not download specified file");
+            return null;
+        }
+    }
+    
+    
+    
+    @GET
+    @Path("/generateReportCompetence")
+    @Produces({ "application/octet-stream" })
+    public Response generateReportCompetences(@QueryParam("testId") final Long testId, @QueryParam("memberId") final Long memberId) {
+        final UUID uuid = UUID.randomUUID();
+        GeneratePdfCompetences.GeneratePdfCompetences(testId, uuid, memberId);
+        try {
+            final File file = new File(String.valueOf(System.getProperty("java.io.tmpdir")) + "//" + uuid + "//competences.pdf");
+            System.out.println(file.getAbsolutePath());
+            final FileInputStream inputStream = new FileInputStream(file);
+            final Response.ResponseBuilder response = Response.ok((Object)file);
+            response.header("Content-Disposition", (Object)"attachment; filename=competences.pdf");
+            return response.build();
+        }
+        catch (Exception e) {
+            System.out.println("could not download specified file");
+            return null;
+        }
+    }
+    
+    
 }

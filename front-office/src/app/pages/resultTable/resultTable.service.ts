@@ -48,11 +48,7 @@ export class ResultTableService {
         return this.http.post(this.url3 +"updateManualAnswer?manualAnwserId="+id+"&response="+response,JSON.stringify,{responseType:'text'});
       }
     
-      generateReportAutodiagnostic(idTest:number , idMember:number):Observable<any> {
-        var url8 = "http://localhost:8098/galateProject/rest/galate/generateReportAutodiagnostic?testId="+idTest+"&memberId="+idMember ;
-        window.location.href=url8;
-        return this.http.get<any>(url8);
-      }
+     
 
       
       getSubcategoryDetails(): Observable<any> {

@@ -204,11 +204,13 @@
             <div  *ngFor="let catalogue of catalogueDetails; let i = index" >
                     <div  class="cat" [style.background]="getColor(i)">
                         <div class="catName">
-                            <p><span class="name">{{catalogue.category.name}}</span> <span id="nbCompet">compétences mesurés</span></p>
+                               
+
+                            <p><span class="name" >{{catalogue.category?.name}}</span> <span id="nbCompet">compétences mesurés</span></p>
                         </div>
                         <div class="sousCat" >
-                            <div class="table-responsive" *ngFor="let subcategory of catalogue.subcategories">
-                                <table class="table">
+                             <!--div class="table-responsive" *ngFor="let subcategory of catalogue.criterions"-->
+                                <!--<table class="table">
                                     <tbody>
                                         <tr>
                                             <th scope="row" class="sousCatName">{{subcategory.subcategory.name}}</th>
@@ -225,10 +227,10 @@
                                             <td [ngStyle]="{'background-color':subcategory.subcategory.score === 11 ? 'white' : '' }">11</td>
                                         </tr>
                                     </tbody>
-                                </table> 
+                                </table> -->
                                 <table class="table">
                                         <tbody>
-                                            <tr *ngFor="let criterion of subcategory.criterions">
+                                            <tr *ngFor="let criterion of catalogue.criterions">
                                                 <th scope="row">{{criterion.name}}</th>
                                                 <td [ngStyle]="{'background-color':criterion.score === 1 ? 'white' : '' }">1</td>
                                                 <td [ngStyle]="{'background-color':criterion.score === 2 ? 'white' : '' }">2</td>
@@ -244,7 +246,7 @@
                                             </tr>
                                         </tbody>
                                 </table>                        
-                            </div>
+                            <!--</div>-->
                         </div>
                        
                     </div>

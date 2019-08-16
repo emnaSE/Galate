@@ -414,6 +414,20 @@ _publics.getCategoryNameByMemberIdAndTestId = (req) => {
                });
    });    
 };
+
+_publics.getCategoryNameByMemberIdAndTestIdBySecondOrder = (req) => { 
+  var id_test=req.query.id_test;
+  var id_member=req.query.id_member;
+  return new Promise((resolve, reject) => {  
+           var sql = "select distinct c.name  as name , c.id as category_id, c.ordre, c.ordre2  from manuel_answer ma left join subcategory sc on(sc.id=ma.id_subcategory) left join category c on (c.id=sc.id_category)  where ma.id_test=? and ma.id_member=? order by c.ordre2 asc"; 
+         
+               con.query(sql,[id_test,id_member], function (err, result) {
+               if (err) reject(err);
+               return resolve(JSON.stringify(result));
+               });
+   });    
+};
+
 _publics.getEtalonnageDetails = (req) => { 
   var id_test=req.query.id_test;
   var id_member=req.query.id_member;
@@ -463,7 +477,7 @@ _publics.updateManualAnswer = (req) => {
 
 
 
-_publics.getAllCriterionsBySubcategories = (req,subcategories) => { 
+/*_publics.getAllCriterionsBySubcategories = (req,subcategories) => { 
   let promises = [];
   for (var i=0;i<JSON.parse(subcategories).length;i++) {
     promises.push( new Promise((resolve, reject) => request.get({
@@ -479,7 +493,21 @@ _publics.getAllCriterionsBySubcategories = (req,subcategories) => {
     })));
   }
   return Promise.all(promises)    
+};*/
+
+
+_publics.getAllCriterionsByCategoryId = (categoryId) => { 
+  return new Promise((resolve, reject) => {  
+           var sql = "select c.*, c.result as score from criterion c where c.id_category=? order by c.ordre asc"; 
+               con.query(sql,[categoryId], function (err, result) {
+                if (err){
+                  reject(err);
+                }
+                return resolve(result);
+               });
+   }); 
 };
+
 
 
 
@@ -512,17 +540,38 @@ _publics.calculateSkills = (req,res,criterionsList) => {
     for (var i=0;i<criterionsList.length;i++) {
         promises.push( new Promise((resolve, reject) => {  
           if(criterionsList[i].median===0){
-            calculateYellowSkill(testId,memberId,criterionsList[i]);//two subcategories without median
+            if(criterionsList[i].id_subcategory2===null){
+              calculatePinkSkill(testId,memberId,criterionsList[i]);//one subcategory  without median
+            }else{
+              calculateYellowSkill(testId,memberId,criterionsList[i]);//two subcategories without median
+            }
+
           }else if(criterionsList[i].id_subcategory2===null){
-            calculateBlueSkill(testId,memberId,criterionsList[i]);//one subcategory with median
+            calculateBlueSkySkill(testId,memberId,criterionsList[i]);//one subcategory with median
           }else{
-            calculateBlueSkySkill(res,testId,memberId,criterionsList[i]);//two subcategories with median
+            calculateBlueSkill(res,testId,memberId,criterionsList[i]);//two subcategories with median
           }
       }));
     }
      return Promise.all(promises)  
 
 }
+
+
+function calculatePinkSkill(testId,memberId,criterion){
+  return new Promise((resolve, reject) => {  
+    getSubcategoryScore(testId,memberId,criterion.id_subcategory1,null)
+    .then(score=>{
+      var sql = "update criterion set result= ? where id=?"; 
+      con.query(sql,[score,criterion.id], function (err, result) {
+      if (err)
+        reject(err);
+      return resolve(result);
+      });
+    })
+  });  
+}
+
 
 
 function calculateYellowSkill(testId,memberId,criterion){
@@ -557,9 +606,9 @@ function getSubcategoriesScore(testId,memberId,criterion){
 }
 
 
-function calculateBlueSkill(testId,memberId,criterion){
+function calculateBlueSkySkill(testId,memberId,criterion){
   return new Promise((resolve, reject) => {  
-    getSubcategoryScore(testId,memberId,criterion.id_subcategory1)
+    getSubcategoryScore(testId,memberId,criterion.id_subcategory1,null)
     .then(score=>{
       var mediane=config.mediane;
       var result=score-mediane;
@@ -577,16 +626,15 @@ function calculateBlueSkill(testId,memberId,criterion){
   });   
 }
 
-function calculateBlueSkySkill(res,testId,memberId,criterion){
+function calculateBlueSkill(res,testId,memberId,criterion){
   return new Promise((resolve, reject) => {  
-    getSubcategoryScore(testId,memberId,criterion.id_subcategory1)
+    getSubcategoryScore(testId,memberId,criterion.id_subcategory1,null)
     .then(score1=>{
-      res.payload.score1=score1;
-      return getSubcategoryScore(testId,memberId,criterion.id_subcategory2);
+      res.payload.score1=score1; 
+      return getSubcategoryScore(testId,memberId,criterion.id_subcategory2,res.payload.score1);
     })
-    .then(score2=>{
-      res.payload.score2=score2;
-      return calculateScoreWithMedian( res.payload.score1,res.payload.score2);
+    .then(score=>{
+      return calculateScoreWithMedian(score);
     })
     .then(result=>{
       updateCriterionResult(result,criterion);
@@ -594,9 +642,8 @@ function calculateBlueSkySkill(res,testId,memberId,criterion){
   }); 
 }
 
-function calculateScoreWithMedian(score1, score2){
+function calculateScoreWithMedian(score){
   return new Promise((resolve, reject) => { 
-    var score=(score1+score2)/2;
     var mediane=config.mediane;
     var result=score-mediane;
     result=mediane-result;
@@ -615,13 +662,20 @@ function updateCriterionResult(result,criterion){
     });
   });
 }
-function getSubcategoryScore(testId,memberId,subcategoryId){
+function getSubcategoryScore(testId,memberId,subcategoryId, score1){
   return new Promise((resolve, reject) => {  
     var sql ="select FLOOR(m.etallonage_result) as score from manuel_answer m where m.id_member=? and id_test=? and m.id_subcategory=?";
         con.query(sql,[memberId,testId,subcategoryId], function (err, result) {
          if (err){
            reject(err);
          }
+         var result;
+         if(score1!==null){
+          console.log("wwwww score1= "+score1+" score2= "+result[0].score);
+          var result=(result[0].score+score1)/2;
+          return resolve(Math.floor(result));
+         }
+         
          return resolve(result[0].score);
         });
   });   

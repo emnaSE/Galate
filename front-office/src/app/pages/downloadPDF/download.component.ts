@@ -63,6 +63,30 @@ export class DownloadComponent  implements OnInit{
         
       }
     )}
+
+    
+    public downloadPersonalityAnalyse(event){
+   
+
+      this.downloadService.downloadPersonalityAnalyse(this.testId ,this.memberId).subscribe(
+        data=>{
+          alert("telegarchement avec succès");
+  
+          
+        }
+      )}
+
+      public downloadCompetences(event){
+   
+
+        this.downloadService.downloadCompetences(this.testId ,this.memberId).subscribe(
+          data=>{
+            alert("telegarchement avec succès");
+    
+            
+          }
+        )}
+
     
     public redirect(event){
       this.router.navigate(['/finalResult', this.testId1 , this.memberId1]);
