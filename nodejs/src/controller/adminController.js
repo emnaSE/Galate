@@ -1962,7 +1962,7 @@ _publics.getCriterionsByTestId = (req) => {
      for (var i=0;i<subcategories.length;i++) {
         promises.push( new Promise((resolve, reject) => {         
           var subcategory =row.ele('Cell');
-          subcategory.att('ss:StyleID' , 'Default');
+          subcategory.att('ss:StyleID' , 'S21W');
           var data5 =  subcategory.ele('Data');
               data5.att('ss:Type', 'String'); 
               
@@ -1978,6 +1978,35 @@ _publics.getCriterionsByTestId = (req) => {
       return Promise.all(promises);   
     
     }
+
+
+    function createRowCompetences(row , criterions , memberResult){
+      let promises = [];
+     
+     for (var i=0;i<criterions.length;i++) {
+        promises.push( new Promise((resolve, reject) => {         
+          var subcategory =row.ele('Cell');
+          subcategory.att('ss:StyleID' , 'ST21');
+          var data5 =  subcategory.ele('Data');
+              data5.att('ss:Type', 'String'); 
+              
+               ///createResultSubCat(data5 , subcategories , memberResult)
+             //data5.txt(memberResult[i]===null ? " " : memberResult[i].etallonage_result) ; 
+              data5.txt(memberResult[i].result) ; 
+              
+            data5.up();
+          subcategory.up();          
+          }));
+      }
+      
+      return Promise.all(promises);   
+    
+    }
+    
+
+
+
+
     
   
 
@@ -2017,7 +2046,7 @@ _publics.generateXMLFile = (input,req , res  ) => {
       var style2 = styles.ele('Style');
         style2.att('ss:ID', 'S21');
           var interior = style2.ele('Interior');
-             interior.att('ss:Color', '#FFFFF0');
+             interior.att('ss:Color', '#F08080');
              interior.att('ss:Pattern', 'Solid');
            interior.up();
           var alignement2= style2.ele('ss:Alignment');
@@ -2055,10 +2084,52 @@ _publics.generateXMLFile = (input,req , res  ) => {
 
 
 
+
+       var style2W = styles.ele('Style');
+       style2W.att('ss:ID', 'S21W');
+         var interior = style2W.ele('Interior');
+            interior.att('ss:Color', '#F08080');
+            interior.att('ss:Pattern', 'Solid');
+          interior.up();
+         var alignement2= style2W.ele('ss:Alignment');
+           alignement2.att('ss:Vertical', 'Bottom');
+           alignement2.up();
+         var borders2 = style2W.ele('ss:Borders');
+            var border = borders2.ele('ss:Border');
+                border.att('ss:Position', 'Left');
+                border.att('ss:Color', '#000000');
+                border.att('ss:LineStyle' , 'Continuous');
+                border.att('ss:Weight' , '1');
+             border.up();
+             var border1 = borders2.ele('ss:Border');
+               border1.att('ss:Position', 'Top');
+               border1.att('ss:Color', '#000000');
+               border1.att('ss:LineStyle' , 'Continuous');
+               border1.att('ss:Weight' , '1');
+             border1.up();
+             var border2 = borders2.ele('ss:Border');
+               border2.att('ss:Position', 'Bottom');
+               border2.att('ss:Color', '#000000');
+               border2.att('ss:LineStyle' , 'Continuous');
+               border2.att('ss:Weight' , '1');
+             border2.up();
+          borders2.up();
+           var font2 = style2W.ele('ss:Font');
+           font2.att('ss:Color', '#000000');
+           font2.att('ss:FontName', 'Arial');
+           font2.att('ss:Size', '10');
+           font2.up();
+           var numberFormat=style2W.ele('ss:NumberFormat')
+           numberFormat.att('ss:Format', '@')
+           numberFormat.up();
+      style2W.up();
+
+
+
        var style3 = styles.ele('Style');
         style3.att('ss:ID', 'S22');
           var interior = style3.ele('Interior');
-             interior.att('ss:Color', '#FFFFF0');
+             interior.att('ss:Color', '#F08080');
              interior.att('ss:Pattern', 'Solid');
            interior.up();
           var alignement2= style3.ele('ss:Alignment');
@@ -2088,7 +2159,7 @@ _publics.generateXMLFile = (input,req , res  ) => {
        var style4 = styles.ele('Style');
         style4.att('ss:ID', 'S23');
           var interior = style4.ele('Interior');
-             interior.att('ss:Color', '#FFFFF0');
+             interior.att('ss:Color', '#F08080');
              interior.att('ss:Pattern', 'Solid');
            interior.up();
           var alignement2= style4.ele('ss:Alignment');
@@ -2119,7 +2190,7 @@ _publics.generateXMLFile = (input,req , res  ) => {
        var style5 = styles.ele('Style');
        style5.att('ss:ID', 'S24');
          var interior = style5.ele('Interior');
-            interior.att('ss:Color', '#FFFFF0');
+            interior.att('ss:Color', '#F08080');
             interior.att('ss:Pattern', 'Solid');
           interior.up();
          var alignement2= style5.ele('ss:Alignment');
@@ -2158,7 +2229,7 @@ _publics.generateXMLFile = (input,req , res  ) => {
       var style6 = styles.ele('Style');
       style6.att('ss:ID', 'S25');
         var interior = style6.ele('Interior');
-           interior.att('ss:Color', '#FFFFF0');
+           interior.att('ss:Color', '#ff5b5b');
            interior.att('ss:Pattern', 'Solid');
          interior.up();
         var alignement2= style6.ele('ss:Alignment');
@@ -2200,7 +2271,7 @@ _publics.generateXMLFile = (input,req , res  ) => {
           var style12 = styles.ele('Style');
           style12.att('ss:ID', 'ST21');
           var interior = style12.ele('Interior');
-          interior.att('ss:Color', '#F08080');
+          interior.att('ss:Color', '#8cb3e3');
           interior.att('ss:Pattern', 'Solid');
           interior.up();
           var alignement =style12.ele('ss:Alignment');
@@ -2236,7 +2307,7 @@ _publics.generateXMLFile = (input,req , res  ) => {
         var style22 = styles.ele('Style');
           style22.att('ss:ID', 'ST22');
             var interior = style22.ele('Interior');
-                interior.att('ss:Color', '#F08080');
+                interior.att('ss:Color', '#8cb3e3');
                 interior.att('ss:Pattern', 'Solid');
               interior.up();
             var alignement2= style22.ele('ss:Alignment');
@@ -2271,7 +2342,7 @@ _publics.generateXMLFile = (input,req , res  ) => {
           var style32 = styles.ele('Style');
           style32.att('ss:ID', 'ST23');
             var interior = style32.ele('Interior');
-                interior.att('ss:Color', '#F08080');
+                interior.att('ss:Color', '#8cb3e3');
                 interior.att('ss:Pattern', 'Solid');
               interior.up();
             var alignement2= style32.ele('ss:Alignment');
@@ -2302,7 +2373,7 @@ _publics.generateXMLFile = (input,req , res  ) => {
           var style42 = styles.ele('Style');
           style42.att('ss:ID', 'ST24');
             var interior = style42.ele('Interior');
-                interior.att('ss:Color', '#F08080');
+                interior.att('ss:Color', '#8cb3e3');
                 interior.att('ss:Pattern', 'Solid');
               interior.up();
             var alignement2= style42.ele('ss:Alignment');
@@ -2339,7 +2410,7 @@ _publics.generateXMLFile = (input,req , res  ) => {
           var style52 = styles.ele('Style');
           style52.att('ss:ID', 'ST25');
             var interior = style52.ele('Interior');
-              interior.att('ss:Color', '#F08080');
+              interior.att('ss:Color', '#8cb3e3');
               interior.att('ss:Pattern', 'Solid');
             interior.up();
             var alignement2= style52.ele('ss:Alignment');
@@ -2380,7 +2451,7 @@ _publics.generateXMLFile = (input,req , res  ) => {
         var style13 = styles.ele('Style');
         style13.att('ss:ID', 'SD21');
         var interior = style13.ele('Interior');
-        interior.att('ss:Color', '#FFD700');
+        interior.att('ss:Color', '#F0F8FF');
         interior.att('ss:Pattern', 'Solid');
         interior.up();
         var alignement =style13.ele('ss:Alignment');
@@ -2416,7 +2487,7 @@ _publics.generateXMLFile = (input,req , res  ) => {
       var style23 = styles.ele('Style');
         style23.att('ss:ID', 'SD22');
           var interior = style23.ele('Interior');
-              interior.att('ss:Color', '#FFD700');
+              interior.att('ss:Color', '#F0F8FF');
               interior.att('ss:Pattern', 'Solid');
             interior.up();
           var alignement2= style23.ele('ss:Alignment');
@@ -2451,7 +2522,7 @@ _publics.generateXMLFile = (input,req , res  ) => {
         var style33 = styles.ele('Style');
         style33.att('ss:ID', 'SD23');
           var interior = style33.ele('Interior');
-              interior.att('ss:Color', '#FFD700');
+              interior.att('ss:Color', '#F0F8FF');
               interior.att('ss:Pattern', 'Solid');
             interior.up();
           var alignement2= style33.ele('ss:Alignment');
@@ -2482,7 +2553,7 @@ _publics.generateXMLFile = (input,req , res  ) => {
         var style43 = styles.ele('Style');
         style43.att('ss:ID', 'SD24');
           var interior = style43.ele('Interior');
-              interior.att('ss:Color', '#FFD700');
+              interior.att('ss:Color', '#F0F8FF');
               interior.att('ss:Pattern', 'Solid');
             interior.up();
           var alignement2= style43.ele('ss:Alignment');
@@ -2514,7 +2585,7 @@ _publics.generateXMLFile = (input,req , res  ) => {
         var style53 = styles.ele('Style');
         style53.att('ss:ID', 'SD25');
           var interior = style53.ele('Interior');
-            interior.att('ss:Color', '#FFD700');
+            interior.att('ss:Color', '#F0F8FF');
             interior.att('ss:Pattern', 'Solid');
           interior.up();
           var alignement2= style53.ele('ss:Alignment');
@@ -2558,8 +2629,8 @@ _publics.generateXMLFile = (input,req , res  ) => {
      var table =  worksheet.ele('ss:Table');
      table.att('ss:DefaultRowHeight', '15');   
      table.att('ss:DefaultColumnWidth', '60');
-     table.att('ss:ExpandedRowCount', 30+input.members.length);
-     table.att('ss:ExpandedColumnCount', 30+input.subcategories.length) ; 
+     table.att('ss:ExpandedRowCount', 60+input.members.length);
+     table.att('ss:ExpandedColumnCount', 30+input.subcategories.length+input.criterions.length) ; 
 
      var row1 = table.ele('Row');
        row1.att('ss:Index' , '1');
@@ -2590,7 +2661,7 @@ _publics.generateXMLFile = (input,req , res  ) => {
 
 
 
-
+//partie criteres
         var cell1S =row1.ele('Cell');
         cell1S.att('ss:StyleID' , 'S21')
           cell1S.up();
@@ -2610,7 +2681,7 @@ _publics.generateXMLFile = (input,req , res  ) => {
               cell6s.att('ss:StyleID' , 'S22')
               var data = cell6s.ele('Data');
               data.att('ss:Type' , 'String');
-              data.txt('Criters')  ;
+              data.txt('Criteres')  ;
               data.up();
           cell6s.up();
          
@@ -2625,7 +2696,45 @@ _publics.generateXMLFile = (input,req , res  ) => {
           var lastCell =row1.ele('Cell');
           lastCell.att('ss:StyleID' , 'S24')
           lastCell.up();
-      
+
+
+
+//partie competences
+          var cell1c =row1.ele('Cell');
+          cell1c.att('ss:StyleID' , 'ST21')
+            cell1c.up();
+            var cell2c =row1.ele('Cell');
+                cell2c.att('ss:StyleID' , 'ST22')
+            cell2c.up();
+            var cell3c =row1.ele('Cell');
+                cell3c.att('ss:StyleID' , 'ST23')
+            cell3c.up();
+            var cell4c =row1.ele('Cell');
+                cell4c.att('ss:StyleID' , 'ST22')
+            cell4c.up();
+            var cell5c =row1.ele('Cell');
+                cell5c.att('ss:StyleID' , 'ST23')
+            cell5c.up();
+            var cell6c =row1.ele('Cell');
+                cell6c.att('ss:StyleID' , 'ST22')
+                var data = cell6c.ele('Data');
+                data.att('ss:Type' , 'String');
+                data.txt('Competences')  ;
+                data.up();
+            cell6c.up();
+           
+  
+  
+          for (var i=0;i<(input.criterions.length-7);i++) {
+            var subcategory =row1.ele('Cell')
+               subcategory.att('ss:StyleID' , 'ST23')
+              subcategory.up();
+             
+              }
+            var lastCellc=row1.ele('Cell');
+            lastCellc.att('ss:StyleID' , 'ST24')
+            lastCellc.up();
+        
 
 
           row1.up();
@@ -2715,12 +2824,24 @@ _publics.generateXMLFile = (input,req , res  ) => {
            
             }
 
+
+            for (var i=0;i<input.criterions.length;i++) {
+              var criterions =row.ele('Cell')
+              criterions.att('ss:StyleID' , 'ST21')
+                 var data5 =  criterions.ele('Data');
+                    data5.att('ss:Type', 'String'); 
+                    data5.txt(input.criterions[i].name) ; 
+                  data5.up();
+                  criterions.up();
+               
+                }
+
       row.up();
 
     for(var i=0 ; i<input.members.length ; i++){
                 var row = table.ele('Row');
                 var cell1 =row.ele('Cell');
-                cell1.att('ss:StyleID' , 'Default')
+                cell1.att('ss:StyleID' , 'SD21')
                     var data1 = cell1.ele('Data');
                         data1.att('ss:Type', 'String') ;
                         data1.txt(input.members[i].firstname);
@@ -2728,7 +2849,7 @@ _publics.generateXMLFile = (input,req , res  ) => {
                   cell1.up();
 
                 var cell2 =row.ele('Cell');
-                cell2.att('ss:StyleID' , 'Default')
+                cell2.att('ss:StyleID' , 'SD21')
                   var data2 = cell2.ele('Data');
                       data2.att('ss:Type', 'String') ;
                       data2.txt(input.members[i].lastname);
@@ -2736,7 +2857,7 @@ _publics.generateXMLFile = (input,req , res  ) => {
                 cell2.up();
 
                 var cell3 =row.ele('Cell');
-                cell3.att('ss:StyleID' , 'Default')
+                cell3.att('ss:StyleID' , 'SD21')
                   var data3 = cell3.ele('Data');
                       data3.att('ss:Type', 'String') ;
                       data3.txt(input.members[i].age)  ;
@@ -2745,7 +2866,7 @@ _publics.generateXMLFile = (input,req , res  ) => {
 
 
                 var cell31 =row.ele('Cell');
-                cell31.att('ss:StyleID' , 'Default')
+                cell31.att('ss:StyleID' , 'SD21')
                   var data31 = cell31.ele('Data');
                       data31.att('ss:Type', 'String') ;
                       data31.txt(input.members[i].email)  ;
@@ -2754,7 +2875,7 @@ _publics.generateXMLFile = (input,req , res  ) => {
 
                 
                 var cell012 =row.ele('Cell');
-                cell012.att('ss:StyleID' , 'Default')
+                cell012.att('ss:StyleID' , 'SD21')
                   var data012 = cell012.ele('Data');
                       data012.att('ss:Type', 'String') ;
                       data012.txt(input.members[i].sexe)  ;
@@ -2763,7 +2884,7 @@ _publics.generateXMLFile = (input,req , res  ) => {
                
 
                 var cell013 =row.ele('Cell');
-                cell013.att('ss:StyleID' , 'Default')
+                cell013.att('ss:StyleID' , 'SD21')
                   var data013 = cell013.ele('Data');
                       data013.att('ss:Type', 'String') ;
                       data013.txt(input.members[i].city)  ;
@@ -2771,7 +2892,7 @@ _publics.generateXMLFile = (input,req , res  ) => {
                 cell013.up();
 
                 var cell01 =row.ele('Cell');
-                cell01.att('ss:StyleID' , 'Default')
+                cell01.att('ss:StyleID' , 'SD21')
                   var data01 = cell01.ele('Data');
                       data01.att('ss:Type', 'String') ;
                       data01.txt(input.members[i].clazz_name)  ;
@@ -2779,7 +2900,7 @@ _publics.generateXMLFile = (input,req , res  ) => {
                 cell01.up();
 
                 var cell08 =row.ele('Cell');
-                cell08.att('ss:StyleID' , 'Default')
+                cell08.att('ss:StyleID' , 'SD21')
                   var data08 = cell08.ele('Data');
                       data08.att('ss:Type', 'String') ;
                       data08.txt(input.members[i].school_name)  ;
@@ -2795,6 +2916,7 @@ _publics.generateXMLFile = (input,req , res  ) => {
 
            
               createRow(row , input.subcategories , input.members[i].result);
+              createRowCompetences(row , input.criterions , input.members[i].competencesResults);
               row.up();
     }
 
