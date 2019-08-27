@@ -45,6 +45,7 @@ public class GeneratePdfCompetences {
 				final InputStream img2 = GeneratePdfEtalonnage.class.getResourceAsStream("srIcon.png");
 				final InputStream img3 = GeneratePdfEtalonnage.class.getResourceAsStream("growth.png");
 				final InputStream img4 = GeneratePdfEtalonnage.class.getResourceAsStream("gal1.png");
+				final InputStream img5 = GeneratePdfEtalonnage.class.getResourceAsStream("image.png");
 				Class.forName("com.mysql.jdbc.Driver");
 				final Connection connection = DriverManager.getConnection(ConnectionConfig.connectionString,
 						ConnectionConfig.user, ConnectionConfig.password);
@@ -59,6 +60,7 @@ public class GeneratePdfCompetences {
 				params.put("img2", img2);
 				params.put("img3", img3);
 				params.put("img4", img4);
+				params.put("img5", img5);
 				final JasperPrint jasperPrint = JasperFillManager.fillReport(
 						GeneratePdfEtalonnage.class.getResourceAsStream("competences.jasper"), (Map) params, connection);
 				final List<JRPrintPage> pages = (List<JRPrintPage>)jasperPrint.getPages();

@@ -237,14 +237,14 @@
 										<pen lineWidth="1.0"/>
 									</box>
 									<frame>
-										<reportElement mode="Opaque" x="0" y="0" width="111" height="30" uuid="e30f9728-1ef5-498d-a66e-0121aa17c209"/>
+										<reportElement mode="Opaque" x="0" y="0" width="111" height="30" backcolor="#8CB3E3" uuid="e30f9728-1ef5-498d-a66e-0121aa17c209"/>
 										<textField pattern="EEEEE dd MMMMM yyyy" isBlankWhenNull="true">
-											<reportElement isPrintRepeatedValues="false" mode="Opaque" x="0" y="0" width="111" height="30" isPrintWhenDetailOverflows="true" uuid="3f386492-0eec-44d1-86be-b656925ac5fc"/>
+											<reportElement stretchType="RelativeToTallestObject" isPrintRepeatedValues="false" mode="Opaque" x="0" y="0" width="111" height="30" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true" backcolor="#8CB3E3" uuid="3f386492-0eec-44d1-86be-b656925ac5fc"/>
 											<box topPadding="0" leftPadding="9">
 												<pen lineWidth="1.0"/>
 											</box>
 											<textElement textAlignment="Left" verticalAlignment="Middle">
-												<font fontName="DejaVu Sans" size="9" isBold="false" isItalic="true" isUnderline="true"/>
+												<font fontName="DejaVu Sans" size="12" isBold="false" isItalic="false" isUnderline="false"/>
 											</textElement>
 											<textFieldExpression><![CDATA[$F{categoryName}]]></textFieldExpression>
 										</textField>
@@ -256,7 +256,7 @@
 								<jr:columnHeader height="20" rowSpan="1"/>
 								<jr:detailCell height="30">
 									<textField>
-										<reportElement mode="Opaque" x="0" y="0" width="103" height="30" uuid="dfbafd91-b769-43b8-87e3-69ee9a8823b5"/>
+										<reportElement mode="Opaque" x="0" y="0" width="103" height="30" backcolor="#8CB3E3" uuid="dfbafd91-b769-43b8-87e3-69ee9a8823b5"/>
 										<box leftPadding="7">
 											<pen lineWidth="1.0"/>
 										</box>

@@ -190,6 +190,11 @@
 		</field>
 	</subDataset>
 	<subDataset name="Empty Dataset1" uuid="b72f4007-f7a3-444f-b0f1-23ca564e133a"/>
+	<subDataset name="Dataset1" uuid="3c7b06cc-222a-4249-9511-855f308b282c">
+		<queryString>
+			<![CDATA[]]>
+		</queryString>
+	</subDataset>
 	<parameter name="idtest" class="java.lang.Long"/>
 	<parameter name="idmember" class="java.lang.Long"/>
 	<parameter name="testName" class="java.lang.String"/>
@@ -200,6 +205,7 @@
 	<parameter name="img2" class="java.io.InputStream"/>
 	<parameter name="img3" class="java.io.InputStream"/>
 	<parameter name="img4" class="java.io.InputStream"/>
+	<parameter name="img5" class="java.io.InputStream"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
@@ -257,9 +263,9 @@
 										<pen lineWidth="1.0"/>
 									</box>
 									<frame>
-										<reportElement mode="Opaque" x="0" y="0" width="111" height="30" backcolor="#C9C9C9" uuid="e30f9728-1ef5-498d-a66e-0121aa17c209"/>
+										<reportElement mode="Opaque" x="0" y="0" width="111" height="30" backcolor="#8CB3E3" uuid="e30f9728-1ef5-498d-a66e-0121aa17c209"/>
 										<textField pattern="EEEEE dd MMMMM yyyy" isBlankWhenNull="true">
-											<reportElement isPrintRepeatedValues="false" mode="Opaque" x="0" y="0" width="111" height="30" isPrintWhenDetailOverflows="true" forecolor="#03040A" backcolor="#C9C9C9" uuid="3f386492-0eec-44d1-86be-b656925ac5fc"/>
+											<reportElement isPrintRepeatedValues="false" mode="Opaque" x="0" y="0" width="111" height="30" isPrintWhenDetailOverflows="true" forecolor="#03040A" backcolor="#8CB3E3" uuid="3f386492-0eec-44d1-86be-b656925ac5fc"/>
 											<box topPadding="0" leftPadding="9">
 												<pen lineWidth="1.0"/>
 											</box>
@@ -276,7 +282,7 @@
 								<jr:columnHeader height="20" rowSpan="1"/>
 								<jr:detailCell height="30">
 									<textField>
-										<reportElement mode="Opaque" x="0" y="0" width="103" height="30" backcolor="#C9C9C9" uuid="dfbafd91-b769-43b8-87e3-69ee9a8823b5"/>
+										<reportElement mode="Opaque" x="0" y="0" width="103" height="30" backcolor="#8CB3E3" uuid="dfbafd91-b769-43b8-87e3-69ee9a8823b5"/>
 										<box leftPadding="7">
 											<pen lineWidth="1.0"/>
 										</box>
@@ -802,7 +808,7 @@
 		<band height="61" splitType="Stretch"/>
 	</columnHeader>
 	<detail>
-		<band height="125" splitType="Stretch"/>
+		<band height="128" splitType="Stretch"/>
 	</detail>
 	<columnFooter>
 		<band height="45" splitType="Stretch"/>
@@ -811,11 +817,69 @@
 		<band height="54" splitType="Stretch"/>
 	</pageFooter>
 	<summary>
-		<band height="45" splitType="Stretch">
+		<band height="283" splitType="Stretch">
+			<rectangle>
+				<reportElement x="1" y="-24" width="549" height="307" uuid="f5e23fa3-489e-4f73-bb41-27e1142de31e"/>
+			</rectangle>
 			<staticText>
-				<reportElement x="323" y="11" width="100" height="30" uuid="6fbf7fd3-2d09-42ea-8fa0-133b6c0d27a9"/>
-				<text><![CDATA[hhhhhhhhhhhhhhhhhhhh]]></text>
+				<reportElement stretchType="ContainerHeight" x="80" y="-8" width="120" height="32" uuid="c6601105-a319-4874-8cc8-4237542eabbe"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[de mes compétences ]]></text>
 			</staticText>
+			<staticText>
+				<reportElement x="20" y="138" width="524" height="35" uuid="c1d4ac45-0ed6-4aa6-81ea-464a74252db7"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Mes scores de 5 à 7: Compétences mobilisables à court terme]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="20" y="205" width="524" height="41" uuid="81f76237-a1ed-4f38-a8a1-b306a52184e3"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Mes scores de 1 à 4: Compétences non mobilisables]]></text>
+			</staticText>
+			<staticText>
+				<reportElement stretchType="ElementGroupHeight" x="20" y="-8" width="60" height="33" uuid="b80d44d9-e933-4f73-9698-618c214aaae5"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[LE TOP]]></text>
+			</staticText>
+			<staticText>
+				<reportElement stretchType="RelativeToBandHeight" x="202" y="-8" width="97" height="31" uuid="a31420ce-7954-4a43-87ab-5e8e69b007a9"/>
+				<textElement>
+					<font size="12" isBold="true" isItalic="false" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[MOBILISABLES]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="301" y="-9" width="106" height="32" uuid="21e699f4-cf91-4fa3-bfb6-5f170ad67771"/>
+				<textElement>
+					<font size="12" isItalic="false" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[immétiatement]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="20" y="33" width="527" height="27" uuid="fe446714-ff3b-439e-84bf-69e94434f99a"/>
+				<textElement>
+					<font size="12" isItalic="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Mes scores de 8 à 11]]></text>
+			</staticText>
+			<image>
+				<reportElement x="20" y="62" width="60" height="50" uuid="8effaddd-cdad-4c21-8b76-f3a9015227a8"/>
+				<imageExpression><![CDATA[$P{img5}]]></imageExpression>
+			</image>
+			<line>
+				<reportElement x="1" y="120" width="549" height="1" uuid="ce956fa5-bd90-42b8-a513-037f6c186722"/>
+			</line>
+			<line>
+				<reportElement x="1" y="180" width="549" height="1" uuid="1fa80573-0f1b-4473-b4ea-06d232b4379b"/>
+			</line>
 		</band>
 	</summary>
 </jasperReport>
