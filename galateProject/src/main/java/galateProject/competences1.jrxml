@@ -207,7 +207,7 @@
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="405" splitType="Stretch">
+		<band height="674" splitType="Stretch">
 			<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.FreeLayout"/>
 			<rectangle radius="0">
 				<reportElement x="-20" y="-20" width="595" height="180" backcolor="#1C4170" uuid="f69b96c6-517e-4ec4-8d9d-6fc0ba4b655c"/>
@@ -795,27 +795,4 @@
 			</staticText>
 		</band>
 	</title>
-	<pageHeader>
-		<band height="3" splitType="Stretch"/>
-	</pageHeader>
-	<columnHeader>
-		<band height="61" splitType="Stretch"/>
-	</columnHeader>
-	<detail>
-		<band height="125" splitType="Stretch"/>
-	</detail>
-	<columnFooter>
-		<band height="45" splitType="Stretch"/>
-	</columnFooter>
-	<pageFooter>
-		<band height="54" splitType="Stretch"/>
-	</pageFooter>
-	<summary>
-		<band height="45" splitType="Stretch">
-			<staticText>
-				<reportElement x="323" y="11" width="100" height="30" uuid="6fbf7fd3-2d09-42ea-8fa0-133b6c0d27a9"/>
-				<text><![CDATA[hhhhhhhhhhhhhhhhhhhh]]></text>
-			</staticText>
-		</band>
-	</summary>
 </jasperReport>

@@ -531,6 +531,20 @@ _publics.getAllCriterionsByCategories=(req,categories) => {
 
 
 
+_publics.deleteMemberTestResultSkills = (req) => { 
+  
+  var memberId=req.query.memberId;
+  var testId=req.query.testId;
+  return new Promise((resolve, reject) => {  
+           var sql = "delete from criterion_result where id_test=? and id_member=?"; 
+               con.query(sql,[testId,memberId], function (err, result) {
+                if (err){
+                  reject(err);
+                }
+                return resolve(result);
+               });
+   }); 
+};
 
 
 _publics.calculateSkills = (req,res,criterionsList) => { 
@@ -558,12 +572,27 @@ _publics.calculateSkills = (req,res,criterionsList) => {
 }
 
 
+
+
+
+
 function calculatePinkSkill(testId,memberId,criterion){
   return new Promise((resolve, reject) => {  
     getSubcategoryScore(testId,memberId,criterion.id_subcategory1,null)
     .then(score=>{
-      var sql = "update criterion set result= ? where id=?"; 
-      con.query(sql,[score,criterion.id], function (err, result) {
+      return new Promise((resolve, reject) => {  
+        var sql = "update criterion set result= ? where id=?"; 
+        con.query(sql,[score,criterion.id], function (err, result) {
+        if (err)
+          reject(err);
+        return resolve(score);
+        });
+      });
+    })
+    .then(result=>{
+      var sql = "INSERT INTO criterion_result SET ? ";
+      const newCriterionResult = { id_member: memberId,id_test:testId,result:result,id_criterion:criterion.id};
+      con.query(sql,newCriterionResult, function (err, result) {
       if (err)
         reject(err);
       return resolve(result);
@@ -578,12 +607,23 @@ function calculateYellowSkill(testId,memberId,criterion){
   return new Promise((resolve, reject) => {  
     getSubcategoriesScore(testId,memberId,criterion)
     .then(score=>{
-      var result=score[0].result;
-      var sql = "update criterion set result= ? where id=?"; 
-      con.query(sql,[result,criterion.id], function (err, result) {
+      return new Promise((resolve, reject) => { 
+        var result=score[0].result;
+        var sql = "update criterion set result= ? where id=?"; 
+        con.query(sql,[result,criterion.id], function (err, res) {
+        if (err)
+          reject(err);
+        return resolve(result);
+        });
+      });
+    })
+    .then(result=>{
+      var sql = "INSERT INTO criterion_result SET ? ";
+      const newCriterionResult = { id_member: memberId,id_test:testId,result:result,id_criterion:criterion.id};
+      con.query(sql,newCriterionResult, function (err, res) {
       if (err)
         reject(err);
-      return resolve(result);
+      return resolve(res);
       });
     })
   });  
@@ -616,11 +656,22 @@ function calculateBlueSkySkill(testId,memberId,criterion){
       return result;
     })
     .then(result=>{
-      var sql = "update criterion set result= ? where id=?"; 
-      con.query(sql,[result,criterion.id], function (err, result) {
+      return new Promise((resolve, reject) => {  
+        var sql = "update criterion set result= ? where id=?"; 
+        con.query(sql,[result,criterion.id], function (err, res) {
+        if (err)
+          reject(err);
+        return resolve(result);
+        });
+      })
+    })
+    .then(result=>{
+      var sql = "INSERT INTO criterion_result SET ? ";
+      const newCriterionResult = { id_member: memberId,id_test:testId,result:result,id_criterion:criterion.id};
+      con.query(sql,newCriterionResult, function (err, res) {
       if (err)
         reject(err);
-      return resolve(result);
+      return resolve(res);
       });
     })
   });   
@@ -637,7 +688,17 @@ function calculateBlueSkill(res,testId,memberId,criterion){
       return calculateScoreWithMedian(score);
     })
     .then(result=>{
-      updateCriterionResult(result,criterion);
+      res.payload.result=result;
+      return updateCriterionResult(result,criterion);
+    })
+    .then(response=>{
+      var sql = "INSERT INTO criterion_result SET ? ";
+      const newCriterionResult = { id_member: memberId,id_test:testId,result:res.payload.result,id_criterion:criterion.id};
+      con.query(sql,newCriterionResult, function (err, res) {
+      if (err)
+        reject(err);
+      return resolve(res);
+      });
     })
   }); 
 }
@@ -665,20 +726,49 @@ function updateCriterionResult(result,criterion){
 function getSubcategoryScore(testId,memberId,subcategoryId, score1){
   return new Promise((resolve, reject) => {  
     var sql ="select FLOOR(m.etallonage_result) as score from manuel_answer m where m.id_member=? and id_test=? and m.id_subcategory=?";
-        con.query(sql,[memberId,testId,subcategoryId], function (err, result) {
+        con.query(sql,[memberId,testId,subcategoryId], function (err, res) {
          if (err){
            reject(err);
          }
          var result;
          if(score1!==null){
-          console.log("wwwww score1= "+score1+" score2= "+result[0].score);
-          var result=(result[0].score+score1)/2;
+          var result=(res[0].score+score1)/2;
           return resolve(Math.floor(result));
          }
-         
-         return resolve(result[0].score);
+         return resolve(res[0].score);
         });
   });   
 }
+
+
+
+/*_publics.saveSkillsResults = (req,criterionsList) => { 
+  let promises = [];
+  var memberId=req.query.memberId;
+  var testId=req.query.testId;
+  for (var i=0;i<criterionsList.length;i++) {
+      promises.push( new Promise((resolve, reject) => {  
+     
+        saveSkillsResult(testId,memberId,criterionsList[i]);
+ 
+    }));
+  }
+   return Promise.all(promises)  
+
+}
+
+function saveSkillsResult(testId,memberId,criterion){
+  return new Promise((resolve, reject) => { 
+        var sql = "INSERT INTO criterion_result SET ? ";
+        const newCriterionResult = { id_member: memberId,id_test:testId,result:criterion.result,id_criterion:criterion.id};
+        con.query(sql,newCriterionResult, function (err, result) {
+         if (err){
+           reject(err);
+         }
+         return resolve(result);
+        });
+  });
+}*/
+
 
  module.exports = _publics;

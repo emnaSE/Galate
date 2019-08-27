@@ -276,7 +276,7 @@ router.get('/getAllCriterionsByCategory', urlencodedParser, (req, res, next) =>a
 .catch(next));
 
 
-router.get('/getAllCriterionBySubcategoryId', urlencodedParser, (req, res, next) =>
+/*router.get('/getAllCriterionBySubcategoryId', urlencodedParser, (req, res, next) =>
 adminController.getSubcategoryWithScoreById(req)
 .then(subcategory => {
   res.payload.subcategory=JSON.parse(subcategory);
@@ -286,14 +286,22 @@ adminController.getSubcategoryWithScoreById(req)
     res.payload.criterions=criterion;
     res.send(res.payload);
 })
-.catch(next));
+.catch(next));*/
 
 
 router.get('/calculateSkills', urlencodedParser, (req, res, next) =>
 adminController.getAllCriterionsByTestId(req)
 .then(criterions=>{
-    calculController.calculateSkills(req,res,criterions);
+    res.payload.criterions=criterions;
+    return calculController.deleteMemberTestResultSkills(req);
 })
+.then(response=>{
+    console.log("hereeeeeeee");
+    return calculController.calculateSkills(req,res,res.payload.criterions);
+})
+/*.then(criterions=>{
+    return calculController.saveSkillsResults(req,criterions);
+})*/
 .then(response=>{
     res.send("calcul success");
 })

@@ -892,6 +892,12 @@ memberController.getMemberDetailsById(req)
 })
 .then(result => {
     res.payload.result=result;
+    req.query.memberId=req.query.id;
+    req.query.testId=req.query.id_test;
+    return adminController.getCompetencesResultsByMemberAndTestId(req)
+})
+.then(competencesResults => {
+    res.payload.competencesResults=competencesResults;
     res.send(res.payload);
 })
 .catch(next));
@@ -907,6 +913,11 @@ adminController.getMembersInformationByTestID(req)
 })
 .then(subcategories=>{
     res.payload.subcategories=JSON.parse(subcategories);
+    return adminController.getCriterionsByTestId(req);
+})
+.then(criterions=>{
+    res.payload.criterions=JSON.parse(criterions);
+    console.log(JSON.stringify(res.payload));
     return adminController.generateXMLFile(res.payload,req , res );
 })
 

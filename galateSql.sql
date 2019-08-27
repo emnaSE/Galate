@@ -239,3 +239,17 @@ alter table criterion add column id_category int(11);
 alter table criterion add FOREIGN KEY (id_category) REFERENCES category(id);
 drop table subcategory_criterion;
 alter table category add column ordre2 int(11);
+
+create table criterion_result(
+	 id int(11) AUTO_INCREMENT,
+     id_member int(11),
+	 id_test int(11),
+	 id_criterion int(11),
+	 result bigint,
+	 FOREIGN KEY (id_member) REFERENCES member(id) ,
+	 FOREIGN KEY (id_test) REFERENCES test(id) ,
+	 FOREIGN KEY (id_criterion) REFERENCES criterion(id) ,
+     PRIMARY KEY (id) 
+);
+
+

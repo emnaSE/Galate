@@ -1857,6 +1857,22 @@ _publics.getSubcategoryByMemberAndTestID = (req) => {
           });    
        };
     
+
+       
+       _publics.getCompetencesResultsByMemberAndTestId =(req) =>{ 
+         var memberId=req.query.memberId;
+         var testId= req.query.testId;
+        return new Promise((resolve, reject) => {  
+                 var sql = "select cr.result, c.name from criterion c left join criterion_result cr on(cr.id_criterion=c.id) where cr.id_test=? and cr.id_member=?";
+                     con.query(sql,[testId,memberId], function (err, result) {
+                     if (err) reject(err);
+                     return resolve(result);
+                     });
+         });    
+      };
+
+
+
        _publics.getMembersResults = (members, testId) => { 
         let promises = [];
         for (var i=0;i<JSON.parse(members).length;i++) {
@@ -1891,6 +1907,19 @@ _publics.getSubcategoryByMemberAndTestID = (req) => {
           });    
      };
 
+
+_publics.getCriterionsByTestId = (req) => { 
+  var id_test=req.query.id_test;
+  
+     return new Promise((resolve, reject) => {  
+              var sql = " select distinct  c.name from criterion c left join test_subcategory ts on(c.id_subcategory1=ts.id_subcategory) where ts.id_test=?";
+
+                  con.query(sql,[id_test], function (err, result) {
+                  if (err) reject(err);
+                  return resolve(JSON.stringify(result));
+                  });
+      });    
+ };
 
   _publics.getMembersInformationByTestID = (req) => { 
       var id_test=req.query.id_test;
@@ -2300,25 +2329,25 @@ _publics.updateSubcategoriesOrder = (ordre, req) => {
 
 
 
-_publics.getAllCriterionsBySubcategoryId = (req) => { 
+/*_publics.getAllCriterionsBySubcategoryId = (req) => { 
   var subCategoryId=req.query.id;
   var testId=req.query.id_test;
   var memberId=req.query.id_member;
-  return new Promise((resolve, reject) => {  
+  return new Promise((resolve, reject) => {  */
            
               /* var sql="select distinct c1.* , "+
                "(select coalesce(FLOOR(sum(ma.etallonage_result)/count(ma.id)),0)  from manuel_answer ma  left join subcategory_criterion sc on(ma.id_subcategory=sc.id_subcategory) "+
                "left join criterion c2 on(c2.id=sc.id_criterion) where c2.id_subcategory=? and ma.id_test=? and id_member=? and c1.id=c2.id) as score "+
                "from manuel_answer ma  left join subcategory_criterion sc on(ma.id_subcategory=sc.id_subcategory) "+
                "left join criterion c1 on(c1.id=sc.id_criterion) where c1.id_subcategory=? and ma.id_test=? and id_member=?"*/
-               var sql="select distinct c.* , c.result as score   from manuel_answer ma  left join criterion c on(ma.id_subcategory=c.id_subcategory) "+
+              /* var sql="select distinct c.* , c.result as score   from manuel_answer ma  left join criterion c on(ma.id_subcategory=c.id_subcategory) "+
                "where c.id_subcategory=? and ma.id_test=? and id_member=?;"
                con.query(sql,[subCategoryId,testId,memberId], function (err, result) {
                if (err) reject(err);
                return resolve(result);
                });
    });    
-};
+};*/
 
 
 _publics.createCriterion = (criterion) => { 
@@ -2533,7 +2562,7 @@ _publics.getAllCriterionsByTestId = (req) => {
   var testId=req.query.testId;
   return new Promise((resolve, reject) => {   
     //var sql = "select c.* from criterion c left join test_subcategory ts on(ts.id_subcategory=c.id_subcategory1) where ts.id_test=?";      
-    var sql = "select c.* from criterion c order by id desc";   
+    var sql = "select c.* from criterion c left join test_subcategory ts on(ts.id_subcategory=c.id_subcategory1) where ts.id_test=? order by id desc";   
     con.query(sql,[testId], function (err, result) {
     if (err) reject(err);
     return resolve(result);
