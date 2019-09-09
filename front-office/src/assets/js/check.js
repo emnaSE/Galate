@@ -5,13 +5,14 @@ function checkButton(elem){
       
         for (var i = 0; i < enfants.length; i++) {
             
-           if(enfants[i].style.backgroundColor =='rgb(31, 73, 125)'){
-               enfants[i].setAttribute( 'style', 'background-color: rgb(255,255,255)' );
+           if(enfants[i].style.border =='2px solid rgb(31, 73, 125)'){
+               enfants[i].setAttribute( 'style', 'border: unset' );
                enfants[i].style.color='#000000b5';
            }
         }
-    elem.setAttribute( 'style', 'background-color: #1f497d');
-    elem.style.color='white';
+    elem.setAttribute( 'style', 'border:solid 2px rgb(31, 73, 125)');
+    //elem.style.color='white';
+    elem.style.color='#000000b5';
     
 }
 function fill(elem){

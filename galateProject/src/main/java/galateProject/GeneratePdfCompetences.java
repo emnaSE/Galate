@@ -33,7 +33,14 @@ public class GeneratePdfCompetences {
 	
 
 
-		public static void GeneratePdfCompetences(final Long testId, final UUID uuid, final Long memberId) {
+		public static void GeneratePdfCompetences(final Long testId, final UUID uuid, final Long memberId){
+			String sbcompetences14=getCriterionsByIntervall(testId, memberId,1, 4);
+			String sbcompetences57=getCriterionsByIntervall(testId, memberId,5, 7);
+			String sbcompetences811=getCriterionsByIntervall(testId, memberId,8, 11);
+			
+			System.out.println("sbcompetences14= "+sbcompetences14);
+			System.out.println("sbcompetences57= "+sbcompetences57);
+			System.out.println("sbcompetences811= "+sbcompetences811);
 			try {
 				final Date today = new Date();
 				final DateFormat date = DateFormat.getDateTimeInstance(2, 2);
@@ -61,8 +68,13 @@ public class GeneratePdfCompetences {
 				params.put("img3", img3);
 				params.put("img4", img4);
 				params.put("img5", img5);
+				params.put("sbcompetences14", sbcompetences14);
+				params.put("sbcompetences57", sbcompetences57);
+				params.put("sbcompetences811", sbcompetences811);
 				final JasperPrint jasperPrint = JasperFillManager.fillReport(
 						GeneratePdfEtalonnage.class.getResourceAsStream("competences.jasper"), (Map) params, connection);
+				
+				
 				final List<JRPrintPage> pages = (List<JRPrintPage>)jasperPrint.getPages();
 		        removeBlankPage(pages);
 				if (jasperPrint != null) {
@@ -110,6 +122,29 @@ public class GeneratePdfCompetences {
 		                i.remove();
 		            }
 		        }
+		 }
+		 
+		 private static String getCriterionsByIntervall(Long testId, Long memberId, int a, int b){
+			 System.out.println("ff "+testId+" "+memberId+" "+a+" "+b);
+			 StringBuilder criterions = new StringBuilder();
+			 try {
+				 Class.forName("com.mysql.jdbc.Driver");
+			 	Statement statement=null;
+				final Connection connection = DriverManager.getConnection(ConnectionConfig.connectionString,
+						ConnectionConfig.user, ConnectionConfig.password);
+				statement=connection.createStatement();
+				String sql = "SELECT name FROM criterion c left join criterion_result r on(c.id=r.id_criterion) where r.result>="+a+" and r.result<="+b+" and r.id_test=" + testId+" and r.id_member="+memberId;
+				ResultSet resultSet = statement.executeQuery(sql);
+				while (resultSet.next()) {
+					criterions.append(resultSet.getString(1)).append(", ");
+				}
+				criterions.delete(criterions.length()-2, criterions.length()-1);
+			 } catch (SQLException e) {
+					e.printStackTrace();
+			}catch (ClassNotFoundException e) {
+				// TODO: handle exception
+			}
+			 return criterions.toString();
 		 }
 		    
 	}

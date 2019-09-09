@@ -151,6 +151,7 @@ export class StartTestComponent  implements OnInit{
  
  
   public saveAnswer(questionId, answerId){
+    console.log(questionId+" => "+answerId);
     this.map.set(questionId,answerId);
   }
  

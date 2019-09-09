@@ -118,5 +118,22 @@ export class TestService {
     return this.http.post(this.url+'AffectSubcategoryToTest?testId='+id+'&subcategoryId='+idSub,JSON.stringify(id),{responseType: 'text'});
   }
 
+  
+  getCriterionsByTestId(id:number):Observable<Object>{
+    return this.http.post(this.url+'AffectSubcategoryToTest?testId='+id+'&subcategoryId=',JSON.stringify(id),{responseType: 'text'});
+  }
+
+  AssignCriterions(id:number,idSub):Observable<Object>{
+    return this.http.post(this.url+'AffectSubcategoryToTest?testId='+id+'&subcategoryId='+idSub,JSON.stringify(id),{responseType: 'text'});
+  }
+  assignCriterionToTest(id:number,idSub):Observable<Object>{
+    return this.http.post(this.url+'AffectSubcategoryToTest?testId='+id+'&subcategoryId='+idSub,JSON.stringify(id),{responseType: 'text'});
+  }
+  unassignCriterionToTest(id:number,idSub):Observable<Object>{
+    return this.http.post(this.url+'AffectSubcategoryToTest?testId='+id+'&subcategoryId='+idSub,JSON.stringify(id),{responseType: 'text'});
+  }
+  
+ 
+
 }
 

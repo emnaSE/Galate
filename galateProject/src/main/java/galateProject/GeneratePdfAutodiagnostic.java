@@ -26,6 +26,10 @@ public class GeneratePdfAutodiagnostic
     
     public static void generatePdfAutodiagnostic(final Long testId, final UUID uuid, final Long memberId) {
         try {
+        	final InputStream img1 = GeneratePdfEtalonnage.class.getResourceAsStream("brGear.png");
+ 			final InputStream img2 = GeneratePdfEtalonnage.class.getResourceAsStream("srIcon.png");
+ 			final InputStream img3 = GeneratePdfEtalonnage.class.getResourceAsStream("growth.png");
+ 			final InputStream img4 = GeneratePdfEtalonnage.class.getResourceAsStream("gal1.png");
             final Date aujourdhui = new Date();
             final DateFormat date = DateFormat.getDateTimeInstance(2, 2);
             final String dateD = date.format(aujourdhui);
@@ -58,6 +62,11 @@ public class GeneratePdfAutodiagnostic
             params.put("date", dateD);
             params.put("logo", logo);
             params.put("logoT", logoT);
+            params.put("img1", img1);
+            params.put("img2", img2);
+            params.put("img3", img3);
+            params.put("img4", img4);
+           
             final JasperPrint jasperPrint = JasperFillManager.fillReport(GeneratePdfEtalonnage.class.getResourceAsStream("resultat.jasper"), (Map)params, connection);
             final int number = jasperPrint.getPages().size();
             System.out.println("nombre des pages  = " + number);

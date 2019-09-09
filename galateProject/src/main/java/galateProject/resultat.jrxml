@@ -17,7 +17,6 @@
 	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
 	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
 	<style name="Title" forecolor="#FFFFFF" fontName="DejaVu Sans" fontSize="26" isBold="true"/>
-	<style name="SubTitle" forecolor="#666666" fontName="DejaVu Sans" fontSize="18"/>
 	<style name="Column header" forecolor="#666666" fontName="DejaVu Sans" fontSize="12" isBold="true"/>
 	<style name="Detail" fontName="DejaVu Sans" fontSize="12"/>
 	<style name="Table">
@@ -164,7 +163,7 @@
 		<parameter name="idtest" class="java.lang.Long"/>
 		<parameter name="idmember" class="java.lang.Long"/>
 		<queryString language="SQL">
-			<![CDATA[select c.name as categoryName ,sc.name as subcategoryName,  sc.up_Description as upDescription  from manuel_answer ma left join subcategory sc on(sc.id=ma.id_subcategory) left join category c on (c.id=sc.id_category)  where ma.id_test=$P!{idtest}  and ma.id_member=$P!{idmember} order by c.name ,sc.name]]>
+			<![CDATA[select c.name as categoryName ,sc.name as subcategoryName,  sc.up_Description as upDescription  from manuel_answer ma left join subcategory sc on(sc.id=ma.id_subcategory) left join category c on (c.id=sc.id_category)  where ma.id_test=$P!{idtest}  and ma.id_member=$P!{idmember} order by c.ordre ,sc.ordre]]>
 		</queryString>
 		<field name="upDescription" class="java.lang.String">
 			<property name="com.jaspersoft.studio.field.label" value="upDescription"/>
@@ -176,6 +175,10 @@
 	<parameter name="date" class="java.lang.String"/>
 	<parameter name="logo" class="java.io.InputStream"/>
 	<parameter name="logoT" class="java.io.InputStream"/>
+	<parameter name="img1" class="java.io.InputStream"/>
+	<parameter name="img2" class="java.io.InputStream"/>
+	<parameter name="img3" class="java.io.InputStream"/>
+	<parameter name="img4" class="java.io.InputStream"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
@@ -185,32 +188,8 @@
 	<title>
 		<band height="762" splitType="Stretch">
 			<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.FreeLayout"/>
-			<rectangle radius="12">
-				<reportElement x="1" y="4" width="555" height="50" uuid="f69b96c6-517e-4ec4-8d9d-6fc0ba4b655c"/>
-			</rectangle>
-			<staticText>
-				<reportElement x="20" y="7" width="219" height="21" uuid="3d5741f5-42ae-43e2-a561-d366cf22b510"/>
-				<textElement>
-					<font size="12"/>
-				</textElement>
-				<text><![CDATA[PERSONALITY AUTODIAGNOSTIC]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="20" y="31" width="43" height="21" uuid="a339ddfd-2641-4a9e-b82c-870bcd588684"/>
-				<textElement>
-					<font size="12"/>
-				</textElement>
-				<text><![CDATA[Date :]]></text>
-			</staticText>
-			<textField>
-				<reportElement x="63" y="28" width="273" height="21" uuid="05a33ad4-eab1-46fb-b6be-00c80692167d"/>
-				<textElement verticalAlignment="Middle">
-					<font size="12"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{date}]]></textFieldExpression>
-			</textField>
 			<componentElement>
-				<reportElement stretchType="RelativeToTallestObject" x="0" y="63" width="270" height="60" uuid="51ac5d14-fee1-48de-b19f-3bfc6dcbba22">
+				<reportElement stretchType="RelativeToTallestObject" x="-20" y="163" width="290" height="60" uuid="51ac5d14-fee1-48de-b19f-3bfc6dcbba22">
 					<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
 					<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
 					<property name="com.jaspersoft.studio.table.style.detail" value="Table_TD"/>
@@ -228,15 +207,15 @@
 						</datasetParameter>
 						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 					</datasetRun>
-					<jr:columnGroup width="248" uuid="8e9d7726-65ca-4a29-8896-4eef78e13d00">
+					<jr:columnGroup width="267" uuid="8e9d7726-65ca-4a29-8896-4eef78e13d00">
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Colonnes [3]"/>
-						<jr:columnGroup width="248" uuid="a7015fa1-fe3c-40c0-85c3-03c5a429cadf">
+						<jr:columnGroup width="267" uuid="a7015fa1-fe3c-40c0-85c3-03c5a429cadf">
 							<property name="com.jaspersoft.studio.components.table.model.column.name" value="Colonnes [3]"/>
-							<jr:column width="74" uuid="085f33ad-6795-4b0c-a655-2bb95721cca1">
+							<jr:column width="80" uuid="085f33ad-6795-4b0c-a655-2bb95721cca1">
 								<property name="com.jaspersoft.studio.components.table.model.column.name" value="Colonne1"/>
 								<jr:columnHeader height="20" rowSpan="1">
 									<textField isBlankWhenNull="true">
-										<reportElement x="0" y="0" width="74" height="20" forecolor="rgba(10, 8, 8, 0.88235295)" uuid="8867476a-0425-402f-8a95-d8b0430172e6"/>
+										<reportElement mode="Opaque" x="0" y="0" width="80" height="20" backcolor="#1C4170" uuid="8867476a-0425-402f-8a95-d8b0430172e6"/>
 										<box>
 											<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 											<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
@@ -247,6 +226,7 @@
 											<font fontName="DejaVu Sans" isBold="true"/>
 											<paragraph lineSpacing="Proportional"/>
 										</textElement>
+										<textFieldExpression><![CDATA[]]></textFieldExpression>
 									</textField>
 								</jr:columnHeader>
 								<jr:detailCell height="30">
@@ -254,25 +234,25 @@
 										<pen lineWidth="1.0"/>
 									</box>
 									<frame>
-										<reportElement mode="Opaque" x="0" y="0" width="74" height="30" backcolor="#C9C9C9" uuid="e30f9728-1ef5-498d-a66e-0121aa17c209"/>
+										<reportElement mode="Opaque" x="0" y="0" width="80" height="30" backcolor="#8CB3E3" uuid="e30f9728-1ef5-498d-a66e-0121aa17c209"/>
 										<textField pattern="EEEEE dd MMMMM yyyy" isBlankWhenNull="true">
-											<reportElement isPrintRepeatedValues="false" mode="Opaque" x="0" y="0" width="74" height="30" isPrintWhenDetailOverflows="true" forecolor="#03040A" backcolor="#C9C9C9" uuid="3f386492-0eec-44d1-86be-b656925ac5fc"/>
+											<reportElement isPrintRepeatedValues="false" mode="Opaque" x="0" y="0" width="80" height="30" isPrintWhenDetailOverflows="true" forecolor="#03040A" backcolor="#8CB3E3" uuid="3f386492-0eec-44d1-86be-b656925ac5fc"/>
 											<box topPadding="0" leftPadding="9">
 												<pen lineWidth="1.0"/>
 											</box>
 											<textElement textAlignment="Left" verticalAlignment="Middle">
-												<font fontName="DejaVu Sans" size="9" isBold="false" isItalic="true" isUnderline="true"/>
+												<font fontName="DejaVu Sans" size="9" isBold="false" isItalic="true" isUnderline="false"/>
 											</textElement>
 											<textFieldExpression><![CDATA[$F{categoryName}]]></textFieldExpression>
 										</textField>
 									</frame>
 								</jr:detailCell>
 							</jr:column>
-							<jr:column width="71" uuid="774807fe-488b-4c9b-a317-d4a887cd1e3c">
+							<jr:column width="77" uuid="774807fe-488b-4c9b-a317-d4a887cd1e3c">
 								<property name="com.jaspersoft.studio.components.table.model.column.name" value="Colonne2"/>
 								<jr:columnHeader height="20" rowSpan="1">
 									<textField isBlankWhenNull="true">
-										<reportElement x="0" y="0" width="71" height="20" forecolor="rgba(10, 8, 8, 0.88235295)" uuid="cc056a8d-3f23-436a-8729-e2f4af005cd1"/>
+										<reportElement mode="Opaque" x="0" y="0" width="77" height="20" backcolor="#1C4170" uuid="cc056a8d-3f23-436a-8729-e2f4af005cd1"/>
 										<box>
 											<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 											<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
@@ -283,11 +263,12 @@
 											<font fontName="DejaVu Sans" isBold="true"/>
 											<paragraph lineSpacing="Proportional"/>
 										</textElement>
+										<textFieldExpression><![CDATA[]]></textFieldExpression>
 									</textField>
 								</jr:columnHeader>
 								<jr:detailCell height="30">
 									<textField>
-										<reportElement mode="Opaque" x="0" y="0" width="71" height="30" backcolor="#C9C9C9" uuid="dfbafd91-b769-43b8-87e3-69ee9a8823b5"/>
+										<reportElement mode="Opaque" x="0" y="0" width="77" height="30" backcolor="#8CB3E3" uuid="dfbafd91-b769-43b8-87e3-69ee9a8823b5"/>
 										<box leftPadding="7">
 											<pen lineWidth="1.0"/>
 										</box>
@@ -298,11 +279,11 @@
 									</textField>
 								</jr:detailCell>
 							</jr:column>
-							<jr:column width="103" uuid="b873b14f-d738-4a6d-a490-dafaef5132c1">
+							<jr:column width="110" uuid="b873b14f-d738-4a6d-a490-dafaef5132c1">
 								<property name="com.jaspersoft.studio.components.table.model.column.name" value="Colonne3"/>
 								<jr:columnHeader height="20" rowSpan="1">
 									<staticText>
-										<reportElement x="0" y="0" width="103" height="20" uuid="0b2116cb-a4ae-48bd-850d-42de8a6058bf"/>
+										<reportElement mode="Opaque" x="0" y="0" width="110" height="20" backcolor="#1C4170" uuid="0b2116cb-a4ae-48bd-850d-42de8a6058bf"/>
 										<box>
 											<pen lineWidth="1.0"/>
 										</box>
@@ -314,7 +295,7 @@
 								</jr:columnHeader>
 								<jr:detailCell height="30">
 									<textField isBlankWhenNull="true">
-										<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="103" height="30" backcolor="#C9C9C9" uuid="332d2103-c881-48ba-babf-be658ba7957d"/>
+										<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="110" height="30" backcolor="#8CB3E3" uuid="332d2103-c881-48ba-babf-be658ba7957d"/>
 										<box>
 											<pen lineWidth="1.0"/>
 										</box>
@@ -328,11 +309,11 @@
 							</jr:column>
 						</jr:columnGroup>
 					</jr:columnGroup>
-					<jr:column width="22" uuid="993f4055-ea9e-4f71-a30c-3393d1e342fd">
+					<jr:column width="23" uuid="993f4055-ea9e-4f71-a30c-3393d1e342fd">
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Colonne4"/>
 						<jr:columnHeader height="20" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="0" width="22" height="20" uuid="06b864bc-eae0-4907-a9cb-e61f06674260"/>
+								<reportElement mode="Opaque" x="0" y="0" width="23" height="20" backcolor="#1C4170" uuid="06b864bc-eae0-4907-a9cb-e61f06674260"/>
 								<box>
 									<pen lineWidth="1.0"/>
 								</box>
@@ -344,7 +325,7 @@
 						</jr:columnHeader>
 						<jr:detailCell height="30">
 							<textField isBlankWhenNull="true">
-								<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="22" height="30" backcolor="#C9C9C9" uuid="04aab67f-5f4f-4b69-a93d-64e2411d7d9d"/>
+								<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="23" height="30" uuid="04aab67f-5f4f-4b69-a93d-64e2411d7d9d"/>
 								<box>
 									<pen lineWidth="1.0"/>
 								</box>
@@ -359,7 +340,7 @@
 				</jr:table>
 			</componentElement>
 			<componentElement>
-				<reportElement stretchType="RelativeToTallestObject" x="290" y="63" width="20" height="60" uuid="a468e2c1-43c8-41af-a1a8-ed301ed15153">
+				<reportElement stretchType="RelativeToTallestObject" x="290" y="163" width="20" height="60" uuid="a468e2c1-43c8-41af-a1a8-ed301ed15153">
 					<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
 					<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
 					<property name="com.jaspersoft.studio.table.style.detail" value="Table_TD"/>
@@ -385,7 +366,7 @@
 								<property name="com.jaspersoft.studio.components.table.model.column.name" value="Colonne1"/>
 								<jr:columnHeader height="20" rowSpan="1">
 									<staticText>
-										<reportElement x="0" y="0" width="20" height="20" uuid="87542382-51a0-40fa-b0a2-db66fc75f2d2"/>
+										<reportElement mode="Opaque" x="0" y="0" width="20" height="20" backcolor="#1C4170" uuid="87542382-51a0-40fa-b0a2-db66fc75f2d2"/>
 										<box>
 											<pen lineWidth="1.0"/>
 										</box>
@@ -397,7 +378,7 @@
 								</jr:columnHeader>
 								<jr:detailCell height="30">
 									<textField isBlankWhenNull="true">
-										<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="20" height="30" backcolor="#C9C9C9" uuid="59324c8d-84a3-4c91-b949-38235a44e161"/>
+										<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="20" height="30" uuid="59324c8d-84a3-4c91-b949-38235a44e161"/>
 										<box>
 											<pen lineWidth="1.0"/>
 										</box>
@@ -414,7 +395,7 @@
 				</jr:table>
 			</componentElement>
 			<componentElement>
-				<reportElement stretchType="RelativeToTallestObject" x="310" y="63" width="20" height="60" uuid="73ef436a-5666-476d-b79f-ae118ad63c3a">
+				<reportElement stretchType="RelativeToTallestObject" x="310" y="163" width="20" height="60" uuid="73ef436a-5666-476d-b79f-ae118ad63c3a">
 					<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
 					<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
 					<property name="com.jaspersoft.studio.table.style.detail" value="Table_TD"/>
@@ -440,7 +421,7 @@
 								<property name="com.jaspersoft.studio.components.table.model.column.name" value="Colonne1"/>
 								<jr:columnHeader height="20" rowSpan="1">
 									<staticText>
-										<reportElement x="0" y="0" width="20" height="20" uuid="89f69190-d23d-446c-959e-afcddfc258cc"/>
+										<reportElement mode="Opaque" x="0" y="0" width="20" height="20" backcolor="#1C4170" uuid="89f69190-d23d-446c-959e-afcddfc258cc"/>
 										<box>
 											<pen lineWidth="1.0"/>
 										</box>
@@ -452,7 +433,7 @@
 								</jr:columnHeader>
 								<jr:detailCell height="30">
 									<textField isBlankWhenNull="true">
-										<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="20" height="30" backcolor="#C9C9C9" uuid="9512653d-34ba-4925-bcb7-82e3c78d406b"/>
+										<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="20" height="30" uuid="9512653d-34ba-4925-bcb7-82e3c78d406b"/>
 										<box>
 											<pen lineWidth="1.0"/>
 										</box>
@@ -469,7 +450,7 @@
 				</jr:table>
 			</componentElement>
 			<componentElement>
-				<reportElement stretchType="RelativeToTallestObject" x="330" y="63" width="20" height="60" uuid="6b9188ad-f6ba-41e7-91d6-ccf8837065eb">
+				<reportElement stretchType="RelativeToTallestObject" x="330" y="163" width="20" height="60" uuid="6b9188ad-f6ba-41e7-91d6-ccf8837065eb">
 					<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
 					<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
 					<property name="com.jaspersoft.studio.table.style.detail" value="Table_TD"/>
@@ -495,7 +476,7 @@
 								<property name="com.jaspersoft.studio.components.table.model.column.name" value="Colonne1"/>
 								<jr:columnHeader height="20" rowSpan="1">
 									<staticText>
-										<reportElement x="0" y="0" width="20" height="20" uuid="1bb240de-8112-4c11-b42f-0d4df4d1319f"/>
+										<reportElement mode="Opaque" x="0" y="0" width="20" height="20" backcolor="#1C4170" uuid="1bb240de-8112-4c11-b42f-0d4df4d1319f"/>
 										<box>
 											<pen lineWidth="1.0"/>
 										</box>
@@ -507,7 +488,7 @@
 								</jr:columnHeader>
 								<jr:detailCell height="30">
 									<textField isBlankWhenNull="true">
-										<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="20" height="30" uuid="3cdc6db6-48e2-4bbb-bf3a-e8f43a977060"/>
+										<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="20" height="30" uuid="3cdc6db6-48e2-4bbb-bf3a-e8f43a977060"/>
 										<box>
 											<pen lineWidth="1.0"/>
 										</box>
@@ -524,7 +505,7 @@
 				</jr:table>
 			</componentElement>
 			<componentElement>
-				<reportElement stretchType="RelativeToTallestObject" x="350" y="63" width="20" height="60" uuid="5fb87b55-29e4-4ea5-bcfd-5a45e08d80ad">
+				<reportElement stretchType="RelativeToTallestObject" x="350" y="163" width="20" height="60" uuid="5fb87b55-29e4-4ea5-bcfd-5a45e08d80ad">
 					<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
 					<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
 					<property name="com.jaspersoft.studio.table.style.detail" value="Table_TD"/>
@@ -550,7 +531,7 @@
 								<property name="com.jaspersoft.studio.components.table.model.column.name" value="Colonne1"/>
 								<jr:columnHeader height="20" rowSpan="1">
 									<staticText>
-										<reportElement x="0" y="0" width="20" height="20" uuid="8d2ea13f-fbed-4ce3-b88c-f8d5f523b9bb"/>
+										<reportElement mode="Opaque" x="0" y="0" width="20" height="20" backcolor="#1C4170" uuid="8d2ea13f-fbed-4ce3-b88c-f8d5f523b9bb"/>
 										<box>
 											<pen lineWidth="1.0"/>
 										</box>
@@ -562,7 +543,7 @@
 								</jr:columnHeader>
 								<jr:detailCell height="30">
 									<textField isBlankWhenNull="true">
-										<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="20" height="30" uuid="d539b3bf-7f10-40e9-aba0-fedf816a23df"/>
+										<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="20" height="30" uuid="d539b3bf-7f10-40e9-aba0-fedf816a23df"/>
 										<box>
 											<pen lineWidth="1.0"/>
 										</box>
@@ -579,7 +560,7 @@
 				</jr:table>
 			</componentElement>
 			<componentElement>
-				<reportElement stretchType="RelativeToTallestObject" x="370" y="63" width="20" height="60" uuid="cf6d43b1-3020-4843-a5ad-1ef3df6db846">
+				<reportElement stretchType="RelativeToTallestObject" x="370" y="163" width="20" height="60" uuid="cf6d43b1-3020-4843-a5ad-1ef3df6db846">
 					<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
 					<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
 					<property name="com.jaspersoft.studio.table.style.detail" value="Table_TD"/>
@@ -605,7 +586,7 @@
 								<property name="com.jaspersoft.studio.components.table.model.column.name" value="Colonne1"/>
 								<jr:columnHeader height="20" rowSpan="1">
 									<staticText>
-										<reportElement x="0" y="0" width="20" height="20" uuid="93c2e39f-d02f-4001-b27f-ed84c1398f92"/>
+										<reportElement mode="Opaque" x="0" y="0" width="20" height="20" backcolor="#1C4170" uuid="93c2e39f-d02f-4001-b27f-ed84c1398f92"/>
 										<box>
 											<pen lineWidth="1.0"/>
 										</box>
@@ -617,7 +598,7 @@
 								</jr:columnHeader>
 								<jr:detailCell height="30">
 									<textField isBlankWhenNull="true">
-										<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="20" height="30" uuid="fc2119a1-2f4e-400b-a9a5-1a1ddfebd9e2"/>
+										<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="20" height="30" uuid="fc2119a1-2f4e-400b-a9a5-1a1ddfebd9e2"/>
 										<box>
 											<pen lineWidth="1.0"/>
 										</box>
@@ -634,7 +615,7 @@
 				</jr:table>
 			</componentElement>
 			<componentElement>
-				<reportElement stretchType="RelativeToTallestObject" x="410" y="63" width="20" height="60" uuid="64bc5559-982b-48d9-a18c-acb348ca80a4">
+				<reportElement stretchType="RelativeToTallestObject" x="410" y="163" width="20" height="60" uuid="64bc5559-982b-48d9-a18c-acb348ca80a4">
 					<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
 					<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
 					<property name="com.jaspersoft.studio.table.style.detail" value="Table_TD"/>
@@ -660,7 +641,7 @@
 								<property name="com.jaspersoft.studio.components.table.model.column.name" value="Colonne1"/>
 								<jr:columnHeader height="20" rowSpan="1">
 									<staticText>
-										<reportElement x="0" y="0" width="20" height="20" uuid="4d40a1f1-0c48-4d60-b1c1-9e9a260b0918"/>
+										<reportElement mode="Opaque" x="0" y="0" width="20" height="20" backcolor="#1C4170" uuid="4d40a1f1-0c48-4d60-b1c1-9e9a260b0918"/>
 										<box>
 											<pen lineWidth="1.0"/>
 										</box>
@@ -672,7 +653,7 @@
 								</jr:columnHeader>
 								<jr:detailCell height="30">
 									<textField isBlankWhenNull="true">
-										<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="20" height="30" backcolor="#C9C9C9" uuid="5e4831e3-53fe-4b6b-b1be-35c448da8cbf"/>
+										<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="20" height="30" uuid="5e4831e3-53fe-4b6b-b1be-35c448da8cbf"/>
 										<box>
 											<pen lineWidth="1.0"/>
 										</box>
@@ -689,7 +670,7 @@
 				</jr:table>
 			</componentElement>
 			<componentElement>
-				<reportElement stretchType="RelativeToTallestObject" x="390" y="63" width="20" height="60" uuid="45b4ef0c-d321-4de6-a958-5d89a6546d3a">
+				<reportElement stretchType="RelativeToTallestObject" x="390" y="163" width="20" height="60" uuid="45b4ef0c-d321-4de6-a958-5d89a6546d3a">
 					<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
 					<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
 					<property name="com.jaspersoft.studio.table.style.detail" value="Table_TD"/>
@@ -715,7 +696,7 @@
 								<property name="com.jaspersoft.studio.components.table.model.column.name" value="Colonne1"/>
 								<jr:columnHeader height="20" rowSpan="1">
 									<staticText>
-										<reportElement x="0" y="0" width="20" height="20" uuid="5c1e5972-fed5-49a8-bc9e-ffd30c6bec29"/>
+										<reportElement mode="Opaque" x="0" y="0" width="20" height="20" backcolor="#1C4170" uuid="5c1e5972-fed5-49a8-bc9e-ffd30c6bec29"/>
 										<box>
 											<pen lineWidth="1.0"/>
 										</box>
@@ -727,7 +708,7 @@
 								</jr:columnHeader>
 								<jr:detailCell height="30">
 									<textField isBlankWhenNull="true">
-										<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="20" height="30" backcolor="#C9C9C9" uuid="fbae4bdc-5934-4966-b937-e8c6259d9a73"/>
+										<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="20" height="30" uuid="fbae4bdc-5934-4966-b937-e8c6259d9a73"/>
 										<box>
 											<pen lineWidth="1.0"/>
 										</box>
@@ -744,7 +725,7 @@
 				</jr:table>
 			</componentElement>
 			<componentElement>
-				<reportElement stretchType="RelativeToTallestObject" x="430" y="63" width="20" height="60" uuid="c80e2378-e49c-495f-a1e8-2b7090682d0e">
+				<reportElement stretchType="RelativeToTallestObject" x="430" y="163" width="20" height="60" uuid="c80e2378-e49c-495f-a1e8-2b7090682d0e">
 					<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
 					<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
 					<property name="com.jaspersoft.studio.table.style.detail" value="Table_TD"/>
@@ -770,7 +751,7 @@
 								<property name="com.jaspersoft.studio.components.table.model.column.name" value="Colonne1"/>
 								<jr:columnHeader height="20" rowSpan="1">
 									<staticText>
-										<reportElement x="0" y="0" width="20" height="20" uuid="3fa11802-1d64-4d33-968f-e87cf9f6a445"/>
+										<reportElement mode="Opaque" x="0" y="0" width="20" height="20" backcolor="#1C4170" uuid="3fa11802-1d64-4d33-968f-e87cf9f6a445"/>
 										<box>
 											<pen lineWidth="1.0"/>
 										</box>
@@ -782,7 +763,7 @@
 								</jr:columnHeader>
 								<jr:detailCell height="30">
 									<textField isBlankWhenNull="true">
-										<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="20" height="30" backcolor="#C9C9C9" uuid="fceb22e0-ba61-4260-85a1-5fbc09b62d86"/>
+										<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="20" height="30" uuid="fceb22e0-ba61-4260-85a1-5fbc09b62d86"/>
 										<box>
 											<pen lineWidth="1.0"/>
 										</box>
@@ -799,7 +780,7 @@
 				</jr:table>
 			</componentElement>
 			<componentElement>
-				<reportElement stretchType="RelativeToTallestObject" x="450" y="63" width="20" height="60" uuid="d50f5226-36a5-4e27-bc89-cb190e57c8a6">
+				<reportElement stretchType="RelativeToTallestObject" x="450" y="163" width="20" height="60" uuid="d50f5226-36a5-4e27-bc89-cb190e57c8a6">
 					<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
 					<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
 					<property name="com.jaspersoft.studio.table.style.detail" value="Table_TD"/>
@@ -825,7 +806,7 @@
 								<property name="com.jaspersoft.studio.components.table.model.column.name" value="Colonne1"/>
 								<jr:columnHeader height="20" rowSpan="1">
 									<staticText>
-										<reportElement x="0" y="0" width="20" height="20" uuid="c92464ba-af85-44fb-8922-0aef8bc447d7"/>
+										<reportElement mode="Opaque" x="0" y="0" width="20" height="20" backcolor="#1C4170" uuid="c92464ba-af85-44fb-8922-0aef8bc447d7"/>
 										<box>
 											<pen lineWidth="1.0"/>
 										</box>
@@ -837,7 +818,7 @@
 								</jr:columnHeader>
 								<jr:detailCell height="30">
 									<textField isBlankWhenNull="true">
-										<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="20" height="30" backcolor="#C9C9C9" uuid="9ca22b58-1098-452a-be63-820a26551914"/>
+										<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="20" height="30" uuid="9ca22b58-1098-452a-be63-820a26551914"/>
 										<box>
 											<pen lineWidth="1.0"/>
 										</box>
@@ -854,7 +835,7 @@
 				</jr:table>
 			</componentElement>
 			<componentElement>
-				<reportElement stretchType="RelativeToTallestObject" x="470" y="63" width="85" height="60" uuid="6af2ade5-5da5-49b3-a605-e2a4746696a5">
+				<reportElement stretchType="RelativeToTallestObject" x="470" y="163" width="105" height="60" uuid="6af2ade5-5da5-49b3-a605-e2a4746696a5">
 					<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
 					<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
 					<property name="com.jaspersoft.studio.table.style.detail" value="Table_TD"/>
@@ -872,15 +853,15 @@
 						</datasetParameter>
 						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 					</datasetRun>
-					<jr:columnGroup width="85" uuid="f4d172ec-5425-48a7-8beb-a795978819d0">
+					<jr:columnGroup width="105" uuid="f4d172ec-5425-48a7-8beb-a795978819d0">
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Colonnes [1]"/>
-						<jr:columnGroup width="85" uuid="c6bd6651-4ba8-431f-afea-9bdeb6442500">
+						<jr:columnGroup width="105" uuid="c6bd6651-4ba8-431f-afea-9bdeb6442500">
 							<property name="com.jaspersoft.studio.components.table.model.column.name" value="Colonnes [1]"/>
-							<jr:column width="85" uuid="16f005a0-0b98-487e-baed-bfce4e967073">
+							<jr:column width="105" uuid="16f005a0-0b98-487e-baed-bfce4e967073">
 								<property name="com.jaspersoft.studio.components.table.model.column.name" value="Colonne1"/>
 								<jr:columnHeader height="20" rowSpan="1">
 									<staticText>
-										<reportElement x="0" y="0" width="85" height="20" uuid="78a31b1f-2003-4eb1-b97a-d7acd51df9af"/>
+										<reportElement mode="Opaque" x="0" y="0" width="105" height="20" backcolor="#1C4170" uuid="78a31b1f-2003-4eb1-b97a-d7acd51df9af"/>
 										<box>
 											<pen lineWidth="1.0"/>
 										</box>
@@ -892,7 +873,7 @@
 								</jr:columnHeader>
 								<jr:detailCell height="30">
 									<textField isBlankWhenNull="true">
-										<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="85" height="30" backcolor="#C9C9C9" uuid="23552a6f-36fe-429a-83f2-9d66d02aaa59"/>
+										<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="105" height="30" backcolor="#8CB3E3" uuid="23552a6f-36fe-429a-83f2-9d66d02aaa59"/>
 										<box>
 											<pen lineWidth="1.0"/>
 										</box>
@@ -909,7 +890,7 @@
 				</jr:table>
 			</componentElement>
 			<componentElement>
-				<reportElement stretchType="RelativeToTallestObject" x="270" y="63" width="20" height="60" uuid="3fef3117-11f0-440f-a0b2-efe637746c40">
+				<reportElement stretchType="RelativeToTallestObject" x="270" y="163" width="20" height="60" uuid="3fef3117-11f0-440f-a0b2-efe637746c40">
 					<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
 					<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
 					<property name="com.jaspersoft.studio.table.style.detail" value="Table_TD"/>
@@ -935,7 +916,7 @@
 								<property name="com.jaspersoft.studio.components.table.model.column.name" value="Colonne1"/>
 								<jr:columnHeader height="20" rowSpan="1">
 									<staticText>
-										<reportElement x="0" y="0" width="20" height="20" uuid="fb4f8793-ea6a-4a31-8dad-18ae7e57ce1d"/>
+										<reportElement mode="Opaque" x="0" y="0" width="20" height="20" backcolor="#1C4170" uuid="fb4f8793-ea6a-4a31-8dad-18ae7e57ce1d"/>
 										<box>
 											<pen lineWidth="1.0"/>
 										</box>
@@ -947,7 +928,7 @@
 								</jr:columnHeader>
 								<jr:detailCell height="30">
 									<textField isBlankWhenNull="true">
-										<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="20" height="30" backcolor="#C9C9C9" uuid="861e9315-65e4-44f2-8a6e-39d19fcfb184"/>
+										<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="20" height="30" uuid="861e9315-65e4-44f2-8a6e-39d19fcfb184"/>
 										<box>
 											<pen lineWidth="1.0"/>
 										</box>
@@ -971,13 +952,6 @@
 				<reportElement x="280" y="710" width="30" height="27" uuid="b5371774-ae0c-473b-9a14-9305343642f9"/>
 				<imageExpression><![CDATA[$P{logoT}]]></imageExpression>
 			</image>
-			<textField>
-				<reportElement x="239" y="3" width="140" height="22" uuid="51b39889-d7b1-411d-86ce-541ac2e51a3d"/>
-				<textElement verticalAlignment="Middle">
-					<font size="12"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{testName}]]></textFieldExpression>
-			</textField>
 			<frame>
 				<reportElement x="1" y="665" width="290" height="40" uuid="47edaedc-d976-4d06-a6dc-23bbadd3e50b"/>
 				<box>
@@ -1012,12 +986,39 @@
 					<text><![CDATA[Résultat du test]]></text>
 				</staticText>
 			</frame>
-			<frame>
-				<reportElement x="0" y="590" width="555" height="70" uuid="e411df6c-a62a-43e5-bac6-9f1c4813d292"/>
-				<box>
-					<pen lineWidth="1.0"/>
-				</box>
-			</frame>
+			<rectangle radius="0">
+				<reportElement x="-20" y="-20" width="595" height="180" backcolor="#1C4170" uuid="6e09cb8c-c074-41ac-b866-709087c5346c"/>
+			</rectangle>
+			<image>
+				<reportElement x="260" y="110" width="42" height="40" uuid="244f9956-fcca-448d-8c37-1aea625dc8c6"/>
+				<imageExpression><![CDATA[$P{img4}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="180" y="84" width="221" height="22" forecolor="#FFFCFC" uuid="67e62ec6-ddf4-46fe-bf14-1537ded1a6b5"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[who am I ? What are my behaviours ?]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="110" y="44" width="330" height="31" forecolor="#FCFAFA" uuid="9576408b-ae04-40fa-82b0-6b3df947bd08"/>
+				<textElement textAlignment="Center">
+					<font size="18"/>
+				</textElement>
+				<text><![CDATA[PERSONNALITE ANALYSE]]></text>
+			</staticText>
+			<image>
+				<reportElement x="266" y="-10" width="50" height="40" uuid="50e7f911-d251-49cd-8949-47b1f1d7e81a"/>
+				<imageExpression><![CDATA[$P{img1}]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="145" y="0" width="40" height="30" uuid="2f9c18aa-d83a-40c6-99cd-ffff9ebe3921"/>
+				<imageExpression><![CDATA[$P{img2}]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="390" y="1" width="40" height="30" uuid="0c409db0-a7ea-4f98-8264-e670ce9fa132"/>
+				<imageExpression><![CDATA[$P{img3}]]></imageExpression>
+			</image>
 		</band>
 	</title>
 </jasperReport>

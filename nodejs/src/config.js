@@ -14,7 +14,7 @@ module.exports = {
         password: "wqtqVSROVpdhilqI00",
         //password: "tbEsNGfMcF8Htt7n",
         //password: "root",
-        database: "galate1",
+        database: "galate6",
         port: 3306
     }),
 

@@ -48,7 +48,15 @@ export class DownloadComponent  implements OnInit{
     if((localStorage.getItem("testId")===null) && (this.testId1!== null)){
       this.router.navigate(['/loginTest', this.testId1 , this.memberId1]);
     }
-              
+      
+    
+    this.downloadService.calculateSkills(this.testId1 , this.memberId1).subscribe(
+      data=>{
+        console.log(data);
+      },err=>{
+        console.log(err)
+      }
+    )
 
    }
    

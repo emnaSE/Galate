@@ -1,0 +1,48 @@
+
+
+<nb-card>
+  <nb-card-header i18n="@@testOrder">
+    Liste des sous Categorie
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+  </nb-card-header>
+
+
+  <nb-card-body>
+    <ng2-smart-table [settings]="settings" [source]="tests" (editConfirm)="onEditConfirm($event)">
+    </ng2-smart-table>
+   <!-- <table id="example2" class="my-3 table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info" style="text-align: center">
+      <thead>
+      <tr role="row">
+
+        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="value: activate to sort column ascending">Valeur</th>
+        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="order: activate to sort column ascending">Ordre</th>
+        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="action: activate to sort column ascending">Action</th>
+
+
+      </thead>
+      <tbody>
+      <tr *ngFor="let test of tests | paginate: { itemsPerPage: 7, currentPage: pageActuel }">
+
+        <td>{{test.subcategory}}</td>
+        <td>{{test.ordre}} </td>
+
+
+        <td>
+
+          <i class="fa fa-edit fa-1x" style="color: #298a66; cursor: pointer;color: #298a66;" ></i>
+        </td>
+
+
+
+      </tr>
+      </tbody>
+    </table>
+    <pagination-controls
+      (pageChange)="pageActuel = $event"
+      previousLabel="Précédent"
+      nextLabel="Suivant"
+    ></pagination-controls>-->
+
+  </nb-card-body>
+</nb-card>

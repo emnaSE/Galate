@@ -34,7 +34,7 @@ export class SubcategorieService {
     return this.http.get<SousCategorie[]>(this.url+"getAllSubcategoriesByCategory?id_category="+id);
   }
   updateSousCategorie(id:number,sousCategorie:any):Observable<any>{
-    return this.http.post(this.url+"updateSubcategoryById?id"+id,sousCategorie,{responseType:'text'});
+    return this.http.post(this.url+"updateSubcategoryById?id="+id,sousCategorie,{responseType:'text'});
   }
 
   deleteSousCategorie(id:number):Observable<Object>{

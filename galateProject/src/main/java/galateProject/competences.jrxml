@@ -56,6 +56,33 @@
 			<rightPen lineWidth="0.5" lineColor="#000000"/>
 		</box>
 	</style>
+	<style name="Table 1_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 1_TH" mode="Opaque" backcolor="#00FFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 1_CH" mode="Opaque" backcolor="#BFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
 	<subDataset name="tableDataset" uuid="1984e317-f823-4ef1-825d-16f92d4dfbd5">
 		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter "/>
 		<parameter name="idtest" class="java.lang.Long"/>
@@ -189,10 +216,28 @@
 			<property name="com.jaspersoft.studio.field.label" value="v11"/>
 		</field>
 	</subDataset>
+	<subDataset name="tableDataset12" uuid="1984e317-f823-4ef1-825d-16f92d4dfbd4">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter "/>
+		<parameter name="idtest" class="java.lang.Long"/>
+		<parameter name="idmember" class="java.lang.Long"/>
+		<queryString language="SQL">
+			<![CDATA[select c.name from criterion c left join criterion_result cr on(cr.id_criterion=c.id) where cr.result>5 and  cr.result<7 and cr.id_test=167 and cr.id_member=218]]>
+		</queryString>
+		<field name="criterionName" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="criterionName"/>
+		</field>
+	</subDataset>
 	<subDataset name="Empty Dataset1" uuid="b72f4007-f7a3-444f-b0f1-23ca564e133a"/>
 	<subDataset name="Dataset1" uuid="3c7b06cc-222a-4249-9511-855f308b282c">
 		<queryString>
 			<![CDATA[]]>
+		</queryString>
+	</subDataset>
+	<subDataset name="competences" uuid="80f032bd-b7d5-4238-93ec-9c3dfcf57bec">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Sample DB"/>
+		<queryString language="SQL">
+			<![CDATA[select c.name as criterion from criterion c left join criterion_result cr on(cr.id_criterion=c.id) where cr.result>5 and  cr.result<7 and cr.id_test=167 and cr.id_member=218;]]>
 		</queryString>
 	</subDataset>
 	<parameter name="idtest" class="java.lang.Long"/>
@@ -206,6 +251,9 @@
 	<parameter name="img3" class="java.io.InputStream"/>
 	<parameter name="img4" class="java.io.InputStream"/>
 	<parameter name="img5" class="java.io.InputStream"/>
+	<parameter name="sbcompetences57" class="java.lang.String"/>
+	<parameter name="sbcompetences811" class="java.lang.String"/>
+	<parameter name="sbcompetences14" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
@@ -223,7 +271,7 @@
 				<textElement textAlignment="Center">
 					<font size="18"/>
 				</textElement>
-				<text><![CDATA[	PORTEFEUILLE                        ]]></text>
+				<text><![CDATA[	INVENTAIRE                         ]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="220" y="80" width="200" height="22" forecolor="#FFFCFC" uuid="a339ddfd-2641-4a9e-b82c-870bcd588684"/>
@@ -817,9 +865,9 @@
 		<band height="54" splitType="Stretch"/>
 	</pageFooter>
 	<summary>
-		<band height="283" splitType="Stretch">
+		<band height="372" splitType="Stretch">
 			<rectangle>
-				<reportElement x="1" y="-24" width="549" height="307" uuid="f5e23fa3-489e-4f73-bb41-27e1142de31e"/>
+				<reportElement x="1" y="-24" width="549" height="396" uuid="f5e23fa3-489e-4f73-bb41-27e1142de31e"/>
 			</rectangle>
 			<staticText>
 				<reportElement stretchType="ContainerHeight" x="80" y="-8" width="120" height="32" uuid="c6601105-a319-4874-8cc8-4237542eabbe"/>
@@ -829,14 +877,14 @@
 				<text><![CDATA[de mes compétences ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="20" y="138" width="524" height="35" uuid="c1d4ac45-0ed6-4aa6-81ea-464a74252db7"/>
+				<reportElement x="20" y="156" width="524" height="22" uuid="c1d4ac45-0ed6-4aa6-81ea-464a74252db7"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
 				<text><![CDATA[Mes scores de 5 à 7: Compétences mobilisables à court terme]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="20" y="205" width="524" height="41" uuid="81f76237-a1ed-4f38-a8a1-b306a52184e3"/>
+				<reportElement x="20" y="267" width="524" height="22" uuid="81f76237-a1ed-4f38-a8a1-b306a52184e3"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
@@ -861,25 +909,46 @@
 				<textElement>
 					<font size="12" isItalic="false" isUnderline="true"/>
 				</textElement>
-				<text><![CDATA[immétiatement]]></text>
+				<text><![CDATA[immédiatement]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="20" y="33" width="527" height="27" uuid="fe446714-ff3b-439e-84bf-69e94434f99a"/>
+				<reportElement x="20" y="36" width="527" height="27" uuid="fe446714-ff3b-439e-84bf-69e94434f99a"/>
 				<textElement>
 					<font size="12" isItalic="true" isUnderline="true"/>
 				</textElement>
 				<text><![CDATA[Mes scores de 8 à 11]]></text>
 			</staticText>
 			<image>
-				<reportElement x="20" y="62" width="60" height="50" uuid="8effaddd-cdad-4c21-8b76-f3a9015227a8"/>
+				<reportElement x="20" y="64" width="60" height="50" uuid="8effaddd-cdad-4c21-8b76-f3a9015227a8"/>
 				<imageExpression><![CDATA[$P{img5}]]></imageExpression>
 			</image>
 			<line>
-				<reportElement x="1" y="120" width="549" height="1" uuid="ce956fa5-bd90-42b8-a513-037f6c186722"/>
+				<reportElement x="1" y="146" width="549" height="1" uuid="ce956fa5-bd90-42b8-a513-037f6c186722"/>
 			</line>
 			<line>
-				<reportElement x="1" y="180" width="549" height="1" uuid="1fa80573-0f1b-4473-b4ea-06d232b4379b"/>
+				<reportElement x="1" y="263" width="549" height="1" uuid="1fa80573-0f1b-4473-b4ea-06d232b4379b"/>
 			</line>
+			<textField>
+				<reportElement x="20" y="185" width="524" height="75" forecolor="#1C4170" uuid="900d4d91-c52b-43e2-8efb-38c23e17ae9d"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{sbcompetences57}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="21" y="294" width="524" height="76" forecolor="#1C4170" uuid="dbaa13c2-5c60-4e2a-b369-51335357c1f3"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{sbcompetences14}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement stretchType="RelativeToBandHeight" x="91" y="66" width="456" height="74" forecolor="#1C4170" uuid="51927527-f376-42b5-b74f-67e6b8104790"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{sbcompetences811}]]></textFieldExpression>
+			</textField>
 		</band>
 	</summary>
 </jasperReport>
