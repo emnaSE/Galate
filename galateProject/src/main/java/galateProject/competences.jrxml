@@ -138,7 +138,7 @@
 		<parameter name="idtest" class="java.lang.Long"/>
 		<parameter name="idmember" class="java.lang.Long"/>
 		<queryString language="SQL">
-			<![CDATA[select  case when (r.result=5) then '#1c4170'  else '#FFFFFF' end as v5, cat.name as categoryName ,c.name as criterionName from criterion_result r left join criterion c on(r.id_criterion=c.id) left join category cat on(cat.id=c.id_category) where r.id_test=$P!{idtest} and r.id_member=$P!{idmember} order by cat.ordre2 ,c.ordre]]>
+			<![CDATA[select  case when (r.result=5) then '#1c4170'  else '#C9C9C9' end as v5, cat.name as categoryName ,c.name as criterionName from criterion_result r left join criterion c on(r.id_criterion=c.id) left join category cat on(cat.id=c.id_category) where r.id_test=$P!{idtest} and r.id_member=$P!{idmember} order by cat.ordre2 ,c.ordre]]>
 		</queryString>
 		<field name="v5" class="java.lang.String">
 			<property name="com.jaspersoft.studio.field.label" value="v5"/>
@@ -155,7 +155,7 @@
 		<parameter name="idtest" class="java.lang.Long"/>
 		<parameter name="idmember" class="java.lang.Long"/>
 		<queryString language="SQL">
-			<![CDATA[select  case when (r.result=6) then '#1c4170'  else '#FFFFFF' end as v6, cat.name as categoryName ,c.name as criterionName from criterion_result r left join criterion c on(r.id_criterion=c.id) left join category cat on(cat.id=c.id_category) where r.id_test=$P!{idtest} and r.id_member=$P!{idmember} order by cat.ordre2 ,c.ordre]]>
+			<![CDATA[select  case when (r.result=6) then '#1c4170'  else '#C9C9C9' end as v6, cat.name as categoryName ,c.name as criterionName from criterion_result r left join criterion c on(r.id_criterion=c.id) left join category cat on(cat.id=c.id_category) where r.id_test=$P!{idtest} and r.id_member=$P!{idmember} order by cat.ordre2 ,c.ordre]]>
 		</queryString>
 		<field name="v6" class="java.lang.String">
 			<property name="com.jaspersoft.studio.field.label" value="v6"/>
@@ -166,7 +166,7 @@
 		<parameter name="idtest" class="java.lang.Long"/>
 		<parameter name="idmember" class="java.lang.Long"/>
 		<queryString language="SQL">
-			<![CDATA[select  case when (r.result=7) then '#1c4170'  else '#FFFFFF' end as v7, cat.name as categoryName ,c.name as criterionName from criterion_result r left join criterion c on(r.id_criterion=c.id) left join category cat on(cat.id=c.id_category) where r.id_test=$P!{idtest} and r.id_member=$P!{idmember} order by cat.ordre2 ,c.ordre]]>
+			<![CDATA[select  case when (r.result=7) then '#1c4170'  else '#C9C9C9' end as v7, cat.name as categoryName ,c.name as criterionName from criterion_result r left join criterion c on(r.id_criterion=c.id) left join category cat on(cat.id=c.id_category) where r.id_test=$P!{idtest} and r.id_member=$P!{idmember} order by cat.ordre2 ,c.ordre]]>
 		</queryString>
 		<field name="v7" class="java.lang.String">
 			<property name="com.jaspersoft.studio.field.label" value="v7"/>
@@ -348,7 +348,7 @@
 						<jr:columnHeader height="20" rowSpan="1"/>
 						<jr:detailCell height="30">
 							<textField isBlankWhenNull="true">
-								<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="45" height="30" uuid="04aab67f-5f4f-4b69-a93d-64e2411d7d9d">
+								<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="45" height="30" backcolor="#C9C9C9" uuid="04aab67f-5f4f-4b69-a93d-64e2411d7d9d">
 									<propertyExpression name="net.sf.jasperreports.style.backcolor"><![CDATA[$F{v1}]]></propertyExpression>
 								</reportElement>
 								<box>
@@ -392,7 +392,7 @@
 								<jr:columnHeader height="20" rowSpan="1"/>
 								<jr:detailCell height="30">
 									<textField isBlankWhenNull="true">
-										<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="32" height="30" uuid="59324c8d-84a3-4c91-b949-38235a44e161">
+										<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="32" height="30" backcolor="#C9C9C9" uuid="59324c8d-84a3-4c91-b949-38235a44e161">
 											<propertyExpression name="net.sf.jasperreports.style.backcolor"><![CDATA[$F{v3}]]></propertyExpression>
 										</reportElement>
 										<box>
@@ -438,7 +438,7 @@
 								<jr:columnHeader height="20" rowSpan="1"/>
 								<jr:detailCell height="30">
 									<textField isBlankWhenNull="true">
-										<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="34" height="30" uuid="9512653d-34ba-4925-bcb7-82e3c78d406b">
+										<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="34" height="30" backcolor="#C9C9C9" uuid="9512653d-34ba-4925-bcb7-82e3c78d406b">
 											<propertyExpression name="net.sf.jasperreports.style.backcolor"><![CDATA[$F{v4}]]></propertyExpression>
 										</reportElement>
 										<box>
@@ -484,7 +484,7 @@
 								<jr:columnHeader height="20" rowSpan="1"/>
 								<jr:detailCell height="30">
 									<textField isBlankWhenNull="true">
-										<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="34" height="30" uuid="3cdc6db6-48e2-4bbb-bf3a-e8f43a977060">
+										<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="34" height="30" backcolor="#C9C9C9" uuid="3cdc6db6-48e2-4bbb-bf3a-e8f43a977060">
 											<propertyExpression name="net.sf.jasperreports.style.backcolor"><![CDATA[$F{v5}]]></propertyExpression>
 										</reportElement>
 										<box>
@@ -530,7 +530,7 @@
 								<jr:columnHeader height="20" rowSpan="1"/>
 								<jr:detailCell height="30">
 									<textField isBlankWhenNull="true">
-										<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="31" height="30" uuid="d539b3bf-7f10-40e9-aba0-fedf816a23df">
+										<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="31" height="30" backcolor="#C9C9C9" uuid="d539b3bf-7f10-40e9-aba0-fedf816a23df">
 											<propertyExpression name="net.sf.jasperreports.style.backcolor"><![CDATA[$F{v6}]]></propertyExpression>
 										</reportElement>
 										<box>
@@ -576,7 +576,7 @@
 								<jr:columnHeader height="20" rowSpan="1"/>
 								<jr:detailCell height="30">
 									<textField isBlankWhenNull="true">
-										<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="29" height="30" uuid="fc2119a1-2f4e-400b-a9a5-1a1ddfebd9e2">
+										<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="29" height="30" backcolor="#C9C9C9" uuid="fc2119a1-2f4e-400b-a9a5-1a1ddfebd9e2">
 											<propertyExpression name="net.sf.jasperreports.style.backcolor"><![CDATA[$F{v7}]]></propertyExpression>
 										</reportElement>
 										<box>
@@ -622,7 +622,7 @@
 								<jr:columnHeader height="20" rowSpan="1"/>
 								<jr:detailCell height="30">
 									<textField isBlankWhenNull="true">
-										<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="30" height="30" uuid="5e4831e3-53fe-4b6b-b1be-35c448da8cbf">
+										<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="30" height="30" backcolor="#C9C9C9" uuid="5e4831e3-53fe-4b6b-b1be-35c448da8cbf">
 											<propertyExpression name="net.sf.jasperreports.style.backcolor"><![CDATA[$F{v9}]]></propertyExpression>
 										</reportElement>
 										<box>
@@ -668,7 +668,7 @@
 								<jr:columnHeader height="20" rowSpan="1"/>
 								<jr:detailCell height="30">
 									<textField isBlankWhenNull="true">
-										<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="30" height="30" uuid="fbae4bdc-5934-4966-b937-e8c6259d9a73">
+										<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="30" height="30" backcolor="#C9C9C9" uuid="fbae4bdc-5934-4966-b937-e8c6259d9a73">
 											<propertyExpression name="net.sf.jasperreports.style.backcolor"><![CDATA[$F{v8}]]></propertyExpression>
 										</reportElement>
 										<box>
@@ -714,7 +714,7 @@
 								<jr:columnHeader height="20" rowSpan="1"/>
 								<jr:detailCell height="30">
 									<textField isBlankWhenNull="true">
-										<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="30" height="30" uuid="fceb22e0-ba61-4260-85a1-5fbc09b62d86">
+										<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="30" height="30" backcolor="#C9C9C9" uuid="fceb22e0-ba61-4260-85a1-5fbc09b62d86">
 											<propertyExpression name="net.sf.jasperreports.style.backcolor"><![CDATA[$F{v10}]]></propertyExpression>
 										</reportElement>
 										<box>
@@ -760,7 +760,7 @@
 								<jr:columnHeader height="20" rowSpan="1"/>
 								<jr:detailCell height="30">
 									<textField isBlankWhenNull="true">
-										<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="55" height="30" uuid="9ca22b58-1098-452a-be63-820a26551914">
+										<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="55" height="30" backcolor="#C9C9C9" uuid="9ca22b58-1098-452a-be63-820a26551914">
 											<propertyExpression name="net.sf.jasperreports.style.backcolor"><![CDATA[$F{v11}]]></propertyExpression>
 										</reportElement>
 										<box>
@@ -806,7 +806,7 @@
 								<jr:columnHeader height="20" rowSpan="1"/>
 								<jr:detailCell height="30">
 									<textField isBlankWhenNull="true">
-										<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="31" height="30" uuid="861e9315-65e4-44f2-8a6e-39d19fcfb184">
+										<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="31" height="30" backcolor="#C9C9C9" uuid="861e9315-65e4-44f2-8a6e-39d19fcfb184">
 											<propertyExpression name="net.sf.jasperreports.style.backcolor"><![CDATA[$F{v2}]]></propertyExpression>
 										</reportElement>
 										<box>
@@ -867,7 +867,7 @@
 	<summary>
 		<band height="372" splitType="Stretch">
 			<rectangle>
-				<reportElement x="1" y="-24" width="549" height="396" uuid="f5e23fa3-489e-4f73-bb41-27e1142de31e"/>
+				<reportElement x="1" y="-24" width="549" height="324" uuid="f5e23fa3-489e-4f73-bb41-27e1142de31e"/>
 			</rectangle>
 			<staticText>
 				<reportElement stretchType="ContainerHeight" x="80" y="-8" width="120" height="32" uuid="c6601105-a319-4874-8cc8-4237542eabbe"/>
@@ -877,14 +877,7 @@
 				<text><![CDATA[de mes compétences ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="20" y="156" width="524" height="22" uuid="c1d4ac45-0ed6-4aa6-81ea-464a74252db7"/>
-				<textElement>
-					<font size="12"/>
-				</textElement>
-				<text><![CDATA[Mes scores de 5 à 7: Compétences mobilisables à court terme]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="20" y="267" width="524" height="22" uuid="81f76237-a1ed-4f38-a8a1-b306a52184e3"/>
+				<reportElement x="20" y="170" width="524" height="22" uuid="81f76237-a1ed-4f38-a8a1-b306a52184e3"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
@@ -923,27 +916,17 @@
 				<imageExpression><![CDATA[$P{img5}]]></imageExpression>
 			</image>
 			<line>
-				<reportElement x="1" y="146" width="549" height="1" uuid="ce956fa5-bd90-42b8-a513-037f6c186722"/>
-			</line>
-			<line>
-				<reportElement x="1" y="263" width="549" height="1" uuid="1fa80573-0f1b-4473-b4ea-06d232b4379b"/>
+				<reportElement x="1" y="166" width="549" height="1" uuid="1fa80573-0f1b-4473-b4ea-06d232b4379b"/>
 			</line>
 			<textField>
-				<reportElement x="20" y="185" width="524" height="75" forecolor="#1C4170" uuid="900d4d91-c52b-43e2-8efb-38c23e17ae9d"/>
-				<textElement>
-					<font size="11" isBold="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{sbcompetences57}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="21" y="294" width="524" height="76" forecolor="#1C4170" uuid="dbaa13c2-5c60-4e2a-b369-51335357c1f3"/>
+				<reportElement x="21" y="197" width="524" height="76" forecolor="#1C4170" uuid="dbaa13c2-5c60-4e2a-b369-51335357c1f3"/>
 				<textElement>
 					<font size="11" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{sbcompetences14}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement stretchType="RelativeToBandHeight" x="91" y="66" width="456" height="74" forecolor="#1C4170" uuid="51927527-f376-42b5-b74f-67e6b8104790"/>
+				<reportElement stretchType="RelativeToBandHeight" x="101" y="66" width="446" height="94" forecolor="#1C4170" uuid="51927527-f376-42b5-b74f-67e6b8104790"/>
 				<textElement>
 					<font size="11" isBold="true"/>
 				</textElement>

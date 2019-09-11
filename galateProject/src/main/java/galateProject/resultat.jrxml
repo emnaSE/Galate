@@ -488,7 +488,7 @@
 								</jr:columnHeader>
 								<jr:detailCell height="30">
 									<textField isBlankWhenNull="true">
-										<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="20" height="30" uuid="3cdc6db6-48e2-4bbb-bf3a-e8f43a977060"/>
+										<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="20" height="30" backcolor="#C9C9C9" uuid="3cdc6db6-48e2-4bbb-bf3a-e8f43a977060"/>
 										<box>
 											<pen lineWidth="1.0"/>
 										</box>
@@ -543,7 +543,7 @@
 								</jr:columnHeader>
 								<jr:detailCell height="30">
 									<textField isBlankWhenNull="true">
-										<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="20" height="30" uuid="d539b3bf-7f10-40e9-aba0-fedf816a23df"/>
+										<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="20" height="30" backcolor="#C9C9C9" uuid="d539b3bf-7f10-40e9-aba0-fedf816a23df"/>
 										<box>
 											<pen lineWidth="1.0"/>
 										</box>
@@ -598,7 +598,7 @@
 								</jr:columnHeader>
 								<jr:detailCell height="30">
 									<textField isBlankWhenNull="true">
-										<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="20" height="30" uuid="fc2119a1-2f4e-400b-a9a5-1a1ddfebd9e2"/>
+										<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="20" height="30" backcolor="#C9C9C9" uuid="fc2119a1-2f4e-400b-a9a5-1a1ddfebd9e2"/>
 										<box>
 											<pen lineWidth="1.0"/>
 										</box>

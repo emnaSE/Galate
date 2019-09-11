@@ -38,10 +38,7 @@ public class GeneratePdfCompetences {
 			String sbcompetences57=getCriterionsByIntervall(testId, memberId,5, 7);
 			String sbcompetences811=getCriterionsByIntervall(testId, memberId,8, 11);
 			
-			System.out.println("sbcompetences14= "+sbcompetences14);
-			System.out.println("sbcompetences57= "+sbcompetences57);
-			System.out.println("sbcompetences811= "+sbcompetences811);
-			try {
+ 			try {
 				final Date today = new Date();
 				final DateFormat date = DateFormat.getDateTimeInstance(2, 2);
 				final String now = date.format(today);
@@ -138,7 +135,9 @@ public class GeneratePdfCompetences {
 				while (resultSet.next()) {
 					criterions.append(resultSet.getString(1)).append(", ");
 				}
-				criterions.delete(criterions.length()-2, criterions.length()-1);
+				if(criterions.length()>2){
+					criterions.delete(criterions.length()-2, criterions.length()-1);
+				}
 			 } catch (SQLException e) {
 					e.printStackTrace();
 			}catch (ClassNotFoundException e) {
