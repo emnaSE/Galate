@@ -20,6 +20,24 @@
 	<style name="SubTitle" forecolor="#666666" fontName="DejaVu Sans" fontSize="18"/>
 	<style name="Column header" forecolor="#666666" fontName="DejaVu Sans" fontSize="12" isBold="true"/>
 	<style name="Detail" fontName="DejaVu Sans" fontSize="12"/>
+	<style name="commonStyle">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{groupNo} % 3 ==0]]></conditionExpression>
+			<style mode="Opaque" backcolor="#FF5B5B"/>
+		</conditionalStyle>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{groupNo}% 3==2]]></conditionExpression>
+			<style mode="Opaque" backcolor="#1C4170"/>
+		</conditionalStyle>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{groupNo}%3 == 1]]></conditionExpression>
+			<style mode="Opaque" backcolor="#8CB3E3"/>
+		</conditionalStyle>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[Boolean.valueOf("#1c4170".equals($V{choix}))]]></conditionExpression>
+			<style mode="Opaque" forecolor="#000000" backcolor="#1C4170" isBlankWhenNull="false"/>
+		</conditionalStyle>
+	</style>
 	<style name="Table">
 		<box>
 			<pen lineWidth="1.0" lineColor="#000000"/>
@@ -88,28 +106,51 @@
 		<parameter name="idtest" class="java.lang.Long"/>
 		<parameter name="idmember" class="java.lang.Long"/>
 		<queryString language="SQL">
-			<![CDATA[select  case when (r.result=1) then '#1c4170'  else '#FFFFFF' end as v1, cat.name as categoryName ,c.name as criterionName from criterion_result r left join criterion c on(r.id_criterion=c.id) left join category cat on(cat.id=c.id_category) where r.id_test=$P!{idtest} and r.id_member=$P!{idmember} order by cat.ordre2 ,c.ordre]]>
+			<![CDATA[select   case when (r.result=1) then '#1c4170'  else '#FFFFFF' end as v1, cat.name as categoryName ,c.name as criterionName from criterion_result r left join criterion c on(r.id_criterion=c.id) left join category cat on(cat.id=c.id_category) where r.id_test=$P!{idtest} and r.id_member=$P!{idmember} order by cat.ordre2 ,c.ordre]]>
 		</queryString>
-		<field name="categoryName" class="java.lang.String">
-			<property name="com.jaspersoft.studio.field.label" value="categoryName"/>
-		</field>
 		<field name="criterionName" class="java.lang.String">
 			<property name="com.jaspersoft.studio.field.label" value="criterionName"/>
 		</field>
 		<field name="v1" class="java.lang.String">
 			<property name="com.jaspersoft.studio.field.label" value="v1"/>
 		</field>
+		<field name="categoryName" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="categoryName"/>
+		</field>
+		<variable name="groupNo" class="java.lang.Integer" incrementType="Group" incrementGroup="codeGroup" calculation="Count">
+			<variableExpression><![CDATA[1]]></variableExpression>
+			<initialValueExpression><![CDATA[0]]></initialValueExpression>
+		</variable>
+		<variable name="choix" class="java.lang.String">
+			<variableExpression><![CDATA[$F{v1}]]></variableExpression>
+		</variable>
+		<group name="codeGroup">
+			<groupExpression><![CDATA[$F{categoryName}]]></groupExpression>
+		</group>
 	</subDataset>
 	<subDataset name="tableDataset2" uuid="1984e317-f823-4ef1-825d-16f92d4dfbd5">
 		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter "/>
 		<parameter name="idtest" class="java.lang.Long"/>
 		<parameter name="idmember" class="java.lang.Long"/>
 		<queryString language="SQL">
-			<![CDATA[select  case when (r.result=2) then '#1c4170'  else '#FFFFFF' end as v2, cat.name as categoryName ,c.name as criterionName from criterion_result r left join criterion c on(r.id_criterion=c.id) left join category cat on(cat.id=c.id_category) where r.id_test=$P!{idtest} and r.id_member=$P!{idmember} order by cat.ordre2 ,c.ordre]]>
+			<![CDATA[select   case when (r.result=2) then '#1c4170'  else '#FFFFFF' end as v2, cat.name as categoryName ,c.name as criterionName from criterion_result r left join criterion c on(r.id_criterion=c.id) left join category cat on(cat.id=c.id_category) where r.id_test=$P!{idtest} and r.id_member=$P!{idmember} order by cat.ordre2 ,c.ordre]]>
 		</queryString>
 		<field name="v2" class="java.lang.String">
 			<property name="com.jaspersoft.studio.field.label" value="v2"/>
 		</field>
+		<field name="categoryName" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="categoryName"/>
+		</field>
+		<variable name="groupNo" class="java.lang.Integer" incrementType="Group" incrementGroup="codeGroup" calculation="Count">
+			<variableExpression><![CDATA[1]]></variableExpression>
+			<initialValueExpression><![CDATA[0]]></initialValueExpression>
+		</variable>
+		<variable name="choix" class="java.lang.String">
+			<variableExpression><![CDATA[$F{v2}]]></variableExpression>
+		</variable>
+		<group name="codeGroup">
+			<groupExpression><![CDATA[$F{categoryName}]]></groupExpression>
+		</group>
 	</subDataset>
 	<subDataset name="tableDataset3" uuid="1984e317-f823-4ef1-825d-16f92d4dfbd5">
 		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter "/>
@@ -121,6 +162,19 @@
 		<field name="v3" class="java.lang.String">
 			<property name="com.jaspersoft.studio.field.label" value="v3"/>
 		</field>
+		<field name="categoryName" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="categoryName"/>
+		</field>
+		<variable name="groupNo" class="java.lang.Integer" incrementType="Group" incrementGroup="codeGroup" calculation="Count">
+			<variableExpression><![CDATA[1]]></variableExpression>
+			<initialValueExpression><![CDATA[0]]></initialValueExpression>
+		</variable>
+		<variable name="choix" class="java.lang.String">
+			<variableExpression><![CDATA[$F{v3}]]></variableExpression>
+		</variable>
+		<group name="codeGroup">
+			<groupExpression><![CDATA[$F{categoryName}]]></groupExpression>
+		</group>
 	</subDataset>
 	<subDataset name="tableDataset4" uuid="1984e317-f823-4ef1-825d-16f92d4dfbd5">
 		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter "/>
@@ -132,6 +186,19 @@
 		<field name="v4" class="java.lang.String">
 			<property name="com.jaspersoft.studio.field.label" value="v4"/>
 		</field>
+		<field name="categoryName" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="categoryName"/>
+		</field>
+		<variable name="groupNo" class="java.lang.Integer" incrementType="Group" incrementGroup="codeGroup" calculation="Count">
+			<variableExpression><![CDATA[1]]></variableExpression>
+			<initialValueExpression><![CDATA[0]]></initialValueExpression>
+		</variable>
+		<variable name="choix" class="java.lang.String">
+			<variableExpression><![CDATA[$F{v4}]]></variableExpression>
+		</variable>
+		<group name="codeGroup">
+			<groupExpression><![CDATA[$F{categoryName}]]></groupExpression>
+		</group>
 	</subDataset>
 	<subDataset name="tableDataset5" uuid="1984e317-f823-4ef1-825d-16f92d4dfbd5">
 		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter "/>
@@ -149,6 +216,16 @@
 		<field name="criterionName" class="java.lang.String">
 			<property name="com.jaspersoft.studio.field.label" value="criterionName "/>
 		</field>
+		<variable name="groupNo" class="java.lang.Integer" incrementType="Group" incrementGroup="codeGroup" calculation="Count">
+			<variableExpression><![CDATA[1]]></variableExpression>
+			<initialValueExpression><![CDATA[0]]></initialValueExpression>
+		</variable>
+		<variable name="choix" class="java.lang.String">
+			<variableExpression><![CDATA[$F{v5}]]></variableExpression>
+		</variable>
+		<group name="codeGroup">
+			<groupExpression><![CDATA[$F{categoryName}]]></groupExpression>
+		</group>
 	</subDataset>
 	<subDataset name="tableDataset6" uuid="1984e317-f823-4ef1-825d-16f92d4dfbd5">
 		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter "/>
@@ -160,6 +237,19 @@
 		<field name="v6" class="java.lang.String">
 			<property name="com.jaspersoft.studio.field.label" value="v6"/>
 		</field>
+		<field name="categoryName" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="categoryName"/>
+		</field>
+		<variable name="groupNo" class="java.lang.Integer" incrementType="Group" incrementGroup="codeGroup" calculation="Count">
+			<variableExpression><![CDATA[1]]></variableExpression>
+			<initialValueExpression><![CDATA[0]]></initialValueExpression>
+		</variable>
+		<variable name="choix" class="java.lang.String">
+			<variableExpression><![CDATA[$F{v6}]]></variableExpression>
+		</variable>
+		<group name="codeGroup">
+			<groupExpression><![CDATA[$F{categoryName}]]></groupExpression>
+		</group>
 	</subDataset>
 	<subDataset name="tableDataset7" uuid="1984e317-f823-4ef1-825d-16f92d4dfbd5">
 		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter "/>
@@ -171,6 +261,19 @@
 		<field name="v7" class="java.lang.String">
 			<property name="com.jaspersoft.studio.field.label" value="v7"/>
 		</field>
+		<field name="categoryName" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="categoryName"/>
+		</field>
+		<variable name="groupNo" class="java.lang.Integer" incrementType="Group" incrementGroup="codeGroup" calculation="Count">
+			<variableExpression><![CDATA[1]]></variableExpression>
+			<initialValueExpression><![CDATA[0]]></initialValueExpression>
+		</variable>
+		<variable name="choix" class="java.lang.String">
+			<variableExpression><![CDATA[$F{v7}]]></variableExpression>
+		</variable>
+		<group name="codeGroup">
+			<groupExpression><![CDATA[$F{categoryName}]]></groupExpression>
+		</group>
 	</subDataset>
 	<subDataset name="tableDataset8" uuid="1984e317-f823-4ef1-825d-16f92d4dfbd5">
 		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter "/>
@@ -182,6 +285,19 @@
 		<field name="v8" class="java.lang.String">
 			<property name="com.jaspersoft.studio.field.label" value="v8"/>
 		</field>
+		<field name="categoryName" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="categoryName"/>
+		</field>
+		<variable name="groupNo" class="java.lang.Integer" incrementType="Group" incrementGroup="codeGroup" calculation="Count">
+			<variableExpression><![CDATA[1]]></variableExpression>
+			<initialValueExpression><![CDATA[0]]></initialValueExpression>
+		</variable>
+		<variable name="choix" class="java.lang.String">
+			<variableExpression><![CDATA[$F{v8}]]></variableExpression>
+		</variable>
+		<group name="codeGroup">
+			<groupExpression><![CDATA[$F{categoryName}]]></groupExpression>
+		</group>
 	</subDataset>
 	<subDataset name="tableDataset9" uuid="1984e317-f823-4ef1-825d-16f92d4dfbd5">
 		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter "/>
@@ -193,6 +309,19 @@
 		<field name="v9" class="java.lang.String">
 			<property name="com.jaspersoft.studio.field.label" value="v9"/>
 		</field>
+		<field name="categoryName" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="categoryName"/>
+		</field>
+		<variable name="groupNo" class="java.lang.Integer" incrementType="Group" incrementGroup="codeGroup" calculation="Count">
+			<variableExpression><![CDATA[1]]></variableExpression>
+			<initialValueExpression><![CDATA[0]]></initialValueExpression>
+		</variable>
+		<variable name="choix" class="java.lang.String">
+			<variableExpression><![CDATA[$F{v9}]]></variableExpression>
+		</variable>
+		<group name="codeGroup">
+			<groupExpression><![CDATA[$F{categoryName}]]></groupExpression>
+		</group>
 	</subDataset>
 	<subDataset name="tableDataset10" uuid="1984e317-f823-4ef1-825d-16f92d4dfbd5">
 		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter "/>
@@ -204,6 +333,19 @@
 		<field name="v10" class="java.lang.String">
 			<property name="com.jaspersoft.studio.field.label" value="v10"/>
 		</field>
+		<field name="categoryName" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="categoryName"/>
+		</field>
+		<variable name="groupNo" class="java.lang.Integer" incrementType="Group" incrementGroup="codeGroup" calculation="Count">
+			<variableExpression><![CDATA[1]]></variableExpression>
+			<initialValueExpression><![CDATA[0]]></initialValueExpression>
+		</variable>
+		<variable name="choix" class="java.lang.String">
+			<variableExpression><![CDATA[$F{v10}]]></variableExpression>
+		</variable>
+		<group name="codeGroup">
+			<groupExpression><![CDATA[$F{categoryName}]]></groupExpression>
+		</group>
 	</subDataset>
 	<subDataset name="tableDataset11" uuid="1984e317-f823-4ef1-825d-16f92d4dfbd5">
 		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter "/>
@@ -215,6 +357,19 @@
 		<field name="v11" class="java.lang.String">
 			<property name="com.jaspersoft.studio.field.label" value="v11"/>
 		</field>
+		<field name="categoryName" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="categoryName"/>
+		</field>
+		<variable name="groupNo" class="java.lang.Integer" incrementType="Group" incrementGroup="codeGroup" calculation="Count">
+			<variableExpression><![CDATA[1]]></variableExpression>
+			<initialValueExpression><![CDATA[0]]></initialValueExpression>
+		</variable>
+		<variable name="choix" class="java.lang.String">
+			<variableExpression><![CDATA[$F{v11}]]></variableExpression>
+		</variable>
+		<group name="codeGroup">
+			<groupExpression><![CDATA[$F{categoryName}]]></groupExpression>
+		</group>
 	</subDataset>
 	<subDataset name="tableDataset12" uuid="1984e317-f823-4ef1-825d-16f92d4dfbd4">
 		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter "/>
@@ -226,6 +381,19 @@
 		<field name="criterionName" class="java.lang.String">
 			<property name="com.jaspersoft.studio.field.label" value="criterionName"/>
 		</field>
+		<field name="categoryName" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="categoryName"/>
+		</field>
+		<variable name="groupNo" class="java.lang.Integer" incrementType="Group" incrementGroup="codeGroup" calculation="Count">
+			<variableExpression><![CDATA[1]]></variableExpression>
+			<initialValueExpression><![CDATA[0]]></initialValueExpression>
+		</variable>
+		<variable name="choix" class="java.lang.String">
+			<variableExpression><![CDATA[13]]></variableExpression>
+		</variable>
+		<group name="codeGroup">
+			<groupExpression><![CDATA[$F{categoryName}]]></groupExpression>
+		</group>
 	</subDataset>
 	<subDataset name="Empty Dataset1" uuid="b72f4007-f7a3-444f-b0f1-23ca564e133a"/>
 	<subDataset name="Dataset1" uuid="3c7b06cc-222a-4249-9511-855f308b282c">
@@ -311,9 +479,9 @@
 										<pen lineWidth="1.0"/>
 									</box>
 									<frame>
-										<reportElement mode="Opaque" x="0" y="0" width="111" height="30" backcolor="#8CB3E3" uuid="e30f9728-1ef5-498d-a66e-0121aa17c209"/>
+										<reportElement style="commonStyle" mode="Opaque" x="0" y="0" width="111" height="30" uuid="e30f9728-1ef5-498d-a66e-0121aa17c209"/>
 										<textField pattern="EEEEE dd MMMMM yyyy" isBlankWhenNull="true">
-											<reportElement isPrintRepeatedValues="false" mode="Opaque" x="0" y="0" width="111" height="30" isPrintWhenDetailOverflows="true" forecolor="#03040A" backcolor="#8CB3E3" uuid="3f386492-0eec-44d1-86be-b656925ac5fc"/>
+											<reportElement style="commonStyle" isPrintRepeatedValues="false" mode="Opaque" x="0" y="0" width="111" height="30" isPrintWhenDetailOverflows="true" forecolor="#03040A" uuid="3f386492-0eec-44d1-86be-b656925ac5fc"/>
 											<box topPadding="0" leftPadding="9">
 												<pen lineWidth="1.0"/>
 											</box>
@@ -330,7 +498,7 @@
 								<jr:columnHeader height="20" rowSpan="1"/>
 								<jr:detailCell height="30">
 									<textField>
-										<reportElement mode="Opaque" x="0" y="0" width="103" height="30" backcolor="#8CB3E3" uuid="dfbafd91-b769-43b8-87e3-69ee9a8823b5"/>
+										<reportElement style="commonStyle" mode="Opaque" x="0" y="0" width="103" height="30" uuid="dfbafd91-b769-43b8-87e3-69ee9a8823b5"/>
 										<box leftPadding="7">
 											<pen lineWidth="1.0"/>
 										</box>
@@ -348,7 +516,7 @@
 						<jr:columnHeader height="20" rowSpan="1"/>
 						<jr:detailCell height="30">
 							<textField isBlankWhenNull="true">
-								<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="45" height="30" backcolor="#C9C9C9" uuid="04aab67f-5f4f-4b69-a93d-64e2411d7d9d">
+								<reportElement style="commonStyle" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="45" height="30" uuid="04aab67f-5f4f-4b69-a93d-64e2411d7d9d">
 									<propertyExpression name="net.sf.jasperreports.style.backcolor"><![CDATA[$F{v1}]]></propertyExpression>
 								</reportElement>
 								<box>
@@ -392,7 +560,7 @@
 								<jr:columnHeader height="20" rowSpan="1"/>
 								<jr:detailCell height="30">
 									<textField isBlankWhenNull="true">
-										<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="32" height="30" backcolor="#C9C9C9" uuid="59324c8d-84a3-4c91-b949-38235a44e161">
+										<reportElement style="commonStyle" positionType="Float" mode="Opaque" x="0" y="0" width="32" height="30" uuid="59324c8d-84a3-4c91-b949-38235a44e161">
 											<propertyExpression name="net.sf.jasperreports.style.backcolor"><![CDATA[$F{v3}]]></propertyExpression>
 										</reportElement>
 										<box>
@@ -438,7 +606,7 @@
 								<jr:columnHeader height="20" rowSpan="1"/>
 								<jr:detailCell height="30">
 									<textField isBlankWhenNull="true">
-										<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="34" height="30" backcolor="#C9C9C9" uuid="9512653d-34ba-4925-bcb7-82e3c78d406b">
+										<reportElement style="commonStyle" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="34" height="30" uuid="9512653d-34ba-4925-bcb7-82e3c78d406b">
 											<propertyExpression name="net.sf.jasperreports.style.backcolor"><![CDATA[$F{v4}]]></propertyExpression>
 										</reportElement>
 										<box>
@@ -484,7 +652,7 @@
 								<jr:columnHeader height="20" rowSpan="1"/>
 								<jr:detailCell height="30">
 									<textField isBlankWhenNull="true">
-										<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="34" height="30" backcolor="#C9C9C9" uuid="3cdc6db6-48e2-4bbb-bf3a-e8f43a977060">
+										<reportElement style="commonStyle" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="34" height="30" uuid="3cdc6db6-48e2-4bbb-bf3a-e8f43a977060">
 											<propertyExpression name="net.sf.jasperreports.style.backcolor"><![CDATA[$F{v5}]]></propertyExpression>
 										</reportElement>
 										<box>
@@ -530,7 +698,7 @@
 								<jr:columnHeader height="20" rowSpan="1"/>
 								<jr:detailCell height="30">
 									<textField isBlankWhenNull="true">
-										<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="31" height="30" backcolor="#C9C9C9" uuid="d539b3bf-7f10-40e9-aba0-fedf816a23df">
+										<reportElement style="commonStyle" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="31" height="30" uuid="d539b3bf-7f10-40e9-aba0-fedf816a23df">
 											<propertyExpression name="net.sf.jasperreports.style.backcolor"><![CDATA[$F{v6}]]></propertyExpression>
 										</reportElement>
 										<box>
@@ -576,7 +744,7 @@
 								<jr:columnHeader height="20" rowSpan="1"/>
 								<jr:detailCell height="30">
 									<textField isBlankWhenNull="true">
-										<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="29" height="30" backcolor="#C9C9C9" uuid="fc2119a1-2f4e-400b-a9a5-1a1ddfebd9e2">
+										<reportElement style="commonStyle" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="29" height="30" uuid="fc2119a1-2f4e-400b-a9a5-1a1ddfebd9e2">
 											<propertyExpression name="net.sf.jasperreports.style.backcolor"><![CDATA[$F{v7}]]></propertyExpression>
 										</reportElement>
 										<box>
@@ -622,7 +790,7 @@
 								<jr:columnHeader height="20" rowSpan="1"/>
 								<jr:detailCell height="30">
 									<textField isBlankWhenNull="true">
-										<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="30" height="30" backcolor="#C9C9C9" uuid="5e4831e3-53fe-4b6b-b1be-35c448da8cbf">
+										<reportElement style="commonStyle" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="30" height="30" uuid="5e4831e3-53fe-4b6b-b1be-35c448da8cbf">
 											<propertyExpression name="net.sf.jasperreports.style.backcolor"><![CDATA[$F{v9}]]></propertyExpression>
 										</reportElement>
 										<box>
@@ -668,7 +836,7 @@
 								<jr:columnHeader height="20" rowSpan="1"/>
 								<jr:detailCell height="30">
 									<textField isBlankWhenNull="true">
-										<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="30" height="30" backcolor="#C9C9C9" uuid="fbae4bdc-5934-4966-b937-e8c6259d9a73">
+										<reportElement style="commonStyle" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="30" height="30" uuid="fbae4bdc-5934-4966-b937-e8c6259d9a73">
 											<propertyExpression name="net.sf.jasperreports.style.backcolor"><![CDATA[$F{v8}]]></propertyExpression>
 										</reportElement>
 										<box>
@@ -714,7 +882,7 @@
 								<jr:columnHeader height="20" rowSpan="1"/>
 								<jr:detailCell height="30">
 									<textField isBlankWhenNull="true">
-										<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="30" height="30" backcolor="#C9C9C9" uuid="fceb22e0-ba61-4260-85a1-5fbc09b62d86">
+										<reportElement style="commonStyle" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="30" height="30" uuid="fceb22e0-ba61-4260-85a1-5fbc09b62d86">
 											<propertyExpression name="net.sf.jasperreports.style.backcolor"><![CDATA[$F{v10}]]></propertyExpression>
 										</reportElement>
 										<box>
@@ -760,7 +928,7 @@
 								<jr:columnHeader height="20" rowSpan="1"/>
 								<jr:detailCell height="30">
 									<textField isBlankWhenNull="true">
-										<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="55" height="30" backcolor="#C9C9C9" uuid="9ca22b58-1098-452a-be63-820a26551914">
+										<reportElement style="commonStyle" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="55" height="30" uuid="9ca22b58-1098-452a-be63-820a26551914">
 											<propertyExpression name="net.sf.jasperreports.style.backcolor"><![CDATA[$F{v11}]]></propertyExpression>
 										</reportElement>
 										<box>
@@ -806,7 +974,7 @@
 								<jr:columnHeader height="20" rowSpan="1"/>
 								<jr:detailCell height="30">
 									<textField isBlankWhenNull="true">
-										<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="31" height="30" backcolor="#C9C9C9" uuid="861e9315-65e4-44f2-8a6e-39d19fcfb184">
+										<reportElement style="commonStyle" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="31" height="30" uuid="861e9315-65e4-44f2-8a6e-39d19fcfb184">
 											<propertyExpression name="net.sf.jasperreports.style.backcolor"><![CDATA[$F{v2}]]></propertyExpression>
 										</reportElement>
 										<box>
