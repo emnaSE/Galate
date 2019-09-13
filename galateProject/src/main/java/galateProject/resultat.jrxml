@@ -1076,7 +1076,7 @@
 				</jr:table>
 			</componentElement>
 			<staticText>
-				<reportElement x="211" y="740" width="190" height="21" uuid="de17cbea-0296-43c7-9cd2-35fd1cb045e0"/>
+				<reportElement x="211" y="740" width="219" height="21" uuid="de17cbea-0296-43c7-9cd2-35fd1cb045e0"/>
 				<text><![CDATA[Galatée Conseil - Tous droits réservés]]></text>
 			</staticText>
 			<image>
