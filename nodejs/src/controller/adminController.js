@@ -1894,7 +1894,8 @@ _publics.getSubcategoryByMemberAndTestID = (req) => {
          var memberId=req.query.memberId;
          var testId= req.query.testId;
         return new Promise((resolve, reject) => {  
-                 var sql = "select cr.result, c.name from criterion c left join criterion_result cr on(cr.id_criterion=c.id) where cr.id_test=? and cr.id_member=?";
+                  var sql="select cr.result, c.name from  criterion_test_category ctc left join criterion_result cr on(ctc.id=cr.id_criterion_test_category)  left join criterion c on(c.id=ctc.id_criterion) where cr.id_test=? and cr.id_member=? order by c.id asc"
+                 //var sql = "select cr.result, c.name from criterion c left join criterion_result cr on(cr.id_criterion=c.id) where cr.id_test=? and cr.id_member=?";
                      con.query(sql,[testId,memberId], function (err, result) {
                      if (err) reject(err);
                      return resolve(result);
@@ -1943,7 +1944,7 @@ _publics.getCriterionsByTestId = (req) => {
   var id_test=req.query.id_test;
   
      return new Promise((resolve, reject) => {  
-              var sql = " select distinct  c.name from criterion c left join test_subcategory ts on(c.id_subcategory1=ts.id_subcategory) where ts.id_test=?";
+              var sql = " select distinct  c.name from criterion c left join criterion_test_category ctc on(ctc.id_criterion=c.id) left join test_category tc on(tc.id=ctc.id_test_category) where tc.id_test=? order by c.id asc; ";
 
                   con.query(sql,[id_test], function (err, result) {
                   if (err) reject(err);
