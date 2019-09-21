@@ -118,8 +118,15 @@ memberController.getRawBody(req)
 
 
 router.post('/deleteClassById', (req, res, next) =>
-adminController.deleteClazzById(req)
-
+adminController.deleteTestClazz(req)
+.then(response=>{
+    if(response==='success'){
+        return adminController.deleteClazzById(req);
+    }else{
+        return "failure";
+    }
+    
+})
 .then(msg => {
     res.send(msg);
 })
@@ -500,7 +507,7 @@ getRawBody(req)
   var testId = req.query.testId;
   res.payload.testId = testId;
   res.payload.categoriesList = affectation.categories;
-  return adminController.RemoveAffectationCategoriesToTest(testId, affectation.categories);
+  return adminController.removeAffectationCategoriesToTest(testId, affectation.categories);
 })
 .then(response => {
   return adminController.AffectCategoriesToTest(res.payload.testId, res.payload.categoriesList);
@@ -597,6 +604,9 @@ router.post('/duplicateTest',(req, res, next)=>memberController
     res.send("ok");
  })
 .catch(next));
+
+
+
 
 
 
@@ -977,12 +987,8 @@ router.post('/createCriterion', (req, res, next) =>
 memberController.getRawBody(req)
 .then(response => {
     var criterion=JSON.parse(response);
-    res.payload.criterionId=criterion.id_category[0].id;
     return adminController.createCriterion(criterion)
 })
-/*.then(response => { // in case 
-    return adminController.createSubcategoryCriterions(res.payload.criterionId, res.payload.subcategories);
-})*/
 .then(msg => {
     res.send(msg);
 })
@@ -1014,15 +1020,8 @@ router.post('/updateCriterion', (req, res, next) =>
 memberController.getRawBody(req)
 .then(response => {
     var criterion=JSON.parse(response);
-    res.payload.categories=criterion.id_categories;
     return adminController.updateCriterion(req, criterion);
 })
-/*.then(response => {
-    return adminController.deleteAllSubcategoryCriterions(req.query.id);
-})*/
-/*.then(response => {
-    return adminController.createSubcategoryCriterions(req.query.id, res.payload.categories);
-})*/
 .then(msg => {
     res.send(msg);
 })
@@ -1066,10 +1065,60 @@ adminController.getJsonFromFile()
 })
 .catch(next));
 
+router.get('/getCriterionsByTestCategoryId', (req, res, next) => adminController
+.getCriterionsByTestCategoryId(req)
+.then(criterions => {
+    res.send(criterions);
+})
+.catch(next));
 
 
+router.post('/assignCriterionTOTestCategory', (req, res, next) => adminController
+.getTestCategoryByTestAndCategoryId(req)
+.then(testCategories=>{
+    if(testCategories.length!==0){
+        var testCategoryId=testCategories[0].id;
+        return adminController.assignCriterionTOTestCategory(testCategoryId, req.query.criterionId);
+    }
+    return "failed"; 
+})
+.then(msg => {
+    res.send(msg);
+})
+.catch(next));
 
 
+router.get('/getAllCriterionTestCategoryByTestAndCategoryIds', (req, res, next) => adminController
+.getAllCriterionTestCategoryByTestAndCategoryIds(req)
+.then(response => {
+    res.send(response);
+})
+.catch(next));
+
+
+router.post('/updateCategoryCriterionOrder', (req, res, next) =>   adminController
+.getRawBody(req)
+.then(ordre=>{
+    var ordre=JSON.parse(ordre);
+    return adminController.updateCategoryCriterionOrder(ordre, req);
+})
+.then(response => {
+    res.send(response);
+})
+.catch(next));
+
+router.get('/unassignCriterionToTestCategory', (req, res, next) => adminController
+.getCriterionTestCategory(req)
+.then(criterionTestCategory=>{
+    if(criterionTestCategory.length!==0){
+        return adminController.unassignCriterionToTestCategory(criterionTestCategory[0].criteriontestcatId);
+    }
+    return "failed";
+})
+.then(msg => {
+    res.send(msg);
+})
+.catch(next));
 
 
 

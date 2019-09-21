@@ -64,14 +64,13 @@ export class CriterionComponent  implements OnInit{
       this.criterionService.deleteCriterion(criterion.id).subscribe(
         data=>{
           if(data==="success"){
-
-            alert("ce critère est lié à des  sous-categorie vous ne pouvez pas le supprimer");
+            alert("Suppression avec succès");
           }else{
-            alert("Vous ne pouvez pas supprimer ce critère");
+            alert("Vous ne pouvez pas supprimer cette compétence");
 
           }
          
-          //this.router.navigate(['pages/criterion'])
+          this.router.navigate(['pages/criterion'])
           this.criterionService.getAllCriterions().subscribe(
             data=>{
               this.criterions=data;
@@ -86,7 +85,7 @@ export class CriterionComponent  implements OnInit{
 
 
         },err =>{
-          console.log(err);
+          console.log("errrrrrrrrrr "+JSON.stringify(err));
         }
       )
     }

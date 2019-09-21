@@ -7,6 +7,7 @@ import { HttpClient, HttpRequest } from '@angular/common/http';
 import {API_URL} from "../../app.constant";
 import {Criterion} from "./criterion.model";
 import { Categorie } from '../dashboard/categorie.model';
+import { SousCategorie } from '../subcategorie/subcategorie.model';
 
 
 
@@ -40,9 +41,8 @@ export class CriterionService {
   }
 
   deleteCriterion(id:number):Observable<Object>{
-    return this.http.post(this.url+"deleteCriterion?id="+id, {responseType: 'text'});
+    return this.http.post(this.url+"deleteCriterion?id="+id,id, {responseType: 'text'});
   }
-
   getAllCriterionsByTestId(id:number):Observable<Criterion[]>{
     return this.http.get<Criterion[]>(this.url+"getAllCriterionsByTestId?id_test="+id);
   }
@@ -57,6 +57,24 @@ export class CriterionService {
   getAllSubcategoriesByCriterionId(criterionId:number): Observable<Categorie[]> {
     return this.http.get<Categorie[]>(this.url + "getAllSubcategoriesByCriterionId?criterionId="+criterionId);
 
+  }
+
+  getCriterionsByTestCategoryId(testId:number, categoryId:number):Observable<any>{
+    return this.http.get<any>(this.url+"getCriterionsByTestCategoryId?testId="+testId+"&categoryId="+categoryId);
+  }
+
+  assignCriterionTOTestCategory(testId:number,categoryId:number,criterionId:number):Observable<Object>{
+    return this.http.post(this.url+'assignCriterionTOTestCategory?testId='+testId+'&categoryId='+categoryId+"&criterionId="+criterionId,JSON.stringify(testId),{responseType: 'text'});
+  }
+  getAllCriterionTestCategoryByTestAndCategoryIds(testId:number,categoryId:number):Observable<SousCategorie[]>{
+    return this.http.get<SousCategorie[]>(this.url+"getAllCriterionTestCategoryByTestAndCategoryIds?testId="+testId+"&categoryId="+categoryId);
+  }
+  updateOrder(criteriontestcatId:number,order:Object):Observable<Object>{
+    return this.http.post(this.url+'updateCategoryCriterionOrder?criteriontestcatId='+criteriontestcatId,JSON.stringify(order),{responseType: 'text'})
+  }
+  
+  unassignCriterionToTestCategory(testId:number,categoryId:number,criterionId:number):Observable<Object>{
+    return this.http.get(this.url+'unassignCriterionToTestCategory?testId='+testId+'&categoryId='+categoryId+'&criterionId='+criterionId,{responseType: 'text'});
   }
 
 }

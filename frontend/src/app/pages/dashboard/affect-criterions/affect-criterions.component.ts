@@ -1,20 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
-import {CategorieService} from "../../dashboard/categorie.service";
-import {Categorie} from "../../dashboard/categorie.model";
-import {SubcategorieService} from "../../subcategorie/subcategorie.service";
 import {SousCategorie} from "../../subcategorie/subcategorie.model";
-import {TestService} from "../test.service";
+import {TestService} from "../../test/test.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import { CriterionService } from '../../criterion/criterion.service';
-import { Criterion } from '../../criterion/criterion.model';
 
 @Component({
-  selector: 'affectation-criterion',
-  templateUrl: './affectation-criterion.component.html',
-  styleUrls: ['./affectation-criterion.component.scss']
+  selector: 'affect-criterions',
+  templateUrl: './affect-criterions.component.html',
+  styleUrls: ['./affect-criterions.component.scss']
 })
-export class AffectCriterionComponent implements OnInit {
+export class AffectCriterionsComponent implements OnInit {
 
 
   dropdownList = [];
@@ -24,11 +20,11 @@ export class AffectCriterionComponent implements OnInit {
   addForm:FormGroup;
   submitted = false;
   id:number;
+  testId:number;
 
 
 
-  constructor(private subCategorieService:SubcategorieService,
-              private criterionService:CriterionService,
+  constructor(private criterionService:CriterionService,
               private formBuilder:FormBuilder,
               private testService:TestService,
               private router:Router,
@@ -43,25 +39,25 @@ export class AffectCriterionComponent implements OnInit {
   }
 
   ngOnInit() {
+    var test=JSON.parse(localStorage.getItem("currentTest"));
+    this.testId=test.id;
+
     this.addForm=this.formBuilder.group({
-      criterions: [[], Validators.required],
+      subcategories: [[], Validators.required],
       unselect:[[]],
 
     })
 
-  
-
     this.criterionService.getAllCriterions().subscribe(
       data=>{
-        this.dropdownList =data.map((cri:Criterion)=>{
-          return{id:cri.id, itemName:cri.name};
+        this.dropdownList =data.map((criterion:SousCategorie)=>{
+          return{id:criterion.id, itemName:criterion.name};
         })
       }
     )
 
     if(this.id){
-
-      this.testService.getCriterionsByTestId(this.id).subscribe(
+      this.criterionService.getCriterionsByTestCategoryId(this.testId,this.id).subscribe(
         (value:any)=>{
           this.addForm.patchValue(value);
 
@@ -102,7 +98,7 @@ export class AffectCriterionComponent implements OnInit {
  affecter(){
 
     let data={... this.addForm.value};
-    data.criterions=data.criterions.map(
+    data.subcategories=data.subcategories.map(
      c=>{
        return c.id ;
        console.log(c.id);
@@ -111,10 +107,11 @@ export class AffectCriterionComponent implements OnInit {
 
    if (this.addForm.valid){
      console.log(this.OnItemDeSelect);
-     this.testService.AssignCriterions(this.id,data).subscribe(
+     this.testService.affectSubCategorie(this.id,data).subscribe(
        data=>{
          alert ("add avec succes");
          this.router.navigate(['pages/test/',this.id,'ordre'])
+         //this.router.navigate(["pages/test"])
        },err=>{
          console.log(err)
        }
@@ -126,7 +123,7 @@ export class AffectCriterionComponent implements OnInit {
 
   onItemSelect(event) {
     console.log(event.id);
-    this.testService.assignCriterionToTest(this.id,event.id).subscribe(
+    this.criterionService.assignCriterionTOTestCategory(this.testId, this.id, event.id).subscribe(
       data=>{
         if(data==='success'){
           alert("ajout avec sucess");
@@ -141,16 +138,13 @@ export class AffectCriterionComponent implements OnInit {
   }
   OnItemDeSelect(event: any) {
     //console.log(event.id);
-    this.testService.unassignCriterionToTest(this.id,event.id).subscribe(
+    this.criterionService.unassignCriterionToTestCategory(this.testId, this.id, event.id).subscribe(
       data=>{
-        //console.log(data);
-
         if(data==='success'){
-
           alert("suppression avec succès");
         }else{
           alert("Vous ne pouvez pas supprimer cette sous categorie");
-          this.testService.getCriterionsByTestId(this.id).subscribe(
+          this.testService.getAffectationById(this.id).subscribe(
             (value:any)=>{
               this.addForm.patchValue(value);
 
@@ -183,9 +177,7 @@ export class AffectCriterionComponent implements OnInit {
   onDeSelectAll(event) {
     console.log(event);
   }
-  getTestCriterion(){
-
-    this.router.navigate(['pages/test/',this.id,'testCriterion'])
-
+  addCriterionOrder(){
+    this.router.navigate(['pages/category',this.id,'criterionsOrder'])
   }
 }

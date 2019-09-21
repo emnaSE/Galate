@@ -106,7 +106,7 @@
 		<parameter name="idtest" class="java.lang.Long"/>
 		<parameter name="idmember" class="java.lang.Long"/>
 		<queryString language="SQL">
-			<![CDATA[select   case when (r.result=1) then '#1c4170'  else '#FFFFFF' end as v1, cat.name as categoryName ,c.name as criterionName from criterion_result r left join criterion c on(r.id_criterion=c.id) left join category cat on(cat.id=c.id_category) where r.id_test=$P!{idtest} and r.id_member=$P!{idmember} order by cat.ordre2 ,c.ordre]]>
+			<![CDATA[select   case when (cr.result=1) then '#1c4170'  else '#FFFFFF' end as v1, cat.name as categoryName ,c.name as criterionName from criterion_result cr left join criterion_test_category ctc on(ctc.id=cr.id_criterion_test_category) left join criterion c on(c.id=ctc.id_criterion) left join test_category tc on(tc.id=ctc.id_test_category) left join category cat on(cat.id=tc.id_category) where cr.id_test=$P!{idtest} and cr.id_member=$P!{idmember} order by cat.ordre2 ,ctc.ordre;]]>
 		</queryString>
 		<field name="criterionName" class="java.lang.String">
 			<property name="com.jaspersoft.studio.field.label" value="criterionName"/>
@@ -133,7 +133,7 @@
 		<parameter name="idtest" class="java.lang.Long"/>
 		<parameter name="idmember" class="java.lang.Long"/>
 		<queryString language="SQL">
-			<![CDATA[select   case when (r.result=2) then '#1c4170'  else '#FFFFFF' end as v2, cat.name as categoryName ,c.name as criterionName from criterion_result r left join criterion c on(r.id_criterion=c.id) left join category cat on(cat.id=c.id_category) where r.id_test=$P!{idtest} and r.id_member=$P!{idmember} order by cat.ordre2 ,c.ordre]]>
+			<![CDATA[select   case when (cr.result=2) then '#1c4170'  else '#FFFFFF' end as v2, cat.name as categoryName ,c.name as criterionName from criterion_result cr left join criterion_test_category ctc on(ctc.id=cr.id_criterion_test_category) left join criterion c on(c.id=ctc.id_criterion) left join test_category tc on(tc.id=ctc.id_test_category) left join category cat on(cat.id=tc.id_category) where cr.id_test=$P!{idtest} and cr.id_member=$P!{idmember} order by cat.ordre2 ,ctc.ordre;]]>
 		</queryString>
 		<field name="v2" class="java.lang.String">
 			<property name="com.jaspersoft.studio.field.label" value="v2"/>
@@ -157,7 +157,7 @@
 		<parameter name="idtest" class="java.lang.Long"/>
 		<parameter name="idmember" class="java.lang.Long"/>
 		<queryString language="SQL">
-			<![CDATA[select  case when (r.result=3) then '#1c4170'  else '#FFFFFF' end as v3, cat.name as categoryName ,c.name as criterionName from criterion_result r left join criterion c on(r.id_criterion=c.id) left join category cat on(cat.id=c.id_category) where r.id_test=$P!{idtest} and r.id_member=$P!{idmember} order by cat.ordre2 ,c.ordre]]>
+			<![CDATA[select  case when (cr.result=3) then '#1c4170'  else '#FFFFFF' end as v3, cat.name as categoryName ,c.name as criterionName from criterion_result cr left join criterion_test_category ctc on(ctc.id=cr.id_criterion_test_category) left join criterion c on(c.id=ctc.id_criterion) left join test_category tc on(tc.id=ctc.id_test_category) left join category cat on(cat.id=tc.id_category) where cr.id_test=$P!{idtest} and cr.id_member=$P!{idmember} order by cat.ordre2 ,ctc.ordre;]]>
 		</queryString>
 		<field name="v3" class="java.lang.String">
 			<property name="com.jaspersoft.studio.field.label" value="v3"/>
@@ -181,7 +181,7 @@
 		<parameter name="idtest" class="java.lang.Long"/>
 		<parameter name="idmember" class="java.lang.Long"/>
 		<queryString language="SQL">
-			<![CDATA[select  case when (r.result=4) then '#1c4170'  else '#FFFFFF' end as v4, cat.name as categoryName ,c.name as criterionName from criterion_result r left join criterion c on(r.id_criterion=c.id) left join category cat on(cat.id=c.id_category) where r.id_test=$P!{idtest} and r.id_member=$P!{idmember} order by cat.ordre2 ,c.ordre]]>
+			<![CDATA[select  case when (cr.result=4) then '#1c4170'  else '#FFFFFF' end as v4, cat.name as categoryName ,c.name as criterionName from criterion_result cr left join criterion_test_category ctc on(ctc.id=cr.id_criterion_test_category) left join criterion c on(c.id=ctc.id_criterion) left join test_category tc on(tc.id=ctc.id_test_category) left join category cat on(cat.id=tc.id_category) where cr.id_test=$P!{idtest} and cr.id_member=$P!{idmember} order by cat.ordre2 ,ctc.ordre;]]>
 		</queryString>
 		<field name="v4" class="java.lang.String">
 			<property name="com.jaspersoft.studio.field.label" value="v4"/>
@@ -205,7 +205,7 @@
 		<parameter name="idtest" class="java.lang.Long"/>
 		<parameter name="idmember" class="java.lang.Long"/>
 		<queryString language="SQL">
-			<![CDATA[select  case when (r.result=5) then '#1c4170'  else '#C9C9C9' end as v5, cat.name as categoryName ,c.name as criterionName from criterion_result r left join criterion c on(r.id_criterion=c.id) left join category cat on(cat.id=c.id_category) where r.id_test=$P!{idtest} and r.id_member=$P!{idmember} order by cat.ordre2 ,c.ordre]]>
+			<![CDATA[select  case when (cr.result=5) then '#1c4170'  else '#C9C9C9' end as v5, cat.name as categoryName ,c.name as criterionName from criterion_result cr left join criterion_test_category ctc on(ctc.id=cr.id_criterion_test_category) left join criterion c on(c.id=ctc.id_criterion) left join test_category tc on(tc.id=ctc.id_test_category) left join category cat on(cat.id=tc.id_category) where cr.id_test=$P!{idtest} and cr.id_member=$P!{idmember} order by cat.ordre2 ,ctc.ordre;]]>
 		</queryString>
 		<field name="v5" class="java.lang.String">
 			<property name="com.jaspersoft.studio.field.label" value="v5"/>
@@ -232,7 +232,7 @@
 		<parameter name="idtest" class="java.lang.Long"/>
 		<parameter name="idmember" class="java.lang.Long"/>
 		<queryString language="SQL">
-			<![CDATA[select  case when (r.result=6) then '#1c4170'  else '#C9C9C9' end as v6, cat.name as categoryName ,c.name as criterionName from criterion_result r left join criterion c on(r.id_criterion=c.id) left join category cat on(cat.id=c.id_category) where r.id_test=$P!{idtest} and r.id_member=$P!{idmember} order by cat.ordre2 ,c.ordre]]>
+			<![CDATA[select  case when (cr.result=6) then '#1c4170'  else '#C9C9C9' end as v6, cat.name as categoryName ,c.name as criterionName from criterion_result cr left join criterion_test_category ctc on(ctc.id=cr.id_criterion_test_category) left join criterion c on(c.id=ctc.id_criterion) left join test_category tc on(tc.id=ctc.id_test_category) left join category cat on(cat.id=tc.id_category) where cr.id_test=$P!{idtest} and cr.id_member=$P!{idmember} order by cat.ordre2 ,ctc.ordre;]]>
 		</queryString>
 		<field name="v6" class="java.lang.String">
 			<property name="com.jaspersoft.studio.field.label" value="v6"/>
@@ -256,7 +256,7 @@
 		<parameter name="idtest" class="java.lang.Long"/>
 		<parameter name="idmember" class="java.lang.Long"/>
 		<queryString language="SQL">
-			<![CDATA[select  case when (r.result=7) then '#1c4170'  else '#C9C9C9' end as v7, cat.name as categoryName ,c.name as criterionName from criterion_result r left join criterion c on(r.id_criterion=c.id) left join category cat on(cat.id=c.id_category) where r.id_test=$P!{idtest} and r.id_member=$P!{idmember} order by cat.ordre2 ,c.ordre]]>
+			<![CDATA[select  case when (cr.result=7) then '#1c4170'  else '#C9C9C9' end as v7, cat.name as categoryName ,c.name as criterionName from criterion_result cr left join criterion_test_category ctc on(ctc.id=cr.id_criterion_test_category) left join criterion c on(c.id=ctc.id_criterion) left join test_category tc on(tc.id=ctc.id_test_category) left join category cat on(cat.id=tc.id_category) where cr.id_test=$P!{idtest} and cr.id_member=$P!{idmember} order by cat.ordre2 ,ctc.ordre;]]>
 		</queryString>
 		<field name="v7" class="java.lang.String">
 			<property name="com.jaspersoft.studio.field.label" value="v7"/>
@@ -280,7 +280,7 @@
 		<parameter name="idtest" class="java.lang.Long"/>
 		<parameter name="idmember" class="java.lang.Long"/>
 		<queryString language="SQL">
-			<![CDATA[select  case when (r.result=8) then '#1c4170'  else '#FFFFFF' end as v8, cat.name as categoryName ,c.name as criterionName from criterion_result r left join criterion c on(r.id_criterion=c.id) left join category cat on(cat.id=c.id_category) where r.id_test=$P!{idtest} and r.id_member=$P!{idmember} order by cat.ordre2 ,c.ordre]]>
+			<![CDATA[select  case when (cr.result=8) then '#1c4170'  else '#FFFFFF' end as v8, cat.name as categoryName ,c.name as criterionName from criterion_result cr left join criterion_test_category ctc on(ctc.id=cr.id_criterion_test_category) left join criterion c on(c.id=ctc.id_criterion) left join test_category tc on(tc.id=ctc.id_test_category) left join category cat on(cat.id=tc.id_category) where cr.id_test=$P!{idtest} and cr.id_member=$P!{idmember} order by cat.ordre2 ,ctc.ordre;]]>
 		</queryString>
 		<field name="v8" class="java.lang.String">
 			<property name="com.jaspersoft.studio.field.label" value="v8"/>
@@ -304,7 +304,7 @@
 		<parameter name="idtest" class="java.lang.Long"/>
 		<parameter name="idmember" class="java.lang.Long"/>
 		<queryString language="SQL">
-			<![CDATA[select  case when (r.result=9) then '#1c4170'  else '#FFFFFF' end as v9, cat.name as categoryName ,c.name as criterionName from criterion_result r left join criterion c on(r.id_criterion=c.id) left join category cat on(cat.id=c.id_category) where r.id_test=$P!{idtest} and r.id_member=$P!{idmember} order by cat.ordre2 ,c.ordre]]>
+			<![CDATA[select  case when (cr.result=9) then '#1c4170'  else '#FFFFFF' end as v9, cat.name as categoryName ,c.name as criterionName from criterion_result cr left join criterion_test_category ctc on(ctc.id=cr.id_criterion_test_category) left join criterion c on(c.id=ctc.id_criterion) left join test_category tc on(tc.id=ctc.id_test_category) left join category cat on(cat.id=tc.id_category) where cr.id_test=$P!{idtest} and cr.id_member=$P!{idmember} order by cat.ordre2 ,ctc.ordre;]]>
 		</queryString>
 		<field name="v9" class="java.lang.String">
 			<property name="com.jaspersoft.studio.field.label" value="v9"/>
@@ -328,7 +328,7 @@
 		<parameter name="idtest" class="java.lang.Long"/>
 		<parameter name="idmember" class="java.lang.Long"/>
 		<queryString language="SQL">
-			<![CDATA[select  case when (r.result=10) then '#1c4170'  else '#FFFFFF' end as v10, cat.name as categoryName ,c.name as criterionName from criterion_result r left join criterion c on(r.id_criterion=c.id) left join category cat on(cat.id=c.id_category) where r.id_test=$P!{idtest} and r.id_member=$P!{idmember} order by cat.ordre2 ,c.ordre]]>
+			<![CDATA[select  case when (cr.result=10) then '#1c4170'  else '#FFFFFF' end as v10, cat.name as categoryName ,c.name as criterionName from criterion_result cr left join criterion_test_category ctc on(ctc.id=cr.id_criterion_test_category) left join criterion c on(c.id=ctc.id_criterion) left join test_category tc on(tc.id=ctc.id_test_category) left join category cat on(cat.id=tc.id_category) where cr.id_test=$P!{idtest} and cr.id_member=$P!{idmember} order by cat.ordre2 ,ctc.ordre;]]>
 		</queryString>
 		<field name="v10" class="java.lang.String">
 			<property name="com.jaspersoft.studio.field.label" value="v10"/>
@@ -352,7 +352,7 @@
 		<parameter name="idtest" class="java.lang.Long"/>
 		<parameter name="idmember" class="java.lang.Long"/>
 		<queryString language="SQL">
-			<![CDATA[select  case when (r.result=11) then '#1c4170'  else '#FFFFFF' end as v11, cat.name as categoryName ,c.name as criterionName from criterion_result r left join criterion c on(r.id_criterion=c.id) left join category cat on(cat.id=c.id_category) where r.id_test=$P!{idtest} and r.id_member=$P!{idmember} order by cat.ordre2 ,c.ordre]]>
+			<![CDATA[select  case when (cr.result=11) then '#1c4170'  else '#FFFFFF' end as v11, cat.name as categoryName ,c.name as criterionName from criterion_result cr left join criterion_test_category ctc on(ctc.id=cr.id_criterion_test_category) left join criterion c on(c.id=ctc.id_criterion) left join test_category tc on(tc.id=ctc.id_test_category) left join category cat on(cat.id=tc.id_category) where cr.id_test=$P!{idtest} and cr.id_member=$P!{idmember} order by cat.ordre2 ,ctc.ordre;]]>
 		</queryString>
 		<field name="v11" class="java.lang.String">
 			<property name="com.jaspersoft.studio.field.label" value="v11"/>
@@ -376,7 +376,7 @@
 		<parameter name="idtest" class="java.lang.Long"/>
 		<parameter name="idmember" class="java.lang.Long"/>
 		<queryString language="SQL">
-			<![CDATA[select c.name from criterion c left join criterion_result cr on(cr.id_criterion=c.id) where cr.result>5 and  cr.result<7 and cr.id_test=167 and cr.id_member=218]]>
+			<![CDATA[select c.name as criterion from criterion c left join criterion_test_category ctc on(c.id=ctc.id_criterion) left join criterion_result cr on(cr.id_criterion_test_category=ctc.id) where cr.result>5 and  cr.result<7 and cr.id_test=$P!{idtest} and cr.id_member=$P!{idmember}]]>
 		</queryString>
 		<field name="criterionName" class="java.lang.String">
 			<property name="com.jaspersoft.studio.field.label" value="criterionName"/>
@@ -404,8 +404,10 @@
 	<subDataset name="competences" uuid="80f032bd-b7d5-4238-93ec-9c3dfcf57bec">
 		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Sample DB"/>
+		<parameter name="idtest" class="java.lang.Long"/>
+		<parameter name="idmember" class="java.lang.Long"/>
 		<queryString language="SQL">
-			<![CDATA[select c.name as criterion from criterion c left join criterion_result cr on(cr.id_criterion=c.id) where cr.result>5 and  cr.result<7 and cr.id_test=167 and cr.id_member=218;]]>
+			<![CDATA[select c.name as criterion from criterion c left join criterion_test_category ctc on(c.id=ctc.id_criterion) left join criterion_result cr on(cr.id_criterion_test_category=ctc.id) where cr.result>5 and  cr.result<7 and cr.id_test=$P!{idtest} and cr.id_member=$P!{idmember}]]>
 		</queryString>
 	</subDataset>
 	<parameter name="idtest" class="java.lang.Long"/>

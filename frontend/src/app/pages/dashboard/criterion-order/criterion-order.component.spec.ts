@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AffectCriterionComponent } from './affectation-criterion.component';
+import { TestOrderComponent } from './test-order.component';
 
-describe('AffectSubcategorieComponent', () => {
-  let component: AffectCriterionComponent;
-  let fixture: ComponentFixture<AffectCriterionComponent>;
+describe('TestOrderComponent', () => {
+  let component: TestOrderComponent;
+  let fixture: ComponentFixture<TestOrderComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AffectCriterionComponent ]
+      declarations: [ TestOrderComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AffectCriterionComponent);
+    fixture = TestBed.createComponent(TestOrderComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

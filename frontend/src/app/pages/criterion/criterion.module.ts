@@ -8,7 +8,6 @@ import { CreateCriterionComponent } from './create-criterion/create-criterion.co
 import {NgxPaginationModule} from 'ngx-pagination';
 import {NgMultiSelectDropDownModule} from "ng-multiselect-dropdown";
 import {AngularMultiSelectModule} from "angular2-multiselect-dropdown";
-import { CriterionInfoComponent } from './criterion-info/criterion-info.component';
 import {TranslateModule} from "@ngx-translate/core";
 
 @NgModule({
@@ -22,8 +21,7 @@ import {TranslateModule} from "@ngx-translate/core";
   ],
   declarations: [
     CriterionComponent,
-    CreateCriterionComponent,
-    CriterionInfoComponent,
+    CreateCriterionComponent
     ],
 })
 export class CriterionModule { }

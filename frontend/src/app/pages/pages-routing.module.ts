@@ -31,7 +31,8 @@ import {TestOrderComponent} from "./test/test-order/test-order.component";
 import {DuplicationComponent} from "./test/duplication/duplication.component";
 import { CriterionComponent } from './criterion/criterion.component';
 import { CreateCriterionComponent } from './criterion/create-criterion/create-criterion.component';
-import { CriterionInfoComponent } from './criterion/criterion-info/criterion-info.component';
+import { AffectCriterionsComponent } from './dashboard/affect-criterions/affect-criterions.component';
+import { CriterionOrderComponent } from './dashboard/criterion-order/criterion-order.component';
 
 const routes: Routes = [{
   path: '',
@@ -222,6 +223,14 @@ const routes: Routes = [{
     {
       path: 'criterion/:id/info',
       component: CreateCriterionComponent,canActivate: [AuthGuard],
+    },
+    {
+      path:"category/assignCriterions/:id",
+      component: AffectCriterionsComponent,
+    },
+    {
+      path:"category/:id/criterionsOrder",
+      component: CriterionOrderComponent,
     },
     {
       path: '**',

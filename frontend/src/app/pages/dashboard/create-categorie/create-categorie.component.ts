@@ -80,4 +80,10 @@ export class CreateCategorieComponent implements OnInit {
     }
 
   }
+
+
+  create(){
+    this.router.navigate(['pages/category/assignCriterions',this.id]);
+  }
+
 }

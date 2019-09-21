@@ -215,11 +215,20 @@
       "Action": "Action",
       "precedant": "précédant",
       "suivante": "suivant"
-    },
-    "CRITERION":{
-      "Order": "Ordre"
     }
-
   },
-  "CATEGORY":"jjjjjjjjjj"
+
+  "CRITERION":{
+    "Order": "Ordre",
+    "list": "Liste des Compétences",
+    "create": "Ajouter",
+    "update": "Modifer",
+    "criterion": "Compétence",
+    "CREATE":{
+      "name":"Nom de la Compétence"
+    },
+    "assignCriterion": "Affecter Compétences",
+    "criterions": "Ordres des Compétences",
+    "criterionsList": "Compétences"
+  }
 }

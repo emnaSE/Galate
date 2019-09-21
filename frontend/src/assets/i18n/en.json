@@ -133,13 +133,13 @@
     "duree": "Duration of the test:",
     "Action": "Action",
     "affectationC": "Assignment category",
-    "AffectationSouC": "Assignment under category",
+    "AffectationSouC": "Assignment Subcategory",
     "xml": "XML file generation",
     "precedant": "previous",
     "suivante": "next",
     "CREATE": {
       "Consulter": "Consult Categories",
-      "ConsulterS": "Consult Under Categories",
+      "ConsulterS": "Consult Subcategories",
       "Nom": "Name:",
       "date": "Activation date:",
       "dateEx": "Expiration date:",
@@ -164,7 +164,7 @@
       "Ajouter": "Add"
     },
     "AFFECTSOUS": {
-      "Affecter": "Assign Under Categories",
+      "Affecter": "Assign Subcategories",
       "order": "Assign orders",
       "Categorie": "SubCategories"
     }
@@ -184,7 +184,7 @@
     }
   },
   "SOUSCATEGORIE": {
-    "list": " List of Catergories",
+    "list": " List of Subcatergories",
     "ajouter": "Add",
     "Nom": "Name",
     "Description": "Description",
@@ -193,7 +193,7 @@
     "precedant": "previous",
     "suivante": "next",
     "nom1": "Name",
-    "ConsulterSou": "Consult Under Categories",
+    "ConsulterSou": "Consult Subcategories",
     "category":"Category",
     "CREATE": {
       "Nom": "Sub-category",
@@ -214,11 +214,20 @@
       "Action": "Action",
       "precedant": "previous",
       "suivante": "next"
-    },
-    "CRITERION":{
-      "Order": "Order"
     }
-
   },
-  "CATEGORY":"kkkkkkkkkkk"
+
+  "CRITERION":{
+    "Order": "Order",
+    "list": "Criterions List",
+    "create": "Add",
+    "update": "Update",
+    "criterion": "Criterion",
+    "CREATE":{
+      "name":"Criterion Name"
+    },
+    "assignCriterion": "Assign Criterions",
+    "criterions": "Criterions order",
+    "criterionsList": "Criterions"
+  }
 }

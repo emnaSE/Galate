@@ -1,19 +1,21 @@
 import { Component, OnInit } from '@angular/core';
-import {TestService} from "../test.service";
+import {TestService} from "../../test/test.service";
 import {ActivatedRoute} from "@angular/router";
-import {Test} from "../test.model";
+import {Test} from "../../test/test.model";
 import {SubcategorieService} from "../../subcategorie/subcategorie.service";
+import { CriterionService } from '../../criterion/criterion.service';
 
 @Component({
   selector: 'test-order',
-  templateUrl: './test-order.component.html',
-  styleUrls: ['./test-order.component.scss']
+  templateUrl: './criterion-order.component.html',
+  styleUrls: ['./criterion-order.component.scss']
 })
-export class TestCriterionComponent implements OnInit {
+export class CriterionOrderComponent implements OnInit {
 
   id:number;
   pageActuel:number=1;
   tests:Test[];
+  testId:number;
   settings = {
     edit: {
       editButtonContent: '<i class="nb-edit"></i>',
@@ -23,7 +25,6 @@ export class TestCriterionComponent implements OnInit {
     },
     actions: {
       add: false,
-
       delete: false,
       filter:false,
     },
@@ -31,7 +32,7 @@ export class TestCriterionComponent implements OnInit {
     columns: {
 
       name: {
-        title: 'Sous categorie',
+        title: 'compétence',
         editable: false,
       },
       ordre: {
@@ -40,7 +41,7 @@ export class TestCriterionComponent implements OnInit {
 
     }
   };
-  constructor(private testService:TestService,
+  constructor(private criterionService:CriterionService,
               private activatedRouter:ActivatedRoute,
               private subCategorieService:SubcategorieService) {
    this.id = this.activatedRouter.snapshot.params['id'];
@@ -48,8 +49,9 @@ export class TestCriterionComponent implements OnInit {
   }
 
   ngOnInit() {
-
-    this.subCategorieService.getAllSubCateByIdTest2(this.id).subscribe(
+    var test=JSON.parse(localStorage.getItem("currentTest"));
+    this.testId=test.id;
+    this.criterionService.getAllCriterionTestCategoryByTestAndCategoryIds(this.testId,this.id).subscribe(
       data=>{
         this.tests=data;
       },err=>{
@@ -62,8 +64,8 @@ export class TestCriterionComponent implements OnInit {
   onEditConfirm(event): void {
 
     if (window.confirm('Êtes-vous sûr de vouloir mettre à jour?')) {
-      console.log(event.newData.testSubcatId);
-        this.testService.updateOrder(event.newData.testSubcatId,event.newData.ordre).subscribe(
+      console.log(event.newData.criteriontestcatId);
+        this.criterionService.updateOrder(event.newData.criteriontestcatId,event.newData.ordre).subscribe(
           data=>{
             alert("succès");
           }

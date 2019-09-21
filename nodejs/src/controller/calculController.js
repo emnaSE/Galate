@@ -546,8 +546,23 @@ _publics.deleteMemberTestResultSkills = (req) => {
    }); 
 };
 
+_publics.deleteMemberTestCriterionResultSkills = (criterionTestCategoryList, memberId) => { 
+   let promises = [];
+   for (var i=0;i<criterionTestCategoryList.length;i++) {
+       promises.push( new Promise((resolve, reject) => {  
+        var sql = "delete from criterion_result where id_criterion_test_category=? and id_member=?"; 
+               con.query(sql,[criterionTestCategoryList[i].id,memberId], function (err, result) {
+                if (err){
+                  reject(err);
+                }
+                return resolve(result);
+               });
+     }));
+   }
+    return Promise.all(promises)  
+};
 
-_publics.calculateSkills = (req,res,criterionsList) => { 
+/*_publics.calculateSkills = (req,res,criterionsList) => { 
     let promises = [];
     var memberId=req.query.memberId;
     var testId=req.query.testId;
@@ -569,8 +584,31 @@ _publics.calculateSkills = (req,res,criterionsList) => {
     }
      return Promise.all(promises)  
 
-}
+}*/
 
+_publics.calculateSkills = (req,res,criterionTestCategoryList) => { 
+  let promises = [];
+  var memberId=req.query.memberId;
+  var testId=req.query.testId;
+  for (var i=0;i<criterionTestCategoryList.length;i++) {
+      promises.push( new Promise((resolve, reject) => {  
+        if(criterionTestCategoryList[i].median===0){
+          if(criterionTestCategoryList[i].id_subcategory2===null){
+            resolve(calculatePinkSkill(testId,memberId,criterionTestCategoryList[i]));//one subcategory  without median
+          }else{
+            resolve(calculateYellowSkill(testId,memberId,criterionTestCategoryList[i]));//two subcategories without median
+          }
+
+        }else if(criterionTestCategoryList[i].id_subcategory2===null){
+          resolve(calculateBlueSkySkill(testId,memberId,criterionTestCategoryList[i]));//one subcategory with median
+        }else{
+          resolve(calculateBlueSkill(res,testId,memberId,criterionTestCategoryList[i]));//two subcategories with median
+        }
+    }));
+  }
+   return Promise.all(promises)  
+
+}
 
 
 
@@ -579,7 +617,7 @@ _publics.calculateSkills = (req,res,criterionsList) => {
 function calculatePinkSkill(testId,memberId,criterion){
   return new Promise((resolve, reject) => {  
     getSubcategoryScore(testId,memberId,criterion.id_subcategory1,null)
-    .then(score=>{
+   /* .then(score=>{
       return new Promise((resolve, reject) => {  
         var sql = "update criterion set result= ? where id=?"; 
         con.query(sql,[score,criterion.id], function (err, result) {
@@ -588,10 +626,10 @@ function calculatePinkSkill(testId,memberId,criterion){
         return resolve(score);
         });
       });
-    })
+    })*/
     .then(result=>{
       var sql = "INSERT INTO criterion_result SET ? ";
-      const newCriterionResult = { id_member: memberId,id_test:testId,result:result,id_criterion:criterion.id};
+      const newCriterionResult = { id_member: memberId,id_test:testId,result:result,id_criterion_test_category:criterion.id};
       con.query(sql,newCriterionResult, function (err, result) {
       if (err)
         reject(err);
@@ -606,7 +644,7 @@ function calculatePinkSkill(testId,memberId,criterion){
 function calculateYellowSkill(testId,memberId,criterion){
   return new Promise((resolve, reject) => {  
     getSubcategoriesScore(testId,memberId,criterion)
-    .then(score=>{
+    /*.then(score=>{
       return new Promise((resolve, reject) => { 
         var result=score[0].result;
         var sql = "update criterion set result= ? where id=?"; 
@@ -616,10 +654,14 @@ function calculateYellowSkill(testId,memberId,criterion){
         return resolve(result);
         });
       });
-    })
-    .then(result=>{
+    })*/
+    .then(score=>{
+      var result=0;
+      if(score.length>0){
+        result=score[0].result;
+      }
       var sql = "INSERT INTO criterion_result SET ? ";
-      const newCriterionResult = { id_member: memberId,id_test:testId,result:result,id_criterion:criterion.id};
+      const newCriterionResult = { id_member: memberId,id_test:testId,result:result,id_criterion_test_category:criterion.id};
       con.query(sql,newCriterionResult, function (err, res) {
       if (err)
         reject(err);
@@ -635,7 +677,7 @@ function getSubcategoriesScore(testId,memberId,criterion){
   return new Promise((resolve, reject) => {  
     var sql ="select 	coalesce(  FLOOR(( (select ma.etallonage_result from manuel_answer ma where id_member=? and id_test=? and id_subcategory=?) " +
     " + (select ma.etallonage_result from manuel_answer ma where id_member=? and id_test=? and id_subcategory=?) ) /2) ,0) as result ";
-        con.query(sql,[memberId,testId,criterion.id_subcategory1,memberId,testId,criterion.id_subcategory2, criterion.id], function (err, result) {
+        con.query(sql,[memberId,testId,criterion.id_subcategory1,memberId,testId,criterion.id_subcategory2], function (err, result) {
          if (err){
            reject(err);
          }
@@ -655,7 +697,7 @@ function calculateBlueSkySkill(testId,memberId,criterion){
       result=mediane-result;
       return result;
     })
-    .then(result=>{
+   /* .then(result=>{
       return new Promise((resolve, reject) => {  
         var sql = "update criterion set result= ? where id=?"; 
         con.query(sql,[result,criterion.id], function (err, res) {
@@ -664,10 +706,10 @@ function calculateBlueSkySkill(testId,memberId,criterion){
         return resolve(result);
         });
       })
-    })
+    })*/
     .then(result=>{
       var sql = "INSERT INTO criterion_result SET ? ";
-      const newCriterionResult = { id_member: memberId,id_test:testId,result:result,id_criterion:criterion.id};
+      const newCriterionResult = { id_member: memberId,id_test:testId,result:result,id_criterion_test_category:criterion.id};
       con.query(sql,newCriterionResult, function (err, res) {
       if (err)
         reject(err);
@@ -687,13 +729,13 @@ function calculateBlueSkill(res,testId,memberId,criterion){
     .then(score=>{
       return calculateScoreWithMedian(score);
     })
-    .then(result=>{
+   /* .then(result=>{
       res.payload.result=result;
       return updateCriterionResult(result,criterion);
-    })
-    .then(response=>{
+    })*/
+    .then(result=>{
       var sql = "INSERT INTO criterion_result SET ? ";
-      const newCriterionResult = { id_member: memberId,id_test:testId,result:res.payload.result,id_criterion:criterion.id};
+      const newCriterionResult = { id_member: memberId,id_test:testId,result:result,id_criterion_test_category:criterion.id};
       con.query(sql,newCriterionResult, function (err, res) {
       if (err)
         reject(err);

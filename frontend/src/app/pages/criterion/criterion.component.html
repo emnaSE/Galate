@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
 
 
-    {{ 'SOUSCATEGORIE.list' | translate }}
+    {{ 'CRITERION.list' | translate }}
 
   </nb-card-header>
 
@@ -19,8 +19,6 @@
       <tr role="row">
         <!-- <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="id: activate to sort column descending">ID</th>-->
         <th  class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="name: activate to sort column ascending">{{ 'SOUSCATEGORIE.Nom' | translate }}</th>
-        <th  class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="description: activate to sort column ascending">{{ 'SOUSCATEGORIE.category' | translate }}</th>
-        <th  class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="action: activate to sort column ascending">{{ 'CRITERION.ordre' | translate }}</th>
         <th  class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="action: activate to sort column ascending">{{ 'SOUSCATEGORIE.Action' | translate }}</th>
 
           </thead>
@@ -28,8 +26,6 @@
       <tr *ngFor="let criterion of criterions | paginate: { itemsPerPage: 7, currentPage: pageActuel }">
         <!-- <td>{{sousCategorie.id}}</td>-->
         <td>{{criterion.name}}</td>
-        <td>{{criterion.subcategory}}</td>
-        <td>{{criterion.ordre}}</td>
         <td>
           <i style="cursor: pointer; color: #69737f; display: inline-block;margin-right: 20px !important;" class="fas fa-trash fa-1x" (click)="deleteByid(criterion)"></i>
           <i class="fas fa-edit fa-1x" style="color: #298a66; cursor: pointer;" (click)="updateCriterion(criterion)"></i>

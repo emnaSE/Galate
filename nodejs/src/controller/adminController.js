@@ -45,10 +45,12 @@ _publics.createCategory = (category) => {
     var category=JSON.parse(category);
     var name=category.name;
     var subcategories_number=category.subcategories_number;
+    var orderForSubcategories=category.orderForSubcategories;
+    var orderForCriterions=category.orderForCriterions;
     return new Promise((resolve, reject) => {  
              var msg="";
              var sql = "INSERT INTO category SET ? ";
-             const newCategory = { name: name,subcategories_number:subcategories_number};
+             const newCategory = { name: name,subcategories_number:subcategories_number,ordre:orderForSubcategories,ordre2:orderForCriterions};
              con.query(sql,newCategory, function (err, result) {
                 if (err){
                     msg="failure";
@@ -201,6 +203,27 @@ _publics.getAllClassesByIdSchool = (req) => {
              });
            });    
  }; 
+
+ 
+
+ _publics.deleteTestClazz = (req) => { 
+  var id=req.query.id;
+  return new Promise((resolve, reject) => { 
+           var msg=""; 
+           var sql = "delete from   test_clazz where id_clazz=?";
+           con.query(sql,[id], function (err, result) {
+            if (err){
+              msg="failure";
+              reject(err);
+            }else{
+              msg="success";
+            }
+          return resolve(msg);
+           });
+         });    
+}; 
+
+
  _publics.deleteClazzByIdSchool= (req) => { 
   
     var id_school=req.query.id_school;
@@ -1015,6 +1038,8 @@ _publics.removeAffectationSubcategoryToTest=(testId, subcategoryId) => {
     });
 }
 
+
+
 _publics.AffectSubcategoryToTest = (testId, subcategoryId) => {
   var msg="";
   return new Promise((resolve, reject) => {
@@ -1073,6 +1098,11 @@ _publics.getTestCategoryByTestId = (testId) => {
      });
 });      
 }; 
+
+
+
+
+
 
 _publics.getTestSubcategoriesByTestId = (testId) => { 
   perf.start();
@@ -1728,6 +1758,7 @@ _publics.getSubCategoriesByTestId = (req) => {
  });  
 
 }
+
 
 _publics.getCategoriesByTestId = (req) => {
   return new Promise((resolve, reject) => {   
@@ -3028,6 +3059,7 @@ _publics.getAllTestSubcategoriesByTestAndSubcategoryIds = (req) => {
 
 
 
+
 _publics.updateSubcategoriesOrder = (ordre, req) => {
   return new Promise((resolve, reject) => {  
     var sql = "update test_subcategory  set ordre=? where id=?"; 
@@ -3070,12 +3102,10 @@ _publics.updateSubcategoriesOrder = (ordre, req) => {
 
 _publics.createCriterion = (criterion) => { 
   var name=criterion.name;
-  var categoryId=criterion.id_category[0].id;
-  var ordre=criterion.ordre;
   return new Promise((resolve, reject) => { 
     var msg="";
     var sql = "insert into criterion set ? ";
-    const newCriterion = { name: name,id_category:categoryId,ordre:ordre};         
+    const newCriterion = { name: name};         
     con.query(sql,newCriterion, function (err, result) {
             if (err){
               msg="failure";
@@ -3139,7 +3169,7 @@ _publics.createCriterion = (criterion) => {
 _publics.getAllCriterions = (req) => { 
   
   return new Promise((resolve, reject) => {  
-           var sql = "select c.*, cat.name as subcategory FROM criterion c left join category cat on(c.id_category=cat.id) order by id desc "; 
+           var sql = "select c.* FROM criterion c  order by id desc "; 
          
                con.query(sql, function (err, result) {
                if (err) reject(err);
@@ -3174,13 +3204,11 @@ _publics.getAllCriterionsByCategoryId = (req) => {
 
 _publics.updateCriterion = (req,criterion) => { 
  var name=criterion.name;
- var order=criterion.ordre;
- var id_category=criterion.id_category[0].id;
  var id=req.query.id;
    return new Promise((resolve, reject) => {  
             var msg="";
-            var sql = "update  criterion set name=?,ordre=?,id_category=? where id=?";
-            con.query(sql,[name,order,id_category,id], function (err, result) {
+            var sql = "update  criterion set name=? where id=?";
+            con.query(sql,[name,id], function (err, result) {
              if (err){
                msg="failure";
                reject(err);
@@ -3288,7 +3316,121 @@ _publics.getAllCriterionsByTestId = (req) => {
  }); 
 
 }
+_publics.getAllCriterionsTestCategoryByTestId = (req) => {
+  var testId=req.query.testId;
+  return new Promise((resolve, reject) => {   
+    var sql = "select ctc.* from criterion_test_category ctc left join test_category tc on(ctc.id_test_category=tc.id)  where tc.id_test=? order by id desc";   
+    con.query(sql,[testId], function (err, result) {
+    if (err) reject(err);
+    return resolve(result);
+    });
+ }); 
 
+}
+
+
+_publics.getCriterionsByTestCategoryId = (req) => {
+  var testId=req.query.testId;
+  var categoryId=req.query.categoryId;
+  return new Promise((resolve, reject) => {   
+    var sql = "select c.* from criterion c left join  criterion_test_category ctc on(c.id=ctc.id_criterion) "+
+    "left join test_category tc on(tc.id=ctc.id_test_category) where tc.id_test=? and tc.id_category=?";        
+    con.query(sql,[testId,categoryId], function (err, result) {
+    if (err) reject(err);
+    return resolve(result);
+    });
+ });  
+
+}
+
+_publics.assignCriterionTOTestCategory = (testSubCategId, criterionId) => {
+  var msg="";
+  return new Promise((resolve, reject) => {
+      var sql = "INSERT INTO criterion_test_category SET? ";
+      con.query(sql,{id_test_category:testSubCategId,id_criterion:criterionId}, function (err, result) {
+        if (err){
+          msg="failed"; 
+          }else{
+            msg="success";  
+          }
+          return resolve(msg);
+      });   
+    });
+}
+
+
+_publics.getTestCategoryByTestAndCategoryId = (req) => {
+  var testId=req.query.testId;
+  var categoryId=req.query.categoryId;
+  return new Promise((resolve, reject) => {   
+    var sql = "select * from test_category where id_test=? and id_category=?";        
+    con.query(sql,[testId,categoryId], function (err, result) {
+    if (err) reject(err);
+    return resolve(result);
+    });
+ });  
+
+}
+
+
+_publics.getAllCriterionTestCategoryByTestAndCategoryIds = (req) => {
+  var tesId=req.query.testId;
+  var categoryId=req.query.categoryId;
+  return new Promise((resolve, reject) => {  
+    var sql = "select ctc.id as criteriontestcatId, c.name,ctc.ordre from criterion c left join criterion_test_category ctc on(c.id=ctc.id_criterion) "+
+    " left join test_category tc on(tc.id=ctc.id_test_category) where tc.id_test=? and tc.id_category=?";      
+    con.query(sql,[tesId,categoryId], function (err, result) {
+    if (err) reject(err);
+    return resolve(result);
+    });
+  }); 
+}
+
+
+_publics.getCriterionTestCategory = (req) => {
+  var tesId=req.query.testId;
+  var categoryId=req.query.categoryId;
+  var criterionId=req.query.criterionId;
+  return new Promise((resolve, reject) => {  
+    var sql = "select ctc.id as criteriontestcatId, c.name,ctc.ordre from criterion c left join criterion_test_category ctc on(c.id=ctc.id_criterion) "+
+    " left join test_category tc on(tc.id=ctc.id_test_category) where tc.id_test=? and tc.id_category=? and ctc.id_criterion=?  ";      
+    con.query(sql,[tesId,categoryId,criterionId], function (err, result) {
+    if (err) reject(err);
+    return resolve(result);
+    });
+  }); 
+}
+
+_publics.updateCategoryCriterionOrder = (ordre, req) => {
+  return new Promise((resolve, reject) => {  
+    var sql = "update criterion_test_category  set ordre=? where id=?"; 
+    var msg="";     
+    con.query(sql,[ordre, req.query.criteriontestcatId], function (err, result) {
+    if (err){
+      msg="failed";
+    }else{
+      msg="success";
+    }
+    return resolve(msg);
+    });
+  }); 
+}
+
+
+_publics.unassignCriterionToTestCategory=(id) => {
+  return new Promise((resolve, reject) => {
+    var msg="";
+      var sql = "delete from criterion_test_category  where id=? ";
+      con.query(sql,[id], function (err, result) {
+        if (err){
+          msg="failed";
+        }else{
+          msg="success";
+        }     
+        return resolve(msg);
+      });   
+    });
+}
 
 
 

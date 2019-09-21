@@ -130,7 +130,7 @@ public class GeneratePdfCompetences {
 				final Connection connection = DriverManager.getConnection(ConnectionConfig.connectionString,
 						ConnectionConfig.user, ConnectionConfig.password);
 				statement=connection.createStatement();
-				String sql = "SELECT name FROM criterion c left join criterion_result r on(c.id=r.id_criterion) where r.result>="+a+" and r.result<="+b+" and r.id_test=" + testId+" and r.id_member="+memberId;
+				String sql = "SELECT name FROM criterion_result r left join criterion_test_category ctc on(ctc.id=r.id_criterion_test_category) left join criterion c on(c.id=ctc.id_criterion) where r.result>="+a+" and r.result<="+b+" and r.id_test=" + testId+" and r.id_member="+memberId;
 				ResultSet resultSet = statement.executeQuery(sql);
 				while (resultSet.next()) {
 					criterions.append(resultSet.getString(1)).append(", ");

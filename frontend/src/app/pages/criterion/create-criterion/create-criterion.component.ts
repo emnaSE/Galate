@@ -15,14 +15,6 @@ import { SubcategorieService } from '../../subcategorie/subcategorie.service';
   styleUrls: ['./create-criterion.component.scss']
 })
 export class CreateCriterionComponent implements OnInit {
-  private subcategories:SousCategorie[]
-  //categories:Categorie[];
-  dropdownList = [];
-  dropdownList1 = [];
-  selectedItems1=[];
-  selectedItems = [];
-  dropdownSettings = {};
-  dropdownSettings1 ={};
 
   id:number;
   editMode=false;
@@ -40,86 +32,23 @@ export class CreateCriterionComponent implements OnInit {
   ngOnInit() {
     this.addForm=this.formBuilder.group({
       name: new FormControl('', [Validators.required]),
-      id_category: [[], Validators.required],
-      ordre: [[], Validators.required],
-     // id_subcategories: [[], Validators.required],
-      
-
-
     });
-
-    this.criterionService.getAllCategories().subscribe(
-      data=>{
-        this.dropdownList =data.map((cat:Categorie)=>{
-          return{id:cat.id, itemName:cat.name};
-        
-
-        })
-        this.dropdownList1 =data.map((scat:SousCategorie)=>{
-          return{id:scat.id, itemName:scat.name};
-        })
-      }
-    )
-
 
     if(this.id){
       this.editMode=true;
       this.criterionService.getCriterionById(this.id).subscribe(
         (value:any)=>{
           this.addForm.patchValue(value);
-                this.selectedItems = this.dropdownList.filter(
-                  c =>{
-                    return c.id == value.id_category;
-                  });
         },err=>{
-          console.log(err)
+          console.log(err);
         }
-      );
-
-      /*this.criterionService.getAllSubcategoriesByCriterionId(this.id).subscribe(
-        (value:any)=>{
-          this.addForm.patchValue(value);
-               this.selectedItems1=this.dropdownList1.filter(
-                  s=>{
-                    return value.map(v=> v.id).includes(s.id)
-                  });
-        },err=>{
-          console.log(err)
-        }
-      );*/
+      )
     }
 
-    this.dropdownSettings = {
-      singleSelection: true,
-      idField: 'item_id',
-      textField: 'item_text',
-      text:"choisissez une categorie",
-      searchPlaceholderText: 'chercher',
-      filterSelectAllText: 'Sélectionner tous les résultats filtrés',
-      selectAllText: 'Tout sélectionner',
-      unSelectAllText: 'Tout déselectionner',
-      noDataLabel: 'Pas de données disponibles',
-      itemsShowLimit: 1,
-      allowSearchFilter: true,
-      enableSearchFilter:true,
-    };
-    this.dropdownSettings1 = {
-      singleSelection: false,
-      idField: 'item_id',
-      textField: 'item_text',
-      text:"choisissez une categorie",
-      searchPlaceholderText: 'chercher',
-      filterSelectAllText: 'Sélectionner tous les résultats filtrés',
-      selectAllText: 'Tout sélectionner',
-      unSelectAllText: 'Tout déselectionner',
-      noDataLabel: 'Pas de données disponibles',
-      itemsShowLimit: 12,
-      allowSearchFilter: true,
-      enableSearchFilter:true,
-    };
+    }
 
-  
-  }
+   
+
 
   get formvalidate() {
     return this.addForm.controls;
@@ -168,14 +97,7 @@ export class CreateCriterionComponent implements OnInit {
 
 
   }
-  onItemSelect(item: any) {
 
-    console.log(item);
-    console.log(this.selectedItems);
-  }
-  onSelectAll(items: any) {
-    console.log(items);
-  }
 
 
   

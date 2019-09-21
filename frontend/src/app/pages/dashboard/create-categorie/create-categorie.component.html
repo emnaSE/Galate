@@ -6,6 +6,9 @@
   <nb-alert  outline="info" *ngIf="err==2" >ajout avec success</nb-alert>
   <nb-card-header >
     {{ editMode ? 'Modifier':'Ajouter'}} {{ 'DASH.CREATE.categorie' | translate }}
+    <ul style="position: relative; float: right">
+      <i style="cursor: pointer; position: relative; float: right ; color: darkgreen"  (click)="create()"> {{ 'CRITERION.assignCriterion' | translate }} </i>
+    </ul>
   </nb-card-header>
 
   <nb-card-body>
