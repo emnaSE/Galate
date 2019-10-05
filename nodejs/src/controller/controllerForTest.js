@@ -34,7 +34,12 @@ _publics.createTest = (test) => {
      var msg="";
            var sql = "INSERT INTO test SET ? ";
            const test0 = { name: name,test_subcategories_number:test_subcategories_number,password:password,activation_date:activation_date,expiration_date:expiration_date};
-           con.query(sql,test0, function (err, response) {
+           pool.getConnection(function(err,connection){ 
+if (err) {  
+reject(err);
+ }
+connection.query
+(sql,test0, function (err, response) {
               if (err){
                   console.log("error");
                 }else{
@@ -146,7 +151,12 @@ _publics.createSchool = (req) => {
     return new Promise((resolve, reject) => {  
         var msg="";
         var sql = "INSERT INTO school SET ? ";
-        con.query(sql,school, function (err, school) {
+        pool.getConnection(function(err,connection){ 
+if (err) {  
+reject(err);
+ }
+connection.query
+(sql,school, function (err, school) {
            if (err){
                msg="failure"; 
                response = {

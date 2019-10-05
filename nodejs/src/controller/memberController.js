@@ -25,7 +25,12 @@ _publics.register = (member) => {
     var message = {};
     var sql = "INSERT INTO member SET ? ";
     const newMember = { firstname: firstname, lastname: lastname, email: email, age: age, pseudo: pseudo, password: password, civility: civility, id_school: id_school, id_clazz: id_clazz, sexe:sexe, city:city, study_level:study_level};
-    con.query(sql, newMember, function (err, result) {
+    pool.getConnection(function(err,connection){ 
+if (err) {  
+reject(err);
+ }
+connection.query
+(sql, newMember, function (err, result) {
       if (err) {
         message ={msg:"failure"};
         reject(err);
@@ -67,7 +72,12 @@ _publics.updateMember = (req, member) => {
   return new Promise((resolve, reject) => {
     var msg = "";
     var sql = "UPDATE member SET firstname=?, lastname=?, email=?, age=?, pseudo=?, password=?,civility=?,id_school=?,id_clazz=?  WHERE id = ?";
-    con.query(sql, [firstname, lastname, email, age, pseudo, password, civility, id_school, id_clazz, id], function (err, result) {
+    pool.getConnection(function(err,connection){ 
+if (err) {  
+reject(err);
+ }
+connection.query
+(sql, [firstname, lastname, email, age, pseudo, password, civility, id_school, id_clazz, id], function (err, result) {
       if (err) {
         msg = "failure";
         reject(err);
@@ -84,7 +94,12 @@ _publics.deleteMember = (req) => {
   return new Promise((resolve, reject) => {
     var sql = "DELETE FROM member WHERE id = ?";
     var msg = "";
-    con.query(sql, [id], function (err, result) {
+    pool.getConnection(function(err,connection){ 
+if (err) {  
+reject(err);
+ }
+connection.query
+(sql, [id], function (err, result) {
       if (err) {
         msg = "failure";
         reject(err);
@@ -101,7 +116,12 @@ _publics.getAllMembers = (req) => {
   return new Promise((resolve, reject) => {
     var sql = "select * FROM member";
 
-    con.query(sql, function (err, result) {
+    pool.getConnection(function(err,connection){ 
+if (err) {  
+reject(err);
+ }
+connection.query
+(sql, function (err, result) {
       if (err) reject(err);
       return resolve(JSON.stringify(result));
     });
@@ -118,7 +138,12 @@ _publics.login = (member) => {
   return new Promise((resolve, reject) => {
 
     var sql = "select * FROM member where pseudo=? and password=? ";
-    con.query(sql, [pseudo, password], function (err, members) {
+    pool.getConnection(function(err,connection){ 
+if (err) {  
+reject(err);
+ }
+connection.query
+(sql, [pseudo, password], function (err, members) {
       var members = JSON.stringify(members);
       members = JSON.parse(members);
 
@@ -145,7 +170,12 @@ _publics.getMemberById = (req) => {
   var idMember = req.query.id;
   return new Promise((resolve, reject) => {
     var sql = "select * FROM member where id=?";
-    con.query(sql, [idMember], function (err, result) {
+    pool.getConnection(function(err,connection){ 
+if (err) {  
+reject(err);
+ }
+connection.query
+(sql, [idMember], function (err, result) {
       if (err) reject(err);
       return resolve(JSON.stringify(result));
     });
@@ -156,7 +186,12 @@ _publics.getMemberDetailsById = (req) => {
   var idMember = req.query.id;
   return new Promise((resolve, reject) => {
     var sql = "select m.firstname , m.lastname , m.age , m.email , m.city , m.sexe , m.civility , c.name as clazz_name , s.name as school_name FROM member m left join clazz c on (c.id = m.id_clazz) left join school s on (s.id = m.id_school) where m.id=?";
-    con.query(sql, [idMember], function (err, result) {
+    pool.getConnection(function(err,connection){ 
+if (err) {  
+reject(err);
+ }
+connection.query
+(sql, [idMember], function (err, result) {
       if (err) reject(err);
       return resolve(JSON.stringify(result));
     });
@@ -174,7 +209,12 @@ _publics.createChoiceMember = (choice_member) => {
     var msg = "";
     var sql = "INSERT INTO choice_member SET ? ";
     const newChoiceMember = { id_question: id_question, id_answer: id_answer, id_test_member: id_test_member };
-    con.query(sql, newChoiceMember, function (err, result) {
+    pool.getConnection(function(err,connection){ 
+if (err) {  
+reject(err);
+ }
+connection.query
+(sql, newChoiceMember, function (err, result) {
       if (err) {
         msg = "failure";
         reject(err);
@@ -216,7 +256,12 @@ _publics.updateChoiceMember = (req, choiceMember) => {
   return new Promise((resolve, reject) => {
     var msg = "";
     var sql = "UPDATE choice_member SET id_question=?, id_answer=?, id_test_member=?  WHERE id = ?";
-    con.query(sql, [id_question, id_answer, id_test_member, id], function (err, result) {
+    pool.getConnection(function(err,connection){ 
+if (err) {  
+reject(err);
+ }
+connection.query
+(sql, [id_question, id_answer, id_test_member, id], function (err, result) {
       if (err) {
         msg = "failure";
         reject(err);
@@ -233,7 +278,12 @@ _publics.deleteChoiceMember = (req) => {
   return new Promise((resolve, reject) => {
     var sql = "DELETE FROM choice_member WHERE id = ?";
     var msg = "";
-    con.query(sql, [id], function (err, result) {
+    pool.getConnection(function(err,connection){ 
+if (err) {  
+reject(err);
+ }
+connection.query
+(sql, [id], function (err, result) {
       if (err) {
         msg = "failure";
         reject(err);
@@ -250,7 +300,12 @@ _publics.getAllChoiceMembers = (req) => {
   return new Promise((resolve, reject) => {
     var sql = "select * FROM choice_member";
 
-    con.query(sql, function (err, result) {
+    pool.getConnection(function(err,connection){ 
+if (err) {  
+reject(err);
+ }
+connection.query
+(sql, function (err, result) {
       if (err) reject(err);
       return resolve(JSON.stringify(result));
     });
@@ -261,7 +316,12 @@ _publics.getMemberByClass = (req) => {
   var idClazz = req.query.idClazz;
   return new Promise((resolve, reject) => {
     var sql = "select * FROM member where id_clazz=? ";
-    con.query(sql, [idClazz], function (err, result) {
+    pool.getConnection(function(err,connection){ 
+if (err) {  
+reject(err);
+ }
+connection.query
+(sql, [idClazz], function (err, result) {
       if (err) reject(err);
       return resolve(JSON.stringify(result));
     });
@@ -273,7 +333,12 @@ _publics.getTestMembersByClassSchool = (req) => {
   var id_school = req.query.id_school;
   return new Promise((resolve, reject) => {
     var sql = "select * FROM member where id_school=? and  id_clazz=? ";
-    con.query(sql, [id_school, id_clazz], function (err, result) {
+    pool.getConnection(function(err,connection){ 
+if (err) {  
+reject(err);
+ }
+connection.query
+(sql, [id_school, id_clazz], function (err, result) {
       if (err) reject(err);
       return resolve(JSON.stringify(result));
     });
@@ -288,7 +353,12 @@ _publics.createTestMember = (testId,memberId) => {
     var msg = "";
     var sql = "INSERT INTO test_member SET ? ";
     const newtestMember = { id_test: testId, id_member: memberId, date_test:date };
-    con.query(sql, newtestMember, function (err, result) {
+    pool.getConnection(function(err,connection){ 
+if (err) {  
+reject(err);
+ }
+connection.query
+(sql, newtestMember, function (err, result) {
       if (err) {
         msg = "failure";
         reject(err);
@@ -313,7 +383,12 @@ _publics.updateTestMember = (req, testMember) => {
   return new Promise((resolve, reject) => {
     var msg = "";
     var sql = "UPDATE test_member SET id_test=?, id_member=?  WHERE id = ?";
-    con.query(sql, [id_test, id_member, idTestMember], function (err, result) {
+    pool.getConnection(function(err,connection){ 
+if (err) {  
+reject(err);
+ }
+connection.query
+(sql, [id_test, id_member, idTestMember], function (err, result) {
       if (err) {
         msg = "failure";
         reject(err);
@@ -330,7 +405,12 @@ _publics.deleteTestMember = (req) => {
   return new Promise((resolve, reject) => {
     var sql = "DELETE FROM test_member WHERE id = ?";
     var msg = "";
-    con.query(sql, [idTestMember], function (err, result) {
+    pool.getConnection(function(err,connection){ 
+if (err) {  
+reject(err);
+ }
+connection.query
+(sql, [idTestMember], function (err, result) {
       if (err) {
         msg = "failure";
         reject(err);
@@ -347,7 +427,12 @@ _publics.getAllMemberTest = (req) => {
   return new Promise((resolve, reject) => {
     var sql = "select * FROM test_member where id_member=?";
 
-    con.query(sql, [idMember], function (err, result) {
+    pool.getConnection(function(err,connection){ 
+if (err) {  
+reject(err);
+ }
+connection.query
+(sql, [idMember], function (err, result) {
       if (err) reject(err);
       return resolve(JSON.stringify(result));
     });
@@ -360,7 +445,12 @@ _publics.getTestMemberByMemberIdAndTestId = (req) => {
   return new Promise((resolve, reject) => {
     var sql = "select * FROM test_member where id_member=? and id_test=?";
 
-    con.query(sql, [idMember,idTest], function (err, result) {
+    pool.getConnection(function(err,connection){ 
+if (err) {  
+reject(err);
+ }
+connection.query
+(sql, [idMember,idTest], function (err, result) {
       if (err) reject(err);
       return resolve(JSON.stringify(result[0]));
     });
@@ -375,7 +465,12 @@ _publics.getTestMemberByTestId = (req) => {
 
   return new Promise((resolve, reject) => {
     var sql = "select id as id FROM test_member where id_member=? and id_test=?";
-    con.query(sql, [id_member, id_test], function (err, result) {
+    pool.getConnection(function(err,connection){ 
+if (err) {  
+reject(err);
+ }
+connection.query
+(sql, [id_member, id_test], function (err, result) {
       if (err) reject(err);
       return resolve(JSON.stringify(result));
     });
@@ -390,7 +485,12 @@ _publics.getAllTestMembers = (req) => {
   return new Promise((resolve, reject) => {
     var sql = "select * FROM test_member";
 
-    con.query(sql, function (err, result) {
+    pool.getConnection(function(err,connection){ 
+if (err) {  
+reject(err);
+ }
+connection.query
+(sql, function (err, result) {
       if (err) reject(err);
       return resolve(JSON.stringify(result));
     });
@@ -411,7 +511,12 @@ _publics.updateManuelAnswer = (req, manuelAnswer) => {
   return new Promise((resolve, reject) => {
     var msg = "";
     var sql = "UPDATE manuel_answer set response=?  WHERE id = ?";
-    con.query(sql, [response, id], function (err, result) {
+    pool.getConnection(function(err,connection){ 
+if (err) {  
+reject(err);
+ }
+connection.query
+(sql, [response, id], function (err, result) {
       if (err) {
         msg = "failure";
         reject(err);
@@ -434,7 +539,12 @@ _publics.getTestDetails = (req) => {
       + "left join question q on (a.id_question=q.id) left join test_subcategory ts on (ts.id=q.id_test_subcategory) "
       + "left join subcategory s on(ts.id_subcategory=s.id) where id_test=? ";
 
-    con.query(sql, [id_test], function (err, result) {
+    pool.getConnection(function(err,connection){ 
+if (err) {  
+reject(err);
+ }
+connection.query
+(sql, [id_test], function (err, result) {
       if (err) reject(err);
       //{"answerId":1,"answer":"Dymanique","ordre":1,"subcategory_name":"Authenticité","idCategory":1}
 /*
@@ -483,7 +593,12 @@ _publics.verifPasswordTest = (test) => {
   return new Promise((resolve, reject) => {
 
     var sql = "select * FROM test where password=? ";
-    con.query(sql, [password], function (err, tests) {
+    pool.getConnection(function(err,connection){ 
+if (err) {  
+reject(err);
+ }
+connection.query
+(sql, [password], function (err, tests) {
       var tests = JSON.stringify(tests);
       tests = JSON.parse(tests);
 
@@ -512,7 +627,12 @@ module.exports = _publics;
 
 function createNewMemberChoices(choices, i, msg) {
     var sql = "INSERT INTO choice_member SET id_question=?,id_answer=? ,id_test_member=?   ";
-    con.query(sql, [choices[i].id_question, choices[i].id_answer, choices[i].id_test_member], function (err, result) {
+    pool.getConnection(function(err,connection){ 
+if (err) {  
+reject(err);
+ }
+connection.query
+(sql, [choices[i].id_question, choices[i].id_answer, choices[i].id_test_member], function (err, result) {
       if (err) {
         msg = "failure";
       }
@@ -525,7 +645,12 @@ function createNewMemberChoices(choices, i, msg) {
 
 /*function createNewMemberChoices(choices, i, msg) {
   var sql = "select count(*) as size from choice_member where id_question=? and id_test_member=?  ";
-  con.query(sql, [choices[i].id_question, choices[i].id_test_member], function (err, result) {
+  pool.getConnection(function(err,connection){ 
+if (err) {  
+reject(err);
+ }
+connection.query
+(sql, [choices[i].id_question, choices[i].id_test_member], function (err, result) {
 
     if (err) {
       msg = "failure";
@@ -535,7 +660,12 @@ function createNewMemberChoices(choices, i, msg) {
 
       if (size === 0) {
         var sql = "INSERT INTO choice_member SET id_question=?,id_answer=? ,id_test_member=?   ";
-        con.query(sql, [choices[i].id_question, choices[i].id_answer, choices[i].id_test_member], function (err, result) {
+        pool.getConnection(function(err,connection){ 
+if (err) {  
+reject(err);
+ }
+connection.query
+(sql, [choices[i].id_question, choices[i].id_answer, choices[i].id_test_member], function (err, result) {
           if (err) {
             msg = "failure";
           }
@@ -546,7 +676,12 @@ function createNewMemberChoices(choices, i, msg) {
         });
       } else {
         var sql = "update choice_member SET id_answer=? where id_question=? and id_test_member=?   ";
-        con.query(sql, [choices[i].id_answer, choices[i].id_question, choices[i].id_test_member], function (err, result) {
+        pool.getConnection(function(err,connection){ 
+if (err) {  
+reject(err);
+ }
+connection.query
+(sql, [choices[i].id_answer, choices[i].id_question, choices[i].id_test_member], function (err, result) {
           if (err) {
             msg = "failure";
           }
@@ -568,7 +703,12 @@ _publics.getTestEnCours = (req) => {
 
   return new Promise((resolve, reject) => {
     var sql = " select * from test t left join test_clazz tc on (t.id=tc.id_test) left join member m on (tc.id_clazz=m.id_clazz) where m.id=? and activation_date < ? and expiration_date >?";
-    con.query(sql, [id_member, date, date], function (err, result) {
+    pool.getConnection(function(err,connection){ 
+if (err) {  
+reject(err);
+ }
+connection.query
+(sql, [id_member, date, date], function (err, result) {
       if (err) reject(err);
       return resolve(JSON.stringify(result));
     });
@@ -583,7 +723,12 @@ _publics.loginForTest = (testId, password) => {
 
   return new Promise((resolve, reject) => {
     var sql = "select * FROM test where id=? ";
-    con.query(sql, [testId], function (err, tests) {
+    pool.getConnection(function(err,connection){ 
+if (err) {  
+reject(err);
+ }
+connection.query
+(sql, [testId], function (err, tests) {
       var tests = JSON.stringify(tests);
       tests = JSON.parse(tests);
 
@@ -612,7 +757,12 @@ _publics.deleteMemberChoicesByIdTestMember = (testMemberId) => {
   return new Promise((resolve, reject) => {
     var sql = " delete from choice_member where id_test_member=?";
     var msg="";
-    con.query(sql, [testMemberId], function (err, result) {
+    pool.getConnection(function(err,connection){ 
+if (err) {  
+reject(err);
+ }
+connection.query
+(sql, [testMemberId], function (err, result) {
       if (err) {
         msg = "failure";
       }
@@ -632,7 +782,12 @@ _publics.deleteManuelAnswersByTestMember = (req) => {
   return new Promise((resolve, reject) => {
     var sql = " delete from manuel_answer where id_member=? and id_test=?";
     var msg="";
-    con.query(sql, [id_member,id_test], function (err, result) {
+    pool.getConnection(function(err,connection){ 
+if (err) {  
+reject(err);
+ }
+connection.query
+(sql, [id_member,id_test], function (err, result) {
       if (err) {
         msg = "failure";
       }

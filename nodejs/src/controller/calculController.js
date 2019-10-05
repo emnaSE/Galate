@@ -34,7 +34,12 @@ _publics.createEtalonnage = (etalonnage) => {
              var msg="";
              var sql = "INSERT INTO etalonnage SET ? ";
              const newEtalonnage = { lower_bound: lower_bound,upper_bound:upper_bound,value:value,id_subcategory:id_subcategory};
-             con.query(sql,newEtalonnage, function (err, result) {
+             pool.getConnection(function(err,connection){ 
+if (err) {  
+reject(err);
+ }
+connection.query
+(sql,newEtalonnage, function (err, result) {
                 if (err){
                     msg="failure";
                     reject(err);
@@ -60,7 +65,12 @@ _publics.updateEtalonnage=(req,etalonnage) => {
     return new Promise((resolve, reject) => { 
              var msg="";
              var sql = "UPDATE etalonnage SET lower_bound=?, upper_bound=?, value=?, id_subcategory=?  WHERE id = ?"; 
-             con.query(sql,[lower_bound,upper_bound,value,id_subcategory,id], function (err, result) {
+             pool.getConnection(function(err,connection){ 
+if (err) {  
+reject(err);
+ }
+connection.query
+(sql,[lower_bound,upper_bound,value,id_subcategory,id], function (err, result) {
                 if (err){
                     msg="failure";
                     reject(err);
@@ -77,7 +87,12 @@ _publics.deleteEtalonnage = (req) => {
    return new Promise((resolve, reject) => {  
             var sql = "DELETE FROM etalonnage WHERE id = ?"; 
             var msg="";
-            con.query(sql,[id], function (err, result) {
+            pool.getConnection(function(err,connection){ 
+if (err) {  
+reject(err);
+ }
+connection.query
+(sql,[id], function (err, result) {
               if (err){
                 msg="failure";
                 reject(err);
@@ -94,7 +109,12 @@ _publics.getAllEtalonnages = (req) => {
     return new Promise((resolve, reject) => {  
              var sql = "select e.*, sc.name as subcategory FROM etalonnage e left join subcategory sc on(e.id_subcategory=sc.id) order by id DESC"; 
            
-                 con.query(sql, function (err, result) {
+                 pool.getConnection(function(err,connection){ 
+if (err) {  
+reject(err);
+ }
+connection.query
+(sql, function (err, result) {
                  if (err) reject(err);
                  return resolve(JSON.stringify(result));
                  });
@@ -106,7 +126,12 @@ _publics.getEtalonnageById = (req) => {
   return new Promise((resolve, reject) => {  
            var sql = "select * FROM etalonnage where id=?"; 
          
-               con.query(sql,[id], function (err, result) {
+               pool.getConnection(function(err,connection){ 
+if (err) {  
+reject(err);
+ }
+connection.query
+(sql,[id], function (err, result) {
                if (err) reject(err);
                return resolve(JSON.stringify(result));
                });
@@ -124,7 +149,12 @@ _publics.getEtalonnageById = (req) => {
            var sql = "select sum(a.value) as sum from answer a left join choice_member cm on(cm.id_answer=a.id) left join question q on (q.id=cm.id_question)"+
            " left join test_member tm on(tm.id_test=cm.id_test_member) where ordre=1 and tm.id_test=? and tm.id_member=?"; 
          
-               con.query(sql,[id_test,id_member], function (err, result) {
+               pool.getConnection(function(err,connection){ 
+if (err) {  
+reject(err);
+ }
+connection.query
+(sql,[id_test,id_member], function (err, result) {
                if (err) reject(err);
                return resolve(JSON.stringify(result));
                });
@@ -138,7 +168,12 @@ _publics.getLineSum = (req) => {
   return new Promise((resolve, reject) => {  
            var sql=" select tsc.id_subcategory, count(*) as sum from test_subcategory tsc left join question q on(q.id_test_subcategory=tsc.id) left join answer a on(a.id_question=q.id) "
            +"left join choice_member cm on(cm.id_answer=a.id) left join test_member tm on(tm.id=cm.id_test_member) where tm.id_member=? and tm.id_test=? and a.ordre=? group by tsc.id_subcategory ";
-               con.query(sql,[id_member,id_test, SECOND_ANSWER], function (err, result) {
+               pool.getConnection(function(err,connection){ 
+if (err) {  
+reject(err);
+ }
+connection.query
+(sql,[id_member,id_test, SECOND_ANSWER], function (err, result) {
                if (err) reject(err);
                return resolve(result);
                });
@@ -151,7 +186,12 @@ _publics.getLineSum = (req) => {
            var sql=" select tsc.id_subcategory, count(*) from test_subcategory tsc "+
            "left join question q on(q.id_test_subcategory=tsc.id) left join choice_member cm on(cm.id_question=q.id) "+
            "left join test_member tm on(tm.id=cm.id_test_member)   left join answer a on(a.id=cm.id_answer) where tm.id_test=? and tm.id_member=? and tsc.ordre=? and a.ordre=? ";
-               con.query(sql,[id_test, id_member, line, SECOND_ANSWER], function (err, result) {
+               pool.getConnection(function(err,connection){ 
+if (err) {  
+reject(err);
+ }
+connection.query
+(sql,[id_test, id_member, line, SECOND_ANSWER], function (err, result) {
                if (err) reject(err);
                return resolve(result);
                });
@@ -186,7 +226,12 @@ function getSumByOrder(req, order){
             " left join choice_member cm on(cm.id_question=q.id) left join test_member tm on(tm.id=cm.id_test_member)   "+
             " left join answer a on(a.id=cm.id_answer) where tm.id_test=? and tm.id_member=? and q.ordre=? and a.ordre=?) as total "+
            "from test_subcategory tscat  left join test_member tm on(tm.id_test=tscat.id_test)  where tm.id_test=? and tm.id_member=? and tscat.ordre=? ";
-               con.query(sql,[id_test, id_member, order, SECOND_ANSWER, id_test, id_member, order, FIRST_ANSWER,id_test, id_member, order], function (err, result) {
+               pool.getConnection(function(err,connection){ 
+if (err) {  
+reject(err);
+ }
+connection.query
+(sql,[id_test, id_member, order, SECOND_ANSWER, id_test, id_member, order, FIRST_ANSWER,id_test, id_member, order], function (err, result) {
                if (err) reject(err);
                return resolve(result[0]);
                });
@@ -200,7 +245,12 @@ _publics.getSubcategoriesAnswers = (req) => {
            var sql=" select tsc.id_subcategory, cm.id_answer as answer, tsc.ordre as x, q.ordre as y from test_subcategory tsc "+
            "left join question q on(q.id_test_subcategory=tsc.id) left join choice_member cm on(cm.id_question=q.id) "+
            "left join test_member tm on(tm.id=cm.id_test_member)  where tm.id_test=? and tm.id_member=? ";
-               con.query(sql,[id_test, id_member], function (err, result) {
+               pool.getConnection(function(err,connection){ 
+if (err) {  
+reject(err);
+ }
+connection.query
+(sql,[id_test, id_member], function (err, result) {
                if (err) reject(err);
                return resolve(result);
                });
@@ -237,7 +287,12 @@ function getLineValuesSum (req,order,id_test_subcategory){
   return new Promise((resolve, reject) => {  
            var sql=" select tsc.id_subcategory as id_subcategory, q.ordre as subcategoryOrder, count(*) as sum from test_subcategory tsc left join question q on(q.id_test_subcategory=tsc.id) left join answer a on(a.id_question=q.id) "
            +"left join choice_member cm on(cm.id_answer=a.id) left join test_member tm on(tm.id=cm.id_test_member) where tm.id_member=? and tm.id_test=? and a.ordre=? and tsc.ordre=? and tsc.id=? ";
-               con.query(sql,[id_member,id_test, SECOND_ANSWER,order,id_test_subcategory], function (err, result) {
+               pool.getConnection(function(err,connection){ 
+if (err) {  
+reject(err);
+ }
+connection.query
+(sql,[id_member,id_test, SECOND_ANSWER,order,id_test_subcategory], function (err, result) {
                if (err) reject(err);
                //console.log("-----------------------------==>"+JSON.stringify(result[0]));
                return resolve(result);
@@ -251,7 +306,12 @@ function getColumnValuesSum (req,order){
   return new Promise((resolve, reject) => {  
            var sql="select tsc.id_subcategory as subcategoryOrder, count(*) as sum from test_subcategory tsc left join question q on(q.id_test_subcategory=tsc.id) left join answer a on(a.id_question=q.id) "
            +"left join choice_member cm on(cm.id_answer=a.id) left join test_member tm on(tm.id=cm.id_test_member) where tm.id_member=? and tm.id_test=? and a.ordre=? and q.ordre=?";
-               con.query(sql,[id_member,id_test, FIRST_ANSWER,order], function (err, result) {
+               pool.getConnection(function(err,connection){ 
+if (err) {  
+reject(err);
+ }
+connection.query
+(sql,[id_member,id_test, FIRST_ANSWER,order], function (err, result) {
                if (err) reject(err);
                return resolve(result);
                });
@@ -269,7 +329,12 @@ _publics.createManuelAnswer= (req,sum) => {
            var msg="";
            var sql = "INSERT INTO manuel_answer SET ? ";
            const manuelAnswer = { id_test: id_test,id_member:id_member,id_subcategory:id_subcategory,result:sum[0].sum};
-           con.query(sql,manuelAnswer, function (err, result) {
+           pool.getConnection(function(err,connection){ 
+if (err) {  
+reject(err);
+ }
+connection.query
+(sql,manuelAnswer, function (err, result) {
             if (err){
               msg="failure"; 
               reject(err);
@@ -291,7 +356,12 @@ _publics.createListOfManuelAnswers= (req, sumLines) => {
                 var msg="";
                 var sql = "INSERT INTO manuel_answer SET ? ";
                 const manuelAnswer = { id_test: id_test,id_member:id_member,id_subcategory:sumLines[i].id_subcategory,result:sumLines[i].sum};
-                con.query(sql,manuelAnswer, function (err, result) {
+                pool.getConnection(function(err,connection){ 
+if (err) {  
+reject(err);
+ }
+connection.query
+(sql,manuelAnswer, function (err, result) {
                 if (err){
                   msg="failure"; 
                   reject(err);
@@ -311,47 +381,76 @@ _publics.updateListOfManuelAnswers= (req, sum) => {
   let promises = [];
  var id_test=req.query.id_test;
  var id_member=req.query.id_member;
- for (var i=0;i<sum.length;i++) {
+ for (var i=0;i < sum.length;i++) {
               promises.push( new Promise((resolve, reject) => {  
-                var msg="";
-                var sql = "update manuel_answer set result=?  where  id_member=? and id_test=? and id_subcategory=?";
-                con.query(sql,[sum[i].total,id_member,id_test,sum[i].subcat], function (err, result) {
-                if (err){
-                  msg="failure"; 
-                  reject(err);
-                }else{
-                  msg="success";
-                }
-                return resolve(msg);
-              });
-            }));
+               var response=updateManualAnswer(id_test,id_member,sum[i]);
+               resolve(response);
+              }));
   }
   return Promise.all(promises)   
 };
+
+
+function updateManualAnswer(id_test,id_member,result){
+
+  return new Promise((resolve, reject) => { 
+        var msg="";
+        var sql = "update manuel_answer set result=?  where  id_member=? and id_test=? and id_subcategory=?";
+        pool.getConnection(function(err,connection){
+                              
+          if (err) {
+            reject(err);
+          }   
+          connection.query(sql,[result.total,id_member,id_test,result.subcat], function (err, result) {
+          connection.release();
+              if (err){
+                msg="failure"; 
+                reject(err);
+              }else{
+                msg="success";
+              }
+              return resolve(msg);
+            });
+        });
+  });
+}
 
 _publics.updateManualAnswerEtalonnageResult= (req, sum) => { 
   let promises = [];
  var id_test=req.query.id_test;
  var id_member=req.query.id_member;
-
  for (var i=0;i<sum.length;i++) {
               promises.push( new Promise((resolve, reject) => {  
-                var msg="";
-                var sql = "update manuel_answer set etallonage_result = coalesce( ("+
-                  " select max(value) from etalonnage where id_subcategory=? and ? between lower_bound and upper_bound) ,0) where id_member=? and id_test=? and id_subcategory=?";
-                con.query(sql,[sum[i].subcat,sum[i].total,id_member,id_test,sum[i].subcat], function (err, result) {
-                if (err){
-                  msg="failure"; 
-                  reject(err);
-                }else{
-                  msg="success";
-                }
-                return resolve(msg);
-              });
+                var response=updateManualAnswerEtalonnageResult(id_test,id_member,sum[i]);
+                resolve(response);
             }));
   }
   return Promise.all(promises)   
 };
+
+function updateManualAnswerEtalonnageResult(id_test,id_member,result){
+  return new Promise((resolve, reject) => { 
+        var msg="";
+        var sql = "update manuel_answer set etallonage_result = coalesce( ("+
+          " select max(value) from etalonnage where id_subcategory=? and ? between lower_bound and upper_bound) ,0) where id_member=? and id_test=? and id_subcategory=?";
+          pool.getConnection(function(err,connection){
+                              
+              if (err) {
+                reject(err);
+              }   
+              connection.query(sql,[result.subcat,result.total,id_member,id_test,result.subcat], function (err, result) {
+              connection.release();
+              if (err){
+                msg="failure"; 
+                reject(err);
+              }else{
+                msg="success";
+              }
+              return resolve(msg);
+            });
+          });
+  });
+}
 
 
 
@@ -363,7 +462,12 @@ _publics.setEtalonnageValue= (req,value) => {
     return new Promise((resolve, reject) => { 
              var msg="";
              var sql = "UPDATE manuel_answer set etallonage_result=?  WHERE id = ?"; 
-             con.query(sql,[value[0].value,value[1].id], function (err, result) {
+             pool.getConnection(function(err,connection){ 
+if (err) {  
+reject(err);
+ }
+connection.query
+(sql,[value[0].value,value[1].id], function (err, result) {
                 if (err){
                     msg="failure";
                     reject(err);
@@ -382,7 +486,12 @@ _publics.getEtalonnageValue = (req) => {
   return new Promise((resolve, reject) => {  
            var sql = "select e.value as value, ma.id as id from etalonnage e left join manuel_answer ma on(ma.id_subcategory=e.id_subcategory) where ma.id_subcategory=? and ma.result between e.upper_bound and e.lower_bound"; 
          
-               con.query(sql,[id_subcategory], function (err, result) {
+               pool.getConnection(function(err,connection){ 
+if (err) {  
+reject(err);
+ }
+connection.query
+(sql,[id_subcategory], function (err, result) {
                if (err) reject(err);
                return resolve(JSON.stringify(result));
                });
@@ -395,7 +504,12 @@ _publics.getEtalonnageResults = (req) => {
   return new Promise((resolve, reject) => {  
            var sql = "select c.name as catName,sc.name as subCatName, sc.down_description, sc.up_description, ma.etallonage_result as result from manuel_answer ma left join subcategory sc on(sc.id=ma.id_subcategory) left join category c on (c.id=sc.id_category)  where ma.id_test=? and ma.id_member=?"; 
          
-               con.query(sql,[id_test,id_member], function (err, result) {
+               pool.getConnection(function(err,connection){ 
+if (err) {  
+reject(err);
+ }
+connection.query
+(sql,[id_test,id_member], function (err, result) {
                if (err) reject(err);
                return resolve(JSON.stringify(result));
                });
@@ -408,7 +522,12 @@ _publics.getCategoryNameByMemberIdAndTestId = (req) => {
   return new Promise((resolve, reject) => {  
            var sql = "select distinct c.name  as name , c.id as category_id, c.ordre  from manuel_answer ma left join subcategory sc on(sc.id=ma.id_subcategory) left join category c on (c.id=sc.id_category)  where ma.id_test=? and ma.id_member=? order by c.ordre asc"; 
          
-               con.query(sql,[id_test,id_member], function (err, result) {
+               pool.getConnection(function(err,connection){ 
+if (err) {  
+reject(err);
+ }
+connection.query
+(sql,[id_test,id_member], function (err, result) {
                if (err) reject(err);
                return resolve(JSON.stringify(result));
                });
@@ -421,7 +540,12 @@ _publics.getCategoryNameByMemberIdAndTestIdBySecondOrder = (req) => {
   return new Promise((resolve, reject) => {  
            var sql = "select distinct c.name  as name , c.id as category_id, c.ordre, c.ordre2  from manuel_answer ma left join subcategory sc on(sc.id=ma.id_subcategory) left join category c on (c.id=sc.id_category)  where ma.id_test=? and ma.id_member=? order by c.ordre2 asc"; 
          
-               con.query(sql,[id_test,id_member], function (err, result) {
+               pool.getConnection(function(err,connection){ 
+if (err) {  
+reject(err);
+ }
+connection.query
+(sql,[id_test,id_member], function (err, result) {
                if (err) reject(err);
                return resolve(JSON.stringify(result));
                });
@@ -435,7 +559,12 @@ _publics.getEtalonnageDetails = (req) => {
   return new Promise((resolve, reject) => {  
            var sql = "select sc.name as subCatName, sc.down_description, sc.up_description, ma.etallonage_result as result from manuel_answer ma left join subcategory sc on(sc.id=ma.id_subcategory) left join category c on (c.id=sc.id_category)  where ma.id_test=? and ma.id_member=? and c.id = ?"; 
          
-               con.query(sql,[id_test,id_member,id_category], function (err, result) {
+               pool.getConnection(function(err,connection){ 
+if (err) {  
+reject(err);
+ }
+connection.query
+(sql,[id_test,id_member,id_category], function (err, result) {
                if (err) reject(err);
                return resolve(JSON.stringify(result));
                });
@@ -450,7 +579,12 @@ _publics.getSubCategoryName = (req) => {
   return new Promise((resolve, reject) => {  
            var sql = "select sc.name as subCatName from manuel_answer ma left join subcategory sc on(sc.id=ma.id_subcategory) left join category c on (c.id=sc.id_category)  where ma.id_test=? and ma.id_member=?"; 
          
-               con.query(sql,[id_test,id_member,id_category], function (err, result) {
+               pool.getConnection(function(err,connection){ 
+if (err) {  
+reject(err);
+ }
+connection.query
+(sql,[id_test,id_member,id_category], function (err, result) {
                if (err) reject(err);
                return resolve(result);
                });
@@ -463,7 +597,12 @@ _publics.updateManualAnswer = (req) => {
   return new Promise((resolve, reject) => {  
            var sql = "update manuel_answer set response=? where id=?"; 
            var msg="";
-               con.query(sql,[response,manualAnwserId], function (err, result) {
+               pool.getConnection(function(err,connection){ 
+if (err) {  
+reject(err);
+ }
+connection.query
+(sql,[response,manualAnwserId], function (err, result) {
                 if (err){
                   msg="failure";
                   reject(err);
@@ -499,7 +638,12 @@ _publics.updateManualAnswer = (req) => {
 _publics.getAllCriterionsByCategoryId = (categoryId) => { 
   return new Promise((resolve, reject) => {  
            var sql = "select c.*, c.result as score from criterion c where c.id_category=? order by c.ordre asc"; 
-               con.query(sql,[categoryId], function (err, result) {
+               pool.getConnection(function(err,connection){ 
+if (err) {  
+reject(err);
+ }
+connection.query
+(sql,[categoryId], function (err, result) {
                 if (err){
                   reject(err);
                 }
@@ -537,7 +681,12 @@ _publics.deleteMemberTestResultSkills = (req) => {
   var testId=req.query.testId;
   return new Promise((resolve, reject) => {  
            var sql = "delete from criterion_result where id_test=? and id_member=?"; 
-               con.query(sql,[testId,memberId], function (err, result) {
+               pool.getConnection(function(err,connection){ 
+if (err) {  
+reject(err);
+ }
+connection.query
+(sql,[testId,memberId], function (err, result) {
                 if (err){
                   reject(err);
                 }
@@ -551,7 +700,12 @@ _publics.deleteMemberTestCriterionResultSkills = (criterionTestCategoryList, mem
    for (var i=0;i<criterionTestCategoryList.length;i++) {
        promises.push( new Promise((resolve, reject) => {  
         var sql = "delete from criterion_result where id_criterion_test_category=? and id_member=?"; 
-               con.query(sql,[criterionTestCategoryList[i].id,memberId], function (err, result) {
+               pool.getConnection(function(err,connection){ 
+if (err) {  
+reject(err);
+ }
+connection.query
+(sql,[criterionTestCategoryList[i].id,memberId], function (err, result) {
                 if (err){
                   reject(err);
                 }
@@ -620,7 +774,12 @@ function calculatePinkSkill(testId,memberId,criterion){
    /* .then(score=>{
       return new Promise((resolve, reject) => {  
         var sql = "update criterion set result= ? where id=?"; 
-        con.query(sql,[score,criterion.id], function (err, result) {
+        pool.getConnection(function(err,connection){ 
+if (err) {  
+reject(err);
+ }
+connection.query
+(sql,[score,criterion.id], function (err, result) {
         if (err)
           reject(err);
         return resolve(score);
@@ -630,7 +789,12 @@ function calculatePinkSkill(testId,memberId,criterion){
     .then(result=>{
       var sql = "INSERT INTO criterion_result SET ? ";
       const newCriterionResult = { id_member: memberId,id_test:testId,result:result,id_criterion_test_category:criterion.id};
-      con.query(sql,newCriterionResult, function (err, result) {
+      pool.getConnection(function(err,connection){ 
+if (err) {  
+reject(err);
+ }
+connection.query
+(sql,newCriterionResult, function (err, result) {
       if (err)
         reject(err);
       return resolve(result);
@@ -648,7 +812,12 @@ function calculateYellowSkill(testId,memberId,criterion){
       return new Promise((resolve, reject) => { 
         var result=score[0].result;
         var sql = "update criterion set result= ? where id=?"; 
-        con.query(sql,[result,criterion.id], function (err, res) {
+        pool.getConnection(function(err,connection){ 
+if (err) {  
+reject(err);
+ }
+connection.query
+(sql,[result,criterion.id], function (err, res) {
         if (err)
           reject(err);
         return resolve(result);
@@ -662,7 +831,12 @@ function calculateYellowSkill(testId,memberId,criterion){
       }
       var sql = "INSERT INTO criterion_result SET ? ";
       const newCriterionResult = { id_member: memberId,id_test:testId,result:result,id_criterion_test_category:criterion.id};
-      con.query(sql,newCriterionResult, function (err, res) {
+      pool.getConnection(function(err,connection){ 
+if (err) {  
+reject(err);
+ }
+connection.query
+(sql,newCriterionResult, function (err, res) {
       if (err)
         reject(err);
       return resolve(res);
@@ -677,7 +851,12 @@ function getSubcategoriesScore(testId,memberId,criterion){
   return new Promise((resolve, reject) => {  
     var sql ="select 	coalesce(  FLOOR(( (select ma.etallonage_result from manuel_answer ma where id_member=? and id_test=? and id_subcategory=?) " +
     " + (select ma.etallonage_result from manuel_answer ma where id_member=? and id_test=? and id_subcategory=?) ) /2) ,0) as result ";
-        con.query(sql,[memberId,testId,criterion.id_subcategory1,memberId,testId,criterion.id_subcategory2], function (err, result) {
+        pool.getConnection(function(err,connection){ 
+if (err) {  
+reject(err);
+ }
+connection.query
+(sql,[memberId,testId,criterion.id_subcategory1,memberId,testId,criterion.id_subcategory2], function (err, result) {
          if (err){
            reject(err);
          }
@@ -700,7 +879,12 @@ function calculateBlueSkySkill(testId,memberId,criterion){
    /* .then(result=>{
       return new Promise((resolve, reject) => {  
         var sql = "update criterion set result= ? where id=?"; 
-        con.query(sql,[result,criterion.id], function (err, res) {
+        pool.getConnection(function(err,connection){ 
+if (err) {  
+reject(err);
+ }
+connection.query
+(sql,[result,criterion.id], function (err, res) {
         if (err)
           reject(err);
         return resolve(result);
@@ -710,7 +894,12 @@ function calculateBlueSkySkill(testId,memberId,criterion){
     .then(result=>{
       var sql = "INSERT INTO criterion_result SET ? ";
       const newCriterionResult = { id_member: memberId,id_test:testId,result:result,id_criterion_test_category:criterion.id};
-      con.query(sql,newCriterionResult, function (err, res) {
+      pool.getConnection(function(err,connection){ 
+if (err) {  
+reject(err);
+ }
+connection.query
+(sql,newCriterionResult, function (err, res) {
       if (err)
         reject(err);
       return resolve(res);
@@ -736,7 +925,12 @@ function calculateBlueSkill(res,testId,memberId,criterion){
     .then(result=>{
       var sql = "INSERT INTO criterion_result SET ? ";
       const newCriterionResult = { id_member: memberId,id_test:testId,result:result,id_criterion_test_category:criterion.id};
-      con.query(sql,newCriterionResult, function (err, res) {
+      pool.getConnection(function(err,connection){ 
+if (err) {  
+reject(err);
+ }
+connection.query
+(sql,newCriterionResult, function (err, res) {
       if (err)
         reject(err);
       return resolve(res);
@@ -758,7 +952,12 @@ function calculateScoreWithMedian(score){
 function updateCriterionResult(result,criterion){
   return new Promise((resolve, reject) => { 
     var sql = "update criterion set result= ? where id=?"; 
-    con.query(sql,[result,criterion.id], function (err, result) {
+    pool.getConnection(function(err,connection){ 
+if (err) {  
+reject(err);
+ }
+connection.query
+(sql,[result,criterion.id], function (err, result) {
     if (err)
       reject(err);
     return resolve(result);
@@ -768,7 +967,12 @@ function updateCriterionResult(result,criterion){
 function getSubcategoryScore(testId,memberId,subcategoryId, score1){
   return new Promise((resolve, reject) => {  
     var sql ="select FLOOR(m.etallonage_result) as score from manuel_answer m where m.id_member=? and id_test=? and m.id_subcategory=?";
-        con.query(sql,[memberId,testId,subcategoryId], function (err, res) {
+        pool.getConnection(function(err,connection){ 
+if (err) {  
+reject(err);
+ }
+connection.query
+(sql,[memberId,testId,subcategoryId], function (err, res) {
          if (err){
            reject(err);
          }
@@ -803,7 +1007,12 @@ function saveSkillsResult(testId,memberId,criterion){
   return new Promise((resolve, reject) => { 
         var sql = "INSERT INTO criterion_result SET ? ";
         const newCriterionResult = { id_member: memberId,id_test:testId,result:criterion.result,id_criterion:criterion.id};
-        con.query(sql,newCriterionResult, function (err, result) {
+        pool.getConnection(function(err,connection){ 
+if (err) {  
+reject(err);
+ }
+connection.query
+(sql,newCriterionResult, function (err, result) {
          if (err){
            reject(err);
          }
