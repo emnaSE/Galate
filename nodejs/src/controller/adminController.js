@@ -9,7 +9,7 @@ const path = require('path');
 var fs = require("fs"); // node filesystem
 var tmp = require('tmp');
 const lineReader = require('line-reader');
-
+var pool=config.pool;
 
 
 const request = require('request');
@@ -1118,6 +1118,7 @@ _publics.getTestSubcategoriesByTestId = (testId) => {
      });
 });      
 }; 
+
 
 _publics.getTestSubcategoriesById = (idTestSubcategory) => { 
 
@@ -3402,6 +3403,7 @@ _publics.getCriterionTestCategory = (req) => {
   }); 
 }
 
+
 _publics.updateCategoryCriterionOrder = (ordre, req) => {
   return new Promise((resolve, reject) => {  
     var sql = "update criterion_test_category  set ordre=? where id=?"; 
@@ -3431,6 +3433,162 @@ _publics.unassignCriterionToTestCategory=(id) => {
         return resolve(msg);
       });   
     });
+}
+
+
+_publics.getTestForTest = (req) => {
+  var tesId=req.query.testId;
+  return new Promise((resolve, reject) => {  
+    var sql = "select * from testg where id=?";    
+    pool.getConnection(function(err,connection){
+      if (err) {
+        reject(err);
+      }   
+      connection.query(sql,[tesId], function (err, result) {
+    if (err) reject(err);
+    return resolve(result);
+    });
+  }); 
+}); 
+}
+
+
+
+
+_publics.getTestCategoriesWithCriterions = (res,testCategories) => { 
+  let promises = [];
+  for (var i=0; i<testCategories.length;i++) {
+    promises.push(new Promise((resolve, reject) => {
+       var criterions= getTestCategoryWithCriterionsBytestCategoryId(res,testCategories[i].id)  ;  
+       return resolve(criterions);
+    }
+    ));
+  }
+  return Promise.all(promises)    
+};
+
+
+function getTestCategoryWithCriterionsBytestCategoryId(res,testCategoryId){ 
+  return new Promise((resolve, reject) => { 
+      var obj={};
+      var crite=[];
+      var testcat=[];
+      getTestCategoryById(testCategoryId)
+      .then(testCategory=>{
+        testcat=testCategory;
+        
+        return getTestCriterionsByCategory(testCategory[0].id);
+
+      }) 
+      .then(criterions=>{
+        crite=criterions;
+        obj={
+          "testCategory":testcat[0],
+          "criterions":crite
+        }
+         return resolve(obj);
+      })  
+  })    
+};
+
+function getTestCategoryById(testCategoryId){
+    return new Promise((resolve, reject) => { 
+      var sql = "select * from test_category where id=?";
+      con.query(sql,[testCategoryId], function (err, result) {
+              if (err){
+                reject(err);
+              }else{         
+                return resolve(result);
+              }
+        });
+    })
+}
+
+
+
+function getTestCriterionsByCategory(testCategoryId){
+  return new Promise((resolve, reject) => { 
+    var sql = "select * from criterion_test_category where id_test_category=?";
+    con.query(sql,[testCategoryId], function (err, result) {
+            if (err){
+              reject(err);
+            }else{         
+              return resolve(result);
+            }
+            
+      });
+  })
+}
+
+
+
+_publics.duplicateTestCategoriesWithCriterions = (testCategories, newTestId) => { 
+  let promises = [];
+  for (var i=0; i<testCategories.length;i++) {
+    promises.push(new Promise((resolve, reject) => {
+      var response=duplicateTestCategoriesWithCriterions(i,testCategories[i], newTestId);
+      return resolve(response);
+    }
+    ));
+  }
+  return Promise.all(promises)      
+}; 
+
+function duplicateTestCategoriesWithCriterions(i,testCategory, newTestId){
+  return new Promise((resolve, reject) => { 
+        return duplicateTestCategory(testCategory.testCategory.id_category,newTestId)
+        .then(newTestCategoryId=>{
+            return duplicateCriterionsTestCategory(newTestCategoryId,testCategory.criterions);
+        })
+        .then(response=>{
+          return resolve(response);
+        })
+      });
+}
+
+
+function duplicateCriterionsTestCategory(newTestCategoryId,criterions){ 
+  let promises = [];
+  for (var i=0; i<criterions.length;i++) {
+    promises.push(new Promise((resolve, reject) => {
+      var result=duplicateCriterionTestCategory(newTestCategoryId,criterions[i])
+      return resolve(result); 
+    
+    }
+    ));
+  }
+  return Promise.all(promises)      
+}; 
+
+
+
+
+function duplicateTestCategory(categoryId,newTestId){
+  return new Promise((resolve, reject) => { 
+    var sql = "INSERT INTO test_category SET? ";
+    con.query(sql,{id_category:categoryId,id_test:newTestId}, function (err, result) {
+            if (err){
+              reject(err);
+            }else{         
+              return resolve(result.insertId);
+            }
+            
+      });
+  })
+}
+
+function duplicateCriterionTestCategory(newTestCategoryId,criterion){
+  return new Promise((resolve, reject) => { 
+    var sql = "INSERT INTO criterion_test_category SET? ";
+    con.query(sql,{id_test_category:newTestCategoryId,id_criterion:criterion.id_criterion,ordre:criterion.ordre,id_subcategory1:criterion.id_subcategory1,id_subcategory2:criterion.id_subcategory2,median:criterion.median}, function (err, result) {
+            if (err){
+              reject(err);
+            }else{         
+              return resolve(result);
+            }
+            
+      });
+  })
 }
 
 

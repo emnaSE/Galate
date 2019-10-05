@@ -22,7 +22,7 @@ create table criterion_result(
 	FOREIGN KEY (id_criterion_test_category) REFERENCES criterion_test_category(id),
     FOREIGN KEY (id_member) REFERENCES member(id)
 );
-alter table criterion_result add column id_test bigint;
+alter table criterion_result add column id_test int(11);
 alter table criterion_result add FOREIGN KEY (id_test) REFERENCES test(id);
 		
 	

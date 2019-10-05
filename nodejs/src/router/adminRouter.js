@@ -555,10 +555,7 @@ router.post('/AffectSubcategoryToTest', (req, res, next) => adminController
 .catch(next));
 
 
-
-
-
-
+/*
 
 router.post('/duplicateTest',(req, res, next)=>memberController
 .getRawBody(req)
@@ -593,6 +590,66 @@ router.post('/duplicateTest',(req, res, next)=>memberController
     var newTestId=response.testId;
     res.payload.testId=newTestId;
     return adminController.duplicateTestCategory(res.payload.testCategories,newTestId)
+ })
+.then(response=>{
+    if(res.payload.leave===true){
+        return;
+    }
+   return adminController.duplicateTestSubCategories(res, res.payload.testSubcategories, res.payload.testId)
+})
+.then(response=>{
+    res.send("ok");
+ })
+.catch(next));
+
+
+
+
+*/
+
+
+
+
+router.post('/duplicateTest',(req, res, next)=>memberController
+.getRawBody(req)
+.then(test=>{
+    var testParsed=JSON.parse(test);
+    //req.query.id=testParsed.id;
+    req.query.id=testParsed.id_test[0];
+    res.payload.testName=testParsed.name;
+    return adminController.getTestById(req)
+})
+.then(test=>{
+    res.payload.test=JSON.parse(test);
+    var testId=JSON.parse(test).id;
+    //return adminController.getTestCategoryByTestId(testId)
+    return adminController.getTestCategoryByTestId(testId)
+})
+.then(testCategories=>{
+    return adminController.getTestCategoriesWithCriterions(res,testCategories)
+})
+.then(testCategories=>{
+    
+    res.payload.testCategories=testCategories;
+    return adminController.getTestSubcategoriesByTestId(res.payload.test.id)
+})
+.then(testSubcategories=>{
+    return adminController.getQuestionsBySubcategories(testSubcategories);
+})
+.then(response=>{ 
+    res.payload.testSubcategories=response; 
+    return adminController.duplicateTest(res.payload.testName, res.payload.test);
+})
+.then(response=>{
+    if(response.msg==="failure"){
+        res.payload.leave=true;
+        return;
+    }
+    var newTestId=response.testId;
+    res.payload.testId=newTestId;
+    //return adminController.duplicateTestCategory(res.payload.testCategories,newTestId)
+    console.log("5555555555555 "+JSON.stringify(res.payload.testCategories));
+    return adminController.duplicateTestCategoriesWithCriterions(res.payload.testCategories,newTestId)
  })
 .then(response=>{
     if(res.payload.leave===true){
@@ -1120,6 +1177,13 @@ router.get('/unassignCriterionToTestCategory', (req, res, next) => adminControll
 })
 .catch(next));
 
+
+router.get('/testPool', (req, res, next) => adminController
+.getTestForTest(req)
+.then(msg => {
+    res.send(msg);
+})
+.catch(next));
 
 
 module.exports = router;

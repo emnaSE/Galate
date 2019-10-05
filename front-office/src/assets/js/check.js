@@ -33,11 +33,11 @@ function fill(elem){
     elem.style.visibility="hidden";*/
     var enfants = elem.parentElement.children;
       
-        for (var i = 0; i < enfants.length; i++) {
-           if(enfants[i].style.backgroundImage =='url("assets/img/done2.png")'){
-                enfants[i].style.backgroundImage = "url('')";
-           }
+    for (var i = 0; i < enfants.length; i++) {
+        if (enfants[i].style.backgroundImage.indexOf("done2.png") != -1) {//url("http://localhost:4200/assets/img/done2.png")
+            enfants[i].style.backgroundImage = "url('')";
         }
+    }
     elem.style.backgroundImage = "url('assets/img/done2.png')";
     elem.style.backgroundSize="25px";
     elem.style.backgroundRepeat="no-repeat";
