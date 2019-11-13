@@ -20,6 +20,7 @@ router.use((req, res, next) => {
 const request = require('request');
 var config = require('../config');
 var url=`http://localhost:`+config.port;
+var pool=config.pool;
 
 
 _publics.createEtalonnage = (etalonnage) => { 
@@ -35,11 +36,11 @@ _publics.createEtalonnage = (etalonnage) => {
              var sql = "INSERT INTO etalonnage SET ? ";
              const newEtalonnage = { lower_bound: lower_bound,upper_bound:upper_bound,value:value,id_subcategory:id_subcategory};
              pool.getConnection(function(err,connection){ 
-if (err) {  
-reject(err);
- }
-connection.query
-(sql,newEtalonnage, function (err, result) {
+            if (err) {  
+            reject(err);
+            }
+            connection.query(sql,newEtalonnage, function (err, result) {
+              connection.release(); 
                 if (err){
                     msg="failure";
                     reject(err);
@@ -50,7 +51,7 @@ connection.query
              });
     });   
   
-        
+  });
   }; 
 
 _publics.updateEtalonnage=(req,etalonnage) => { 
@@ -66,11 +67,11 @@ _publics.updateEtalonnage=(req,etalonnage) => {
              var msg="";
              var sql = "UPDATE etalonnage SET lower_bound=?, upper_bound=?, value=?, id_subcategory=?  WHERE id = ?"; 
              pool.getConnection(function(err,connection){ 
-if (err) {  
-reject(err);
- }
-connection.query
-(sql,[lower_bound,upper_bound,value,id_subcategory,id], function (err, result) {
+            if (err) {  
+            reject(err);
+            }
+            connection.query(sql,[lower_bound,upper_bound,value,id_subcategory,id], function (err, result) {
+              connection.release(); 
                 if (err){
                     msg="failure";
                     reject(err);
@@ -80,6 +81,7 @@ connection.query
               return resolve(msg);
              });
            });    
+          });
   };
 
 _publics.deleteEtalonnage = (req) => { 
@@ -88,11 +90,11 @@ _publics.deleteEtalonnage = (req) => {
             var sql = "DELETE FROM etalonnage WHERE id = ?"; 
             var msg="";
             pool.getConnection(function(err,connection){ 
-if (err) {  
-reject(err);
- }
-connection.query
-(sql,[id], function (err, result) {
+            if (err) {  
+            reject(err);
+            }
+            connection.query(sql,[id], function (err, result) {
+              connection.release(); 
               if (err){
                 msg="failure";
                 reject(err);
@@ -102,6 +104,7 @@ connection.query
              return resolve(msg);
             });
           });    
+        });
 };
 
 _publics.getAllEtalonnages = (req) => { 
@@ -110,14 +113,15 @@ _publics.getAllEtalonnages = (req) => {
              var sql = "select e.*, sc.name as subcategory FROM etalonnage e left join subcategory sc on(e.id_subcategory=sc.id) order by id DESC"; 
            
                  pool.getConnection(function(err,connection){ 
-if (err) {  
-reject(err);
- }
-connection.query
-(sql, function (err, result) {
+                if (err) {  
+                reject(err);
+                }
+                connection.query(sql, function (err, result) {
+                  connection.release(); 
                  if (err) reject(err);
                  return resolve(JSON.stringify(result));
                  });
+                });
      });    
  };
 
@@ -127,14 +131,15 @@ _publics.getEtalonnageById = (req) => {
            var sql = "select * FROM etalonnage where id=?"; 
          
                pool.getConnection(function(err,connection){ 
-if (err) {  
-reject(err);
- }
-connection.query
-(sql,[id], function (err, result) {
+              if (err) {  
+              reject(err);
+              }
+              connection.query(sql,[id], function (err, result) {
+                connection.release(); 
                if (err) reject(err);
                return resolve(JSON.stringify(result));
                });
+              });
    });    
 };
 
@@ -169,14 +174,15 @@ _publics.getLineSum = (req) => {
            var sql=" select tsc.id_subcategory, count(*) as sum from test_subcategory tsc left join question q on(q.id_test_subcategory=tsc.id) left join answer a on(a.id_question=q.id) "
            +"left join choice_member cm on(cm.id_answer=a.id) left join test_member tm on(tm.id=cm.id_test_member) where tm.id_member=? and tm.id_test=? and a.ordre=? group by tsc.id_subcategory ";
                pool.getConnection(function(err,connection){ 
-if (err) {  
-reject(err);
- }
-connection.query
-(sql,[id_member,id_test, SECOND_ANSWER], function (err, result) {
+              if (err) {  
+              reject(err);
+              }
+              connection.query(sql,[id_member,id_test, SECOND_ANSWER], function (err, result) {
+                connection.release(); 
                if (err) reject(err);
                return resolve(result);
                });
+              });
    });    
 };
 /*_publics.getLineSum = (req, line) => { 
@@ -227,14 +233,15 @@ function getSumByOrder(req, order){
             " left join answer a on(a.id=cm.id_answer) where tm.id_test=? and tm.id_member=? and q.ordre=? and a.ordre=?) as total "+
            "from test_subcategory tscat  left join test_member tm on(tm.id_test=tscat.id_test)  where tm.id_test=? and tm.id_member=? and tscat.ordre=? ";
                pool.getConnection(function(err,connection){ 
-if (err) {  
-reject(err);
- }
-connection.query
-(sql,[id_test, id_member, order, SECOND_ANSWER, id_test, id_member, order, FIRST_ANSWER,id_test, id_member, order], function (err, result) {
-               if (err) reject(err);
+              if (err) {  
+              reject(err);
+              }
+              connection.query(sql,[id_test, id_member, order, SECOND_ANSWER, id_test, id_member, order, FIRST_ANSWER,id_test, id_member, order], function (err, result) {
+                connection.release(); 
+                if (err) reject(err);
                return resolve(result[0]);
                });
+              });
    });  
 };
 
@@ -246,14 +253,15 @@ _publics.getSubcategoriesAnswers = (req) => {
            "left join question q on(q.id_test_subcategory=tsc.id) left join choice_member cm on(cm.id_question=q.id) "+
            "left join test_member tm on(tm.id=cm.id_test_member)  where tm.id_test=? and tm.id_member=? ";
                pool.getConnection(function(err,connection){ 
-if (err) {  
-reject(err);
- }
-connection.query
-(sql,[id_test, id_member], function (err, result) {
+                if (err) {  
+                reject(err);
+                }
+                connection.query(sql,[id_test, id_member], function (err, result) {
+                  connection.release(); 
                if (err) reject(err);
                return resolve(result);
                });
+              });
    });    
 };
 
@@ -288,15 +296,16 @@ function getLineValuesSum (req,order,id_test_subcategory){
            var sql=" select tsc.id_subcategory as id_subcategory, q.ordre as subcategoryOrder, count(*) as sum from test_subcategory tsc left join question q on(q.id_test_subcategory=tsc.id) left join answer a on(a.id_question=q.id) "
            +"left join choice_member cm on(cm.id_answer=a.id) left join test_member tm on(tm.id=cm.id_test_member) where tm.id_member=? and tm.id_test=? and a.ordre=? and tsc.ordre=? and tsc.id=? ";
                pool.getConnection(function(err,connection){ 
-if (err) {  
-reject(err);
- }
-connection.query
-(sql,[id_member,id_test, SECOND_ANSWER,order,id_test_subcategory], function (err, result) {
+              if (err) {  
+              reject(err);
+              }
+              connection.query(sql,[id_member,id_test, SECOND_ANSWER,order,id_test_subcategory], function (err, result) {
+                connection.release(); 
                if (err) reject(err);
                //console.log("-----------------------------==>"+JSON.stringify(result[0]));
                return resolve(result);
                });
+              });
    });    
 };
 
@@ -307,14 +316,15 @@ function getColumnValuesSum (req,order){
            var sql="select tsc.id_subcategory as subcategoryOrder, count(*) as sum from test_subcategory tsc left join question q on(q.id_test_subcategory=tsc.id) left join answer a on(a.id_question=q.id) "
            +"left join choice_member cm on(cm.id_answer=a.id) left join test_member tm on(tm.id=cm.id_test_member) where tm.id_member=? and tm.id_test=? and a.ordre=? and q.ordre=?";
                pool.getConnection(function(err,connection){ 
-if (err) {  
-reject(err);
- }
-connection.query
-(sql,[id_member,id_test, FIRST_ANSWER,order], function (err, result) {
+              if (err) {  
+              reject(err);
+              }
+              connection.query(sql,[id_member,id_test, FIRST_ANSWER,order], function (err, result) {
+                connection.release(); 
                if (err) reject(err);
                return resolve(result);
                });
+              });
    });    
 };
 
@@ -330,11 +340,11 @@ _publics.createManuelAnswer= (req,sum) => {
            var sql = "INSERT INTO manuel_answer SET ? ";
            const manuelAnswer = { id_test: id_test,id_member:id_member,id_subcategory:id_subcategory,result:sum[0].sum};
            pool.getConnection(function(err,connection){ 
-if (err) {  
-reject(err);
- }
-connection.query
-(sql,manuelAnswer, function (err, result) {
+            if (err) {  
+            reject(err);
+            }
+            connection.query(sql,manuelAnswer, function (err, result) {
+              connection.release(); 
             if (err){
               msg="failure"; 
               reject(err);
@@ -343,7 +353,8 @@ connection.query
             }
            return resolve(msg);
           });
-        });    
+        });   
+      }); 
 };
 
 
@@ -357,11 +368,11 @@ _publics.createListOfManuelAnswers= (req, sumLines) => {
                 var sql = "INSERT INTO manuel_answer SET ? ";
                 const manuelAnswer = { id_test: id_test,id_member:id_member,id_subcategory:sumLines[i].id_subcategory,result:sumLines[i].sum};
                 pool.getConnection(function(err,connection){ 
-if (err) {  
-reject(err);
- }
-connection.query
-(sql,manuelAnswer, function (err, result) {
+                if (err) {  
+                reject(err);
+                }
+                connection.query(sql,manuelAnswer, function (err, result) {
+                  connection.release(); 
                 if (err){
                   msg="failure"; 
                   reject(err);
@@ -370,6 +381,7 @@ connection.query
                 }
                 return resolve(msg);
               });
+            });
             }));
   }
   return Promise.all(promises)   
@@ -463,11 +475,11 @@ _publics.setEtalonnageValue= (req,value) => {
              var msg="";
              var sql = "UPDATE manuel_answer set etallonage_result=?  WHERE id = ?"; 
              pool.getConnection(function(err,connection){ 
-if (err) {  
-reject(err);
- }
-connection.query
-(sql,[value[0].value,value[1].id], function (err, result) {
+            if (err) {  
+            reject(err);
+            }
+            connection.query(sql,[value[0].value,value[1].id], function (err, result) {
+              connection.release(); 
                 if (err){
                     msg="failure";
                     reject(err);
@@ -477,6 +489,7 @@ connection.query
               return resolve(msg);
              });
            });    
+          });
   };
 
 
@@ -487,14 +500,15 @@ _publics.getEtalonnageValue = (req) => {
            var sql = "select e.value as value, ma.id as id from etalonnage e left join manuel_answer ma on(ma.id_subcategory=e.id_subcategory) where ma.id_subcategory=? and ma.result between e.upper_bound and e.lower_bound"; 
          
                pool.getConnection(function(err,connection){ 
-if (err) {  
-reject(err);
- }
-connection.query
-(sql,[id_subcategory], function (err, result) {
+              if (err) {  
+              reject(err);
+              }
+              connection.query(sql,[id_subcategory], function (err, result) {
+                connection.release(); 
                if (err) reject(err);
                return resolve(JSON.stringify(result));
                });
+              });
    });    
 };
 // ;
@@ -505,14 +519,15 @@ _publics.getEtalonnageResults = (req) => {
            var sql = "select c.name as catName,sc.name as subCatName, sc.down_description, sc.up_description, ma.etallonage_result as result from manuel_answer ma left join subcategory sc on(sc.id=ma.id_subcategory) left join category c on (c.id=sc.id_category)  where ma.id_test=? and ma.id_member=?"; 
          
                pool.getConnection(function(err,connection){ 
-if (err) {  
-reject(err);
- }
-connection.query
-(sql,[id_test,id_member], function (err, result) {
+              if (err) {  
+              reject(err);
+              }
+              connection.query(sql,[id_test,id_member], function (err, result) {
+                connection.release(); 
                if (err) reject(err);
                return resolve(JSON.stringify(result));
                });
+              });
    });    
 };
 
@@ -523,15 +538,16 @@ _publics.getCategoryNameByMemberIdAndTestId = (req) => {
            var sql = "select distinct c.name  as name , c.id as category_id, c.ordre  from manuel_answer ma left join subcategory sc on(sc.id=ma.id_subcategory) left join category c on (c.id=sc.id_category)  where ma.id_test=? and ma.id_member=? order by c.ordre asc"; 
          
                pool.getConnection(function(err,connection){ 
-if (err) {  
-reject(err);
- }
-connection.query
-(sql,[id_test,id_member], function (err, result) {
+              if (err) {  
+              reject(err);
+              }
+              connection.query(sql,[id_test,id_member], function (err, result) {
+                connection.release(); 
                if (err) reject(err);
                return resolve(JSON.stringify(result));
                });
-   });    
+   });   
+  }); 
 };
 
 _publics.getCategoryNameByMemberIdAndTestIdBySecondOrder = (req) => { 
@@ -541,14 +557,15 @@ _publics.getCategoryNameByMemberIdAndTestIdBySecondOrder = (req) => {
            var sql = "select distinct c.name  as name , c.id as category_id, c.ordre, c.ordre2  from manuel_answer ma left join subcategory sc on(sc.id=ma.id_subcategory) left join category c on (c.id=sc.id_category)  where ma.id_test=? and ma.id_member=? order by c.ordre2 asc"; 
          
                pool.getConnection(function(err,connection){ 
-if (err) {  
-reject(err);
- }
-connection.query
-(sql,[id_test,id_member], function (err, result) {
+                if (err) {  
+                reject(err);
+                }
+                connection.query(sql,[id_test,id_member], function (err, result) {
+                  connection.release(); 
                if (err) reject(err);
                return resolve(JSON.stringify(result));
                });
+              });
    });    
 };
 
@@ -560,14 +577,15 @@ _publics.getEtalonnageDetails = (req) => {
            var sql = "select sc.name as subCatName, sc.down_description, sc.up_description, ma.etallonage_result as result from manuel_answer ma left join subcategory sc on(sc.id=ma.id_subcategory) left join category c on (c.id=sc.id_category)  where ma.id_test=? and ma.id_member=? and c.id = ?"; 
          
                pool.getConnection(function(err,connection){ 
-if (err) {  
-reject(err);
- }
-connection.query
-(sql,[id_test,id_member,id_category], function (err, result) {
+                if (err) {  
+                reject(err);
+                }
+                connection.query(sql,[id_test,id_member,id_category], function (err, result) {
+                  connection.release(); 
                if (err) reject(err);
                return resolve(JSON.stringify(result));
                });
+              });
    });    
 };
 
@@ -580,14 +598,15 @@ _publics.getSubCategoryName = (req) => {
            var sql = "select sc.name as subCatName from manuel_answer ma left join subcategory sc on(sc.id=ma.id_subcategory) left join category c on (c.id=sc.id_category)  where ma.id_test=? and ma.id_member=?"; 
          
                pool.getConnection(function(err,connection){ 
-if (err) {  
-reject(err);
- }
-connection.query
-(sql,[id_test,id_member,id_category], function (err, result) {
+              if (err) {  
+              reject(err);
+              }
+              connection.query(sql,[id_test,id_member,id_category], function (err, result) {
+                connection.release(); 
                if (err) reject(err);
                return resolve(result);
                });
+              });
    });    
 };
 
@@ -598,11 +617,11 @@ _publics.updateManualAnswer = (req) => {
            var sql = "update manuel_answer set response=? where id=?"; 
            var msg="";
                pool.getConnection(function(err,connection){ 
-if (err) {  
-reject(err);
- }
-connection.query
-(sql,[response,manualAnwserId], function (err, result) {
+              if (err) {  
+              reject(err);
+              }
+              connection.query(sql,[response,manualAnwserId], function (err, result) {
+                connection.release(); 
                 if (err){
                   msg="failure";
                   reject(err);
@@ -611,6 +630,7 @@ connection.query
                 }
                 return resolve(msg);
                });
+              });
    });    
 };
 
@@ -639,16 +659,17 @@ _publics.getAllCriterionsByCategoryId = (categoryId) => {
   return new Promise((resolve, reject) => {  
            var sql = "select c.*, c.result as score from criterion c where c.id_category=? order by c.ordre asc"; 
                pool.getConnection(function(err,connection){ 
-if (err) {  
-reject(err);
- }
-connection.query
-(sql,[categoryId], function (err, result) {
+              if (err) {  
+              reject(err);
+              }
+              connection.query(sql,[categoryId], function (err, result) {
+                connection.release(); 
                 if (err){
                   reject(err);
                 }
                 return resolve(result);
                });
+              });
    }); 
 };
 
@@ -682,16 +703,17 @@ _publics.deleteMemberTestResultSkills = (req) => {
   return new Promise((resolve, reject) => {  
            var sql = "delete from criterion_result where id_test=? and id_member=?"; 
                pool.getConnection(function(err,connection){ 
-if (err) {  
-reject(err);
- }
-connection.query
-(sql,[testId,memberId], function (err, result) {
+              if (err) {  
+              reject(err);
+              }
+              connection.query(sql,[testId,memberId], function (err, result) {
+                connection.release(); 
                 if (err){
                   reject(err);
                 }
                 return resolve(result);
                });
+              });
    }); 
 };
 
@@ -699,23 +721,29 @@ _publics.deleteMemberTestCriterionResultSkills = (criterionTestCategoryList, mem
    let promises = [];
    for (var i=0;i<criterionTestCategoryList.length;i++) {
        promises.push( new Promise((resolve, reject) => {  
-        var sql = "delete from criterion_result where id_criterion_test_category=? and id_member=?"; 
-               pool.getConnection(function(err,connection){ 
-if (err) {  
-reject(err);
- }
-connection.query
-(sql,[criterionTestCategoryList[i].id,memberId], function (err, result) {
-                if (err){
-                  reject(err);
-                }
-                return resolve(result);
-               });
+        var response=deleteMemberTestCriterionResultSkills(criterionTestCategoryList[i],memberId);
+        resolve(response);
      }));
    }
     return Promise.all(promises)  
 };
-
+function deleteMemberTestCriterionResultSkills(criterionTestCategory,memberId){
+  return new Promise((resolve, reject) => {  
+  var sql = "delete from criterion_result where id_criterion_test_category=? and id_member=?"; 
+         pool.getConnection(function(err,connection){ 
+        if (err) {  
+        reject(err);
+        }
+        connection.query(sql,[criterionTestCategory.id,memberId], function (err, result) {
+          connection.release(); 
+          if (err){
+            reject(err);
+          }
+          return resolve(result);
+         });
+        });
+      });
+}
 /*_publics.calculateSkills = (req,res,criterionsList) => { 
     let promises = [];
     var memberId=req.query.memberId;
@@ -790,15 +818,16 @@ connection.query
       var sql = "INSERT INTO criterion_result SET ? ";
       const newCriterionResult = { id_member: memberId,id_test:testId,result:result,id_criterion_test_category:criterion.id};
       pool.getConnection(function(err,connection){ 
-if (err) {  
-reject(err);
- }
-connection.query
-(sql,newCriterionResult, function (err, result) {
+        if (err) {  
+        reject(err);
+        }
+        connection.query(sql,newCriterionResult, function (err, result) {
+          connection.release(); 
       if (err)
         reject(err);
       return resolve(result);
       });
+    });
     })
   });  
 }
@@ -832,15 +861,16 @@ connection.query
       var sql = "INSERT INTO criterion_result SET ? ";
       const newCriterionResult = { id_member: memberId,id_test:testId,result:result,id_criterion_test_category:criterion.id};
       pool.getConnection(function(err,connection){ 
-if (err) {  
-reject(err);
- }
-connection.query
-(sql,newCriterionResult, function (err, res) {
+      if (err) {  
+      reject(err);
+      }
+      connection.query(sql,newCriterionResult, function (err, res) {
+        connection.release(); 
       if (err)
         reject(err);
       return resolve(res);
       });
+    });
     })
   });  
 }
@@ -852,16 +882,17 @@ function getSubcategoriesScore(testId,memberId,criterion){
     var sql ="select 	coalesce(  FLOOR(( (select ma.etallonage_result from manuel_answer ma where id_member=? and id_test=? and id_subcategory=?) " +
     " + (select ma.etallonage_result from manuel_answer ma where id_member=? and id_test=? and id_subcategory=?) ) /2) ,0) as result ";
         pool.getConnection(function(err,connection){ 
-if (err) {  
-reject(err);
- }
-connection.query
-(sql,[memberId,testId,criterion.id_subcategory1,memberId,testId,criterion.id_subcategory2], function (err, result) {
-         if (err){
+        if (err) {  
+        reject(err);
+        }
+        connection.query(sql,[memberId,testId,criterion.id_subcategory1,memberId,testId,criterion.id_subcategory2], function (err, result) {
+          connection.release(); 
+          if (err){
            reject(err);
          }
          return resolve(result);
         });
+      });
   }); 
 
 }
@@ -895,15 +926,16 @@ connection.query
       var sql = "INSERT INTO criterion_result SET ? ";
       const newCriterionResult = { id_member: memberId,id_test:testId,result:result,id_criterion_test_category:criterion.id};
       pool.getConnection(function(err,connection){ 
-if (err) {  
-reject(err);
- }
-connection.query
-(sql,newCriterionResult, function (err, res) {
+        if (err) {  
+        reject(err);
+        }
+        connection.query(sql,newCriterionResult, function (err, res) {
+          connection.release(); 
       if (err)
         reject(err);
       return resolve(res);
       });
+    });
     })
   });   
 }
@@ -926,16 +958,17 @@ function calculateBlueSkill(res,testId,memberId,criterion){
       var sql = "INSERT INTO criterion_result SET ? ";
       const newCriterionResult = { id_member: memberId,id_test:testId,result:result,id_criterion_test_category:criterion.id};
       pool.getConnection(function(err,connection){ 
-if (err) {  
-reject(err);
- }
-connection.query
-(sql,newCriterionResult, function (err, res) {
+      if (err) {  
+      reject(err);
+      }
+      connection.query(sql,newCriterionResult, function (err, res) {
+        connection.release(); 
       if (err)
         reject(err);
       return resolve(res);
       });
-    })
+    });
+    });
   }); 
 }
 
@@ -953,26 +986,27 @@ function updateCriterionResult(result,criterion){
   return new Promise((resolve, reject) => { 
     var sql = "update criterion set result= ? where id=?"; 
     pool.getConnection(function(err,connection){ 
-if (err) {  
-reject(err);
- }
-connection.query
-(sql,[result,criterion.id], function (err, result) {
+      if (err) {  
+      reject(err);
+      }
+      connection.query(sql,[result,criterion.id], function (err, result) {
+        connection.release(); 
     if (err)
       reject(err);
     return resolve(result);
     });
+  });
   });
 }
 function getSubcategoryScore(testId,memberId,subcategoryId, score1){
   return new Promise((resolve, reject) => {  
     var sql ="select FLOOR(m.etallonage_result) as score from manuel_answer m where m.id_member=? and id_test=? and m.id_subcategory=?";
         pool.getConnection(function(err,connection){ 
-if (err) {  
-reject(err);
- }
-connection.query
-(sql,[memberId,testId,subcategoryId], function (err, res) {
+        if (err) {  
+        reject(err);
+        }
+        connection.query(sql,[memberId,testId,subcategoryId], function (err, res) {
+          connection.release(); 
          if (err){
            reject(err);
          }
@@ -983,6 +1017,7 @@ connection.query
          }
          return resolve(res[0].score);
         });
+      });
   });   
 }
 

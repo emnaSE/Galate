@@ -1285,16 +1285,17 @@ function removeTestCategory(testId, categoryId){
   return new Promise((resolve, reject) => {
       var sql = "delete from test_category where id_test=? ";
       pool.getConnection(function(err,connection){ 
-if (err) {  
-reject(err);
- }
-connection.query
-(sql,[testId], function (err, res) {
+      if (err) {  
+      reject(err);
+      }
+      connection.query(sql,[testId], function (err, res) {
+        connection.release();
         if (err)
           reject(err);
         return resolve(res>0);
       });   
     });
+  });
 }
 
 function removeTestSubcategory(testId, subcategoryId){
@@ -1302,16 +1303,17 @@ function removeTestSubcategory(testId, subcategoryId){
   return new Promise((resolve, reject) => {
       var sql = "delete from test_subcategory where id_test=? ";
       pool.getConnection(function(err,connection){ 
-if (err) {  
-reject(err);
- }
-connection.query
-(sql,[testId], function (err, res) {
+      if (err) {  
+      reject(err);
+      }
+      connection.query(sql,[testId], function (err, res) {
+        connection.release();
         if (err)
           reject(err);
         return resolve(res>0);
       });   
     });
+  });
 }
 
 _publics.AffectCategoriesToTest = (testId, categoriesList) => {
@@ -1348,11 +1350,11 @@ _publics.removeAffectationSubcategoryToTest=(testId, subcategoryId) => {
     var msg="";
       var sql = "delete from test_subcategory where id_test=? and id_subcategory=? ";
       pool.getConnection(function(err,connection){ 
-if (err) {  
-reject(err);
- }
-connection.query
-(sql,[testId,subcategoryId], function (err, result) {
+      if (err) {  
+      reject(err);
+      }
+      connection.query(sql,[testId,subcategoryId], function (err, result) {
+        connection.release();
         if (err){
           msg="failed";
         }else{
@@ -1361,6 +1363,7 @@ connection.query
         return resolve(msg);
       });   
     });
+  });
 }
 
 
@@ -1370,18 +1373,19 @@ _publics.AffectSubcategoryToTest = (testId, subcategoryId) => {
   return new Promise((resolve, reject) => {
       var sql = "INSERT INTO test_subcategory SET? ";
       pool.getConnection(function(err,connection){ 
-if (err) {  
-reject(err);
- }
-connection.query
-(sql,{id_test:testId,id_subcategory:subcategoryId}, function (err, affectation) {
+      if (err) {  
+      reject(err);
+      }
+      connection.query(sql,{id_test:testId,id_subcategory:subcategoryId}, function (err, affectation) {
+        connection.release();
         if (err){
           msg="failed"; 
           }else{
             msg="success";  
           }
           return resolve(msg);
-      });   
+      });
+    });   
     });
 }
 
@@ -1419,11 +1423,11 @@ _publics.getTestCategoryByTestId = (testId) => {
   return new Promise((resolve, reject) => { 
   var sql = "select * from test_category where id_test=?";
   pool.getConnection(function(err,connection){ 
-if (err) {  
-reject(err);
- }
-connection.query
-(sql,[testId], function (err, result) {
+    if (err) {  
+    reject(err);
+    }
+    connection.query(sql,[testId], function (err, result) {
+      connection.release();
           if (err){
             reject(err);
           }else{         
@@ -1431,6 +1435,7 @@ connection.query
           }
           
      });
+    });
 });      
 }; 
 
@@ -1444,11 +1449,11 @@ _publics.getTestSubcategoriesByTestId = (testId) => {
   return new Promise((resolve, reject) => { 
   var sql = "select * from test_subcategory where id_test=? order by ordre";
   pool.getConnection(function(err,connection){ 
-if (err) {  
-reject(err);
- }
-connection.query
-(sql,[testId], function (err, result) {
+    if (err) {  
+    reject(err);
+    }
+    connection.query(sql,[testId], function (err, result) {
+      connection.release();
           if (err){
             reject(err);
           }else{         
@@ -1456,6 +1461,7 @@ connection.query
           }
           
      });
+    });
 });      
 }; 
 
@@ -1465,11 +1471,11 @@ _publics.getTestSubcategoriesById = (idTestSubcategory) => {
   return new Promise((resolve, reject) => { 
   var sql = "select * from test_subcategory where id=?";
   pool.getConnection(function(err,connection){ 
-if (err) {  
-reject(err);
- }
-connection.query
-(sql,[idTestSubcategory], function (err, result) {
+    if (err) {  
+    reject(err);
+    }
+    connection.query(sql,[idTestSubcategory], function (err, result) {
+      connection.release();
           if (err){
             reject(err);
           }else{         
@@ -1478,6 +1484,7 @@ connection.query
           
      });
 });      
+  });
 }; 
 
 
@@ -1489,20 +1496,21 @@ _publics.getQuestionsByTestSubcategories = (testSubcategories ) => {
     promises.push(new Promise((resolve, reject) => {
       var sql = "select * from question where id_test_subcategory= ? ";
       pool.getConnection(function(err,connection){ 
-if (err) {  
-reject(err);
- }
-connection.query
-(sql,testSubcategories[i].id, function (err, result) {
+      if (err) {  
+      reject(err);
+      }
+      connection.query(sql,testSubcategories[i].id, function (err, result) {
+        connection.release();
         if (err){
           reject(err);
         }else{     
           return resolve(result);
         }
-        
+      });
       });
     }
     ));
+    
   }
   return Promise.all(promises)      
 }; 
@@ -1513,11 +1521,11 @@ _publics.getAnswersByQuestions = (questions ) => {
     promises.push(new Promise((resolve, reject) => {
       var sql = "select * from answer where id_question= ? ";
       pool.getConnection(function(err,connection){ 
-if (err) {  
-reject(err);
- }
-connection.query
-(sql,questions[i].id, function (err, result) {
+      if (err) {  
+      reject(err);
+      }
+      connection.query(sql,questions[i].id, function (err, result) {
+        connection.release();
         if (err){
           reject(err);
         }else{         
@@ -1525,6 +1533,7 @@ connection.query
         }
         
       });
+    });
     }
     ));
   }
@@ -1549,11 +1558,11 @@ _publics.duplicateTest = (testName,test) => {
   var sql = "insert into test set ? ";
   const newTest = { name: name,test_subcategories_number:test_subcategories_number,password:password,activation_date:activation_date,expiration_date:expiration_date,duration:duration};         
   pool.getConnection(function(err,connection){ 
-if (err) {  
-reject(err);
- }
-connection.query
-(sql,newTest, function (err, result) {
+    if (err) {  
+    reject(err);
+    }
+    connection.query(sql,newTest, function (err, result) {
+      connection.release();
         if (err){
           response={
             msg:"failure"
@@ -1567,7 +1576,8 @@ connection.query
           }
           return resolve(response);
      });
-});      
+});   
+  });   
 }; 
 
 
@@ -1579,11 +1589,11 @@ _publics.duplicateTestCategory = (testCategories, testId ) => {
       var response={};
       var sql = "INSERT INTO test_category SET? ";
       pool.getConnection(function(err,connection){ 
-if (err) {  
-reject(err);
- }
-connection.query
-(sql,{id_category:testCategories[i].id_category,id_test:testId}, function (err, result) {
+      if (err) {  
+      reject(err);
+      }
+      connection.query(sql,{id_category:testCategories[i].id_category,id_test:testId}, function (err, result) {
+        connection.release();
         if (err){
           reject(err);
         }else{     
@@ -1591,6 +1601,7 @@ connection.query
         }
        
       });
+    });
     }
     ));
   }
@@ -1605,11 +1616,11 @@ _publics.duplicateTestSubCategory = (testSubcategory,testId ) => {
       var response={};
       var sql = "INSERT INTO test_subcategory SET ?";
       pool.getConnection(function(err,connection){ 
-if (err) {  
-reject(err);
- }
-connection.query
-(sql,{id_category:testSubcategory.id_category,id_subcategory:testSubcategory.id_subcategory,id_test:testId,questions_number:testSubcategory.questions_number,wording:testSubcategory.wording}, function (err, result) {
+      if (err) {  
+      reject(err);
+      }
+      connection.query(sql,{id_category:testSubcategory.id_category,id_subcategory:testSubcategory.id_subcategory,id_test:testId,questions_number:testSubcategory.questions_number,wording:testSubcategory.wording}, function (err, result) {
+        connection.release();
         if (err){
           response={
             msg:"failure"
@@ -1623,6 +1634,7 @@ connection.query
           }
           return resolve(response);
       });
+    });
     }
     );
      
@@ -1673,12 +1685,12 @@ function duplicateTestSubCategories( res, testSubcategory, testId ) {
     var response={};
     var sql = "INSERT INTO test_subcategory SET ?";
     pool.getConnection(function(err,connection){ 
-if (err) {  
-reject(err);
- }
-connection.query
-(sql,{id_category:testSubcategory.id_category,id_subcategory:testSubcategory.id_subcategory,id_test:testId,questions_number:testSubcategory.questions_number,wording:testSubcategory.wording, ordre:testSubcategory.ordre}, function (err, result) {
-      if (err){
+      if (err) {  
+      reject(err);
+      }
+      connection.query(sql,{id_category:testSubcategory.id_category,id_subcategory:testSubcategory.id_subcategory,id_test:testId,questions_number:testSubcategory.questions_number,wording:testSubcategory.wording, ordre:testSubcategory.ordre}, function (err, result) {
+        connection.release();
+        if (err){
         response={
           msg:"failure"
         }
@@ -1691,6 +1703,7 @@ connection.query
         }
         return resolve(response);
     });
+  });
   }
   );
    
@@ -1718,11 +1731,11 @@ function createAnswers (questionId, answers ) {
       var sql = "INSERT INTO answer SET ? ";
       const answer = { id_question:questionId,name:answers[i].name,value:answers[i].value,ordre:answers[i].ordre};
       pool.getConnection(function(err,connection){ 
-if (err) {  
-reject(err);
- }
-connection.query
-(sql,answer, function (err, result) {
+      if (err) {  
+      reject(err);
+      }
+      connection.query(sql,answer, function (err, result) {
+        connection.release();
          if (err){
              msg="failure";
              reject(err);
@@ -1732,6 +1745,7 @@ connection.query
            
        return resolve(msg);
       });
+    });
     }
     ));
   }
@@ -1773,15 +1787,16 @@ function getQuestionById(input){
     var questionId=input[0].id_question;
            var sql = "select * FROM question where id=?"; 
                pool.getConnection(function(err,connection){ 
-if (err) {  
-reject(err);
- }
-connection.query
-(sql,[questionId], function (err, result) {
+            if (err) {  
+            reject(err);
+            }
+            connection.query(sql,[questionId], function (err, result) {
+              connection.release();
                if (err) reject(err);
                return resolve(JSON.stringify(result[0]));
                });
    });    
+  });
 };
 
 /*function createQuestionAndAnswers(input, req, res ) { 
@@ -1820,11 +1835,11 @@ function createQuestion (question,testSubCategId, res ){
               var sql = "INSERT INTO question SET ? ";
               const newQuestion = { name: name,wording:wording,value:value,id_test_subcategory:id_test_subcategory,ordre:order};
               pool.getConnection(function(err,connection){ 
-if (err) {  
-reject(err);
- }
-connection.query
-(sql,newQuestion, function (err, result) {
+              if (err) {  
+              reject(err);
+              }
+              connection.query(sql,newQuestion, function (err, result) {
+                connection.release();
                   if (err){
                     response={
                       msg:"failure"
@@ -1839,6 +1854,7 @@ connection.query
                     }
                 return resolve(response);
               });
+            });
             }
   });   
 
@@ -1852,11 +1868,11 @@ _publics.duplicateQuestion = (question,testSubcategoryId ) => {
       var response={};
       var sql = "INSERT INTO question SET ?";
       pool.getConnection(function(err,connection){ 
-if (err) {  
-reject(err);
- }
-connection.query
-(sql,{name:question.name,wording:question.wording,value:question.value,id_test_subcategory:testSubcategoryId}, function (err, result) {
+      if (err) {  
+      reject(err);
+      }
+      connection.query(sql,{name:question.name,wording:question.wording,value:question.value,id_test_subcategory:testSubcategoryId}, function (err, result) {
+        connection.release();
         if (err){
           response={
             msg:"failure"
@@ -1870,6 +1886,7 @@ connection.query
           }
           return resolve(response);
       });
+    });
     }
     );
     
@@ -1883,11 +1900,11 @@ _publics.duplicateAnswer = (answer, questionId ) => {
       var msg="";
       var sql = "INSERT INTO answer SET ?";
       pool.getConnection(function(err,connection){ 
-if (err) {  
-reject(err);
- }
-connection.query
-(sql,{name:answer.name,value:answer.value,ordre:answer.ordre,id_question:questionId}, function (err, result) {
+      if (err) {  
+      reject(err);
+      }
+      connection.query(sql,{name:answer.name,value:answer.value,ordre:answer.ordre,id_question:questionId}, function (err, result) {
+        connection.release();
         if (err){
           response={
             msg:"failure"
@@ -1901,6 +1918,7 @@ connection.query
           }
           return resolve(response);
       });
+    });
     }
     );
     
@@ -1915,14 +1933,15 @@ _publics.getTestClassDateMember = (req) => {
 return new Promise((resolve, reject) => {  
          var sql = "select * from test_member tm left join test_clazz tc on (tm.id_test=tc.id_test) left join test t on (tm.id_test=t.id) left join test_school ts on (ts.id_test=tm.id_test) where tc.id_clazz=? and ts.id_school=? and activation_date < ? and expiration_date > ? and tm.id_member=?";        
              pool.getConnection(function(err,connection){ 
-if (err) {  
-reject(err);
- }
-connection.query
-(sql,[id_clazz,id_school,date,date,id_member], function (err, result) {
+          if (err) {  
+          reject(err);
+          }
+          connection.query(sql,[id_clazz,id_school,date,date,id_member], function (err, result) {
+            connection.release();
              if (err) reject(err);
              return resolve(JSON.stringify(result));
              });
+            });
  });    
 };
 
@@ -1935,14 +1954,15 @@ _publics.getTestFait = (req) => {
 return new Promise((resolve, reject) => {  
          var sql = "select * from test_member tm left join test_clazz tc on (tm.id_test=tc.id_test) left join test t on (tm.id_test=t.id) left join test_school ts on (ts.id_test=tm.id_test) where tc.id_clazz=? and ts.id_school=? and tm.id_member=? and tm.date_test <?";        
              pool.getConnection(function(err,connection){ 
-if (err) {  
-reject(err);
- }
-connection.query
-(sql,[id_clazz,id_school,id_member,date], function (err, result) {
+            if (err) {  
+            reject(err);
+            }
+            connection.query(sql,[id_clazz,id_school,id_member,date], function (err, result) {
+              connection.release();
              if (err) reject(err);
              return resolve(JSON.stringify(result));
              });
+            });
  });    
 };
 
@@ -1959,11 +1979,11 @@ _publics.login = (admin) => {
 
     var sql = "select * FROM member where pseudo=? and password=? and role='admin' ";
     pool.getConnection(function(err,connection){ 
-if (err) {  
-reject(err);
- }
-connection.query
-(sql, [pseudo, password], function (err, admins) {
+      if (err) {  
+      reject(err);
+      }
+      connection.query(sql, [pseudo, password], function (err, admins) {
+        connection.release();
       var admins = JSON.stringify(admins);
       admins = JSON.parse(admins);
 
@@ -1976,6 +1996,7 @@ connection.query
       }
       return resolve(status);
     });
+  });
   });
 }
 
@@ -2168,14 +2189,15 @@ _publics.getSubCategoriesByTestId = (req) => {
   return new Promise((resolve, reject) => {   
     var sql = "select sc.* from subcategory sc left join  test_subcategory tsc on(sc.id=tsc.id_subcategory)  where tsc.id_test=?";        
     pool.getConnection(function(err,connection){ 
-if (err) {  
-reject(err);
- }
-connection.query
-(sql,[req.query.testId], function (err, result) {
+      if (err) {  
+      reject(err);
+      }
+      connection.query(sql,[req.query.testId], function (err, result) {
+        connection.release();
     if (err) reject(err);
     return resolve(result);
     });
+  });
  });  
 
 }
@@ -2185,14 +2207,15 @@ _publics.getCategoriesByTestId = (req) => {
   return new Promise((resolve, reject) => {   
     var sql = "select c.* from category c left join  test_category tc on(c.id=tc.id_category)  where tc.id_test=?";        
     pool.getConnection(function(err,connection){ 
-if (err) {  
-reject(err);
- }
-connection.query
-(sql,[req.query.testId], function (err, result) {
+    if (err) {  
+    reject(err);
+    }
+    connection.query(sql,[req.query.testId], function (err, result) {
+      connection.release();
     if (err) reject(err);
     return resolve(result);
     });
+  });
  });  
 
 }
@@ -2205,14 +2228,15 @@ _publics.getTestsByFilter = (req) => {
      +"left join clazz c on(m.id_clazz=c.id) left join school s on(m.id_school=s.id) where 5=5";        
     sql=whereClause(req, sql);
     pool.getConnection(function(err,connection){ 
-if (err) {  
-reject(err);
- }
-connection.query
-(sql,[req.query.testId], function (err, result) {
+      if (err) {  
+      reject(err);
+      }
+      connection.query(sql,[req.query.testId], function (err, result) {
+        connection.release();
     if (err) reject(err);
     return resolve(result);
     });
+  });
  });  
 
 }
@@ -2258,11 +2282,11 @@ function createDefaultMemberChoices(quest,idTestMember){
        
         const defaultResponse = { id_question:firstQuestion.id_question ,id_answer:firstQuestion.id,id_test_member:idTestMember};
         pool.getConnection(function(err,connection){ 
-if (err) {  
-reject(err);
- }
-connection.query
-(sql,defaultResponse, function (err, result) {
+        if (err) {  
+        reject(err);
+        }
+        connection.query(sql,defaultResponse, function (err, result) {
+          connection.release();
         if (err){
           msg="failure"; 
           reject(err);
@@ -2271,6 +2295,7 @@ connection.query
         }
         return resolve(msg);
       });
+    });
     }));
   }
   return Promise.all(promises); 
@@ -2293,14 +2318,15 @@ _publics.getSubcategoryByMemberAndTestID = (req) => {
               var sql = "select sc.name as section, ma.etallonage_result as calculated_result from manuel_answer ma left join subcategory sc on(sc.id=ma.id_subcategory) left join category c on (c.id=sc.id_category)  where ma.id_test=? and ma.id_member=?"; 
             
                   pool.getConnection(function(err,connection){ 
-if (err) {  
-reject(err);
- }
-connection.query
-(sql,[id_test,id_member], function (err, result) {
+                  if (err) {  
+                  reject(err);
+                  }
+                  connection.query(sql,[id_test,id_member], function (err, result) {
+                    connection.release();
                   if (err) reject(err);
                   return resolve(JSON.stringify(result));
                   });
+                });
       });    
    };
 
@@ -2312,14 +2338,15 @@ connection.query
                 var sql = "select distinct m.firstname as prenom , m.lastname as nom , m.age as age from member m left join manuel_answer ma on (ma.id_member = m.id ) where ma.id_test=? and ma.id_member=?"; 
               
                     pool.getConnection(function(err,connection){ 
-if (err) {  
-reject(err);
- }
-connection.query
-(sql,[id_test,id_member], function (err, result) {
+                    if (err) {  
+                    reject(err);
+                    }
+                    connection.query(sql,[id_test,id_member], function (err, result) {
+                      connection.release();
                     if (err) reject(err);
                     return resolve(JSON.stringify(result));
                     });
+                  });
         });    
      };
 
@@ -2328,14 +2355,15 @@ connection.query
          return new Promise((resolve, reject) => {  
                   var sql = "select distinct  ma.etallonage_result,s.name from member m left join manuel_answer ma on(ma.id_member=m.id) left join test_subcategory ts on(ts.id_subcategory=ma.id_subcategory) left join subcategory s on(s.id=ts.id_subcategory) where ma.id_test=? and ma.id_member=?";
                       pool.getConnection(function(err,connection){ 
-if (err) {  
-reject(err);
- }
-connection.query
-(sql,[id_test,id_member], function (err, result) {
+                      if (err) {  
+                      reject(err);
+                      }
+                      connection.query(sql,[id_test,id_member], function (err, result) {
+                        connection.release();
                       if (err) reject(err);
                       return resolve(result);
                       });
+                    });
           });    
        };
     
@@ -2348,14 +2376,15 @@ connection.query
                   var sql="select cr.result, c.name from  criterion_test_category ctc left join criterion_result cr on(ctc.id=cr.id_criterion_test_category)  left join criterion c on(c.id=ctc.id_criterion) where cr.id_test=? and cr.id_member=? order by c.id asc"
                  //var sql = "select cr.result, c.name from criterion c left join criterion_result cr on(cr.id_criterion=c.id) where cr.id_test=? and cr.id_member=?";
                      pool.getConnection(function(err,connection){ 
-if (err) {  
-reject(err);
- }
-connection.query
-(sql,[testId,memberId], function (err, result) {
+                  if (err) {  
+                  reject(err);
+                  }
+                  connection.query(sql,[testId,memberId], function (err, result) {
+                    connection.release();
                      if (err) reject(err);
                      return resolve(result);
                      });
+                    });
          });    
       };
 
@@ -2389,15 +2418,16 @@ connection.query
                   var sql = " select distinct  s.name from member m left join manuel_answer ma on(ma.id_member=m.id) left join test_subcategory ts on(ts.id_subcategory=ma.id_subcategory) left join subcategory s on(s.id=ts.id_subcategory) where ma.id_test=?";
 
                       pool.getConnection(function(err,connection){ 
-if (err) {  
-reject(err);
- }
-connection.query
-(sql,[id_test], function (err, result) {
+                    if (err) {  
+                    reject(err);
+                    }
+                    connection.query(sql,[id_test], function (err, result) {
+                      connection.release();
                       if (err) reject(err);
                       return resolve(JSON.stringify(result));
                       });
-          });    
+          }); 
+        });   
      };
 
 
@@ -2408,14 +2438,15 @@ _publics.getCriterionsByTestId = (req) => {
               var sql = " select distinct  c.name from criterion c left join criterion_test_category ctc on(ctc.id_criterion=c.id) left join test_category tc on(tc.id=ctc.id_test_category) where tc.id_test=? order by c.id asc; ";
 
                   pool.getConnection(function(err,connection){ 
-if (err) {  
-reject(err);
- }
-connection.query
-(sql,[id_test], function (err, result) {
+                  if (err) {  
+                  reject(err);
+                  }
+                  connection.query(sql,[id_test], function (err, result) {
+                    connection.release();
                   if (err) reject(err);
                   return resolve(JSON.stringify(result));
                   });
+                });
       });    
  };
 
@@ -2426,14 +2457,15 @@ connection.query
                   var sql = "select distinct  m.id ,m.firstname,m.lastname,m.age from member m left join manuel_answer ma on(ma.id_member=m.id) left join test_subcategory ts on(ts.id_subcategory=ma.id_subcategory) left join subcategory s on(s.id=ts.id_subcategory) where ma.id_test=? "; 
                 
                       pool.getConnection(function(err,connection){ 
-if (err) {  
-reject(err);
- }
-connection.query
-(sql,[id_test], function (err, result) {
+                      if (err) {  
+                      reject(err);
+                      }
+                      connection.query(sql,[id_test], function (err, result) {
+                        connection.release();
                       if (err) reject(err);
                       return resolve(JSON.stringify(result));
                       });
+                    });
           });    
      };
 
@@ -2452,7 +2484,7 @@ connection.query
         
         }));
       }
-    }
+    }  
       
       return Promise.all(promises);   
     
@@ -3523,15 +3555,16 @@ _publics.getAllTestSubcategoriesByTestAndSubcategoryIds = (req) => {
   return new Promise((resolve, reject) => {  
     var sql = "select tsc.id as testSubcatId, sc.name,tsc.ordre from subcategory sc left join test_subcategory tsc on(sc.id=tsc.id_subcategory) where tsc.id_test=?";      
     pool.getConnection(function(err,connection){ 
-if (err) {  
-reject(err);
- }
-connection.query
-(sql,[tesId], function (err, result) {
+      if (err) {  
+      reject(err);
+      }
+      connection.query(sql,[tesId], function (err, result) {
+        connection.release();
     if (err) reject(err);
     return resolve(result);
     });
   }); 
+});
 }
 
 
@@ -3542,11 +3575,11 @@ _publics.updateSubcategoriesOrder = (ordre, req) => {
     var sql = "update test_subcategory  set ordre=? where id=?"; 
     var msg="";     
     pool.getConnection(function(err,connection){ 
-if (err) {  
-reject(err);
- }
-connection.query
-(sql,[ordre, req.query.id], function (err, result) {
+    if (err) {  
+    reject(err);
+    }
+    connection.query(sql,[ordre, req.query.id], function (err, result) {
+      connection.release();
     if (err){
       msg="failed";
     }else{
@@ -3554,6 +3587,7 @@ connection.query
     }
     return resolve(msg);
     });
+  });
   }); 
 }
 
@@ -3594,11 +3628,11 @@ _publics.createCriterion = (criterion) => {
     var sql = "insert into criterion set ? ";
     const newCriterion = { name: name};         
     pool.getConnection(function(err,connection){ 
-if (err) {  
-reject(err);
- }
-connection.query
-(sql,newCriterion, function (err, result) {
+      if (err) {  
+      reject(err);
+      }
+      connection.query(sql,newCriterion, function (err, result) {
+        connection.release();
             if (err){
               msg="failure";
               reject(err);
@@ -3607,6 +3641,7 @@ connection.query
             }
            return resolve(msg);
        });
+      });
 });    
 };
 
@@ -3674,14 +3709,15 @@ _publics.getAllCriterions = (req) => {
            var sql = "select c.* FROM criterion c  order by id desc "; 
          
                pool.getConnection(function(err,connection){ 
-if (err) {  
-reject(err);
- }
-connection.query
-(sql, function (err, result) {
+            if (err) {  
+            reject(err);
+            }
+            connection.query(sql, function (err, result) {
+              connection.release();
                if (err) reject(err);
                return resolve(JSON.stringify(result));
                });
+              });
    });    
 };
 
@@ -3691,14 +3727,15 @@ _publics.getCriterionById = (req) => {
            var sql = "select * FROM criterion where id=?"; 
          
                pool.getConnection(function(err,connection){ 
-if (err) {  
-reject(err);
- }
-connection.query
-(sql,[id], function (err, result) {
+              if (err) {  
+              reject(err);
+              }
+              connection.query(sql,[id], function (err, result) {
+                connection.release();
                if (err) reject(err);
                return resolve(JSON.stringify(result[0]));
                });
+              });
    });    
 };
 
@@ -3708,14 +3745,15 @@ _publics.getAllCriterionsByCategoryId = (req) => {
            var sql = "select * FROM criterion  where id_category=? "; 
          
                pool.getConnection(function(err,connection){ 
-if (err) {  
-reject(err);
- }
-connection.query
-(sql,[idCategory], function (err, result) {
+              if (err) {  
+              reject(err);
+              }
+              connection.query(sql,[idCategory], function (err, result) {
+                connection.release();
                if (err) reject(err);
                return resolve(JSON.stringify(result));
                });
+              });
    });    
 };
 
@@ -3726,11 +3764,11 @@ _publics.updateCriterion = (req,criterion) => {
             var msg="";
             var sql = "update  criterion set name=? where id=?";
             pool.getConnection(function(err,connection){ 
-if (err) {  
-reject(err);
- }
-connection.query
-(sql,[name,id], function (err, result) {
+            if (err) {  
+            reject(err);
+            }
+            connection.query(sql,[name,id], function (err, result) {
+              connection.release();
              if (err){
                msg="failure";
                reject(err);
@@ -3739,7 +3777,8 @@ connection.query
              }
             return resolve(msg);
             });
-          });    
+          }); 
+        });   
 }; 
 
 
@@ -3749,11 +3788,11 @@ _publics.deleteCriterion = (req) => {
            var msg="";
            var sql = "delete from criterion where id=?";
            pool.getConnection(function(err,connection){ 
-if (err) {  
-reject(err);
- }
-connection.query
-(sql,[id], function (err, result) {
+          if (err) {  
+          reject(err);
+          }
+          connection.query(sql,[id], function (err, result) {
+            connection.release();
             if (err){
               msg="failure";
               reject(err);
@@ -3762,6 +3801,7 @@ connection.query
             }
            return resolve(msg);
            });
+          });
          });    
 }; 
 
@@ -3811,16 +3851,16 @@ _publics.getAllCategoriesByCriterionId = (req) => {
   return new Promise((resolve, reject) => {   
     var sql = "select cat.* from category cat left join criterion c on(cat.id=c.id_category) where c.id=?";        
     pool.getConnection(function(err,connection){ 
-if (err) {  
-reject(err);
- }
-connection.query
-(sql,[req.query.criterionId], function (err, result) {
+      if (err) {  
+      reject(err);
+      }
+      connection.query(sql,[req.query.criterionId], function (err, result) {
+        connection.release();
     if (err) reject(err);
     return resolve(result);
     });
  });  
-
+  });
 }
 
 _publics.getJsonFromFile = () => {
@@ -3852,13 +3892,14 @@ _publics.getAllCriterionsByTestId = (req) => {
     //var sql = "select c.* from criterion c left join test_subcategory ts on(ts.id_subcategory=c.id_subcategory1) where ts.id_test=?";      
     var sql = "select c.* from criterion c left join test_subcategory ts on(ts.id_subcategory=c.id_subcategory1) where ts.id_test=? order by id desc";   
     pool.getConnection(function(err,connection){ 
-if (err) {  
-reject(err);
- }
-connection.query
-(sql,[testId], function (err, result) {
+      if (err) {  
+      reject(err);
+      }
+      connection.query(sql,[testId], function (err, result) {
+        connection.release();
     if (err) reject(err);
     return resolve(result);
+      });
     });
  }); 
 
@@ -3868,14 +3909,15 @@ _publics.getAllCriterionsTestCategoryByTestId = (req) => {
   return new Promise((resolve, reject) => {   
     var sql = "select ctc.* from criterion_test_category ctc left join test_category tc on(ctc.id_test_category=tc.id)  where tc.id_test=? order by id desc";   
     pool.getConnection(function(err,connection){ 
-if (err) {  
-reject(err);
- }
-connection.query
-(sql,[testId], function (err, result) {
+    if (err) {  
+    reject(err);
+    }
+    connection.query(sql,[testId], function (err, result) {
+      connection.release();
     if (err) reject(err);
     return resolve(result);
     });
+  });
  }); 
 
 }
@@ -3888,15 +3930,16 @@ _publics.getCriterionsByTestCategoryId = (req) => {
     var sql = "select c.* from criterion c left join  criterion_test_category ctc on(c.id=ctc.id_criterion) "+
     "left join test_category tc on(tc.id=ctc.id_test_category) where tc.id_test=? and tc.id_category=?";        
     pool.getConnection(function(err,connection){ 
-if (err) {  
-reject(err);
- }
-connection.query
-(sql,[testId,categoryId], function (err, result) {
+      if (err) {  
+      reject(err);
+      }
+      connection.query(sql,[testId,categoryId], function (err, result) {
+        connection.release();
     if (err) reject(err);
     return resolve(result);
     });
  });  
+});
 
 }
 
@@ -3905,11 +3948,11 @@ _publics.assignCriterionTOTestCategory = (testSubCategId, criterionId) => {
   return new Promise((resolve, reject) => {
       var sql = "INSERT INTO criterion_test_category SET? ";
       pool.getConnection(function(err,connection){ 
-if (err) {  
-reject(err);
- }
-connection.query
-(sql,{id_test_category:testSubCategId,id_criterion:criterionId}, function (err, result) {
+      if (err) {  
+      reject(err);
+      }
+      connection.query(sql,{id_test_category:testSubCategId,id_criterion:criterionId}, function (err, result) {
+        connection.release();
         if (err){
           msg="failed"; 
           }else{
@@ -3918,6 +3961,7 @@ connection.query
           return resolve(msg);
       });   
     });
+  });
 }
 
 
@@ -3927,14 +3971,15 @@ _publics.getTestCategoryByTestAndCategoryId = (req) => {
   return new Promise((resolve, reject) => {   
     var sql = "select * from test_category where id_test=? and id_category=?";        
     pool.getConnection(function(err,connection){ 
-if (err) {  
-reject(err);
- }
-connection.query
-(sql,[testId,categoryId], function (err, result) {
+      if (err) {  
+      reject(err);
+      }
+      connection.query(sql,[testId,categoryId], function (err, result) {
+        connection.release();
     if (err) reject(err);
     return resolve(result);
     });
+  });
  });  
 
 }
@@ -3947,15 +3992,16 @@ _publics.getAllCriterionTestCategoryByTestAndCategoryIds = (req) => {
     var sql = "select ctc.id as criteriontestcatId, c.name,ctc.ordre from criterion c left join criterion_test_category ctc on(c.id=ctc.id_criterion) "+
     " left join test_category tc on(tc.id=ctc.id_test_category) where tc.id_test=? and tc.id_category=?";      
     pool.getConnection(function(err,connection){ 
-if (err) {  
-reject(err);
- }
-connection.query
-(sql,[tesId,categoryId], function (err, result) {
+    if (err) {  
+    reject(err);
+    }
+    connection.query(sql,[tesId,categoryId], function (err, result) {
+      connection.release();
     if (err) reject(err);
     return resolve(result);
     });
   }); 
+});
 }
 
 
@@ -3967,14 +4013,15 @@ _publics.getCriterionTestCategory = (req) => {
     var sql = "select ctc.id as criteriontestcatId, c.name,ctc.ordre from criterion c left join criterion_test_category ctc on(c.id=ctc.id_criterion) "+
     " left join test_category tc on(tc.id=ctc.id_test_category) where tc.id_test=? and tc.id_category=? and ctc.id_criterion=?  ";      
     pool.getConnection(function(err,connection){ 
-if (err) {  
-reject(err);
- }
-connection.query
-(sql,[tesId,categoryId,criterionId], function (err, result) {
+    if (err) {  
+    reject(err);
+    }
+    connection.query(sql,[tesId,categoryId,criterionId], function (err, result) {
+      connection.release();
     if (err) reject(err);
     return resolve(result);
     });
+  });
   }); 
 }
 
@@ -3984,17 +4031,18 @@ _publics.updateCategoryCriterionOrder = (ordre, req) => {
     var sql = "update criterion_test_category  set ordre=? where id=?"; 
     var msg="";     
     pool.getConnection(function(err,connection){ 
-if (err) {  
-reject(err);
- }
-connection.query
-(sql,[ordre, req.query.criteriontestcatId], function (err, result) {
+    if (err) {  
+    reject(err);
+    }
+    connection.query(sql,[ordre, req.query.criteriontestcatId], function (err, result) {
+      connection.release();
     if (err){
       msg="failed";
     }else{
       msg="success";
     }
     return resolve(msg);
+    });
     });
   }); 
 }
@@ -4005,11 +4053,11 @@ _publics.unassignCriterionToTestCategory=(id) => {
     var msg="";
       var sql = "delete from criterion_test_category  where id=? ";
       pool.getConnection(function(err,connection){ 
-if (err) {  
-reject(err);
- }
-connection.query
-(sql,[id], function (err, result) {
+      if (err) {  
+      reject(err);
+      }
+      connection.query(sql,[id], function (err, result) {
+        connection.release();
         if (err){
           msg="failed";
         }else{
@@ -4017,6 +4065,7 @@ connection.query
         }     
         return resolve(msg);
       });   
+    });
     });
 }
 
@@ -4030,6 +4079,7 @@ _publics.getTestForTest = (req) => {
         reject(err);
       }   
       connection.query(sql,[tesId], function (err, result) {
+        connection.release();
     if (err) reject(err);
     return resolve(result);
     });
@@ -4080,17 +4130,18 @@ function getTestCategoryById(testCategoryId){
     return new Promise((resolve, reject) => { 
       var sql = "select * from test_category where id=?";
       pool.getConnection(function(err,connection){ 
-if (err) {  
-reject(err);
- }
-connection.query
-(sql,[testCategoryId], function (err, result) {
+      if (err) {  
+      reject(err);
+      }
+      connection.query(sql,[testCategoryId], function (err, result) {
+        connection.release();
               if (err){
                 reject(err);
               }else{         
                 return resolve(result);
               }
         });
+      });
     })
 }
 
@@ -4100,11 +4151,11 @@ function getTestCriterionsByCategory(testCategoryId){
   return new Promise((resolve, reject) => { 
     var sql = "select * from criterion_test_category where id_test_category=?";
     pool.getConnection(function(err,connection){ 
-if (err) {  
-reject(err);
- }
-connection.query
-(sql,[testCategoryId], function (err, result) {
+    if (err) {  
+    reject(err);
+    }
+    connection.query(sql,[testCategoryId], function (err, result) {
+      connection.release();
             if (err){
               reject(err);
             }else{         
@@ -4112,6 +4163,7 @@ connection.query
             }
             
       });
+    });
   })
 }
 
@@ -4162,17 +4214,17 @@ function duplicateTestCategory(categoryId,newTestId){
   return new Promise((resolve, reject) => { 
     var sql = "INSERT INTO test_category SET? ";
     pool.getConnection(function(err,connection){ 
-if (err) {  
-reject(err);
- }
-connection.query
-(sql,{id_category:categoryId,id_test:newTestId}, function (err, result) {
+    if (err) {  
+    reject(err);
+    }
+    connection.query(sql,{id_category:categoryId,id_test:newTestId}, function (err, result) {
+      connection.release();
             if (err){
               reject(err);
             }else{         
               return resolve(result.insertId);
             }
-            
+          });
       });
   })
 }
@@ -4181,17 +4233,17 @@ function duplicateCriterionTestCategory(newTestCategoryId,criterion){
   return new Promise((resolve, reject) => { 
     var sql = "INSERT INTO criterion_test_category SET? ";
     pool.getConnection(function(err,connection){ 
-if (err) {  
-reject(err);
- }
-connection.query
-(sql,{id_test_category:newTestCategoryId,id_criterion:criterion.id_criterion,ordre:criterion.ordre,id_subcategory1:criterion.id_subcategory1,id_subcategory2:criterion.id_subcategory2,median:criterion.median}, function (err, result) {
-            if (err){
+      if (err) {  
+      reject(err);
+      }
+      connection.query(sql,{id_test_category:newTestCategoryId,id_criterion:criterion.id_criterion,ordre:criterion.ordre,id_subcategory1:criterion.id_subcategory1,id_subcategory2:criterion.id_subcategory2,median:criterion.median}, function (err, result) {
+        connection.release();   
+        if (err){
               reject(err);
             }else{         
               return resolve(result);
             }
-            
+          }); 
       });
   })
 }

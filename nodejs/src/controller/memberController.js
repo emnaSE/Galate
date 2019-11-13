@@ -5,6 +5,7 @@ var config = require('../config');
 var getRawBody = require('raw-body');
 var con = config.con;
 var url = `http://localhost:3000`;
+var pool=config.pool;
 //member 
 _publics.register = (member) => {
   var member = JSON.parse(member);
@@ -26,11 +27,11 @@ _publics.register = (member) => {
     var sql = "INSERT INTO member SET ? ";
     const newMember = { firstname: firstname, lastname: lastname, email: email, age: age, pseudo: pseudo, password: password, civility: civility, id_school: id_school, id_clazz: id_clazz, sexe:sexe, city:city, study_level:study_level};
     pool.getConnection(function(err,connection){ 
-if (err) {  
-reject(err);
- }
-connection.query
-(sql, newMember, function (err, result) {
+      if (err) {  
+      reject(err);
+      }
+      connection.query(sql, newMember, function (err, result) {
+        connection.release(); 
       if (err) {
         message ={msg:"failure"};
         reject(err);
@@ -39,6 +40,7 @@ connection.query
       }
       return resolve(message);
     });
+  });
   });
 
 
@@ -73,12 +75,12 @@ _publics.updateMember = (req, member) => {
     var msg = "";
     var sql = "UPDATE member SET firstname=?, lastname=?, email=?, age=?, pseudo=?, password=?,civility=?,id_school=?,id_clazz=?  WHERE id = ?";
     pool.getConnection(function(err,connection){ 
-if (err) {  
-reject(err);
- }
-connection.query
-(sql, [firstname, lastname, email, age, pseudo, password, civility, id_school, id_clazz, id], function (err, result) {
-      if (err) {
+      if (err) {  
+      reject(err);
+      }
+      connection.query(sql, [firstname, lastname, email, age, pseudo, password, civility, id_school, id_clazz, id], function (err, result) {
+        connection.release(); 
+        if (err) {
         msg = "failure";
         reject(err);
       } else {
@@ -87,6 +89,7 @@ connection.query
       return resolve(msg);
     });
   });
+});
 };
 
 _publics.deleteMember = (req) => {
@@ -95,11 +98,11 @@ _publics.deleteMember = (req) => {
     var sql = "DELETE FROM member WHERE id = ?";
     var msg = "";
     pool.getConnection(function(err,connection){ 
-if (err) {  
-reject(err);
- }
-connection.query
-(sql, [id], function (err, result) {
+      if (err) {  
+      reject(err);
+      }
+      connection.query(sql, [id], function (err, result) {
+        connection.release(); 
       if (err) {
         msg = "failure";
         reject(err);
@@ -109,6 +112,7 @@ connection.query
       return resolve(msg);
     });
   });
+});
 };
 
 _publics.getAllMembers = (req) => {
@@ -117,15 +121,16 @@ _publics.getAllMembers = (req) => {
     var sql = "select * FROM member";
 
     pool.getConnection(function(err,connection){ 
-if (err) {  
-reject(err);
- }
-connection.query
-(sql, function (err, result) {
+      if (err) {  
+      reject(err);
+      }
+      connection.query(sql, function (err, result) {
+        connection.release(); 
       if (err) reject(err);
       return resolve(JSON.stringify(result));
     });
   });
+});
 };
 //login
 _publics.login = (member) => {
@@ -139,11 +144,11 @@ _publics.login = (member) => {
 
     var sql = "select * FROM member where pseudo=? and password=? ";
     pool.getConnection(function(err,connection){ 
-if (err) {  
-reject(err);
- }
-connection.query
-(sql, [pseudo, password], function (err, members) {
+      if (err) {  
+      reject(err);
+      }
+      connection.query(sql, [pseudo, password], function (err, members) {
+        connection.release(); 
       var members = JSON.stringify(members);
       members = JSON.parse(members);
 
@@ -164,6 +169,7 @@ connection.query
       return resolve(JSON.stringify(memberDetails));
     });
   });
+});
 };
 
 _publics.getMemberById = (req) => {
@@ -171,15 +177,16 @@ _publics.getMemberById = (req) => {
   return new Promise((resolve, reject) => {
     var sql = "select * FROM member where id=?";
     pool.getConnection(function(err,connection){ 
-if (err) {  
-reject(err);
- }
-connection.query
-(sql, [idMember], function (err, result) {
+      if (err) {  
+      reject(err);
+      }
+      connection.query(sql, [idMember], function (err, result) {
+        connection.release(); 
       if (err) reject(err);
       return resolve(JSON.stringify(result));
     });
   });
+});
 };
 
 _publics.getMemberDetailsById = (req) => {
@@ -187,15 +194,16 @@ _publics.getMemberDetailsById = (req) => {
   return new Promise((resolve, reject) => {
     var sql = "select m.firstname , m.lastname , m.age , m.email , m.city , m.sexe , m.civility , c.name as clazz_name , s.name as school_name FROM member m left join clazz c on (c.id = m.id_clazz) left join school s on (s.id = m.id_school) where m.id=?";
     pool.getConnection(function(err,connection){ 
-if (err) {  
-reject(err);
- }
-connection.query
-(sql, [idMember], function (err, result) {
+      if (err) {  
+      reject(err);
+      }
+      connection.query(sql, [idMember], function (err, result) {
+        connection.release(); 
       if (err) reject(err);
       return resolve(JSON.stringify(result));
     });
   });
+});
 };
 //choice member
 _publics.createChoiceMember = (choice_member) => {
@@ -210,11 +218,11 @@ _publics.createChoiceMember = (choice_member) => {
     var sql = "INSERT INTO choice_member SET ? ";
     const newChoiceMember = { id_question: id_question, id_answer: id_answer, id_test_member: id_test_member };
     pool.getConnection(function(err,connection){ 
-if (err) {  
-reject(err);
- }
-connection.query
-(sql, newChoiceMember, function (err, result) {
+      if (err) {  
+      reject(err);
+      }
+      connection.query(sql, newChoiceMember, function (err, result) {
+        connection.release(); 
       if (err) {
         msg = "failure";
         reject(err);
@@ -223,6 +231,7 @@ connection.query
       }
       return resolve(msg);
     });
+  });
   });
 
 
@@ -257,11 +266,11 @@ _publics.updateChoiceMember = (req, choiceMember) => {
     var msg = "";
     var sql = "UPDATE choice_member SET id_question=?, id_answer=?, id_test_member=?  WHERE id = ?";
     pool.getConnection(function(err,connection){ 
-if (err) {  
-reject(err);
- }
-connection.query
-(sql, [id_question, id_answer, id_test_member, id], function (err, result) {
+      if (err) {  
+      reject(err);
+      }
+      connection.query(sql, [id_question, id_answer, id_test_member, id], function (err, result) {
+        connection.release(); 
       if (err) {
         msg = "failure";
         reject(err);
@@ -270,6 +279,7 @@ connection.query
       }
       return resolve(msg);
     });
+  });
   });
 };
 
@@ -279,11 +289,11 @@ _publics.deleteChoiceMember = (req) => {
     var sql = "DELETE FROM choice_member WHERE id = ?";
     var msg = "";
     pool.getConnection(function(err,connection){ 
-if (err) {  
-reject(err);
- }
-connection.query
-(sql, [id], function (err, result) {
+      if (err) {  
+      reject(err);
+      }
+      connection.query(sql, [id], function (err, result) {
+        connection.release(); 
       if (err) {
         msg = "failure";
         reject(err);
@@ -293,6 +303,7 @@ connection.query
       return resolve(msg);
     });
   });
+  });
 };
 
 _publics.getAllChoiceMembers = (req) => {
@@ -301,14 +312,15 @@ _publics.getAllChoiceMembers = (req) => {
     var sql = "select * FROM choice_member";
 
     pool.getConnection(function(err,connection){ 
-if (err) {  
-reject(err);
- }
-connection.query
-(sql, function (err, result) {
+      if (err) {  
+      reject(err);
+      }
+      connection.query(sql, function (err, result) {
+        connection.release(); 
       if (err) reject(err);
       return resolve(JSON.stringify(result));
     });
+  });
   });
 };
 
@@ -317,14 +329,15 @@ _publics.getMemberByClass = (req) => {
   return new Promise((resolve, reject) => {
     var sql = "select * FROM member where id_clazz=? ";
     pool.getConnection(function(err,connection){ 
-if (err) {  
-reject(err);
- }
-connection.query
-(sql, [idClazz], function (err, result) {
+      if (err) {  
+      reject(err);
+      }
+      connection.query(sql, [idClazz], function (err, result) {
+        connection.release(); 
       if (err) reject(err);
       return resolve(JSON.stringify(result));
     });
+  });
   });
 };
 
@@ -334,14 +347,15 @@ _publics.getTestMembersByClassSchool = (req) => {
   return new Promise((resolve, reject) => {
     var sql = "select * FROM member where id_school=? and  id_clazz=? ";
     pool.getConnection(function(err,connection){ 
-if (err) {  
-reject(err);
- }
-connection.query
-(sql, [id_school, id_clazz], function (err, result) {
+      if (err) {  
+      reject(err);
+      }
+      connection.query(sql, [id_school, id_clazz], function (err, result) {
+        connection.release(); 
       if (err) reject(err);
       return resolve(JSON.stringify(result));
     });
+  });
   });
 
 };
@@ -354,11 +368,11 @@ _publics.createTestMember = (testId,memberId) => {
     var sql = "INSERT INTO test_member SET ? ";
     const newtestMember = { id_test: testId, id_member: memberId, date_test:date };
     pool.getConnection(function(err,connection){ 
-if (err) {  
-reject(err);
- }
-connection.query
-(sql, newtestMember, function (err, result) {
+      if (err) {  
+      reject(err);
+      }
+      connection.query(sql, newtestMember, function (err, result) {
+        connection.release(); 
       if (err) {
         msg = "failure";
         reject(err);
@@ -367,6 +381,7 @@ connection.query
       }
       return resolve(msg);
     });
+  });
   });
 
 
@@ -376,19 +391,16 @@ _publics.updateTestMember = (req, testMember) => {
   var testMember = JSON.parse(testMember);
   var id_test = testMember.id_test;
   var id_member = testMember.id_member;
-
-
-
   var idTestMember = req.query.id;
   return new Promise((resolve, reject) => {
     var msg = "";
     var sql = "UPDATE test_member SET id_test=?, id_member=?  WHERE id = ?";
     pool.getConnection(function(err,connection){ 
-if (err) {  
-reject(err);
- }
-connection.query
-(sql, [id_test, id_member, idTestMember], function (err, result) {
+      if (err) {  
+      reject(err);
+      }
+      connection.query(sql, [id_test, id_member, idTestMember], function (err, result) {
+        connection.release(); 
       if (err) {
         msg = "failure";
         reject(err);
@@ -397,6 +409,7 @@ connection.query
       }
       return resolve(msg);
     });
+  });
   });
 };
 
@@ -406,11 +419,11 @@ _publics.deleteTestMember = (req) => {
     var sql = "DELETE FROM test_member WHERE id = ?";
     var msg = "";
     pool.getConnection(function(err,connection){ 
-if (err) {  
-reject(err);
- }
-connection.query
-(sql, [idTestMember], function (err, result) {
+      if (err) {  
+      reject(err);
+      }
+      connection.query(sql, [idTestMember], function (err, result) {
+        connection.release(); 
       if (err) {
         msg = "failure";
         reject(err);
@@ -420,6 +433,7 @@ connection.query
       return resolve(msg);
     });
   });
+});
 };
 
 _publics.getAllMemberTest = (req) => {
@@ -428,15 +442,16 @@ _publics.getAllMemberTest = (req) => {
     var sql = "select * FROM test_member where id_member=?";
 
     pool.getConnection(function(err,connection){ 
-if (err) {  
-reject(err);
- }
-connection.query
-(sql, [idMember], function (err, result) {
+      if (err) {  
+      reject(err);
+      }
+      connection.query(sql, [idMember], function (err, result) {
+        connection.release(); 
       if (err) reject(err);
       return resolve(JSON.stringify(result));
     });
   });
+});
 };
 
 _publics.getTestMemberByMemberIdAndTestId = (req) => {
@@ -446,15 +461,16 @@ _publics.getTestMemberByMemberIdAndTestId = (req) => {
     var sql = "select * FROM test_member where id_member=? and id_test=?";
 
     pool.getConnection(function(err,connection){ 
-if (err) {  
-reject(err);
- }
-connection.query
-(sql, [idMember,idTest], function (err, result) {
+      if (err) {  
+      reject(err);
+      }
+      connection.query(sql, [idMember,idTest], function (err, result) {
+        connection.release(); 
       if (err) reject(err);
       return resolve(JSON.stringify(result[0]));
     });
   });
+});
 };
 
 
@@ -466,15 +482,16 @@ _publics.getTestMemberByTestId = (req) => {
   return new Promise((resolve, reject) => {
     var sql = "select id as id FROM test_member where id_member=? and id_test=?";
     pool.getConnection(function(err,connection){ 
-if (err) {  
-reject(err);
- }
-connection.query
-(sql, [id_member, id_test], function (err, result) {
+      if (err) {  
+      reject(err);
+      }
+      connection.query(sql, [id_member, id_test], function (err, result) {
+        connection.release(); 
       if (err) reject(err);
       return resolve(JSON.stringify(result));
     });
   });
+});
 
 };
 
@@ -484,17 +501,17 @@ _publics.getAllTestMembers = (req) => {
 
   return new Promise((resolve, reject) => {
     var sql = "select * FROM test_member";
-
     pool.getConnection(function(err,connection){ 
-if (err) {  
-reject(err);
- }
-connection.query
-(sql, function (err, result) {
+    if (err) {  
+    reject(err);
+    }
+    connection.query(sql, function (err, result) {
+      connection.release(); 
       if (err) reject(err);
       return resolve(JSON.stringify(result));
     });
   });
+});
 };
 
 _publics.updateManuelAnswer = (req, manuelAnswer) => {
@@ -504,19 +521,16 @@ _publics.updateManuelAnswer = (req, manuelAnswer) => {
   var id_subcategory = manuelAnswer.id_subcategory;
   var id = manuelAnswer.id;
   var response = req.query.response;
-
-
-
   var id = req.query.id;
   return new Promise((resolve, reject) => {
     var msg = "";
     var sql = "UPDATE manuel_answer set response=?  WHERE id = ?";
     pool.getConnection(function(err,connection){ 
-if (err) {  
-reject(err);
- }
-connection.query
-(sql, [response, id], function (err, result) {
+      if (err) {  
+      reject(err);
+      }
+      connection.query(sql, [response, id], function (err, result) {
+        connection.release(); 
       if (err) {
         msg = "failure";
         reject(err);
@@ -526,25 +540,23 @@ connection.query
       return resolve(msg);
     });
   });
+  });
 };
 
 //test details
 _publics.getTestDetails = (req) => {
   var id_test = req.query.id_test;
-
-
-
   return new Promise((resolve, reject) => {
     var sql = "select q.id_test_subcategory as testSubcategory, a.id as answerId, a.name as answer, a.ordre as ordre,s.name as subcategory_name,s.id_category as idCategory,q.id as questionId from answer a "
       + "left join question q on (a.id_question=q.id) left join test_subcategory ts on (ts.id=q.id_test_subcategory) "
       + "left join subcategory s on(ts.id_subcategory=s.id) where id_test=? ";
 
     pool.getConnection(function(err,connection){ 
-if (err) {  
-reject(err);
- }
-connection.query
-(sql, [id_test], function (err, result) {
+    if (err) {  
+    reject(err);
+    }
+    connection.query(sql, [id_test], function (err, result) {
+      connection.release(); 
       if (err) reject(err);
       //{"answerId":1,"answer":"Dymanique","ordre":1,"subcategory_name":"Authenticité","idCategory":1}
 /*
@@ -580,6 +592,7 @@ connection.query
       return resolve(JSON.stringify(result));
     });
   });
+});
 
 };
 
@@ -594,11 +607,11 @@ _publics.verifPasswordTest = (test) => {
 
     var sql = "select * FROM test where password=? ";
     pool.getConnection(function(err,connection){ 
-if (err) {  
-reject(err);
- }
-connection.query
-(sql, [password], function (err, tests) {
+      if (err) {  
+      reject(err);
+      }
+      connection.query(sql, [password], function (err, tests) {
+        connection.release(); 
       var tests = JSON.stringify(tests);
       tests = JSON.parse(tests);
 
@@ -620,6 +633,7 @@ connection.query
       return resolve(JSON.stringify(testDetails));
     });
   });
+});
 };
 
 
@@ -628,11 +642,11 @@ module.exports = _publics;
 function createNewMemberChoices(choices, i, msg) {
     var sql = "INSERT INTO choice_member SET id_question=?,id_answer=? ,id_test_member=?   ";
     pool.getConnection(function(err,connection){ 
-if (err) {  
-reject(err);
- }
-connection.query
-(sql, [choices[i].id_question, choices[i].id_answer, choices[i].id_test_member], function (err, result) {
+      if (err) {  
+      reject(err);
+      }
+      connection.query(sql, [choices[i].id_question, choices[i].id_answer, choices[i].id_test_member], function (err, result) {
+        connection.release(); 
       if (err) {
         msg = "failure";
       }
@@ -641,6 +655,7 @@ connection.query
       }
       return msg;
     });
+  });
 }
 
 /*function createNewMemberChoices(choices, i, msg) {
@@ -704,15 +719,16 @@ _publics.getTestEnCours = (req) => {
   return new Promise((resolve, reject) => {
     var sql = " select * from test t left join test_clazz tc on (t.id=tc.id_test) left join member m on (tc.id_clazz=m.id_clazz) where m.id=? and activation_date < ? and expiration_date >?";
     pool.getConnection(function(err,connection){ 
-if (err) {  
-reject(err);
- }
-connection.query
-(sql, [id_member, date, date], function (err, result) {
+      if (err) {  
+      reject(err);
+      }
+      connection.query(sql, [id_member, date, date], function (err, result) {
+        connection.release(); 
       if (err) reject(err);
       return resolve(JSON.stringify(result));
     });
   });
+});
 };
 
 
@@ -724,11 +740,11 @@ _publics.loginForTest = (testId, password) => {
   return new Promise((resolve, reject) => {
     var sql = "select * FROM test where id=? ";
     pool.getConnection(function(err,connection){ 
-if (err) {  
-reject(err);
- }
-connection.query
-(sql, [testId], function (err, tests) {
+      if (err) {  
+      reject(err);
+      }
+      connection.query(sql, [testId], function (err, tests) {
+        connection.release(); 
       var tests = JSON.stringify(tests);
       tests = JSON.parse(tests);
 
@@ -749,6 +765,7 @@ connection.query
       return resolve(JSON.stringify(response));
     });
   });
+});
 };
 
 
@@ -758,11 +775,11 @@ _publics.deleteMemberChoicesByIdTestMember = (testMemberId) => {
     var sql = " delete from choice_member where id_test_member=?";
     var msg="";
     pool.getConnection(function(err,connection){ 
-if (err) {  
-reject(err);
- }
-connection.query
-(sql, [testMemberId], function (err, result) {
+      if (err) {  
+      reject(err);
+      }
+      connection.query(sql, [testMemberId], function (err, result) {
+        connection.release(); 
       if (err) {
         msg = "failure";
       }
@@ -772,6 +789,7 @@ connection.query
       return resolve(msg);
     });
   });
+});
 };
 
 
@@ -783,11 +801,11 @@ _publics.deleteManuelAnswersByTestMember = (req) => {
     var sql = " delete from manuel_answer where id_member=? and id_test=?";
     var msg="";
     pool.getConnection(function(err,connection){ 
-if (err) {  
-reject(err);
- }
-connection.query
-(sql, [id_member,id_test], function (err, result) {
+      if (err) {  
+      reject(err);
+      }
+      connection.query(sql, [id_member,id_test], function (err, result) {
+        connection.release(); 
       if (err) {
         msg = "failure";
       }
@@ -797,6 +815,7 @@ connection.query
       return resolve(msg);
     });
   });
+});
 };
 
 

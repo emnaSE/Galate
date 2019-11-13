@@ -166,6 +166,9 @@ export class RegisterComponent  implements OnInit{
             //this.router.navigate(['/login'])
             //this.router.navigate(['/test'])
             console.log(this.currentTestId);
+            if(localStorage.getItem('testId')!== null){
+              this.currentTestId=localStorage.getItem('testId'); 
+            }
             localStorage.setItem('testId', this.currentTestId);
             this.router.navigate(['/loginTest' , this.currentTestId , JSON.parse(JSON.stringify(data)).memberId])
           },err=>{

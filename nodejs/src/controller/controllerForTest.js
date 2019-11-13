@@ -6,7 +6,7 @@ var config = require('../config');
 var con=config.con;
 var getRawBody = require('raw-body');
 const request = require('request');
-
+var pool=config.pool;
 
 
 _publics.getRawBody = (req) => { 
@@ -35,11 +35,11 @@ _publics.createTest = (test) => {
            var sql = "INSERT INTO test SET ? ";
            const test0 = { name: name,test_subcategories_number:test_subcategories_number,password:password,activation_date:activation_date,expiration_date:expiration_date};
            pool.getConnection(function(err,connection){ 
-if (err) {  
-reject(err);
- }
-connection.query
-(sql,test0, function (err, response) {
+            if (err) {  
+            reject(err);
+            }
+            connection.query(sql,test0, function (err, response) {
+              connection.release(); 
               if (err){
                   console.log("error");
                 }else{
@@ -48,6 +48,7 @@ connection.query
             
             return resolve("ok");
         });
+      });  
    });  
 }
 
@@ -152,11 +153,11 @@ _publics.createSchool = (req) => {
         var msg="";
         var sql = "INSERT INTO school SET ? ";
         pool.getConnection(function(err,connection){ 
-if (err) {  
-reject(err);
- }
-connection.query
-(sql,school, function (err, school) {
+        if (err) {  
+        reject(err);
+        }
+        connection.query(sql,school, function (err, school) {
+          connection.release(); 
            if (err){
                msg="failure"; 
                response = {
@@ -175,6 +176,7 @@ connection.query
          
          return resolve(response);
         });
+      });  
    });  
   
 }

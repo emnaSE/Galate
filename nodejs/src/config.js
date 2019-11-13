@@ -8,7 +8,7 @@ module.exports = {
     env: process.env.NODE_ENV || 'development',
    
 
-    con : mysql.createConnection({
+    /*con : mysql.createConnection({
         host: "localhost",
         user: "root",
         password: "wqtqVSROVpdhilqI00",
@@ -16,7 +16,7 @@ module.exports = {
         //password: "root",
         database: "galate7",
         port: 3306
-    }),
+    }),*/
 
     mediane: 6,
 
@@ -28,7 +28,8 @@ module.exports = {
     host     : '127.0.0.1',
     user     : 'root',
     password : 'wqtqVSROVpdhilqI00',
-    database : 'galate7',
+    //password: "tbEsNGfMcF8Htt7n",
+    database : 'galate3',
     debug    :  false
   }),  
 

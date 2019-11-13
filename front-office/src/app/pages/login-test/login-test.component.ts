@@ -66,6 +66,9 @@ export class LoginTestComponent implements OnInit {
       this.router.navigate(['/register']);
     }
     
+    if(this.testId1!==null){
+      localStorage.setItem('testId', this.testId1);   
+    }
   }
 
   signIn() {
